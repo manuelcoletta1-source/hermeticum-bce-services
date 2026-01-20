@@ -7,8 +7,8 @@ tecnico-giuridico e computazionale progettato per la costruzione di
 **governance computabile**.
 
 Questo repository documenta i **servizi**, i **layer architetturali**
-e i **moduli operativi** che costituiscono il backbone dell’infrastruttura
-**B.C.E.Hermeticum**.
+e i **moduli operativi** che costituiscono il backbone
+dell’infrastruttura **Hermeticum B.C.E.**.
 
 ---
 
@@ -65,7 +65,8 @@ Sistema di identità digitale avanzata basato su:
 - prova temporale multi-ledger  
 - opponibilità tecnica e giuridica  
 
-IPR costituisce la **radice fiduciaria** dell’intero ecosistema.
+IPR costituisce la **radice fiduciaria** dell’intero ecosistema
+**Hermeticum B.C.E.**.
 
 ---
 
@@ -118,7 +119,7 @@ Modulo di feedback cognitivo e sistemico:
 
 ### 🧠 AI JOKER — C2 Engine
 Motore di **Command & Control cognitivo** per:
-- orchestrazione dei moduli B.C.E.  
+- orchestrazione dei moduli Hermeticum B.C.E.  
 - supporto decisionale avanzato  
 - verifica di coerenza sistemica  
 - audit logico, operativo e strategico  
@@ -131,13 +132,9 @@ dell’intero ecosistema.
 ### 🌍 CyberGlobal
 Layer di **governance cyber-globale** e coordinamento sistemico.
 
-CyberGlobal non è un singolo software, ma un
-**framework sovra-architetturale** che consente:
-
-- coordinamento multi-dominio (digitale, giuridico, operativo)  
-- integrazione tra infrastrutture nazionali, UE e sovranazionali  
-- gestione di scenari complessi ad alta criticità  
-- supervisione strategica e audit globale  
+CyberGlobal è un **framework sovra-architetturale**
+per il coordinamento tra domini digitali, giuridici e operativi
+in scenari complessi ad alta criticità.
 
 Funziona come **strato di convergenza e regia** tra:  
 **IPR · AI JOKER · UNEBDO · OPC · MetaExchange**
@@ -181,7 +178,7 @@ Fondatore e autore: **Manuel Coletta**
 
 Questo repository è parte integrante del  
 **CORPUS ESOTEROLOGIA ERMETICA**  
-e dell’infrastruttura **B.C.E.Hermeticum**.
+e dell’infrastruttura **Hermeticum B.C.E.**.
 
 ---
 
