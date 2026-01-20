@@ -160,7 +160,28 @@ Funziona come **strato di convergenza e regia** tra:
 - cyber-governance istituzionale  
 - AI critiche e C2  
 - proof-of-existence / proof-of-intent  
+## Index Hub — Pagine pubbliche (GitHub Pages)
 
+- Hermeticum B.C.E. — Services  
+  https://manuelcoletta1-source.github.io/hermeticum-bce-services/
+
+- GITJOKER-C2 (C2)  
+  https://manuelcoletta1-source.github.io/gitjoker-c2/
+
+- EU IPR Registry  
+  https://manuelcoletta1-source.github.io/ue-ipr-registry/
+
+- ESOTEROLOGIA — Edizioni (IPR-5)  
+  https://manuelcoletta1-source.github.io/esoterologia-edizioni-ipr5/
+
+- CORPUS ESOTEROLOGIA ERMETICA  
+  https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/
+
+- APOCALIPSIS  
+  https://manuelcoletta1-source.github.io/apocalipsis/
+
+- IL PORTALE DELL’ANTICRISTO  
+  https://manuelcoletta1-source.github.io/IL-PORTALE-DELL--ANTICRISTO/
 ---
 
 ## Licenza e stato
