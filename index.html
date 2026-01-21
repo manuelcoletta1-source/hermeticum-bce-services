@@ -13,11 +13,13 @@
     nav{margin:20px auto;max-width:1200px;padding:14px;border:1px solid #333;border-radius:12px;text-align:center}
     nav a{color:#8fd3ff;text-decoration:none;margin:0 8px;white-space:nowrap}
     nav a:hover{text-decoration:underline}
-    main{max-width:1000px;margin:0 auto;padding:40px 20px}
-    h2{border-left:4px solid #888;padding-left:10px;margin-top:42px}
-    ul{list-style:none;padding-left:0}
+    main{max-width:1020px;margin:0 auto;padding:34px 20px 46px}
+    h2{border-left:4px solid #888;padding-left:10px;margin-top:36px}
+    p{color:#cfcfcf;line-height:1.6}
+    ul{list-style:none;padding-left:0;margin:10px 0 0}
     li{margin:10px 0}
     .pill{margin-left:8px;padding:2px 10px;border:1px solid #444;border-radius:999px;font-size:.8em;color:#bbb}
+    .box{border:1px solid #333;border-radius:12px;padding:14px 14px;margin-top:14px;background:#0e0e0e}
     footer{padding:20px;text-align:center;font-size:.85em;color:#777;border-top:1px solid #333}
   </style>
 </head>
@@ -26,10 +28,10 @@
 
 <header>
   <h1>Hermeticum B.C.E. — Services</h1>
-  <p>Portale HUB dell’infrastruttura Blindata · Computabile · Evolutiva</p>
+  <p>HUB pubblico: indicizzazione, instradamento, verificabilità</p>
 </header>
 
-<nav>
+<nav aria-label="BCE Global Navigation">
   <a href="/hermeticum-bce-services/">Services</a> |
   <a href="/Hermeticum-B.C.E.-Technology/">Technology</a> |
   <a href="/gitjoker-c2/">GitJoker-C2</a> |
@@ -41,36 +43,51 @@
 
 <main>
 
-<h2>Moduli Software BCE</h2>
-<ul>
-  <li><a href="/unebdo/">UNEBDO</a><span class="pill">validità</span></li>
-  <li><a href="/opc/">OPC</a><span class="pill">opponibilità</span></li>
-  <li><a href="/metaexchange/">MetaExchange</a><span class="pill">scambio</span></li>
-  <li><a href="/neuroloop/">NeuroLoop</a><span class="pill">continuità</span></li>
-  <li><a href="/iospace/">Io-Space</a><span class="pill">identità</span></li>
-  <li><a href="/cyberglobal/">CyberGlobal</a><span class="pill">governance</span></li>
-</ul>
+  <div class="box">
+    <strong>Stato:</strong> 🟢 LIVE (baseline sigillata)<br/>
+    <strong>Ruolo:</strong> Services è un HUB non esecutivo: collega nodi e rende verificabile la struttura BCE.
+  </div>
 
-<h2>Infrastruttura & Registro</h2>
-<ul>
-  <li><a href="/Hermeticum-B.C.E.-Technology/">Technology</a></li>
-  <li><a href="/gitjoker-c2/">GitJoker — C2</a></li>
-  <li><a href="/ue-ipr-registry/">UE IPR Registry</a></li>
-</ul>
+  <h2>Infrastructure</h2>
+  <ul>
+    <li><a href="/Hermeticum-B.C.E.-Technology/">Hermeticum B.C.E. — Technology</a><span class="pill">infra</span></li>
+    <li><a href="/gitjoker-c2/">GitJoker — C2</a><span class="pill">c2</span></li>
+    <li><a href="/ue-ipr-registry/">UE IPR Registry</a><span class="pill">registry</span></li>
+  </ul>
 
-<h2>Editoria & Corpus</h2>
-<ul>
-  <li><a href="/esoterologia-edizioni-ipr5/">Esoterologia Edizioni</a></li>
-  <li><a href="/corpus-esoterologia-ermetica/">Corpus Esoterologia Ermetica</a></li>
-</ul>
+  <h2>BCE Software Modules</h2>
+  <ul>
+    <li><a href="/unebdo/">UNEBDO</a><span class="pill">validità</span></li>
+    <li><a href="/opc/">OPC</a><span class="pill">opponibilità</span></li>
+    <li><a href="/metaexchange/">MetaExchange</a><span class="pill">scambio</span></li>
+    <li><a href="/neuroloop/">NeuroLoop</a><span class="pill">continuità</span></li>
+    <li><a href="/iospace/">Io-Space</a><span class="pill">identità</span></li>
+    <li><a href="/cyberglobal/">CyberGlobal</a><span class="pill">governance</span></li>
+  </ul>
 
-<h2>Nodi Concettuali</h2>
-<ul>
-  <li><a href="/apocalipsis/">Apocalipsis</a></li>
-  <li><a href="/apocalipsis/">Portale dell’Anticristo</a></li>
-</ul>
+  <h2>Documentation & Evidence</h2>
+  <ul>
+    <li>
+      <a href="/Hermeticum-B.C.E.-Technology/docs/phi-omega/00-index/">ΦΩ Documentation Pack (Technology)</a>
+      <span class="pill">docs</span>
+    </li>
+  </ul>
 
-<p>🟢 <strong>PORTALE BCE COMPLETO — OPERATIVO</strong></p>
+  <h2>Editorial & Conceptual</h2>
+  <ul>
+    <li><a href="/esoterologia-edizioni-ipr5/">Esoterologia Edizioni — IPR5</a><span class="pill">editoria</span></li>
+    <li><a href="/corpus-esoterologia-ermetica/">Corpus Esoterologia Ermetica</a><span class="pill">corpus</span></li>
+    <li><a href="/apocalipsis/">Apocalipsis / Portale dell’Anticristo</a><span class="pill">concept</span></li>
+  </ul>
+
+  <h2>Governance (Services)</h2>
+  <ul>
+    <li><a href="./STATUS.md">STATUS</a><span class="pill">seal</span></li>
+    <li><a href="./POLICY.md">POLICY</a><span class="pill">rules</span></li>
+    <li><a href="./AUDIT.md">AUDIT</a><span class="pill">audit</span></li>
+    <li><a href="./CROSS-AUDIT.md">CROSS-AUDIT</a><span class="pill">audit</span></li>
+    <li><a href="./CHANGELOG.md">CHANGELOG</a><span class="pill">history</span></li>
+  </ul>
 
 </main>
 
@@ -80,14 +97,4 @@
 
 </body>
 </html>
-
-<h2>Documentazione & Evidenze</h2>
-<ul>
-  <li>
-    <a href="/Hermeticum-B.C.E.-Technology/docs/phi-omega/00-index/">
-      ΦΩ Documentation Pack (Technology)
-    </a>
-    <span class="pill">docs</span>
-  </li>
-</ul>
 
