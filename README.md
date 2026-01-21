@@ -4,8 +4,8 @@
 *(Blindata · Computabile · Evolutiva)*
 
 Questo repository è il **portale HUB ufficiale** dell’ecosistema **Hermeticum B.C.E.**  
-Services fornisce **accesso pubblico**, **indice dei nodi**, e **instradamento stabile**
-tra i moduli e le infrastrutture BCE.
+Services fornisce **accesso pubblico**, **indice dei nodi** e **instradamento stabile**
+tra i moduli software e le infrastrutture BCE.
 
 > Services **non contiene software esecutivo**.  
 > È il punto di ingresso e coordinamento dell’intero sistema.
@@ -49,7 +49,7 @@ tra i moduli e le infrastrutture BCE.
   https://manuelcoletta1-source.github.io/neuroloop/
 
 - **Io-Space — Spazio identitario digitale**  
-  https://manuelcoletta1-source.github.io/io-space/
+  https://manuelcoletta1-source.github.io/iospace/
 
 - **CyberGlobal — Governance cyber-globale**  
   https://manuelcoletta1-source.github.io/cyberglobal/
@@ -86,7 +86,7 @@ tra i moduli e le infrastrutture BCE.
 - https://github.com/manuelcoletta1-source/opc
 - https://github.com/manuelcoletta1-source/metaexchange
 - https://github.com/manuelcoletta1-source/neuroloop
-- https://github.com/manuelcoletta1-source/io-space
+- https://github.com/manuelcoletta1-source/iospace
 - https://github.com/manuelcoletta1-source/cyberglobal
 - https://github.com/manuelcoletta1-source/ue-ipr-registry
 - https://github.com/manuelcoletta1-source/esoterologia-edizioni-ipr5
@@ -100,7 +100,7 @@ tra i moduli e le infrastrutture BCE.
 - link inter-repo con **path assoluti** `/repo/`
 - **slash finale** sempre
 - GitHub Pages **case-sensitive**
-- Services = HUB (non duplicazione)
+- Services = HUB (non duplicazione dei contenuti)
 
 ---
 
