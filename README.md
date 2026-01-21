@@ -110,3 +110,6 @@ tra i moduli software e le infrastrutture BCE.
 Fondatore — **Hermeticum B.C.E.**
 
 © Hermeticum B.C.E. — Infrastruttura europea computabile
+
+- ΦΩ Documentation Pack (Technology)
+  https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/docs/phi-omega/00-index/
