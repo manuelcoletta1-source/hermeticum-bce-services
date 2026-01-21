@@ -3,7 +3,7 @@
 **Hermeticum B.C.E.**  
 *(Blindata · Computabile · Evolutiva)*
 
-Questo repository è il **Services HUB ufficiale** dell’ecosistema **Hermeticum B.C.E.**  
+Questo repository costituisce il **Services HUB ufficiale** dell’ecosistema **Hermeticum B.C.E.**  
 La sua funzione è fornire **accesso pubblico**, **indicizzazione dei nodi** e
 **instradamento stabile** tra moduli software, infrastrutture e registri BCE.
 
@@ -27,7 +27,7 @@ La sua funzione è fornire **accesso pubblico**, **indicizzazione dei nodi** e
 ---
 
 ### Infrastruttura Tecnologica
-- **Hermeticum B.C.E. — Technology**  
+- **Hermeticum B.C.E. — Technology (Hub tecnico e documentale)**  
   https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/
 
 - **GitJoker-C2 — Orchestrazione & Audit**  
@@ -35,11 +35,11 @@ La sua funzione è fornire **accesso pubblico**, **indicizzazione dei nodi** e
 
 ---
 
-### Moduli Software BCE
-- **UNEBDO — Dispositivo giuridico-computabile**  
+### Moduli Software BCE (esecutivi)
+- **UNEBDO — Dispositivo giuridico-computabile (Proof Engine)**  
   https://manuelcoletta1-source.github.io/unebdo/
 
-- **OPC — Opponibility Policy Controller**  
+- **OPC — Opponibility Policy Controller (Policy Engine)**  
   https://manuelcoletta1-source.github.io/opc/
 
 - **MetaExchange — Layer di scambio tracciato** *(planned)*  
@@ -56,7 +56,7 @@ La sua funzione è fornire **accesso pubblico**, **indicizzazione dei nodi** e
 
 ---
 
-### Identità, Registro ed Editoria
+### Identità, Registri ed Editoria
 - **UE IPR Registry**  
   https://manuelcoletta1-source.github.io/ue-ipr-registry/
 
@@ -74,6 +74,27 @@ La sua funzione è fornire **accesso pubblico**, **indicizzazione dei nodi** e
 
 - **Portale dell’Anticristo** *(accesso pubblico)*  
   https://manuelcoletta1-source.github.io/apocalipsis/
+
+---
+
+## Documentazione Canonica (Technology)
+
+Documenti ufficiali pubblicabili e auditabili (UE-safe), ospitati nel Technology Hub:
+
+- **Legal Pack**  
+  Indice:  
+  https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/docs/legal/00-index/  
+  PDF:  
+  https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/assets/pdf/OGGETTO-SOCIALE.pdf
+
+- **IPR Service Pack**  
+  Indice:  
+  https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/docs/ipr/00-index/  
+  PDF:  
+  https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/assets/pdf/IPR-SERVICE-1.0.pdf
+
+> Services **linka** questa documentazione come fonte canonica.  
+> Nessuna duplicazione è ammessa.
 
 ---
 
@@ -100,7 +121,7 @@ La sua funzione è fornire **accesso pubblico**, **indicizzazione dei nodi** e
 - Link inter-repo con **path assoluti** `/repo/`
 - **Slash finale** sempre
 - GitHub Pages **case-sensitive**
-- Services = **HUB** (nessuna duplicazione dei contenuti)
+- Services = **HUB di indirizzamento**, non contenitore
 
 ---
 
@@ -109,7 +130,7 @@ La sua funzione è fornire **accesso pubblico**, **indicizzazione dei nodi** e
 L’accesso ai servizi **Hermeticum B.C.E.** avviene esclusivamente tramite
 **IPR personale attivo**.
 
-- Attivazione IPR:  
+- Gateway IPR:  
   https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/
 
 Senza IPR attivo **non è possibile accedere ai servizi**.
