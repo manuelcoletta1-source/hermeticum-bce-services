@@ -3,38 +3,22 @@
 **Hermeticum B.C.E.**  
 *(Blindata · Computabile · Evolutiva)*
 
-Questo repository rappresenta il **nodo HUB di servizio** dell’ecosistema **Hermeticum B.C.E.**  
-Qui vengono orchestrati, documentati e instradati i **servizi**, i **repository operativi** e i **nodi pubblici** del sistema.
+Questo repository è il **nodo HUB di servizio** dell’ecosistema **Hermeticum B.C.E.**  
+Qui vengono indicizzati e instradati i **servizi**, i **repository operativi** e i **nodi pubblici** del sistema.
 
-Services **non contiene software esecutivo**, ma funge da:
-- punto di accesso unificato
-- indice dei moduli BCE
-- layer di collegamento tra infrastrutture
+**Services non contiene software esecutivo**: è una **vetrina tecnica + directory** di navigazione e coerenza.
 
 ---
 
-## Stato del Repository
+## Stato
 
-🟢 **ATTIVO**  
-Repository di servizio, navigazione e orchestrazione.
-
----
-
-## Architettura BCE (visione)
-
-L’ecosistema **Hermeticum B.C.E.** è progettato come infrastruttura:
-- tecnico–giuridica
-- computabile
-- opponibile
-- tracciabile
-
-Ogni repository è un **nodo autonomo**, ma Services è il **punto di convergenza**.
+🟢 **ATTIVO** — HUB pubblico BCE (navigazione e orchestrazione)
 
 ---
 
 ## Nodi Pubblici (GitHub Pages)
 
-Accesso diretto ai servizi pubblici BCE:
+Accesso diretto alle pagine pubbliche:
 
 - **Services (HUB)**  
   https://manuelcoletta1-source.github.io/hermeticum-bce-services/
@@ -57,6 +41,12 @@ Accesso diretto ai servizi pubblici BCE:
 - **Apocalipsis**  
   https://manuelcoletta1-source.github.io/apocalipsis/
 
+- **Portale dell’Anticristo** *(nodo pubblico di accesso)*  
+  https://manuelcoletta1-source.github.io/apocalipsis/
+
+> Nota: il Portale è esposto come link pubblico all’interno del nodo **Apocalipsis** (Pages).  
+> Se in futuro diventa repo dedicato, verrà separato come `/portale-dell-anticristo/`.
+
 ---
 
 ## Repository Ufficiali (Codice)
@@ -75,8 +65,6 @@ Repository sorgente dell’ecosistema:
 
 ## Moduli BCE (panoramica)
 
-I seguenti moduli sono parte dell’architettura BCE:
-
 - **UNEBDO** — Dispositivo giuridico-computabile
 - **OPC** — Opponibilità Policy Computabile
 - **CyberGlobal** — Governance cyber-globale
@@ -84,22 +72,22 @@ I seguenti moduli sono parte dell’architettura BCE:
 - **Io-Space** — Spazio identitario digitale
 - **NeuroLoop** — Continuità cognitiva e feedback
 
-*(I moduli sono documentati e sviluppati nei rispettivi repository Technology / C2)*
+*(I moduli sono documentati e sviluppati nei rispettivi repository Technology / C2.)*
 
 ---
 
-## Regole di Navigazione (standard BCE)
+## Standard di Navigazione (anti-404)
 
-- I link tra repository usano **path assoluti** (`/nome-repo/`)
-- Ogni repo è **autonomo**, Services è solo HUB
-- Nessun routing relativo tra repo
-- GitHub Pages è **case-sensitive** sui nomi
+Regole operative usate in Services:
+
+- link tra repository: **path assoluti** `/<repo>/`
+- **slash finale** sempre presente
+- GitHub Pages è **case-sensitive** (maiuscole/minuscole contano)
+- Services = HUB, non duplicazione dei contenuti degli altri nodi
 
 ---
 
-## Autore e Fondazione
+## Autore
 
 **Manuel Coletta**  
-Fondatore e autore del sistema **Hermeticum B.C.E.**
-
 © Hermeticum B.C.E. — infrastruttura europea computabile
