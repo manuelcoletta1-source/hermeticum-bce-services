@@ -3,32 +3,60 @@
 **Hermeticum B.C.E.**  
 *(Blindata · Computabile · Evolutiva)*
 
-Questo repository è il **nodo HUB di servizio** dell’ecosistema **Hermeticum B.C.E.**  
-Qui vengono indicizzati e instradati i **servizi**, i **repository operativi** e i **nodi pubblici** del sistema.
+Questo repository è il **nodo HUB ufficiale** dell’ecosistema **Hermeticum B.C.E.**  
+Services funge da **portale pubblico**, **indice dei nodi**, e **layer di instradamento**
+tra le infrastrutture computabili del sistema.
 
-**Services non contiene software esecutivo**: è una **vetrina tecnica + directory** di navigazione e coerenza.
+> Services **non contiene software esecutivo**.  
+> È il punto di accesso, coordinamento e coerenza semantica BCE.
 
 ---
 
 ## Stato
 
-🟢 **ATTIVO** — HUB pubblico BCE (navigazione e orchestrazione)
+🟢 **ATTIVO — PORTALE OPERATIVO**
 
 ---
 
 ## Nodi Pubblici (GitHub Pages)
 
-Accesso diretto alle pagine pubbliche:
-
+### HUB
 - **Services (HUB)**  
   https://manuelcoletta1-source.github.io/hermeticum-bce-services/
 
+---
+
+### Infrastruttura Tecnologica
 - **Hermeticum B.C.E. — Technology**  
   https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/
 
 - **GitJoker — C2**  
   https://manuelcoletta1-source.github.io/gitjoker-c2/
 
+---
+
+### Moduli Software BCE
+- **UNEBDO — Dispositivo giuridico-computabile**  
+  https://manuelcoletta1-source.github.io/unebdo/
+
+- **OPC — Opponibilità Policy Computabile**  
+  https://manuelcoletta1-source.github.io/opc/
+
+- **MetaExchange — Layer di scambio tracciato**  
+  https://manuelcoletta1-source.github.io/metaexchange/
+
+- **NeuroLoop — Continuità cognitiva e feedback**  
+  https://manuelcoletta1-source.github.io/neuroloop/
+
+- **Io-Space — Spazio identitario digitale**  
+  https://manuelcoletta1-source.github.io/io-space/
+
+- **CyberGlobal — Governance cyber-globale**  
+  https://manuelcoletta1-source.github.io/cyberglobal/
+
+---
+
+### Identità, Registro e Editoria
 - **UE IPR Registry**  
   https://manuelcoletta1-source.github.io/ue-ipr-registry/
 
@@ -38,24 +66,28 @@ Accesso diretto alle pagine pubbliche:
 - **Corpus Esoterologia Ermetica**  
   https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/
 
+---
+
+### Nodi Concettuali
 - **Apocalipsis**  
   https://manuelcoletta1-source.github.io/apocalipsis/
 
-- **Portale dell’Anticristo** *(nodo pubblico di accesso)*  
+- **Portale dell’Anticristo** *(accesso pubblico)*  
   https://manuelcoletta1-source.github.io/apocalipsis/
-
-> Nota: il Portale è esposto come link pubblico all’interno del nodo **Apocalipsis** (Pages).  
-> Se in futuro diventa repo dedicato, verrà separato come `/portale-dell-anticristo/`.
 
 ---
 
 ## Repository Ufficiali (Codice)
 
-Repository sorgente dell’ecosistema:
-
 - https://github.com/manuelcoletta1-source/hermeticum-bce-services
 - https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology
 - https://github.com/manuelcoletta1-source/gitjoker-c2
+- https://github.com/manuelcoletta1-source/unebdo
+- https://github.com/manuelcoletta1-source/opc
+- https://github.com/manuelcoletta1-source/metaexchange
+- https://github.com/manuelcoletta1-source/neuroloop
+- https://github.com/manuelcoletta1-source/io-space
+- https://github.com/manuelcoletta1-source/cyberglobal
 - https://github.com/manuelcoletta1-source/ue-ipr-registry
 - https://github.com/manuelcoletta1-source/esoterologia-edizioni-ipr5
 - https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica
@@ -63,31 +95,18 @@ Repository sorgente dell’ecosistema:
 
 ---
 
-## Moduli BCE (panoramica)
+## Regole di Navigazione BCE
 
-- **UNEBDO** — Dispositivo giuridico-computabile
-- **OPC** — Opponibilità Policy Computabile
-- **CyberGlobal** — Governance cyber-globale
-- **MetaExchange** — Layer di scambio tracciato
-- **Io-Space** — Spazio identitario digitale
-- **NeuroLoop** — Continuità cognitiva e feedback
-
-*(I moduli sono documentati e sviluppati nei rispettivi repository Technology / C2.)*
-
----
-
-## Standard di Navigazione (anti-404)
-
-Regole operative usate in Services:
-
-- link tra repository: **path assoluti** `/<repo>/`
-- **slash finale** sempre presente
-- GitHub Pages è **case-sensitive** (maiuscole/minuscole contano)
-- Services = HUB, non duplicazione dei contenuti degli altri nodi
+- link inter-repo con **path assoluti** `/repo/`
+- **slash finale** sempre
+- GitHub Pages **case-sensitive**
+- Services = HUB, non duplicazione
 
 ---
 
 ## Autore
 
 **Manuel Coletta**  
-© Hermeticum B.C.E. — infrastruttura europea computabile
+Fondatore — **Hermeticum B.C.E.**
+
+© Hermeticum B.C.E. — Infrastruttura europea computabile
