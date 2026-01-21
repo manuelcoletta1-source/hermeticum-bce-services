@@ -1,152 +1,105 @@
-# Hermeticum B.C.E. — Services (Master Hub)
+# Hermeticum B.C.E. — Services
 
-**Hermeticum B.C.E.** (*Blindata · Computabile · Evolutiva*) è un ecosistema tecnico-giuridico e computazionale progettato per la costruzione di **infrastrutture digitali avanzate**, fondate su:
+**Hermeticum B.C.E.**  
+*(Blindata · Computabile · Evolutiva)*
 
-- identità verificabili
-- opponibilità tecnica e giuridica
-- tracciabilità crittografica
-- auditabilità sistemica
-- governance computabile
+Questo repository rappresenta il **nodo HUB di servizio** dell’ecosistema **Hermeticum B.C.E.**  
+Qui vengono orchestrati, documentati e instradati i **servizi**, i **repository operativi** e i **nodi pubblici** del sistema.
 
-Questo repository è il **PORTALE MADRE** (Master Hub):  
-contiene la **mappa completa dei servizi**, dei **repository** e dei **nodi pubblici** dell’ecosistema **Hermeticum B.C.E.**  
-L’hub **non interpreta e non gerarchizza**: **collega**.
+Services **non contiene software esecutivo**, ma funge da:
+- punto di accesso unificato
+- indice dei moduli BCE
+- layer di collegamento tra infrastrutture
 
 ---
 
-## Stato del repository
+## Stato del Repository
 
 🟢 **ATTIVO**  
-Hub documentale e di navigazione — evoluzione controllata
+Repository di servizio, navigazione e orchestrazione.
 
 ---
 
-## Missione
+## Architettura BCE (visione)
 
-Costruire sistemi digitali che siano:
+L’ecosistema **Hermeticum B.C.E.** è progettato come infrastruttura:
+- tecnico–giuridica
+- computabile
+- opponibile
+- tracciabile
 
-- verificabili
-- opponibili
-- auditabili
-- coerenti nel tempo
-- compatibili con contesti **UE / istituzionali / critici**
-
----
-
-## Architettura generale
-
-L’ecosistema **Hermeticum B.C.E.** è organizzato su **layer cooperanti**:
-
-1. **Identità e fondazione** — IPR  
-2. **Policy opponibili** — UNEBDO · OPC  
-3. **Servizi e interscambio** — MetaExchange · IoSpace  
-4. **Controllo cognitivo e decisionale** — AI JOKER · NeuroLoop  
-5. **Governance cyber-globale** — CyberGlobal  
+Ogni repository è un **nodo autonomo**, ma Services è il **punto di convergenza**.
 
 ---
 
-## Hub principale (GitHub Pages)
+## Nodi Pubblici (GitHub Pages)
 
-➡ **Hermeticum B.C.E. — Services (Master Hub)**  
-https://manuelcoletta1-source.github.io/hermeticum-bce-services/
+Accesso diretto ai servizi pubblici BCE:
 
----
-
-## Repository ufficiali (codice / nodi)
-
-- **Hermeticum B.C.E. — Services (Hub)**  
-  https://github.com/manuelcoletta1-source/hermeticum-bce-services
-
-- **Hermeticum B.C.E. — Technology (Software)**  
-  https://github.com/manuelcoletta1-source/hermeticum-bce-technology
-
-- **GITJOKER-C2 (C2 / Command & Control)**  
-  https://github.com/manuelcoletta1-source/gitjoker-c2
-
-- **EU IPR Registry**  
-  https://github.com/manuelcoletta1-source/ue-ipr-registry
-
-- **ESOTEROLOGIA — Edizioni (IPR-5)**  
-  https://github.com/manuelcoletta1-source/esoterologia-edizioni-ipr5
-
-- **CORPUS ESOTEROLOGIA ERMETICA**  
-  https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica
-
-- **APOCALIPSIS**  
-  https://github.com/manuelcoletta1-source/apocalipsis
-
-- **IL PORTALE DELL’ANTICRISTO**  
-  https://github.com/manuelcoletta1-source/IL-PORTALE-DELL--ANTICRISTO
-
----
-
-## Nodi pubblici (GitHub Pages)
-
-- **Hermeticum B.C.E. — Services (Hub)**  
+- **Services (HUB)**  
   https://manuelcoletta1-source.github.io/hermeticum-bce-services/
 
-- **Hermeticum B.C.E. — Technology (Software)**  
-  https://manuelcoletta1-source.github.io/hermeticum-bce-technology/
+- **Hermeticum B.C.E. — Technology**  
+  https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/
 
-- **GITJOKER-C2**  
+- **GitJoker — C2**  
   https://manuelcoletta1-source.github.io/gitjoker-c2/
 
-- **EU IPR Registry**  
+- **UE IPR Registry**  
   https://manuelcoletta1-source.github.io/ue-ipr-registry/
 
-- **ESOTEROLOGIA — Edizioni (IPR-5)**  
+- **Esoterologia Edizioni — IPR5**  
   https://manuelcoletta1-source.github.io/esoterologia-edizioni-ipr5/
 
-- **CORPUS ESOTEROLOGIA ERMETICA**  
+- **Corpus Esoterologia Ermetica**  
   https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/
 
-- **APOCALIPSIS**  
+- **Apocalipsis**  
   https://manuelcoletta1-source.github.io/apocalipsis/
 
-- **IL PORTALE DELL’ANTICRISTO**  
-  https://manuelcoletta1-source.github.io/IL-PORTALE-DELL--ANTICRISTO/
+---
+
+## Repository Ufficiali (Codice)
+
+Repository sorgente dell’ecosistema:
+
+- https://github.com/manuelcoletta1-source/hermeticum-bce-services
+- https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology
+- https://github.com/manuelcoletta1-source/gitjoker-c2
+- https://github.com/manuelcoletta1-source/ue-ipr-registry
+- https://github.com/manuelcoletta1-source/esoterologia-edizioni-ipr5
+- https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica
+- https://github.com/manuelcoletta1-source/apocalipsis
 
 ---
 
-## Software (link diretto al repository TECHNOLOGY)
+## Moduli BCE (panoramica)
 
-Il software ufficiale vive in **Hermeticum B.C.E. — Technology**:
+I seguenti moduli sono parte dell’architettura BCE:
 
-- `ipr/` — Identity Primary Record  
-- `unebdo/` — Unità Normativa Esecutiva Blindata Digitale Opponibile  
-- `opc/` — Opponible Policy Core  
-- `metaexchange/` — Interscambio dati e valore  
-- `iospace/` — Spazio operativo digitale  
-- `neuroloop/` — Feedback cognitivo e sistemico  
-- `ai-joker-c2/` — C2 Engine  
-- `cyberglobal/` — Governance cyber-globale  
+- **UNEBDO** — Dispositivo giuridico-computabile
+- **OPC** — Opponibilità Policy Computabile
+- **CyberGlobal** — Governance cyber-globale
+- **MetaExchange** — Layer di scambio tracciato
+- **Io-Space** — Spazio identitario digitale
+- **NeuroLoop** — Continuità cognitiva e feedback
 
----
-
-## Principi architetturali
-
-- **Decisione → Costo → Traccia → Tempo**
-- Audit-by-design
-- Fail-closed
-- Modularità evolutiva
-- Tracciabilità nativa
-- Orientamento UE e istituzionale
+*(I moduli sono documentati e sviluppati nei rispettivi repository Technology / C2)*
 
 ---
 
-## Licenza e stato
+## Regole di Navigazione (standard BCE)
 
-Repository documentale e progettuale.  
-Distribuzione e riuso soggetti a **Licenza Hermeticum B.C.E.**  
-**Tutti i diritti riservati.**
+- I link tra repository usano **path assoluti** (`/nome-repo/`)
+- Ogni repo è **autonomo**, Services è solo HUB
+- Nessun routing relativo tra repo
+- GitHub Pages è **case-sensitive** sui nomi
 
 ---
 
-## Autore e fondazione
+## Autore e Fondazione
 
-**Hermeticum B.C.E. S.r.l.**  
-Fondatore e autore: **Manuel Coletta**
+**Manuel Coletta**  
+Fondatore e autore del sistema **Hermeticum B.C.E.**
 
-Questo repository è parte integrante del  
-**CORPUS ESOTEROLOGIA ERMETICA**  
-e dell’infrastruttura **Hermeticum B.C.E.**
+© Hermeticum B.C.E. — infrastruttura europea computabile
