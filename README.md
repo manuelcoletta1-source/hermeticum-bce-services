@@ -121,3 +121,12 @@ Fondatore — **Hermeticum B.C.E.**
 - **Telefono:** +39 351 572 4982
 - - **ΦΩ Standards Pack (Technology)**  
   https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/docs/standards/
+## Ingresso nell’ecosistema
+
+L’accesso ai servizi Hermeticum B.C.E. avviene esclusivamente
+tramite **IPR-Personale**.
+
+- Attiva IPR:
+  https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/
+
+Senza IPR attivo non è possibile accedere ai servizi.
