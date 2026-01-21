@@ -1,14 +1,14 @@
-# Hermeticum B.C.E. — Services
+# HERMETICUM B.C.E. — Services
 
 **Hermeticum B.C.E.**  
 *(Blindata · Computabile · Evolutiva)*
 
-Questo repository è il **portale HUB ufficiale** dell’ecosistema **Hermeticum B.C.E.**  
-Services fornisce **accesso pubblico**, **indice dei nodi** e **instradamento stabile**
-tra i moduli software e le infrastrutture BCE.
+Questo repository è il **Services HUB ufficiale** dell’ecosistema **Hermeticum B.C.E.**  
+La sua funzione è fornire **accesso pubblico**, **indicizzazione dei nodi** e
+**instradamento stabile** tra moduli software, infrastrutture e registri BCE.
 
-> Services **non contiene software esecutivo**.  
-> È il punto di ingresso e coordinamento dell’intero sistema.
+> **Services non contiene software esecutivo.**  
+> È il **punto di ingresso e coordinamento** dell’intero sistema.
 
 ---
 
@@ -21,7 +21,7 @@ tra i moduli software e le infrastrutture BCE.
 ## Nodi Pubblici (GitHub Pages)
 
 ### HUB
-- **Services (HUB)**  
+- **Hermeticum B.C.E. — Services (HUB)**  
   https://manuelcoletta1-source.github.io/hermeticum-bce-services/
 
 ---
@@ -30,7 +30,7 @@ tra i moduli software e le infrastrutture BCE.
 - **Hermeticum B.C.E. — Technology**  
   https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/
 
-- **GitJoker — C2**  
+- **GitJoker-C2 — Orchestrazione & Audit**  
   https://manuelcoletta1-source.github.io/gitjoker-c2/
 
 ---
@@ -39,19 +39,19 @@ tra i moduli software e le infrastrutture BCE.
 - **UNEBDO — Dispositivo giuridico-computabile**  
   https://manuelcoletta1-source.github.io/unebdo/
 
-- **OPC — Opponibilità Policy Computabile**  
+- **OPC — Opponibility Policy Controller**  
   https://manuelcoletta1-source.github.io/opc/
 
-- **MetaExchange — Layer di scambio tracciato**  
+- **MetaExchange — Layer di scambio tracciato** *(planned)*  
   https://manuelcoletta1-source.github.io/metaexchange/
 
-- **NeuroLoop — Continuità cognitiva e feedback**  
+- **NeuroLoop — Continuità cognitiva e feedback** *(planned)*  
   https://manuelcoletta1-source.github.io/neuroloop/
 
-- **Io-Space — Spazio identitario digitale**  
+- **Io-Space — Spazio identitario digitale** *(planned)*  
   https://manuelcoletta1-source.github.io/iospace/
 
-- **CyberGlobal — Governance cyber-globale**  
+- **CyberGlobal — Governance cyber-globale** *(planned)*  
   https://manuelcoletta1-source.github.io/cyberglobal/
 
 ---
@@ -97,36 +97,28 @@ tra i moduli software e le infrastrutture BCE.
 
 ## Regole di Navigazione BCE
 
-- link inter-repo con **path assoluti** `/repo/`
-- **slash finale** sempre
+- Link inter-repo con **path assoluti** `/repo/`
+- **Slash finale** sempre
 - GitHub Pages **case-sensitive**
-- Services = HUB (non duplicazione dei contenuti)
+- Services = **HUB** (nessuna duplicazione dei contenuti)
 
 ---
 
-## Autore
+## Accesso all’Ecosistema
 
-**Manuel Coletta**  
-Fondatore — **Hermeticum B.C.E.**
+L’accesso ai servizi **Hermeticum B.C.E.** avviene esclusivamente tramite
+**IPR personale attivo**.
 
-© Hermeticum B.C.E. — Infrastruttura europea computabile
-
-- ΦΩ Documentation Pack (Technology)
-  https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/docs/phi-omega/00-index/
-  ---
-
-## Contatti
-
-- **Email:** manuelcoletta1@gmil.com
-- **Telefono:** +39 351 572 4982
-- - **ΦΩ Standards Pack (Technology)**  
-  https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/docs/standards/
-## Ingresso nell’ecosistema
-
-L’accesso ai servizi Hermeticum B.C.E. avviene esclusivamente
-tramite **IPR-Personale**.
-
-- Attiva IPR:
+- Attivazione IPR:  
   https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/
 
-Senza IPR attivo non è possibile accedere ai servizi.
+Senza IPR attivo **non è possibile accedere ai servizi**.
+
+---
+
+## Autore e Fondatore
+
+**Manuel Coletta**  
+Hermeticum B.C.E.
+
+© Hermeticum B.C.E. — Infrastruttura europea computabile
