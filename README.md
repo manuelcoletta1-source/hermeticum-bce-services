@@ -3,12 +3,12 @@
 **Hermeticum B.C.E.**  
 *(Blindata · Computabile · Evolutiva)*
 
-Questo repository è il **nodo HUB ufficiale** dell’ecosistema **Hermeticum B.C.E.**  
-Services funge da **portale pubblico**, **indice dei nodi**, e **layer di instradamento**
-tra le infrastrutture computabili del sistema.
+Questo repository è il **portale HUB ufficiale** dell’ecosistema **Hermeticum B.C.E.**  
+Services fornisce **accesso pubblico**, **indice dei nodi**, e **instradamento stabile**
+tra i moduli e le infrastrutture BCE.
 
 > Services **non contiene software esecutivo**.  
-> È il punto di accesso, coordinamento e coerenza semantica BCE.
+> È il punto di ingresso e coordinamento dell’intero sistema.
 
 ---
 
@@ -56,7 +56,7 @@ tra le infrastrutture computabili del sistema.
 
 ---
 
-### Identità, Registro e Editoria
+### Identità, Registro ed Editoria
 - **UE IPR Registry**  
   https://manuelcoletta1-source.github.io/ue-ipr-registry/
 
@@ -100,7 +100,7 @@ tra le infrastrutture computabili del sistema.
 - link inter-repo con **path assoluti** `/repo/`
 - **slash finale** sempre
 - GitHub Pages **case-sensitive**
-- Services = HUB, non duplicazione
+- Services = HUB (non duplicazione)
 
 ---
 
