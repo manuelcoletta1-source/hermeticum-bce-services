@@ -119,3 +119,5 @@ Fondatore — **Hermeticum B.C.E.**
 
 - **Email:** manuelcoletta1@gmil.com
 - **Telefono:** +39 351 572 4982
+- - **ΦΩ Standards Pack (Technology)**  
+  https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/docs/standards/
