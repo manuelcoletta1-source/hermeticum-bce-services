@@ -14,7 +14,7 @@
       line-height: 1.6;
     }
     header {
-      padding: 40px 20px;
+      padding: 44px 20px 28px;
       text-align: center;
       border-bottom: 1px solid #333;
     }
@@ -24,42 +24,49 @@
       letter-spacing: 1px;
     }
     header p {
-      margin-top: 10px;
+      margin: 10px 0 0;
       color: #aaa;
     }
     nav {
-      margin: 20px auto;
-      max-width: 1000px;
-      padding: 14px;
+      margin: 22px auto 0;
+      max-width: 1100px;
+      padding: 14px 12px;
       border: 1px solid #333;
-      border-radius: 10px;
+      border-radius: 12px;
       text-align: center;
     }
     nav a {
       color: #8fd3ff;
       text-decoration: none;
-      margin: 0 6px;
+      margin: 0 7px;
       white-space: nowrap;
     }
-    nav a:hover {
-      text-decoration: underline;
-    }
+    nav a:hover { text-decoration: underline; }
     main {
       max-width: 900px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 38px 20px 46px;
     }
     h2 {
       border-left: 4px solid #888;
       padding-left: 10px;
-      margin-top: 40px;
+      margin-top: 38px;
     }
-    ul {
-      list-style: none;
-      padding-left: 0;
+    ul { list-style: none; padding-left: 0; }
+    li { margin: 10px 0; }
+    .pill {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 10px;
+      border: 1px solid #444;
+      border-radius: 999px;
+      font-size: 0.85em;
+      color: #bbb;
     }
-    li {
-      margin: 10px 0;
+    .note {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 0.95em;
     }
     footer {
       padding: 20px;
@@ -76,16 +83,16 @@
 <header>
   <h1>Hermeticum B.C.E. — Services</h1>
   <p>Blindata · Computabile · Evolutiva</p>
-  <p>HUB di servizio e orchestrazione dell’ecosistema BCE</p>
+  <p>HUB pubblico: navigazione e orchestrazione dei nodi BCE</p>
 </header>
 
-<!-- NAVBAR CANONICA BCE -->
+<!-- NAVBAR CANONICA BCE (link assoluti anti-404) -->
 <nav aria-label="BCE Global Navigation">
   <a href="/hermeticum-bce-services/">Services</a> |
   <a href="/Hermeticum-B.C.E.-Technology/">Technology</a> |
   <a href="/gitjoker-c2/">GitJoker-C2</a> |
   <a href="/ue-ipr-registry/">UE IPR Registry</a> |
-  <a href="/esoterologia-edizioni-ipr5/">Esoterologia Edizioni (IPR5)</a> |
+  <a href="/esoterologia-edizioni-ipr5/">Esoterologia Edizioni</a> |
   <a href="/corpus-esoterologia-ermetica/">Corpus</a> |
   <a href="/apocalipsis/">Apocalipsis</a>
 </nav>
@@ -94,49 +101,47 @@
 
   <h2>Funzione del Repository</h2>
   <p>
-    <strong>Hermeticum B.C.E. — Services</strong> è il nodo HUB dell’infrastruttura
-    Hermeticum B.C.E. Non contiene software esecutivo, ma fornisce:
+    <strong>Services</strong> è il punto di ingresso unificato dell’ecosistema
+    Hermeticum B.C.E.: indicizza i nodi, stabilizza la navigazione e mantiene
+    coerenza semantica tra i repository.
   </p>
-  <ul>
-    <li>• punto di accesso unificato</li>
-    <li>• instradamento tra repository</li>
-    <li>• indice dei servizi e dei nodi pubblici</li>
-    <li>• layer di coerenza semantica BCE</li>
-  </ul>
 
   <h2>Nodi Pubblici</h2>
   <ul>
     <li>
-      <a href="/Hermeticum-B.C.E.-Technology/">
-        Hermeticum B.C.E. — Technology
-      </a>
+      <a href="/Hermeticum-B.C.E.-Technology/">Hermeticum B.C.E. — Technology</a>
+      <span class="pill">software & docs</span>
     </li>
     <li>
-      <a href="/gitjoker-c2/">
-        GitJoker — C2
-      </a>
+      <a href="/gitjoker-c2/">GitJoker — C2</a>
+      <span class="pill">C2 / operational layer</span>
     </li>
     <li>
-      <a href="/ue-ipr-registry/">
-        UE IPR Registry
-      </a>
+      <a href="/ue-ipr-registry/">UE IPR Registry</a>
+      <span class="pill">registro</span>
     </li>
     <li>
-      <a href="/esoterologia-edizioni-ipr5/">
-        Esoterologia Edizioni — IPR5
-      </a>
+      <a href="/esoterologia-edizioni-ipr5/">Esoterologia Edizioni — IPR5</a>
+      <span class="pill">editoria</span>
     </li>
     <li>
-      <a href="/corpus-esoterologia-ermetica/">
-        Corpus Esoterologia Ermetica
-      </a>
+      <a href="/corpus-esoterologia-ermetica/">Corpus Esoterologia Ermetica</a>
+      <span class="pill">corpus</span>
     </li>
     <li>
-      <a href="/apocalipsis/">
-        Apocalipsis
-      </a>
+      <a href="/apocalipsis/">Apocalipsis</a>
+      <span class="pill">timeline</span>
+    </li>
+    <li>
+      <a href="/apocalipsis/">Portale dell’Anticristo</a>
+      <span class="pill">pagina portale</span>
     </li>
   </ul>
+
+  <p class="note">
+    Nota: il <strong>Portale dell’Anticristo</strong> è attualmente esposto come entry pubblica
+    nel nodo <strong>Apocalipsis</strong>. Se diventa repo dedicato, verrà separato come nodo autonomo.
+  </p>
 
   <h2>Moduli BCE (panoramica)</h2>
   <ul>
@@ -149,7 +154,7 @@
   </ul>
 
   <h2>Stato</h2>
-  <p>🟢 <strong>ATTIVO</strong> — HUB di servizio e navigazione BCE</p>
+  <p>🟢 <strong>ATTIVO</strong> — HUB BCE pubblico (routing stabile, anti-404)</p>
 
 </main>
 
