@@ -1,4 +1,4 @@
-# Hermeticum B.C.E. — Services
+# Hermeticum B.C.E. — Services (Master Hub)
 
 **Hermeticum B.C.E.** (*Blindata · Computabile · Evolutiva*) è un ecosistema tecnico-giuridico e computazionale progettato per la costruzione di **infrastrutture digitali avanzate**, fondate su:
 
@@ -8,21 +8,16 @@
 - auditabilità sistemica
 - governance computabile
 
-Questo repository **non contiene il software**: è l’**Hub di Servizio e Documentazione** che descrive
-architetture, layer, interfacce e nodi pubblici dell’infrastruttura **Hermeticum B.C.E.**
-
-➡ **Repository SOFTWARE ufficiale (TECHNOLOGY):**  
-https://github.com/manuelcoletta1-source/hermeticum-bce-technology  
-➡ **Pagina pubblica (TECHNOLOGY / GitHub Pages):**  
-https://manuelcoletta1-source.github.io/hermeticum-bce-technology/
+Questo repository è il **PORTALE MADRE** (Master Hub):  
+contiene la **mappa completa dei servizi**, dei **repository** e dei **nodi pubblici** dell’ecosistema **Hermeticum B.C.E.**  
+L’hub **non interpreta e non gerarchizza**: **collega**.
 
 ---
 
 ## Stato del repository
 
 🟢 **ATTIVO**  
-Repository di servizio e architettura (Hub documentale)  
-Documentazione in evoluzione controllata
+Hub documentale e di navigazione — evoluzione controllata
 
 ---
 
@@ -38,19 +33,6 @@ Costruire sistemi digitali che siano:
 
 ---
 
-## Ambito funzionale
-
-Il repository copre:
-
-- Identità digitale avanzata
-- Cyber-governance multi-livello
-- Infrastrutture giuridico-computabili
-- Intelligenza Artificiale di controllo (C2)
-- Tracciabilità, audit e prova temporale
-- Coordinamento cyber-globale
-
----
-
 ## Architettura generale
 
 L’ecosistema **Hermeticum B.C.E.** è organizzato su **layer cooperanti**:
@@ -61,21 +43,83 @@ L’ecosistema **Hermeticum B.C.E.** è organizzato su **layer cooperanti**:
 4. **Controllo cognitivo e decisionale** — AI JOKER · NeuroLoop  
 5. **Governance cyber-globale** — CyberGlobal  
 
-📌 Il codice dei moduli vive nel repository TECHNOLOGY:  
-https://github.com/manuelcoletta1-source/hermeticum-bce-technology
+---
+
+## Hub principale (GitHub Pages)
+
+➡ **Hermeticum B.C.E. — Services (Master Hub)**  
+https://manuelcoletta1-source.github.io/hermeticum-bce-services/
 
 ---
 
-## Moduli (vista documentale)
+## Repository ufficiali (codice / nodi)
 
-- 🔐 **IPR** — Identity Primary Record  
-- ⚖️ **UNEBDO** — Unità Normativa Esecutiva Blindata Digitale Opponibile  
-- 🔁 **OPC** — Opponible Policy Core  
-- 🌐 **MetaExchange** — Interscambio dati e valore  
-- 🛰️ **IoSpace** — Spazio operativo digitale  
-- 🧬 **NeuroLoop** — Feedback cognitivo e sistemico  
-- 🧠 **AI JOKER** — C2 Engine  
-- 🌍 **CyberGlobal** — Governance cyber-globale  
+- **Hermeticum B.C.E. — Services (Hub)**  
+  https://github.com/manuelcoletta1-source/hermeticum-bce-services
+
+- **Hermeticum B.C.E. — Technology (Software)**  
+  https://github.com/manuelcoletta1-source/hermeticum-bce-technology
+
+- **GITJOKER-C2 (C2 / Command & Control)**  
+  https://github.com/manuelcoletta1-source/gitjoker-c2
+
+- **EU IPR Registry**  
+  https://github.com/manuelcoletta1-source/ue-ipr-registry
+
+- **ESOTEROLOGIA — Edizioni (IPR-5)**  
+  https://github.com/manuelcoletta1-source/esoterologia-edizioni-ipr5
+
+- **CORPUS ESOTEROLOGIA ERMETICA**  
+  https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica
+
+- **APOCALIPSIS**  
+  https://github.com/manuelcoletta1-source/apocalipsis
+
+- **IL PORTALE DELL’ANTICRISTO**  
+  https://github.com/manuelcoletta1-source/IL-PORTALE-DELL--ANTICRISTO
+
+---
+
+## Nodi pubblici (GitHub Pages)
+
+- **Hermeticum B.C.E. — Services (Hub)**  
+  https://manuelcoletta1-source.github.io/hermeticum-bce-services/
+
+- **Hermeticum B.C.E. — Technology (Software)**  
+  https://manuelcoletta1-source.github.io/hermeticum-bce-technology/
+
+- **GITJOKER-C2**  
+  https://manuelcoletta1-source.github.io/gitjoker-c2/
+
+- **EU IPR Registry**  
+  https://manuelcoletta1-source.github.io/ue-ipr-registry/
+
+- **ESOTEROLOGIA — Edizioni (IPR-5)**  
+  https://manuelcoletta1-source.github.io/esoterologia-edizioni-ipr5/
+
+- **CORPUS ESOTEROLOGIA ERMETICA**  
+  https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/
+
+- **APOCALIPSIS**  
+  https://manuelcoletta1-source.github.io/apocalipsis/
+
+- **IL PORTALE DELL’ANTICRISTO**  
+  https://manuelcoletta1-source.github.io/IL-PORTALE-DELL--ANTICRISTO/
+
+---
+
+## Software (link diretto al repository TECHNOLOGY)
+
+Il software ufficiale vive in **Hermeticum B.C.E. — Technology**:
+
+- `ipr/` — Identity Primary Record  
+- `unebdo/` — Unità Normativa Esecutiva Blindata Digitale Opponibile  
+- `opc/` — Opponible Policy Core  
+- `metaexchange/` — Interscambio dati e valore  
+- `iospace/` — Spazio operativo digitale  
+- `neuroloop/` — Feedback cognitivo e sistemico  
+- `ai-joker-c2/` — C2 Engine  
+- `cyberglobal/` — Governance cyber-globale  
 
 ---
 
@@ -87,37 +131,6 @@ https://github.com/manuelcoletta1-source/hermeticum-bce-technology
 - Modularità evolutiva
 - Tracciabilità nativa
 - Orientamento UE e istituzionale
-
----
-
-## Index Hub — Pagine pubbliche (GitHub Pages)
-
-Questo hub collega i nodi esposti tramite `index.html`.  
-L’indice non interpreta e non gerarchizza: **collega**.
-
-- **Hermeticum B.C.E. — Services**  
-  https://manuelcoletta1-source.github.io/hermeticum-bce-services/
-
-- **Hermeticum B.C.E. — Technology (Software)**  
-  https://manuelcoletta1-source.github.io/hermeticum-bce-technology/
-
-- **GITJOKER-C2** (Command & Control)  
-  https://manuelcoletta1-source.github.io/gitjoker-c2/
-
-- **EU IPR Registry**  
-  https://manuelcoletta1-source.github.io/ue-ipr-registry/
-
-- **ESOTEROLOGIA — Edizioni** (IPR-5)  
-  https://manuelcoletta1-source.github.io/esoterologia-edizioni-ipr5/
-
-- **CORPUS ESOTEROLOGIA ERMETICA**  
-  https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/
-
-- **APOCALIPSIS**  
-  https://manuelcoletta1-source.github.io/apocalipsis/
-
-- **IL PORTALE DELL’ANTICRISTO**  
-  https://manuelcoletta1-source.github.io/IL-PORTALE-DELL--ANTICRISTO/
 
 ---
 
