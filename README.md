@@ -113,3 +113,9 @@ Fondatore — **Hermeticum B.C.E.**
 
 - ΦΩ Documentation Pack (Technology)
   https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/docs/phi-omega/00-index/
+  ---
+
+## Contatti
+
+- **Email:** manuelcoletta1@gmil.com
+- **Telefono:** +39 351 572 4982
