@@ -1,3 +1,4 @@
+<a href="#corpus" data-view="corpus">Corpus</a>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -166,7 +167,45 @@
   }
   window.addEventListener('hashchange', render);
   document.addEventListener('click', e=>{
-    const a = e.target.closest('a[data-view]');
+    const a = e.target.closest('a[corpus: `
+  <div class="card">
+    <h1>Corpus Esoterologia Ermetica</h1>
+    <p>Accesso editoriale interno al Corpus.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Volume I — Esoterologia · Scienza dell’Essere</h2>
+      <p>Indice capitoli (lettura interna).</p>
+      <a class="btn" href="#v1" data-view="v1">Apri Volume I</a>
+    </div>
+  </div>
+      v1: `
+  <div class="card">
+    <h1>Volume I</h1>
+    <h2>Esoterologia · Scienza dell’Essere</h2>
+    <p>Indice capitoli.</p>
+    <ul>
+      <li><a class="btn" href="#c0" data-view="c0">Capitolo 0</a></li>
+      <li><a class="btn" href="#c1" data-view="c1">Capitolo I</a></li>
+      <li><a class="btn" href="#c2" data-view="c2">Capitolo II</a></li>
+      <li><a class="btn" href="#c3" data-view="c3">Capitolo III</a></li>
+      <li><a class="btn" href="#c4" data-view="c4">Capitolo IV</a></li>
+      <li><a class="btn" href="#c5" data-view="c5">Capitolo V</a></li>
+      <li><a class="btn" href="#c6" data-view="c6">Capitolo VI</a></li>
+      <li><a class="btn" href="#c7" data-view="c7">Capitolo VII</a></li>
+    </ul>
+  </div>
+`,c0: `
+  <div class="card">
+    <h1>Capitolo 0 — Atto di esposizione disciplinare</h1>
+    <iframe
+      src="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/volumi/volume-I/capitolo-00-atto-di-esposizione-disciplinare.md"
+      style="width:100%; height:70vh; border:1px solid #24262b; border-radius:12px;">
+    </iframe>
+  </div>
+`,
+`,]');
     if(a){ e.preventDefault(); location.hash = a.getAttribute('data-view'); }
   });
   render();
@@ -174,4 +213,5 @@
 
 </body>
 </html>
+
 
