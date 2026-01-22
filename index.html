@@ -1,78 +1,177 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
   <title>Hermeticum B.C.E. — Services</title>
-  <meta name="description" content="Hub pubblico di navigazione dell’ecosistema Hermeticum B.C.E. Servizi, moduli e contenuti verificabili." />
-  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hermeticum B.C.E. Services — Applicazione editoriale e operativa dell’ecosistema B.C.E." />
   <style>
-    :root { color-scheme: dark; }
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0b0c10;color:#e8e8e8}
-    header,main,footer{max-width:980px;margin:0 auto;padding:22px}
-    .card{background:#0f1117;border:1px solid #24262b;border-radius:18px;padding:20px;margin-bottom:16px}
-    h1{margin:0 0 10px 0;font-size:32px}
-    h2{margin:18px 0 8px 0;font-size:18px}
-    p{margin:8px 0;line-height:1.6;color:#cfd2d6}
-    .meta{font-size:13px;color:#9aa2aa}
-    .rule{border-left:4px solid #d6b8ff;padding-left:14px;margin:14px 0}
-    a{color:#d6b8ff;text-decoration:none}
-    a:hover{text-decoration:underline}
-    ul{margin:8px 0 8px 18px}
-    li{margin:6px 0;color:#cfd2d6}
+    :root{
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#9aa2aa;
+      --accent:#9ecbff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    header{
+      position:sticky; top:0; z-index:10;
+      background:rgba(11,12,16,.9); backdrop-filter:saturate(1.2) blur(6px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      max-width:1200px; margin:0 auto; padding:14px 18px;
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
+    }
+    .brand{font-weight:700; letter-spacing:.03em}
+    .menu{display:flex; gap:10px; flex-wrap:wrap}
+    .menu a{
+      padding:8px 12px; border-radius:10px; border:1px solid var(--line);
+      color:var(--text); text-decoration:none; background:transparent;
+    }
+    .menu a.active, .menu a:hover{border-color:var(--accent); color:var(--accent)}
+    main{
+      max-width:1200px; margin:0 auto; padding:28px 18px 60px;
+      display:grid; grid-template-columns: 280px 1fr; gap:18px;
+    }
+    aside{
+      border:1px solid var(--line); border-radius:16px; background:var(--panel);
+      padding:14px;
+    }
+    .card{
+      border:1px solid var(--line); border-radius:16px; background:var(--panel);
+      padding:18px; margin-bottom:14px;
+    }
+    h1,h2{margin:.2em 0}
+    p{color:#cfd2d6; line-height:1.6}
+    .btn{
+      display:inline-block; margin-top:10px; padding:10px 14px;
+      border-radius:12px; border:1px solid var(--line);
+      background:#0b0c10; color:var(--accent); text-decoration:none;
+    }
+    .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+    footer{
+      border-top:1px solid var(--line); color:var(--muted);
+      padding:18px; text-align:center;
+    }
+    @media (max-width: 900px){
+      main{grid-template-columns:1fr}
+      aside{order:2}
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="card">
-    <div class="meta">HUB PUBBLICO · ECOSISTEMA B.C.E.</div>
-    <h1>Hermeticum B.C.E. — Services</h1>
-
-    <div class="rule">
-      <p>
-        Pagina di orientamento strutturale.
-        Collega nodi tecnici, moduli software e contenuti editoriali
-        dell’ecosistema Hermeticum B.C.E.
-      </p>
-    </div>
+  <div class="nav">
+    <div class="brand">HERMETICUM B.C.E.</div>
+    <nav class="menu">
+      <a href="#home" data-view="home" class="active">Home</a>
+      <a href="#services" data-view="services">Services</a>
+      <a href="#documents" data-view="documents">Documentazione</a>
+      <a href="#ipr" data-view="ipr">IPR</a>
+      <a href="#about" data-view="about">About</a>
+    </nav>
   </div>
 </header>
 
 <main>
-  <div class="card">
-    <h2>Infrastruttura</h2>
-    <ul>
-      <li><a href="../hermeticum-bce-technology/">Hermeticum B.C.E. — Technology</a></li>
-      <li><a href="../gitjoker-c2/">GitJoker — C2</a></li>
-      <li><a href="../ue-ipr-registry/">UE IPR Registry</a></li>
-    </ul>
+  <aside>
+    <div class="card">
+      <strong>Dashboard</strong>
+      <p class="muted">Navigazione applicativa</p>
+      <a class="btn" href="#home" data-view="home">Home</a>
+      <a class="btn" href="#services" data-view="services">Services</a>
+      <a class="btn" href="#documents" data-view="documents">Documentazione</a>
+      <a class="btn" href="#ipr" data-view="ipr">IPR Registry</a>
+    </div>
+    <div class="card">
+      <strong>Link rapidi</strong>
+      <p>
+        <a class="btn" href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/" target="_blank">Corpus</a>
+        <a class="btn" href="https://manuelcoletta1-source.github.io/gitjoker-c2/" target="_blank">GitJoker</a>
+      </p>
+    </div>
+  </aside>
 
-    <h2>Moduli software</h2>
-    <ul>
-      <li><a href="../unebdo/">UNEBDO</a></li>
-      <li><a href="../opc/">OPC — voto opponibile</a></li>
-      <li><a href="../metaexchange/">MetaExchange</a></li>
-      <li><a href="../neuroloop/">NeuroLoop</a></li>
-      <li><a href="../iospace/">Io-Space</a></li>
-      <li><a href="../cyberglobal/">CyberGlobal</a></li>
-    </ul>
-
-    <h2>Editoriale</h2>
-    <ul>
-      <li><a href="../esoterologia-edizioni-ipr5/">Esoterologia — Edizioni</a></li>
-      <li><a href="../corpus-esoterologia-ermetica/">Corpus Esoterologia Ermetica</a></li>
-      <li><a href="../apocalipsis/">Apocalipsis</a></li>
-      <li><a href="../il-portale-dell-anticristo/">Il Portale dell’Anticristo</a></li>
-    </ul>
-  </div>
+  <section id="view"></section>
 </main>
 
 <footer>
-  <div class="card">
-    <p class="meta">© 2026 — Manuel Coletta · Hermeticum B.C.E.</p>
-  </div>
+  © 2026 — HERMETICUM B.C.E. · Services · UE
 </footer>
+
+<script>
+  const views = {
+    home: `
+      <div class="card">
+        <h1>Hermeticum B.C.E. — Services</h1>
+        <p>Applicazione unica dell’ecosistema B.C.E. per servizi, infrastrutture e documentazione.</p>
+      </div>
+      <div class="grid">
+        <div class="card"><h2>Services</h2><p>Moduli e servizi operativi.</p><a class="btn" href="#services" data-view="services">Apri</a></div>
+        <div class="card"><h2>Documentazione</h2><p>Volumi, corpus e materiali.</p><a class="btn" href="#documents" data-view="documents">Apri</a></div>
+        <div class="card"><h2>IPR</h2><p>Registry e identità operative.</p><a class="btn" href="#ipr" data-view="ipr">Apri</a></div>
+      </div>
+    `,
+    services: `
+      <div class="card">
+        <h1>Services</h1>
+        <p>Catalogo dei servizi Hermeticum B.C.E.</p>
+        <ul>
+          <li>CyberGlobal</li>
+          <li>UNEBDO</li>
+          <li>OPC</li>
+          <li>MetaExchange</li>
+          <li>IOSpace</li>
+          <li>NeuroLoop</li>
+        </ul>
+      </div>
+    `,
+    documents: `
+      <div class="card">
+        <h1>Documentazione</h1>
+        <p>Accesso ai contenuti editoriali.</p>
+        <a class="btn" href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/" target="_blank">Corpus Esoterologia Ermetica</a>
+      </div>
+    `,
+    ipr: `
+      <div class="card">
+        <h1>IPR</h1>
+        <p>Registro UE e identità operative.</p>
+        <a class="btn" href="https://manuelcoletta1-source.github.io/ue-ipr-registry/" target="_blank">UE IPR Registry</a>
+        <a class="btn" href="https://manuelcoletta1-source.github.io/gitjoker-c2/" target="_blank">IPR-5 GitJoker</a>
+      </div>
+    `,
+    about: `
+      <div class="card">
+        <h1>About</h1>
+        <p>HERMETICUM B.C.E. — ecosistema tecnico-editoriale UE.</p>
+      </div>
+    `
+  };
+
+  const viewEl = document.getElementById('view');
+  function render(){
+    const hash = location.hash.replace('#','') || 'home';
+    viewEl.innerHTML = views[hash] || views.home;
+    document.querySelectorAll('.menu a').forEach(a=>{
+      a.classList.toggle('active', a.getAttribute('data-view')===hash);
+    });
+  }
+  window.addEventListener('hashchange', render);
+  document.addEventListener('click', e=>{
+    const a = e.target.closest('a[data-view]');
+    if(a){ e.preventDefault(); location.hash = a.getAttribute('data-view'); }
+  });
+  render();
+</script>
 
 </body>
 </html>
+
