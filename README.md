@@ -1,93 +1,108 @@
-# Hermeticum B.C.E. — Services
+# HERMETICUM B.C.E. — Services
 
-**Hub pubblico di navigazione dell’ecosistema Hermeticum B.C.E.**  
-Pagina di orientamento strutturale · non esecutiva · verificabile.
+**Hermeticum B.C.E. — Services** è l’applicazione web ufficiale dell’ecosistema  
+**HERMETICUM B.C.E. (Blindata · Computabile · Evolutiva)**.
 
----
-
-## Funzione del repository
-
-Questo repository non ospita codice operativo né servizi eseguibili.
-
-**Hermeticum B.C.E. — Services** svolge la funzione di:
-- mappa pubblica dell’ecosistema B.C.E.
-- punto di accesso verificabile ai moduli tecnici
-- indice editoriale e documentale
-- strato di orientamento per audit, governance e ricerca
-
-Il repository espone **relazioni**, non esecuzioni.
+Questo repository pubblica una **Single-Page Application (SPA)** statica,
+progettata come **interfaccia operativa e editoriale** per l’accesso ai servizi,
+ai moduli e alla documentazione dell’ecosistema.
 
 ---
 
-## Natura del sistema B.C.E.
+## Natura del Progetto
 
-**Hermeticum B.C.E. (Blindata · Computabile · Evolutiva)** è un ecosistema
-tecnico-giuridico e computazionale progettato per:
+- **Tipologia:** Web Application (SPA statica)
+- **Tecnologia:** HTML · CSS · JavaScript (vanilla)
+- **Hosting:** GitHub Pages
+- **Ambito:** infrastruttura tecnico-editoriale UE-oriented
+- **Stato:** ATTIVO / in evoluzione controllata
 
-- identità digitali opponibili
-- tracciabilità delle decisioni
-- audit pubblico e continuità nel tempo
-- integrazione tra sistemi tecnici ed editoriali
-
-Il sistema non è una piattaforma unica, ma una **costellazione di nodi verificabili**.
-
----
-
-## Struttura dei servizi
-
-### Infrastruttura
-- **Hermeticum B.C.E. — Technology**  
-  Repository tecnologico e architetturale
-- **GitJoker — C2**  
-  Framework operativo per operatori umani e AI
-- **UE IPR Registry**  
-  Registro sperimentale europeo di Identity Primary Record
+L’applicazione non è un sito informativo tradizionale:
+è una **dashboard applicativa** che consente di navigare
+l’intero ecosistema **senza uscire dall’interfaccia**.
 
 ---
 
-### Moduli software B.C.E.
-- **UNEBDO** — validità e stato
-- **OPC** — opponibilità e voto digitale
-- **MetaExchange** — scambio e coordinamento
-- **NeuroLoop** — continuità e persistenza
-- **Io-Space** — identità, spazio, energia
-- **CyberGlobal** — governance e cybersicurezza
+## Funzione
 
-Ogni modulo è autonomo, versionato e pubblicamente verificabile.
+L’applicazione fornisce:
+
+- accesso unificato ai **servizi Hermeticum B.C.E.**
+- collegamento alla **documentazione editoriale**
+- integrazione con **IPR Registry** e **GitJoker**
+- struttura coerente con progetti **UE / Horizon-compatible**
 
 ---
 
-### Editoriale e contenuti
-- **Esoterologia — Edizioni**
+## Servizi Integrati
+
+L’ecosistema include, tra gli altri:
+
+- **CyberGlobal** — modulo di cybersicurezza UE
+- **UNEBDO** — infrastruttura giuridico-tecnica
+- **OPC** — Opponible Policy Core
+- **MetaExchange** — scambio e governance
+- **IOSpace** — spazio e energia computabile
+- **NeuroLoop** — moduli neuro-operativi
+
+I servizi sono presentati come **componenti applicativi**,
+non come semplici pagine descrittive.
+
+---
+
+## Documentazione
+
+L’applicazione collega e integra:
+
 - **Corpus Esoterologia Ermetica**
-- **Apocalipsis**
-- **Il Portale dell’Anticristo**
+- Volumi editoriali
+- Materiali fondativi
+- Repository di riferimento
 
-Questi contenuti non decorano il sistema: ne costituiscono la **base editoriale opponibile**.
-
----
-
-## Governance e audit
-
-Il repository collega strumenti di:
-- STATUS
-- POLICY
-- AUDIT
-- CROSS-AUDIT
-- CHANGELOG
-
-La governance è trattata come **processo osservabile**, non come dichiarazione.
+Accesso diretto:
+- https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/
 
 ---
 
-## Stato del repository
+## IPR & Identità Operative
 
-- **Stato:** LIVE
-- **Ruolo:** Hub di servizi e relazioni
-- **Esecutività:** Nessuna
-- **Funzione:** Orientamento pubblico e tracciabilità
+Il sistema è progettato per operare in sinergia con:
+
+- **UE IPR Registry**
+- **IPR-5 — GitJoker (AIJoker-C2)**
+
+Questi elementi costituiscono il livello di:
+- identità digitale
+- tracciabilità
+- continuità operativa
 
 ---
 
-© 2026 — Manuel Coletta  
-Hermeticum B.C.E.
+## Architettura
+
+- Applicazione **single-page**
+- Navigazione interna via hash routing
+- Nessun framework esterno
+- Codice auditabile e stabile
+- UX orientata a uso professionale
+
+---
+
+## Ente Promotore
+
+**HERMETICUM B.C.E. S.r.l.**  
+Fondatore: **Manuel Coletta**  
+Giurisdizione di riferimento: **Unione Europea**
+
+---
+
+## Stato del Repository
+
+- **Repository:** pubblico
+- **Finalità:** servizio / interfaccia applicativa
+- **Livello di maturità:** UE-ready
+- **Regime:** evolutivo, tracciabile, opponibile
+
+---
+
+© 2026 — HERMETICUM B.C.E. · Services
