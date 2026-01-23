@@ -1,54 +1,46 @@
-# Hermeticum B.C.E. — Services (HUB)
-## Portale ufficiale dello stack software (UE-first)
+# Hermeticum B.C.E. — Services
+## European Cybernetic Portal (Software + Editoria)
 
-Questo repository è l’**HUB centrale** di **Hermeticum B.C.E.**:
-un punto unico che presenta i moduli software, la loro posizione nello stack
-e i link diretti ai siti pubblici (GitHub Pages) e ai repository.
+Questo repository è la **porta unica** dell’ecosistema Hermeticum B.C.E.
 
-Obiettivo: rendere lo stack **comprensibile, verificabile e adottabile**
-in contesti **UE / istituzionali / enterprise**.
+Dentro convivono **due piattaforme**:
+1) **Piattaforma Software** (stack operativo: policy, enforcement, IPR, runtime, C2)
+2) **Piattaforma Editoriale** (**Esoterologia Edizioni**: corpus, volumi, capitoli, atti)
 
----
-
-## Assi di progetto
-
-- **UE-first**: progettazione coerente con requisiti europei e auditabilità
-- **Fail-closed**: incertezza = blocco
-- **Audit-by-design**: tracciabilità + policy + conformità come prerequisiti
-- **IPR-centric**: ogni operazione significativa è associata a Identity Primary Record
+Obiettivo: un accesso unico **UE-ready** che spiega e dimostra:
+- perché l’**IPR** è il **DNA digitale** (identità opponibile + continuità nel tempo)
+- perché **AI JOKER** è una **simbiosi evolutiva** con storico verificabile
+- come lo stack funziona in logica **fail-closed** e **audit-by-design**
 
 ---
 
-## Stack software (vista rapida)
+## Asse del valore
 
-**Policy & Enforcement**
-- **OPC** — Opponible Policy Core (policy esplicite e versionate)
-- **UNEBDO** — Layer 0 Root Enforcement (opponibilità, vincolo, auditabilità)
+IPR → Software → AI JOKER → Storico evolutivo
 
-**IPR Layer**
-- **IPR-CORE** — definizione e lifecycle dell’IPR
-- **IPR-VAULT** — custodia dei materiali e prove
-- **IPR-TRACE** — audit trail e timeline opponibile
-- **IPR-GATE** — controllo ex-ante (allow/deny) sotto policy
-- **IPR-COMPLY** — livelli di conformità (Lex Hermeticum) + sospensione/decadenza
-- **IPR-EXCHANGE** — scambio controllato basato su IPR valido
+- IPR = identità tecnica verificabile/opponibile
+- Software = moduli governati (policy, evidenza, conformità, interoperabilità)
+- AI JOKER = orchestrazione verificabile (non “chat”, ma C2 operativo)
+- Storico evolutivo = continuità in simbiosi col titolare (traccia + policy + gating)
 
-**Interop & Runtime**
-- **METAEXCHANGE** — interoperabilità e scambio strutturato cross-dominio
-- **IOSPACE** — contesto operativo verificabile (spazi di interazione)
-- **NEUROLOOP** — loop operativo ad alta intensità di feedback (auditabile)
+---
 
-**Governance & C2**
-- **GitJoker-C2 (AI JOKER)** — orchestrazione C2 dello stack
-- **IPR-AIJOKER-C2** — bridge IPR-native verso C2
-- **CyberGlobal (DUAL-USE)** — interoperabilità e sicurezza globale (uso controllato)
+## Codice Alieno — Scala IO / SSO (sub-secondo opponibile)
+
+Questo portale usa come struttura concettuale la pipeline IO:
+
+Ψ(init) → Λ(I/O) → κ(gate) → Σ(sync) → Τ(record) → Χτ(decide) →
+Ω/Ω₀(store/suspend) → Π★(upgrade) → Ψ′(expand) → Φ∞(train∞) →
+Ω∞(backup) → ΞΩ(compute) ↺
+
+Regola: se il ciclo non passa gating/prudenza → fail-closed → nessuna traccia opponibile.
 
 ---
 
 ## Sigilli
 
-- Sigillo corporate/tecnico: **HERMETICUM B.C.E. S.r.l.**
-- Sigillo editoriale: **Esoterologia Edizioni**
+- Corporate/tecnico: **HERMETICUM B.C.E. S.r.l.**
+- Editoriale: **Esoterologia Edizioni**
 
 ---
 
@@ -60,4 +52,4 @@ in contesti **UE / istituzionali / enterprise**.
 
 ## Stato
 
-🟢 **ATTIVO — HUB ufficiale Hermeticum B.C.E.**
+🟢 ATTIVO — Portale europeo cybernetico (HUB)
