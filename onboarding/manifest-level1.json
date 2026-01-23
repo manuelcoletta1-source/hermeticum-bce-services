@@ -1,0 +1,38 @@
+{
+  "schema": "HERMETICUM-BCE-IPR",
+  "schemaVersion": "1.0",
+  "level": "BASE",
+  "iprId": "IPR-<UUID>",
+  "hrrRef": "HRR-<PSEUDONYM>",
+  "status": "ACTIVE",
+  "createdAt": "UTC-ISO8601",
+  "timeRef": {
+    "type": "CERTIFIED_TIMESTAMP",
+    "provider": "INTERNAL_OR_ETSI_COMPATIBLE",
+    "reference": "TS-<ID>"
+  },
+  "dgv": {
+    "validator": "DGV-v1",
+    "outcome": "ALLOW",
+    "policy": "FAIL_CLOSED"
+  },
+  "integrity": {
+    "hashAlgorithm": "SHA-512",
+    "manifestHash": "<TO_BE_COMPUTED>",
+    "attachments": []
+  },
+  "anchoring": {
+    "ipfs": null,
+    "bitcoin": null,
+    "ethereum": null
+  },
+  "privacy": {
+    "personalDataIncluded": false,
+    "publicDisclosure": "HASH_ONLY"
+  },
+  "evolution": {
+    "upgradeAllowed": true,
+    "upgradableTo": ["OPPOSABLE", "STRONG"]
+  },
+  "notes": "Level 1 BASE manifest. No public blockchain anchoring by default."
+}
