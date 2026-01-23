@@ -1,0 +1,94 @@
+{
+  "schema": "HERMETICUM-BCE-IPR",
+  "schemaVersion": "1.0",
+  "level": "STRONG",
+  "iprId": "IPR-<UUID>",
+  "hrrRef": "HRR-<PSEUDONYM>",
+  "status": "ACTIVE",
+  "createdAt": "UTC-ISO8601",
+  "timeRef": {
+    "type": "CERTIFIED_TIMESTAMP",
+    "provider": "ETSI_COMPATIBLE_OR_EQUIVALENT",
+    "reference": "TS-<ID>",
+    "redundancy": [
+      {
+        "type": "PUBLIC_CHAIN_TIME",
+        "chain": "BITCOIN",
+        "tx": "<BTC_TXID>",
+        "hashAnchored": "manifestHash"
+      },
+      {
+        "type": "PUBLIC_CHAIN_REFERENCE",
+        "chain": "ETHEREUM",
+        "tx": "<EVM_TXHASH>",
+        "hashAnchored": "manifestHash"
+      }
+    ]
+  },
+  "dgv": {
+    "validator": "DGV-v1",
+    "outcome": "ALLOW",
+    "policy": "FAIL_CLOSED"
+  },
+  "integrity": {
+    "hashAlgorithm": "SHA-512",
+    "manifestHash": "<TO_BE_COMPUTED>",
+    "bundleHash": "<TO_BE_COMPUTED>",
+    "attachments": [
+      {
+        "name": "public-proof.txt",
+        "sha512": "<TO_BE_COMPUTED>",
+        "disclosure": "PUBLIC"
+      },
+      {
+        "name": "evidence/manifest.json",
+        "sha512": "<TO_BE_COMPUTED>",
+        "disclosure": "PUBLIC"
+      },
+      {
+        "name": "evidence/hashes.txt",
+        "sha512": "<TO_BE_COMPUTED>",
+        "disclosure": "PUBLIC"
+      }
+    ]
+  },
+  "privacy": {
+    "personalDataIncluded": false,
+    "publicDisclosure": "HASH_ONLY",
+    "publicBundlePolicy": "MANIFEST_HASHES_ONLY"
+  },
+  "anchoring": {
+    "ipfs": {
+      "enabled": true,
+      "cid": "<CID>",
+      "content": "PUBLIC_EVIDENCE_BUNDLE",
+      "sha512Bound": "bundleHash"
+    },
+    "bitcoin": {
+      "enabled": true,
+      "txid": "<BTC_TXID>",
+      "hashAnchored": "manifestHash",
+      "role": "STRONG_TIME_ANCHOR"
+    },
+    "ethereum": {
+      "enabled": true,
+      "tx": "<EVM_TXHASH>",
+      "hashAnchored": "manifestHash",
+      "role": "PROCESS_REFERENCE"
+    }
+  },
+  "lta": {
+    "enabled": true,
+    "policy": "ETSI_EN_319_LTA_READY",
+    "retention": "10Y",
+    "evidenceVault": "VAULT-<ID>",
+    "recheckInterval": "12M",
+    "reanchorPolicy": "ON_DEGRADATION_OR_POLICY"
+  },
+  "evolution": {
+    "upgradeFrom": "OPPOSABLE",
+    "upgradeAllowed": true,
+    "compatibility": ["BASE", "OPPOSABLE"]
+  },
+  "notes": "Level 3 STRONG: IPFS + BTC + ETH + LTA-ready. No personal data published."
+}
