@@ -1,12 +1,10 @@
-<a href="./governance.html">Governance</a>
-<a href="./use-cases.html">Use Cases</a>
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Catalogo — Carte Biocibernetiche & Ancoraggi | HERMETICUM B.C.E.</title>
+  <title>Catalogo — BioCyber Identity Card | HERMETICUM B.C.E.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Catalogo Carte Biocibernetiche (BioCyber Identity Card) e servizi di ancoraggio: IPFS, Bitcoin, Ethereum. Framework HERMETICUM B.C.E." />
+  <meta name="description" content="Catalogo ufficiale BioCyber Identity Card: livelli BASE, OPPONIBILE, FORTE (STRONG) con prezzi in abbonamento e potenzialità. Servizi di ancoraggio IPFS/BTC/ETH. UE-first." />
   <style>
     :root{
       --bg:#0b0c10;
@@ -22,80 +20,48 @@
     *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
       line-height:1.6;
     }
 
-    /* Master header (central, fixed style) */
-    header{
-      border-bottom:1px solid var(--line);
-      background:var(--bg);
-    }
+    header{ border-bottom:1px solid var(--line); background:var(--bg); }
     .brandwrap{
-      max-width:980px;
-      margin:0 auto;
-      padding:28px 20px 16px;
-      text-align:center;
+      max-width:980px; margin:0 auto; padding:28px 20px 16px; text-align:center;
     }
     .brand{
-      margin:0;
-      font-size:2.4rem;
-      letter-spacing:0.12em;
-      font-weight:600;
+      margin:0; font-size:2.4rem; letter-spacing:0.12em; font-weight:600;
     }
-    .brandsub{
-      margin:10px 0 0 0;
-      color:var(--muted);
-      font-size:0.95rem;
-    }
+    .brandsub{ margin:10px 0 0; color:var(--muted); font-size:0.95rem; }
 
-    /* Page container */
-    .pagehead, main, footer{
-      max-width:980px;
-      margin:0 auto;
-      padding:20px 20px;
+    .nav{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+      margin-top:10px; font-size:0.95rem;
     }
-    footer{
-      border-top:1px solid var(--line);
-      color:var(--muted);
-      font-size:0.9rem;
-      margin-top:60px;
-      padding:22px 20px;
-    }
-
     a{ color:var(--accent); text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    h1{
-      margin:0 0 10px 0;
-      font-size:1.9rem;
-      letter-spacing:0.02em;
+    .pagehead, main, footer{
+      max-width:980px; margin:0 auto; padding:20px 20px;
     }
-    h2{ margin-top:36px; font-size:1.25rem; }
+    footer{
+      border-top:1px solid var(--line);
+      color:var(--muted); font-size:0.9rem;
+      margin-top:60px; padding:22px 20px;
+    }
+
+    h1{ margin:0 0 10px; font-size:1.9rem; }
+    h2{ margin-top:36px; font-size:1.35rem; }
+    h3{ margin-top:18px; font-size:1.1rem; }
     p{ max-width:860px; }
     .muted{ color:var(--muted); }
 
-    .nav{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      margin-top:10px;
-      font-size:0.95rem;
-    }
-
     .status{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      margin-top:10px;
-      padding:6px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:var(--panel);
-      color:var(--muted);
-      font-size:0.85rem;
+      display:inline-flex; align-items:center; gap:10px;
+      margin-top:12px; padding:6px 12px; border-radius:999px;
+      border:1px solid var(--line); background:var(--panel);
+      color:var(--muted); font-size:0.85rem;
     }
     .dot{
       width:10px; height:10px; border-radius:50%;
@@ -105,10 +71,8 @@
     }
 
     .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-      margin-top:16px;
+      display:grid; grid-template-columns: repeat(12, 1fr);
+      gap:14px; margin-top:16px;
     }
     .col4{ grid-column: span 12; }
     .col6{ grid-column: span 12; }
@@ -122,6 +86,7 @@
       border:1px solid var(--line);
       border-radius:14px;
       padding:18px;
+      margin-top:16px;
     }
     .kicker{
       letter-spacing:0.08em;
@@ -130,6 +95,11 @@
       color:var(--muted);
       margin-bottom:6px;
     }
+    .highlight{
+      outline:2px solid rgba(122,162,255,0.25);
+      box-shadow: 0 0 0 4px rgba(122,162,255,0.06);
+    }
+
     .tagrow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
     .tag{
       border:1px solid var(--line);
@@ -154,9 +124,13 @@
       border-left-color:var(--warn);
       background: rgba(255,212,59,0.10);
     }
+    .bad{
+      border-left-color:var(--bad);
+      background: rgba(255,107,107,0.10);
+    }
 
     .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
       background:#0b0c10;
       border:1px solid var(--line);
       border-radius:12px;
@@ -177,10 +151,16 @@
       font-size:0.95rem;
     }
 
-    .highlight{
-      outline:2px solid rgba(122,162,255,0.25);
-      box-shadow: 0 0 0 4px rgba(122,162,255,0.06);
+    .price{
+      font-size:1.05rem;
+      margin:10px 0 0;
     }
+    .price strong{
+      font-size:1.15rem;
+      letter-spacing:0.01em;
+    }
+    .small{ font-size:0.92rem; }
+    code{ color: #c6d0ff; }
   </style>
 </head>
 
@@ -190,201 +170,242 @@
   <div class="brandwrap">
     <h1 class="brand">HERMETICUM&nbsp;B.C.E.</h1>
     <p class="brandsub">Blindata · Computabile · Evolutiva</p>
+
+    <nav class="nav">
+      <a href="./index.html">Home</a>
+      <a href="./services.html">Servizi</a>
+      <a href="./catalog.html"><strong>Catalogo</strong></a>
+      <a href="./create.html">Attivazione</a>
+      <a href="./use-cases.html">Use Cases</a>
+      <a href="./verify.html">Verifica</a>
+      <a href="./governance.html">Governance</a>
+      <a href="./README.md">README</a>
+    </nav>
+
+    <div class="status"><span class="dot"></span>EU Pilot — Catalogo ufficiale</div>
   </div>
 </header>
 
 <section class="pagehead">
-  <h1>Catalogo</h1>
+  <h1>Catalogo — BioCyber Identity Card</h1>
   <p class="muted">
-    Catalogo delle <strong>Carte Biocibernetiche</strong> (BioCyber Identity Card) e dei relativi
-    <strong>servizi di ancoraggio</strong>.
-    Struttura neutra, audit-ready, UE-first.
+    <strong>HERMETICUM B.C.E. nasce per la sicurezza digitale europea dell’individuo.</strong><br/>
+    La BioCyber Identity Card è un servizio continuativo che abilita attribuzione umana verificabile,
+    accountability ex-ante e prova digitale opponibile nel tempo.
   </p>
 
-  <nav class="nav">
-    <a href="./index.html">Home</a>
-    <a href="./services.html">Servizi</a>
-    <a href="./catalog.html"><strong>Catalogo</strong></a>
-    <a href="./verify.html">Verifica</a>
-    <a href="./README.md">README</a>
-  </nav>
-
-  <div class="status"><span class="dot"></span>Offerta strutturata — Nessun prezzo pubblicato</div>
-
   <div class="note warn">
-    La carta biocibernetica <strong>non è un documento civile</strong> e non sostituisce CIE/passaporto.
-    È una <strong>posizione verificabile nel tempo</strong> per attribuzione, accountability e prova digitale.
+    Non è un documento civile. Non sostituisce CIE o passaporto.
+    Pubblicazione predefinita: <strong>hash-only</strong> (nessun dato personale).
   </div>
 </section>
 
 <main>
 
   <section>
-    <h2>Carte Biocibernetiche</h2>
+    <h2>Livelli di servizio (abbonamento)</h2>
     <p class="muted">
-      Tre livelli operativi. Il livello consigliato (standard) è <strong>Opponibile</strong>.
-      L’ancoraggio pubblico è un servizio: si attiva quando il valore supera il costo.
+      La card non “si compra”: <strong>si mantiene attiva</strong>.
+      La verifica resta sempre riproducibile: ricalcolo hash, confronto manifest, controllo riferimenti.
     </p>
 
     <div class="grid">
 
+      <!-- LEVEL 1 -->
       <div class="card col4">
-        <div class="kicker">Carta 01</div>
-        <h3>BioCyber Card — BASE</h3>
-        <p class="muted">Ingresso tecnico: identità opponibile interna e evidenza minima.</p>
+        <div class="kicker">Livello 1</div>
+        <h3>BASE</h3>
+        <p class="muted">Identità tecnica + sicurezza minima continua (fail-closed).</p>
+
+        <p class="price"><strong>€9 / mese</strong> · <strong>€90 / anno</strong> <span class="muted small">(2 mesi inclusi)</span></p>
+
         <ul>
-          <li>IPR/HRR univoco</li>
-          <li>Evidence Bundle iniziale</li>
-          <li>Timestamp certificato</li>
-          <li>Decision Gate (fail-closed)</li>
+          <li>IPR/HRR attivo (radice umana tecnica)</li>
+          <li>Manifest Level 1 (machine-readable)</li>
+          <li>Hash SHA-512 + timestamp certificato</li>
+          <li>Evidence Bundle privato</li>
+          <li>DGV: ALLOW/REVIEW/DENY/FAIL_CLOSED</li>
         </ul>
+
         <div class="tagrow">
-          <span class="tag">No chain</span>
-          <span class="tag">Minimo costo</span>
-          <span class="tag">Pilot interno</span>
+          <span class="tag">Hash + Timestamp</span>
+          <span class="tag">Fail-Closed</span>
+          <span class="tag">Privacy-by-design</span>
         </div>
+
+        <div class="note">
+          Documentazione: <code>/onboarding/manifest-level1.json</code>
+        </div>
+
         <div class="btnrow">
-          <a class="btn" href="./services.html">Vedi componenti</a>
-          <a class="btn" href="./verify.html">Vedi verifica</a>
+          <a class="btn" href="./create.html">Attiva Level 1</a>
+          <a class="btn" href="./verify.html">Come verificare</a>
         </div>
       </div>
 
+      <!-- LEVEL 2 -->
       <div class="card col4 highlight">
-        <div class="kicker">Carta 02 — Standard</div>
-        <h3>BioCyber Card — OPPONIBILE</h3>
-        <p class="muted">Verifica esterna e prova pubblica selettiva (audit-ready).</p>
+        <div class="kicker">Livello 2 — Standard</div>
+        <h3>OPPONIBILE</h3>
+        <p class="muted">Sicurezza pubblicamente verificabile (senza pubblicare dati personali).</p>
+
+        <p class="price"><strong>€29 / mese</strong> · <strong>€290 / anno</strong></p>
+
         <ul>
           <li>Tutto il livello BASE</li>
-          <li>Manifest verificabile esternamente</li>
-          <li>Evidence Bundle pubblicabile (parziale)</li>
-          <li>Ancoraggio selettivo</li>
+          <li>Evidence pubblicabile (manifest + hash)</li>
+          <li><strong>IPFS</strong> (CID) per bundle pubblico</li>
+          <li><strong>1 chain pubblica</strong> (BTC <em>oppure</em> ETH)</li>
+          <li>Public Proof opponibile</li>
         </ul>
+
         <div class="tagrow">
           <span class="tag">IPFS</span>
           <span class="tag">BTC o ETH</span>
           <span class="tag">Audit-ready</span>
         </div>
+
         <div class="note">
-          <strong>Consigliata</strong> per professionisti, aziende e fornitori UE.
+          Documentazione: <code>/onboarding/manifest-level2-opposable.json</code><br/>
+          Upgrade: <code>/onboarding/UPGRADE-BASE-TO-OPPOSABLE.md</code>
         </div>
+
         <div class="btnrow">
-          <a class="btn" href="./verify.html">Workflow di verifica</a>
-          <a class="btn" href="./README.md">Specifica</a>
+          <a class="btn" href="./create.html">Upgrade a Level 2</a>
+          <a class="btn" href="./evidence/README.md">Evidence</a>
         </div>
       </div>
 
+      <!-- LEVEL 3 -->
       <div class="card col4">
-        <div class="kicker">Carta 03</div>
-        <h3>BioCyber Card — FORTE / ISTITUZIONALE</h3>
-        <p class="muted">Massima opponibilità: multi-ancora e conservazione LTA.</p>
+        <div class="kicker">Livello 3</div>
+        <h3>FORTE / ISTITUZIONALE (STRONG)</h3>
+        <p class="muted">Massima opponibilità + policy LTA-ready (memoria nel tempo).</p>
+
+        <p class="price"><strong>€79 / mese</strong> · <strong>€790 / anno</strong></p>
+
         <ul>
           <li>Tutto il livello OPPONIBILE</li>
-          <li>Conservazione a lungo termine (LTA)</li>
-          <li>Ridondanza di prova</li>
-          <li>Uso istituzionale / contenzioso</li>
+          <li><strong>IPFS + Bitcoin + Ethereum</strong> (multi-ancora)</li>
+          <li>Doppia ridondanza temporale</li>
+          <li>Evidence Bundle strutturato</li>
+          <li>Policy <strong>LTA-ready</strong> (retention/recheck)</li>
         </ul>
+
         <div class="tagrow">
           <span class="tag">IPFS</span>
           <span class="tag">Bitcoin</span>
           <span class="tag">Ethereum</span>
+          <span class="tag">LTA-ready</span>
         </div>
+
         <div class="note warn">
-          Solo per casi ad alto valore o requisiti istituzionali.
+          Documentazione: <code>/onboarding/manifest-level3-strong.json</code><br/>
+          Upgrade: <code>/onboarding/UPGRADE-OPPOSABLE-TO-STRONG.md</code>
         </div>
+
         <div class="btnrow">
-          <a class="btn" href="./verify.html">Verifica</a>
-          <a class="btn" href="./services.html">Architettura</a>
+          <a class="btn" href="./create.html">Upgrade a Level 3</a>
+          <a class="btn" href="./governance.html">Scope & Non-goals</a>
         </div>
       </div>
 
     </div>
+
+    <div class="note">
+      Regola: se un controllo o un riferimento di prova non è verificabile → esito <strong>FAIL_CLOSED</strong>.
+      Il sistema deve fermarsi.
+    </div>
   </section>
 
   <section>
-    <h2>Servizi di Ancoraggio</h2>
+    <h2>Potenzialità per livello (in breve)</h2>
+    <div class="card">
+      <ul>
+        <li><strong>BASE</strong>: sicurezza minima continua, radice umana, prove private, hash+timestamp.</li>
+        <li><strong>OPPONIBILE</strong>: terze parti verificano senza fiducia, IPFS + 1 chain, prove pubblicabili (hash-only).</li>
+        <li><strong>FORTE</strong>: multi-ancora + LTA-ready, resilienza a contestazioni nel tempo e contesti istituzionali.</li>
+      </ul>
+      <div class="btnrow">
+        <a class="btn" href="./use-cases.html">Vedi casi d’uso</a>
+        <a class="btn" href="./verify.html">Vedi verifica</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Servizi di ancoraggio (componente tecnico)</h2>
     <p class="muted">
-      I servizi di ancoraggio possono essere inclusi nella carta (in base al livello)
-      oppure attivati come servizio separato per documenti, eventi e bundle di evidenza.
+      Gli ancoraggi rendono opponibile l’evidenza. Il principio resta invariato:
+      <strong>ricalcola e confronta</strong>.
     </p>
 
     <div class="grid">
-
       <div class="card col6">
-        <div class="kicker">Anchoring A</div>
+        <div class="kicker">Anchoring</div>
         <h3>IPFS (CID)</h3>
-        <p class="muted">Pubblicazione contenuto/manifest con identificatore verificabile (CID).</p>
         <ul>
-          <li>Prova di esistenza del contenuto</li>
-          <li>Distribuzione e recupero</li>
-          <li>Privacy configurabile (pubblico/parziale)</li>
+          <li>pubblicazione bundle pubblico (manifest + hash)</li>
+          <li>identificatore verificabile: CID</li>
+          <li>contenuto privo di dati personali (hash-only)</li>
         </ul>
-        <div class="mono">Output tipico:
+        <div class="mono">Output:
 - CID (IPFS)
-- hash del manifest (SHA-512)
-- reference path /evidence/</div>
+- bundleHash (SHA-512)
+- reference: /evidence/ (se pubblicato)</div>
       </div>
 
       <div class="card col6">
-        <div class="kicker">Anchoring B</div>
-        <h3>Bitcoin (tempo forte)</h3>
-        <p class="muted">Ancoraggio dell’hash radice per massima resistenza temporale.</p>
+        <div class="kicker">Anchoring</div>
+        <h3>Bitcoin / Ethereum</h3>
         <ul>
-          <li>Timestamp forte e pubblico</li>
-          <li>Opponibilità temporale elevata</li>
-          <li>Ideale per audit e dispute</li>
+          <li>ancoraggio hash radice su chain pubblica</li>
+          <li>Bitcoin: tempo forte (timestamp pubblico)</li>
+          <li>Ethereum: riferimento di processo (smart-ready)</li>
         </ul>
-        <div class="mono">Output tipico:
-- TXID (Bitcoin)
-- hash radice ancorato
-- riferimento nel manifest</div>
+        <div class="mono">Output:
+- BTC TXID (opzionale)
+- EVM TX hash (opzionale)
+- hashAnchored: manifestHash</div>
       </div>
+    </div>
 
-      <div class="card col6">
-        <div class="kicker">Anchoring C</div>
-        <h3>Ethereum (riferimenti logici)</h3>
-        <p class="muted">Ancoraggio con metadati e possibilità di integrazione con processi.</p>
-        <ul>
-          <li>Riferimenti smart-ready</li>
-          <li>Integrazione workflow</li>
-          <li>Tracciabilità di stato</li>
-        </ul>
-        <div class="mono">Output tipico:
-- TX hash (EVM)
-- reference metadati
-- collegamento a policy/processo</div>
-      </div>
-
-      <div class="card col6 highlight">
-        <div class="kicker">Anchoring D</div>
-        <h3>Triplo (IPFS + BTC + ETH)</h3>
-        <p class="muted">Ridondanza e resilienza massima per casi istituzionali.</p>
-        <ul>
-          <li>Contenuto su IPFS</li>
-          <li>Tempo forte su Bitcoin</li>
-          <li>Riferimenti logici su Ethereum</li>
-        </ul>
-        <div class="note">
-          Regola: si applica quando la criticità richiede <strong>prova multi-canale</strong>.
-        </div>
-      </div>
-
+    <div class="note warn">
+      L’ancoraggio pubblico non implica pubblicazione di identità: si pubblicano hash e riferimenti,
+      non dati personali.
     </div>
   </section>
 
   <section>
-    <h2>Output standard (cosa riceve il cliente)</h2>
+    <h2>Addon (servizi opzionali)</h2>
     <div class="card">
-      <p class="muted">Ogni attivazione produce un Evidence Bundle con output verificabili.</p>
-      <div class="mono">Output minimi:
-- IPR-ID / HRR reference
-- manifest.json (hash + riferimenti)
-- hash SHA-512
-- timestamp (se previsto)
-- anchors (se attivati): CID / TXID BTC / TX EVM</div>
+      <h3>Conservazione Evidence (mensile)</h3>
+      <ul>
+        <li><strong>€5 / mese</strong> — BASE</li>
+        <li><strong>€10 / mese</strong> — OPPONIBILE</li>
+        <li><strong>€20 / mese</strong> — FORTE</li>
+      </ul>
 
+      <h3>Eventi extra ad alto carico</h3>
+      <ul>
+        <li><strong>€5 / evento</strong> oltre soglia standard</li>
+      </ul>
+
+      <div class="note">
+        Nessun lock-in: la verificabilità storica resta possibile tramite hash e manifest, anche a servizio terminato.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Come si attiva</h2>
+    <div class="card">
+      <p class="muted">
+        L’attivazione Level 1 è la porta d’ingresso. Level 2 e Level 3 sono upgrade senza perdere lo storico.
+      </p>
       <div class="btnrow">
-        <a class="btn" href="./verify.html">Vedi come verificare</a>
-        <a class="btn" href="./evidence/README.md">Evidence bundle</a>
+        <a class="btn" href="./create.html">Procedura di attivazione</a>
+        <a class="btn" href="./onboarding/README.md">Onboarding (file)</a>
       </div>
     </div>
   </section>
@@ -393,8 +414,8 @@
 
 <footer>
   <p>
-    HERMETICUM B.C.E. — Services<br/>
-    Catalogo Carte Biocibernetiche &amp; Servizi di Ancoraggio (EU Pilot).
+    HERMETICUM B.C.E. — Catalogo<br/>
+    Sicurezza digitale europea dell’individuo · UE-first · evidence-first · fail-closed.
   </p>
 </footer>
 
