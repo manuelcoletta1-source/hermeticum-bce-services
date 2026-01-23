@@ -1,62 +1,152 @@
-# Hermeticum B.C.E. — Services
-## Portale europeo per IPR, software e adozione istituzionale
+# Hermeticum B.C.E. — BioCyber Identity Card  
+## EU Pilot Framework for Decision Accountability
 
-Questo repository è la **Home ufficiale** dell’ecosistema **Hermeticum B.C.E.**
-(*Blindata · Computabile · Evolutiva*).
+**Hermeticum B.C.E. — Services** documenta il framework tecnico-operativo della  
+**BioCyber Identity Card europea**:  
+uno **standard di attribuzione umana, responsabilità decisionale e prova a lungo termine**  
+per sistemi digitali ad alto rischio.
 
-È il punto di accesso unico per:
-- **Adozione UE/Enterprise dell’IPR** (Identity Primary Record)
-- **Suite software** (OPC, UNEBDO, IOSPACE, NEUROLOOP, METAEXCHANGE, CyberGlobal, GitJoker-C2)
-- **Corpus editoriale** (Esoterologia Edizioni: Volumi I–III e opere)
+Questo repository **non introduce una nuova identità civile**,  
+**non sostituisce documenti nazionali**  
+e **non definisce diritti politici o morali**.
 
----
-
-## Cosa è (in una riga)
-
-**IPR** rende identità e operatività **verificabili nel tempo** con:
-policy opponibili (OPC), vincoli (UNEBDO), moduli IPR e AI JOKER-C2.
-
-Regola: se non è verificabile, **non è eseguibile**.
+È un **layer tecnico di sicurezza e accountability**, progettato per rendere **impossibile**
+l’esecuzione di decisioni digitali critiche **senza un responsabile umano opponibile**.
 
 ---
 
-## Due piattaforme
+## Problema affrontato
 
-### 1) Piattaforma Software (Hermeticum B.C.E.)
-Stack modulare UE-first:
-- OPC (policy)
-- UNEBDO (Layer 0 enforcement)
-- IPR + moduli (core/gate/comply/exchange)
-- IOSPACE (contesto operativo)
-- NEUROLOOP (runtime feedback)
-- METAEXCHANGE (interoperabilità/scambio)
-- CyberGlobal (DUAL-USE controllato)
-- GitJoker-C2 (AI JOKER-C2)
+I sistemi digitali contemporanei (in particolare quelli basati su AI) presentano tre falle strutturali:
 
-### 2) Piattaforma Editoriale (Esoterologia Edizioni)
-**CORPUS ESOTEROLOGIA ERMETICA** — Trilogia primaria:
-- Volume I (Fondativo)
-- Volume II (Applicativo)
-- Volume III (Normativo)
+- decisioni eseguite senza attribuzione umana opponibile  
+- automazione priva di verifica ex-ante  
+- prove digitali che decadono o diventano inutilizzabili nel tempo  
+
+Queste falle generano:
+- incertezza giuridica  
+- incidenti operativi  
+- scarico sistemico di responsabilità (“ha deciso l’algoritmo”)
 
 ---
 
-## Entry points (siti)
+## Soluzione proposta
 
-- Services HUB: https://manuelcoletta1-source.github.io/hermeticum-bce-services/
-- Technology Hub: https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/
-- IPR Gateway: https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/
-- UE IPR Registry: https://manuelcoletta1-source.github.io/ue-ipr-registry/
-- CORPUS HUB: https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/
+La **BioCyber Identity Card** è una **card logica**, non un documento fisico.
+
+Definisce una **catena tecnica minima e fail-closed** che garantisce che:
+
+- ogni decisione critica sia collegata a **un essere umano reale**
+- ogni decisione sia **verificata prima dell’esecuzione**
+- ogni decisione lasci **prove opponibili che non scadono**
 
 ---
 
-## Autore
-**Manuel Coletta**
+## Ambito di applicazione (Fase 1)
 
-## Sigilli
-- Software / infrastruttura: **HERMETICUM B.C.E. S.r.l.**
-- Casa editoriale: **Esoterologia Edizioni**
+Il framework è progettato per contesti **ad alto rischio**, tra cui:
 
-## Stato
-🟢 **ATTIVO — Portale Services**
+- sistemi di Intelligenza Artificiale ad alto rischio (AI Act UE)
+- sanità critica
+- sistemi di comando e controllo (C2 / C4ISR)
+- procurement pubblico automatizzato
+
+I contesti a basso rischio sono **fuori ambito**.
+
+---
+
+## Componenti principali
+
+La BioCyber Identity Card si basa su quattro componenti tecnici essenziali:
+
+### 1. Human Root Reference (HRR)
+(ex IPR-5)
+
+- attribuzione univoca a un essere umano reale  
+- non duplicabile  
+- auditabile  
+- sospendibile ma non cancellabile  
+
+**HRR non è un’identità legale.**  
+È una radice tecnica di responsabilità.
+
+---
+
+### 2. Decision Gate Validator (DGV)
+(ex GitJoker / AI JOKER)
+
+- validazione ex-ante delle decisioni  
+- modalità **fail-closed obbligatoria**  
+- esiti standard:
+  - ALLOW
+  - REVIEW
+  - DENY
+  - FAIL_CLOSED  
+
+FAIL non è un errore:  
+FAIL è **protezione del sistema**.
+
+---
+
+### 3. Certified Time & Trace
+
+- tempo certificato metrologicamente  
+- tracciabilità verificabile degli eventi  
+- sincronizzazione con riferimenti temporali opponibili  
+
+Ciò che non è misurabile e tracciabile **non è opponibile**.
+
+---
+
+### 4. Long-Term Evidence Vault
+
+- conservazione delle prove ≥ 20 anni  
+- verificabilità offline  
+- ri-marcatura temporale periodica  
+- conformità ETSI / eIDAS (profilo LTA)
+
+Il vault conserva **prove**, non interpretazioni.
+
+---
+
+## Architettura minima (fail-closed)
+Evento → Human Root Reference → Decision Gate Validator → Certified Time & Trace → Long-Term Evidence Vault
+Se uno solo di questi elementi manca  
+→ **processo invalido**.
+
+---
+
+## Conformità normativa
+
+Il framework è progettato per essere **nativamente compatibile** con:
+
+- **AI Act (UE)** — attribuzione, human-in-the-loop, auditabilità  
+- **eIDAS 2.0** — integrità, non ripudio, firme e conservazione  
+- **ETSI EN 319 / PAdES-LTA** — prove digitali a lungo termine  
+- **ISO 17025** — metrologia del tempo e della misura  
+
+Non introduce nuove autorità civili o monetarie.
+
+---
+
+## Stato del progetto
+
+🟢 **EU Pilot / Technical Specification — ACTIVE**
+
+- framework operativo minimo definito  
+- implementazione reference in corso  
+- pronto per piloti istituzionali e audit tecnici  
+
+---
+
+## Nota finale
+
+Questo repository **non promette un futuro migliore**.  
+Serve a **evitare danni evitabili nel presente**.
+
+Qualsiasi sistema che rifiuti:
+- attribuzione umana,
+- verifica ex-ante,
+- memoria opponibile,
+
+**non è idoneo a prendere decisioni critiche.**
