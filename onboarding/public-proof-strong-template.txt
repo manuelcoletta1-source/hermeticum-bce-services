@@ -1,0 +1,25 @@
+HERMETICUM B.C.E. — Public Proof (STRONG)
+
+IPR-ID: IPR-<UUID>
+HRR-REF: HRR-<PSEUDONYM>
+
+Manifest (SHA-512): <MANIFEST_HASH>
+Bundle (SHA-512): <BUNDLE_HASH>
+
+TimeRef: <TS-REFERENCE>
+
+IPFS CID: <CID>
+Bitcoin TXID: <BTC_TXID>
+Ethereum TX: <EVM_TXHASH>
+
+LTA:
+- policy: ETSI_EN_319_LTA_READY
+- retention: 10Y
+- recheck: 12M
+- vaultRef: VAULT-<ID>
+
+Verification:
+- recompute SHA-512
+- match manifest + bundle
+- check CID + TXID + TX binding
+- see: /verify.html
