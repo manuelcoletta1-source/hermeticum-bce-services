@@ -1,29 +1,30 @@
-# Evidence Bundles (EU Pilot)
+# Evidence Bundle — EU Pilot
 
-This folder contains **public evidence bundles** for BioCyber Identity Card pilot instances.
+Questa cartella contiene **bundle di evidenza pubblici** per i pilot della
+**BioCyber Identity Card**.
 
-The goal is reproducible verification:
-- recompute hashes locally
-- compare to manifest
-- verify timestamp reference (if present)
-- confirm fail-closed outcomes
+L’obiettivo è la **verifica riproducibile**:
+- ricalcolo locale degli hash
+- confronto con il manifest
+- verifica del riferimento temporale (se presente)
+- conferma degli esiti fail-closed
 
-## Minimal bundle structure
+## Struttura minima del bundle
 
-Each pilot bundle SHOULD follow:
-evidence/ EVT-/ manifest.json (optional attachments)
-Minimal publication rule:
-- you may publish only `manifest.json` publicly
-- attachments may remain private
-- as long as hashes in the manifest remain verifiable
+Ogni bundle di pilot DOVREBBE seguire questa struttura:
+evidence/ EVT-/ manifest.json (allegati opzionali)
+**Regola minima di pubblicazione**
+- è possibile pubblicare **solo `manifest.json`** in modo pubblico
+- gli allegati possono restare privati
+- a condizione che gli **hash nel manifest restino verificabili**
 
-## Verification (summary)
+## Verifica (sintesi)
 
-1. Download the manifest (and any published attachments).
-2. Compute SHA-512 hashes locally.
-3. Compare with the values in `manifest.json`.
-4. If a timestamp is provided, verify it binds to the same hash.
-5. If DGV outcome is `DENY` or `FAIL_CLOSED`, the action must not have executed.
+1. Scarica il manifest (e gli eventuali allegati pubblici).
+2. Calcola localmente gli hash SHA-512.
+3. Confronta i valori con quelli presenti nel `manifest.json`.
+4. Se è presente un timestamp, verifica che sia vincolato allo stesso hash.
+5. Se l’esito DGV è `DENY` o `FAIL_CLOSED`, l’azione **non deve** essere stata eseguita.
 
-Golden rule:
-**verification is "recompute and match", not "trust the website".**
+**Regola d’oro:**  
+la verifica è “ricalcola e confronta”, non “fidati del sito”.
