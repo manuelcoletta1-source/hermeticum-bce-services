@@ -1,0 +1,17 @@
+HERMETICUM B.C.E. — Public Proof (OPPOSABLE)
+
+IPR-ID: IPR-<UUID>
+HRR-REF: HRR-<PSEUDONYM>
+
+Manifest (SHA-512): <HASH>
+TimeRef: <TS-REFERENCE>
+
+IPFS CID: <CID>
+Public Chain: BITCOIN_OR_ETHEREUM
+TX: <TXID_OR_TXHASH>
+
+Verification:
+- recompute SHA-512
+- match manifest
+- check CID + TX binding
+- see: /verify.html
