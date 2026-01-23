@@ -1,99 +1,43 @@
-<a href="./create.html">Attivazione</a>
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>HERMETICUM B.C.E. — BioCyber Identity Card (EU Pilot)</title>
+  <title>HERMETICUM B.C.E. — Sicurezza Digitale Europea dell’Individuo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HERMETICUM B.C.E. — EU Pilot Framework per BioCyber Identity Card: attribuzione umana, accountability e prove digitali a lungo termine per sistemi ad alto rischio." />
+  <meta name="description" content="HERMETICUM B.C.E. nasce per la sicurezza digitale europea dell’individuo. Framework UE-first per attribuzione umana verificabile, accountability tecnica e prova digitale opponibile nel tempo." />
   <style>
     :root{
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#9aa0a6;
-      --accent:#7aa2ff;
-      --good:#8ce99a;
-      --warn:#ffd43b;
-      --bad:#ff6b6b;
+      --bg:#0b0c10; --panel:#0f1117; --line:#24262b;
+      --text:#e8e8e8; --muted:#9aa0a6; --accent:#7aa2ff;
+      --good:#8ce99a; --warn:#ffd43b;
     }
     *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6;
     }
-
-    header{
-      border-bottom:1px solid var(--line);
-      background:var(--bg);
-    }
+    header{ border-bottom:1px solid var(--line); }
     .brandwrap{
-      max-width:980px;
-      margin:0 auto;
-      padding:28px 20px 16px;
-      text-align:center;
+      max-width:980px; margin:0 auto; padding:28px 20px 16px; text-align:center;
     }
     .brand{
-      margin:0;
-      font-size:2.4rem;
-      letter-spacing:0.12em;
-      font-weight:600;
+      margin:0; font-size:2.4rem; letter-spacing:0.12em; font-weight:600;
     }
-    .brandsub{
-      margin:10px 0 0 0;
-      color:var(--muted);
-      font-size:0.95rem;
-    }
+    .brandsub{ margin:10px 0 0; color:var(--muted); font-size:0.95rem; }
 
-    .pagehead, main, footer{
-      max-width:980px;
-      margin:0 auto;
-      padding:20px 20px;
+    .nav{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+      margin-top:10px; font-size:0.95rem;
     }
-    footer{
-      border-top:1px solid var(--line);
-      color:var(--muted);
-      font-size:0.9rem;
-      margin-top:60px;
-      padding:22px 20px;
-    }
-
     a{ color:var(--accent); text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    h1{
-      margin:0 0 10px 0;
-      font-size:1.9rem;
-      letter-spacing:0.02em;
-    }
-    h2{ margin-top:36px; font-size:1.25rem; }
-    p{ max-width:860px; }
-    .muted{ color:var(--muted); }
-
-    .nav{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      margin-top:10px;
-      font-size:0.95rem;
-      justify-content:center;
-    }
-
     .status{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      margin-top:10px;
-      padding:6px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:var(--panel);
-      color:var(--muted);
-      font-size:0.85rem;
+      display:inline-flex; align-items:center; gap:10px;
+      margin-top:12px; padding:6px 12px; border-radius:999px;
+      border:1px solid var(--line); background:var(--panel);
+      color:var(--muted); font-size:0.85rem;
     }
     .dot{
       width:10px; height:10px; border-radius:50%;
@@ -102,59 +46,52 @@
       display:inline-block;
     }
 
+    .pagehead, main, footer{
+      max-width:980px; margin:0 auto; padding:20px 20px;
+    }
+    footer{
+      border-top:1px solid var(--line);
+      color:var(--muted); font-size:0.9rem; margin-top:60px;
+    }
+
+    h1{ margin:0 0 10px; font-size:1.9rem; }
+    h2{ margin-top:36px; font-size:1.25rem; }
+    p{ max-width:860px; }
+    .muted{ color:var(--muted); }
+
     .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:18px;
-      margin-top:16px;
+      background:var(--panel); border:1px solid var(--line);
+      border-radius:14px; padding:18px; margin-top:16px;
     }
     ul{ padding-left:20px; margin:10px 0 0; }
     li{ margin:6px 0; }
 
     .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      background:#0b0c10;
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:14px;
-      overflow-x:auto;
-      white-space:pre;
+      font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      background:#0b0c10; border:1px solid var(--line);
+      border-radius:12px; padding:14px; overflow-x:auto; white-space:pre;
       margin-top:12px;
     }
 
     .note{
       border-left:3px solid var(--accent);
-      padding:10px 12px;
-      background: rgba(122,162,255,0.08);
-      border-radius:10px;
-      margin-top:12px;
+      padding:10px 12px; background: rgba(122,162,255,0.08);
+      border-radius:10px; margin-top:12px;
     }
-    .warn{
-      border-left-color:var(--warn);
-      background: rgba(255,212,59,0.10);
-    }
+    .warn{ border-left-color:var(--warn); background: rgba(255,212,59,0.10); }
 
     .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-      margin-top:16px;
+      display:grid; grid-template-columns: repeat(12, 1fr);
+      gap:14px; margin-top:16px;
     }
     .col6{ grid-column: span 12; }
-    @media (min-width: 920px){
-      .col6{ grid-column: span 6; }
-    }
+    @media (min-width: 920px){ .col6{ grid-column: span 6; } }
 
     .btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
     .btn{
-      display:inline-block;
-      padding:9px 12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:#0b0c10;
-      color:var(--text);
-      font-size:0.95rem;
+      display:inline-block; padding:9px 12px; border-radius:12px;
+      border:1px solid var(--line); background:#0b0c10;
+      color:var(--text); font-size:0.95rem;
     }
   </style>
 </head>
@@ -170,86 +107,91 @@
       <a href="./index.html"><strong>Home</strong></a>
       <a href="./services.html">Servizi</a>
       <a href="./catalog.html">Catalogo</a>
+      <a href="./create.html">Attivazione</a>
       <a href="./verify.html">Verifica</a>
       <a href="./README.md">README</a>
     </nav>
 
-    <div class="status"><span class="dot"></span>EU Pilot — BioCyber Identity Card</div>
+    <div class="status"><span class="dot"></span>EU Pilot — Sicurezza Digitale dell’Individuo</div>
   </div>
 </header>
 
 <section class="pagehead">
   <h1>BioCyber Identity Card</h1>
   <p class="muted">
-    Strato tecnico di <strong>attribuzione umana</strong>, <strong>accountability</strong> e
-    <strong>prove digitali a lungo termine</strong> per sistemi ad alto rischio.
-    Non è un documento civile e non sostituisce identità nazionali.
+    <strong>HERMETICUM B.C.E. nasce per la sicurezza digitale europea dell’individuo.</strong><br/>
+    Framework tecnico per attribuzione umana verificabile, accountability e
+    prova digitale opponibile nel tempo in sistemi ad alto rischio.
   </p>
 
   <div class="note warn">
-    Obiettivo: rendere <strong>non opzionale</strong> la responsabilità in sistemi critici.
-    Se manca una prova minima → il sistema deve fermarsi (<strong>FAIL_CLOSED</strong>).
+    Non è un documento civile. Non sostituisce CIE o passaporto.
+    È uno strato di sicurezza che rende la responsabilità <strong>non opzionale</strong>.
   </div>
 </section>
 
 <main>
 
   <section>
-    <h2>Problema</h2>
+    <h2>Il problema</h2>
     <div class="card">
       <ul>
-        <li>decisioni critiche eseguite senza responsabile umano opponibile</li>
-        <li>automazione senza validazione ex-ante (fail-open)</li>
-        <li>prove digitali che decadono nel tempo</li>
+        <li>decisioni digitali critiche senza responsabile umano opponibile</li>
+        <li>automazione fail-open (assenza di controllo ex-ante)</li>
+        <li>prove digitali che decadono o diventano inutilizzabili</li>
       </ul>
       <p class="muted">
-        Risultato: incertezza giuridica, incidenti operativi, scarico sistemico di responsabilità.
+        Effetti sistemici: incertezza giuridica, incidenti operativi,
+        scarico di responsabilità sull’algoritmo.
       </p>
     </div>
   </section>
 
   <section>
-    <h2>Soluzione</h2>
+    <h2>La soluzione</h2>
     <div class="card">
       <p>
-        La BioCyber Identity Card definisce una <strong>catena minima e fail-closed</strong>:
+        La BioCyber Identity Card introduce una <strong>catena minima fail-closed</strong>:
       </p>
-      <div class="mono">Evento → IPR/HRR → DGV → Tempo certificato & Traccia → Evidence Vault</div>
+      <div class="mono">Evento → IPR/HRR → DGV → Tempo certificato → Evidence Bundle</div>
       <p class="muted">
-        Se uno di questi elementi manca → l’azione non deve essere eseguita.
+        Se un elemento manca o non è verificabile → l’azione <strong>non deve</strong> essere eseguita.
       </p>
     </div>
   </section>
 
   <section>
-    <h2>Componenti (sintesi)</h2>
+    <h2>Componenti chiave</h2>
     <div class="grid">
-
       <div class="card col6">
         <h3>IPR / HRR (Radice Umana)</h3>
-        <p class="muted">Attribuzione tecnica a un essere umano reale (auditabile, non duplicabile).</p>
-        <a class="btn" href="./services.html">Dettagli tecnici</a>
+        <p class="muted">
+          Collegamento tecnico a una persona reale.
+          Auditabile, non duplicabile, non pubblico.
+        </p>
+        <a class="btn" href="./services.html">Architettura</a>
       </div>
-
       <div class="card col6">
         <h3>DGV (Decision Gate Validator)</h3>
-        <p class="muted">Validazione ex-ante con esiti standard: ALLOW / REVIEW / DENY / FAIL_CLOSED.</p>
-        <a class="btn" href="./verify.html">Workflow verifica</a>
+        <p class="muted">
+          Validazione ex-ante con esiti standard:
+          ALLOW / REVIEW / DENY / FAIL_CLOSED.
+        </p>
+        <a class="btn" href="./verify.html">Verifica</a>
       </div>
-
     </div>
   </section>
 
   <section>
-    <h2>Catalogo e Ancoraggi</h2>
+    <h2>Carte e Ancoraggi</h2>
     <div class="card">
       <p class="muted">
-        Il framework supporta Carte Base / Opponibile / Forte e servizi di ancoraggio
+        Carte Base, Opponibile e Forte con servizi di ancoraggio
         (IPFS, Bitcoin, Ethereum) attivabili secondo criticità e valore.
       </p>
       <div class="btnrow">
-        <a class="btn" href="./catalog.html">Apri Catalogo</a>
-        <a class="btn" href="./evidence/README.md">Evidence Bundles</a>
+        <a class="btn" href="./catalog.html">Catalogo</a>
+        <a class="btn" href="./evidence/README.md">Evidence</a>
       </div>
     </div>
   </section>
@@ -259,11 +201,9 @@
 <footer>
   <p>
     HERMETICUM B.C.E. — Services<br/>
-    EU Pilot Framework per BioCyber Identity Card (attribuzione · accountability · prova).
+    Framework UE-first per la sicurezza digitale dell’individuo.
   </p>
 </footer>
 
 </body>
 </html>
-
-
