@@ -1,130 +1,291 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <title>Services — BioCyber Identity Card (EU Pilot) | Hermeticum B.C.E.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — Services (HUB)</title>
-  <meta name="description" content="HUB ufficiale dei software Hermeticum B.C.E.: policy, enforcement, IPR, interoperabilità, runtime e orchestrazione C2. UE-first, fail-closed, audit-by-design." />
-  <meta name="author" content="Manuel Coletta" />
-  <meta name="publisher" content="Esoterologia Edizioni" />
+  <meta name="description" content="Core operational components of the BioCyber Identity Card EU Pilot: HRR, DGV, Certified Time & Trace, Long-Term Evidence Vault." />
   <style>
-    :root { color-scheme: dark; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0c10; color:#e8e8e8; }
-    header, main, footer { max-width: 1150px; margin: 0 auto; padding: 24px; }
-    .card { background:#0f1117; border:1px solid #24262b; border-radius:18px; padding:22px; box-shadow:0 12px 30px rgba(0,0,0,.35); }
-    h1 { font-size: 30px; margin:0 0 10px; }
-    h2 { font-size: 18px; font-weight: 600; opacity:.9; margin:0 0 18px; }
-    h3 { font-size: 16px; margin:0 0 10px; }
-    p { line-height:1.55; opacity:.95; margin: 10px 0; }
-    .muted { opacity:.75; font-size: 13px; }
-    .tag { display:inline-block; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid #2b2f38; opacity:.9; margin-bottom:12px; }
-    .grid { display:grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
-    .btns { display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
-    .btn { border:1px solid #2b2f38; border-radius:12px; padding:10px 14px; background:#111420; color:#9bdcff; text-decoration:none; font-size:14px; }
-    .btn:hover { text-decoration: underline; }
-    footer { text-align:center; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    :root {
+      --bg: #0b0c10;
+      --panel: #0f1117;
+      --line: #24262b;
+      --text: #e8e8e8;
+      --muted: #9aa0a6;
+      --accent: #7aa2ff;
+      --good: #8ce99a;
+      --warn: #ffd43b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    header, main, footer {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px;
+    }
+    header { border-bottom: 1px solid var(--line); }
+    footer { border-top: 1px solid var(--line); margin-top: 60px; color: var(--muted); font-size: 0.9rem; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .topbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    h1 { margin: 0 0 10px 0; font-size: 1.8rem; }
+    h2 { margin: 34px 0 12px; font-size: 1.25rem; }
+    p { max-width: 860px; }
+    .muted { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .card {
+      grid-column: span 12;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    @media (min-width: 860px) {
+      .card.half { grid-column: span 6; }
+    }
+
+    .kicker {
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    ul { padding-left: 20px; margin: 10px 0 0; }
+    li { margin: 6px 0; }
+
+    .tagrow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .tag {
+      border: 1px solid var(--line);
+      background: #0b0c10;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .chain {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #0b0c10;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      overflow-x: auto;
+      color: var(--text);
+    }
+
+    .note {
+      border-left: 3px solid var(--accent);
+      padding: 10px 12px;
+      background: rgba(122, 162, 255, 0.08);
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+
+    .statusline {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--good);
+      box-shadow: 0 0 0 3px rgba(140, 233, 154, 0.12);
+      display: inline-block;
+    }
   </style>
 </head>
+
 <body>
 
 <header>
-  <div class="card">
-    <div class="tag">HUB ufficiale · UE-first</div>
-    <h1>Hermeticum B.C.E. — Services</h1>
-    <h2>Portale unico dei software · Audit-by-design · Fail-closed</h2>
-    <p>
-      Questo HUB presenta l’intero stack software di <b>Hermeticum B.C.E.</b>:
-      policy, enforcement, IPR, interoperabilità, runtime e orchestrazione C2.
-      Progettato per adozione <b>istituzionale</b> ed <b>enterprise</b>.
-    </p>
-    <p class="muted">
-      Regola operativa: <span class="mono">no policy → no enforcement → no action</span>
-    </p>
-    <div class="btns">
-      <a class="btn" href="./README.md">README HUB</a>
-      <a class="btn" href="../corpus-esoterologia-ermetica/">CORPUS HUB</a>
+  <div class="topbar">
+    <div>
+      <h1>Services</h1>
+      <div class="statusline">
+        <span class="dot"></span>
+        <span class="pill">BioCyber Identity Card — EU Pilot Components</span>
+      </div>
+      <p class="muted">
+        Operational components of the accountability chain.  
+        Not a civil identity. Not a replacement of national documents. Only enforceable responsibility.
+      </p>
     </div>
+
+    <nav class="nav">
+      <a href="./index.html">Home</a>
+      <a href="./services.html"><strong>Services</strong></a>
+      <a href="./technology.html">Technology</a>
+      <a href="./verify.html">Verify</a>
+      <a href="./README.md">README</a>
+    </nav>
   </div>
 </header>
 
-<main class="grid">
+<main>
 
-  <!-- POLICY & ENFORCEMENT -->
-  <section class="card">
-    <div class="tag">Policy & Enforcement</div>
-    <h3>OPC · UNEBDO</h3>
-    <p class="muted">Policy esplicite (OPC) → Root enforcement e opponibilità (UNEBDO).</p>
-    <div class="btns">
-      <a class="btn" href="https://manuelcoletta1-source.github.io/opc/">Apri OPC</a>
-      <a class="btn" href="https://github.com/manuelcoletta1-source/opc">Repo OPC</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/unebdo/">Apri UNEBDO</a>
-      <a class="btn" href="https://github.com/manuelcoletta1-source/unebdo">Repo UNEBDO</a>
-    </div>
-  </section>
-
-  <!-- IPR LAYER -->
-  <section class="card">
-    <div class="tag">IPR Layer</div>
-    <h3>CORE · VAULT · TRACE · GATE · COMPLY · EXCHANGE</h3>
-    <p class="muted">Identità verificabile + custodia + audit trail + controllo ex-ante + conformità + scambio.</p>
-    <div class="btns">
-      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-core/">IPR-CORE</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-vault/">IPR-VAULT</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-trace/">IPR-TRACE</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-gate/">IPR-GATE</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-comply/">IPR-COMPLY</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-exchange/">IPR-EXCHANGE</a>
-    </div>
-  </section>
-
-  <!-- INTEROP & RUNTIME -->
-  <section class="card">
-    <div class="tag">Interop & Runtime</div>
-    <h3>METAEXCHANGE · IOSPACE · NEUROLOOP</h3>
-    <p class="muted">Interoperabilità governata, contesto operativo verificabile e loop di feedback auditabili.</p>
-    <div class="btns">
-      <a class="btn" href="https://manuelcoletta1-source.github.io/metaexchange/">METAEXCHANGE</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/iospace/">IOSPACE</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/neuroloop/">NEUROLOOP</a>
-    </div>
-  </section>
-
-  <!-- C2 & GOVERNANCE -->
-  <section class="card">
-    <div class="tag">C2 & Governance</div>
-    <h3>AI JOKER-C2 · IPR-AIJOKER-C2 · CyberGlobal (DUAL-USE)</h3>
-    <p class="muted">Orchestrazione operativa, bridge IPR-native e interoperabilità globale (uso controllato).</p>
-    <div class="btns">
-      <a class="btn" href="https://manuelcoletta1-source.github.io/gitjoker-c2/">GitJoker-C2</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-aijoker-c2/">IPR-AIJOKER-C2</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/cyberglobal/">CyberGlobal (DUAL-USE)</a>
-    </div>
-  </section>
-
-  <!-- NOTE / SIGILLI -->
-  <aside class="card">
-    <div class="tag">Sigilli</div>
-    <h3>HERMETICUM B.C.E. S.r.l. · Esoterologia Edizioni</h3>
-    <p class="muted">
-      Stack progettato per adozione UE-first: audit-by-design, policy esplicite, fail-closed.
+  <section>
+    <h2>Minimal fail-closed chain</h2>
+    <p>
+      The BioCyber Identity Card is implemented as a <strong>minimal chain</strong>.
+      If any component is missing, the system must not proceed.
     </p>
-    <p class="muted">
-      Autore: <b>Manuel Coletta</b>
-    </p>
-    <div class="btns">
-      <a class="btn" href="./README.md">Leggi README</a>
+    <div class="chain">
+      Event → Human Root Reference (HRR) → Decision Gate Validator (DGV) → Certified Time & Trace → Long-Term Evidence Vault
     </div>
-  </aside>
+    <div class="note">
+      <strong>Fail-closed rule:</strong> if attribution, validation, time/trace or long-term evidence cannot be guaranteed,
+      the outcome must be <strong>FAIL_CLOSED</strong>.
+    </div>
+  </section>
+
+  <section>
+    <h2>Core components</h2>
+
+    <div class="grid">
+
+      <div class="card half">
+        <div class="kicker">Component 01</div>
+        <h3>Human Root Reference (HRR)</h3>
+        <p class="muted">
+          Technical human attribution. Guarantees that a real, accountable human exists behind a critical action.
+        </p>
+        <ul>
+          <li>unique per individual</li>
+          <li>not duplicable</li>
+          <li>auditable</li>
+          <li>suspendable (not erasable)</li>
+        </ul>
+        <div class="tagrow">
+          <span class="tag">Attribution</span>
+          <span class="tag">Audit</span>
+          <span class="tag">Non-duplication</span>
+        </div>
+      </div>
+
+      <div class="card half">
+        <div class="kicker">Component 02</div>
+        <h3>Decision Gate Validator (DGV)</h3>
+        <p class="muted">
+          Validates or blocks actions <em>before execution</em>, enforcing a standard decision outcome.
+        </p>
+        <ul>
+          <li>mandatory <strong>fail-closed</strong> behavior</li>
+          <li>standard outcomes: <strong>ALLOW / REVIEW / DENY / FAIL_CLOSED</strong></li>
+          <li>machine-readable logs</li>
+        </ul>
+        <div class="tagrow">
+          <span class="tag">Pre-execution gate</span>
+          <span class="tag">Fail-closed</span>
+          <span class="tag">Logging</span>
+        </div>
+      </div>
+
+      <div class="card half">
+        <div class="kicker">Component 03</div>
+        <h3>Certified Time & Trace</h3>
+        <p class="muted">
+          Metrologically valid time and traceability.  
+          What cannot be measured and traced is not enforceable.
+        </p>
+        <ul>
+          <li>certified timestamps with known error bounds</li>
+          <li>traceability and reproducible verification</li>
+          <li>consistent reference time source</li>
+        </ul>
+        <div class="tagrow">
+          <span class="tag">Time authority</span>
+          <span class="tag">Traceability</span>
+          <span class="tag">Verification</span>
+        </div>
+      </div>
+
+      <div class="card half">
+        <div class="kicker">Component 04</div>
+        <h3>Long-Term Evidence Vault</h3>
+        <p class="muted">
+          Long-term preservation of evidence, designed to remain usable and verifiable over decades.
+        </p>
+        <ul>
+          <li>evidence retention ≥ 20 years</li>
+          <li>offline verification</li>
+          <li>periodic re-timestamping</li>
+          <li>ETSI / eIDAS compatible LTA profiles</li>
+        </ul>
+        <div class="tagrow">
+          <span class="tag">LTA</span>
+          <span class="tag">Offline verify</span>
+          <span class="tag">Evidence</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Phase 1 scope</h2>
+    <div class="card">
+      <p>
+        This phase targets <strong>high-risk domains</strong> where accountability failures have high cost:
+      </p>
+      <ul>
+        <li>AI systems under EU AI Act (high-risk use cases)</li>
+        <li>critical healthcare systems</li>
+        <li>C2 / C4ISR environments</li>
+        <li>automated public procurement</li>
+      </ul>
+      <p class="muted">
+        Low-risk consumer use cases are out of scope.
+      </p>
+    </div>
+  </section>
 
 </main>
 
 <footer>
-  <p class="muted">
-    © Manuel Coletta<br/>
-    <b>Esoterologia Edizioni</b><br/>
-    Hermeticum B.C.E. — Services HUB
+  <p>
+    Hermeticum B.C.E. — Services<br/>
+    BioCyber Identity Card (EU Pilot) — Operational components page.
   </p>
 </footer>
 
