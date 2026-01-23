@@ -1,0 +1,60 @@
+{
+  "schema": "HERMETICUM-BCE-IPR",
+  "schemaVersion": "1.0",
+  "level": "OPPOSABLE",
+  "iprId": "IPR-<UUID>",
+  "hrrRef": "HRR-<PSEUDONYM>",
+  "status": "ACTIVE",
+  "createdAt": "UTC-ISO8601",
+  "timeRef": {
+    "type": "CERTIFIED_TIMESTAMP",
+    "provider": "ETSI_COMPATIBLE_OR_EQUIVALENT",
+    "reference": "TS-<ID>"
+  },
+  "dgv": {
+    "validator": "DGV-v1",
+    "outcome": "ALLOW",
+    "policy": "FAIL_CLOSED"
+  },
+  "integrity": {
+    "hashAlgorithm": "SHA-512",
+    "manifestHash": "<TO_BE_COMPUTED>",
+    "attachments": [
+      {
+        "name": "public-proof.txt",
+        "sha512": "<TO_BE_COMPUTED>",
+        "disclosure": "PUBLIC"
+      },
+      {
+        "name": "evidence/manifest.json",
+        "sha512": "<TO_BE_COMPUTED>",
+        "disclosure": "PUBLIC"
+      }
+    ]
+  },
+  "privacy": {
+    "personalDataIncluded": false,
+    "publicDisclosure": "HASH_ONLY",
+    "publicBundlePolicy": "MANIFEST_AND_HASHES_ONLY"
+  },
+  "anchoring": {
+    "ipfs": {
+      "enabled": true,
+      "cid": "<CID>",
+      "content": "MANIFEST_OR_PUBLIC_BUNDLE",
+      "sha512Bound": "manifestHash"
+    },
+    "publicChain": {
+      "enabled": true,
+      "type": "BITCOIN_OR_ETHEREUM",
+      "tx": "<TXID_OR_TXHASH>",
+      "hashAnchored": "manifestHash"
+    }
+  },
+  "evolution": {
+    "upgradeFrom": "BASE",
+    "upgradeAllowed": true,
+    "upgradableTo": ["STRONG"]
+  },
+  "notes": "Level 2 OPPOSABLE: IPFS + one public chain anchor. No personal data published."
+}
