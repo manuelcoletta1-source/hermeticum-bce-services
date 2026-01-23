@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Verify — BioCyber Identity Card (EU Pilot) | Hermeticum B.C.E.</title>
+  <title>Verifica — BioCyber Identity Card (EU Pilot) | Hermeticum B.C.E.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Public verification workflow for BioCyber Identity Card pilots: recompute hashes, verify timestamp, confirm fail-closed outcomes." />
+  <meta name="description" content="Workflow pubblico di verifica per i pilot BioCyber Identity Card: ricalcolo hash, verifica timestamp, conferma esiti fail-closed." />
   <style>
     :root{
       --bg:#0b0c10;
@@ -104,75 +104,82 @@
 <body>
 
 <header>
-  <h1>Verify</h1>
+  <h1>Verifica</h1>
   <p class="muted">
-    Public, reproducible verification workflow for a <strong>BioCyber Identity Card</strong> pilot instance.
-    Verification is not “trust the website”. Verification is “recompute and match”.
+    Workflow di verifica pubblico e riproducibile per un’istanza pilot di
+    <strong>BioCyber Identity Card</strong>.
+    La verifica non è “fidati del sito”.
+    La verifica è “ricalcola e confronta”.
   </p>
 
   <nav class="nav">
     <a href="./index.html">Home</a>
-    <a href="./services.html">Services</a>
-    <a href="./verify.html"><strong>Verify</strong></a>
+    <a href="./services.html">Servizi</a>
+    <a href="./verify.html"><strong>Verifica</strong></a>
     <a href="./README.md">README</a>
   </nav>
 
-  <div class="status"><span class="dot"></span>Evidence-first — Minimal audit workflow</div>
+  <div class="status"><span class="dot"></span>Evidence-first — Workflow di audit minimale</div>
 </header>
 
 <main>
 
   <section>
-    <h2>What is being verified</h2>
+    <h2>Cosa viene verificato</h2>
     <div class="card">
       <p>
-        Verification targets an <strong>Evidence Bundle</strong>:
-        a minimal package that proves <strong>who requested what</strong>, <strong>when</strong>,
-        and <strong>under which constraints</strong>, in a way that remains checkable over time.
+        La verifica riguarda un <strong>Evidence Bundle</strong>:
+        un pacchetto minimo che dimostra <strong>chi ha richiesto cosa</strong>,
+        <strong>quando</strong> e <strong>con quali vincoli</strong>,
+        in modo verificabile nel tempo.
       </p>
       <div class="note warn">
-        This page can be used with <strong>pseudonymous</strong> identifiers.
-        No personal data is required for public verification.
+        Questa pagina può essere utilizzata con identificativi <strong>pseudonimi</strong>.
+        Nessun dato personale è richiesto per la verifica pubblica.
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Evidence Bundle (minimal)</h2>
+    <h2>Evidence Bundle (minimo)</h2>
     <div class="card">
       <p class="muted">
-        The pilot bundle is described by a machine-readable manifest and integrity proofs.
+        Il bundle di pilot è descritto da un manifest leggibile da macchina
+        e da prove di integrità.
       </p>
       <div class="mono">Evidence Bundle
-- manifest.json (hashes + references)
-- attachments (optional, may remain private)
-- timestamp reference (if present)
-- anchors (optional: LTA/IPFS/ledger)</div>
+- manifest.json (hash + riferimenti)
+- allegati (opzionali, possono restare privati)
+- riferimento temporale (se presente)
+- ancoraggi (opzionali: LTA/IPFS/ledger)</div>
 
       <div class="note">
-        Minimal publishing rule: you can publish only <strong>manifest + hashes</strong> publicly,
-        while keeping attachments private, as long as hashes are verifiable.
+        Regola minima di pubblicazione:
+        è possibile pubblicare solo <strong>manifest + hash</strong>,
+        mantenendo privati gli allegati,
+        purché gli hash restino verificabili.
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Verification steps</h2>
+    <h2>Passaggi di verifica</h2>
     <div class="card">
       <ol>
-        <li><strong>Compute hashes</strong> of the published files and compare with the manifest.</li>
-        <li><strong>Verify timestamp</strong> (if present): it must bind to the same hash.</li>
-        <li><strong>Confirm DGV outcome</strong>: if <strong>DENY</strong> or <strong>FAIL_CLOSED</strong>, the action must not have executed.</li>
+        <li><strong>Ricalcolare gli hash</strong> dei file pubblicati e confrontarli con il manifest.</li>
+        <li><strong>Verificare il timestamp</strong> (se presente): deve essere vincolato allo stesso hash.</li>
+        <li><strong>Confermare l’esito DGV</strong>: se <strong>DENY</strong> o <strong>FAIL_CLOSED</strong>, l’azione non deve essere stata eseguita.</li>
       </ol>
 
       <div class="note bad">
-        If hashes do not match, or timestamp verification fails, the bundle is <strong>not enforceable</strong>.
+        Se gli hash non coincidono, o la verifica temporale fallisce,
+        il bundle <strong>non è opponibile</strong>.
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Local hash commands</h2>
+    <h2>Comandi locali per il calcolo hash</h2>
     <div class="card">
       <div class="mono">Linux / macOS:
 shasum -a 512 manifest.json
@@ -183,26 +190,29 @@ Get-FileHash .\manifest.json -Algorithm SHA512
 Get-FileHash .\file.ext -Algorithm SHA512</div>
 
       <div class="note warn">
-        If the environment cannot compute hashes reliably, verification must be considered incomplete.
+        Se l’ambiente non è in grado di calcolare hash in modo affidabile,
+        la verifica deve essere considerata incompleta.
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Pilot instance (placeholder)</h2>
+    <h2>Istanza pilot (placeholder)</h2>
     <div class="card">
       <p class="muted">
-        Replace the placeholders below when you publish a real pilot bundle.
+        Sostituire i placeholder sottostanti quando viene pubblicato
+        un bundle reale.
       </p>
-      <div class="mono">Pilot instance:
+      <div class="mono">Istanza pilot:
 - eventId: EVT-&lt;UUID&gt;
 - manifest: ./evidence/EVT-&lt;UUID&gt;/manifest.json
-- manifest hash (SHA-512): &lt;PASTE_HASH&gt;
-- timestamp reference: &lt;PASTE_REFERENCE&gt;
-- anchors (optional): IPFS &lt;CID&gt; | BTC &lt;TXID&gt; | EVM &lt;TX&gt;</div>
+- hash manifest (SHA-512): &lt;INCOLLA_HASH&gt;
+- riferimento temporale: &lt;INCOLLA_RIFERIMENTO&gt;
+- ancoraggi (opzionali): IPFS &lt;CID&gt; | BTC &lt;TXID&gt; | EVM &lt;TX&gt;</div>
 
       <div class="note">
-        Next step: create <strong>/evidence/</strong> and publish one sample manifest.
+        Passo successivo: creare la cartella <strong>/evidence/</strong>
+        e pubblicare un manifest di esempio.
       </div>
     </div>
   </section>
@@ -212,7 +222,7 @@ Get-FileHash .\file.ext -Algorithm SHA512</div>
 <footer>
   <p>
     Hermeticum B.C.E. — Services<br/>
-    Verify page: minimal public verification workflow for BioCyber Identity Card pilots.
+    Pagina di verifica: workflow pubblico minimo per i pilot BioCyber Identity Card.
   </p>
 </footer>
 
