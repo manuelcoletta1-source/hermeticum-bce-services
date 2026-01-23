@@ -1,0 +1,9 @@
+BIOCYBER ID CARD — RICHIESTA DI ESEMPIO
+
+Allegato non sensibile utilizzato esclusivamente per dimostrare
+la verifica degli hash.
+
+Nessun dato personale è incluso.
+
+Esito DGV previsto: FAIL_CLOSED
+Motivo: evidenza richiesta mancante (dimostrazione comportamento fail-closed).
