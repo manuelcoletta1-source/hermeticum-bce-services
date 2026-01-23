@@ -1,0 +1,30 @@
+{
+  "bundleType": "BIOCYBER_EVIDENCE_BUNDLE",
+  "version": "1.0",
+  "eventId": "EVT-SAMPLE-0001",
+  "hrrRef": "HRR-SAMPLE-PSEUDONIMO-0001",
+  "dgvOutcome": "FAIL_CLOSED",
+  "timeRef": "UTC(IT)",
+  "hashes": {
+    "sha512_manifest": "SOSTITUIRE_CON_SHA512_REALE_DOPO_COMMIT",
+    "sha256_manifest": "SOSTITUIRE_CON_SHA256_REALE_DOPO_COMMIT"
+  },
+  "attachments": [
+    {
+      "name": "request.txt",
+      "sha512": "SOSTITUIRE_CON_SHA512_REALE_DOPO_COMMIT"
+    }
+  ],
+  "timestamp": {
+    "type": "RFC3161",
+    "reference": "PLACEHOLDER",
+    "hashBound": "sha512_manifest"
+  },
+  "anchors": {
+    "lta": "PLACEHOLDER",
+    "ipfs": "OPZIONALE",
+    "btc_txid": "OPZIONALE",
+    "evm_tx": "OPZIONALE"
+  },
+  "notes": "Bundle di esempio per dimostrazione. Sostituire i placeholder con hash reali dopo la pubblicazione."
+}
