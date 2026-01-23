@@ -1,73 +1,150 @@
-# Hermeticum B.C.E. — Services
+# Hermeticum B.C.E. — Infrastruttura Europea IPR
 
-**Hermeticum B.C.E.**  
-(*Blindata · Computabile · Evolutiva*)
+**Hermeticum B.C.E.** (Blindata · Computabile · Evolutiva) è una **infrastruttura tecnica europea**
+per l’adozione istituzionale degli **IPR — Identity Primary Record** come **standard di identità
+digitale tracciabile, opponibile e auditabile**.
 
-Questo repository rappresenta la **vetrina istituzionale** dei servizi
-dell’ecosistema **Hermeticum B.C.E.**.
-
-Non è un’applicazione.  
-Non è una dashboard.  
-È un **sito di riferimento**.
+Questo repository costituisce il **portale istituzionale pubblico** del progetto,
+destinato a **Unione Europea, Stati membri, enti pubblici e aziende strategiche**.
 
 ---
 
-## Cos’è Hermeticum B.C.E.
+## Obiettivo del progetto
 
-Hermeticum B.C.E. è un ecosistema tecnico-giuridico e computazionale
-progettato per la costruzione di **infrastrutture digitali avanzate**,
-fondate su:
-
-- identità verificabili (IPR)
-- tracciabilità crittografica
-- opponibilità tecnica
-- continuità temporale
+Fornire all’Europa una **infrastruttura di riferimento** per:
+- identità digitali istituzionali
+- registri pubblici e privati
+- processi amministrativi e industriali
 - governance computabile
+- audit e tracciabilità nel tempo
+
+Hermeticum B.C.E. **non è un servizio per il singolo individuo**  
+ed **non è un prodotto consumer**.
+
+Il modello è **B2G / B2B / istituzionale**.
 
 ---
 
-## Funzione di questo repository
+## Cos’è un IPR (Identity Primary Record)
 
-Questo repository ha **un solo scopo**:
+Un **IPR** è una **unità primaria di identità tracciabile**, progettata per sistemi complessi.
 
-> presentare in modo chiaro, leggibile e istituzionale  
-> i **servizi** e i **domini operativi** di Hermeticum B.C.E.
+Un IPR:
+- è ancorato crittograficamente
+- possiede tracciabilità temporale verificabile
+- è opponibile tecnicamente
+- è auditabile per progettazione
+- non dipende da un singolo fornitore
+- è interoperabile
 
-Qui non si opera.
-Qui **si comprende**.
-
----
-
-## Aree di Servizio
-
-I servizi sono organizzati per domini funzionali:
-
-- **IPR — Identity Primary Record**  
-  Identità personale opponibile e tracciabile nel tempo.
-
-- **AI Joker / C2**  
-  Intelligenza operativa simbiotica associata all’identità.
-
-- **Technology**  
-  Software, moduli e architetture computabili.
-
-- **Governance & Compliance**  
-  Strutture di controllo, audit e standard UE-oriented.
-
-Ogni area è documentata tramite repository dedicati.
+L’IPR **non è un account** e **non è un documento digitale**.  
+È una **ancora strutturale** utilizzabile da:
+- istituzioni europee
+- Stati membri
+- enti pubblici
+- aziende
+- sistemi AI
+- supply chain
+- registri e infrastrutture critiche
 
 ---
 
-## Stato
+## Casi d’uso principali
 
-🟢 **ATTIVO**  
-Repository istituzionale — aggiornamenti controllati.
+### Istituzioni europee
+- registri digitali europei
+- programmi UE
+- fondi e grant
+- verifiche cross-border
+- audit temporali
+
+### Stati membri
+- interoperabilità delle identità
+- antifrode
+- continuità amministrativa
+- tracciabilità documentale
+
+### Aziende e infrastrutture
+- supply chain
+- certificazioni
+- responsabilità dei sistemi AI
+- compliance normativa
+- audit industriale
 
 ---
 
-## Nota metodologica
+## Tecnologia e conformità
 
-Hermeticum B.C.E. non promette soluzioni semplici.  
-Offre **strutture verificabili**.
+Hermeticum B.C.E. è progettato secondo i principi:
+- **UE-first**
+- **blockchain-agnostic**
+- **no lock-in**
+- **verificabilità indipendente**
+- **audit-by-design**
 
-> Decidi, e paghi la traccia per rimanere nel tempo.
+Tecnologie utilizzate:
+- blockchain pubbliche per ancoraggi temporali
+- IPFS / Filecoin per persistenza dei contenuti
+- architettura modulare e interoperabile
+
+---
+
+## Governance
+
+Hermeticum B.C.E. **non sostituisce le istituzioni**.
+
+Fornisce strumenti tecnici per:
+- governance computabile
+- controllo dei processi
+- responsabilità decisionale
+- tracciabilità delle azioni
+
+Componenti di governance:
+- CyberGlobal
+- UNEBDO
+- OPC
+- AI Joker come **strumento tecnico**, non soggetto giuridico
+
+---
+
+## Stato e verificabilità
+
+- **IPR-HERMETICUM B.C.E.**
+- IPR-ID: `IPR-HBCE-000`
+- Evento di aggancio crittografico triplo: Bitcoin · Ethereum · IPFS
+- Data di riferimento: **19/01/2026**
+- Repository pubblici e verificabili
+
+Questo progetto **non richiede fiducia**.  
+Richiede **verifica**.
+
+---
+
+## Stato del repository
+
+🟢 **ATTIVO — Portale istituzionale europeo**
+
+Repository di presentazione, architettura e verifica pubblica
+dell’infrastruttura Hermeticum B.C.E.
+
+---
+
+## Autore e responsabilità
+
+Ideazione e architettura:
+**Manuel Coletta**
+
+Sigillo e denominazione ufficiale:
+**HERMETICUM B.C.E. S.r.l.**
+
+Metadato temporale canonico IPR:
+**05/02/1988 — 15:30 — Bologna (IT)**
+
+---
+
+## Nota finale
+
+Hermeticum B.C.E. è una **infrastruttura tecnica**.
+Non è ideologia, non è religione, non è narrativa.
+
+È un sistema progettato per **esistere nel tempo**.
