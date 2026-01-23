@@ -1,87 +1,132 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <title>Hermeticum B.C.E. — Services</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Sito istituzionale dei servizi Hermeticum B.C.E. — infrastrutture digitali, identità verificabili e governance computabile.">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermeticum B.C.E. — Services (HUB)</title>
+  <meta name="description" content="HUB ufficiale dei software Hermeticum B.C.E.: policy, enforcement, IPR, interoperabilità, runtime e orchestrazione C2. UE-first, fail-closed, audit-by-design." />
+  <meta name="author" content="Manuel Coletta" />
+  <meta name="publisher" content="Esoterologia Edizioni" />
   <style>
     :root { color-scheme: dark; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #0b0c10;
-      color: #e8e8e8;
-      line-height: 1.6;
-    }
-    header, main, footer {
-      max-width: 980px;
-      margin: auto;
-      padding: 32px 20px;
-    }
-    h1, h2, h3 { font-weight: 600; }
-    .card {
-      border: 1px solid #24262b;
-      border-radius: 16px;
-      padding: 20px;
-      background: #0f1117;
-      margin-bottom: 24px;
-    }
-    .muted { color: #9aa0a6; }
-    a { color: #7aa2f7; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0c10; color:#e8e8e8; }
+    header, main, footer { max-width: 1150px; margin: 0 auto; padding: 24px; }
+    .card { background:#0f1117; border:1px solid #24262b; border-radius:18px; padding:22px; box-shadow:0 12px 30px rgba(0,0,0,.35); }
+    h1 { font-size: 30px; margin:0 0 10px; }
+    h2 { font-size: 18px; font-weight: 600; opacity:.9; margin:0 0 18px; }
+    h3 { font-size: 16px; margin:0 0 10px; }
+    p { line-height:1.55; opacity:.95; margin: 10px 0; }
+    .muted { opacity:.75; font-size: 13px; }
+    .tag { display:inline-block; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid #2b2f38; opacity:.9; margin-bottom:12px; }
+    .grid { display:grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .btns { display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
+    .btn { border:1px solid #2b2f38; border-radius:12px; padding:10px 14px; background:#111420; color:#9bdcff; text-decoration:none; font-size:14px; }
+    .btn:hover { text-decoration: underline; }
+    footer { text-align:center; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
   </style>
 </head>
-
 <body>
 
 <header>
-  <h1>Hermeticum B.C.E.</h1>
-  <p class="muted">Blindata · Computabile · Evolutiva</p>
+  <div class="card">
+    <div class="tag">HUB ufficiale · UE-first</div>
+    <h1>Hermeticum B.C.E. — Services</h1>
+    <h2>Portale unico dei software · Audit-by-design · Fail-closed</h2>
+    <p>
+      Questo HUB presenta l’intero stack software di <b>Hermeticum B.C.E.</b>:
+      policy, enforcement, IPR, interoperabilità, runtime e orchestrazione C2.
+      Progettato per adozione <b>istituzionale</b> ed <b>enterprise</b>.
+    </p>
+    <p class="muted">
+      Regola operativa: <span class="mono">no policy → no enforcement → no action</span>
+    </p>
+    <div class="btns">
+      <a class="btn" href="./README.md">README HUB</a>
+      <a class="btn" href="../corpus-esoterologia-ermetica/">CORPUS HUB</a>
+    </div>
+  </div>
 </header>
 
-<main>
+<main class="grid">
 
+  <!-- POLICY & ENFORCEMENT -->
   <section class="card">
-    <h2>Servizi</h2>
-    <p>
-      Hermeticum B.C.E. è un ecosistema progettato per la costruzione di
-      infrastrutture digitali fondate su identità verificabili,
-      tracciabilità crittografica e continuità temporale.
-    </p>
-    <p>
-      Questa pagina è una <strong>presentazione istituzionale</strong>.
-      Non è un’applicazione.
-    </p>
+    <div class="tag">Policy & Enforcement</div>
+    <h3>OPC · UNEBDO</h3>
+    <p class="muted">Policy esplicite (OPC) → Root enforcement e opponibilità (UNEBDO).</p>
+    <div class="btns">
+      <a class="btn" href="https://manuelcoletta1-source.github.io/opc/">Apri OPC</a>
+      <a class="btn" href="https://github.com/manuelcoletta1-source/opc">Repo OPC</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/unebdo/">Apri UNEBDO</a>
+      <a class="btn" href="https://github.com/manuelcoletta1-source/unebdo">Repo UNEBDO</a>
+    </div>
   </section>
 
+  <!-- IPR LAYER -->
   <section class="card">
-    <h3>Domini Operativi</h3>
-    <ul>
-      <li><strong>IPR</strong> — Identity Primary Record personale</li>
-      <li><strong>AI Joker</strong> — intelligenza operativa simbiotica</li>
-      <li><strong>Technology</strong> — software e moduli computabili</li>
-      <li><strong>Governance</strong> — audit, compliance, opponibilità</li>
-    </ul>
+    <div class="tag">IPR Layer</div>
+    <h3>CORE · VAULT · TRACE · GATE · COMPLY · EXCHANGE</h3>
+    <p class="muted">Identità verificabile + custodia + audit trail + controllo ex-ante + conformità + scambio.</p>
+    <div class="btns">
+      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-core/">IPR-CORE</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-vault/">IPR-VAULT</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-trace/">IPR-TRACE</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-gate/">IPR-GATE</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-comply/">IPR-COMPLY</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-exchange/">IPR-EXCHANGE</a>
+    </div>
   </section>
 
+  <!-- INTEROP & RUNTIME -->
   <section class="card">
-    <h3>Principio Fondativo</h3>
-    <p>
-      Ogni decisione genera una traccia.  
-      Ogni traccia ha un costo.  
-      Ogni costo esiste nel tempo.
-    </p>
-    <p><em>Decidi, e paghi la traccia per rimanere nel tempo.</em></p>
+    <div class="tag">Interop & Runtime</div>
+    <h3>METAEXCHANGE · IOSPACE · NEUROLOOP</h3>
+    <p class="muted">Interoperabilità governata, contesto operativo verificabile e loop di feedback auditabili.</p>
+    <div class="btns">
+      <a class="btn" href="https://manuelcoletta1-source.github.io/metaexchange/">METAEXCHANGE</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/iospace/">IOSPACE</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/neuroloop/">NEUROLOOP</a>
+    </div>
   </section>
+
+  <!-- C2 & GOVERNANCE -->
+  <section class="card">
+    <div class="tag">C2 & Governance</div>
+    <h3>AI JOKER-C2 · IPR-AIJOKER-C2 · CyberGlobal (DUAL-USE)</h3>
+    <p class="muted">Orchestrazione operativa, bridge IPR-native e interoperabilità globale (uso controllato).</p>
+    <div class="btns">
+      <a class="btn" href="https://manuelcoletta1-source.github.io/gitjoker-c2/">GitJoker-C2</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-aijoker-c2/">IPR-AIJOKER-C2</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/cyberglobal/">CyberGlobal (DUAL-USE)</a>
+    </div>
+  </section>
+
+  <!-- NOTE / SIGILLI -->
+  <aside class="card">
+    <div class="tag">Sigilli</div>
+    <h3>HERMETICUM B.C.E. S.r.l. · Esoterologia Edizioni</h3>
+    <p class="muted">
+      Stack progettato per adozione UE-first: audit-by-design, policy esplicite, fail-closed.
+    </p>
+    <p class="muted">
+      Autore: <b>Manuel Coletta</b>
+    </p>
+    <div class="btns">
+      <a class="btn" href="./README.md">Leggi README</a>
+    </div>
+  </aside>
 
 </main>
 
-<footer class="muted">
-  © Hermeticum B.C.E. — Repository istituzionale
+<footer>
+  <p class="muted">
+    © Manuel Coletta<br/>
+    <b>Esoterologia Edizioni</b><br/>
+    Hermeticum B.C.E. — Services HUB
+  </p>
 </footer>
 
 </body>
 </html>
-
