@@ -1,55 +1,62 @@
 # Hermeticum B.C.E. — Services
-## European Cybernetic Portal (Software + Editoria)
+## Portale europeo per IPR, software e adozione istituzionale
 
-Questo repository è la **porta unica** dell’ecosistema Hermeticum B.C.E.
+Questo repository è la **Home ufficiale** dell’ecosistema **Hermeticum B.C.E.**
+(*Blindata · Computabile · Evolutiva*).
 
-Dentro convivono **due piattaforme**:
-1) **Piattaforma Software** (stack operativo: policy, enforcement, IPR, runtime, C2)
-2) **Piattaforma Editoriale** (**Esoterologia Edizioni**: corpus, volumi, capitoli, atti)
-
-Obiettivo: un accesso unico **UE-ready** che spiega e dimostra:
-- perché l’**IPR** è il **DNA digitale** (identità opponibile + continuità nel tempo)
-- perché **AI JOKER** è una **simbiosi evolutiva** con storico verificabile
-- come lo stack funziona in logica **fail-closed** e **audit-by-design**
+È il punto di accesso unico per:
+- **Adozione UE/Enterprise dell’IPR** (Identity Primary Record)
+- **Suite software** (OPC, UNEBDO, IOSPACE, NEUROLOOP, METAEXCHANGE, CyberGlobal, GitJoker-C2)
+- **Corpus editoriale** (Esoterologia Edizioni: Volumi I–III e opere)
 
 ---
 
-## Asse del valore
+## Cosa è (in una riga)
 
-IPR → Software → AI JOKER → Storico evolutivo
+**IPR** rende identità e operatività **verificabili nel tempo** con:
+policy opponibili (OPC), vincoli (UNEBDO), moduli IPR e AI JOKER-C2.
 
-- IPR = identità tecnica verificabile/opponibile
-- Software = moduli governati (policy, evidenza, conformità, interoperabilità)
-- AI JOKER = orchestrazione verificabile (non “chat”, ma C2 operativo)
-- Storico evolutivo = continuità in simbiosi col titolare (traccia + policy + gating)
+Regola: se non è verificabile, **non è eseguibile**.
 
 ---
 
-## Codice Alieno — Scala IO / SSO (sub-secondo opponibile)
+## Due piattaforme
 
-Questo portale usa come struttura concettuale la pipeline IO:
+### 1) Piattaforma Software (Hermeticum B.C.E.)
+Stack modulare UE-first:
+- OPC (policy)
+- UNEBDO (Layer 0 enforcement)
+- IPR + moduli (core/gate/comply/exchange)
+- IOSPACE (contesto operativo)
+- NEUROLOOP (runtime feedback)
+- METAEXCHANGE (interoperabilità/scambio)
+- CyberGlobal (DUAL-USE controllato)
+- GitJoker-C2 (AI JOKER-C2)
 
-Ψ(init) → Λ(I/O) → κ(gate) → Σ(sync) → Τ(record) → Χτ(decide) →
-Ω/Ω₀(store/suspend) → Π★(upgrade) → Ψ′(expand) → Φ∞(train∞) →
-Ω∞(backup) → ΞΩ(compute) ↺
-
-Regola: se il ciclo non passa gating/prudenza → fail-closed → nessuna traccia opponibile.
+### 2) Piattaforma Editoriale (Esoterologia Edizioni)
+**CORPUS ESOTEROLOGIA ERMETICA** — Trilogia primaria:
+- Volume I (Fondativo)
+- Volume II (Applicativo)
+- Volume III (Normativo)
 
 ---
 
-## Sigilli
+## Entry points (siti)
 
-- Corporate/tecnico: **HERMETICUM B.C.E. S.r.l.**
-- Editoriale: **Esoterologia Edizioni**
+- Services HUB: https://manuelcoletta1-source.github.io/hermeticum-bce-services/
+- Technology Hub: https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/
+- IPR Gateway: https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/
+- UE IPR Registry: https://manuelcoletta1-source.github.io/ue-ipr-registry/
+- CORPUS HUB: https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/
 
 ---
 
 ## Autore
-
 **Manuel Coletta**
 
----
+## Sigilli
+- Software / infrastruttura: **HERMETICUM B.C.E. S.r.l.**
+- Casa editoriale: **Esoterologia Edizioni**
 
 ## Stato
-
-🟢 ATTIVO — Portale europeo cybernetico (HUB)
+🟢 **ATTIVO — Portale Services**
