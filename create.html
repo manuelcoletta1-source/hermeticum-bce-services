@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Attivazione — Livello 1 (BASE) | HERMETICUM B.C.E.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Procedura di attivazione Livello 1 (BASE) per BioCyber Identity Card: input utente, verifica, output e prove verificabili." />
+  <style>
+    :root{
+      --bg:#0b0c10; --panel:#0f1117; --line:#24262b;
+      --text:#e8e8e8; --muted:#9aa0a6; --accent:#7aa2ff;
+      --good:#8ce99a; --warn:#ffd43b; --bad:#ff6b6b;
+    }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+    header{ border-bottom:1px solid var(--line); background:var(--bg); }
+    .brandwrap{ max-width:980px; margin:0 auto; padding:28px 20px 16px; text-align:center; }
+    .brand{ margin:0; font-size:2.4rem; letter-spacing:0.12em; font-weight:600; }
+    .brandsub{ margin:10px 0 0; color:var(--muted); font-size:0.95rem; }
+    .nav{ display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; font-size:0.95rem; justify-content:center; }
+    a{ color:var(--accent); text-decoration:none; } a:hover{ text-decoration:underline; }
+    .pagehead, main, footer{ max-width:980px; margin:0 auto; padding:20px 20px; }
+    footer{ border-top:1px solid var(--line); color:var(--muted); font-size:0.9rem; margin-top:60px; padding:22px 20px; }
+    h1{ margin:0 0 10px; font-size:1.9rem; }
+    h2{ margin-top:36px; font-size:1.25rem; }
+    p{ max-width:860px; } .muted{ color:var(--muted); }
+    .card{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; margin-top:16px; }
+    ul{ padding-left:20px; margin:10px 0 0; } li{ margin:6px 0; }
+    .note{ border-left:3px solid var(--accent); padding:10px 12px; background: rgba(122,162,255,0.08); border-radius:10px; margin-top:12px; }
+    .warn{ border-left-color:var(--warn); background: rgba(255,212,59,0.10); }
+    .mono{ font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; background:#0b0c10; border:1px solid var(--line); border-radius:12px; padding:14px; overflow-x:auto; white-space:pre; margin-top:12px; }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brandwrap">
+    <h1 class="brand">HERMETICUM&nbsp;B.C.E.</h1>
+    <p class="brandsub">Blindata · Computabile · Evolutiva</p>
+    <nav class="nav">
+      <a href="./index.html">Home</a>
+      <a href="./services.html">Servizi</a>
+      <a href="./catalog.html">Catalogo</a>
+      <a href="./verify.html">Verifica</a>
+      <a href="./create.html"><strong>Attivazione</strong></a>
+      <a href="./README.md">README</a>
+    </nav>
+  </div>
+</header>
+
+<section class="pagehead">
+  <h1>Attivazione — Livello 1 (BASE)</h1>
+  <p class="muted">
+    Procedura standard per registrare un utente e generare un <strong>IPR/HRR</strong> con
+    <strong>Evidence Bundle</strong> verificabile. Nessun dato personale viene pubblicato di default.
+  </p>
+  <div class="note warn">
+    Livello 1 BASE: <strong>hash + timestamp</strong>.  
+    Ancoraggi pubblici (IPFS/BTC/ETH) sono disponibili come upgrade (Livello Opponibile/Forte).
+  </div>
+</section>
+
+<main>
+
+  <section>
+    <h2>1) Cosa fornisce l’utente (input)</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Dati minimi</strong>: nome, cognome, data di nascita, paese/nazionalità</li>
+        <li><strong>Documento valido</strong>: CIE / passaporto (solo verifica interna)</li>
+        <li><strong>Contatto</strong>: email per consegna bundle e comunicazioni</li>
+        <li><strong>Consenso opponibile</strong>: non-cancellabilità, tracciabilità, fail-closed</li>
+      </ul>
+      <div class="note">
+        Opzionale: public key dell’utente (se già disponibile) e documenti extra da includere nel bundle.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2) Cosa facciamo noi (verifica e generazione)</h2>
+    <div class="card">
+      <ul>
+        <li>verifica identità (KYC leggero) e controllo anti-frode</li>
+        <li>generazione <strong>IPR-ID / HRR</strong> univoco</li>
+        <li>creazione <strong>manifest.json</strong> (machine-readable)</li>
+        <li>calcolo <strong>hash SHA-512</strong> di manifest e allegati</li>
+        <li>applicazione di <strong>timestamp</strong> (riferimento temporale)</li>
+      </ul>
+      <div class="mono">Output logico:
+Utente → Verifica → IPR/HRR → manifest.json → SHA-512 → Timestamp → Evidence Bundle</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3) Cosa riceve l’utente (output)</h2>
+    <div class="card">
+      <p class="muted">Consegna privata (zip) + prova pubblicabile (senza dati personali).</p>
+      <ul>
+        <li><strong>IPR-ID / HRR</strong></li>
+        <li><strong>Evidence Bundle</strong>: manifest.json + hashes + receipt</li>
+        <li><strong>Public Proof</strong>: hash manifest + timeRef + istruzioni di verifica</li>
+      </ul>
+      <div class="note">
+        La verifica è riproducibile tramite <a href="./verify.html">verify.html</a> e (se pubblicato) tramite <code>/evidence</code>.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>4) Regole Livello 1 (BASE)</h2>
+    <div class="card">
+      <ul>
+        <li>nessun ancoraggio pubblico obbligatorio</li>
+        <li>fail-closed: in assenza di evidenza minima → esito <strong>FAIL_CLOSED</strong></li>
+        <li>upgrade possibile a livello Opponibile (IPFS + BTC/ETH) o Forte (IPFS + BTC + ETH)</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    HERMETICUM B.C.E. — Services<br/>
+    Procedura Attivazione Livello 1 (BASE) — BioCyber Identity Card (EU Pilot).
+  </p>
+</footer>
+
+</body>
+</html>
