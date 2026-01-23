@@ -1,108 +1,73 @@
-# HERMETICUM B.C.E. — Services
+# Hermeticum B.C.E. — Services
 
-**Hermeticum B.C.E. — Services** è l’applicazione web ufficiale dell’ecosistema  
-**HERMETICUM B.C.E. (Blindata · Computabile · Evolutiva)**.
+**Hermeticum B.C.E.**  
+(*Blindata · Computabile · Evolutiva*)
 
-Questo repository pubblica una **Single-Page Application (SPA)** statica,
-progettata come **interfaccia operativa e editoriale** per l’accesso ai servizi,
-ai moduli e alla documentazione dell’ecosistema.
+Questo repository rappresenta la **vetrina istituzionale** dei servizi
+dell’ecosistema **Hermeticum B.C.E.**.
 
----
-
-## Natura del Progetto
-
-- **Tipologia:** Web Application (SPA statica)
-- **Tecnologia:** HTML · CSS · JavaScript (vanilla)
-- **Hosting:** GitHub Pages
-- **Ambito:** infrastruttura tecnico-editoriale UE-oriented
-- **Stato:** ATTIVO / in evoluzione controllata
-
-L’applicazione non è un sito informativo tradizionale:
-è una **dashboard applicativa** che consente di navigare
-l’intero ecosistema **senza uscire dall’interfaccia**.
+Non è un’applicazione.  
+Non è una dashboard.  
+È un **sito di riferimento**.
 
 ---
 
-## Funzione
+## Cos’è Hermeticum B.C.E.
 
-L’applicazione fornisce:
+Hermeticum B.C.E. è un ecosistema tecnico-giuridico e computazionale
+progettato per la costruzione di **infrastrutture digitali avanzate**,
+fondate su:
 
-- accesso unificato ai **servizi Hermeticum B.C.E.**
-- collegamento alla **documentazione editoriale**
-- integrazione con **IPR Registry** e **GitJoker**
-- struttura coerente con progetti **UE / Horizon-compatible**
-
----
-
-## Servizi Integrati
-
-L’ecosistema include, tra gli altri:
-
-- **CyberGlobal** — modulo di cybersicurezza UE
-- **UNEBDO** — infrastruttura giuridico-tecnica
-- **OPC** — Opponible Policy Core
-- **MetaExchange** — scambio e governance
-- **IOSpace** — spazio e energia computabile
-- **NeuroLoop** — moduli neuro-operativi
-
-I servizi sono presentati come **componenti applicativi**,
-non come semplici pagine descrittive.
+- identità verificabili (IPR)
+- tracciabilità crittografica
+- opponibilità tecnica
+- continuità temporale
+- governance computabile
 
 ---
 
-## Documentazione
+## Funzione di questo repository
 
-L’applicazione collega e integra:
+Questo repository ha **un solo scopo**:
 
-- **Corpus Esoterologia Ermetica**
-- Volumi editoriali
-- Materiali fondativi
-- Repository di riferimento
+> presentare in modo chiaro, leggibile e istituzionale  
+> i **servizi** e i **domini operativi** di Hermeticum B.C.E.
 
-Accesso diretto:
-- https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/
+Qui non si opera.
+Qui **si comprende**.
 
 ---
 
-## IPR & Identità Operative
+## Aree di Servizio
 
-Il sistema è progettato per operare in sinergia con:
+I servizi sono organizzati per domini funzionali:
 
-- **UE IPR Registry**
-- **IPR-5 — GitJoker (AIJoker-C2)**
+- **IPR — Identity Primary Record**  
+  Identità personale opponibile e tracciabile nel tempo.
 
-Questi elementi costituiscono il livello di:
-- identità digitale
-- tracciabilità
-- continuità operativa
+- **AI Joker / C2**  
+  Intelligenza operativa simbiotica associata all’identità.
 
----
+- **Technology**  
+  Software, moduli e architetture computabili.
 
-## Architettura
+- **Governance & Compliance**  
+  Strutture di controllo, audit e standard UE-oriented.
 
-- Applicazione **single-page**
-- Navigazione interna via hash routing
-- Nessun framework esterno
-- Codice auditabile e stabile
-- UX orientata a uso professionale
+Ogni area è documentata tramite repository dedicati.
 
 ---
 
-## Ente Promotore
+## Stato
 
-**HERMETICUM B.C.E. S.r.l.**  
-Fondatore: **Manuel Coletta**  
-Giurisdizione di riferimento: **Unione Europea**
-
----
-
-## Stato del Repository
-
-- **Repository:** pubblico
-- **Finalità:** servizio / interfaccia applicativa
-- **Livello di maturità:** UE-ready
-- **Regime:** evolutivo, tracciabile, opponibile
+🟢 **ATTIVO**  
+Repository istituzionale — aggiornamenti controllati.
 
 ---
 
-© 2026 — HERMETICUM B.C.E. · Services
+## Nota metodologica
+
+Hermeticum B.C.E. non promette soluzioni semplici.  
+Offre **strutture verificabili**.
+
+> Decidi, e paghi la traccia per rimanere nel tempo.
