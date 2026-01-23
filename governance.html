@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Governance & Scope — UE-first | HERMETICUM B.C.E.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Governance, scope e non-obiettivi del framework HERMETICUM B.C.E. per la sicurezza digitale europea dell’individuo (BioCyber Identity Card)." />
+  <style>
+    :root{
+      --bg:#0b0c10; --panel:#0f1117; --line:#24262b;
+      --text:#e8e8e8; --muted:#9aa0a6; --accent:#7aa2ff;
+      --good:#8ce99a; --warn:#ffd43b; --bad:#ff6b6b;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6;
+    }
+    header{ border-bottom:1px solid var(--line); }
+    .brandwrap{
+      max-width:980px; margin:0 auto; padding:28px 20px 16px; text-align:center;
+    }
+    .brand{ margin:0; font-size:2.4rem; letter-spacing:0.12em; font-weight:600; }
+    .brandsub{ margin:10px 0 0; color:var(--muted); font-size:0.95rem; }
+
+    .nav{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+      margin-top:10px; font-size:0.95rem;
+    }
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .pagehead, main, footer{
+      max-width:980px; margin:0 auto; padding:20px 20px;
+    }
+    footer{
+      border-top:1px solid var(--line);
+      color:var(--muted); font-size:0.9rem; margin-top:60px;
+    }
+
+    h1{ margin:0 0 10px; font-size:1.9rem; }
+    h2{ margin-top:36px; font-size:1.35rem; }
+    h3{ margin-top:18px; font-size:1.1rem; }
+    p{ max-width:860px; }
+    .muted{ color:var(--muted); }
+
+    .card{
+      background:var(--panel); border:1px solid var(--line);
+      border-radius:14px; padding:18px; margin-top:16px;
+    }
+    ul{ padding-left:20px; margin:10px 0 0; }
+    li{ margin:6px 0; }
+
+    .note{
+      border-left:3px solid var(--accent);
+      padding:10px 12px; background: rgba(122,162,255,0.08);
+      border-radius:10px; margin-top:12px;
+    }
+    .warn{
+      border-left-color:var(--warn);
+      background: rgba(255,212,59,0.10);
+    }
+    .bad{
+      border-left-color:var(--bad);
+      background: rgba(255,107,107,0.10);
+    }
+
+    .grid{
+      display:grid; grid-template-columns: repeat(12, 1fr);
+      gap:14px; margin-top:16px;
+    }
+    .col6{ grid-column: span 12; }
+    @media (min-width: 920px){ .col6{ grid-column: span 6; } }
+
+    .mono{
+      font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      background:#0b0c10; border:1px solid var(--line);
+      border-radius:12px; padding:14px; overflow-x:auto; white-space:pre;
+      margin-top:12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brandwrap">
+    <h1 class="brand">HERMETICUM&nbsp;B.C.E.</h1>
+    <p class="brandsub">Blindata · Computabile · Evolutiva</p>
+
+    <nav class="nav">
+      <a href="./index.html">Home</a>
+      <a href="./services.html">Servizi</a>
+      <a href="./catalog.html">Catalogo</a>
+      <a href="./create.html">Attivazione</a>
+      <a href="./use-cases.html">Use Cases</a>
+      <a href="./verify.html">Verifica</a>
+      <a href="./governance.html"><strong>Governance</strong></a>
+      <a href="./README.md">README</a>
+    </nav>
+  </div>
+</header>
+
+<section class="pagehead">
+  <h1>Governance & Scope (UE-first)</h1>
+  <p class="muted">
+    <strong>HERMETICUM B.C.E. nasce per la sicurezza digitale europea dell’individuo.</strong><br/>
+    Questa pagina definisce governance, perimetro, vincoli e non-obiettivi
+    della BioCyber Identity Card come layer tecnico di sicurezza.
+  </p>
+
+  <div class="note warn">
+    Principio operativo: <strong>fail-closed</strong>. In assenza di prova minima verificabile,
+    l’azione non deve essere eseguita.
+  </div>
+</section>
+
+<main>
+
+  <section>
+    <h2>Missione</h2>
+    <div class="card">
+      <p>
+        Garantire che decisioni digitali critiche possano essere attribuite a un responsabile umano
+        e provate nel tempo con verifica riproducibile, senza esporre dati personali.
+      </p>
+      <div class="mono">Mission:
+Sicurezza dell’individuo → attribuzione → accountability → prova → continuità</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Scope (cosa copre)</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Attribuzione tecnica</strong> (IPR/HRR) a persona reale, auditabile e non pubblica</li>
+        <li><strong>Validazione ex-ante</strong> (DGV) di eventi e decisioni critiche</li>
+        <li><strong>Evidence Bundle</strong> verificabili (hash + tempo + riferimenti)</li>
+        <li><strong>Ancoraggi opzionali</strong> (IPFS, Bitcoin, Ethereum) per opponibilità pubblica selettiva</li>
+        <li><strong>Verifica pubblica</strong> basata su ricalcolo indipendente</li>
+      </ul>
+      <div class="note">
+        Lo scope è volutamente minimo: l’obiettivo è un layer di sicurezza riusabile,
+        integrabile e verificabile, non un ecosistema chiuso.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Non-goals (cosa NON facciamo)</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Non sostituiamo</strong> documenti civili (CIE, passaporto, eID nazionali)</li>
+        <li><strong>Non creiamo</strong> un’identità sovrana parallela o un’autorità civile</li>
+        <li><strong>Non vendiamo</strong> sorveglianza, tracciamento o profilazione dell’utente</li>
+        <li><strong>Non imponiamo</strong> blockchain: l’ancoraggio pubblico è opzionale e misurato</li>
+        <li><strong>Non custodiamo</strong> dati personali pubblicamente (privacy-by-design)</li>
+      </ul>
+      <div class="note bad">
+        Se un requisito richiede esposizione di dati personali come condizione di verifica pubblica,
+        il requisito è considerato <strong>non conforme</strong> ai principi del framework.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Governance tecnica</h2>
+    <div class="grid">
+      <div class="card col6">
+        <h3>Fail-Closed by Default</h3>
+        <p class="muted">
+          Ogni workflow deve degradare in modo sicuro: se manca prova, hash, tempo o policy,
+          l’azione viene bloccata.
+        </p>
+        <div class="mono">Esiti DGV:
+ALLOW / REVIEW / DENY / FAIL_CLOSED</div>
+      </div>
+
+      <div class="card col6">
+        <h3>Evidence-first</h3>
+        <p class="muted">
+          La piattaforma non è “fonte di verità”. La verità è la verifica riproducibile:
+          ricalcolo hash, confronto manifest, controllo riferimenti temporali e ancoraggi.
+        </p>
+        <div class="mono">Verify:
+recompute → match → timestamp → anchors</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Privacy & Data Minimization</h2>
+    <div class="card">
+      <ul>
+        <li>dati personali: solo per verifica interna e solo quanto necessario</li>
+        <li>pubblicazione: hash-only di default</li>
+        <li>pseudonimi: permessi per verifiche pubbliche</li>
+        <li>separazione: identità reale ≠ prova pubblica</li>
+      </ul>
+      <div class="note">
+        La sicurezza dell’individuo richiede che la prova sia verificabile
+        senza trasformare l’identità in esposizione.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Allineamento normativo (alto livello)</h2>
+    <div class="card">
+      <p class="muted">
+        Il framework è progettato per compatibilità con approcci UE (alto livello),
+        senza sostituire regolamenti o autorità esistenti.
+      </p>
+      <ul>
+        <li>AI Act (UE): accountability e governance dei sistemi ad alto rischio</li>
+        <li>eIDAS 2.0: contesto europeo di identità digitale (non sostituzione)</li>
+        <li>ETSI EN 319: principi di conservazione e timestamping (LTA-ready)</li>
+      </ul>
+      <div class="note warn">
+        Questa pagina descrive il perimetro. I dettagli tecnici sono in `README.md` e nei manifest in `/onboarding`.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    HERMETICUM B.C.E. — Governance & Scope<br/>
+    UE-first: sicurezza digitale dell’individuo, attribuzione, prova, fail-closed.
+  </p>
+</footer>
+
+</body>
+</html>
