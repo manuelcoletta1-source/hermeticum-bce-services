@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Services — BioCyber Identity Card (EU Pilot) | Hermeticum B.C.E.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Services of the BioCyber Identity Card EU Pilot: HRR, DGV, Certified Time & Trace, Long-Term Evidence Vault." />
+  <style>
+    :root {
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#9aa0a6;
+      --accent:#7aa2ff;
+      --good:#8ce99a;
+      --warn:#ffd43b;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    header, main, footer {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px;
+    }
+    header { border-bottom:1px solid var(--line); }
+    footer { border-top:1px solid var(--line); color:var(--muted); font-size:0.9rem; margin-top:60px; }
+
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    h1 { margin:0 0 10px 0; font-size:1.9rem; }
+    h2 { margin-top:36px; font-size:1.25rem; }
+    h3 { margin:0 0 8px 0; font-size:1.05rem; }
+    p { max-width: 860px; }
+    .muted { color:var(--muted); }
+
+    .nav {
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:12px;
+      font-size:0.95rem;
+    }
+
+    .status {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:10px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--muted);
+      font-size:0.85rem;
+    }
+    .dot {
+      width:10px; height:10px; border-radius:50%;
+      background:var(--good);
+      box-shadow: 0 0 0 3px rgba(140,233,154,0.12);
+      display:inline-block;
+    }
+
+    .card {
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:18px;
+      margin-top:16px;
+    }
+
+    .grid {
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+      margin-top:16px;
+    }
+    .col6 { grid-column: span 12; }
+    @media (min-width: 860px) { .col6 { grid-column: span 6; } }
+
+    ul { padding-left:20px; margin:10px 0 0; }
+    li { margin:6px 0; }
+
+    .kicker {
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      font-size:0.78rem;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background:#0b0c10;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:14px;
+      overflow-x:auto;
+      white-space:nowrap;
+    }
+
+    .note {
+      border-left:3px solid var(--accent);
+      padding:10px 12px;
+      background: rgba(122,162,255,0.08);
+      border-radius:10px;
+      margin-top:12px;
+    }
+
+    .warn {
+      border-left-color: var(--warn);
+      background: rgba(255,212,59,0.10);
+    }
+
+    .btnrow { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .btn {
+      display:inline-block;
+      padding:9px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0b0c10;
+      color:var(--text);
+      font-size:0.95rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Services</h1>
+  <p class="muted">
+    Operational components of the <strong>BioCyber Identity Card</strong> (EU Pilot).<br/>
+    Not a civil identity. Not a replacement of national documents. Only enforceable accountability.
+  </p>
+
+  <nav class="nav">
+    <a href="./index.html">Home</a>
+    <a href="./services.html"><strong>Services</strong></a>
+    <a href="./verify.html">Verify</a>
+    <a href="./README.md">README</a>
+  </nav>
+
+  <div class="status"><span class="dot"></span>Minimal fail-closed chain — Phase 1</div>
+</header>
+
+<main>
+
+  <section>
+    <h2>Minimal chain (fail-closed)</h2>
+    <p>
+      The EU Pilot is implemented as a minimal chain.  
+      If any required evidence is missing, the system must not proceed.
+    </p>
+    <div class="mono">Event → HRR → DGV → Certified Time &amp; Trace → Long-Term Evidence Vault</div>
+    <div class="note warn">
+      <strong>Fail-closed rule:</strong> uncertainty is treated as risk.  
+      Outcome must be <strong>FAIL_CLOSED</strong>.
+    </div>
+  </section>
+
+  <section>
+    <h2>Core components</h2>
+
+    <div class="grid">
+
+      <div class="card col6">
+        <div class="kicker">Component 01</div>
+        <h3>Human Root Reference (HRR)</h3>
+        <p class="muted">
+          Technical human attribution for critical actions.
+          Ensures there is a real, accountable human behind the request.
+        </p>
+        <ul>
+          <li>unique per individual</li>
+          <li>not duplicable</li>
+          <li>auditable</li>
+          <li>suspendable (not erasable)</li>
+        </ul>
+        <div class="note">
+          HRR is not a civil identity. It is a technical root of accountability.
+        </div>
+      </div>
+
+      <div class="card col6">
+        <div class="kicker">Component 02</div>
+        <h3>Decision Gate Validator (DGV)</h3>
+        <p class="muted">
+          Validates or blocks actions <em>before execution</em>, enforcing standard outcomes.
+        </p>
+        <ul>
+          <li>mandatory <strong>fail-closed</strong> behavior</li>
+          <li>standard outcomes: <strong>ALLOW / REVIEW / DENY / FAIL_CLOSED</strong></li>
+          <li>machine-readable logs</li>
+        </ul>
+        <div class="note">
+          FAIL is protection, not failure. Execution without validation is non-conformant.
+        </div>
+      </div>
+
+      <div class="card col6">
+        <div class="kicker">Component 03</div>
+        <h3>Certified Time &amp; Trace</h3>
+        <p class="muted">
+          Metrologically valid time and traceability.
+          What cannot be measured and traced is not enforceable.
+        </p>
+        <ul>
+          <li>trusted timestamps with known error bounds</li>
+          <li>traceability and reproducible verification</li>
+          <li>consistent reference time source</li>
+        </ul>
+      </div>
+
+      <div class="card col6">
+        <div class="kicker">Component 04</div>
+        <h3>Long-Term Evidence Vault</h3>
+        <p class="muted">
+          Long-term evidence preservation designed to remain verifiable for decades.
+        </p>
+        <ul>
+          <li>retention ≥ 20 years</li>
+          <li>offline verification</li>
+          <li>periodic re-timestamping</li>
+          <li>ETSI / eIDAS compatible LTA profiles</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Public verification</h2>
+    <div class="card">
+      <p>
+        The pilot is designed to support public, reproducible verification workflows.
+      </p>
+      <div class="btnrow">
+        <a class="btn" href="./verify.html">Open Verify workflow</a>
+        <a class="btn" href="./README.md">Read the framework README</a>
+      </div>
+      <div class="note">
+        Golden rule: verification is “recompute and match”, not “trust the website”.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    Hermeticum B.C.E. — Services<br/>
+    Services page for BioCyber Identity Card (EU Pilot).
+  </p>
+</footer>
+
+</body>
+</html>
