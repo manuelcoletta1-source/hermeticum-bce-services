@@ -1,154 +1,108 @@
 # HERMETICUM B.C.E.
 ## Blindata · Computabile · Evolutiva
 
-**HERMETICUM B.C.E.** è un framework tecnico-operativo per la costruzione di
-**identità opponibili**, **responsabilità verificabile** e **prove digitali a lungo termine**
-in sistemi ad alto rischio.
+**HERMETICUM B.C.E. nasce per la sicurezza digitale europea dell’individuo.**
 
-Questo repository documenta l’implementazione **Services**
-del framework, con particolare riferimento alla
-**BioCyber Identity Card** come strato di accountability tecnica.
+Il framework fornisce strumenti tecnici per:
+- attribuzione umana verificabile
+- accountability ex-ante
+- prova digitale opponibile nel tempo
 
----
-
-## Cosa NON è questo progetto
-
-Per chiarezza operativa, HERMETICUM B.C.E.:
-
-- **non è** un documento di identità civile
-- **non sostituisce** CIE, passaporti o sistemi nazionali
-- **non è** una criptovaluta
-- **non è** una piattaforma social
-- **non è** un’ideologia
-
-È un **layer tecnico** che rende **impossibile**
-l’esecuzione di decisioni digitali critiche
-senza attribuzione umana, verifica ex-ante e memoria opponibile.
+in contesti digitali ad alto rischio.
 
 ---
 
-## Il problema affrontato
+## Cosa NON è
+- non è un documento di identità civile
+- non sostituisce CIE o passaporto
+- non è una criptovaluta
+- non è un sistema di sorveglianza
 
-I sistemi digitali contemporanei soffrono di tre fallimenti strutturali:
-
-1. decisioni eseguite senza un responsabile umano opponibile  
-2. automazione senza controllo ex-ante (fail-open)  
-3. prove digitali che decadono nel tempo  
-
-Il risultato è:
-- incertezza giuridica
-- incidenti operativi
-- scarico sistemico di responsabilità (“ha deciso l’algoritmo”)
+È uno **strato di sicurezza** che impedisce l’esecuzione di decisioni critiche
+senza responsabilità umana e prova verificabile.
 
 ---
 
-## La soluzione: BioCyber Identity Card
+## Concetto centrale: BioCyber Identity Card
 
-La **BioCyber Identity Card** non è una carta fisica.
-È una **posizione verificabile nel tempo**.
+La BioCyber Identity Card non è una carta fisica.
+È una **posizione verificabile nel tempo** che collega:
 
-Definisce una **catena minima e fail-closed** che garantisce:
-
-- attribuzione a un essere umano reale
-- validazione prima dell’esecuzione
-- prova digitale che non scade
+- una persona reale (HRR / IPR)
+- una decisione o evento
+- una validazione ex-ante
+- una prova digitale durabile
 
 ---
 
 ## Architettura minima (fail-closed)
-Evento → Human Root Reference (IPR) → Decision Gate Validator (DGV) → Tempo certificato & tracciabilità → Evidence Vault a lungo termine
-Se uno di questi elementi manca  
-→ **l’azione non deve essere eseguita**.
+Evento → IPR / HRR → Decision Gate Validator (DGV) → Tempo certificato → Evidence Bundle
+In assenza di uno di questi elementi,
+l’esito corretto è **FAIL_CLOSED**.
 
 ---
 
-## Componenti principali
+## Componenti
 
-### Human Root Reference (IPR)
+### IPR / HRR
 Radice tecnica di responsabilità umana.
-Univoca, non duplicabile, auditabile.
-Non è un’identità civile.
+Auditabile, non duplicabile, non pubblica.
 
-### Decision Gate Validator (DGV)
-Modulo di validazione ex-ante.
-Esiti standard:
-- ALLOW
-- REVIEW
-- DENY
-- FAIL_CLOSED
-
+### DGV
+Gate di validazione ex-ante con esiti standardizzati.
 FAIL_CLOSED è protezione del sistema, non errore.
 
 ### Evidence Bundle
 Pacchetto minimo di prova:
-- manifest leggibile da macchina
-- hash verificabili
-- riferimento temporale
-- ancoraggi opzionali
+manifest leggibile da macchina, hash, riferimento temporale,
+ancoraggi opzionali.
 
-### Anchoring Services
-Servizi opzionali di opponibilità pubblica:
-- IPFS (contenuto)
-- Bitcoin (tempo forte)
-- Ethereum (riferimenti logici)
+### Servizi di ancoraggio
+- IPFS — contenuto
+- Bitcoin — tempo forte
+- Ethereum — riferimenti logici
 
 L’ancoraggio è un **servizio**, non un obbligo.
 
 ---
 
-## Catalogo Carte Biocyber
+## Carte Biocibernetiche
 
-Il framework supporta diversi livelli di carta:
+- **BASE** — identità tecnica e prova minima
+- **OPPONIBILE** — verifica pubblica selettiva
+- **FORTE / ISTITUZIONALE** — multi-ancora e conservazione LTA
 
-- **Base** — identità tecnica, uso interno
-- **Opponibile** — prova pubblica, audit-ready
-- **Forte / Istituzionale** — multi-ancora, conservazione LTA
-
-Vedi `catalog.html` per i dettagli.
+Vedi `catalog.html`.
 
 ---
 
-## Verifica pubblica
+## Attivazione e verifica
 
-La verifica non richiede fiducia.
+- Procedura di attivazione: `create.html`
+- Verifica pubblica: `verify.html`
+- Evidenze di esempio: `/evidence`
 
-È basata su:
-- ricalcolo locale degli hash
-- confronto con il manifest
-- verifica temporale
-- conferma esiti fail-closed
-
-Vedi `verify.html` e la cartella `/evidence`.
+La verifica è sempre basata su:
+**ricalcola e confronta**, non fiducia.
 
 ---
 
-## Conformità e allineamento
+## Allineamento normativo
 
-Il framework è progettato per essere compatibile con:
-
+Progettato per compatibilità con:
 - AI Act (UE)
 - eIDAS 2.0
 - ETSI EN 319 (LTA)
-- principi ISO di auditabilità e metrologia
-
-Non introduce nuove autorità civili o monetarie.
+- principi ISO di auditabilità e tracciabilità
 
 ---
 
-## Stato del progetto
-
+## Stato
 🟢 **EU Pilot — ACTIVE**
-
-- architettura minima definita
-- sito pubblico operativo
-- evidenze verificabili
-- evoluzione controllata
 
 ---
 
 ## Principio guida
 
-> Non tutto deve essere ancorato.  
-> Ma ciò che conta deve poter essere provato.  
-
-HERMETICUM B.C.E. esiste per questo.
+> La sicurezza digitale dell’individuo
+> non è una funzione opzionale del sistema.
