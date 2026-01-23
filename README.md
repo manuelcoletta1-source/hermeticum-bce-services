@@ -1,129 +1,135 @@
-# Hermeticum B.C.E. — BioCyber Identity Card  
-## EU Pilot Framework for Decision Accountability
+# HERMETICUM B.C.E.
+## Blindata · Computabile · Evolutiva
 
-**Hermeticum B.C.E. — Services** documenta il framework tecnico-operativo della  
-**BioCyber Identity Card europea**:  
-uno **standard di attribuzione umana, responsabilità decisionale e prova a lungo termine**  
-per sistemi digitali ad alto rischio.
+**HERMETICUM B.C.E.** è un framework tecnico-operativo per la costruzione di
+**identità opponibili**, **responsabilità verificabile** e **prove digitali a lungo termine**
+in sistemi ad alto rischio.
 
-Questo repository **non introduce una nuova identità civile**,  
-**non sostituisce documenti nazionali**  
-e **non definisce diritti politici o morali**.
-
-È un **layer tecnico di sicurezza e accountability**, progettato per rendere **impossibile**
-l’esecuzione di decisioni digitali critiche **senza un responsabile umano opponibile**.
+Questo repository documenta l’implementazione **Services**
+del framework, con particolare riferimento alla
+**BioCyber Identity Card** come strato di accountability tecnica.
 
 ---
 
-## Problema affrontato
+## Cosa NON è questo progetto
 
-I sistemi digitali contemporanei (in particolare quelli basati su AI) presentano tre falle strutturali:
+Per chiarezza operativa, HERMETICUM B.C.E.:
 
-- decisioni eseguite senza attribuzione umana opponibile  
-- automazione priva di verifica ex-ante  
-- prove digitali che decadono o diventano inutilizzabili nel tempo  
+- **non è** un documento di identità civile
+- **non sostituisce** CIE, passaporti o sistemi nazionali
+- **non è** una criptovaluta
+- **non è** una piattaforma social
+- **non è** un’ideologia
 
-Queste falle generano:
-- incertezza giuridica  
-- incidenti operativi  
+È un **layer tecnico** che rende **impossibile**
+l’esecuzione di decisioni digitali critiche
+senza attribuzione umana, verifica ex-ante e memoria opponibile.
+
+---
+
+## Il problema affrontato
+
+I sistemi digitali contemporanei soffrono di tre fallimenti strutturali:
+
+1. decisioni eseguite senza un responsabile umano opponibile  
+2. automazione senza controllo ex-ante (fail-open)  
+3. prove digitali che decadono nel tempo  
+
+Il risultato è:
+- incertezza giuridica
+- incidenti operativi
 - scarico sistemico di responsabilità (“ha deciso l’algoritmo”)
 
 ---
 
-## Soluzione proposta
+## La soluzione: BioCyber Identity Card
 
-La **BioCyber Identity Card** è una **card logica**, non un documento fisico.
+La **BioCyber Identity Card** non è una carta fisica.
+È una **posizione verificabile nel tempo**.
 
-Definisce una **catena tecnica minima e fail-closed** che garantisce che:
+Definisce una **catena minima e fail-closed** che garantisce:
 
-- ogni decisione critica sia collegata a **un essere umano reale**
-- ogni decisione sia **verificata prima dell’esecuzione**
-- ogni decisione lasci **prove opponibili che non scadono**
+- attribuzione a un essere umano reale
+- validazione prima dell’esecuzione
+- prova digitale che non scade
 
 ---
 
-## Ambito di applicazione (Fase 1)
-
-Il framework è progettato per contesti **ad alto rischio**, tra cui:
-
-- sistemi di Intelligenza Artificiale ad alto rischio (AI Act UE)
-- sanità critica
-- sistemi di comando e controllo (C2 / C4ISR)
-- procurement pubblico automatizzato
-
-I contesti a basso rischio sono **fuori ambito**.
+## Architettura minima (fail-closed)
+Evento → Human Root Reference (IPR) → Decision Gate Validator (DGV) → Tempo certificato & tracciabilità → Evidence Vault a lungo termine
+Se uno di questi elementi manca  
+→ **l’azione non deve essere eseguita**.
 
 ---
 
 ## Componenti principali
 
-La BioCyber Identity Card si basa su quattro componenti tecnici essenziali:
+### Human Root Reference (IPR)
+Radice tecnica di responsabilità umana.
+Univoca, non duplicabile, auditabile.
+Non è un’identità civile.
 
-### 1. Human Root Reference (HRR)
-(ex IPR-5)
+### Decision Gate Validator (DGV)
+Modulo di validazione ex-ante.
+Esiti standard:
+- ALLOW
+- REVIEW
+- DENY
+- FAIL_CLOSED
 
-- attribuzione univoca a un essere umano reale  
-- non duplicabile  
-- auditabile  
-- sospendibile ma non cancellabile  
+FAIL_CLOSED è protezione del sistema, non errore.
 
-**HRR non è un’identità legale.**  
-È una radice tecnica di responsabilità.
+### Evidence Bundle
+Pacchetto minimo di prova:
+- manifest leggibile da macchina
+- hash verificabili
+- riferimento temporale
+- ancoraggi opzionali
 
----
+### Anchoring Services
+Servizi opzionali di opponibilità pubblica:
+- IPFS (contenuto)
+- Bitcoin (tempo forte)
+- Ethereum (riferimenti logici)
 
-### 2. Decision Gate Validator (DGV)
-(ex GitJoker / AI JOKER)
-
-- validazione ex-ante delle decisioni  
-- modalità **fail-closed obbligatoria**  
-- esiti standard:
-  - ALLOW
-  - REVIEW
-  - DENY
-  - FAIL_CLOSED  
-
-FAIL non è un errore:  
-FAIL è **protezione del sistema**.
-
----
-
-### 3. Certified Time & Trace
-
-- tempo certificato metrologicamente  
-- tracciabilità verificabile degli eventi  
-- sincronizzazione con riferimenti temporali opponibili  
-
-Ciò che non è misurabile e tracciabile **non è opponibile**.
+L’ancoraggio è un **servizio**, non un obbligo.
 
 ---
 
-### 4. Long-Term Evidence Vault
+## Catalogo Carte Biocyber
 
-- conservazione delle prove ≥ 20 anni  
-- verificabilità offline  
-- ri-marcatura temporale periodica  
-- conformità ETSI / eIDAS (profilo LTA)
+Il framework supporta diversi livelli di carta:
 
-Il vault conserva **prove**, non interpretazioni.
+- **Base** — identità tecnica, uso interno
+- **Opponibile** — prova pubblica, audit-ready
+- **Forte / Istituzionale** — multi-ancora, conservazione LTA
 
----
-
-## Architettura minima (fail-closed)
-Evento → Human Root Reference → Decision Gate Validator → Certified Time & Trace → Long-Term Evidence Vault
-Se uno solo di questi elementi manca  
-→ **processo invalido**.
+Vedi `catalog.html` per i dettagli.
 
 ---
 
-## Conformità normativa
+## Verifica pubblica
 
-Il framework è progettato per essere **nativamente compatibile** con:
+La verifica non richiede fiducia.
 
-- **AI Act (UE)** — attribuzione, human-in-the-loop, auditabilità  
-- **eIDAS 2.0** — integrità, non ripudio, firme e conservazione  
-- **ETSI EN 319 / PAdES-LTA** — prove digitali a lungo termine  
-- **ISO 17025** — metrologia del tempo e della misura  
+È basata su:
+- ricalcolo locale degli hash
+- confronto con il manifest
+- verifica temporale
+- conferma esiti fail-closed
+
+Vedi `verify.html` e la cartella `/evidence`.
+
+---
+
+## Conformità e allineamento
+
+Il framework è progettato per essere compatibile con:
+
+- AI Act (UE)
+- eIDAS 2.0
+- ETSI EN 319 (LTA)
+- principi ISO di auditabilità e metrologia
 
 Non introduce nuove autorità civili o monetarie.
 
@@ -131,22 +137,18 @@ Non introduce nuove autorità civili o monetarie.
 
 ## Stato del progetto
 
-🟢 **EU Pilot / Technical Specification — ACTIVE**
+🟢 **EU Pilot — ACTIVE**
 
-- framework operativo minimo definito  
-- implementazione reference in corso  
-- pronto per piloti istituzionali e audit tecnici  
+- architettura minima definita
+- sito pubblico operativo
+- evidenze verificabili
+- evoluzione controllata
 
 ---
 
-## Nota finale
+## Principio guida
 
-Questo repository **non promette un futuro migliore**.  
-Serve a **evitare danni evitabili nel presente**.
+> Non tutto deve essere ancorato.  
+> Ma ciò che conta deve poter essere provato.  
 
-Qualsiasi sistema che rifiuti:
-- attribuzione umana,
-- verifica ex-ante,
-- memoria opponibile,
-
-**non è idoneo a prendere decisioni critiche.**
+HERMETICUM B.C.E. esiste per questo.
