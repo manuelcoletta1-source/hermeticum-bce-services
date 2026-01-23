@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verify — BioCyber Identity Card (EU Pilot) | Hermeticum B.C.E.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Public verification workflow for BioCyber Identity Card pilots: recompute hashes, verify timestamp, confirm fail-closed outcomes." />
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#9aa0a6;
+      --accent:#7aa2ff;
+      --good:#8ce99a;
+      --warn:#ffd43b;
+      --bad:#ff6b6b;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    header, main, footer{
+      max-width:980px;
+      margin:0 auto;
+      padding:28px 20px;
+    }
+    header{ border-bottom:1px solid var(--line); }
+    footer{ border-top:1px solid var(--line); color:var(--muted); font-size:0.9rem; margin-top:60px; }
+
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    h1{ margin:0 0 10px 0; font-size:1.9rem; }
+    h2{ margin-top:36px; font-size:1.25rem; }
+    p{ max-width:860px; }
+    .muted{ color:var(--muted); }
+
+    .nav{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:12px;
+      font-size:0.95rem;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:18px;
+      margin-top:16px;
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background:#0b0c10;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:14px;
+      overflow-x:auto;
+      white-space:pre;
+    }
+
+    .note{
+      border-left:3px solid var(--accent);
+      padding:10px 12px;
+      background: rgba(122,162,255,0.08);
+      border-radius:10px;
+      margin-top:12px;
+    }
+    .warn{ border-left-color:var(--warn); background: rgba(255,212,59,0.10); }
+    .bad{ border-left-color:var(--bad); background: rgba(255,107,107,0.10); }
+
+    ol{ padding-left:20px; }
+    li{ margin:8px 0; }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:10px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--muted);
+      font-size:0.85rem;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background:var(--good);
+      box-shadow:0 0 0 3px rgba(140,233,154,0.12);
+      display:inline-block;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Verify</h1>
+  <p class="muted">
+    Public, reproducible verification workflow for a <strong>BioCyber Identity Card</strong> pilot instance.
+    Verification is not “trust the website”. Verification is “recompute and match”.
+  </p>
+
+  <nav class="nav">
+    <a href="./index.html">Home</a>
+    <a href="./services.html">Services</a>
+    <a href="./verify.html"><strong>Verify</strong></a>
+    <a href="./README.md">README</a>
+  </nav>
+
+  <div class="status"><span class="dot"></span>Evidence-first — Minimal audit workflow</div>
+</header>
+
+<main>
+
+  <section>
+    <h2>What is being verified</h2>
+    <div class="card">
+      <p>
+        Verification targets an <strong>Evidence Bundle</strong>:
+        a minimal package that proves <strong>who requested what</strong>, <strong>when</strong>,
+        and <strong>under which constraints</strong>, in a way that remains checkable over time.
+      </p>
+      <div class="note warn">
+        This page can be used with <strong>pseudonymous</strong> identifiers.
+        No personal data is required for public verification.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Evidence Bundle (minimal)</h2>
+    <div class="card">
+      <p class="muted">
+        The pilot bundle is described by a machine-readable manifest and integrity proofs.
+      </p>
+      <div class="mono">Evidence Bundle
+- manifest.json (hashes + references)
+- attachments (optional, may remain private)
+- timestamp reference (if present)
+- anchors (optional: LTA/IPFS/ledger)</div>
+
+      <div class="note">
+        Minimal publishing rule: you can publish only <strong>manifest + hashes</strong> publicly,
+        while keeping attachments private, as long as hashes are verifiable.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Verification steps</h2>
+    <div class="card">
+      <ol>
+        <li><strong>Compute hashes</strong> of the published files and compare with the manifest.</li>
+        <li><strong>Verify timestamp</strong> (if present): it must bind to the same hash.</li>
+        <li><strong>Confirm DGV outcome</strong>: if <strong>DENY</strong> or <strong>FAIL_CLOSED</strong>, the action must not have executed.</li>
+      </ol>
+
+      <div class="note bad">
+        If hashes do not match, or timestamp verification fails, the bundle is <strong>not enforceable</strong>.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Local hash commands</h2>
+    <div class="card">
+      <div class="mono">Linux / macOS:
+shasum -a 512 manifest.json
+shasum -a 512 file.ext
+
+Windows (PowerShell):
+Get-FileHash .\manifest.json -Algorithm SHA512
+Get-FileHash .\file.ext -Algorithm SHA512</div>
+
+      <div class="note warn">
+        If the environment cannot compute hashes reliably, verification must be considered incomplete.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pilot instance (placeholder)</h2>
+    <div class="card">
+      <p class="muted">
+        Replace the placeholders below when you publish a real pilot bundle.
+      </p>
+      <div class="mono">Pilot instance:
+- eventId: EVT-&lt;UUID&gt;
+- manifest: ./evidence/EVT-&lt;UUID&gt;/manifest.json
+- manifest hash (SHA-512): &lt;PASTE_HASH&gt;
+- timestamp reference: &lt;PASTE_REFERENCE&gt;
+- anchors (optional): IPFS &lt;CID&gt; | BTC &lt;TXID&gt; | EVM &lt;TX&gt;</div>
+
+      <div class="note">
+        Next step: create <strong>/evidence/</strong> and publish one sample manifest.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    Hermeticum B.C.E. — Services<br/>
+    Verify page: minimal public verification workflow for BioCyber Identity Card pilots.
+  </p>
+</footer>
+
+</body>
+</html>
