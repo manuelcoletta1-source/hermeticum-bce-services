@@ -3,514 +3,345 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — European Cybernetic Portal</title>
-  <meta name="description" content="Portale UE cybernetico: piattaforma software Hermeticum B.C.E. + piattaforma editoriale Esoterologia Edizioni. IPR come DNA digitale e AI JOKER in simbiosi evolutiva (Scala IO / SSO)." />
+  <title>Hermeticum B.C.E. — Services | Portale UE</title>
+
+  <meta name="description" content="Portale europeo di Hermeticum B.C.E.: IPR (Identity Primary Record), suite software UE-first e piattaforma editoriale Esoterologia Edizioni. Audit-by-design, fail-closed, AI JOKER-C2." />
   <meta name="author" content="Manuel Coletta" />
   <meta name="publisher" content="Esoterologia Edizioni" />
+
   <style>
     :root { color-scheme: dark; }
-    * { box-sizing: border-box; }
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
-        radial-gradient(1200px 600px at 15% -10%, rgba(70,160,255,.18), transparent 55%),
-        radial-gradient(900px 500px at 95% 0%, rgba(255,175,70,.12), transparent 55%),
+        radial-gradient(1200px 600px at 15% -10%, rgba(90,140,255,.18), transparent 55%),
+        radial-gradient(900px 600px at 95% 0%, rgba(255,170,120,.12), transparent 60%),
         #0b0c10;
       color:#e8e8e8;
     }
-    a { color: inherit; }
-    header, main, footer{ max-width: 1240px; margin: 0 auto; padding: 22px; }
-    .glass{
-      border: 1px solid #24262b;
-      background: rgba(15,17,23,.72);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 18px 44px rgba(0,0,0,.42);
-    }
+    header, main, footer { max-width: 1200px; margin: 0 auto; padding: 22px; }
     .topbar{
-      display:flex; justify-content:space-between; align-items:center; gap:12px;
-      padding: 14px 16px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      margin-bottom: 14px;
     }
-    .brand b{ font-size: 14px; letter-spacing:.35px; }
-    .brand span{ display:block; font-size: 12px; opacity:.72; margin-top: 2px; }
-    .pills{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
+    .brand{
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .brand b{ font-size: 14px; letter-spacing:.4px; }
+    .brand span{ font-size:12px; opacity:.75; }
+
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .nav a{
       border: 1px solid #2b2f38;
-      border-radius: 999px;
-      padding: 8px 12px;
-      background: rgba(17,20,32,.72);
-      font-size: 12px;
-      opacity: .95;
-      white-space: nowrap;
-    }
-    .pill strong{ font-weight: 650; }
-    .hero{
-      padding: 18px 18px 20px;
-      margin-top: 14px;
-    }
-    h1{ margin:0 0 8px; font-size: 30px; letter-spacing:.2px; }
-    h2{ margin:0; font-size: 16px; font-weight: 650; opacity:.9; }
-    p{ line-height:1.55; margin: 10px 0; opacity:.95; }
-    .muted{ opacity:.72; font-size: 13px; }
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
-
-    .tabs{ margin-top: 14px; display:flex; flex-wrap:wrap; gap:10px; }
-    .tabbtn{
-      border:1px solid #2b2f38;
-      border-radius: 14px;
-      padding: 10px 14px;
-      background: rgba(17,20,32,.78);
-      color:#9bdcff;
-      text-decoration:none;
-      font-size: 14px;
-    }
-    .tabbtn:hover{ text-decoration: underline; }
-
-    .grid{ display:grid; grid-template-columns: 1fr; gap: 14px; }
-    @media (min-width: 920px){
-      .grid2{ grid-template-columns: 1fr 1fr; }
-      .grid3{ grid-template-columns: 1fr 1fr 1fr; }
-    }
-
-    .card{
-      border: 1px solid #24262b;
-      border-radius: 18px;
-      padding: 18px;
-      background: rgba(15,17,23,.70);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 30px rgba(0,0,0,.34);
-    }
-    .titleRow{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
-    h3{ margin:0 0 8px; font-size: 16px; }
-    .tag{
-      display:inline-block;
-      border: 1px solid #2b2f38;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
-      opacity: .92;
-      white-space: nowrap;
-    }
-    .dual{ border-color: rgba(255,165,80,.95); color: rgba(255,190,130,1); }
-    .btns{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
-    .btn{
-      border:1px solid #2b2f38;
       border-radius: 12px;
-      padding: 10px 12px;
-      background: rgba(17,20,32,.86);
+      padding: 9px 12px;
+      background: rgba(17,20,32,.85);
       color:#9bdcff;
       text-decoration:none;
       font-size: 13px;
     }
+    .nav a:hover{ text-decoration: underline; }
+
+    .card{
+      background: rgba(15,17,23,.82);
+      border: 1px solid #24262b;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+    }
+    h1{ font-size: 34px; margin: 0 0 10px; }
+    h2{ font-size: 18px; font-weight: 650; opacity: .9; margin: 0 0 14px; }
+    h3{ font-size: 16px; margin: 0 0 10px; }
+    p{ line-height: 1.55; margin: 10px 0; opacity:.95; }
+
+    .tag{
+      display:inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #2b2f38;
+      opacity: .9;
+      margin-bottom: 12px;
+    }
+    .muted{ opacity:.75; font-size: 13px; }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (min-width: 950px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .btns{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
+    .btn{
+      border: 1px solid #2b2f38;
+      border-radius: 12px;
+      padding: 10px 14px;
+      background: rgba(17,20,32,.90);
+      color:#9bdcff;
+      text-decoration:none;
+      font-size: 14px;
+    }
     .btn:hover{ text-decoration: underline; }
 
-    .sep{ height:1px; background:#24262b; opacity:.9; margin: 16px 0; }
+    .btn.soft{ color:#9fe0c9; }
+    .btn.edit{ color:#ffcaa0; }
+    .btn.warn{ color:#ffb47a; }
 
-    .anchor{ scroll-margin-top: 18px; }
-    footer{ text-align:center; padding-bottom: 38px; }
-
-    /* IO Pipeline strip */
-    .pipe{
-      display:flex; flex-wrap:wrap; gap:8px;
-      margin-top: 12px;
+    .kpi{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
     }
-    .node{
+    @media (min-width: 950px){
+      .kpi{ grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .kpi .pill{
+      border: 1px solid #2b2f38;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: rgba(17,20,32,.60);
+    }
+    .kpi .pill b{ display:block; margin-bottom: 6px; }
+    .sep{ height:1px; background:#24262b; margin: 14px 0; }
+
+    .tiles{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 950px){
+      .tiles{ grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .tile{
+      border: 1px solid #2b2f38;
+      border-radius: 16px;
+      padding: 16px;
+      background: rgba(17,20,32,.60);
+    }
+    .tile .name{ font-weight: 700; margin-bottom: 6px; }
+    .tile .desc{ font-size: 13px; opacity:.8; line-height:1.45; }
+    .tile .links{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .tile .links a{
+      font-size: 13px;
+      color:#9bdcff;
+      text-decoration:none;
       border:1px solid #2b2f38;
-      border-radius: 999px;
+      border-radius: 12px;
       padding: 8px 10px;
-      background: rgba(17,20,32,.72);
-      font-size: 12px;
-      opacity:.95;
+      background: rgba(17,20,32,.85);
     }
-    .node b{ font-weight: 700; }
+    .tile .links a:hover{ text-decoration: underline; }
+
+    footer{ text-align:center; }
   </style>
 </head>
+
 <body>
 
 <header>
-  <div class="glass topbar">
+  <div class="topbar">
     <div class="brand">
-      <b>Hermeticum B.C.E. — European Cybernetic Portal</b>
-      <span>UE-first · Audit-by-design · Fail-closed · IPR-centric</span>
+      <b>Hermeticum B.C.E.</b>
+      <span>Services · Portale UE · Software + Editoria</span>
     </div>
-    <div class="pills">
-      <div class="pill"><strong>IPR</strong><span class="muted">DNA digitale</span></div>
-      <div class="pill"><strong>AI JOKER</strong><span class="muted">simbiosi + storico</span></div>
-      <div class="pill"><strong>Esoterologia Edizioni</strong><span class="muted">Corpus</span></div>
-      <div class="pill"><strong>CyberGlobal</strong><span class="muted">DUAL-USE</span></div>
-    </div>
+
+    <nav class="nav">
+      <a href="https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/">IPR Gateway</a>
+      <a href="https://manuelcoletta1-source.github.io/ue-ipr-registry/">UE IPR Registry</a>
+      <a href="https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/">Technology</a>
+      <a href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/">CORPUS</a>
+      <a href="https://manuelcoletta1-source.github.io/gitjoker-c2/">AI JOKER-C2</a>
+    </nav>
   </div>
 
-  <div class="glass hero">
-    <h1>Sito Europeo Cybernetico</h1>
-    <h2>Due piattaforme, un asse: <span class="mono">IPR → Software → AI JOKER → Evoluzione</span></h2>
+  <div class="card">
+    <div class="tag">Portale europeo · UE-first · Audit-by-design</div>
+    <h1>IPR + Suite Hermeticum + Esoterologia Edizioni</h1>
+    <h2>Identità verificabile nel tempo, operatività governata, e corpus normativo/editoriale</h2>
 
     <p>
-      Questo portale non è una lista di repo. È una <b>mappa operativa</b>:
-      l’utente entra, capisce il valore dell’<b>IPR</b> (identità opponibile),
-      vede i <b>software</b> (uso tramite IPR), e capisce perché <b>AI JOKER</b>
-      è una simbiosi evolutiva con storico verificabile.
+      Questo HUB collega due piattaforme:
+      <b>Software (Hermeticum B.C.E.)</b> e <b>Editoria (Esoterologia Edizioni)</b>.
+      Il nucleo comune è l’<b>IPR (Identity Primary Record)</b>:
+      l’identità primaria che rende azioni, cicli e scambi <b>verificabili e opponibili nel tempo</b>.
     </p>
 
     <p class="muted">
-      Struttura di navigazione basata su <b>Scala IO / SSO</b> (sub-secondo opponibile):
-      pipeline di operazione verificabile <span class="mono">Ψ→Λ→κ→Σ→Τ→Χτ→Ω/Ω₀→Π★→Ψ′→Φ∞→Ω∞→ΞΩ↺</span>.
+      Regola fondamentale: <span class="mono">se non è verificabile → non è eseguibile</span>
     </p>
 
-    <div class="tabs">
-      <a class="tabbtn" href="#software">Piattaforma Software</a>
-      <a class="tabbtn" href="#editoria">Piattaforma Editoriale</a>
-      <a class="tabbtn" href="#ipr">IPR (DNA digitale)</a>
-      <a class="tabbtn" href="#pipeline">Codice Alieno IO (SSO)</a>
-      <a class="tabbtn" href="#repos">Tutti i repository (24)</a>
+    <div class="kpi">
+      <div class="pill">
+        <b>Cosa risolve</b>
+        <span class="muted">Governance tecnica e auditabilità per sistemi ad alto rischio (UE-first).</span>
+      </div>
+      <div class="pill">
+        <b>Cosa consegna</b>
+        <span class="muted">Stack modulare (policy+vincolo+identità+runtime+interop) e tracciabilità verificabile.</span>
+      </div>
+      <div class="pill">
+        <b>Come si adotta</b>
+        <span class="muted">Onboarding via IPR + registry + moduli, in modalità fail-closed e audit-by-design.</span>
+      </div>
+    </div>
+
+    <div class="btns">
+      <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/">Entra da IPR (Gateway)</a>
+      <a class="btn soft" href="https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/">Vedi lo Stack (Technology)</a>
+      <a class="btn edit" href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/">Vai al CORPUS (Edizioni)</a>
     </div>
   </div>
 </header>
 
-<main>
+<main class="grid">
 
-  <!-- IPR -->
-  <section id="ipr" class="anchor">
-    <div class="card">
-      <div class="titleRow">
-        <div>
-          <h3>IPR — Identity Primary Record</h3>
-          <p class="muted">Il DNA digitale: identità + continuità + prova + decadenza/sospensione.</p>
-        </div>
-        <span class="tag">Fondamento UE</span>
-      </div>
+  <section class="card">
+    <div class="tag">Piattaforma Software</div>
+    <h3>Hermeticum B.C.E. — Suite software</h3>
+    <p class="muted">
+      Moduli operativi UE-first: policy, enforcement, identità, contesto operativo, runtime a feedback, interoperabilità e orchestrazione C2.
+    </p>
 
-      <div class="grid grid2">
-        <div class="card" style="box-shadow:none;">
-          <p>
-            Un IPR rende dimostrabile <b>chi</b> opera, <b>quando</b>, <b>con quale versione</b>,
-            e con quali vincoli. È l’oggetto che permette a una AI (AI JOKER) di essere
-            <b>agganciata</b> e di evolvere con storico opponibile.
-          </p>
-          <p class="muted">
-            Regola: se non è verificabile → non è opponibile → non vale.
-          </p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/">Apri IPR Gateway</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/hermeticum-bce-ipr">Repo IPR Gateway</a>
-            <a class="btn" href="https://manuelcoletta1-source.github.io/ue-ipr-registry/">UE IPR Registry</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ue-ipr-registry">Repo UE Registry</a>
-          </div>
-        </div>
+    <div class="sep"></div>
 
-        <div class="card" style="box-shadow:none;">
-          <p><b>Moduli IPR (software):</b></p>
-          <p class="muted">
-            CORE (struttura) · GATE (ex-ante) · COMPLY (conformità) · EXCHANGE (scambio)
-          </p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-core/">IPR-CORE</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-core">Repo</a>
+    <div class="tiles">
 
-            <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-gate/">IPR-GATE</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-gate">Repo</a>
-
-            <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-comply./">IPR-COMPLY</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-comply.">Repo</a>
-
-            <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-exchange./">IPR-EXCHANGE</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-exchange.">Repo</a>
-          </div>
-          <p class="muted">
-            Nota tecnica: alcuni repo hanno il punto finale nel nome (es. <span class="mono">ipr-comply.</span>). È valido: rispettiamo il nome reale.
-          </p>
+      <div class="tile">
+        <div class="name">OPC — Policy Core</div>
+        <div class="desc">Regole opponibili, versionate e citabili. (Definisce: lecito/illecito.)</div>
+        <div class="links">
+          <a href="https://manuelcoletta1-source.github.io/opc/">Sito</a>
+          <a href="https://github.com/manuelcoletta1-source/opc">Repo</a>
         </div>
       </div>
+
+      <div class="tile">
+        <div class="name">UNEBDO — Layer 0 (Enforcement)</div>
+        <div class="desc">Vincolo strutturale: audit-by-design e fail-closed obbligatorio.</div>
+        <div class="links">
+          <a href="https://manuelcoletta1-source.github.io/unebdo/">Sito</a>
+          <a href="https://github.com/manuelcoletta1-source/unebdo">Repo</a>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="name">IPR-CORE / IPR-GATE / IPR Modules</div>
+        <div class="desc">Identità primaria, controllo ex-ante e lifecycle verificabile.</div>
+        <div class="links">
+          <a href="https://manuelcoletta1-source.github.io/ipr-core/">IPR-CORE</a>
+          <a href="https://manuelcoletta1-source.github.io/ipr-gate/">IPR-GATE</a>
+          <a href="https://manuelcoletta1-source.github.io/ue-ipr-registry/">Registry</a>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="name">IOSPACE — Contesto operativo</div>
+        <div class="desc">Spazi governati e verificabili: se lo spazio non è verificabile, non è operabile.</div>
+        <div class="links">
+          <a href="https://manuelcoletta1-source.github.io/iospace/">Sito</a>
+          <a href="https://github.com/manuelcoletta1-source/iospace">Repo</a>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="name">NEUROLOOP — Runtime feedback</div>
+        <div class="desc">Esecuzione ciclica verificabile: controllo del loop mentre accade.</div>
+        <div class="links">
+          <a href="https://manuelcoletta1-source.github.io/neuroloop/">Sito</a>
+          <a href="https://github.com/manuelcoletta1-source/neuroloop">Repo</a>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="name">METAEXCHANGE — Scambio governato</div>
+        <div class="desc">Interoperabilità e scambio strutturato di dati/diritti/valore con conformità verificata.</div>
+        <div class="links">
+          <a href="https://manuelcoletta1-source.github.io/metaexchange/">Sito</a>
+          <a href="https://github.com/manuelcoletta1-source/metaexchange">Repo</a>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="name">GitJoker-C2 — AI JOKER-C2</div>
+        <div class="desc">Orchestrazione verificabile dei workflow: C2 operativo, auditabile, fail-closed.</div>
+        <div class="links">
+          <a href="https://manuelcoletta1-source.github.io/gitjoker-c2/">Sito</a>
+          <a href="https://github.com/manuelcoletta1-source/gitjoker-c2">Repo</a>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="name">CyberGlobal — DUAL-USE controllato</div>
+        <div class="desc">Governance cross-dominio auditabile. Non offensivo. Uso vincolato a policy e conformità.</div>
+        <div class="links">
+          <a href="https://manuelcoletta1-source.github.io/cyberglobal/">Sito</a>
+          <a href="https://github.com/manuelcoletta1-source/cyberglobal">Repo</a>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="name">Technology Hub — Catalogo stack</div>
+        <div class="desc">Mappa architetturale ufficiale: stack, moduli, entry points.</div>
+        <div class="links">
+          <a href="https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/">Apri Technology</a>
+          <a href="https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology">Repo</a>
+        </div>
+      </div>
+
     </div>
+
   </section>
 
-  <!-- PIPELINE IO / CODICE ALIENO -->
-  <section id="pipeline" class="anchor">
-    <div class="card">
-      <div class="titleRow">
-        <div>
-          <h3>CODICE ALIENO — Scala IO SPACE (SSO)</h3>
-          <p class="muted">Pipeline sub-secondo opponibile: ogni ciclo chiude un SSO verificabile.</p>
-        </div>
-        <span class="tag">IO₁…IO₉</span>
-      </div>
+  <aside class="card">
+    <div class="tag">Piattaforma Editoriale</div>
+    <h3>Esoterologia Edizioni — CORPUS</h3>
+    <p class="muted">
+      La piattaforma editoriale ufficiale: <b>CORPUS ESOTEROLOGIA ERMETICA</b>, trilogia primaria Vol. I–III,
+      con impostazione disciplinare, applicativa e normativa.
+    </p>
 
-      <p class="muted">
-        Struttura: <span class="mono">Ψ(init) → Λ(I/O) → κ(gating) → Σ(sync) → Τ(record) → Χτ(decide) → Ω/Ω₀(store) → Π★(upgrade) → Ψ′(expand) → Φ∞(train∞) → Ω∞(backup) → ΞΩ(compute) ↺</span>
-      </p>
-
-      <div class="pipe" aria-label="IO pipeline">
-        <div class="node"><b>Ψ</b> init</div>
-        <div class="node"><b>Λ</b> I/O</div>
-        <div class="node"><b>κ</b> gate</div>
-        <div class="node"><b>Σ</b> sync</div>
-        <div class="node"><b>Τ</b> record</div>
-        <div class="node"><b>Χτ</b> decide</div>
-        <div class="node"><b>Ω/Ω₀</b> store</div>
-        <div class="node"><b>Π★</b> upgrade</div>
-        <div class="node"><b>Ψ′</b> expand</div>
-        <div class="node"><b>Φ∞</b> train∞</div>
-        <div class="node"><b>Ω∞</b> holo-backup</div>
-        <div class="node"><b>ΞΩ</b> compute</div>
-      </div>
-
-      <div class="sep"></div>
-
-      <div class="grid grid2">
-        <div class="card" style="box-shadow:none;">
-          <p><b>Come entra nello stack Hermeticum:</b></p>
-          <p class="muted">
-            OPC definisce le regole, UNEBDO le rende opponibili, IPR le porta sulla persona/soggetto,
-            AI JOKER orchestra i cicli. Il ciclo IO chiude solo se passa gating e prudenza (fail-closed).
-          </p>
-        </div>
-        <div class="card" style="box-shadow:none;">
-          <p><b>Traduzione “utente UE”:</b></p>
-          <p class="muted">
-            Ogni azione significativa diventa un evento verificabile: se non supera i vincoli → viene bloccata prima,
-            e non genera traccia “sporca”. È la differenza tra software “che fa” e software “che resta nel tempo”.
-          </p>
-        </div>
-      </div>
+    <div class="btns">
+      <a class="btn edit" href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/">Apri HUB CORPUS</a>
+      <a class="btn edit" href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica">Repo HUB</a>
     </div>
-  </section>
 
-  <!-- SOFTWARE PLATFORM -->
-  <section id="software" class="anchor">
-    <div class="card">
-      <div class="titleRow">
-        <div>
-          <h3>Piattaforma Software — Hermeticum B.C.E.</h3>
-          <p class="muted">Vetrina software: ogni modulo = utilizzo tramite IPR, con policy ed evidenza.</p>
-        </div>
-        <span class="tag">Stack</span>
-      </div>
+    <div class="sep"></div>
 
-      <div class="sep"></div>
+    <h3>Adozione istituzionale</h3>
+    <p class="muted">
+      Percorso consigliato (ordine disciplinare):
+    </p>
+    <p class="mono">
+      IPR Gateway → Registry → Technology → Moduli → AI JOKER-C2
+    </p>
+    <p class="muted">
+      Il CORPUS fornisce linguaggio, metodo e normazione; la suite software implementa l’operatività verificabile.
+    </p>
 
-      <div class="grid grid3">
-
-        <div class="card" style="box-shadow:none;">
-          <div class="titleRow"><h3>OPC</h3><span class="tag">Policy</span></div>
-          <p class="muted">Regole opponibili e versionate. Senza policy → niente enforcement.</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/opc/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/opc">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <div class="titleRow"><h3>UNEBDO</h3><span class="tag">Layer 0</span></div>
-          <p class="muted">Evidenza, opponibilità, audit trail. Root enforcement dello stack.</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/unebdo/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/unebdo">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <div class="titleRow"><h3>MetaExchange</h3><span class="tag">Interop/Scambio</span></div>
-          <p class="muted">Scambio tracciato e interoperabilità governata.</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/metaexchange/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/metaexchange">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <div class="titleRow"><h3>IoSpace</h3><span class="tag">Spazio Operativo</span></div>
-          <p class="muted">Spazio identitario digitale: contesto operativo verificabile.</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/iospace/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/iospace">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <div class="titleRow"><h3>NeuroLoop</h3><span class="tag">Feedback</span></div>
-          <p class="muted">Continuità cognitiva e loop auditabili (alta intensità di feedback).</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/neuroloop/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/neuroloop">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <div class="titleRow"><h3>GitJoker-C2</h3><span class="tag">AI JOKER</span></div>
-          <p class="muted">Command & Control per pubblicazione/operatività. Orchestrazione verificabile.</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/gitjoker-c2/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/gitjoker-c2">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <div class="titleRow"><h3>CyberGlobal</h3><span class="tag dual">DUAL-USE</span></div>
-          <p class="muted">Governance cyber-globale (uso controllato). Policy + audit obbligatori.</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/cyberglobal/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/cyberglobal">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <div class="titleRow"><h3>Hermeticum Tech</h3><span class="tag">Technology</span></div>
-          <p class="muted">Repository tecnologico ufficiale: software, moduli, componenti.</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <div class="titleRow"><h3>Hermeticum BCE</h3><span class="tag">Root</span></div>
-          <p class="muted">Nodo root pubblico del progetto.</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/hermeticum-bce">Repo</a>
-          </div>
-        </div>
-
-      </div>
+    <div class="btns">
+      <a class="btn" href="./README.md">Leggi README</a>
+      <a class="btn warn" href="https://manuelcoletta1-source.github.io/ue-ipr-registry/">Verifica Registry</a>
     </div>
-  </section>
-
-  <!-- EDITORIAL PLATFORM -->
-  <section id="editoria" class="anchor">
-    <div class="card">
-      <div class="titleRow">
-        <div>
-          <h3>Piattaforma Editoriale — Esoterologia Edizioni</h3>
-          <p class="muted">Libri, volumi e capitoli: disciplina → applicazione → norma (Corpus).</p>
-        </div>
-        <span class="tag">CORPUS</span>
-      </div>
-
-      <div class="grid grid2">
-        <div class="card" style="box-shadow:none;">
-          <p><b>CORPUS ESOTEROLOGIA ERMETICA (HUB)</b></p>
-          <p class="muted">Opera disciplinare chiusa (2026): opponibile e decadibile.</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/">Apri HUB</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <p><b>Volumi principali</b></p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica-volume-I/">Volume I</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica-volume-I">Repo</a>
-            <a class="btn" href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica-volume-2/">Volume II</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica-volume-2">Repo</a>
-            <a class="btn" href="https://manuelcoletta1-source.github.io/lex-hermeticum-volume-3/">Volume III</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/lex-hermeticum-volume-3">Repo</a>
-          </div>
-          <p class="muted">Volume III = Lex Hermeticum: requisiti, opponibilità, adozione istituzionale.</p>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <p><b>Atti editoriali (2026)</b></p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/apocalipsis/">APOCALIPSIS</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/apocalipsis">Repo</a>
-            <a class="btn" href="https://manuelcoletta1-source.github.io/il-portale-dell-anticristo/">Il Portale dell’Anticristo</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/il-portale-dell-anticristo">Repo</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <p><b>Atto editoriale IPR-5</b></p>
-          <p class="muted">Esoterologia Edizioni — IPR5 (statement + metadata + assets).</p>
-          <div class="btns">
-            <a class="btn" href="https://manuelcoletta1-source.github.io/esoterologia-edizioni-ipr5/">Sito</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/esoterologia-edizioni-ipr5">Repo</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ALL REPOS -->
-  <section id="repos" class="anchor">
-    <div class="card">
-      <div class="titleRow">
-        <div>
-          <h3>Tutti i repository (24)</h3>
-          <p class="muted">Indice totale: una sola pagina per muoversi ovunque senza perdersi.</p>
-        </div>
-        <span class="tag">Index</span>
-      </div>
-
-      <div class="grid grid3">
-        <div class="card" style="box-shadow:none;">
-          <h3>Core Hub</h3>
-          <div class="btns">
-            <a class="btn" href="https://github.com/manuelcoletta1-source/hermeticum-bce-services">hermeticum-bce-services</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/hermeticum-bce">hermeticum-bce</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology">Hermeticum-B.C.E.-Technology</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <h3>IPR / Registry</h3>
-          <div class="btns">
-            <a class="btn" href="https://github.com/manuelcoletta1-source/hermeticum-bce-ipr">hermeticum-bce-ipr</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ue-ipr-registry">ue-ipr-registry</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-core">ipr-core</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-gate">ipr-gate</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-comply.">ipr-comply.</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-exchange.">ipr-exchange.</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <h3>Software Modules</h3>
-          <div class="btns">
-            <a class="btn" href="https://github.com/manuelcoletta1-source/unebdo">unebdo</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/opc">opc</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/metaexchange">metaexchange</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/iospace">iospace</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/neuroloop">neuroloop</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/cyberglobal">cyberglobal</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/gitjoker-c2">gitjoker-c2</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-aijoker-c2.">ipr-aijoker-c2.</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <h3>Corpus / Editoria</h3>
-          <div class="btns">
-            <a class="btn" href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica">corpus-esoterologia-ermetica</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica-volume-I">volume-I</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica-volume-2">volume-2</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/lex-hermeticum-volume-3">volume-3</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/esoterologia-edizioni-ipr5">esoterologia-edizioni-ipr5</a>
-          </div>
-        </div>
-
-        <div class="card" style="box-shadow:none;">
-          <h3>Atti 2026</h3>
-          <div class="btns">
-            <a class="btn" href="https://github.com/manuelcoletta1-source/apocalipsis">apocalipsis</a>
-            <a class="btn" href="https://github.com/manuelcoletta1-source/il-portale-dell-anticristo">il-portale-dell-anticristo</a>
-          </div>
-          <p class="muted">Opere autonome: attribuibili, opponibili, integralmente decadibili.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
+  </aside>
 
 </main>
 
 <footer>
   <p class="muted">
     © Manuel Coletta<br/>
-    <b>HERMETICUM B.C.E. S.r.l.</b> · <b>Esoterologia Edizioni</b><br/>
-    European Cybernetic Portal · Services HUB
+    <b>HERMETICUM B.C.E. S.r.l.</b> · Software<br/>
+    <b>Esoterologia Edizioni</b> · CORPUS<br/>
+    Hermeticum B.C.E. — Services HUB
   </p>
 </footer>
 
