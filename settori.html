@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermeticum B.C.E. — Settori (Sanità · Istruzione · Infrastrutture)</title>
+  <meta name="description" content="Settori applicativi di Hermeticum B.C.E.: Sanità, Istruzione, Infrastrutture digitali di fiducia. Benefici concreti per l’individuo e per le istituzioni, con orientamento UE-first." />
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a9abb3;
+      --accent:#7bdcff;
+      --ok:#5cffb0;
+      --warn:#ffd27b;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    header,main,footer{max-width:1040px;margin:0 auto;padding:18px}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      border:1px solid var(--line);background:rgba(15,17,23,.75);
+      border-radius:16px;padding:14px 16px;backdrop-filter: blur(6px);
+    }
+    .brand{display:flex;flex-direction:column;gap:2px}
+    .brand b{letter-spacing:.4px}
+    .brand small{color:var(--muted)}
+    nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+    nav a{
+      padding:8px 10px;border:1px solid transparent;border-radius:12px;color:var(--text);
+      background:transparent
+    }
+    nav a:hover{border-color:var(--line);background:rgba(255,255,255,.03);text-decoration:none}
+    .hero{margin-top:14px;border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:18px}
+    .hero h1{margin:0 0 8px 0;font-size:22px}
+    .hero p{margin:0;color:var(--muted)}
+    .pillrow{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border:1px solid var(--line);border-radius:999px;
+      background:rgba(255,255,255,.02);color:var(--text);font-size:13px
+    }
+    .grid{margin-top:14px;display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .card{
+      grid-column:span 12;
+      border:1px solid var(--line);background:var(--panel);
+      border-radius:18px;padding:16px
+    }
+    @media (min-width: 900px){
+      .card.half{grid-column:span 6}
+      .card.third{grid-column:span 4}
+    }
+    .card h2{margin:0 0 10px 0;font-size:18px}
+    .card h3{margin:14px 0 8px 0;font-size:15px}
+    .muted{color:var(--muted)}
+    ul{margin:8px 0 0 18px}
+    li{margin:6px 0}
+    .tag{display:inline-flex;align-items:center;gap:8px;margin-top:10px}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 9px;border-radius:999px;border:1px solid var(--line);
+      font-size:12px;color:var(--text);background:rgba(255,255,255,.02)
+    }
+    .badge.ok{border-color:rgba(92,255,176,.25)}
+    .badge.warn{border-color:rgba(255,210,123,.25)}
+    .note{
+      margin-top:12px;padding:12px 12px;border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;background:rgba(255,255,255,.02);color:var(--muted)
+    }
+    .ctaRow{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:10px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.04);color:var(--text)
+    }
+    .btn:hover{background:rgba(255,255,255,.07);text-decoration:none}
+    .btn.primary{border-color:rgba(123,220,255,.25);background:rgba(123,220,255,.08)}
+    .footer{
+      border-top:1px solid var(--line);
+      margin-top:16px;padding-top:14px;color:var(--muted);font-size:13px
+    }
+    .kpi{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .kpi .badge{background:rgba(255,255,255,.02)}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <b>Hermeticum B.C.E.</b>
+        <small>Settori applicativi — sicurezza digitale dell’individuo (UE-first)</small>
+      </div>
+      <nav aria-label="Navigazione">
+        <a href="index.html">Home</a>
+        <a href="percorso.html">Percorso</a>
+        <a href="services.html">Servizi</a>
+        <a href="policy-ue.html">Policy UE</a>
+        <a href="onboarding-base.html">Onboarding</a>
+        <a href="pdar.html">Documenti (PDAR)</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <h1>Sanità · Istruzione · Infrastrutture</h1>
+      <p>
+        Qui spieghiamo <b>come</b> Hermeticum B.C.E. si applica ai settori reali.
+        Non vendiamo “buzzword”: vendiamo <b>continuità, integrità e verificabilità</b> nel tempo.
+      </p>
+
+      <div class="pillrow" role="list" aria-label="Principi">
+        <span class="pill" role="listitem">🔐 Minimizzazione dati</span>
+        <span class="pill" role="listitem">🧾 Prove di integrità (hash)</span>
+        <span class="pill" role="listitem">⏱️ Continuità temporale</span>
+        <span class="pill" role="listitem">🧰 Audit-by-design</span>
+        <span class="pill" role="listitem">🇪🇺 UE-first (GDPR + accountability)</span>
+      </div>
+
+      <div class="note">
+        <b>Nota UE-first:</b> indica un orientamento progettuale (GDPR, minimizzazione, auditabilità, security-by-design).
+        <b>Non</b> è una certificazione ufficiale UE e <b>non</b> sostituisce identità o documenti statali.
+      </div>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="onboarding-base.html">Avvia IPR Base</a>
+        <a class="btn" href="policy-ue.html">Leggi la Policy UE</a>
+        <a class="btn" href="services.html">Vai al Catalogo Servizi</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="grid" aria-label="Settori">
+
+      <!-- SANITÀ -->
+      <article class="card half" id="sanita">
+        <h2>Sanità — Prove di integrità e continuità documentale</h2>
+        <p class="muted">
+          Non creiamo un “fascicolo sanitario” parallelo. Creiamo <b>prove crittografiche</b> che un documento
+          (referto, prescrizione, attestazione) <b>esisteva</b> e <b>non è stato alterato</b>.
+        </p>
+
+        <div class="kpi">
+          <span class="badge ok">Integrità verificabile</span>
+          <span class="badge ok">Dati minimizzati</span>
+          <span class="badge warn">No dati sanitari pubblici</span>
+        </div>
+
+        <h3>Cosa risolve</h3>
+        <ul>
+          <li>Frammentazione tra portali, regioni e provider.</li>
+          <li>Difficoltà nel dimostrare <b>continuità</b> e <b>integrità</b> nel tempo.</li>
+          <li>Rischio di contestazioni su documenti “modificati” o “ricostruiti”.</li>
+        </ul>
+
+        <h3>Cosa offriamo</h3>
+        <ul>
+          <li><b>Hash</b> del documento (prova di integrità) + <b>timestamp</b> (prova temporale).</li>
+          <li>Registrazione delle prove in modo <b>auditabile</b> senza esporre contenuti sensibili.</li>
+          <li>Portabilità: la prova resta valida anche se cambia il portale o il fornitore.</li>
+        </ul>
+
+        <h3>Beneficio per il cliente</h3>
+        <ul>
+          <li>“Posso dimostrare che questo documento esisteva già a quella data.”</li>
+          <li>“Posso dimostrare che non è stato alterato.”</li>
+          <li>“Non devo fidarmi di una singola piattaforma per provare la verità.”</li>
+        </ul>
+
+        <div class="note">
+          <b>Privacy by design:</b> pubblichiamo/ancoriamo <b>prove</b> (hash), non i contenuti.
+          I contenuti restano sotto controllo del titolare.
+        </div>
+      </article>
+
+      <!-- ISTRUZIONE -->
+      <article class="card half" id="istruzione">
+        <h2>Istruzione — Qualifiche verificabili e portabili</h2>
+        <p class="muted">
+          Titoli, certificazioni, competenze: l’obiettivo è renderli <b>verificabili</b>,
+          <b>portabili</b> e <b>opponibili</b> senza dipendere da una singola piattaforma.
+        </p>
+
+        <div class="kpi">
+          <span class="badge ok">Anti-falsificazione</span>
+          <span class="badge ok">Verifica rapida</span>
+          <span class="badge ok">Portabilità UE</span>
+        </div>
+
+        <h3>Cosa risolve</h3>
+        <ul>
+          <li>Certificazioni disperse tra enti, portali e PDF non verificabili.</li>
+          <li>Falsi attestati e controlli lenti.</li>
+          <li>Perdita di continuità tra scuola, università e formazione continua.</li>
+        </ul>
+
+        <h3>Cosa offriamo</h3>
+        <ul>
+          <li><b>Portfolio verificabile</b> (prove di integrità per attestati e certificati).</li>
+          <li><b>Verifica istantanea</b>: confronto tra documento e prova crittografica.</li>
+          <li>Struttura evolutiva: dalla scuola alle certificazioni professionali.</li>
+        </ul>
+
+        <h3>Beneficio per il cliente</h3>
+        <ul>
+          <li>Curriculum <b>opponibile</b> (meno attrito con HR/enti).</li>
+          <li>Riduzione delle frodi e maggiore fiducia nelle verifiche.</li>
+          <li>Storico coerente nel tempo, anche cambiando Paese/ente in UE.</li>
+        </ul>
+      </article>
+
+      <!-- INFRASTRUTTURE -->
+      <article class="card" id="infrastrutture">
+        <h2>Infrastrutture — Infrastrutture digitali di fiducia (auditabili)</h2>
+        <p class="muted">
+          Qui “infrastrutture” significa <b>infrastrutture digitali</b> (documenti, ruoli, processi, responsabilità).
+          Costruiamo catene di prova che rendono i sistemi <b>più resistenti</b> e <b>più auditabili</b>.
+        </p>
+
+        <div class="kpi">
+          <span class="badge ok">Audit-by-design</span>
+          <span class="badge ok">Responsabilità tracciabile</span>
+          <span class="badge ok">Riduzione rischio sistemico</span>
+        </div>
+
+        <h3>Cosa risolve</h3>
+        <ul>
+          <li>Supply chain digitale fragile: chi ha fatto cosa, quando, con quale autorizzazione.</li>
+          <li>Audit costosi perché la tracciabilità è “aggiunta dopo”, non nativa.</li>
+          <li>Conflitti tra ruoli, policy interne e prove documentali.</li>
+        </ul>
+
+        <h3>Cosa offriamo</h3>
+        <ul>
+          <li><b>Catena di responsabilità</b>: atti/ruoli/documenti con prove temporali verificabili.</li>
+          <li><b>Policy opponibili</b>: regole tecniche leggibili e verificabili (policy-as-code).</li>
+          <li><b>Audit continuo</b>: evidenze costruite mentre il sistema opera, non a posteriori.</li>
+        </ul>
+
+        <h3>Beneficio</h3>
+        <ul>
+          <li>Riduzione rischio (frode, contestazioni, incidenti).</li>
+          <li>Maggiore conformità e governabilità.</li>
+          <li>Più fiducia tra attori diversi (enti, fornitori, cittadini).</li>
+        </ul>
+
+        <div class="note">
+          <b>Principio chiave:</b> la tracciabilità è una garanzia (accountability), non una sorveglianza.
+          Progettiamo per minimizzare dati e massimizzare verificabilità.
+        </div>
+      </article>
+
+      <!-- CHIUSURA: dove andare -->
+      <article class="card third">
+        <h2>Da qui: cosa fare</h2>
+        <p class="muted">Scegli un percorso chiaro. Niente labirinti.</p>
+        <ul>
+          <li><a href="percorso.html">Percorso cliente (vita reale)</a></li>
+          <li><a href="policy-ue.html">Policy UE (UE-first spiegato bene)</a></li>
+          <li><a href="onboarding-base.html">Avvia rilascio IPR Base</a></li>
+        </ul>
+      </article>
+
+      <article class="card third">
+        <h2>Per istituzioni / partner</h2>
+        <p class="muted">Se stai valutando adozione o sperimentazione territoriale:</p>
+        <ul>
+          <li><a href="piemonte.html">Nodo regionale Piemonte</a></li>
+          <li><a href="pdar.html">Documenti (PDAR)</a></li>
+        </ul>
+      </article>
+
+      <article class="card third">
+        <h2>Trasparenza</h2>
+        <p class="muted">La fiducia si costruisce con regole e controlli chiari.</p>
+        <ul>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Termini</a></li>
+        </ul>
+      </article>
+
+    </section>
+
+    <footer class="footer">
+      <div>
+        <b>Hermeticum B.C.E.</b> — Settori applicativi (Sanità · Istruzione · Infrastrutture).
+        UE-first: GDPR, minimizzazione, auditabilità. Non certificazione UE.
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
+```0
