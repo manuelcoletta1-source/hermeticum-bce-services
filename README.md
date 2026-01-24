@@ -9,7 +9,15 @@
 Questo repository (**Services**) è il **portale operativo ufficiale**: spiega i servizi in modo semplice e collega tutti i repository-modulo dell’ecosistema.
 
 ---
+## Rilascio IPR Base (cittadini privati)
 
+Il portale Services consente ai cittadini di ottenere un **IPR Base** collegando la propria identità reale tramite **CIE + Codice Fiscale**.
+
+- I documenti **non vengono archiviati** nel portale
+- si conservano solo **evidenze crittografiche (hash)**
+- al termine viene rilasciato un **IPR Base** in modalità **privata** (VALID-PRIVATE)
+
+➡️ Avvia: `onboarding-base.html`
 ## Artefatto principale
 ## Carta d’Identità Cibernetica Hermeticum (UE-conforme)
 
