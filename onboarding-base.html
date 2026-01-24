@@ -362,12 +362,20 @@
   </footer>
 
   <script>
-    // --- helpers
+    // helpers
     const $ = (id) => document.getElementById(id);
+
+    function resetPills(){
+      ["pill1","pill2","pill3"].forEach(id => {
+        const el = $(id);
+        el.classList.remove("active");
+        el.classList.remove("done");
+      });
+    }
 
     function setPills(step){
       const p1 = $("pill1"), p2 = $("pill2"), p3 = $("pill3");
-      [p1,p2,p3].forEach(p => p.classList.remove("active"));
+      resetPills();
       if(step === 1){
         p1.classList.add("active");
       }else if(step === 2){
@@ -388,7 +396,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // --- state
+    // state
     let state = {
       mode: "minimal",
       cf: "",
@@ -402,7 +410,7 @@
       bundleBlob: null
     };
 
-    // --- Step 1 logic
+    // Step 1
     const cf = $("cf");
     const mode = $("mode");
     const fullBlock = $("fullBlock");
@@ -411,9 +419,7 @@
 
     function validateStep1(){
       state.cf = (cf.value || "").trim().toUpperCase();
-
-      // Very light validation (length only) — avoids false negatives
-      const cfOk = state.cf.length >= 8;
+      const cfOk = state.cf.length >= 8; // light validation, avoids false negatives
 
       if(state.mode === "full"){
         state.nome = ($("nome").value || "").trim();
@@ -438,13 +444,14 @@
     cf.addEventListener("input", validateStep1);
     ["nome","cognome","nascita","luogo"].forEach(id => {
       const el = $(id);
-      if(el) el.addEventListener("input", validateStep1);
-      if(el && el.type === "date") el.addEventListener("change", validateStep1);
+      if(!el) return;
+      el.addEventListener("input", validateStep1);
+      if(el.type === "date") el.addEventListener("change", validateStep1);
     });
 
     to2.addEventListener("click", () => showStep(2));
 
-    // --- Step 2 logic
+    // Step 2
     const doc = $("doc");
     const docInfo = $("docInfo");
     const hashBtn = $("hashBtn");
@@ -495,7 +502,6 @@
         hashBox.textContent = `SHA-512:\n${hex}`;
         hashBox.classList.remove("hide");
         s2status.innerHTML = `<span class="status-ok">Hash calcolato.</span> Vai allo Step 3.`;
-        $("pill2").classList.add("done");
         showStep(3);
         $("bundleBtn").disabled = false;
       }catch(e){
@@ -506,7 +512,7 @@
       }
     });
 
-    // --- Step 3 logic
+    // Step 3
     const bundleBtn = $("bundleBtn");
     const downloadBtn = $("downloadBtn");
     const back2 = $("back2");
@@ -583,7 +589,6 @@
       URL.revokeObjectURL(url);
 
       s3status.innerHTML = `<span class="status-ok">Download avviato:</span> ${fname}`;
-      $("pill3").classList.add("done");
     });
 
     // init
