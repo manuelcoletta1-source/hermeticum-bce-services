@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermeticum B.C.E. — Attivazione Base</title>
+  <meta name="description" content="Attivazione Base Carta d’Identità Cibernetica: inserimento dati minimi e hashing locale (SHA-512) dei file CIE. Nessun upload documento." />
+  <style>
+    :root{
+      --bg:#0b0c10; --panel:#0f1117; --line:#24262b;
+      --text:#e8e8e8; --muted:#9aa0a6; --accent:#6aa9ff;
+      --ok:#2bd576; --warn:#ffcc66;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    header, main, footer{max-width:980px;margin:0 auto;padding:20px}
+    header{border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+    a{color:var(--text);text-decoration:none}
+    a:hover{color:var(--accent)}
+    .muted{color:var(--muted)}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:16px}
+    label{display:block;margin-top:10px;font-size:0.95rem}
+    input[type="text"], input[type="date"], input[type="file"]{
+      width:100%;margin-top:6px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);
+      background:rgba(255,255,255,0.03);color:var(--text)
+    }
+    .row{display:flex;flex-wrap:wrap;gap:12px}
+    .col{flex:1;min-width:240px}
+    .btn{
+      display:inline-block;padding:10px 14px;border:1px solid var(--line);
+      border-radius:10px;background:var(--panel);color:var(--text);cursor:pointer
+    }
+    .btn.primary{border-color:var(--accent);color:#fff}
+    .btn:disabled{opacity:0.45;cursor:not-allowed}
+    pre{
+      white-space:pre-wrap;word-break:break-word;
+      background:rgba(0,0,0,0.25);border:1px solid var(--line);
+      padding:12px;border-radius:12px;color:var(--text);margin:10px 0 0
+    }
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:0.8rem;color:var(--muted)}
+    .pill.ok{border-color:rgba(43,213,118,0.35);color:rgba(43,213,118,0.95)}
+    .note{font-size:0.9rem}
+  </style>
+</head>
+
+<body>
+<header>
+  <div>
+    <strong>Hermeticum B.C.E.</strong>
+    <div class="muted" style="font-size:0.85rem">Attivazione Base · Carta d’Identità Cibernetica</div>
+  </div>
+  <nav class="muted" style="font-size:0.95rem">
+    <a href="index.html">Home</a> ·
+    <a href="services.html">Servizi</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="card">
+    <h1 style="margin:0 0 8px">Attivazione Base</h1>
+    <p class="muted" style="margin:0">
+      Inserisci i dati minimi e seleziona i file CIE (fronte/retro).
+      Il sistema calcola <strong>SHA-512 nel browser</strong>. I documenti <strong>non vengono caricati</strong>.
+      Verrà generato un <strong>Evidence Bundle</strong> (JSON) che potrai scaricare.
+    </p>
+    <p class="muted note" style="margin:10px 0 0">
+      Regola: <strong>fail-closed</strong>. Se mancano i file o gli hash, l’attivazione non procede.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2 style="margin:0 0 8px">Dati minimi (uso interno)</h2>
+
+    <div class="row">
+      <div class="col">
+        <label for="nome">Nome</label>
+        <input id="nome" type="text" autocomplete="given-name" placeholder="Es. Manuel" />
+      </div>
+      <div class="col">
+        <label for="cognome">Cognome</label>
+        <input id="cognome" type="text" autocomplete="family-name" placeholder="Es. Coletta" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="nascita">Data di nascita</label>
+        <input id="nascita" type="date" />
+      </div>
+      <div class="col">
+        <label for="luogo">Luogo di nascita</label>
+        <input id="luogo" type="text" placeholder="Es. Bologna (BO)" />
+      </div>
+    </div>
+
+    <label for="cf">Codice Fiscale (uso interno, NON pubblicato)</label>
+    <input id="cf" type="text" inputmode="latin" autocapitalize="characters" placeholder="Es. CLT..." />
+
+    <p class="muted note" style="margin:10px 0 0">
+      Il Codice Fiscale serve a coerenza anagrafica interna. Nei record pubblici si usano solo evidenze (hash) e metadati minimali.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2 style="margin:0 0 8px">Documento (CIE) — hashing locale</h2>
+
+    <div class="row">
+      <div class="col">
+        <label for="cieFront">CIE fronte (file)</label>
+        <input id="cieFront" type="file" accept="image/*,application/pdf" />
+      </div>
+      <div class="col">
+        <label for="cieBack">CIE retro (file)</label>
+        <input id="cieBack" type="file" accept="image/*,application/pdf" />
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:12px">
+      <button class="btn primary" id="btnHash">Calcola SHA-512</button>
+      <button class="btn" id="btnDownload" disabled>Scarica Evidence Bundle (JSON)</button>
+      <span class="pill" id="statePill">Stato: in attesa</span>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="margin:0 0 8px">Hash calcolati</h3>
+      <div class="muted note">Fronte:</div>
+      <pre id="outFront">(non calcolato)</pre>
+      <div class="muted note" style="margin-top:10px">Retro:</div>
+      <pre id="outBack">(non calcolato)</pre>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="margin:0 0 8px">Evidence Bundle (anteprima)</h3>
+      <pre id="outJson">{}</pre>
+    </div>
+
+    <p class="muted note" style="margin:10px 0 0">
+      Questo bundle è pensato per essere allegato a un IPR/PDAR in modalità privata.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <p class="muted">
+    Hermeticum B.C.E. — Attivazione Base · UE-first · GDPR minimization · fail-closed
+  </p>
+</footer>
+
+<script>
+  // --- Helpers ---
+  function toHex(buffer){
+    const bytes = new Uint8Array(buffer);
+    let hex = "";
+    for (const b of bytes) hex += b.toString(16).padStart(2, "0");
+    return hex;
+  }
+
+  async function sha512File(file){
+    const buf = await file.arrayBuffer();
+    // WebCrypto SHA-512 is supported in modern Chromium/Android WebView.
+    const digest = await crypto.subtle.digest("SHA-512", buf);
+    return toHex(digest);
+  }
+
+  function nowISO(){
+    return new Date().toISOString();
+  }
+
+  function setPill(text, kind){
+    const pill = document.getElementById("statePill");
+    pill.textContent = text;
+    pill.className = "pill" + (kind ? " " + kind : "");
+  }
+
+  function buildBundle(frontHash, backHash){
+    const nome = document.getElementById("nome").value.trim();
+    const cognome = document.getElementById("cognome").value.trim();
+    const nascita = document.getElementById("nascita").value;
+    const luogo = document.getElementById("luogo").value.trim();
+    const cf = document.getElementById("cf").value.trim().toUpperCase();
+
+    return {
+      bundle_version: "1.0",
+      type: "BaseActivationEvidenceBundle",
+      namespace: "Hermeticum B.C.E.",
+      service: "Services / Base Activation",
+      created_at_utc: nowISO(),
+      subject_minimal: {
+        given_name: nome || null,
+        family_name: cognome || null,
+        birth_date: nascita || null,
+        birth_place: luogo || null,
+        tax_code_internal: cf ? "[COLLECTED-PRIVATE]" : null
+      },
+      evidence: {
+        cie_front: { alg: "sha512", hash: frontHash },
+        cie_back:  { alg: "sha512", hash: backHash }
+      },
+      privacy: {
+        no_document_upload: true,
+        store_hash_only: true,
+        public_records_no_plaintext_ids: true
+      },
+      fail_closed: [
+        "Missing CIE front/back hash -> STOP",
+        "Missing required fields (policy dependent) -> STOP"
+      ],
+      next_step: "Attach this bundle to PDAR-CIE (VALID-PRIVATE) and associate to IPR."
+    };
+  }
+
+  function downloadJSON(obj, filename){
+    const data = JSON.stringify(obj, null, 2);
+    const blob = new Blob([data], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // --- UI wiring ---
+  let lastBundle = null;
+
+  document.getElementById("btnHash").addEventListener("click", async () => {
+    const f = document.getElementById("cieFront").files[0];
+    const b = document.getElementById("cieBack").files[0];
+
+    if (!f || !b){
+      setPill("Stato: FAIL-CLOSED (mancano file CIE)", "");
+      alert("Seleziona CIE fronte e retro. Il processo è fail-closed.");
+      return;
+    }
+
+    try{
+      setPill("Stato: calcolo hash…", "");
+      document.getElementById("btnHash").disabled = true;
+
+      const frontHash = await sha512File(f);
+      const backHash  = await sha512File(b);
+
+      document.getElementById("outFront").textContent = frontHash;
+      document.getElementById("outBack").textContent = backHash;
+
+      lastBundle = buildBundle(frontHash, backHash);
+      document.getElementById("outJson").textContent = JSON.stringify(lastBundle, null, 2);
+
+      document.getElementById("btnDownload").disabled = false;
+      setPill("Stato: evidenze pronte", "ok");
+    }catch(e){
+      console.error(e);
+      setPill("Stato: ERRORE hashing", "");
+      alert("Errore durante il calcolo SHA-512. Verifica browser e riprova.");
+    }finally{
+      document.getElementById("btnHash").disabled = false;
+    }
+  });
+
+  document.getElementById("btnDownload").addEventListener("click", () => {
+    if (!lastBundle){
+      alert("Calcola prima gli hash.");
+      return;
+    }
+    const filename = "HERMETICUM-BASE-EVIDENCE-BUNDLE.json";
+    downloadJSON(lastBundle, filename);
+  });
+</script>
+</body>
+</html>
