@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermeticum B.C.E. — Percorso dell’individuo</title>
+  <meta name="description" content="Percorso di vita digitale con Hermeticum B.C.E.: nascita, sanità, istruzione, lavoro. Continuità, integrità e verificabilità UE-first." />
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a9abb3;
+      --accent:#7bdcff;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    header,main,footer{max-width:1040px;margin:0 auto;padding:18px}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      border:1px solid var(--line);background:rgba(15,17,23,.75);
+      border-radius:16px;padding:14px 16px;
+    }
+    .brand small{color:var(--muted)}
+    nav{display:flex;flex-wrap:wrap;gap:10px}
+    nav a{padding:8px 10px;border-radius:12px;color:var(--text)}
+    nav a:hover{background:rgba(255,255,255,.05);text-decoration:none}
+    .hero{
+      margin-top:14px;border:1px solid var(--line);
+      background:var(--panel);border-radius:18px;padding:18px
+    }
+    .hero h1{margin:0 0 8px 0;font-size:22px}
+    .hero p{margin:0;color:var(--muted)}
+    .grid{margin-top:14px;display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .card{
+      grid-column:span 12;border:1px solid var(--line);
+      background:var(--panel);border-radius:18px;padding:16px
+    }
+    @media (min-width: 900px){
+      .card.half{grid-column:span 6}
+    }
+    .card h2{margin:0 0 8px 0;font-size:18px}
+    .card h3{margin:12px 0 6px 0;font-size:15px}
+    .muted{color:var(--muted)}
+    ul{margin:6px 0 0 18px}
+    li{margin:6px 0}
+    .note{
+      margin-top:10px;padding:12px;border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;background:rgba(255,255,255,.02);color:var(--muted)
+    }
+    .ctaRow{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{
+      padding:10px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.04);color:var(--text)
+    }
+    .btn:hover{background:rgba(255,255,255,.07);text-decoration:none}
+    .btn.primary{border-color:rgba(123,220,255,.25);background:rgba(123,220,255,.08)}
+    footer{border-top:1px solid var(--line);margin-top:16px;padding-top:14px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <b>Hermeticum B.C.E.</b><br/>
+        <small>Percorso dell’individuo — continuità digitale UE-first</small>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="settori.html">Settori</a>
+        <a href="services.html">Servizi</a>
+        <a href="policy-ue.html">Policy UE</a>
+        <a href="onboarding-base.html">Onboarding</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <h1>Il percorso di vita digitale</h1>
+      <p>
+        Hermeticum B.C.E. accompagna l’individuo nel tempo.
+        Non crea un account: costruisce <b>continuità, prove e responsabilità verificabili</b>
+        lungo le fasi reali della vita.
+      </p>
+
+      <div class="note">
+        UE-first = orientamento progettuale (GDPR, minimizzazione, auditabilità).
+        Non certificazione UE. Non sostituisce documenti statali.
+      </div>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="onboarding-base.html">Avvia IPR Base</a>
+        <a class="btn" href="services.html">Vedi i Servizi</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="grid">
+
+      <!-- NASCITA -->
+      <article class="card half">
+        <h2>Nascita — Radice di identità</h2>
+        <p class="muted">
+          Il punto zero: creare una <b>radice tecnica</b> che consenta continuità futura,
+          senza esporre dati sensibili.
+        </p>
+        <ul>
+          <li>Prima ancora temporale dell’identità.</li>
+          <li>Collegamento a eventi/documenti in forma di prova (hash).</li>
+          <li>Nessuna banca dati centrale.</li>
+        </ul>
+        <h3>Beneficio</h3>
+        <ul>
+          <li>Identità digitale nativa, non ricostruita a posteriori.</li>
+          <li>Base solida per sanità, istruzione e lavoro.</li>
+        </ul>
+      </article>
+
+      <!-- SANITÀ -->
+      <article class="card half">
+        <h2>Sanità — Continuità e integrità</h2>
+        <p class="muted">
+          Non gestiamo dati clinici. Gestiamo <b>prove di integrità</b> dei documenti.
+        </p>
+        <ul>
+          <li>Dimostrare che un referto esisteva a una certa data.</li>
+          <li>Dimostrare che non è stato alterato.</li>
+          <li>Portabilità delle prove nel tempo.</li>
+        </ul>
+        <h3>Beneficio</h3>
+        <ul>
+          <li>Maggiore tutela del cittadino.</li>
+          <li>Meno contestazioni, più chiarezza.</li>
+        </ul>
+      </article>
+
+      <!-- ISTRUZIONE -->
+      <article class="card half">
+        <h2>Istruzione — Titoli verificabili</h2>
+        <p class="muted">
+          Scuola, università, formazione continua: tutto diventa
+          <b>verificabile e opponibile</b>.
+        </p>
+        <ul>
+          <li>Certificazioni con prove crittografiche.</li>
+          <li>Verifica rapida da parte di enti e datori.</li>
+          <li>Continuità tra percorsi diversi.</li>
+        </ul>
+        <h3>Beneficio</h3>
+        <ul>
+          <li>Curriculum portabile in UE.</li>
+          <li>Riduzione delle frodi.</li>
+        </ul>
+      </article>
+
+      <!-- LAVORO -->
+      <article class="card half">
+        <h2>Lavoro — Responsabilità e fiducia</h2>
+        <p class="muted">
+          Nel lavoro la fiducia conta: Hermeticum B.C.E. la rende
+          <b>computabile</b>.
+        </p>
+        <ul>
+          <li>Ruoli e atti con prove temporali.</li>
+          <li>Continuità tra persona e attività professionale.</li>
+          <li>Base per audit e compliance.</li>
+        </ul>
+        <h3>Beneficio</h3>
+        <ul>
+          <li>Meno conflitti e ambiguità.</li>
+          <li>Maggiore affidabilità nel tempo.</li>
+        </ul>
+      </article>
+
+    </section>
+
+    <footer>
+      <div>
+        <b>Hermeticum B.C.E.</b> — Percorso dell’individuo.
+        Continuità, integrità, verificabilità. UE-first.
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
