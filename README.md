@@ -1,130 +1,120 @@
 # Hermeticum B.C.E. — Services
 
-**Hermeticum B.C.E.** è un’azienda tecnologica UE-first che progetta e vende **software e artefatti cibernetici** per:
-- identità verificabile
-- tracciabilità nel tempo
-- opponibilità tecnica
-- continuità digitale
+**Hermeticum B.C.E.** è un’azienda tecnologica europea che progetta e distribuisce
+**artefatti software di sicurezza digitale** per cittadini, lavoratori e organizzazioni UE.
 
-Questo repository (**Services**) è il **portale operativo ufficiale**: spiega i servizi in modo semplice e collega tutti i repository-modulo dell’ecosistema.
-
----
-## Rilascio IPR Base (cittadini privati)
-
-Il portale Services consente ai cittadini di ottenere un **IPR Base** collegando la propria identità reale tramite **CIE + Codice Fiscale**.
-
-- I documenti **non vengono archiviati** nel portale
-- si conservano solo **evidenze crittografiche (hash)**
-- al termine viene rilasciato un **IPR Base** in modalità **privata** (VALID-PRIVATE)
-
-➡️ Avvia: `onboarding-base.html`
-## Artefatto principale
-## Carta d’Identità Cibernetica Hermeticum (UE-conforme)
-
-La Carta d’Identità Cibernetica è un **artefatto software** che collega una persona reale (soggetto responsabile) a una identità cibernetica verificabile, persistente e auditabile.
-
-**Non sostituisce** documenti statali (es. CIE).  
-Li **aggancia** con evidenze tecniche (hash + riferimenti), nel rispetto delle competenze pubbliche.
+Questo repository (**Services**) è il **portale operativo ufficiale**
+per l’accesso ai servizi Hermeticum.
 
 ---
 
-## Servizio Base (cliente)
-### Attivazione Carta — BASE
+## Marchio di fabbrica Hermeticum
 
-**Input (uso interno):**
-- CIE (fronte/retro)  
-- Codice Fiscale
+Hermeticum è il **marchio di fabbrica** della
+**Carta d’Identità Cibernetica** e degli artefatti associati.
 
-**Metodo:**
-- hashing **lato client** (SHA-512)  
-- il documento **non viene archiviato** nel portale  
-- si conserva solo evidenza verificabile (hash + metadati minimi)
+Il marchio Hermeticum funziona come un **bollino di sicurezza digitale UE**:
+un segno tecnico che indica che un’identità, un atto o un output digitale è:
 
-**Output:**
-- Carta d’Identità Cibernetica (BASE) attiva
-- IPR associato (Identity / Project Record)
-- PDAR CIE (VALID-PRIVATE) — record di aggancio evidence-only
+- collegato a una persona reale
+- verificabile nel tempo
+- tracciato con evidenze crittografiche
+- conforme a principi UE-first (GDPR, audit-by-design, minimizzazione)
 
-**Privacy (GDPR-minimization):**
-- nessun numero documento / MRZ / indirizzo in chiaro nei record pubblici
-- i dati completi restano in area privata del titolare (vault/privato)
+Hermeticum **non è un documento statale**  
+Hermeticum **non sostituisce la CIE**  
+Hermeticum è un **artefatto cibernetico di estensione e sicurezza**
 
 ---
 
-## A cosa serve
-Hermeticum B.C.E. serve a rendere verificabile e opponibile:
-- **chi** (identità)
-- **cosa** (atto/output)
-- **quando** (tempo)
-- **con quale responsabilità** (attribuzione)
-- **nel tempo** (continuità)
+## Servizio principale
+## Rilascio IPR Base (cittadini UE)
 
-Il dato può vivere ovunque.  
-La prova resta.
+Il servizio principale consente ai cittadini di ottenere un **IPR Base**
+(Identity / Project Record) collegato alla propria identità reale.
 
----
+### Input
+- Carta d’Identità Elettronica (CIE)
+- Codice Fiscale  
+*(uso interno, non pubblicato)*
 
-## A chi serve
-- Cittadini UE (continuità identitaria digitale)
-- Professionisti (paternità, priorità, responsabilità)
-- Aziende/organizzazioni (audit, governance, compliance)
-- Progetti e contesti istituzionali UE (interoperabilità UE-first)
+### Metodo
+- calcolo di evidenze crittografiche **lato browser**
+- nessun caricamento dei documenti
+- conservazione esclusiva di **hash e metadati minimi**
 
----
+### Output (automatico)
+- **IPR Base** (BASE-ACTIVE)
+- **PDAR CIE** (Public Document Anchor Record — VALID-PRIVATE)
+- Evidence Bundle verificabile
 
-## Documenti pubblici statali (aggancio, non sostituzione)
-Hermeticum B.C.E. non certifica documenti statali e non sostituisce registri pubblici.
+Il rilascio avviene **automaticamente** al termine della procedura.
 
-Fornisce un metodo per **agganciare riferimenti a documenti pubblici** tramite:
-- hash (impronta)
-- timestamp
-- riferimenti istituzionali (URL/protocollo)
-- collegamento a Carta/IPR
-
-Output: **PDAR — Public Document Anchor Record** (evidence-only, fail-closed).
+➡️ Avvio servizio: `onboarding-base.html`
 
 ---
 
-## Architettura (sintesi)
-- Carta d’Identità Cibernetica (nodo centrale)
-- IPR Gateway (core record)
-- UNEBDO / OPC (policy, audit, opponibilità UE-first)
-- Verifica pubblica (evidence-based)
-- Moduli operativi (AI Workers, IoSpace, CyberGlobal, MetaExchange, ecc.)
+## Cos’è l’IPR
 
-Regola: **1 servizio = 1 repository**.
+L’**IPR** è un record cibernetico che collega nel tempo:
 
----
+- una persona reale
+- le sue evidenze di identità
+- le sue attività digitali
+- i suoi output (lavoro, decisioni, contenuti)
 
-## Repository / Moduli
-Sostituisci i placeholder con link stabili. Se un modulo non è pronto: **COMING SOON** (niente 404).
-
-### Core
-- IPR Gateway — (repo/link)
-- Verifica pubblica — (repo/link)
-
-### Servizi
-- AI Workers — (repo/link)
-- Documenti Pubblici (PDA/PDAR) — (repo/link)
-
-### Compliance / Infrastruttura / Operativo
-- UNEBDO — (repo/link)
-- OPC — (repo/link)
-- CyberGlobal — (repo/link)
-- IoSpace — (repo/link)
-- MetaExchange — (repo/link)
-- 🜏 AI JOKER ΦΩ — C2 SOFTWARE — (repo/link)
-- Esoterologia Edizioni / Corpus — (repo/link)
+L’IPR è sotto il **controllo del titolare**  
+Non è un account, non è un social, non è un wallet.
 
 ---
 
-## Stato e governance
+## A cosa serve il bollino Hermeticum
+
+Il bollino Hermeticum indica che un soggetto o un output digitale è:
+
+- **attribuibile** (chi è responsabile)
+- **verificabile** (prove tecniche)
+- **persistente nel tempo**
+- **difendibile** in contesti professionali e istituzionali
+
+È pensato come **standard di sicurezza digitale per l’utente europeo**.
+
+---
+
+## Servizi collegati
+
+- **AI Workers**  
+  Attribuzione e responsabilità umana nel lavoro con l’Intelligenza Artificiale.
+
+- **Documenti pubblici (PDA/PDAR)**  
+  Aggancio evidence-based a documenti pubblici statali
+  senza sostituzione delle competenze pubbliche.
+
+- **Verifica pubblica (proof stub)**  
+  Verifica minimale e interoperabile di evidenze (hash, riferimenti).
+
+Ogni servizio è implementato come **repository indipendente**.
+
+---
+
+## Principi non negoziabili
+
+- UE-first
+- GDPR minimization
+- privacy-by-design
+- audit-by-design
+- fail-closed
+- nessuna archiviazione di documenti statali
+
+---
+
+## Stato del repository
+
 - Stato: **ATTIVO**
 - Classificazione: **DUAL-USE (NON OFFENSIVA)**
-- Approccio: **UE-first**
-- Metodo: **audit-by-design · privacy-by-design · fail-closed**
+- Destinazione: cittadini UE, professionisti, contesti istituzionali
 
 ---
 
 **Hermeticum B.C.E.**  
-Marchio di fabbrica di artefatti cibernetici europei.
+Marchio di fabbrica europeo per la sicurezza digitale dell’utente.
