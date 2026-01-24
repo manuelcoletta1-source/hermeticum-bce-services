@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Servizi — Hermeticum B.C.E. Services</title>
-  <meta name="description" content="Catalogo servizi — evidenze crittografiche, identità verificabili, UE-first, audit-by-design." />
+  <title>Hermeticum B.C.E. — Catalogo Servizi</title>
+  <meta name="description" content="Catalogo servizi Hermeticum B.C.E.: livelli, benefici e attivazione IPR Base. UE-first, audit-by-design, minimizzazione dati." />
   <style>
     :root{
       color-scheme: dark;
@@ -12,233 +12,215 @@
       --panel:#0f1117;
       --line:#24262b;
       --text:#e8e8e8;
-      --muted:#b8b8b8;
-      --accent:#6ae3ff;
-      --warn:#ffd36a;
+      --muted:#a9abb3;
+      --accent:#7bdcff;
+      --accent2:#5cffb0;
+      --warn:#ffd27b;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.55;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);color:var(--text);line-height:1.55;
     }
-    header, main, footer{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header{ padding-top: 32px; padding-bottom: 10px; }
-    h1{
-      margin:0 0 8px;
-      font-size: 26px;
-      letter-spacing: .3px;
-    }
-    h2{
-      margin: 18px 0 10px;
-      font-size: 18px;
-      letter-spacing: .2px;
-    }
-    p{ margin: 10px 0; }
-    a{ color: var(--accent); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    .pill{
-      display:inline-block;
-      padding: 4px 10px;
+    header, main, footer{max-width:1100px;margin:0 auto;padding:18px}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
       border:1px solid var(--line);
-      border-radius: 999px;
-      font-size: 12px;
-      color: var(--muted);
-      background: rgba(255,255,255,0.03);
-      margin-right: 6px;
+      background:rgba(15,17,23,.75);
+      border-radius:16px;
+      padding:14px 16px;
+      backdrop-filter: blur(6px);
+      box-shadow: var(--shadow);
     }
+    .brand{display:flex;flex-direction:column;gap:2px}
+    .brand small{color:var(--muted)}
+    nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+    nav a{
+      padding:8px 10px;border:1px solid transparent;border-radius:12px;color:var(--text);
+    }
+    nav a:hover{border-color:var(--line);background:rgba(255,255,255,.03);text-decoration:none}
+
+    .hero{
+      margin-top:14px;border:1px solid var(--line);background:var(--panel);
+      border-radius:18px;padding:18px;box-shadow: var(--shadow);
+    }
+    .hero h1{margin:0 0 8px 0;font-size:22px}
+    .hero p{margin:0;color:var(--muted)}
+    .note{
+      margin-top:12px;padding:12px;border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;background:rgba(255,255,255,.02);color:var(--muted)
+    }
+    .ctaRow{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:10px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.04);color:var(--text)
+    }
+    .btn:hover{background:rgba(255,255,255,.07);text-decoration:none}
+    .btn.primary{border-color:rgba(92,255,176,.25);background:rgba(92,255,176,.08)}
+    .btn.secondary{border-color:rgba(123,220,255,.25);background:rgba(123,220,255,.08)}
+
+    .grid{margin-top:14px;display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
     .card{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      background: var(--panel);
-      padding: 18px;
-      margin-top: 14px;
+      grid-column:span 12;
+      border:1px solid var(--line);background:var(--panel);
+      border-radius:18px;padding:16px;box-shadow: var(--shadow);
     }
-    .disclaimer{
-      border-left: 3px solid var(--warn);
-      padding: 12px 14px;
-      background: rgba(255,211,106,0.08);
-      border-radius: 12px;
-      font-size: 14px;
-      margin-top: 12px;
+    @media (min-width: 900px){
+      .card.half{grid-column:span 6}
+      .card.third{grid-column:span 4}
     }
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-      margin-top: 14px;
+    .card h2{margin:0 0 10px 0;font-size:18px}
+    .card p{margin:0;color:var(--muted)}
+    .card ul{margin:10px 0 0 18px}
+    .card li{margin:6px 0}
+    .badgeRow{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 9px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.02);font-size:12px;color:var(--text)
     }
-    .service{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255,255,255,0.02);
-      padding: 16px;
+    .footer{
+      border-top:1px solid var(--line);
+      margin-top:16px;padding-top:14px;color:var(--muted);font-size:13px
     }
-    .service h3{
-      margin:0 0 8px;
-      font-size: 16px;
-      letter-spacing: .2px;
-    }
-    .tagrow{
-      display:flex;
-      gap:8px;
-      flex-wrap: wrap;
-      margin-bottom: 8px;
-    }
-    .tag{
-      display:inline-block;
-      padding: 3px 8px;
-      border:1px solid var(--line);
-      border-radius: 999px;
-      font-size: 11px;
-      color: var(--muted);
-      background: rgba(255,255,255,0.03);
-    }
-    .meta{
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .cta{
-      display:inline-block;
-      margin-top: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: var(--accent);
-      color:#000;
-      font-weight: 700;
-    }
-    .cta.secondary{
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--line);
-      margin-left: 8px;
-      font-weight: 650;
-    }
-    ul{ margin: 10px 0 10px 18px; }
-    li{ margin: 6px 0; }
-    footer{
-      margin-top: 34px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    footer a{ color: var(--muted); }
+    .hr{height:1px;background:var(--line);margin:12px 0}
   </style>
 </head>
 
 <body>
-<header>
-  <span class="pill">UE-first</span>
-  <span class="pill">Audit-by-design</span>
-  <span class="pill">Privacy by design</span>
-
-  <h1>Catalogo Servizi</h1>
-  <p class="meta">
-    Moduli tecnici per generare <strong>evidenze verificabili</strong> (hash e bundle locali) e supportare
-    processi di integrità, coerenza e audit.
-  </p>
-
-  <div class="disclaimer">
-    <strong>Nota:</strong> “UE-first” è uno standard di riferimento progettuale (GDPR, minimizzazione, auditabilità).
-    <strong>Non è una certificazione ufficiale UE</strong> e non sostituisce documenti statali.
-  </div>
-
-  <p style="margin-top:12px;">
-    <a class="cta" href="./onboarding-base.html">Attiva IPR Base</a>
-    <a class="cta secondary" href="./index.html">Home</a>
-  </p>
-</header>
-
-<main>
-
-  <section class="card">
-    <h2>Servizi disponibili</h2>
-
-    <div class="grid">
-
-      <div class="service">
-        <div class="tagrow">
-          <span class="tag">client-side</span>
-          <span class="tag">offline-verifiable</span>
-          <span class="tag">v0.1</span>
-        </div>
-        <h3>IPR Base</h3>
-        <p>
-          Genera un <strong>Evidence Bundle</strong> locale con hash del documento e metadati essenziali.
-          Progettato per integrità e verificabilità offline.
-        </p>
-        <p class="meta"><strong>Output:</strong> <span>HBCE-IPR-BASE (JSON)</span></p>
-        <p class="meta"><strong>Limite:</strong> non è identità statale / non è certificazione UE.</p>
-        <a class="cta" href="./onboarding-base.html">Avvia</a>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <b>Hermeticum B.C.E.</b>
+        <small>Catalogo Servizi — livelli e benefici</small>
       </div>
-
-      <div class="service">
-        <div class="tagrow">
-          <span class="tag">proof</span>
-          <span class="tag">records</span>
-          <span class="tag">spec-in-progress</span>
-        </div>
-        <h3>PDAR</h3>
-        <p>
-          Proof of Data &amp; Record: pagina pubblica per definire criteri di prova, coerenza e verifiche.
-          Modulo orientato a processi di audit e tracciabilità.
-        </p>
-        <p class="meta"><strong>Output:</strong> note/spec di verifica + workflow</p>
-        <p class="meta"><strong>Limite:</strong> non sostituisce procedure legali o forensi ufficiali.</p>
-        <a class="cta" href="./public-documents.html">Apri</a>
-      </div>
-
-      <div class="service">
-        <div class="tagrow">
-          <span class="tag">preview</span>
-          <span class="tag">ai</span>
-          <span class="tag">controlled-release</span>
-        </div>
-        <h3>AI Workers</h3>
-        <p>
-          Moduli AI orientati a verifica, controllo, coerenza e supporto operativo.
-          Attualmente in rilascio controllato.
-        </p>
-        <p class="meta"><strong>Output:</strong> strumenti/worker modulari (roadmap)</p>
-        <p class="meta"><strong>Limite:</strong> non è un sistema offensivo; uso conforme a policy.</p>
-        <a class="cta" href="./ai-workers.html">Apri</a>
-      </div>
-
+      <nav aria-label="Navigazione">
+        <a href="index.html">Home</a>
+        <a href="percorso.html">Percorso</a>
+        <a href="settori.html">Settori</a>
+        <a href="policy-ue.html">Policy UE</a>
+        <a href="services.html">Catalogo</a>
+        <a href="onboarding-base.html">Onboarding</a>
+        <a href="pdar.html">PDAR</a>
+      </nav>
     </div>
-  </section>
 
-  <section class="card">
-    <h2>Linee guida di uso corretto</h2>
-    <ul>
-      <li>Usa questi strumenti come <strong>evidenze tecniche</strong>, non come “titoli” legali.</li>
-      <li>Conserva i bundle in modo sicuro: il sistema è <strong>zero retention</strong>.</li>
-      <li>Verifica gli hash anche con strumenti locali (offline) per ridurre errori.</li>
-      <li>Se il dispositivo è compromesso, la sicurezza client-side non può garantire integrità.</li>
-    </ul>
-    <p class="meta">
-      Documenti ufficiali del progetto: <a href="./privacy.html">Privacy</a> · <a href="./terms.html">Terms</a> · <a href="./security.html">Security</a>
-    </p>
-  </section>
+    <section class="hero">
+      <h1>Catalogo Servizi</h1>
+      <p>
+        Qui trovi i livelli principali. Prima di attivare un servizio, leggi:
+        <a href="percorso.html">Percorso</a> ·
+        <a href="settori.html">Settori</a> ·
+        <a href="policy-ue.html">Policy UE</a>.
+      </p>
 
-</main>
+      <div class="ctaRow">
+        <a class="btn primary" href="onboarding-base.html">Avvia IPR Base</a>
+        <a class="btn secondary" href="settori.html">Vedi applicazioni (Sanità/Istruzione/Infrastrutture)</a>
+      </div>
 
-<footer>
-  <p>
-    © Hermeticum B.C.E. — Services<br />
-    <a href="./privacy.html">Privacy</a> ·
-    <a href="./terms.html">Terms</a> ·
-    <a href="./security.html">Security</a>
-    <span> — UE-first · audit-by-design · fail-closed</span>
-  </p>
-</footer>
+      <div class="note">
+        UE-first = orientamento progettuale (GDPR, minimizzazione, auditabilità). Non certificazione UE.
+        Non sostituisce documenti o identità statali.
+      </div>
+    </section>
+  </header>
 
+  <main>
+    <section class="grid" aria-label="Catalogo">
+
+      <article class="card third">
+        <h2>IPR Base</h2>
+        <p>Il primo livello: attivazione di una radice operativa con prove verificabili.</p>
+        <div class="badgeRow">
+          <span class="badge">Integrità</span>
+          <span class="badge">Tempo</span>
+          <span class="badge">Minimizzazione</span>
+        </div>
+        <ul>
+          <li>Struttura minima per continuità nel tempo.</li>
+          <li>Proof-first: separazione tra contenuto e prova.</li>
+          <li>Onboarding guidato e documentazione base.</li>
+        </ul>
+        <div class="hr"></div>
+        <a class="btn primary" href="onboarding-base.html">Attiva IPR Base</a>
+      </article>
+
+      <article class="card third">
+        <h2>Verifica & Evidenze</h2>
+        <p>Meccanismi di verifica: come dimostrare integrità e continuità.</p>
+        <div class="badgeRow">
+          <span class="badge">Hash</span>
+          <span class="badge">Timestamp</span>
+          <span class="badge">Audit</span>
+        </div>
+        <ul>
+          <li>Prove di integrità documentale.</li>
+          <li>Tracciabilità auditabile.</li>
+          <li>Livelli di verifica pubblica/privata.</li>
+        </ul>
+        <div class="hr"></div>
+        <a class="btn" href="policy-ue.html">Scope e limiti (Policy UE)</a>
+      </article>
+
+      <article class="card third">
+        <h2>Policy & Compliance</h2>
+        <p>Regole chiare: accountability, sicurezza by design, minimizzazione.</p>
+        <div class="badgeRow">
+          <span class="badge">UE-first</span>
+          <span class="badge">GDPR</span>
+          <span class="badge">Accountability</span>
+        </div>
+        <ul>
+          <li>Principi UE applicati al modello.</li>
+          <li>Cosa è / cosa non è (trasparenza).</li>
+          <li>Documentazione e processi (PDAR).</li>
+        </ul>
+        <div class="hr"></div>
+        <a class="btn" href="pdar.html">Apri PDAR</a>
+      </article>
+
+      <article class="card half">
+        <h2>Applicazioni settoriali</h2>
+        <p>Tre macro-ambiti dove il modello porta benefici immediati.</p>
+        <ul>
+          <li><b>Sanità</b>: prove di integrità e continuità documentale (senza dati clinici in chiaro).</li>
+          <li><b>Istruzione</b>: titoli e certificazioni verificabili, riduzione frodi.</li>
+          <li><b>Infrastrutture digitali</b>: catene di responsabilità, audit-by-design.</li>
+        </ul>
+        <div class="ctaRow">
+          <a class="btn secondary" href="settori.html">Apri Settori</a>
+          <a class="btn" href="percorso.html">Vedi Percorso dell’individuo</a>
+        </div>
+      </article>
+
+      <article class="card half">
+        <h2>Trasparenza operativa</h2>
+        <p>Per fidarsi servono regole e documenti leggibili.</p>
+        <ul>
+          <li><a href="security.html">Security</a> — principi e posture.</li>
+          <li><a href="privacy.html">Privacy</a> — minimizzazione e trattamento.</li>
+          <li><a href="terms.html">Termini</a> — scope e responsabilità.</li>
+        </ul>
+        <div class="ctaRow">
+          <a class="btn" href="policy-ue.html">Leggi Policy UE</a>
+          <a class="btn" href="pdar.html">PDAR</a>
+        </div>
+      </article>
+
+    </section>
+
+    <footer class="footer">
+      <div>
+        <b>Hermeticum B.C.E.</b> — Catalogo Servizi.
+        UE-first: GDPR, minimizzazione, auditabilità. Non certificazione UE.
+      </div>
+    </footer>
+  </main>
 </body>
 </html>
