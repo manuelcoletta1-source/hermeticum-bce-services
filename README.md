@@ -1,83 +1,121 @@
 # HERMETICUM B.C.E. — Services
 **Blindata · Computabile · Evolutiva**
 
-> **Un sistema che riflette, organizza e risponde.**  
-> **Uno strumento affilato al servizio dell’intelligenza umana.**
+Repository “vetrina” e punto di ingresso dell’ecosistema **HERMETICUM B.C.E.**: sicurezza digitale **UE-first**, identità verificabile, responsabilità umana opponibile, prove digitali resistenti nel tempo.
 
-Repository “vetrina” e punto di ingresso dell’ecosistema **HERMETICUM B.C.E.**: sicurezza digitale UE-first, identità verificabile, responsabilità opponibile, prove digitali resistenti nel tempo.
+> **Principio operativo:** se un elemento essenziale non è verificabile, l’azione **non procede** (*fail-closed*).
 
 ---
 
 ## Cos’è HERMETICUM B.C.E.
-**HERMETICUM B.C.E.** è un framework tecnico-operativo che introduce una catena minima **fail-closed** per le decisioni digitali critiche:
 
+**HERMETICUM B.C.E.** è un framework tecnico-operativo per decisioni digitali critiche, progettato per rendere ogni azione:
+
+- **attribuibile** a una radice umana verificabile
+- **validata ex-ante** (prima dell’esecuzione)
+- **tracciabile nel tempo** con riferimento temporale coerente
+- **auditabile** tramite evidenze riproducibili
+
+### Catena minima (fail-closed)
 **Evento → Identità umana verificabile (IPR/HRR) → Gate decisionale (DGV) → Tempo certificato → Evidence Bundle**
 
-Se un elemento essenziale non è verificabile, l’azione **non prosegue**.
+Se manca un requisito o la verifica non è riproducibile, l’esito deve essere: **FAIL_CLOSED**.
 
 ---
 
 ## Cosa NON è
+
 - Non è “AI cosciente”.
 - Non è un sistema che “decide al posto tuo”.
 - Non sostituisce documenti civili (CIE, passaporto).
+- Non richiede fiducia nel sito: la verifica è sempre “**ricalcola e confronta**”.
 
-È un’infrastruttura che rende le decisioni digitali **attribuibili, verificabili, auditabili**.
+È un’infrastruttura per rendere le decisioni digitali **responsabili, verificabili, opponibili**.
 
 ---
 
-## Pillar (principi)
-- **UE-first**: allineamento a compliance e governance europea.
+## Principi (Pillar)
+
+- **UE-first**: impostazione normativa e progettuale allineata al quadro europeo.
 - **Fail-Closed**: niente esecuzione senza validazione.
-- **Responsabilità umana non opzionale**: tracciabilità verso una radice umana opponibile.
-- **Evidence nel tempo**: prove digitali strutturate per durare e verificarsi.
-- **Audit-by-design**: ricostruibilità e controllabilità integrata.
+- **Responsabilità umana non opzionale**: ogni azione riconduce a una radice umana verificabile.
+- **Evidence-first**: senza prova strutturata non esiste opponibilità.
+- **Audit-by-design**: ricostruibilità e controllabilità integrate.
 
 ---
 
 ## Componenti chiave
-- **IPR / HRR (Radice Umana)**  
-  Collegamento tecnico a una persona reale, verificabile e non duplicabile.
 
-- **DGV — Decision Gate Validator**  
-  Validazione ex-ante: `ALLOW / REVIEW / DENY / FAIL_CLOSED`.
+### IPR / HRR — Radice Umana
+Collegamento tecnico a una persona reale, verificabile e non duplicabile, intesa come **soggetto tecnico e giuridico responsabile** dell’azione.
 
-- **Temporal Evidence Bundle**  
-  Pacchetto di evidenze (hash + firme + tempo + metadati) per audit e opponibilità.
+### DGV — Decision Gate Validator
+Validazione ex-ante con outcome standardizzati:
 
-- **Anchors (opzionali)**  
-  Livelli di ancoraggio crittografico (es. IPFS / BTC / EVM) in base alla criticità.
+`ALLOW · REVIEW · DENY · FAIL_CLOSED`
+
+### Tempo certificato
+Riferimento temporale consistente e verificabile. Senza tempo affidabile, la prova perde forza.
+
+### Evidence Bundle
+Pacchetto strutturato (manifest + hash + firme + tempo + metadati) per audit e opponibilità nel tempo.
+
+### Anchors (opzionali)
+Ancoraggi crittografici selettivi (es. **IPFS / Bitcoin / Ethereum**) attivati in base a criticità e policy, in modalità **hash-only**.
+
+---
+
+## A chi serve
+
+- **Persone / professionisti**: accountability personale e prova digitale per azioni critiche.
+- **Aziende / organizzazioni**: governance dei processi, ruoli e decisioni con auditabilità.
+- **Istituzioni / PA**: procedimenti sensibili con verifica riproducibile e continuità nel tempo.
 
 ---
 
 ## Struttura del sito (GitHub Pages)
-Questo repo pubblica la **homepage** e le pagine “services” su GitHub Pages.
 
-- `index.html` → landing principale (marketing + percorso utente)
-- (eventuali) `catalog.html`, `services.html` → schede e listino servizi
-- `assets/` → immagini, icone, css (se presenti)
+Questo repository pubblica un sito statico (GitHub Pages) con pagine stabili e coerenti:
+
+- `index.html` → landing principale (percorso utente + principi)
+- `services.html` → componenti e servizi (catena fail-closed)
+- `catalog.html` → livelli (BASE / OPPONIBILE / FORTE)
+- `create.html` → attivazione (onboarding Level 1)
+- `verify.html` → verifica pubblica (recompute & match)
+- `governance.html` → scope, policy, non-goals
+- `use-cases.html` → casi d’uso UE/PA-ready
+- `evidence.html` → struttura Evidence Bundle
 
 ---
 
 ## Link ufficiali
+
 - **Sito (Services):** https://manuelcoletta1-source.github.io/hermeticum-bce-services/
 - **Technology (architettura):** https://manuelcoletta1-source.github.io/hermeticum-bce-technology/
-- **Verifica / IPR:** https://manuelcoletta1-source.github.io/manuhell/ (sezione pubblica di verifica)
+- **Verifica / IPR pubblica:** https://manuelcoletta1-source.github.io/manuhell/
 
 ---
 
 ## Call to action
-- **Scopri l’architettura:** vai su *Technology*
-- **Attiva la tua BioCyber Identity Card:** onboarding guidato (livello base → opponibile → forte)
-- **Richiedi un audit / partnership:** percorso istituzionale UE-first
+
+- **Inizia Attivazione:** `create.html`
+- **Verifica pubblica:** `verify.html`
+- **Scegli un livello:** `catalog.html`
+- **Approfondisci governance:** `governance.html`
 
 ---
 
 ## Stato
+
 🟢 **ATTIVO — Repository di servizio e vetrina**  
 Evoluzione controllata, semantica stabile, miglioramenti incrementali.
 
 ---
 
 ## Licenza
-Da definire (consigliato: licenza separata per contenuti “vetrina” e specifiche tecniche).
+
+Da definire.  
+Consigliata separazione tra:
+- contenuti “vetrina” (testi/brand)
+- specifiche tecniche
+- eventuale codice operativo
