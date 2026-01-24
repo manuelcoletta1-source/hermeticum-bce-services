@@ -1,233 +1,252 @@
-<a href="./governance.html">Governance</a>
-<a href="./use-cases.html">Use Cases</a>
-<a href="./create.html">Attivazione</a>
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Verifica — BioCyber Identity Card (EU Pilot) | Hermeticum B.C.E.</title>
+  <title>Verifica — Hermeticum B.C.E.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Workflow pubblico di verifica per i pilot BioCyber Identity Card: ricalcolo hash, verifica timestamp, conferma esiti fail-closed." />
+  <meta name="description" content="Verifica Hermeticum B.C.E. — Prova, tracciabilità e auditabilità (UE-first)." />
   <style>
-    :root{
+    :root {
       --bg:#0b0c10;
       --panel:#0f1117;
       --line:#24262b;
       --text:#e8e8e8;
-      --muted:#9aa0a6;
-      --accent:#7aa2ff;
-      --good:#8ce99a;
-      --warn:#ffd43b;
-      --bad:#ff6b6b;
+      --muted:#a0a0a0;
+      --accent:#4da6ff;
+      --ok:#53d769;
+      --warn:#ffd60a;
     }
-    *{ box-sizing:border-box; }
-    body{
+    body {
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:var(--bg);
       color:var(--text);
-      line-height:1.6;
+      line-height:1.55;
     }
-    header, main, footer{
+    header, main, footer {
       max-width:980px;
       margin:0 auto;
-      padding:28px 20px;
+      padding:24px;
     }
-    header{ border-bottom:1px solid var(--line); }
-    footer{ border-top:1px solid var(--line); color:var(--muted); font-size:0.9rem; margin-top:60px; }
-
-    a{ color:var(--accent); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    h1{ margin:0 0 10px 0; font-size:1.9rem; }
-    h2{ margin-top:36px; font-size:1.25rem; }
-    p{ max-width:860px; }
-    .muted{ color:var(--muted); }
-
-    .nav{
+    header {
+      border-bottom:1px solid var(--line);
       display:flex;
-      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
       flex-wrap:wrap;
-      margin-top:12px;
-      font-size:0.95rem;
     }
-
-    .card{
+    header a {
+      color:var(--muted);
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:10px;
+    }
+    header a:hover { border-color:var(--accent); color:var(--accent); }
+    h1, h2, h3 { font-weight:600; line-height:1.25; margin:0; }
+    h1 { font-size:2rem; margin-top:32px; }
+    h2 { font-size:1.3rem; margin-top:40px; }
+    p { color:var(--muted); margin-top:12px; }
+    .box {
       background:var(--panel);
       border:1px solid var(--line);
       border-radius:14px;
-      padding:18px;
-      margin-top:16px;
+      padding:20px;
+      margin-top:18px;
     }
-
-    .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    .pill {
+      display:inline-block;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:0.85rem;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+    .row {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .cta {
+      display:inline-block;
+      margin-top:6px;
+      padding:12px 18px;
+      border-radius:10px;
+      border:1px solid var(--accent);
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:500;
+    }
+    .cta.secondary {
+      border-color:var(--line);
+      color:var(--muted);
+    }
+    code, pre {
       background:#0b0c10;
       border:1px solid var(--line);
       border-radius:12px;
-      padding:14px;
-      overflow-x:auto;
-      white-space:pre;
+      padding:12px;
+      color:var(--text);
+      overflow:auto;
     }
-
-    .note{
-      border-left:3px solid var(--accent);
-      padding:10px 12px;
-      background: rgba(122,162,255,0.08);
-      border-radius:10px;
+    label {
+      display:block;
       margin-top:12px;
+      color:var(--muted);
     }
-    .warn{ border-left-color:var(--warn); background: rgba(255,212,59,0.10); }
-    .bad{ border-left-color:var(--bad); background: rgba(255,107,107,0.10); }
-
-    ol{ padding-left:20px; }
-    li{ margin:8px 0; }
-
-    .status{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      margin-top:10px;
-      padding:6px 12px;
-      border-radius:999px;
+    input, textarea {
+      width:100%;
+      margin-top:8px;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0b0c10;
+      color:var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      box-sizing:border-box;
+    }
+    button {
+      margin-top:14px;
+      padding:12px 16px;
+      border-radius:12px;
+      border:1px solid var(--accent);
+      background:transparent;
+      color:var(--accent);
+      cursor:pointer;
+      font-weight:600;
+    }
+    button:hover { filter:brightness(1.1); }
+    .result {
+      margin-top:14px;
+      padding:14px;
+      border-radius:12px;
       border:1px solid var(--line);
       background:var(--panel);
+    }
+    .ok { border-color: rgba(83,215,105,.35); }
+    .warn { border-color: rgba(255,214,10,.35); }
+    .muted { color: var(--muted); }
+    footer {
+      border-top:1px solid var(--line);
+      margin-top:64px;
+      font-size:0.9rem;
       color:var(--muted);
-      font-size:0.85rem;
     }
-    .dot{
-      width:10px; height:10px; border-radius:50%;
-      background:var(--good);
-      box-shadow:0 0 0 3px rgba(140,233,154,0.12);
-      display:inline-block;
-    }
+    small { color: var(--muted); }
   </style>
 </head>
-
 <body>
 
 <header>
-  <h1>Verifica</h1>
-  <p class="muted">
-    Workflow di verifica pubblico e riproducibile per un’istanza pilot di
-    <strong>BioCyber Identity Card</strong>.
-    La verifica non è “fidati del sito”.
-    La verifica è “ricalcola e confronta”.
-  </p>
-
-  <nav class="nav">
-    <a href="./index.html">Home</a>
-    <a href="./services.html">Servizi</a>
-    <a href="./verify.html"><strong>Verifica</strong></a>
-    <a href="./README.md">README</a>
-  </nav>
-
-  <div class="status"><span class="dot"></span>Evidence-first — Workflow di audit minimale</div>
+  <strong>Hermeticum B.C.E.</strong> — Verifica
+  <div class="row" style="margin-top:0;">
+    <a href="index.html">Services</a>
+    <a href="inizia.html">Inizia</a>
+  </div>
 </header>
 
 <main>
 
-  <section>
-    <h2>Cosa viene verificato</h2>
-    <div class="card">
-      <p>
-        La verifica riguarda un <strong>Evidence Bundle</strong>:
-        un pacchetto minimo che dimostra <strong>chi ha richiesto cosa</strong>,
-        <strong>quando</strong> e <strong>con quali vincoli</strong>,
-        in modo verificabile nel tempo.
-      </p>
-      <div class="note warn">
-        Questa pagina può essere utilizzata con identificativi <strong>pseudonimi</strong>.
-        Nessun dato personale è richiesto per la verifica pubblica.
-      </div>
-    </div>
+  <h1>Verifica: dalla fiducia alla prova</h1>
+  <p>
+    Questa pagina serve per mostrare <strong>tracciabilità</strong> e <strong>auditabilità</strong>.
+    Qui non si “crede”: si <em>verifica</em>.
+  </p>
+
+  <section class="box">
+    <div class="pill">CONCETTO</div>
+    <h2>Che cosa si verifica</h2>
+    <p>
+      In un sistema UE-first, una verifica minima include:
+      <strong>hash</strong> (impronta del contenuto), <strong>riferimenti</strong> stabili,
+      e (quando presente) <strong>ancoraggio</strong> su registri pubblici.
+    </p>
+    <p class="muted">
+      Nota: un hash prova l’integrità di un contenuto. Non prova automaticamente “chi” lo ha creato,
+      se non è accompagnato da firma/contesto.
+    </p>
   </section>
 
-  <section>
-    <h2>Evidence Bundle (minimo)</h2>
-    <div class="card">
-      <p class="muted">
-        Il bundle di pilot è descritto da un manifest leggibile da macchina
-        e da prove di integrità.
-      </p>
-      <div class="mono">Evidence Bundle
-- manifest.json (hash + riferimenti)
-- allegati (opzionali, possono restare privati)
-- riferimento temporale (se presente)
-- ancoraggi (opzionali: LTA/IPFS/ledger)</div>
+  <section class="box">
+    <div class="pill">PROVA MINIMA</div>
+    <h2>Calcola un hash SHA-256 (localmente nel browser)</h2>
+    <p>
+      Incolla un testo: il browser calcola SHA-256 in locale (non invia dati a server).
+      È utile per capire il meccanismo di impronta e confronto.
+    </p>
 
-      <div class="note">
-        Regola minima di pubblicazione:
-        è possibile pubblicare solo <strong>manifest + hash</strong>,
-        mantenendo privati gli allegati,
-        purché gli hash restino verificabili.
-      </div>
-    </div>
+    <label for="txt">Testo da hashare</label>
+    <textarea id="txt" rows="6" placeholder="Incolla qui un testo (es. un estratto di documento)"></textarea>
+
+    <button id="btn">Calcola SHA-256</button>
+
+    <div id="out" class="result warn" style="display:none;"></div>
+
+    <small>
+      Questo è un demo UX: per file PDF e documenti reali, l’hash si calcola normalmente lato client (tool) e si pubblica il risultato come prova.
+    </small>
   </section>
 
-  <section>
-    <h2>Passaggi di verifica</h2>
-    <div class="card">
-      <ol>
-        <li><strong>Ricalcolare gli hash</strong> dei file pubblicati e confrontarli con il manifest.</li>
-        <li><strong>Verificare il timestamp</strong> (se presente): deve essere vincolato allo stesso hash.</li>
-        <li><strong>Confermare l’esito DGV</strong>: se <strong>DENY</strong> o <strong>FAIL_CLOSED</strong>, l’azione non deve essere stata eseguita.</li>
-      </ol>
+  <section class="box">
+    <div class="pill">RIFERIMENTI</div>
+    <h2>Riferimenti verificabili (da inserire)</h2>
+    <p>
+      Qui metteremo i riferimenti reali di verifica del tuo ecosistema:
+      ad esempio CID IPFS, hash ufficiali, e link a registri pubblici.
+      Per ora lasciamo placeholder, così la pagina è pronta e non inventa dati.
+    </p>
 
-      <div class="note bad">
-        Se gli hash non coincidono, o la verifica temporale fallisce,
-        il bundle <strong>non è opponibile</strong>.
-      </div>
-    </div>
-  </section>
+    <pre><code>IPFS CID: TBD
+HASH (SHA-256): TBD
+Registro pubblico: TBD</code></pre>
 
-  <section>
-    <h2>Comandi locali per il calcolo hash</h2>
-    <div class="card">
-      <div class="mono">Linux / macOS:
-shasum -a 512 manifest.json
-shasum -a 512 file.ext
-
-Windows (PowerShell):
-Get-FileHash .\manifest.json -Algorithm SHA512
-Get-FileHash .\file.ext -Algorithm SHA512</div>
-
-      <div class="note warn">
-        Se l’ambiente non è in grado di calcolare hash in modo affidabile,
-        la verifica deve essere considerata incompleta.
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Istanza pilot (placeholder)</h2>
-    <div class="card">
-      <p class="muted">
-        Sostituire i placeholder sottostanti quando viene pubblicato
-        un bundle reale.
-      </p>
-      <div class="mono">Istanza pilot:
-- eventId: EVT-&lt;UUID&gt;
-- manifest: ./evidence/EVT-&lt;UUID&gt;/manifest.json
-- hash manifest (SHA-512): &lt;INCOLLA_HASH&gt;
-- riferimento temporale: &lt;INCOLLA_RIFERIMENTO&gt;
-- ancoraggi (opzionali): IPFS &lt;CID&gt; | BTC &lt;TXID&gt; | EVM &lt;TX&gt;</div>
-
-      <div class="note">
-        Passo successivo: creare la cartella <strong>/evidence/</strong>
-        e pubblicare un manifest di esempio.
-      </div>
+    <div class="row">
+      <a class="cta secondary" href="#">Apri Registro (coming soon)</a>
+      <a class="cta secondary" href="#">Scarica prova (coming soon)</a>
     </div>
   </section>
 
 </main>
 
 <footer>
-  <p>
-    Hermeticum B.C.E. — Services<br/>
-    Pagina di verifica: workflow pubblico minimo per i pilot BioCyber Identity Card.
-  </p>
+  Hermeticum B.C.E. — Verifica e trasparenza: prova minima, auditabilità, UE-first.
 </footer>
+
+<script>
+  // SHA-256 in browser using Web Crypto API
+  const $ = (id) => document.getElementById(id);
+
+  async function sha256(text) {
+    const enc = new TextEncoder();
+    const data = enc.encode(text);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  $("btn").addEventListener("click", async () => {
+    const text = $("txt").value || "";
+    const out = $("out");
+
+    if (!text.trim()) {
+      out.style.display = "block";
+      out.className = "result warn";
+      out.innerHTML = "<strong>Inserisci del testo.</strong><div class='muted'>Serve almeno una riga per calcolare l’hash.</div>";
+      return;
+    }
+
+    const h = await sha256(text);
+    out.style.display = "block";
+    out.className = "result ok";
+    out.innerHTML =
+      "<strong>SHA-256:</strong><br><code style='display:block; margin-top:10px;'>" + h + "</code>" +
+      "<div class='muted' style='margin-top:10px;'>Copia questo valore e usalo per confronti di integrità.</div>";
+  });
+</script>
 
 </body>
 </html>
