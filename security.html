@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Security & Verification — Hermeticum B.C.E. Services</title>
+  <meta name="description" content="Security & Verification Note — Threat model, limiti, assunzioni e verifiche offline." />
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#b8b8b8;
+      --accent:#6ae3ff;
+      --warn:#ffd36a;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    header, main, footer{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header{ padding-top: 28px; padding-bottom: 10px; }
+    .brand{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand h1{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: .2px;
+    }
+    .brand .sub{
+      color:var(--muted);
+      font-size: 13px;
+    }
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .card{
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      padding: 18px;
+    }
+    h2{
+      margin: 18px 0 10px;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    p{ margin: 10px 0; color: var(--text); }
+    ul{ margin: 10px 0 10px 18px; color: var(--text); }
+    li{ margin: 6px 0; }
+    .muted{ color: var(--muted); }
+    .pill{
+      display:inline-block;
+      padding: 4px 10px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+    }
+    .note{
+      border-left: 3px solid var(--accent);
+      padding: 10px 12px;
+      margin-top: 14px;
+      background: rgba(106,227,255,0.06);
+      border-radius: 10px;
+    }
+    .warn{
+      border-left: 3px solid var(--warn);
+      padding: 10px 12px;
+      margin-top: 14px;
+      background: rgba(255,211,106,0.08);
+      border-radius: 10px;
+    }
+    code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.5px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+    pre{
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      padding: 12px;
+      border-radius: 12px;
+      overflow:auto;
+      margin: 10px 0;
+    }
+    .footer-links{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer-links span{ color: var(--muted); }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div>
+        <h1>Security &amp; Verification</h1>
+        <div class="sub">Hermeticum B.C.E. — Services <span class="pill">threat model · limiti · verifiche offline</span></div>
+      </div>
+      <div class="sub">
+        <a href="./index.html">Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <p class="muted">
+        Ultimo aggiornamento: <strong>2026-01-24</strong>
+      </p>
+
+      <h2>1. Obiettivo di sicurezza</h2>
+      <p>
+        L’obiettivo del servizio è permettere all’utente di generare <strong>prove verificabili</strong> (es. hash) e bundle locali
+        per <strong>integrità</strong> e <strong>coerenza</strong> dei dati, riducendo al minimo il rischio di esposizione.
+      </p>
+
+      <h2>2. Cosa fa (e cosa non fa)</h2>
+      <div class="note">
+        <p><strong>FA:</strong></p>
+        <ul>
+          <li>calcolo di hash (es. <code>SHA-512</code>) lato browser</li>
+          <li>generazione di file/bundle <strong>locali</strong> scaricati dall’utente</li>
+          <li>verifica di integrità tramite confronto hash</li>
+        </ul>
+        <p><strong>NON FA:</strong></p>
+        <ul>
+          <li>non è una certificazione ufficiale UE</li>
+          <li>non sostituisce documenti statali (CIE, passaporto, ecc.)</li>
+          <li>non protegge se il dispositivo dell’utente è compromesso</li>
+        </ul>
+      </div>
+
+      <h2>3. Modello di minaccia (threat model)</h2>
+      <p>Questo sistema è progettato per ridurre i rischi più comuni, ma assume alcune condizioni:</p>
+      <ul>
+        <li><strong>Assunzione A:</strong> il browser non è alterato (estensioni malevole, malware, man-in-the-browser)</li>
+        <li><strong>Assunzione B:</strong> l’utente controlla i file che seleziona e conserva i bundle in modo sicuro</li>
+        <li><strong>Assunzione C:</strong> l’utente usa una connessione affidabile (anche se il processo è locale)</li>
+      </ul>
+
+      <div class="warn">
+        <p>
+          <strong>Limite critico:</strong> se il dispositivo o il browser sono compromessi, qualunque misura “client-side” può essere aggirata.
+          In quel caso la sicurezza reale dipende dalla bonifica del sistema, non dal sito.
+        </p>
+      </div>
+
+      <h2>4. Verifica offline (procedura consigliata)</h2>
+      <p>
+        Per verificare integrità e coerenza, confronta l’hash calcolato in due modi indipendenti:
+      </p>
+      <ul>
+        <li>hash calcolato sul sito (client-side)</li>
+        <li>hash calcolato localmente sul tuo sistema operativo</li>
+      </ul>
+
+      <p class="muted">Esempi (indicativi):</p>
+
+      <pre><code># Linux / macOS
+shasum -a 512 FILE.pdf
+
+# Windows PowerShell
+Get-FileHash -Algorithm SHA512 .\FILE.pdf</code></pre>
+
+      <h2>5. Privacy e assenza di archiviazione</h2>
+      <p>
+        Il servizio è progettato per funzionare senza inviare o archiviare dati su server:
+        dati e file restano nel browser e sul dispositivo dell’utente.
+      </p>
+
+      <h2>6. Responsabilità operativa dell’utente</h2>
+      <p>
+        L’utente è responsabile di:
+      </p>
+      <ul>
+        <li>proteggere il proprio dispositivo (password, cifratura, aggiornamenti)</li>
+        <li>conservare i bundle in modo sicuro</li>
+        <li>non condividere file sensibili con terzi non autorizzati</li>
+      </ul>
+
+      <h2>7. Nota UE-first</h2>
+      <div class="note">
+        <p>
+          “UE-first” indica un orientamento progettuale (GDPR, auditabilità, minimizzazione), non un riconoscimento pubblico.
+          <strong>Non esiste alcuna approvazione o certificazione ufficiale UE implicita</strong> nel servizio.
+        </p>
+      </div>
+
+      <div class="footer-links" aria-label="link di servizio">
+        <span>Link:</span>
+        <a href="./privacy.html">Privacy</a>
+        <a href="./terms.html">Terms</a>
+        <a href="./security.html">Security</a>
+        <a href="./index.html">Home</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="muted">
+    <div class="footer-links">
+      <span>© Hermeticum B.C.E.</span>
+      <span>—</span>
+      <span>UE-first · audit-by-design · fail-closed</span>
+    </div>
+  </footer>
+</body>
+</html>
