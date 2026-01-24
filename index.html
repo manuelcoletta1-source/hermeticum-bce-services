@@ -1,167 +1,177 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hermeticum B.C.E. — Services</title>
-  <meta name="description" content="Hermeticum B.C.E. Services — Rilascio automatico IPR Base con CIE e Codice Fiscale. Bollino europeo di sicurezza digitale per l’utente UE." />
+  <meta name="description" content="Hermeticum B.C.E. Services — Identità verificabili, evidenze crittografiche, UE-first, privacy by design." />
   <style>
     :root{
+      color-scheme: dark;
       --bg:#0b0c10;
       --panel:#0f1117;
       --line:#24262b;
       --text:#e8e8e8;
-      --muted:#9aa0a6;
-      --accent:#6aa9ff;
-      --ok:#2bd576;
+      --muted:#b8b8b8;
+      --accent:#6ae3ff;
+      --warn:#ffd36a;
     }
-    *{box-sizing:border-box}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:var(--bg);
       color:var(--text);
-      line-height:1.6;
+      line-height:1.55;
     }
     header, main, footer{
-      max-width:1120px;
-      margin:0 auto;
-      padding:20px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px;
     }
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      border-bottom:1px solid var(--line);
-      gap:16px;
+    header{ padding-top: 32px; }
+    h1{
+      margin:0 0 8px;
+      font-size: 28px;
+      letter-spacing: .3px;
     }
-    .brand strong{font-size:1.1rem}
-    .brand span{display:block;color:var(--muted);font-size:0.85rem}
-    nav a{
-      color:var(--text);
-      text-decoration:none;
-      margin-left:14px;
-      font-size:0.95rem;
+    h2{
+      margin: 22px 0 10px;
+      font-size: 18px;
+      letter-spacing: .2px;
     }
-    nav a:hover{color:var(--accent)}
-    .hero{padding:34px 0 16px}
-    .hero h1{margin:0 0 10px;font-size:2.2rem}
-    .hero p{margin:0;color:var(--muted);max-width:900px}
-    .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-    .cta{
-      display:inline-block;
-      padding:12px 16px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:var(--panel);
-      color:var(--text);
-      text-decoration:none;
-      font-size:0.95rem;
-    }
-    .cta.primary{border-color:var(--accent);color:#fff}
-    section{margin-top:42px}
-    h2{margin:0 0 12px}
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:16px;
-    }
+    p{ margin: 10px 0; }
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
     .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      padding: 18px;
+      margin-top: 16px;
     }
-    .card h3{margin:0 0 8px}
-    .muted{color:var(--muted)}
-    .list{margin:0;padding-left:18px;color:var(--muted)}
     .pill{
       display:inline-block;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(43,213,118,0.35);
-      color:rgba(43,213,118,0.95);
-      font-size:0.75rem;
+      padding: 4px 10px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+      margin-right: 6px;
     }
-    .seal-wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:18px}
-    .seal-img{width:140px;height:140px;border-radius:16px;border:1px solid var(--line);background:var(--panel);padding:10px}
+    .disclaimer{
+      border-left: 3px solid var(--warn);
+      padding: 12px 14px;
+      margin-top: 14px;
+      background: rgba(255,211,106,0.08);
+      border-radius: 12px;
+      font-size: 14px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .cta{
+      display:inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--accent);
+      color:#000;
+      font-weight:600;
+    }
+    .cta.secondary{
+      background: transparent;
+      color: var(--accent);
+      border:1px solid var(--line);
+      margin-left: 8px;
+    }
+    .muted{ color: var(--muted); }
+
     footer{
-      margin-top:56px;
-      border-top:1px solid var(--line);
-      color:var(--muted);
-      font-size:0.9rem;
+      margin-top: 40px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
     }
+    footer a{ color: var(--muted); }
   </style>
 </head>
 
 <body>
 
 <header>
-  <div class="brand">
-    <strong>Hermeticum B.C.E.</strong>
-    <span>Services · Portale UE-first</span>
+  <span class="pill">UE-first</span>
+  <span class="pill">Privacy by design</span>
+  <span class="pill">Zero data retention</span>
+
+  <h1>Hermeticum B.C.E. — Services</h1>
+  <p class="muted">
+    Infrastruttura leggera per <strong>evidenze crittografiche</strong>, identità verificabili
+    e processi <strong>auditabili</strong>, progettata secondo standard europei.
+  </p>
+
+  <div class="disclaimer">
+    <strong>Nota importante:</strong><br />
+    “UE-first” indica uno <strong>standard di riferimento progettuale</strong> (GDPR, minimizzazione, auditabilità).
+    <strong>Non è una certificazione ufficiale UE</strong> e non sostituisce documenti statali
+    come Carta d’Identità o passaporto.
   </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="services.html">Servizi</a>
-    <a href="ai-workers.html">AI Workers</a>
-    <a href="public-documents.html">Documenti pubblici</a>
-  </nav>
 </header>
 
 <main>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Bollino Europeo di Sicurezza Digitale</h1>
+  <section class="card">
+    <h2>Cos’è questo servizio</h2>
     <p>
-      Hermeticum B.C.E. rilascia il <strong>bollino di sicurezza digitale UE</strong>
-      tramite <strong>IPR Base</strong>, collegando una persona reale alla propria identità cibernetica
-      in modo automatico, verificabile e privacy-by-design.
+      Hermeticum B.C.E. Services consente di generare <strong>prove verificabili</strong>
+      (hash crittografici e bundle locali) per attestare integrità, coerenza e continuità
+      nel tempo di dati e documenti, <strong>senza inviare nulla a server</strong>.
     </p>
-
-    <div class="row">
-      <a class="cta primary" href="onboarding-base.html">Avvia rilascio IPR Base</a>
-      <a class="cta" href="services.html">Catalogo servizi</a>
-    </div>
-
-    <div class="seal-wrap">
-      <img class="seal-img" src="assets/hermeticum-bollino.svg" alt="Bollino Hermeticum — Sicurezza Digitale UE" />
-      <p class="muted" style="margin:0;max-width:720px">
-        <strong>Hermeticum</strong> è il marchio di fabbrica:
-        il bollino indica attribuzione, verificabilità e continuità nel tempo
-        tramite evidenze crittografiche, nel rispetto degli standard UE.
-      </p>
-    </div>
+    <p>
+      Tutte le operazioni avvengono <strong>nel browser dell’utente</strong>.
+    </p>
   </section>
 
-  <!-- COME FUNZIONA -->
-  <section>
-    <h2>Come funziona</h2>
+  <section class="card">
+    <h2>Cosa puoi fare</h2>
     <div class="grid">
-      <div class="card">
-        <h3>1. Dati minimi</h3>
-        <p class="muted">Inserisci CIE (fronte/retro) e Codice Fiscale. Nessun account.</p>
+      <div>
+        <strong>IPR Base</strong>
+        <p class="muted">
+          Genera un evidence bundle locale con hash e metadati verificabili.
+        </p>
       </div>
-      <div class="card">
-        <h3>2. Evidenze locali</h3>
-        <p class="muted">I documenti non vengono caricati. Hash SHA-512 lato browser.</p>
+      <div>
+        <strong>PDAR</strong>
+        <p class="muted">
+          Proof of Data & Record: tracciabilità e verifica offline.
+        </p>
       </div>
-      <div class="card">
-        <h3>3. Rilascio automatico</h3>
-        <p class="muted">Download automatico di IPR Base, PDAR CIE ed Evidence Bundle.</p>
+      <div>
+        <strong>AI Workers (preview)</strong>
+        <p class="muted">
+          Moduli AI orientati a verifica, controllo e coerenza.
+        </p>
       </div>
     </div>
+
+    <a class="cta" href="./onboarding-base.html">Attiva IPR Base</a>
+    <a class="cta secondary" href="./services.html">Vedi servizi</a>
   </section>
 
-  <!-- GARANZIE -->
-  <section>
-    <h2>Garanzie UE</h2>
-    <ul class="list">
-      <li>Hermeticum non sostituisce documenti statali</li>
-      <li>Nessuna archiviazione di CIE o dati sensibili</li>
-      <li>Solo evidenze crittografiche verificabili</li>
-      <li>UE-first · GDPR · fail-closed</li>
+  <section class="card">
+    <h2>Principi chiave</h2>
+    <ul>
+      <li>nessun caricamento dati su server</li>
+      <li>hash locali (es. SHA-512)</li>
+      <li>verifica offline indipendente</li>
+      <li>orientamento UE-first</li>
+      <li>fail-closed, audit-by-design</li>
     </ul>
   </section>
 
@@ -169,11 +179,13 @@
 
 <footer>
   <p>
-    <strong>Hermeticum B.C.E.</strong><br/>
-    Marchio di fabbrica europeo per la sicurezza digitale dell’utente
+    © Hermeticum B.C.E. — Services<br />
+    <a href="./privacy.html">Privacy</a> ·
+    <a href="./terms.html">Terms</a> ·
+    <a href="./security.html">Security</a>
+    <span> — UE-first · audit-by-design · fail-closed</span>
   </p>
 </footer>
 
 </body>
 </html>
-
