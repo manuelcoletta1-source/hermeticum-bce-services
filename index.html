@@ -1,213 +1,241 @@
-<a href="./governance.html">Governance</a>
-<a href="./use-cases.html">Use Cases</a>
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>HERMETICUM B.C.E. — Sicurezza Digitale Europea dell’Individuo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HERMETICUM B.C.E. nasce per la sicurezza digitale europea dell’individuo. Framework UE-first per attribuzione umana verificabile, accountability tecnica e prova digitale opponibile nel tempo." />
+  <title>HERMETICUM B.C.E. — Services</title>
+  <meta name="description" content="HERMETICUM B.C.E. — Sicurezza digitale UE-first: identità verificabile, responsabilità opponibile, fail-closed, prove digitali nel tempo." />
+  <meta name="theme-color" content="#0b0c10" />
   <style>
     :root{
-      --bg:#0b0c10; --panel:#0f1117; --line:#24262b;
-      --text:#e8e8e8; --muted:#9aa0a6; --accent:#7aa2ff;
-      --good:#8ce99a; --warn:#ffd43b;
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a9adb7;
+      --accent:#9be7ff;
+      --good:#6ee7b7;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --radius:18px;
     }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg); color:var(--text); line-height:1.6;
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header, main, footer{max-width:1100px;margin:0 auto;padding:22px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;flex-direction:column;gap:2px}
+    .brand b{letter-spacing:.4px}
+    .brand small{color:var(--muted)}
+    nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+    .chip{border:1px solid var(--line);background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:999px;color:var(--text)}
+    .chip:hover{background:rgba(255,255,255,0.05)}
+    .hero{margin-top:18px;border:1px solid var(--line);background:linear-gradient(180deg, rgba(155,231,255,0.08), rgba(15,17,23,0.85));border-radius:var(--radius);padding:20px}
+    .kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02)}
+    h1{margin:12px 0 6px;font-size:28px;letter-spacing:.2px}
+    .subtitle{color:var(--muted);margin:0 0 14px;max-width:70ch}
+    .claim{margin:12px 0 0;font-size:16px}
+    .claim b{color:var(--accent)}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;border:1px solid var(--line);padding:10px 12px;background:rgba(255,255,255,0.02);color:var(--text)}
+    .btn.primary{background:rgba(155,231,255,0.14);border-color:rgba(155,231,255,0.35)}
+    .btn:hover{background:rgba(255,255,255,0.06);text-decoration:none}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:14px}
+    .card{grid-column:span 12;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:16px}
+    @media(min-width:900px){
+      .card.span6{grid-column:span 6}
+      .card.span4{grid-column:span 4}
+      .card.span8{grid-column:span 8}
     }
-    header{ border-bottom:1px solid var(--line); }
-    .brandwrap{
-      max-width:980px; margin:0 auto; padding:28px 20px 16px; text-align:center;
-    }
-    .brand{
-      margin:0; font-size:2.4rem; letter-spacing:0.12em; font-weight:600;
-    }
-    .brandsub{ margin:10px 0 0; color:var(--muted); font-size:0.95rem; }
-
-    .nav{
-      display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
-      margin-top:10px; font-size:0.95rem;
-    }
-    a{ color:var(--accent); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    .status{
-      display:inline-flex; align-items:center; gap:10px;
-      margin-top:12px; padding:6px 12px; border-radius:999px;
-      border:1px solid var(--line); background:var(--panel);
-      color:var(--muted); font-size:0.85rem;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:50%;
-      background:var(--good);
-      box-shadow:0 0 0 3px rgba(140,233,154,0.12);
-      display:inline-block;
-    }
-
-    .pagehead, main, footer{
-      max-width:980px; margin:0 auto; padding:20px 20px;
-    }
-    footer{
-      border-top:1px solid var(--line);
-      color:var(--muted); font-size:0.9rem; margin-top:60px;
-    }
-
-    h1{ margin:0 0 10px; font-size:1.9rem; }
-    h2{ margin-top:36px; font-size:1.25rem; }
-    p{ max-width:860px; }
-    .muted{ color:var(--muted); }
-
-    .card{
-      background:var(--panel); border:1px solid var(--line);
-      border-radius:14px; padding:18px; margin-top:16px;
-    }
-    ul{ padding-left:20px; margin:10px 0 0; }
-    li{ margin:6px 0; }
-
-    .mono{
-      font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-      background:#0b0c10; border:1px solid var(--line);
-      border-radius:12px; padding:14px; overflow-x:auto; white-space:pre;
-      margin-top:12px;
-    }
-
-    .note{
-      border-left:3px solid var(--accent);
-      padding:10px 12px; background: rgba(122,162,255,0.08);
-      border-radius:10px; margin-top:12px;
-    }
-    .warn{ border-left-color:var(--warn); background: rgba(255,212,59,0.10); }
-
-    .grid{
-      display:grid; grid-template-columns: repeat(12, 1fr);
-      gap:14px; margin-top:16px;
-    }
-    .col6{ grid-column: span 12; }
-    @media (min-width: 920px){ .col6{ grid-column: span 6; } }
-
-    .btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-    .btn{
-      display:inline-block; padding:9px 12px; border-radius:12px;
-      border:1px solid var(--line); background:#0b0c10;
-      color:var(--text); font-size:0.95rem;
-    }
+    h2{margin:0 0 10px;font-size:18px}
+    p{margin:10px 0;color:var(--text)}
+    ul{margin:10px 0 0;padding-left:18px;color:var(--text)}
+    li{margin:6px 0}
+    .muted{color:var(--muted)}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .diagram{border:1px dashed var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,0.02);overflow:auto}
+    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted);background:rgba(255,255,255,0.02)}
+    .badge .dot{width:8px;height:8px;border-radius:999px;background:var(--good)}
+    .footerline{border-top:1px solid var(--line);margin-top:18px;padding-top:16px;color:var(--muted);font-size:13px}
+    .small{font-size:13px}
   </style>
 </head>
 
 <body>
-
 <header>
-  <div class="brandwrap">
-    <h1 class="brand">HERMETICUM&nbsp;B.C.E.</h1>
-    <p class="brandsub">Blindata · Computabile · Evolutiva</p>
-
-    <nav class="nav">
-      <a href="./index.html"><strong>Home</strong></a>
-      <a href="./services.html">Servizi</a>
-      <a href="./catalog.html">Catalogo</a>
-      <a href="./create.html">Attivazione</a>
-      <a href="./verify.html">Verifica</a>
-      <a href="./README.md">README</a>
+  <div class="topbar">
+    <div class="brand">
+      <b>HERMETICUM B.C.E.</b>
+      <small>Services · UE-first · Fail-Closed · Opponibilità</small>
+    </div>
+    <nav>
+      <a class="chip" href="#cos-e">Cos’è</a>
+      <a class="chip" href="#modello">Modello</a>
+      <a class="chip" href="#componenti">Componenti</a>
+      <a class="chip" href="#livelli">Livelli</a>
+      <a class="chip" href="#next">Prossimi passi</a>
+      <a class="chip" href="https://manuelcoletta1-source.github.io/hermeticum-bce-technology/" target="_blank" rel="noopener">Technology</a>
     </nav>
-
-    <div class="status"><span class="dot"></span>EU Pilot — Sicurezza Digitale dell’Individuo</div>
   </div>
+
+  <section class="hero">
+    <div class="kicker">
+      <span class="badge"><span class="dot"></span> ATTIVO</span>
+      <span>Blindata · Computabile · Evolutiva</span>
+      <span class="muted">UE-first</span>
+    </div>
+
+    <h1>Sicurezza Digitale Europea dell’Individuo</h1>
+    <p class="subtitle">
+      HERMETICUM B.C.E. introduce una catena minima <b>fail-closed</b> per rendere le decisioni digitali
+      <b>attribuibili</b>, <b>verificabili</b> e <b>opponibili</b> nel tempo.
+    </p>
+
+    <p class="claim">
+      <b>Un sistema che riflette, organizza e risponde.</b><br/>
+      Uno strumento affilato al servizio dell’intelligenza umana.
+    </p>
+
+    <div class="cta">
+      <a class="btn primary" href="https://manuelcoletta1-source.github.io/hermeticum-bce-technology/" target="_blank" rel="noopener">Scopri l’architettura (Technology)</a>
+      <a class="btn" href="#next">Attiva il percorso (onboarding)</a>
+      <a class="btn" href="https://manuelcoletta1-source.github.io/manuhell/" target="_blank" rel="noopener">Verifica pubblica / IPR</a>
+    </div>
+
+    <p class="muted small" style="margin-top:12px;">
+      Nota: JOKER è una <b>configurazione operativa</b> dell’AI per riflettere, organizzare e rispondere.
+      Non è “coscienza autonoma” e non decide al posto tuo: la responsabilità resta umana.
+    </p>
+  </section>
 </header>
 
-<section class="pagehead">
-  <h1>BioCyber Identity Card</h1>
-  <p class="muted">
-    <strong>HERMETICUM B.C.E. nasce per la sicurezza digitale europea dell’individuo.</strong><br/>
-    Framework tecnico per attribuzione umana verificabile, accountability e
-    prova digitale opponibile nel tempo in sistemi ad alto rischio.
-  </p>
-
-  <div class="note warn">
-    Non è un documento civile. Non sostituisce CIE o passaporto.
-    È uno strato di sicurezza che rende la responsabilità <strong>non opzionale</strong>.
-  </div>
-</section>
-
 <main>
-
-  <section>
-    <h2>Il problema</h2>
-    <div class="card">
-      <ul>
-        <li>decisioni digitali critiche senza responsabile umano opponibile</li>
-        <li>automazione fail-open (assenza di controllo ex-ante)</li>
-        <li>prove digitali che decadono o diventano inutilizzabili</li>
-      </ul>
-      <p class="muted">
-        Effetti sistemici: incertezza giuridica, incidenti operativi,
-        scarico di responsabilità sull’algoritmo.
-      </p>
-    </div>
-  </section>
-
-  <section>
-    <h2>La soluzione</h2>
-    <div class="card">
+  <section id="cos-e" class="grid">
+    <div class="card span8">
+      <h2>Cos’è HERMETICUM B.C.E.</h2>
       <p>
-        La BioCyber Identity Card introduce una <strong>catena minima fail-closed</strong>:
+        Un framework tecnico-operativo che rende la responsabilità umana <b>non opzionale</b>
+        nelle decisioni digitali critiche. Non sostituisce documenti civili (CIE, passaporto):
+        aggiunge uno strato di sicurezza e prova che resiste nel tempo.
       </p>
-      <div class="mono">Evento → IPR/HRR → DGV → Tempo certificato → Evidence Bundle</div>
+      <ul>
+        <li><b>UE-first</b> (compliance e interoperabilità come baseline)</li>
+        <li><b>Fail-Closed</b> (niente azione senza verifiche minime)</li>
+        <li><b>Audit-by-design</b> (ricostruibilità e controllabilità integrata)</li>
+        <li><b>Evidence nel tempo</b> (prove strutturate, non “log fragili”)</li>
+      </ul>
+    </div>
+
+    <div class="card span4">
+      <h2>Cosa NON è</h2>
+      <ul>
+        <li>Non è “AI cosciente”.</li>
+        <li>Non è un sistema che decide al posto tuo.</li>
+        <li>Non è “solo blockchain”.</li>
+      </ul>
+      <p class="muted small">
+        È un sistema di validazione e tracciabilità: se mancano i prerequisiti, si ferma.
+      </p>
+    </div>
+  </section>
+
+  <section id="modello" class="grid">
+    <div class="card span12">
+      <h2>Il problema sistemico</h2>
+      <ul>
+        <li><b>Decisioni critiche</b> senza responsabile umano opponibile.</li>
+        <li><b>Automazioni fail-open</b> che eseguono anche quando non dovrebbero.</li>
+        <li><b>Prove digitali che decadono</b> e diventano inutilizzabili nel tempo.</li>
+      </ul>
+    </div>
+
+    <div class="card span12">
+      <h2>La soluzione: catena minima fail-closed</h2>
+      <p class="muted">Se un elemento essenziale non è verificabile, l’azione non prosegue.</p>
+      <div class="diagram mono">
+        Evento → IPR/HRR (Radice Umana) → DGV (Gate decisionale) → Tempo certificato → Evidence Bundle
+      </div>
+      <p class="small muted">
+        Esiti DGV: <span class="mono">ALLOW / REVIEW / DENY / FAIL_CLOSED</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="componenti" class="grid">
+    <div class="card span4">
+      <h2>IPR / HRR</h2>
+      <p class="muted">Radice umana verificabile.</p>
+      <p>Connessione tecnica a una persona reale, auditabile e non duplicabile.</p>
+    </div>
+
+    <div class="card span4">
+      <h2>DGV</h2>
+      <p class="muted">Decision Gate Validator.</p>
+      <p>Validazione ex-ante con regole dure e comportamento fail-closed.</p>
+    </div>
+
+    <div class="card span4">
+      <h2>Evidence Bundle</h2>
+      <p class="muted">Prova nel tempo.</p>
+      <p>Pacchetto di evidenze (hash, firme, tempo, metadati) per audit e opponibilità.</p>
+    </div>
+
+    <div class="card span12">
+      <h2>Anchors (opzionali)</h2>
       <p class="muted">
-        Se un elemento manca o non è verificabile → l’azione <strong>non deve</strong> essere eseguita.
+        Livelli di ancoraggio crittografico in base alla criticità dell’evento.
+        Esempi: IPFS / BTC / EVM.
       </p>
     </div>
   </section>
 
-  <section>
-    <h2>Componenti chiave</h2>
-    <div class="grid">
-      <div class="card col6">
-        <h3>IPR / HRR (Radice Umana)</h3>
-        <p class="muted">
-          Collegamento tecnico a una persona reale.
-          Auditabile, non duplicabile, non pubblico.
-        </p>
-        <a class="btn" href="./services.html">Architettura</a>
-      </div>
-      <div class="card col6">
-        <h3>DGV (Decision Gate Validator)</h3>
-        <p class="muted">
-          Validazione ex-ante con esiti standard:
-          ALLOW / REVIEW / DENY / FAIL_CLOSED.
-        </p>
-        <a class="btn" href="./verify.html">Verifica</a>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Carte e Ancoraggi</h2>
-    <div class="card">
-      <p class="muted">
-        Carte Base, Opponibile e Forte con servizi di ancoraggio
-        (IPFS, Bitcoin, Ethereum) attivabili secondo criticità e valore.
+  <section id="livelli" class="grid">
+    <div class="card span12">
+      <h2>Carte e livelli</h2>
+      <p>Tre livelli per scalare da onboarding a opponibilità forte.</p>
+      <ul>
+        <li><b>Carta Base</b> — attivazione e percorso minimo, identity + regole.</li>
+        <li><b>Carta Opponibile</b> — evidenze strutturate e auditabilità robusta.</li>
+        <li><b>Carta Forte</b> — ancoraggi e policy per contesti ad alta criticità.</li>
+      </ul>
+      <p class="muted small">
+        Obiettivo: rendere chiaro “quanto vale” un evento e quale prova serve per sostenerlo nel tempo.
       </p>
-      <div class="btnrow">
-        <a class="btn" href="./catalog.html">Catalogo</a>
-        <a class="btn" href="./evidence/README.md">Evidence</a>
-      </div>
     </div>
   </section>
 
+  <section id="next" class="grid">
+    <div class="card span6">
+      <h2>Prossimi passi</h2>
+      <ol style="margin:10px 0 0; padding-left:18px;">
+        <li>Definisci il percorso utente (Base → Opponibile → Forte).</li>
+        <li>Pubblica un “Catalogo Servizi” con prezzi mensili/annuali.</li>
+        <li>Aggiungi una pagina “Cos’è / Cosa NON è JOKER”.</li>
+        <li>Collega la sezione Technology con architettura e moduli.</li>
+      </ol>
+    </div>
+
+    <div class="card span6">
+      <h2>CTA rapide</h2>
+      <div class="cta" style="margin-top:10px;">
+        <a class="btn primary" href="https://manuelcoletta1-source.github.io/hermeticum-bce-technology/" target="_blank" rel="noopener">Vai a Technology</a>
+        <a class="btn" href="https://manuelcoletta1-source.github.io/manuhell/" target="_blank" rel="noopener">Verifica / IPR</a>
+      </div>
+      <p class="muted small" style="margin-top:12px;">
+        Suggerimento: inserire un’email/PEC o form di contatto quando vuoi aprire a partnership.
+      </p>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <p>
-    HERMETICUM B.C.E. — Services<br/>
-    Framework UE-first per la sicurezza digitale dell’individuo.
-  </p>
+  <div class="footerline">
+    <div><b>HERMETICUM B.C.E.</b> — Services</div>
+    <div class="small">UE-first · Fail-Closed · Audit-by-design · Opponibilità nel tempo</div>
+  </div>
 </footer>
-
 </body>
 </html>
-
 
