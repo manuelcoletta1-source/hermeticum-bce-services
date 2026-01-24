@@ -1,17 +1,10 @@
-<div class="row" style="margin-top:12px">
-  <button class="btn primary" id="btnHash">Calcola SHA-512</button>
-  <button class="btn" id="btnDownload" disabled>Scarica Bundle (JSON)</button>
-  <button class="btn" id="btnDownloadPDAR" disabled>Scarica PDAR CIE (JSON)</button>
-  <button class="btn primary" id="btnDownloadIPR" disabled>Scarica IPR Base (JSON)</button>
-  <span class="pill" id="statePill">Stato: in attesa</span>
-</div>
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hermeticum B.C.E. — Attivazione Base</title>
-  <meta name="description" content="Attivazione Base Carta d’Identità Cibernetica: inserimento dati minimi e hashing locale (SHA-512) dei file CIE. Nessun upload documento." />
+  <meta name="description" content="Attivazione Base Carta d’Identità Cibernetica: dati minimi + hashing locale dei file CIE. Nessun upload documento. Output: Bundle + PDAR + IPR (download)." />
   <style>
     :root{
       --bg:#0b0c10; --panel:#0f1117; --line:#24262b;
@@ -68,8 +61,8 @@
     <h1 style="margin:0 0 8px">Attivazione Base</h1>
     <p class="muted" style="margin:0">
       Inserisci i dati minimi e seleziona i file CIE (fronte/retro).
-      Il sistema calcola <strong>SHA-512 nel browser</strong>. I documenti <strong>non vengono caricati</strong>.
-      Verrà generato un <strong>Evidence Bundle</strong> (JSON) che potrai scaricare.
+      Il sistema calcola l’hash <strong>nel browser</strong>. I documenti <strong>non vengono caricati</strong>.
+      Al termine puoi scaricare: <strong>Bundle</strong>, <strong>PDAR CIE</strong> e <strong>IPR Base</strong>.
     </p>
     <p class="muted note" style="margin:10px 0 0">
       Regola: <strong>fail-closed</strong>. Se mancano i file o gli hash, l’attivazione non procede.
@@ -105,7 +98,7 @@
     <input id="cf" type="text" inputmode="latin" autocapitalize="characters" placeholder="Es. CLT..." />
 
     <p class="muted note" style="margin:10px 0 0">
-      Il Codice Fiscale serve a coerenza anagrafica interna. Nei record pubblici si usano solo evidenze (hash) e metadati minimali.
+      Nei record pubblici si usano solo evidenze (hash) e metadati minimali. Il CF non viene esportato in chiaro.
     </p>
   </section>
 
@@ -123,9 +116,12 @@
       </div>
     </div>
 
+    <!-- TOOLBAR UNICA (4 bottoni) -->
     <div class="row" style="margin-top:12px">
-      <button class="btn primary" id="btnHash">Calcola SHA-512</button>
-      <button class="btn" id="btnDownload" disabled>Scarica Evidence Bundle (JSON)</button>
+      <button class="btn primary" id="btnHash">Calcola hash</button>
+      <button class="btn" id="btnDownload" disabled>Scarica Bundle (JSON)</button>
+      <button class="btn" id="btnDownloadPDAR" disabled>Scarica PDAR CIE (JSON)</button>
+      <button class="btn primary" id="btnDownloadIPR" disabled>Scarica IPR Base (JSON)</button>
       <span class="pill" id="statePill">Stato: in attesa</span>
     </div>
 
@@ -138,12 +134,12 @@
     </div>
 
     <div class="card" style="margin-top:14px">
-      <h3 style="margin:0 0 8px">Evidence Bundle (anteprima)</h3>
+      <h3 style="margin:0 0 8px">Bundle (anteprima)</h3>
       <pre id="outJson">{}</pre>
     </div>
 
     <p class="muted note" style="margin:10px 0 0">
-      Questo bundle è pensato per essere allegato a un IPR/PDAR in modalità privata.
+      Output privati: Bundle, PDAR e IPR sono file scaricati localmente.
     </p>
   </section>
 
@@ -156,7 +152,10 @@
 </footer>
 
 <script>
-  // --- Helpers ---
+  const $ = (id) => document.getElementById(id);
+
+  function nowISO(){ return new Date().toISOString(); }
+
   function toHex(buffer){
     const bytes = new Uint8Array(buffer);
     let hex = "";
@@ -164,58 +163,10 @@
     return hex;
   }
 
-  async function sha512File(file){
-    const buf = await file.arrayBuffer();
-    // WebCrypto SHA-512 is supported in modern Chromium/Android WebView.
-    const digest = await crypto.subtle.digest("SHA-512", buf);
-    return toHex(digest);
-  }
-
-  function nowISO(){
-    return new Date().toISOString();
-  }
-
-  function setPill(text, kind){
-    const pill = document.getElementById("statePill");
+  function setPill(text, ok){
+    const pill = $("statePill");
     pill.textContent = text;
-    pill.className = "pill" + (kind ? " " + kind : "");
-  }
-
-  function buildBundle(frontHash, backHash){
-    const nome = document.getElementById("nome").value.trim();
-    const cognome = document.getElementById("cognome").value.trim();
-    const nascita = document.getElementById("nascita").value;
-    const luogo = document.getElementById("luogo").value.trim();
-    const cf = document.getElementById("cf").value.trim().toUpperCase();
-
-    return {
-      bundle_version: "1.0",
-      type: "BaseActivationEvidenceBundle",
-      namespace: "Hermeticum B.C.E.",
-      service: "Services / Base Activation",
-      created_at_utc: nowISO(),
-      subject_minimal: {
-        given_name: nome || null,
-        family_name: cognome || null,
-        birth_date: nascita || null,
-        birth_place: luogo || null,
-        tax_code_internal: cf ? "[COLLECTED-PRIVATE]" : null
-      },
-      evidence: {
-        cie_front: { alg: "sha512", hash: frontHash },
-        cie_back:  { alg: "sha512", hash: backHash }
-      },
-      privacy: {
-        no_document_upload: true,
-        store_hash_only: true,
-        public_records_no_plaintext_ids: true
-      },
-      fail_closed: [
-        "Missing CIE front/back hash -> STOP",
-        "Missing required fields (policy dependent) -> STOP"
-      ],
-      next_step: "Attach this bundle to PDAR-CIE (VALID-PRIVATE) and associate to IPR."
-    };
+    pill.className = "pill" + (ok ? " ok" : "");
   }
 
   function downloadJSON(obj, filename){
@@ -231,51 +182,162 @@
     URL.revokeObjectURL(url);
   }
 
-  // --- UI wiring ---
-  let lastBundle = null;
+  async function hashFileWithFallback(file){
+    const buf = await file.arrayBuffer();
+    try{
+      const digest = await crypto.subtle.digest("SHA-512", buf);
+      return { alg: "sha512", hex: toHex(digest) };
+    }catch(e){
+      const digest = await crypto.subtle.digest("SHA-256", buf);
+      return { alg: "sha256", hex: toHex(digest) };
+    }
+  }
 
-  document.getElementById("btnHash").addEventListener("click", async () => {
-    const f = document.getElementById("cieFront").files[0];
-    const b = document.getElementById("cieBack").files[0];
+  function subjectMinimal(){
+    const nome = $("nome").value.trim();
+    const cognome = $("cognome").value.trim();
+    const nascita = $("nascita").value;
+    const luogo = $("luogo").value.trim();
+    const cf = $("cf").value.trim().toUpperCase();
+
+    return {
+      given_name: nome || null,
+      family_name: cognome || null,
+      birth_date: nascita || null,
+      birth_place: luogo || null,
+      tax_code_internal: cf ? "[COLLECTED-PRIVATE]" : null
+    };
+  }
+
+  function makeIPRId(subj){
+    const baseA = (subj.given_name || "PRIVATE").replace(/\s+/g,"-");
+    const baseB = (subj.family_name || "PRIVATE").replace(/\s+/g,"-");
+    const stamp = new Date().toISOString().slice(0,10).replaceAll("-","");
+    return `IPR-${(baseA+"-"+baseB).toUpperCase()}-BASE-${stamp}-0001`;
+  }
+
+  function buildBundle(subj, evidence){
+    return {
+      bundle_version: "1.0",
+      type: "BaseActivationEvidenceBundle",
+      namespace: "Hermeticum B.C.E.",
+      service: "Services / Base Activation",
+      created_at_utc: nowISO(),
+      subject_minimal: subj,
+      evidence,
+      privacy: {
+        no_document_upload: true,
+        store_hash_only: true,
+        public_records_no_plaintext_ids: true
+      },
+      fail_closed: [
+        "Missing CIE front/back hash -> STOP"
+      ]
+    };
+  }
+
+  function buildPDAR(iprId, evidence){
+    return {
+      pdar_version: "1.0",
+      type: "PublicDocumentAnchorRecord",
+      namespace: "Hermeticum B.C.E.",
+      service: "Services / Base Activation",
+      status: "VALID-PRIVATE",
+      subject: { ipr_id: iprId, holder_display_name: "[PRIVATE]", jurisdiction: "IT / UE" },
+      identity_document: { doc_type: "Carta d’Identità (CIE)", scope: "KYC private evidence", storage: "NO-DOCUMENT-STORAGE" },
+      evidence,
+      compliance: { ue_first: true, gdpr_minimization: true, fail_closed: true }
+    };
+  }
+
+  function buildIPR(iprId){
+    return {
+      ipr_version: "1.0",
+      type: "IPR",
+      namespace: "Hermeticum B.C.E.",
+      ipr_id: iprId,
+      status: "BASE-ACTIVE",
+      issued_at_utc: nowISO(),
+      privacy: { public_records_no_plaintext_ids: true, store_hash_only: true },
+      policy: { ue_first: true, gdpr_minimization: true, fail_closed: true },
+      links_private: {
+        pdar_cie_filename: "PDAR-CIE-IT.json",
+        evidence_bundle_filename: "HERMETICUM-BASE-EVIDENCE-BUNDLE.json"
+      }
+    };
+  }
+
+  let __bundle = null, __pdar = null, __ipr = null, __iprId = null;
+
+  // inizializzazione
+  $("btnDownload").disabled = true;
+  $("btnDownloadPDAR").disabled = true;
+  $("btnDownloadIPR").disabled = true;
+
+  $("btnHash").addEventListener("click", async () => {
+    const f = $("cieFront").files[0];
+    const b = $("cieBack").files[0];
 
     if (!f || !b){
-      setPill("Stato: FAIL-CLOSED (mancano file CIE)", "");
+      setPill("Stato: FAIL-CLOSED (mancano file CIE)", false);
       alert("Seleziona CIE fronte e retro. Il processo è fail-closed.");
       return;
     }
 
     try{
-      setPill("Stato: calcolo hash…", "");
-      document.getElementById("btnHash").disabled = true;
+      setPill("Stato: calcolo hash…", false);
+      $("btnHash").disabled = true;
 
-      const frontHash = await sha512File(f);
-      const backHash  = await sha512File(b);
+      const front = await hashFileWithFallback(f);
+      const back  = await hashFileWithFallback(b);
 
-      document.getElementById("outFront").textContent = frontHash;
-      document.getElementById("outBack").textContent = backHash;
+      $("outFront").textContent = `${front.alg.toUpperCase()}: ${front.hex}`;
+      $("outBack").textContent  = `${back.alg.toUpperCase()}: ${back.hex}`;
 
-      lastBundle = buildBundle(frontHash, backHash);
-      document.getElementById("outJson").textContent = JSON.stringify(lastBundle, null, 2);
+      const subj = subjectMinimal();
+      const evidence = {
+        cie_front: { alg: front.alg, hash: front.hex },
+        cie_back:  { alg: back.alg,  hash: back.hex }
+      };
 
-      document.getElementById("btnDownload").disabled = false;
-      setPill("Stato: evidenze pronte", "ok");
+      __bundle = buildBundle(subj, evidence);
+      __iprId = makeIPRId(subj);
+      __pdar = buildPDAR(__iprId, evidence);
+      __ipr  = buildIPR(__iprId);
+
+      $("outJson").textContent = JSON.stringify(__bundle, null, 2);
+
+      $("btnDownload").disabled = false;
+      $("btnDownloadPDAR").disabled = false;
+      $("btnDownloadIPR").disabled = false;
+
+      setPill(`Stato: IPR Base pronto (${front.alg.toUpperCase()})`, true);
+
     }catch(e){
       console.error(e);
-      setPill("Stato: ERRORE hashing", "");
-      alert("Errore durante il calcolo SHA-512. Verifica browser e riprova.");
+      setPill("Stato: ERRORE hashing", false);
+      alert("Errore durante il calcolo hash. Prova a cambiare file o browser e riprova.");
     }finally{
-      document.getElementById("btnHash").disabled = false;
+      $("btnHash").disabled = false;
     }
   });
 
-  document.getElementById("btnDownload").addEventListener("click", () => {
-    if (!lastBundle){
-      alert("Calcola prima gli hash.");
-      return;
-    }
-    const filename = "HERMETICUM-BASE-EVIDENCE-BUNDLE.json";
-    downloadJSON(lastBundle, filename);
+  $("btnDownload").addEventListener("click", () => {
+    if (!__bundle){ alert("Calcola prima gli hash."); return; }
+    downloadJSON(__bundle, "HERMETICUM-BASE-EVIDENCE-BUNDLE.json");
+  });
+
+  $("btnDownloadPDAR").addEventListener("click", () => {
+    if (!__pdar){ alert("Calcola prima gli hash."); return; }
+    downloadJSON(__pdar, "PDAR-CIE-IT.json");
+  });
+
+  $("btnDownloadIPR").addEventListener("click", () => {
+    if (!__ipr){ alert("Calcola prima gli hash."); return; }
+    const filename = (__iprId || "IPR-BASE") + ".json";
+    downloadJSON(__ipr, filename);
   });
 </script>
+
 </body>
 </html>
