@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — Services | Catalogo</title>
-  <meta name="description" content="Catalogo servizi Hermeticum B.C.E.: Carta d’Identità Cibernetica, IPR, verifica, audit, moduli software ed editoriali." />
+  <title>Hermeticum B.C.E. — Catalogo Services</title>
+  <meta name="description" content="Catalogo servizi Hermeticum B.C.E.: rilascio IPR Base (CIE+CF), AI Workers, documenti pubblici (PDAR), moduli e repository." />
   <style>
     :root{
       --bg:#0b0c10;
@@ -36,11 +36,7 @@
       gap:16px;
       border-bottom:1px solid var(--line);
     }
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-    }
+    .brand{display:flex; flex-direction:column; gap:2px}
     .brand strong{font-size:1.05rem}
     .brand span{color:var(--muted); font-size:0.85rem}
     nav a{
@@ -52,17 +48,10 @@
     }
     nav a:last-child{margin-right:0}
     nav a:hover{color:var(--accent)}
-    .hero{
-      padding:28px 0 8px;
-    }
-    .hero h1{margin:0 0 8px; font-size:1.8rem}
-    .hero p{margin:0 0 14px; color:var(--muted); max-width:860px}
-    .row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:10px;
-    }
+    h1{margin:0 0 8px; font-size:2rem}
+    .muted{color:var(--muted)}
+    .hero{padding:24px 0 8px}
+    .row{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
     .cta{
       display:inline-block;
       padding:10px 14px;
@@ -73,10 +62,7 @@
       text-decoration:none;
       font-size:0.95rem;
     }
-    .cta.primary{
-      border-color:var(--accent);
-      color:#fff;
-    }
+    .cta.primary{border-color:var(--accent); color:#fff}
     .badge{
       display:inline-block;
       padding:4px 8px;
@@ -86,11 +72,12 @@
       color:var(--muted);
       margin-right:6px;
     }
+    section{margin-top:28px}
     .grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
       gap:16px;
-      margin-top:14px;
+      margin-top:12px;
     }
     .card{
       border:1px solid var(--line);
@@ -98,15 +85,8 @@
       padding:16px;
       background:var(--panel);
     }
-    .card h3{margin:0 0 8px; font-size:1.1rem}
-    .card p{margin:0 0 10px}
-    .muted{color:var(--muted)}
-    .kpi{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:10px;
-    }
+    .card h2, .card h3{margin:0 0 8px}
+    .kpi{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
     .kpi span{
       font-size:0.85rem;
       color:var(--muted);
@@ -115,254 +95,177 @@
       padding:6px 10px;
       background:rgba(255,255,255,0.02);
     }
+    .pill{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-size:0.75rem;
+      color:var(--muted);
+    }
+    .pill.ok{border-color:rgba(43,213,118,0.35);color:rgba(43,213,118,0.95)}
+    .pill.soon{border-color:rgba(255,204,102,0.35);color:rgba(255,204,102,0.95)}
     .list{margin:0; padding-left:18px; color:var(--muted)}
-    section{margin-top:34px}
-    .hr{border-top:1px solid var(--line); margin:26px 0}
     footer{
       margin-top:46px;
       border-top:1px solid var(--line);
       color:var(--muted);
       font-size:0.9rem;
     }
-    footer a{color:var(--muted); text-decoration:none}
-    footer a:hover{color:var(--accent)}
-    .flag{
-      display:inline-block;
-      padding:4px 8px;
-      border-radius:999px;
-      font-size:0.75rem;
-      border:1px solid var(--line);
-      color:var(--muted);
-    }
-    .flag.ok{border-color:rgba(43,213,118,0.35); color:rgba(43,213,118,0.95)}
-    .flag.warn{border-color:rgba(255,204,102,0.35); color:rgba(255,204,102,0.95)}
   </style>
 </head>
 
 <body>
-
 <header>
   <div class="brand">
     <strong>Hermeticum B.C.E.</strong>
-    <span>Services · Catalogo servizi e artefatti</span>
+    <span>Catalogo Services · Portale UE-first</span>
   </div>
   <nav>
     <a href="index.html">Home</a>
-    <a href="#catalogo">Catalogo</a>
-    <a href="#onboarding">Onboarding</a>
-    <a href="#moduli">Repository</a>
-    <a href="#verifica">Verifica</a>
+    <a href="onboarding-base.html">Attiva Base</a>
+    <a href="ai-workers.html">AI Workers</a>
+    <a href="public-documents.html">Documenti pubblici</a>
   </nav>
 </header>
 
 <main>
-
   <section class="hero">
-    <h1>Catalogo servizi</h1>
-    <p>
-      Hermeticum B.C.E. fornisce servizi e artefatti cibernetici UE-first per rendere
-      <strong>identità, atti e opere</strong> verificabili nel tempo, con tracciabilità e responsabilità opponibile.
+    <h1>Catalogo Services</h1>
+    <p class="muted">
+      Qui trovi i servizi disponibili e i moduli dell’ecosistema. Regola: <strong>1 servizio = 1 repository</strong>.
+      Dove un modulo non è pronto: <span class="pill soon">COMING SOON</span>.
     </p>
     <div class="row">
-      <a class="cta primary" href="#carta">Carta d’Identità Cibernetica</a>
-      <a class="cta" href="#onboarding">Avvia onboarding</a>
-      <a class="cta" href="#verifica">Verifica pubblica</a>
+      <a class="cta primary" href="onboarding-base.html">Avvia rilascio IPR Base</a>
+      <a class="cta" href="index.html#moduli">Vedi repository</a>
     </div>
     <div class="row" style="margin-top:12px">
       <span class="badge">UE-first</span>
+      <span class="badge">GDPR minimization</span>
       <span class="badge">Audit-by-design</span>
       <span class="badge">Fail-closed</span>
-      <span class="badge">Dual-use non offensiva</span>
     </div>
   </section>
 
-  <section id="catalogo">
+  <!-- PRIORITÀ 1: IPR BASE -->
+  <section>
+    <div class="card">
+      <h2>Rilascio IPR Base (cittadini privati)</h2>
+      <p class="muted" style="margin:0">
+        Attivazione della <strong>Carta d’Identità Cibernetica (BASE)</strong> tramite CIE + Codice Fiscale.
+        I documenti <strong>non vengono caricati</strong>: si conserva solo evidenza verificabile (hash).
+      </p>
+      <div class="kpi">
+        <span>Input: CIE + CF</span>
+        <span>Metodo: SHA-512 lato browser</span>
+        <span>Output: IPR Base + PDAR (VALID-PRIVATE)</span>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <a class="cta primary" href="onboarding-base.html">Apri modulo Base</a>
+        <a class="cta" href="index.html#base">Dettagli Base</a>
+      </div>
+      <p class="muted" style="margin:10px 0 0; font-size:0.9rem">
+        Nota: Hermeticum B.C.E. non sostituisce documenti statali; realizza un aggancio evidence-based nel rispetto del GDPR.
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVIZI PRINCIPALI -->
+  <section>
     <h2>Servizi principali</h2>
-
     <div class="grid">
-
-      <div class="card" id="carta">
-        <h3>Carta d’Identità Cibernetica Hermeticum (UE-conforme)</h3>
-        <p class="muted">
-          Artefatto software che collega una persona reale (o soggetto responsabile) a un’identità cibernetica verificabile
-          e persistente nel tempo.
+      <div class="card">
+        <h3>AI Workers</h3>
+        <p class="muted" style="margin:0">
+          Attribuzione, paternità e responsabilità umana nel lavoro con l’AI. Supporto ad audit e continuità professionale.
         </p>
         <div class="kpi">
-          <span>Output: Identità cibernetica attiva</span>
-          <span>Prova: verificabile</span>
-          <span>Continuità: nel tempo</span>
+          <span>Human-in-the-loop</span>
+          <span>Priorità temporale</span>
+          <span>Audit</span>
         </div>
-        <div class="hr"></div>
-        <p class="muted"><strong>Serve per:</strong></p>
-        <ul class="list">
-          <li>ancorare documenti, opere, software e decisioni a un’identità</li>
-          <li>dimostrare nel tempo cosa esisteva, quando e sotto quale responsabilità</li>
-          <li>mantenere continuità anche se cambiano sistemi o piattaforme</li>
-        </ul>
-        <p class="muted" style="margin-top:10px">
-          Non sostituisce documenti statali (es. CIE). Li estende nel dominio cibernetico come strato tecnico di prova.
-        </p>
+        <div class="row" style="margin-top:12px">
+          <a class="cta" href="ai-workers.html">Apri pagina</a>
+          <span class="pill ok">ATTIVO</span>
+        </div>
       </div>
 
       <div class="card">
-        <h3>IPR Gateway (Identity / Project Record)</h3>
-        <p class="muted">
-          Generazione e gestione degli IPR: unità primaria verificabile per identità e progetti, collegabile nel tempo.
+        <h3>Documenti pubblici (PDA/PDAR)</h3>
+        <p class="muted" style="margin:0">
+          Aggancio evidence-based a documenti pubblici statali: hash + timestamp + riferimento istituzionale collegato a Carta/IPR.
         </p>
         <div class="kpi">
-          <span>Output: IPR attivo</span>
-          <span>Link: eventi nel tempo</span>
-          <span>Verifica: pubblica</span>
+          <span>PDAR</span>
+          <span>Riferimenti istituzionali</span>
+          <span>Fail-closed</span>
         </div>
-        <p class="muted" style="margin-top:10px">
-          L’IPR è l’unità primaria: nessun modulo crea identità, tutti i moduli usano la stessa identità.
-        </p>
+        <div class="row" style="margin-top:12px">
+          <a class="cta" href="public-documents.html">Apri pagina</a>
+          <span class="pill ok">ATTIVO</span>
+        </div>
       </div>
 
       <div class="card">
         <h3>Verifica pubblica</h3>
-        <p class="muted">
-          Verifica di identità e record tramite evidenze pubbliche (hash, metadati, riferimenti di ancoraggio).
+        <p class="muted" style="margin:0">
+          Verifica evidence-based (stub pubblico): pubblicazione minima di hash e riferimenti, senza dati sensibili.
         </p>
         <div class="kpi">
-          <span>Output: esito verifica</span>
-          <span>Metodo: evidence-based</span>
-          <span>Scopo: fiducia tecnica</span>
+          <span>Proof stub</span>
+          <span>Minimizzazione</span>
+          <span>Interoperabile</span>
         </div>
-      </div>
-
-      <div class="card">
-        <h3>Compliance & Opponibilità (UNEBDO / OPC)</h3>
-        <p class="muted">
-          Policy UE-first, regole di conformità e audit-by-design. Strato che rende attribuibili e opponibili le azioni.
-        </p>
-        <div class="kpi">
-          <span>Approccio: UE-first</span>
-          <span>Regola: fail-closed</span>
-          <span>Audit: by design</span>
+        <div class="row" style="margin-top:12px">
+          <a class="cta" href="#repos">Vai ai repository</a>
+          <span class="pill soon">COMING SOON</span>
         </div>
-      </div>
-
-      <div class="card">
-        <h3>AI JOKER ΦΩ / C2 (assistente operativo)</h3>
-        <p class="muted">
-          Assistenza operativa non autonoma: supporta processi e automazioni controllate, legate all’identità del titolare.
-        </p>
-        <div class="kpi">
-          <span>Soggetto: umano</span>
-          <span>AI: strumentale</span>
-          <span>Azioni: attribuibili</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Infrastruttura & Interoperabilità (CyberGlobal / IoSpace)</h3>
-        <p class="muted">
-          Coordinamento, interoperabilità e ambienti operativi digitali. Classificazione dual-use non offensiva.
-        </p>
-        <div class="kpi">
-          <span class="flag ok">NON OFFENSIVA</span>
-          <span>Interoperabilità</span>
-          <span>Contesti complessi</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="onboarding">
-    <h2>Onboarding</h2>
-    <div class="card">
-      <p class="muted">
-        Attivazione in 3 passi. Regola di sicurezza: <strong>FAIL-CLOSED</strong> (se un requisito non è soddisfatto, il processo non procede).
-      </p>
-      <div class="grid">
-        <div class="card">
-          <h3>1) Selezione livello</h3>
-          <p class="muted">Base · Opponibile · Forte</p>
-        </div>
-        <div class="card">
-          <h3>2) Verifica requisiti UE</h3>
-          <p class="muted">Documentazione e regole minime di coerenza</p>
-        </div>
-        <div class="card">
-          <h3>3) Rilascio evidenze</h3>
-          <p class="muted">Evidence bundle: tracciabilità, metadati, link verifica</p>
-        </div>
-      </div>
-      <div class="row" style="margin-top:14px">
-        <a class="cta primary" href="#moduli">Vai ai moduli</a>
-        <a class="cta" href="#verifica">Esegui verifica</a>
       </div>
     </div>
   </section>
 
-  <section id="moduli">
-    <h2>Repository e moduli (da collegare)</h2>
+  <!-- MODULI / REPO -->
+  <section id="repos">
+    <h2>Moduli e repository</h2>
     <p class="muted">
-      Inserisci qui i link ai tuoi repository ufficiali. Regola: pubblicare solo link stabili; se un modulo non è pronto,
-      indicare <strong>COMING SOON</strong> (fail-closed, niente 404).
+      Inserisci qui i link ai repository reali. Se un link non è pronto, lascia COMING SOON (meglio di un 404).
     </p>
 
     <div class="grid">
       <div class="card">
         <h3>Core</h3>
         <ul class="list">
-          <li>IPR Gateway — (repo/link)</li>
-          <li>Registro / Verifica pubblica — (repo/link)</li>
+          <li>IPR Gateway — (link)</li>
+          <li>Verifica pubblica — (link)</li>
         </ul>
       </div>
+
       <div class="card">
-        <h3>Compliance</h3>
+        <h3>Compliance / Policy</h3>
         <ul class="list">
-          <li>UNEBDO — (repo/link)</li>
-          <li>OPC — (repo/link)</li>
+          <li>UNEBDO — (link)</li>
+          <li>OPC — (link)</li>
         </ul>
       </div>
+
       <div class="card">
-        <h3>Infrastruttura</h3>
+        <h3>Operativo</h3>
         <ul class="list">
-          <li>CyberGlobal — (repo/link)</li>
-          <li>IoSpace — (repo/link)</li>
+          <li>🜏 AI JOKER ΦΩ — C2 SOFTWARE — (link)</li>
+          <li>CyberGlobal — (link)</li>
+          <li>IoSpace — (link)</li>
+          <li>MetaExchange — (link)</li>
         </ul>
       </div>
-      <div class="card">
-        <h3>Assistente operativo</h3>
-        <ul class="list">
-          <li>🜏 AI JOKER ΦΩ — C2 — (repo/link)</li>
-          <li>GitJoker — (repo/link)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Scambio</h3>
-        <ul class="list">
-          <li>MetaExchange — (repo/link)</li>
-        </ul>
-      </div>
+
       <div class="card">
         <h3>Editoria</h3>
         <ul class="list">
-          <li>Esoterologia Edizioni — (repo/link)</li>
-          <li>Corpus — (repo/link)</li>
+          <li>Esoterologia Edizioni — (link)</li>
+          <li>CORPUS ESOTEROLOGIA ERMETICA — (link)</li>
         </ul>
       </div>
-    </div>
-  </section>
-
-  <section id="verifica">
-    <h2>Verifica pubblica</h2>
-    <div class="card">
-      <p class="muted">
-        Esempio di pagina di verifica IPR (pubblica):
-      </p>
-      <p>
-        <a class="cta" href="https://manuelcoletta1-source.github.io/manuhell/" target="_blank">
-          Apri verifica IPR
-        </a>
-      </p>
-      <p class="muted">
-        La verifica è evidence-based: fiducia basata su prove, non su promesse.
-      </p>
     </div>
   </section>
 
