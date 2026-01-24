@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hermeticum B.C.E. — Services</title>
-  <meta name="description" content="Hermeticum B.C.E. Services — Rilascio automatico IPR Base tramite CIE e Codice Fiscale. UE-first, privacy-by-design, evidenze verificabili." />
+  <meta name="description" content="Hermeticum B.C.E. Services — Rilascio automatico IPR Base con CIE e Codice Fiscale. Bollino europeo di sicurezza digitale per l’utente UE." />
   <style>
     :root{
       --bg:#0b0c10;
@@ -44,7 +44,7 @@
       font-size:0.95rem;
     }
     nav a:hover{color:var(--accent)}
-    .hero{padding:32px 0 12px}
+    .hero{padding:34px 0 16px}
     .hero h1{margin:0 0 10px;font-size:2.2rem}
     .hero p{margin:0;color:var(--muted);max-width:900px}
     .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
@@ -59,7 +59,7 @@
       font-size:0.95rem;
     }
     .cta.primary{border-color:var(--accent);color:#fff}
-    section{margin-top:40px}
+    section{margin-top:42px}
     h2{margin:0 0 12px}
     .grid{
       display:grid;
@@ -83,6 +83,8 @@
       color:rgba(43,213,118,0.95);
       font-size:0.75rem;
     }
+    .seal-wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:18px}
+    .seal-img{width:140px;height:140px;border-radius:16px;border:1px solid var(--line);background:var(--panel);padding:10px}
     footer{
       margin-top:56px;
       border-top:1px solid var(--line);
@@ -111,15 +113,25 @@
 
   <!-- HERO -->
   <section class="hero">
-    <h1>Rilascio IPR Base</h1>
+    <h1>Bollino Europeo di Sicurezza Digitale</h1>
     <p>
-      Hermeticum B.C.E. consente ai cittadini di ottenere un <strong>IPR Base</strong>
-      collegando la propria identità reale tramite <strong>CIE e Codice Fiscale</strong>.
-      Il processo è automatico, privacy-by-design e conforme agli standard UE.
+      Hermeticum B.C.E. rilascia il <strong>bollino di sicurezza digitale UE</strong>
+      tramite <strong>IPR Base</strong>, collegando una persona reale alla propria identità cibernetica
+      in modo automatico, verificabile e privacy-by-design.
     </p>
+
     <div class="row">
       <a class="cta primary" href="onboarding-base.html">Avvia rilascio IPR Base</a>
-      <a class="cta" href="services.html">Vedi tutti i servizi</a>
+      <a class="cta" href="services.html">Catalogo servizi</a>
+    </div>
+
+    <div class="seal-wrap">
+      <img class="seal-img" src="assets/hermeticum-bollino.svg" alt="Bollino Hermeticum — Sicurezza Digitale UE" />
+      <p class="muted" style="margin:0;max-width:720px">
+        <strong>Hermeticum</strong> è il marchio di fabbrica:
+        il bollino indica attribuzione, verificabilità e continuità nel tempo
+        tramite evidenze crittografiche, nel rispetto degli standard UE.
+      </p>
     </div>
   </section>
 
@@ -128,66 +140,28 @@
     <h2>Come funziona</h2>
     <div class="grid">
       <div class="card">
-        <h3>1. Inserimento dati minimi</h3>
-        <p class="muted">
-          Inserisci i dati anagrafici essenziali, il Codice Fiscale e selezioni
-          la CIE (fronte/retro).
-        </p>
+        <h3>1. Dati minimi</h3>
+        <p class="muted">Inserisci CIE (fronte/retro) e Codice Fiscale. Nessun account.</p>
       </div>
       <div class="card">
         <h3>2. Evidenze locali</h3>
-        <p class="muted">
-          I documenti <strong>non vengono caricati</strong>.
-          Il browser calcola localmente hash crittografici (SHA-512).
-        </p>
+        <p class="muted">I documenti non vengono caricati. Hash SHA-512 lato browser.</p>
       </div>
       <div class="card">
         <h3>3. Rilascio automatico</h3>
-        <p class="muted">
-          Il sistema genera automaticamente:
-          <strong>Evidence Bundle</strong>, <strong>PDAR CIE</strong> e <strong>IPR Base</strong>.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- COSA OTTIENI -->
-  <section>
-    <h2>Cosa ottieni</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>IPR Base</h3>
-        <p class="muted">
-          Il tuo record identitario cibernetico, sotto il tuo controllo,
-          riutilizzabile nel tempo.
-        </p>
-        <span class="pill">BASE-ACTIVE</span>
-      </div>
-      <div class="card">
-        <h3>PDAR CIE (privato)</h3>
-        <p class="muted">
-          Collegamento evidence-based tra la tua identità e il documento statale,
-          senza archiviare il documento.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Pronto per i servizi</h3>
-        <p class="muted">
-          L’IPR Base può essere usato per AI Workers, documenti pubblici,
-          continuità professionale e memoria digitale.
-        </p>
+        <p class="muted">Download automatico di IPR Base, PDAR CIE ed Evidence Bundle.</p>
       </div>
     </div>
   </section>
 
   <!-- GARANZIE -->
   <section>
-    <h2>Garanzie fondamentali</h2>
+    <h2>Garanzie UE</h2>
     <ul class="list">
-      <li>Hermeticum B.C.E. non sostituisce documenti statali</li>
-      <li>Nessun upload di CIE o dati sensibili</li>
+      <li>Hermeticum non sostituisce documenti statali</li>
+      <li>Nessuna archiviazione di CIE o dati sensibili</li>
       <li>Solo evidenze crittografiche verificabili</li>
-      <li>Approccio UE-first · GDPR · fail-closed</li>
+      <li>UE-first · GDPR · fail-closed</li>
     </ul>
   </section>
 
@@ -196,9 +170,10 @@
 <footer>
   <p>
     <strong>Hermeticum B.C.E.</strong><br/>
-    Stato: ATTIVO · Classificazione: DUAL-USE (NON OFFENSIVA) · UE-first
+    Marchio di fabbrica europeo per la sicurezza digitale dell’utente
   </p>
 </footer>
 
 </body>
 </html>
+
