@@ -1,108 +1,83 @@
-# HERMETICUM B.C.E.
-## Blindata · Computabile · Evolutiva
+# HERMETICUM B.C.E. — Services
+**Blindata · Computabile · Evolutiva**
 
-**HERMETICUM B.C.E. nasce per la sicurezza digitale europea dell’individuo.**
+> **Un sistema che riflette, organizza e risponde.**  
+> **Uno strumento affilato al servizio dell’intelligenza umana.**
 
-Il framework fornisce strumenti tecnici per:
-- attribuzione umana verificabile
-- accountability ex-ante
-- prova digitale opponibile nel tempo
+Repository “vetrina” e punto di ingresso dell’ecosistema **HERMETICUM B.C.E.**: sicurezza digitale UE-first, identità verificabile, responsabilità opponibile, prove digitali resistenti nel tempo.
 
-in contesti digitali ad alto rischio.
+---
+
+## Cos’è HERMETICUM B.C.E.
+**HERMETICUM B.C.E.** è un framework tecnico-operativo che introduce una catena minima **fail-closed** per le decisioni digitali critiche:
+
+**Evento → Identità umana verificabile (IPR/HRR) → Gate decisionale (DGV) → Tempo certificato → Evidence Bundle**
+
+Se un elemento essenziale non è verificabile, l’azione **non prosegue**.
 
 ---
 
 ## Cosa NON è
-- non è un documento di identità civile
-- non sostituisce CIE o passaporto
-- non è una criptovaluta
-- non è un sistema di sorveglianza
+- Non è “AI cosciente”.
+- Non è un sistema che “decide al posto tuo”.
+- Non sostituisce documenti civili (CIE, passaporto).
 
-È uno **strato di sicurezza** che impedisce l’esecuzione di decisioni critiche
-senza responsabilità umana e prova verificabile.
+È un’infrastruttura che rende le decisioni digitali **attribuibili, verificabili, auditabili**.
 
 ---
 
-## Concetto centrale: BioCyber Identity Card
-
-La BioCyber Identity Card non è una carta fisica.
-È una **posizione verificabile nel tempo** che collega:
-
-- una persona reale (HRR / IPR)
-- una decisione o evento
-- una validazione ex-ante
-- una prova digitale durabile
+## Pillar (principi)
+- **UE-first**: allineamento a compliance e governance europea.
+- **Fail-Closed**: niente esecuzione senza validazione.
+- **Responsabilità umana non opzionale**: tracciabilità verso una radice umana opponibile.
+- **Evidence nel tempo**: prove digitali strutturate per durare e verificarsi.
+- **Audit-by-design**: ricostruibilità e controllabilità integrata.
 
 ---
 
-## Architettura minima (fail-closed)
-Evento → IPR / HRR → Decision Gate Validator (DGV) → Tempo certificato → Evidence Bundle
-In assenza di uno di questi elementi,
-l’esito corretto è **FAIL_CLOSED**.
+## Componenti chiave
+- **IPR / HRR (Radice Umana)**  
+  Collegamento tecnico a una persona reale, verificabile e non duplicabile.
+
+- **DGV — Decision Gate Validator**  
+  Validazione ex-ante: `ALLOW / REVIEW / DENY / FAIL_CLOSED`.
+
+- **Temporal Evidence Bundle**  
+  Pacchetto di evidenze (hash + firme + tempo + metadati) per audit e opponibilità.
+
+- **Anchors (opzionali)**  
+  Livelli di ancoraggio crittografico (es. IPFS / BTC / EVM) in base alla criticità.
 
 ---
 
-## Componenti
+## Struttura del sito (GitHub Pages)
+Questo repo pubblica la **homepage** e le pagine “services” su GitHub Pages.
 
-### IPR / HRR
-Radice tecnica di responsabilità umana.
-Auditabile, non duplicabile, non pubblica.
-
-### DGV
-Gate di validazione ex-ante con esiti standardizzati.
-FAIL_CLOSED è protezione del sistema, non errore.
-
-### Evidence Bundle
-Pacchetto minimo di prova:
-manifest leggibile da macchina, hash, riferimento temporale,
-ancoraggi opzionali.
-
-### Servizi di ancoraggio
-- IPFS — contenuto
-- Bitcoin — tempo forte
-- Ethereum — riferimenti logici
-
-L’ancoraggio è un **servizio**, non un obbligo.
+- `index.html` → landing principale (marketing + percorso utente)
+- (eventuali) `catalog.html`, `services.html` → schede e listino servizi
+- `assets/` → immagini, icone, css (se presenti)
 
 ---
 
-## Carte Biocibernetiche
-
-- **BASE** — identità tecnica e prova minima
-- **OPPONIBILE** — verifica pubblica selettiva
-- **FORTE / ISTITUZIONALE** — multi-ancora e conservazione LTA
-
-Vedi `catalog.html`.
+## Link ufficiali
+- **Sito (Services):** https://manuelcoletta1-source.github.io/hermeticum-bce-services/
+- **Technology (architettura):** https://manuelcoletta1-source.github.io/hermeticum-bce-technology/
+- **Verifica / IPR:** https://manuelcoletta1-source.github.io/manuhell/ (sezione pubblica di verifica)
 
 ---
 
-## Attivazione e verifica
-
-- Procedura di attivazione: `create.html`
-- Verifica pubblica: `verify.html`
-- Evidenze di esempio: `/evidence`
-
-La verifica è sempre basata su:
-**ricalcola e confronta**, non fiducia.
-
----
-
-## Allineamento normativo
-
-Progettato per compatibilità con:
-- AI Act (UE)
-- eIDAS 2.0
-- ETSI EN 319 (LTA)
-- principi ISO di auditabilità e tracciabilità
+## Call to action
+- **Scopri l’architettura:** vai su *Technology*
+- **Attiva la tua BioCyber Identity Card:** onboarding guidato (livello base → opponibile → forte)
+- **Richiedi un audit / partnership:** percorso istituzionale UE-first
 
 ---
 
 ## Stato
-🟢 **EU Pilot — ACTIVE**
+🟢 **ATTIVO — Repository di servizio e vetrina**  
+Evoluzione controllata, semantica stabile, miglioramenti incrementali.
 
 ---
 
-## Principio guida
-
-> La sicurezza digitale dell’individuo
-> non è una funzione opzionale del sistema.
+## Licenza
+Da definire (consigliato: licenza separata per contenuti “vetrina” e specifiche tecniche).
