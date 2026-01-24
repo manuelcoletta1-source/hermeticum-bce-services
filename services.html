@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — Catalogo Services</title>
-  <meta name="description" content="Catalogo servizi Hermeticum B.C.E.: rilascio IPR Base (CIE+CF), AI Workers, documenti pubblici (PDAR), moduli e repository." />
+  <title>Hermeticum B.C.E. — Catalogo Servizi</title>
+  <meta name="description" content="Catalogo servizi Hermeticum B.C.E. — IPR Base, AI Workers, documenti pubblici e moduli software UE-first." />
   <style>
     :root{
       --bg:#0b0c10;
@@ -13,8 +13,6 @@
       --text:#e8e8e8;
       --muted:#9aa0a6;
       --accent:#6aa9ff;
-      --ok:#2bd576;
-      --warn:#ffcc66;
     }
     *{box-sizing:border-box}
     body{
@@ -31,83 +29,45 @@
     }
     header{
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:16px;
+      align-items:center;
       border-bottom:1px solid var(--line);
     }
-    .brand{display:flex; flex-direction:column; gap:2px}
-    .brand strong{font-size:1.05rem}
-    .brand span{color:var(--muted); font-size:0.85rem}
     nav a{
       color:var(--text);
       text-decoration:none;
-      margin-right:14px;
+      margin-left:14px;
       font-size:0.95rem;
-      white-space:nowrap;
     }
-    nav a:last-child{margin-right:0}
     nav a:hover{color:var(--accent)}
-    h1{margin:0 0 8px; font-size:2rem}
+    h1{margin:24px 0 8px}
     .muted{color:var(--muted)}
-    .hero{padding:24px 0 8px}
-    .row{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
-    .cta{
-      display:inline-block;
-      padding:10px 14px;
-      border:1px solid var(--line);
-      border-radius:10px;
-      background:var(--panel);
-      color:var(--text);
-      text-decoration:none;
-      font-size:0.95rem;
-    }
-    .cta.primary{border-color:var(--accent); color:#fff}
-    .badge{
-      display:inline-block;
-      padding:4px 8px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      font-size:0.75rem;
-      color:var(--muted);
-      margin-right:6px;
-    }
-    section{margin-top:28px}
+    section{margin-top:36px}
     .grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
       gap:16px;
-      margin-top:12px;
     }
     .card{
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:16px;
       background:var(--panel);
-    }
-    .card h2, .card h3{margin:0 0 8px}
-    .kpi{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-    .kpi span{
-      font-size:0.85rem;
-      color:var(--muted);
       border:1px solid var(--line);
-      border-radius:10px;
-      padding:6px 10px;
-      background:rgba(255,255,255,0.02);
+      border-radius:16px;
+      padding:18px;
     }
-    .pill{
+    .card h2,.card h3{margin:0 0 8px}
+    .cta{
       display:inline-block;
-      padding:4px 10px;
-      border-radius:999px;
+      margin-top:10px;
+      padding:10px 14px;
+      border-radius:10px;
       border:1px solid var(--line);
-      font-size:0.75rem;
-      color:var(--muted);
+      background:transparent;
+      color:var(--text);
+      text-decoration:none;
     }
-    .pill.ok{border-color:rgba(43,213,118,0.35);color:rgba(43,213,118,0.95)}
-    .pill.soon{border-color:rgba(255,204,102,0.35);color:rgba(255,204,102,0.95)}
-    .list{margin:0; padding-left:18px; color:var(--muted)}
+    .cta.primary{border-color:var(--accent)}
     footer{
-      margin-top:46px;
+      margin-top:56px;
       border-top:1px solid var(--line);
       color:var(--muted);
       font-size:0.9rem;
@@ -116,155 +76,61 @@
 </head>
 
 <body>
+
 <header>
-  <div class="brand">
-    <strong>Hermeticum B.C.E.</strong>
-    <span>Catalogo Services · Portale UE-first</span>
-  </div>
+  <strong>Hermeticum B.C.E.</strong>
   <nav>
     <a href="index.html">Home</a>
-    <a href="onboarding-base.html">Attiva Base</a>
-    <a href="ai-workers.html">AI Workers</a>
-    <a href="public-documents.html">Documenti pubblici</a>
+    <a href="services.html">Servizi</a>
   </nav>
 </header>
 
 <main>
-  <section class="hero">
-    <h1>Catalogo Services</h1>
-    <p class="muted">
-      Qui trovi i servizi disponibili e i moduli dell’ecosistema. Regola: <strong>1 servizio = 1 repository</strong>.
-      Dove un modulo non è pronto: <span class="pill soon">COMING SOON</span>.
-    </p>
-    <div class="row">
-      <a class="cta primary" href="onboarding-base.html">Avvia rilascio IPR Base</a>
-      <a class="cta" href="index.html#moduli">Vedi repository</a>
-    </div>
-    <div class="row" style="margin-top:12px">
-      <span class="badge">UE-first</span>
-      <span class="badge">GDPR minimization</span>
-      <span class="badge">Audit-by-design</span>
-      <span class="badge">Fail-closed</span>
-    </div>
-  </section>
 
-  <!-- PRIORITÀ 1: IPR BASE -->
+  <h1>Catalogo Servizi</h1>
+  <p class="muted">
+    Ogni servizio Hermeticum è un artefatto software indipendente.
+    Regola: <strong>1 servizio = 1 repository</strong>.
+  </p>
+
+  <!-- IPR BASE -->
   <section>
     <div class="card">
-      <h2>Rilascio IPR Base (cittadini privati)</h2>
-      <p class="muted" style="margin:0">
-        Attivazione della <strong>Carta d’Identità Cibernetica (BASE)</strong> tramite CIE + Codice Fiscale.
-        I documenti <strong>non vengono caricati</strong>: si conserva solo evidenza verificabile (hash).
+      <img src="assets/hermeticum-bollino.svg" alt="Bollino Hermeticum" style="width:110px;float:right;margin-left:12px" />
+      <h2>IPR Base — Carta d’Identità Cibernetica</h2>
+      <p class="muted">
+        Rilascio automatico dell’IPR Base tramite CIE e Codice Fiscale.
+        È il bollino Hermeticum di sicurezza digitale UE per l’utente.
       </p>
-      <div class="kpi">
-        <span>Input: CIE + CF</span>
-        <span>Metodo: SHA-512 lato browser</span>
-        <span>Output: IPR Base + PDAR (VALID-PRIVATE)</span>
-      </div>
-      <div class="row" style="margin-top:12px">
-        <a class="cta primary" href="onboarding-base.html">Apri modulo Base</a>
-        <a class="cta" href="index.html#base">Dettagli Base</a>
-      </div>
-      <p class="muted" style="margin:10px 0 0; font-size:0.9rem">
-        Nota: Hermeticum B.C.E. non sostituisce documenti statali; realizza un aggancio evidence-based nel rispetto del GDPR.
-      </p>
+      <a class="cta primary" href="onboarding-base.html">Attiva IPR Base</a>
     </div>
   </section>
 
-  <!-- SERVIZI PRINCIPALI -->
+  <!-- ALTRI SERVIZI -->
   <section>
-    <h2>Servizi principali</h2>
     <div class="grid">
       <div class="card">
         <h3>AI Workers</h3>
-        <p class="muted" style="margin:0">
-          Attribuzione, paternità e responsabilità umana nel lavoro con l’AI. Supporto ad audit e continuità professionale.
+        <p class="muted">
+          Attribuzione e responsabilità umana nel lavoro con l’Intelligenza Artificiale.
         </p>
-        <div class="kpi">
-          <span>Human-in-the-loop</span>
-          <span>Priorità temporale</span>
-          <span>Audit</span>
-        </div>
-        <div class="row" style="margin-top:12px">
-          <a class="cta" href="ai-workers.html">Apri pagina</a>
-          <span class="pill ok">ATTIVO</span>
-        </div>
+        <a class="cta" href="ai-workers.html">Apri</a>
       </div>
 
       <div class="card">
-        <h3>Documenti pubblici (PDA/PDAR)</h3>
-        <p class="muted" style="margin:0">
-          Aggancio evidence-based a documenti pubblici statali: hash + timestamp + riferimento istituzionale collegato a Carta/IPR.
+        <h3>Documenti Pubblici (PDAR)</h3>
+        <p class="muted">
+          Aggancio evidence-based a documenti statali senza sostituire competenze pubbliche.
         </p>
-        <div class="kpi">
-          <span>PDAR</span>
-          <span>Riferimenti istituzionali</span>
-          <span>Fail-closed</span>
-        </div>
-        <div class="row" style="margin-top:12px">
-          <a class="cta" href="public-documents.html">Apri pagina</a>
-          <span class="pill ok">ATTIVO</span>
-        </div>
+        <a class="cta" href="public-documents.html">Apri</a>
       </div>
 
       <div class="card">
-        <h3>Verifica pubblica</h3>
-        <p class="muted" style="margin:0">
-          Verifica evidence-based (stub pubblico): pubblicazione minima di hash e riferimenti, senza dati sensibili.
+        <h3>Verifica Pubblica</h3>
+        <p class="muted">
+          Verifica minimale di IPR e artefatti tramite proof stub.
         </p>
-        <div class="kpi">
-          <span>Proof stub</span>
-          <span>Minimizzazione</span>
-          <span>Interoperabile</span>
-        </div>
-        <div class="row" style="margin-top:12px">
-          <a class="cta" href="#repos">Vai ai repository</a>
-          <span class="pill soon">COMING SOON</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULI / REPO -->
-  <section id="repos">
-    <h2>Moduli e repository</h2>
-    <p class="muted">
-      Inserisci qui i link ai repository reali. Se un link non è pronto, lascia COMING SOON (meglio di un 404).
-    </p>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Core</h3>
-        <ul class="list">
-          <li>IPR Gateway — (link)</li>
-          <li>Verifica pubblica — (link)</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Compliance / Policy</h3>
-        <ul class="list">
-          <li>UNEBDO — (link)</li>
-          <li>OPC — (link)</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Operativo</h3>
-        <ul class="list">
-          <li>🜏 AI JOKER ΦΩ — C2 SOFTWARE — (link)</li>
-          <li>CyberGlobal — (link)</li>
-          <li>IoSpace — (link)</li>
-          <li>MetaExchange — (link)</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Editoria</h3>
-        <ul class="list">
-          <li>Esoterologia Edizioni — (link)</li>
-          <li>CORPUS ESOTEROLOGIA ERMETICA — (link)</li>
-        </ul>
+        <span class="muted">COMING SOON</span>
       </div>
     </div>
   </section>
@@ -273,8 +139,7 @@
 
 <footer>
   <p>
-    <strong>Hermeticum B.C.E.</strong> — Services<br/>
-    Stato: ATTIVO · Classificazione: DUAL-USE (NON OFFENSIVA) · Approccio: UE-first
+    <strong>Hermeticum B.C.E.</strong> — Catalogo Servizi
   </p>
 </footer>
 
