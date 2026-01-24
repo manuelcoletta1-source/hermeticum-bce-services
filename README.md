@@ -1,106 +1,79 @@
-# Hermeticum B.C.E. — Services
+# Hermeticum B.C.E. — Services (Gateway)
 
-**Hermeticum B.C.E. — Services** è il **gateway ufficiale**
-dell’ecosistema **Hermeticum B.C.E.**  
-Qui avviene l’**ingresso controllato**: onboarding, generazione di evidenze
-e accesso ai moduli operativi secondo principi **UE-first** e **audit-by-design**.
+**Hermeticum B.C.E.** (*Blindata · Computabile · Evolutiva*) è un’infrastruttura UE-first per la **sicurezza digitale dell’individuo**: continuità, integrità e verificabilità nel tempo lungo fasi reali della vita (**nascita · sanità · istruzione · lavoro**).
 
-> Questo repository **non è un cockpit operativo**.  
-> È il punto in cui si **entra nel sistema**.
+> UE-first = orientamento progettuale (GDPR, minimizzazione, auditabilità, security-by-design).  
+> **Non** è una certificazione ufficiale UE e **non** sostituisce identità o documenti statali.
 
 ---
 
-## Funzione del repository
+## Portale pubblico
 
-Questo repository fornisce:
-
-- Onboarding tecnico per la generazione di **IPR Base**
-- Hashing locale e creazione di **bundle di evidenze**
-- Accesso ordinato ai moduli dell’ecosistema
-- Documentazione di ingresso e contesto
-
-Tutte le operazioni critiche sono progettate per avvenire **nel browser**
-(con minimizzazione dei dati lato server).
-
----
-
-## Architettura logica (stile banca / ente UE)
-
-L’ecosistema è organizzato in tre livelli funzionali:
-
-### ENTRY — Identità & Evidence
-- Creazione dell’IPR Base
-- Generazione di evidenze verificabili (hash, bundle JSON)
-- Nessuna operazione è consentita senza questo livello
-
-### CONTROL — Policy & Conformità
-- Applicazione di regole fail-closed
-- Policy opponibili e governance computabile
-- Valutazione di conformità e lifecycle dell’identità
-
-### OPERATION — Cockpit & Workflow
-- Interazione operatore ↔ AI
-- Workflow controllati
-- Audit locale e tracciabilità
+- **Home (Services Gateway):** https://manuelcoletta1-source.github.io/hermeticum-bce-services/
+- Pagine chiave:
+  - `percorso.html` — Percorso dell’individuo
+  - `settori.html` — Sanità / Istruzione / Infrastrutture
+  - `policy-ue.html` — Policy UE-first (scope e limiti)
+  - `services.html` — Catalogo Servizi (livelli)
+  - `onboarding-base.html` — Attivazione IPR Base
+  - `privacy.html` / `terms.html` / `security.html` — Trasparenza operativa
 
 ---
 
-## Navigazione rapida
+## Mappa dei repository (25)
 
-- **Gateway Services (home)**  
-  https://manuelcoletta1-source.github.io/hermeticum-bce-services/
+### A) Gateway & Delivery (cliente)
+1. **hermeticum-bce-services** — Gateway pubblico, onboarding, policy, catalogo  
+2. **hermeticum-bce-technology** — Repository tecnologico (stack, componenti, integrazioni)  
+3. **ue-ipr-registry** — Registro/struttura UE per IPR (impostazione UE-first, verifiche)  
+4. **manuhell** — Verifica pubblica IPR (pagina/ancoraggi)  
+5. **public-documents** (o equivalente) — Documenti pubblici, template, release note (se separato)
 
-- **Catalogo moduli**  
-  https://manuelcoletta1-source.github.io/hermeticum-bce-services/catalog.html
+### B) Backbone Hermeticum (moduli core)
+6. **unebdo** — Enforcement & tracciabilità (UE-first / audit-by-design)  
+7. **opc** — Opponible Policy Core (policy opponibili / policy-as-code)  
+8. **metaexchange** — Scambio valore/dati (regole, audit, interoperabilità)  
+9. **iospace** — Spazio operativo digitale (workflow e operazioni)  
+10. **neuroloop** — Feedback/learning controllato (loop evolutivo, governance)
 
-- **Onboarding IPR Base**  
-  https://manuelcoletta1-source.github.io/hermeticum-bce-services/onboarding-base.html
+### C) Governance infrastrutturale (dual-use controllato)
+11. **cyberglobal** — Interoperabilità e governance globale (DUAL-USE non offensivo)  
+12. **hermeticum-bce-portal** (se presente) — Hub/porta d’accesso (routing, navigazione, federazione)  
+13. **hermeticum-bce-identity** (se presente) — Strato identità (IPR, verifiche, profile binding)
 
-- **AI JOKER — Workers (cockpit operativo)**  
-  https://manuelcoletta1-source.github.io/ai-joker-workers/
+### D) AI JOKER / C2 / Workers (automazione e controllo)
+14. **gitjoker-c2** — C2/DevOps/controllo operativo (versioning, audit, orchestration)  
+15. **ai-joker-workers** — Workers e automazioni operative (pipeline, task, strumenti)  
+16. **ai-joker-c2-software** (se presente) — “🜏 AI JOKER ΦΩ — C2 SOFTWARE” (asset software principale)  
+17. **ai-joker-portal** (se presente) — Interfaccia/console (separata dal gateway servizi)
 
----
+### E) Evidenze, audit, freeze (prove e tracciabilità)
+18. **hermeticum-bce-evidence** (se separato) — Evidenze, bundle, sample, manifest  
+19. **hermeticum-bce-audit** (se separato) — Audit docs / cross-audit / freeze / proof snapshot  
+20. **hermeticum-bce-policy** (se separato) — Governance rules, versioning, policy lifecycle
 
-## Moduli collegati
+### F) CORPUS ESOTEROLOGIA ERMETICA (editoriale)
+21. **corpus-esoterologia-ermetica** — Root del corpus editoriale  
+22. **corpus-esoterologia-ermetica-volume-I** — Volume I (fondazione)  
+23. **corpus-esoterologia-ermetica-volume-II** — Volume II (Matrix 2026)  
+24. **corpus-esoterologia-ermetica-volume-III** — Volume III (Lex Hermeticum)  
+25. **esoterologia-edizioni** / **esoterologia-edizioni-ipr5** — Casa editoriale + IPR editoriale
 
-- **AI JOKER — Workers**  
-  Cockpit Human-in-the-Loop con audit append-only e gating IPR
-
-- **UNEBDO**  
-  Dispositivo giuridico-computabile per policy e governance
-
-- **IPR Core / Gate / Comply**  
-  Nucleo, controllo ex-ante e valutazione di conformità dell’IPR
-
-- **GitJoker-C2**  
-  Command & Control per publishing GitHub con tracciabilità
-
----
-
-## Sicurezza e principi
-
-- Fail-closed di default
-- Zero data retention lato server (impostazione standard)
-- Evidenze esportabili e verificabili
-- Nessuna funzione bancaria o finanziaria
-- Nessun rilascio di identità legali statali
-
----
-
-## Stato del repository
-
-🟢 **ATTIVO — Gateway stabile**
-
-Le funzionalità operative risiedono nei repository dedicati.
-Questo gateway è progettato per rimanere **semplice, stabile e difendibile**.
+> Nota: alcuni repo “se presente” sono moduli previsti/ricorrenti nel backbone.  
+> Se un nome differisce (es. trattino/underscore), rinomina la voce nel README mantenendo la stessa funzione.
 
 ---
 
-## Note legali
-
-- Consultare **Privacy** e **Terms of Service** prima dell’uso
-- Il progetto è orientato a ricerca, architettura e dimostrazione tecnica
+## Regole di coerenza (1 minuto)
+- **1 funzione = 1 pagina canonica** (le pagine legacy vanno in redirect)
+- Niente promesse “certificazione UE”
+- Contenuti sensibili: **mai** in chiaro → solo prove (hash/timestamp) dove utile
+- UE-first sempre esplicito: GDPR, minimizzazione, auditabilità
 
 ---
 
-© Hermeticum B.C.E.
+## Stato
+Questo repository è il **gateway ufficiale**: descrive il modello, guida il cliente, collega i moduli e pubblica policy/documenti operativi.
+
+**Sigillo:** HERMETICUM B.C.E. S.r.l.  
+**Casa editoriale:** Esoterologia Edizioni
