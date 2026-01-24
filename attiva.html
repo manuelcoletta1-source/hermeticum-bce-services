@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Attiva IPR — Hermeticum B.C.E.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Attiva un IPR (Identity Primary Record) — percorso guidato UE-first per identità digitale verificabile." />
+  <style>
+    :root {
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a0a0a0;
+      --accent:#4da6ff;
+      --ok:#53d769;
+      --warn:#ffd60a;
+      --bad:#ff453a;
+    }
+    body {
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    header, main, footer {
+      max-width:980px;
+      margin:0 auto;
+      padding:24px;
+    }
+    header {
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    header a {
+      color:var(--muted);
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:10px;
+    }
+    header a:hover { border-color:var(--accent); color:var(--accent); }
+    h1, h2, h3 { font-weight:600; line-height:1.25; margin:0; }
+    h1 { font-size:2rem; margin-top:32px; }
+    h2 { font-size:1.3rem; margin-top:40px; }
+    p { color:var(--muted); margin-top:12px; }
+    .box {
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:20px;
+      margin-top:18px;
+    }
+    .pill {
+      display:inline-block;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:0.85rem;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+    .row {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .cta {
+      display:inline-block;
+      margin-top:6px;
+      padding:12px 18px;
+      border-radius:10px;
+      border:1px solid var(--accent);
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+    }
+    .cta.secondary {
+      border-color:var(--line);
+      color:var(--muted);
+      font-weight:500;
+    }
+    ul { margin:12px 0 0 18px; color:var(--muted); }
+    li { margin:8px 0; }
+    label { display:block; margin-top:12px; color:var(--muted); }
+    input, select, textarea {
+      width:100%;
+      margin-top:8px;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0b0c10;
+      color:var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      box-sizing:border-box;
+    }
+    textarea { resize: vertical; }
+    button {
+      margin-top:14px;
+      padding:12px 16px;
+      border-radius:12px;
+      border:1px solid var(--accent);
+      background:transparent;
+      color:var(--accent);
+      cursor:pointer;
+      font-weight:700;
+    }
+    button:hover { filter:brightness(1.1); }
+    .result {
+      margin-top:14px;
+      padding:14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0b0c10;
+      overflow:auto;
+    }
+    code, pre {
+      background:#0b0c10;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:12px;
+      color:var(--text);
+      overflow:auto;
+    }
+    .hint { color:var(--muted); font-size:0.95rem; margin-top:10px; }
+    .ok { border-color: rgba(83,215,105,.35); }
+    .warn { border-color: rgba(255,214,10,.35); }
+    .bad { border-color: rgba(255,69,58,.35); }
+    footer {
+      border-top:1px solid var(--line);
+      margin-top:64px;
+      font-size:0.9rem;
+      color:var(--muted);
+    }
+    small { color:var(--muted); }
+  </style>
+</head>
+<body>
+
+<header>
+  <strong>Hermeticum B.C.E.</strong> — Attiva IPR
+  <div class="row" style="margin-top:0;">
+    <a href="index.html">Services</a>
+    <a href="inizia.html">Inizia</a>
+    <a href="verifica.html">Verifica</a>
+  </div>
+</header>
+
+<main>
+
+  <h1>Attiva un IPR (Identity Primary Record)</h1>
+  <p>
+    Qui prepari una <strong>bozza</strong> di attivazione IPR: dati minimi,
+    perimetro di pubblicazione e output copiabile. Non inviamo dati a server.
+  </p>
+
+  <section class="box">
+    <div class="pill">PRINCIPIO UE-FIRST</div>
+    <h2>Cosa viene pubblicato e cosa no</h2>
+    <ul>
+      <li><strong>Pubblicabile:</strong> hash, riferimenti, CID, metadati tecnici non sensibili</li>
+      <li><strong>Non pubblicare:</strong> numeri documenti, indirizzi, dati personali completi</li>
+    </ul>
+    <p class="hint">
+      Obiettivo: creare una traccia verificabile senza esporre dati personali inutili.
+    </p>
+  </section>
+
+  <section class="box">
+    <div class="pill">DATI MINIMI</div>
+    <h2>Compila il profilo IPR (minimo indispensabile)</h2>
+
+    <label for="entityType">Tipo</label>
+    <select id="entityType">
+      <option value="person">Persona fisica</option>
+      <option value="org">Entità / Organizzazione</option>
+      <option value="project">Progetto / Sistema</option>
+    </select>
+
+    <label for="displayName">Nome pubblico (display)</label>
+    <input id="displayName" type="text" placeholder="Es. Manuel Coletta / HERMETICUM B.C.E. S.r.l." />
+
+    <label for="scope">Perimetro (1 riga)</label>
+    <input id="scope" type="text" placeholder="Es. Identità verificabile e continuità temporale (UE-first)" />
+
+    <label for="publicRefs">Riferimenti pubblici (opzionale)</label>
+    <textarea id="publicRefs" rows="4" placeholder="Es. URL di verifica, CID IPFS, TXID (se già disponibili)"></textarea>
+
+    <label for="notes">Note operative (private, non pubblicate)</label>
+    <textarea id="notes" rows="4" placeholder="Es. cosa vuoi fare dopo, requisiti, passaggi…"></textarea>
+
+    <button id="gen">Genera bozza IPR (manifest)</button>
+
+    <div id="out" class="result warn" style="display:none;"></div>
+    <small>
+      Suggerimento: quando avrai un documento (PDF) da ancorare, calcola l’hash e inseriscilo nei riferimenti pubblici.
+    </small>
+  </section>
+
+  <section class="box">
+    <div class="pill">PROSSIMO PASSO</div>
+    <h2>Come si completa davvero l’attivazione</h2>
+    <ul>
+      <li>1) prepari un documento (PDF) o un pacchetto di prova</li>
+      <li>2) calcoli l’hash (SHA-256)</li>
+      <li>3) pubblichi hash + riferimento (e/o CID IPFS) come prova</li>
+      <li>4) (opzionale) ancoraggio su registro pubblico / blockchain</li>
+    </ul>
+
+    <div class="row">
+      <a class="cta" href="verifica.html">Vai a: Verifica (hash)</a>
+      <a class="cta secondary" href="index.html">Torna ai Services</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Hermeticum B.C.E. — Attivazione guidata IPR: minimo indispensabile, tracciabilità verificabile, UE-first.
+</footer>
+
+<script>
+  function nowISO() {
+    return new Date().toISOString();
+  }
+
+  function safeText(v) {
+    return (v || "").toString().trim();
+  }
+
+  function buildManifest() {
+    const entityType = safeText(document.getElementById("entityType").value);
+    const displayName = safeText(document.getElementById("displayName").value);
+    const scope = safeText(document.getElementById("scope").value);
+    const publicRefs = safeText(document.getElementById("publicRefs").value);
+    const notes = safeText(document.getElementById("notes").value);
+
+    const warnings = [];
+    if (!displayName) warnings.push("Inserisci un nome pubblico (display).");
+    if (!scope) warnings.push("Inserisci il perimetro (1 riga).");
+
+    const manifest = {
+      schema: "hbce.ipr.manifest.v1",
+      created_at: nowISO(),
+      entity: {
+        type: entityType,          // person | org | project
+        display_name: displayName, // pubblico
+        scope: scope               // pubblico (una riga)
+      },
+      public_references: publicRefs ? publicRefs.split("\n").map(s => s.trim()).filter(Boolean) : [],
+      privacy_note: "Non inserire dati personali sensibili. Pubblicare solo hash/riferimenti tecnici.",
+      operator_notes_private: notes || ""
+    };
+
+    return { manifest, warnings };
+  }
+
+  document.getElementById("gen").addEventListener("click", () => {
+    const out = document.getElementById("out");
+    const { manifest, warnings } = buildManifest();
+
+    out.style.display = "block";
+
+    if (warnings.length) {
+      out.className = "result warn";
+      out.innerHTML =
+        "<strong>Completa i campi minimi:</strong><ul style='margin-top:10px; color:#a0a0a0;'>" +
+        warnings.map(w => "<li>" + w + "</li>").join("") +
+        "</ul>";
+      return;
+    }
+
+    out.className = "result ok";
+    out.innerHTML =
+      "<strong>Bozza IPR (manifest) — copia e incolla:</strong>" +
+      "<pre style='margin-top:10px;'>" + JSON.stringify(manifest, null, 2) + "</pre>" +
+      "<div class='hint'>Questo è un output locale. Usalo come base per README/registro o per una richiesta di attivazione.</div>";
+  });
+</script>
+
+</body>
+</html>
