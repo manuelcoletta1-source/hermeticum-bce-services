@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hermeticum B.C.E. — Services</title>
-  <meta name="description" content="Portale Hermeticum B.C.E. Services: Carta d’Identità Cibernetica UE-first, attivazione Base (CIE+CF), evidenze verificabili e moduli software." />
+  <meta name="description" content="Hermeticum B.C.E. Services — Rilascio automatico IPR Base tramite CIE e Codice Fiscale. UE-first, privacy-by-design, evidenze verificabili." />
   <style>
     :root{
       --bg:#0b0c10;
@@ -30,80 +30,52 @@
     }
     header{
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:16px;
+      align-items:center;
       border-bottom:1px solid var(--line);
+      gap:16px;
     }
-    .brand{display:flex; flex-direction:column; gap:2px}
-    .brand strong{font-size:1.05rem}
-    .brand span{color:var(--muted); font-size:0.85rem}
+    .brand strong{font-size:1.1rem}
+    .brand span{display:block;color:var(--muted);font-size:0.85rem}
     nav a{
       color:var(--text);
       text-decoration:none;
-      margin-right:14px;
+      margin-left:14px;
       font-size:0.95rem;
-      white-space:nowrap;
     }
-    nav a:last-child{margin-right:0}
     nav a:hover{color:var(--accent)}
-    .hero{padding:28px 0 8px}
-    .hero h1{margin:0 0 8px; font-size:2rem}
-    .hero p{margin:0 0 14px; color:var(--muted); max-width:920px}
-    .row{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .hero{padding:32px 0 12px}
+    .hero h1{margin:0 0 10px;font-size:2.2rem}
+    .hero p{margin:0;color:var(--muted);max-width:900px}
+    .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
     .cta{
       display:inline-block;
-      padding:10px 14px;
+      padding:12px 16px;
+      border-radius:12px;
       border:1px solid var(--line);
-      border-radius:10px;
       background:var(--panel);
       color:var(--text);
       text-decoration:none;
       font-size:0.95rem;
     }
-    .cta.primary{border-color:var(--accent); color:#fff}
-    .badge{
-      display:inline-block;
-      padding:4px 8px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      font-size:0.75rem;
-      color:var(--muted);
-      margin-right:6px;
-    }
-    section{margin-top:34px}
-    h2{margin:0 0 10px}
-    .muted{color:var(--muted)}
+    .cta.primary{border-color:var(--accent);color:#fff}
+    section{margin-top:40px}
+    h2{margin:0 0 12px}
     .grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
       gap:16px;
-      margin-top:12px;
     }
     .card{
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:16px;
       background:var(--panel);
-    }
-    .card h3{margin:0 0 8px; font-size:1.1rem}
-    .kpi{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-    .kpi span{
-      font-size:0.85rem;
-      color:var(--muted);
       border:1px solid var(--line);
-      border-radius:10px;
-      padding:6px 10px;
-      background:rgba(255,255,255,0.02);
+      border-radius:16px;
+      padding:18px;
     }
-    .list{margin:0; padding-left:18px; color:var(--muted)}
-    footer{
-      margin-top:46px;
-      border-top:1px solid var(--line);
-      color:var(--muted);
-      font-size:0.9rem;
-    }
-    .pill-ok{
+    .card h3{margin:0 0 8px}
+    .muted{color:var(--muted)}
+    .list{margin:0;padding-left:18px;color:var(--muted)}
+    .pill{
       display:inline-block;
       padding:4px 10px;
       border-radius:999px;
@@ -111,155 +83,120 @@
       color:rgba(43,213,118,0.95);
       font-size:0.75rem;
     }
+    footer{
+      margin-top:56px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:0.9rem;
+    }
   </style>
 </head>
 
 <body>
+
 <header>
   <div class="brand">
     <strong>Hermeticum B.C.E.</strong>
-    <span>Services · Portale operativo UE-first</span>
+    <span>Services · Portale UE-first</span>
   </div>
   <nav>
-    <a href="#cos-e">Cos’è</a>
-    <a href="#base">Attiva Base</a>
-    <a href="#documenti">Documenti pubblici</a>
-    <a href="#moduli">Repository</a>
+    <a href="index.html">Home</a>
+    <a href="services.html">Servizi</a>
+    <a href="ai-workers.html">AI Workers</a>
+    <a href="public-documents.html">Documenti pubblici</a>
   </nav>
 </header>
 
 <main>
 
+  <!-- HERO -->
   <section class="hero">
-    <h1>Services</h1>
+    <h1>Rilascio IPR Base</h1>
     <p>
-      Portale Hermeticum B.C.E. per l’attivazione e l’uso di artefatti cibernetici UE-first:
-      <strong>identità verificabile</strong>, <strong>tracciabilità nel tempo</strong> e <strong>opponibilità tecnica</strong>.
-      La fiducia è basata su evidenze verificabili, non su promesse.
+      Hermeticum B.C.E. consente ai cittadini di ottenere un <strong>IPR Base</strong>
+      collegando la propria identità reale tramite <strong>CIE e Codice Fiscale</strong>.
+      Il processo è automatico, privacy-by-design e conforme agli standard UE.
     </p>
     <div class="row">
-      <a class="cta primary" href="onboarding-base.html">Attiva Carta (Base)</a>
-      <a class="cta" href="services.html">Catalogo servizi</a>
-      <a class="cta" href="ai-workers.html">AI Workers</a>
-      <a class="cta" href="public-documents.html">Documenti pubblici</a>
-    </div>
-    <div class="row" style="margin-top:12px">
-      <span class="badge">UE-first</span>
-      <span class="badge">GDPR minimization</span>
-      <span class="badge">Audit-by-design</span>
-      <span class="badge">Fail-closed</span>
-      <span class="badge">Dual-use non offensiva</span>
+      <a class="cta primary" href="onboarding-base.html">Avvia rilascio IPR Base</a>
+      <a class="cta" href="services.html">Vedi tutti i servizi</a>
     </div>
   </section>
 
-  <section id="cos-e">
-    <h2>Cos’è</h2>
-    <div class="card">
-      <p class="muted" style="margin:0">
-        Hermeticum B.C.E. è un’azienda tecnologica europea che progetta e vende software e artefatti cibernetici.
-        Non è un datacenter, non è un social, non è un documento statale.
-        È un’infrastruttura modulare che rende verificabili nel tempo identità, atti e responsabilità.
-      </p>
-    </div>
-  </section>
-
-  <section id="base">
-    <h2>Attivazione Base</h2>
+  <!-- COME FUNZIONA -->
+  <section>
+    <h2>Come funziona</h2>
     <div class="grid">
       <div class="card">
-        <h3>Carta d’Identità Cibernetica (BASE)</h3>
+        <h3>1. Inserimento dati minimi</h3>
         <p class="muted">
-          Attivazione per cliente con evidenze verificabili e minimizzazione GDPR.
+          Inserisci i dati anagrafici essenziali, il Codice Fiscale e selezioni
+          la CIE (fronte/retro).
         </p>
-        <div class="kpi">
-          <span>Input: CIE + Codice Fiscale</span>
-          <span>Metodo: SHA-512 lato browser</span>
-          <span>Output: IPR + PDAR (PRIVATE)</span>
-        </div>
-        <div class="row" style="margin-top:12px">
-          <a class="cta primary" href="onboarding-base.html">Apri modulo Base</a>
-        </div>
       </div>
-
       <div class="card">
-        <h3>Privacy e sicurezza</h3>
+        <h3>2. Evidenze locali</h3>
         <p class="muted">
-          I documenti non vengono archiviati nel portale. Si conservano solo hash e metadati minimi.
+          I documenti <strong>non vengono caricati</strong>.
+          Il browser calcola localmente hash crittografici (SHA-512).
         </p>
-        <ul class="list">
-          <li>no MRZ / numero documento in record pubblici</li>
-          <li>no indirizzo completo in chiaro</li>
-          <li>fail-closed: senza evidenze richieste non si procede</li>
-        </ul>
       </div>
-
       <div class="card">
-        <h3>Risultato</h3>
+        <h3>3. Rilascio automatico</h3>
         <p class="muted">
-          Identità reale agganciata all’IPR e Carta attiva in modalità Base.
+          Il sistema genera automaticamente:
+          <strong>Evidence Bundle</strong>, <strong>PDAR CIE</strong> e <strong>IPR Base</strong>.
         </p>
-        <div class="kpi">
-          <span class="pill-ok">BASE-ACTIVE</span>
-          <span>Continuità nel tempo</span>
-          <span>Verifica evidence-based</span>
-        </div>
       </div>
     </div>
   </section>
 
-  <section id="documenti">
-    <h2>Documenti pubblici statali</h2>
-    <div class="card">
-      <p class="muted" style="margin:0">
-        Hermeticum B.C.E. non sostituisce lo Stato e non certifica documenti pubblici.
-        Fornisce un metodo per <strong>agganciare riferimenti</strong> a documenti pubblici tramite
-        hash + timestamp + riferimento istituzionale, collegati a Carta/IPR (PDAR).
-      </p>
-      <div class="row" style="margin-top:12px">
-        <a class="cta" href="public-documents.html">Apri pagina Documenti pubblici</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="moduli">
-    <h2>Repository e moduli</h2>
-    <p class="muted">
-      Regola: <strong>1 servizio = 1 repository</strong>. Pubblicare solo link stabili; se non pronto: COMING SOON.
-    </p>
-
+  <!-- COSA OTTIENI -->
+  <section>
+    <h2>Cosa ottieni</h2>
     <div class="grid">
       <div class="card">
-        <h3>Core</h3>
-        <ul class="list">
-          <li>IPR Gateway — (link)</li>
-          <li>Verifica pubblica — (link)</li>
-        </ul>
+        <h3>IPR Base</h3>
+        <p class="muted">
+          Il tuo record identitario cibernetico, sotto il tuo controllo,
+          riutilizzabile nel tempo.
+        </p>
+        <span class="pill">BASE-ACTIVE</span>
       </div>
       <div class="card">
-        <h3>Servizi</h3>
-        <ul class="list">
-          <li><a href="ai-workers.html">AI Workers</a></li>
-          <li><a href="public-documents.html">Documenti Pubblici (PDA/PDAR)</a></li>
-          <li><a href="services.html">Catalogo Services</a></li>
-        </ul>
+        <h3>PDAR CIE (privato)</h3>
+        <p class="muted">
+          Collegamento evidence-based tra la tua identità e il documento statale,
+          senza archiviare il documento.
+        </p>
       </div>
       <div class="card">
-        <h3>Compliance / Operativo</h3>
-        <ul class="list">
-          <li>UNEBDO — (link)</li>
-          <li>OPC — (link)</li>
-          <li>🜏 AI JOKER ΦΩ — C2 SOFTWARE — (link)</li>
-        </ul>
+        <h3>Pronto per i servizi</h3>
+        <p class="muted">
+          L’IPR Base può essere usato per AI Workers, documenti pubblici,
+          continuità professionale e memoria digitale.
+        </p>
       </div>
     </div>
+  </section>
+
+  <!-- GARANZIE -->
+  <section>
+    <h2>Garanzie fondamentali</h2>
+    <ul class="list">
+      <li>Hermeticum B.C.E. non sostituisce documenti statali</li>
+      <li>Nessun upload di CIE o dati sensibili</li>
+      <li>Solo evidenze crittografiche verificabili</li>
+      <li>Approccio UE-first · GDPR · fail-closed</li>
+    </ul>
   </section>
 
 </main>
 
 <footer>
   <p>
-    <strong>Hermeticum B.C.E.</strong> — Services<br/>
-    Stato: ATTIVO · Classificazione: DUAL-USE (NON OFFENSIVA) · Approccio: UE-first
+    <strong>Hermeticum B.C.E.</strong><br/>
+    Stato: ATTIVO · Classificazione: DUAL-USE (NON OFFENSIVA) · UE-first
   </p>
 </footer>
 
