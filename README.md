@@ -1,68 +1,105 @@
 # Hermeticum B.C.E. — Services
 
-**Hermeticum B.C.E.** (*Blindata · Computabile · Evolutiva*) è il **gateway ufficiale**
-dell’ecosistema Hermeticum B.C.E.  
-Questo repository fornisce **onboarding, servizi di base e punti di accesso**
-ai moduli operativi, nel rispetto di principi **UE-first**, **audit-by-design**
-e **minimizzazione dei dati**.
+**Hermeticum B.C.E. — Services** è il **gateway ufficiale**
+dell’ecosistema **Hermeticum B.C.E.**  
+Qui avviene l’**ingresso controllato**: onboarding, generazione di evidenze
+e accesso ai moduli operativi secondo principi **UE-first** e **audit-by-design**.
 
-> Qui non si “opera”.  
-> Qui si **entra** nel sistema.
+> Questo repository **non è un cockpit operativo**.  
+> È il punto in cui si **entra nel sistema**.
 
 ---
 
 ## Funzione del repository
-- Onboarding dell’utente / operatore
-- Generazione **IPR Base** (Identity Primary Record)
-- Hashing locale e bundle crittografici
-- Accesso controllato ai moduli operativi (AI, C2, Governance)
+
+Questo repository fornisce:
+
+- Onboarding tecnico per la generazione di **IPR Base**
+- Hashing locale e creazione di **bundle di evidenze**
+- Accesso ordinato ai moduli dell’ecosistema
+- Documentazione di ingresso e contesto
+
+Tutte le operazioni critiche sono progettate per avvenire **nel browser**
+(con minimizzazione dei dati lato server).
 
 ---
 
-## Cos’è l’IPR Base
-L’**IPR Base** è una **ancora identitaria crittografica** che:
-- collega una persona reale o entità operativa
-- produce evidenze verificabili (hash, timestamp, bundle)
-- abilita l’accesso ai servizi Hermeticum B.C.E.
-- NON è un documento di identità statale
-- NON sostituisce documenti UE esistenti
+## Architettura logica (stile banca / ente UE)
 
-L’IPR è **locale, verificabile e opponibile**.
+L’ecosistema è organizzato in tre livelli funzionali:
+
+### ENTRY — Identità & Evidence
+- Creazione dell’IPR Base
+- Generazione di evidenze verificabili (hash, bundle JSON)
+- Nessuna operazione è consentita senza questo livello
+
+### CONTROL — Policy & Conformità
+- Applicazione di regole fail-closed
+- Policy opponibili e governance computabile
+- Valutazione di conformità e lifecycle dell’identità
+
+### OPERATION — Cockpit & Workflow
+- Interazione operatore ↔ AI
+- Workflow controllati
+- Audit locale e tracciabilità
+
+---
+
+## Navigazione rapida
+
+- **Gateway Services (home)**  
+  https://manuelcoletta1-source.github.io/hermeticum-bce-services/
+
+- **Catalogo moduli**  
+  https://manuelcoletta1-source.github.io/hermeticum-bce-services/catalog.html
+
+- **Onboarding IPR Base**  
+  https://manuelcoletta1-source.github.io/hermeticum-bce-services/onboarding-base.html
+
+- **AI JOKER — Workers (cockpit operativo)**  
+  https://manuelcoletta1-source.github.io/ai-joker-workers/
 
 ---
 
 ## Moduli collegati
-Questo gateway collega e abilita:
 
-- **AI JOKER Workers**  
-  Cockpit operativo Human-in-the-Loop (operatore ↔ AI)  
-  👉 https://manuelcoletta1-source.github.io/ai-joker-workers/
+- **AI JOKER — Workers**  
+  Cockpit Human-in-the-Loop con audit append-only e gating IPR
 
 - **UNEBDO**  
-  Dispositivo giuridico-computabile  
-  👉 https://manuelcoletta1-source.github.io/unebdo/
+  Dispositivo giuridico-computabile per policy e governance
 
 - **IPR Core / Gate / Comply**  
-  Lifecycle, policy e conformità dell’identità
+  Nucleo, controllo ex-ante e valutazione di conformità dell’IPR
 
-- **CyberGlobal / MetaExchange / OPC / IoSpace**  
-  Moduli infrastrutturali dell’ecosistema
-
----
-
-## Principi di sicurezza
-- Zero data retention lato server
-- Tutte le operazioni critiche avvengono **nel browser**
-- Fail-closed by default
-- Audit ed evidenze esportabili
+- **GitJoker-C2**  
+  Command & Control per publishing GitHub con tracciabilità
 
 ---
 
-## Stato
-🟢 **ATTIVO — Gateway di accesso ufficiale**
+## Sicurezza e principi
 
-Questo repository è stabile.
-Le funzionalità operative risiedono nei moduli dedicati.
+- Fail-closed di default
+- Zero data retention lato server (impostazione standard)
+- Evidenze esportabili e verificabili
+- Nessuna funzione bancaria o finanziaria
+- Nessun rilascio di identità legali statali
+
+---
+
+## Stato del repository
+
+🟢 **ATTIVO — Gateway stabile**
+
+Le funzionalità operative risiedono nei repository dedicati.
+Questo gateway è progettato per rimanere **semplice, stabile e difendibile**.
+
+---
+
+## Note legali
+
+- Consultare **Privacy** e **Terms of Service** prima dell’uso
+- Il progetto è orientato a ricerca, architettura e dimostrazione tecnica
 
 ---
 
