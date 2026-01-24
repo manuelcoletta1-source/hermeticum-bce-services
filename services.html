@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <title>Servizi — BioCyber Identity Card (EU Pilot) | HERMETICUM B.C.E.</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Servizi della BioCyber Identity Card (EU Pilot): IPR/HRR, DGV fail-closed, Tempo Certificato & Traccia, Evidence Vault LTA." />
-  <meta name="theme-color" content="#0b0c10" />
+  <title>Hermeticum B.C.E. — Services | Catalogo</title>
+  <meta name="description" content="Catalogo servizi Hermeticum B.C.E.: Carta d’Identità Cibernetica, IPR, verifica, audit, moduli software ed editoriali." />
   <style>
     :root{
-      color-scheme: dark;
       --bg:#0b0c10;
       --panel:#0f1117;
       --line:#24262b;
       --text:#e8e8e8;
-      --muted:#a9adb7;
-      --accent:#9be7ff;
-      --good:#6ee7b7;
-      --warn:#fbbf24;
-      --bad:#fb7185;
-      --radius:18px;
+      --muted:#9aa0a6;
+      --accent:#6aa9ff;
+      --ok:#2bd576;
+      --warn:#ffcc66;
     }
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -29,342 +25,355 @@
       line-height:1.6;
     }
     header, main, footer{
-      max-width:1100px;
+      max-width:1120px;
       margin:0 auto;
-      padding:22px;
+      padding:20px;
     }
-    header{ border-bottom:1px solid var(--line); }
-    footer{
-      border-top:1px solid var(--line);
-      color:var(--muted);
-      font-size:0.92rem;
-      margin-top:44px;
-    }
-    a{ color:var(--accent); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    .topbar{
+    header{
       display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .brand b{ letter-spacing:.4px; }
-    .brand small{ color:var(--muted); display:block; margin-top:2px; }
-
-    .nav{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      margin-top:2px;
-      font-size:0.95rem;
-    }
-    .chip{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.02);
-      padding:8px 10px;
-      border-radius:999px;
-      color:var(--text);
-    }
-    .chip:hover{ background:rgba(255,255,255,0.06); text-decoration:none; }
-
-    h1{ margin:14px 0 8px; font-size:28px; letter-spacing:.2px; }
-    h2{ margin:0 0 10px; font-size:18px; }
-    h3{ margin:0 0 8px; font-size:16px; }
-    p{ margin:10px 0; }
-
-    .hero{
-      margin-top:14px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(155,231,255,0.08), rgba(15,17,23,0.86));
-      padding:18px;
-    }
-    .muted{ color:var(--muted); }
-    .statusrow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
       align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      border-bottom:1px solid var(--line);
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .brand strong{font-size:1.05rem}
+    .brand span{color:var(--muted); font-size:0.85rem}
+    nav a{
+      color:var(--text);
+      text-decoration:none;
+      margin-right:14px;
+      font-size:0.95rem;
+      white-space:nowrap;
+    }
+    nav a:last-child{margin-right:0}
+    nav a:hover{color:var(--accent)}
+    .hero{
+      padding:28px 0 8px;
+    }
+    .hero h1{margin:0 0 8px; font-size:1.8rem}
+    .hero p{margin:0 0 14px; color:var(--muted); max-width:860px}
+    .row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
       margin-top:10px;
     }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
+    .cta{
+      display:inline-block;
+      padding:10px 14px;
       border:1px solid var(--line);
-      border-radius:999px;
-      padding:6px 10px;
-      font-size:12px;
-      color:var(--muted);
-      background:rgba(255,255,255,0.02);
-    }
-    .dot{ width:8px; height:8px; border-radius:999px; background:var(--good); display:inline-block; }
-
-    .btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      padding:10px 12px;
-      background:rgba(255,255,255,0.02);
+      border-radius:10px;
+      background:var(--panel);
       color:var(--text);
+      text-decoration:none;
       font-size:0.95rem;
     }
-    .btn.primary{
-      background:rgba(155,231,255,0.14);
-      border-color:rgba(155,231,255,0.35);
+    .cta.primary{
+      border-color:var(--accent);
+      color:#fff;
     }
-    .btn:hover{ background:rgba(255,255,255,0.06); text-decoration:none; }
-
+    .badge{
+      display:inline-block;
+      padding:4px 8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      font-size:0.75rem;
+      color:var(--muted);
+      margin-right:6px;
+    }
     .grid{
       display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:14px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:16px;
       margin-top:14px;
     }
     .card{
-      grid-column:span 12;
       border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:var(--panel);
-      padding:16px;
-    }
-    @media(min-width:900px){
-      .span6{ grid-column:span 6; }
-      .span4{ grid-column:span 4; }
-      .span8{ grid-column:span 8; }
-    }
-    ul{ margin:10px 0 0; padding-left:18px; }
-    li{ margin:6px 0; }
-
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-      border:1px dashed var(--line);
       border-radius:14px;
-      padding:12px;
-      background:rgba(255,255,255,0.02);
-      overflow:auto;
-      white-space:nowrap;
+      padding:16px;
+      background:var(--panel);
     }
-
-    .note{
-      margin-top:12px;
-      border-left:3px solid var(--accent);
-      border-radius:12px;
-      background:rgba(155,231,255,0.08);
-      padding:10px 12px;
+    .card h3{margin:0 0 8px; font-size:1.1rem}
+    .card p{margin:0 0 10px}
+    .muted{color:var(--muted)}
+    .kpi{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
     }
-    .note.warn{
-      border-left-color:var(--warn);
-      background:rgba(251,191,36,0.10);
-    }
-    .note.bad{
-      border-left-color:var(--bad);
-      background:rgba(251,113,133,0.10);
-    }
-
-    .kicker{
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-      font-size:0.78rem;
+    .kpi span{
+      font-size:0.85rem;
       color:var(--muted);
-      margin-bottom:6px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:6px 10px;
+      background:rgba(255,255,255,0.02);
     }
-    .footerline{ padding-top:16px; }
+    .list{margin:0; padding-left:18px; color:var(--muted)}
+    section{margin-top:34px}
+    .hr{border-top:1px solid var(--line); margin:26px 0}
+    footer{
+      margin-top:46px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+    footer a{color:var(--muted); text-decoration:none}
+    footer a:hover{color:var(--accent)}
+    .flag{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:0.75rem;
+      border:1px solid var(--line);
+      color:var(--muted);
+    }
+    .flag.ok{border-color:rgba(43,213,118,0.35); color:rgba(43,213,118,0.95)}
+    .flag.warn{border-color:rgba(255,204,102,0.35); color:rgba(255,204,102,0.95)}
   </style>
 </head>
 
 <body>
+
 <header>
-  <div class="topbar">
-    <div class="brand">
-      <b>HERMETICUM B.C.E.</b>
-      <small>Services · UE-first · Fail-Closed · Opponibilità</small>
-    </div>
-
-    <nav class="nav">
-      <a class="chip" href="./index.html">Home</a>
-      <a class="chip" href="./services.html"><strong>Servizi</strong></a>
-      <a class="chip" href="./use-cases.html">Use Cases</a>
-      <a class="chip" href="./governance.html">Governance</a>
-      <a class="chip" href="./create.html">Attivazione</a>
-      <a class="chip" href="./verify.html">Verifica</a>
-      <a class="chip" href="https://manuelcoletta1-source.github.io/hermeticum-bce-technology/" target="_blank" rel="noopener">Technology</a>
-    </nav>
+  <div class="brand">
+    <strong>Hermeticum B.C.E.</strong>
+    <span>Services · Catalogo servizi e artefatti</span>
   </div>
-
-  <section class="hero">
-    <h1>Servizi — BioCyber Identity Card (EU Pilot)</h1>
-    <p class="muted" style="max-width:80ch;">
-      Componenti operativi del pilot: <b>identità tecnica umana</b>, <b>gate decisionale fail-closed</b>,
-      <b>tempo certificato</b> e <b>evidenze a lungo termine</b>.
-      Non è identità civile. Non sostituisce documenti nazionali. È <b>responsabilità opponibile</b>.
-    </p>
-
-    <div class="statusrow">
-      <span class="badge"><span class="dot"></span> FASE 1 — Catena minima fail-closed</span>
-      <span class="badge">UE-first</span>
-      <span class="badge">Audit-by-design</span>
-    </div>
-
-    <div class="btnrow">
-      <a class="btn primary" href="./create.html">Avvia Attivazione</a>
-      <a class="btn" href="./verify.html">Workflow di Verifica</a>
-    </div>
-
-    <div class="note warn">
-      <b>Regola fail-closed:</b> l’incertezza è trattata come rischio. Se manca un prerequisito verificabile → <b>FAIL_CLOSED</b>.
-    </div>
-  </section>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#catalogo">Catalogo</a>
+    <a href="#onboarding">Onboarding</a>
+    <a href="#moduli">Repository</a>
+    <a href="#verifica">Verifica</a>
+  </nav>
 </header>
 
 <main>
-  <section class="grid">
-    <div class="card span12">
-      <h2>Catena minima (fail-closed)</h2>
-      <p class="muted">
-        Il pilot è implementato come catena minima. Se manca un’evidenza richiesta, il sistema non procede.
-      </p>
-      <div class="mono">Evento → IPR/HRR (Radice Umana) → DGV → Tempo Certificato &amp; Traccia → Evidence Vault (LTA)</div>
-      <p class="muted small" style="margin-top:10px;">
-        Esiti DGV: <span class="mono">ALLOW / REVIEW / DENY / FAIL_CLOSED</span>
-      </p>
+
+  <section class="hero">
+    <h1>Catalogo servizi</h1>
+    <p>
+      Hermeticum B.C.E. fornisce servizi e artefatti cibernetici UE-first per rendere
+      <strong>identità, atti e opere</strong> verificabili nel tempo, con tracciabilità e responsabilità opponibile.
+    </p>
+    <div class="row">
+      <a class="cta primary" href="#carta">Carta d’Identità Cibernetica</a>
+      <a class="cta" href="#onboarding">Avvia onboarding</a>
+      <a class="cta" href="#verifica">Verifica pubblica</a>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <span class="badge">UE-first</span>
+      <span class="badge">Audit-by-design</span>
+      <span class="badge">Fail-closed</span>
+      <span class="badge">Dual-use non offensiva</span>
     </div>
   </section>
 
-  <section>
-    <h2>Servizi core</h2>
+  <section id="catalogo">
+    <h2>Servizi principali</h2>
+
     <div class="grid">
 
-      <div class="card span6">
-        <div class="kicker">Servizio 01</div>
-        <h3>IPR/HRR — Radice Umana Opponibile</h3>
+      <div class="card" id="carta">
+        <h3>Carta d’Identità Cibernetica Hermeticum (UE-conforme)</h3>
         <p class="muted">
-          Attribuzione tecnica umana per azioni critiche: garantisce che esista un responsabile reale e verificabile.
+          Artefatto software che collega una persona reale (o soggetto responsabile) a un’identità cibernetica verificabile
+          e persistente nel tempo.
         </p>
-        <ul>
-          <li>unico per individuo</li>
-          <li>non duplicabile</li>
-          <li>auditabile</li>
-          <li>sospendibile (non cancellabile)</li>
-        </ul>
-        <div class="note warn">
-          <b>Fail-closed trigger:</b> IPR/HRR mancante o invalido → <b>FAIL_CLOSED</b>.
+        <div class="kpi">
+          <span>Output: Identità cibernetica attiva</span>
+          <span>Prova: verificabile</span>
+          <span>Continuità: nel tempo</span>
         </div>
-        <div class="note">
-          <b>Nota:</b> non è identità civile. È una radice tecnica di responsabilità.
+        <div class="hr"></div>
+        <p class="muted"><strong>Serve per:</strong></p>
+        <ul class="list">
+          <li>ancorare documenti, opere, software e decisioni a un’identità</li>
+          <li>dimostrare nel tempo cosa esisteva, quando e sotto quale responsabilità</li>
+          <li>mantenere continuità anche se cambiano sistemi o piattaforme</li>
+        </ul>
+        <p class="muted" style="margin-top:10px">
+          Non sostituisce documenti statali (es. CIE). Li estende nel dominio cibernetico come strato tecnico di prova.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>IPR Gateway (Identity / Project Record)</h3>
+        <p class="muted">
+          Generazione e gestione degli IPR: unità primaria verificabile per identità e progetti, collegabile nel tempo.
+        </p>
+        <div class="kpi">
+          <span>Output: IPR attivo</span>
+          <span>Link: eventi nel tempo</span>
+          <span>Verifica: pubblica</span>
+        </div>
+        <p class="muted" style="margin-top:10px">
+          L’IPR è l’unità primaria: nessun modulo crea identità, tutti i moduli usano la stessa identità.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Verifica pubblica</h3>
+        <p class="muted">
+          Verifica di identità e record tramite evidenze pubbliche (hash, metadati, riferimenti di ancoraggio).
+        </p>
+        <div class="kpi">
+          <span>Output: esito verifica</span>
+          <span>Metodo: evidence-based</span>
+          <span>Scopo: fiducia tecnica</span>
         </div>
       </div>
 
-      <div class="card span6">
-        <div class="kicker">Servizio 02</div>
-        <h3>DGV — Decision Gate Validator</h3>
+      <div class="card">
+        <h3>Compliance & Opponibilità (UNEBDO / OPC)</h3>
         <p class="muted">
-          Valida o blocca azioni <em>prima dell’esecuzione</em>, applicando outcome standard e ricostruibili.
+          Policy UE-first, regole di conformità e audit-by-design. Strato che rende attribuibili e opponibili le azioni.
         </p>
-        <ul>
-          <li>comportamento <b>fail-closed</b> obbligatorio</li>
-          <li>outcome: <b>ALLOW / REVIEW / DENY / FAIL_CLOSED</b></li>
-          <li>log machine-readable per audit</li>
-        </ul>
-        <div class="note warn">
-          <b>Fail-closed trigger:</b> policy assente, ambigua o non verificabile → <b>FAIL_CLOSED</b>.
-        </div>
-        <div class="note">
-          <b>Principio:</b> FAIL è protezione, non fallimento. Esecuzione senza validazione = non conforme.
+        <div class="kpi">
+          <span>Approccio: UE-first</span>
+          <span>Regola: fail-closed</span>
+          <span>Audit: by design</span>
         </div>
       </div>
 
-      <div class="card span6">
-        <div class="kicker">Servizio 03</div>
-        <h3>Tempo Certificato &amp; Traccia</h3>
+      <div class="card">
+        <h3>AI JOKER ΦΩ / C2 (assistente operativo)</h3>
         <p class="muted">
-          Tempo e tracciabilità come fondamento della sicurezza: ciò che non è misurabile e verificabile non è opponibile.
+          Assistenza operativa non autonoma: supporta processi e automazioni controllate, legate all’identità del titolare.
         </p>
-        <ul>
-          <li>timestamp con errore noto (bound)</li>
-          <li>tracciabilità e verifica riproducibile</li>
-          <li>fonte di tempo consistente e documentata</li>
-        </ul>
-        <div class="note warn">
-          <b>Fail-closed trigger:</b> fonte tempo non verificabile o drift non gestito → <b>FAIL_CLOSED</b>.
+        <div class="kpi">
+          <span>Soggetto: umano</span>
+          <span>AI: strumentale</span>
+          <span>Azioni: attribuibili</span>
         </div>
       </div>
 
-      <div class="card span6">
-        <div class="kicker">Servizio 04</div>
-        <h3>Evidence Vault — Lungo Termine (LTA)</h3>
+      <div class="card">
+        <h3>Infrastruttura & Interoperabilità (CyberGlobal / IoSpace)</h3>
         <p class="muted">
-          Conservazione di evidenze progettata per restare verificabile nel tempo (anni/decenni), con profili LTA.
+          Coordinamento, interoperabilità e ambienti operativi digitali. Classificazione dual-use non offensiva.
         </p>
-        <ul>
-          <li>retention ≥ 20 anni (configurabile)</li>
-          <li>verifica offline</li>
-          <li>re-timestamping periodico</li>
-          <li>compatibilità ETSI/eIDAS (profili LTA)</li>
-        </ul>
-        <div class="note warn">
-          <b>Fail-closed trigger:</b> integrità non ricalcolabile o catena evidenze spezzata → <b>FAIL_CLOSED</b>.
-        </div>
-      </div>
-
-      <div class="card span12">
-        <div class="kicker">Servizio 05</div>
-        <h3>Ancoraggi Critici (on-demand)</h3>
-        <p class="muted">
-          Ancoraggi crittografici selettivi (quando serve davvero) per eventi ad alta criticità: prova distribuita e resistente.
-        </p>
-        <ul>
-          <li>attivazione per livello (Base → Opponibile → Forte)</li>
-          <li>ancoraggio come “prova finale”, non come moda</li>
-          <li>modello costi/criticità controllato</li>
-        </ul>
-        <div class="note">
-          <b>Regola:</b> più rischio → più forza probatoria. Nessun ancoraggio inutile.
+        <div class="kpi">
+          <span class="flag ok">NON OFFENSIVA</span>
+          <span>Interoperabilità</span>
+          <span>Contesti complessi</span>
         </div>
       </div>
 
     </div>
   </section>
 
-  <section class="grid">
-    <div class="card span8">
-      <h2>Verifica pubblica</h2>
-      <p>
-        Il pilot supporta workflow di verifica pubblica e riproducibile:
-        la regola d’oro è <b>“ricalcola e confronta”</b>, non “fidati del sito”.
+  <section id="onboarding">
+    <h2>Onboarding</h2>
+    <div class="card">
+      <p class="muted">
+        Attivazione in 3 passi. Regola di sicurezza: <strong>FAIL-CLOSED</strong> (se un requisito non è soddisfatto, il processo non procede).
       </p>
-      <div class="btnrow">
-        <a class="btn primary" href="./verify.html">Apri Verify</a>
-        <a class="btn" href="./create.html">Attivazione</a>
+      <div class="grid">
+        <div class="card">
+          <h3>1) Selezione livello</h3>
+          <p class="muted">Base · Opponibile · Forte</p>
+        </div>
+        <div class="card">
+          <h3>2) Verifica requisiti UE</h3>
+          <p class="muted">Documentazione e regole minime di coerenza</p>
+        </div>
+        <div class="card">
+          <h3>3) Rilascio evidenze</h3>
+          <p class="muted">Evidence bundle: tracciabilità, metadati, link verifica</p>
+        </div>
+      </div>
+      <div class="row" style="margin-top:14px">
+        <a class="cta primary" href="#moduli">Vai ai moduli</a>
+        <a class="cta" href="#verifica">Esegui verifica</a>
       </div>
     </div>
+  </section>
 
-    <div class="card span4">
-      <h2>Nota di sicurezza</h2>
-      <p class="muted">
-        Ogni servizio è progettato per ridurre rischio <b>prima</b> dell’esecuzione.
-        Il comportamento fail-closed non è opzionale.
-      </p>
-      <div class="note bad">
-        <b>Se non è verificabile → non si fa.</b>
+  <section id="moduli">
+    <h2>Repository e moduli (da collegare)</h2>
+    <p class="muted">
+      Inserisci qui i link ai tuoi repository ufficiali. Regola: pubblicare solo link stabili; se un modulo non è pronto,
+      indicare <strong>COMING SOON</strong> (fail-closed, niente 404).
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Core</h3>
+        <ul class="list">
+          <li>IPR Gateway — (repo/link)</li>
+          <li>Registro / Verifica pubblica — (repo/link)</li>
+        </ul>
       </div>
+      <div class="card">
+        <h3>Compliance</h3>
+        <ul class="list">
+          <li>UNEBDO — (repo/link)</li>
+          <li>OPC — (repo/link)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Infrastruttura</h3>
+        <ul class="list">
+          <li>CyberGlobal — (repo/link)</li>
+          <li>IoSpace — (repo/link)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Assistente operativo</h3>
+        <ul class="list">
+          <li>🜏 AI JOKER ΦΩ — C2 — (repo/link)</li>
+          <li>GitJoker — (repo/link)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Scambio</h3>
+        <ul class="list">
+          <li>MetaExchange — (repo/link)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Editoria</h3>
+        <ul class="list">
+          <li>Esoterologia Edizioni — (repo/link)</li>
+          <li>Corpus — (repo/link)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="verifica">
+    <h2>Verifica pubblica</h2>
+    <div class="card">
+      <p class="muted">
+        Esempio di pagina di verifica IPR (pubblica):
+      </p>
+      <p>
+        <a class="cta" href="https://manuelcoletta1-source.github.io/manuhell/" target="_blank">
+          Apri verifica IPR
+        </a>
+      </p>
+      <p class="muted">
+        La verifica è evidence-based: fiducia basata su prove, non su promesse.
+      </p>
     </div>
   </section>
 
 </main>
 
 <footer>
-  <div class="footerline">
-    <div><b>HERMETICUM B.C.E.</b> — Services</div>
-    <div class="muted">BioCyber Identity Card (EU Pilot) · UE-first · Fail-Closed · Opponibilità nel tempo</div>
-  </div>
+  <p>
+    <strong>Hermeticum B.C.E.</strong> — Services<br/>
+    Stato: ATTIVO · Classificazione: DUAL-USE (NON OFFENSIVA) · Approccio: UE-first
+  </p>
 </footer>
+
 </body>
 </html>
-```0
