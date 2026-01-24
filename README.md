@@ -1,121 +1,180 @@
-# HERMETICUM B.C.E. — Services
-**Blindata · Computabile · Evolutiva**
+# Hermeticum B.C.E. — Services
 
-Repository “vetrina” e punto di ingresso dell’ecosistema **HERMETICUM B.C.E.**: sicurezza digitale **UE-first**, identità verificabile, responsabilità umana opponibile, prove digitali resistenti nel tempo.
+**Hermeticum B.C.E.** è un’azienda tecnologica europea che **progetta, produce e distribuisce software e artefatti cibernetici UE-first**, orientati a:
+- identità verificabile
+- tracciabilità nel tempo
+- opponibilità tecnica
+- continuità digitale
 
-> **Principio operativo:** se un elemento essenziale non è verificabile, l’azione **non procede** (*fail-closed*).
-
----
-
-## Cos’è HERMETICUM B.C.E.
-
-**HERMETICUM B.C.E.** è un framework tecnico-operativo per decisioni digitali critiche, progettato per rendere ogni azione:
-
-- **attribuibile** a una radice umana verificabile
-- **validata ex-ante** (prima dell’esecuzione)
-- **tracciabile nel tempo** con riferimento temporale coerente
-- **auditabile** tramite evidenze riproducibili
-
-### Catena minima (fail-closed)
-**Evento → Identità umana verificabile (IPR/HRR) → Gate decisionale (DGV) → Tempo certificato → Evidence Bundle**
-
-Se manca un requisito o la verifica non è riproducibile, l’esito deve essere: **FAIL_CLOSED**.
+Questo repository (**Services**) è il **portale operativo ufficiale**: descrive i servizi, gli artefatti, l’architettura e collega tutti i moduli software ed editoriali dell’ecosistema.
 
 ---
 
-## Cosa NON è
+## Cos’è Hermeticum B.C.E.
 
-- Non è “AI cosciente”.
-- Non è un sistema che “decide al posto tuo”.
-- Non sostituisce documenti civili (CIE, passaporto).
-- Non richiede fiducia nel sito: la verifica è sempre “**ricalcola e confronta**”.
+Hermeticum B.C.E. **non è una piattaforma**, **non è un datacenter**, **non è un social**.
 
-È un’infrastruttura per rendere le decisioni digitali **responsabili, verificabili, opponibili**.
+È una **infrastruttura cibernetica modulare** che fornisce **artefatti software** per rendere **verificabile e responsabile** l’esistenza digitale di persone, progetti e opere.
 
----
-
-## Principi (Pillar)
-
-- **UE-first**: impostazione normativa e progettuale allineata al quadro europeo.
-- **Fail-Closed**: niente esecuzione senza validazione.
-- **Responsabilità umana non opzionale**: ogni azione riconduce a una radice umana verificabile.
-- **Evidence-first**: senza prova strutturata non esiste opponibilità.
-- **Audit-by-design**: ricostruibilità e controllabilità integrate.
+Hermeticum B.C.E. è il **marchio di fabbrica** di questi artefatti.
 
 ---
 
-## Componenti chiave
+## L’artefatto principale
+## Carta d’Identità Cibernetica Hermeticum (UE-conforme)
 
-### IPR / HRR — Radice Umana
-Collegamento tecnico a una persona reale, verificabile e non duplicabile, intesa come **soggetto tecnico e giuridico responsabile** dell’azione.
+La **Carta d’Identità Cibernetica Hermeticum** è il primo artefatto prodotto da Hermeticum B.C.E.
 
-### DGV — Decision Gate Validator
-Validazione ex-ante con outcome standardizzati:
+### Cos’è
+Un **artefatto software** che collega una **persona reale** (o soggetto responsabile) a una **identità cibernetica verificabile**, persistente nel tempo.
 
-`ALLOW · REVIEW · DENY · FAIL_CLOSED`
+Non sostituisce documenti statali (es. CIE).  
+Li **estende nel dominio cibernetico** come strato tecnico di prova.
 
-### Tempo certificato
-Riferimento temporale consistente e verificabile. Senza tempo affidabile, la prova perde forza.
+### Cosa permette di fare
+La Carta consente di:
+- esistere nel cyberspazio in modo **stabile e verificabile**
+- ancorare **documenti, opere, software e decisioni** a un’identità
+- dimostrare **nel tempo** cosa esisteva, quando e sotto quale responsabilità
+- mantenere **continuità digitale** anche se cambiano piattaforme o sistemi
+- collegare eventi futuri alla stessa identità verificata
 
-### Evidence Bundle
-Pacchetto strutturato (manifest + hash + firme + tempo + metadati) per audit e opponibilità nel tempo.
+👉 La fiducia non è dichiarata: è **dimostrabile**.
 
-### Anchors (opzionali)
-Ancoraggi crittografici selettivi (es. **IPFS / Bitcoin / Ethereum**) attivati in base a criticità e policy, in modalità **hash-only**.
+---
+
+## A cosa serve
+
+Hermeticum B.C.E. serve a rendere **opponibili e verificabili**:
+- identità
+- eventi
+- contenuti
+- responsabilità
+- continuità nel tempo
+
+Il dato può vivere ovunque.  
+**La prova resta.**
 
 ---
 
 ## A chi serve
 
-- **Persone / professionisti**: accountability personale e prova digitale per azioni critiche.
-- **Aziende / organizzazioni**: governance dei processi, ruoli e decisioni con auditabilità.
-- **Istituzioni / PA**: procedimenti sensibili con verifica riproducibile e continuità nel tempo.
+- **Cittadini UE**: identità digitale stabile e tracciabile  
+- **Professionisti**: paternità, priorità, responsabilità tecnica  
+- **Aziende e organizzazioni**: governance, audit, continuità  
+- **Progetti UE / contesti istituzionali**: interoperabilità e standard UE-first
 
 ---
 
-## Struttura del sito (GitHub Pages)
+## Perché è nuova tecnologia
 
-Questo repository pubblica un sito statico (GitHub Pages) con pagine stabili e coerenti:
+La novità non è lo strumento, ma **l’unità primaria**.
 
-- `index.html` → landing principale (percorso utente + principi)
-- `services.html` → componenti e servizi (catena fail-closed)
-- `catalog.html` → livelli (BASE / OPPONIBILE / FORTE)
-- `create.html` → attivazione (onboarding Level 1)
-- `verify.html` → verifica pubblica (recompute & match)
-- `governance.html` → scope, policy, non-goals
-- `use-cases.html` → casi d’uso UE/PA-ready
-- `evidence.html` → struttura Evidence Bundle
+In Hermeticum B.C.E. l’unità base non è un account o una piattaforma, ma un:
 
----
+### IPR — Identity / Project Record
+Un oggetto digitale:
+- indipendente
+- verificabile
+- collegabile nel tempo
+- auditabile
+- opponibile
 
-## Link ufficiali
-
-- **Sito (Services):** https://manuelcoletta1-source.github.io/hermeticum-bce-services/
-- **Technology (architettura):** https://manuelcoletta1-source.github.io/hermeticum-bce-technology/
-- **Verifica / IPR pubblica:** https://manuelcoletta1-source.github.io/manuhell/
+👉 **Un’identità. Molti software. Nessuna duplicazione.**
 
 ---
 
-## Call to action
+## Architettura (sintesi)
 
-- **Inizia Attivazione:** `create.html`
-- **Verifica pubblica:** `verify.html`
-- **Scegli un livello:** `catalog.html`
-- **Approfondisci governance:** `governance.html`
+L’ecosistema è organizzato per livelli modulari:
+
+1. **Carta d’Identità Cibernetica** — nodo centrale  
+2. **IPR Gateway** — generazione, gestione e verifica IPR  
+3. **UNEBDO / OPC** — policy, compliance, opponibilità UE-first  
+4. **CyberGlobal** — coordinamento e interoperabilità (dual-use non offensiva)  
+5. **IoSpace** — spazio operativo digitale  
+6. **AI JOKER ΦΩ / C2** — assistente operativo non autonomo  
+7. **MetaExchange** — scambio regolato di dati e valore  
+8. **GitJoker / Repository** — produzione software e paternità opponibile  
+9. **Esoterologia Edizioni / Corpus** — editoria verificabile
+
+Nessun modulo crea identità.  
+Tutti i moduli **usano la stessa identità**.
 
 ---
 
-## Stato
+## Percorso di attivazione (onboarding)
 
-🟢 **ATTIVO — Repository di servizio e vetrina**  
-Evoluzione controllata, semantica stabile, miglioramenti incrementali.
+### In 3 passi
+1. Selezione del livello di servizio  
+2. Verifica dei requisiti minimi UE  
+3. Attivazione dell’IPR e rilascio delle evidenze
+
+**Regola di sicurezza:** `FAIL-CLOSED`  
+Se un requisito non è soddisfatto, il processo non procede.
 
 ---
 
-## Licenza
+## Repository e moduli
 
-Da definire.  
-Consigliata separazione tra:
-- contenuti “vetrina” (testi/brand)
-- specifiche tecniche
-- eventuale codice operativo
+Questo portale collega i repository ufficiali dell’ecosistema Hermeticum B.C.E.
+
+### Core
+- IPR Gateway — (repo)
+- Registro / Verifica pubblica — (repo)
+
+### Compliance
+- UNEBDO — (repo)
+- OPC — (repo)
+
+### Infrastruttura
+- CyberGlobal — (repo)
+- IoSpace — (repo)
+
+### Assistente operativo
+- 🜏 AI JOKER ΦΩ — C2 SOFTWARE — (repo)
+- GitJoker — (repo)
+
+### Scambio e valore
+- MetaExchange — (repo)
+
+### Continuità
+- NeuroLoop — (repo)
+
+### Editoria
+- Esoterologia Edizioni — (repo)
+- CORPUS ESOTEROLOGIA ERMETICA — (repo)
+
+*(I link puntano esclusivamente a repository o pagine pubbliche verificabili.)*
+
+---
+
+## Stato e governance
+
+- **Stato:** ATTIVO  
+- **Classificazione:** DUAL-USE (NON OFFENSIVA)  
+- **Approccio normativo:** UE-first  
+- **Metodo:** audit-by-design · privacy-by-design · fail-closed
+
+---
+
+## Verifica pubblica
+
+Esempio di pagina di verifica IPR:
+https://manuelcoletta1-source.github.io/manuhell/
+
+La verifica è parte integrante del servizio.
+
+---
+
+## Nota legale essenziale
+
+Hermeticum B.C.E.:
+- non sostituisce documenti di identità statali
+- non agisce come autorità pubblica
+- fornisce **artefatti tecnici** per tracciabilità e opponibilità digitale
+
+---
+
+**Hermeticum B.C.E.**  
+Marchio di fabbrica di artefatti cibernetici europei.
