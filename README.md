@@ -1,178 +1,120 @@
 # Hermeticum B.C.E. — Services
 
-**Hermeticum B.C.E.** è un’azienda tecnologica europea che **progetta, produce e distribuisce software e artefatti cibernetici UE-first**, orientati a:
+**Hermeticum B.C.E.** è un’azienda tecnologica UE-first che progetta e vende **software e artefatti cibernetici** per:
 - identità verificabile
 - tracciabilità nel tempo
 - opponibilità tecnica
 - continuità digitale
 
-Questo repository (**Services**) è il **portale operativo ufficiale**: descrive i servizi, gli artefatti, l’architettura e collega tutti i moduli software ed editoriali dell’ecosistema.
+Questo repository (**Services**) è il **portale operativo ufficiale**: spiega i servizi in modo semplice e collega tutti i repository-modulo dell’ecosistema.
 
 ---
 
-## Cos’è Hermeticum B.C.E.
-
-Hermeticum B.C.E. **non è una piattaforma**, **non è un datacenter**, **non è un social**.
-
-È una **infrastruttura cibernetica modulare** che fornisce **artefatti software** per rendere **verificabile e responsabile** l’esistenza digitale di persone, progetti e opere.
-
-Hermeticum B.C.E. è il **marchio di fabbrica** di questi artefatti.
-
----
-
-## L’artefatto principale
+## Artefatto principale
 ## Carta d’Identità Cibernetica Hermeticum (UE-conforme)
 
-La **Carta d’Identità Cibernetica Hermeticum** è il primo artefatto prodotto da Hermeticum B.C.E.
+La Carta d’Identità Cibernetica è un **artefatto software** che collega una persona reale (soggetto responsabile) a una identità cibernetica verificabile, persistente e auditabile.
 
-### Cos’è
-Un **artefatto software** che collega una **persona reale** (o soggetto responsabile) a una **identità cibernetica verificabile**, persistente nel tempo.
+**Non sostituisce** documenti statali (es. CIE).  
+Li **aggancia** con evidenze tecniche (hash + riferimenti), nel rispetto delle competenze pubbliche.
 
-Non sostituisce documenti statali (es. CIE).  
-Li **estende nel dominio cibernetico** come strato tecnico di prova.
+---
 
-### Cosa permette di fare
-La Carta consente di:
-- esistere nel cyberspazio in modo **stabile e verificabile**
-- ancorare **documenti, opere, software e decisioni** a un’identità
-- dimostrare **nel tempo** cosa esisteva, quando e sotto quale responsabilità
-- mantenere **continuità digitale** anche se cambiano piattaforme o sistemi
-- collegare eventi futuri alla stessa identità verificata
+## Servizio Base (cliente)
+### Attivazione Carta — BASE
 
-👉 La fiducia non è dichiarata: è **dimostrabile**.
+**Input (uso interno):**
+- CIE (fronte/retro)  
+- Codice Fiscale
+
+**Metodo:**
+- hashing **lato client** (SHA-512)  
+- il documento **non viene archiviato** nel portale  
+- si conserva solo evidenza verificabile (hash + metadati minimi)
+
+**Output:**
+- Carta d’Identità Cibernetica (BASE) attiva
+- IPR associato (Identity / Project Record)
+- PDAR CIE (VALID-PRIVATE) — record di aggancio evidence-only
+
+**Privacy (GDPR-minimization):**
+- nessun numero documento / MRZ / indirizzo in chiaro nei record pubblici
+- i dati completi restano in area privata del titolare (vault/privato)
 
 ---
 
 ## A cosa serve
-
-Hermeticum B.C.E. serve a rendere **opponibili e verificabili**:
-- identità
-- eventi
-- contenuti
-- responsabilità
-- continuità nel tempo
+Hermeticum B.C.E. serve a rendere verificabile e opponibile:
+- **chi** (identità)
+- **cosa** (atto/output)
+- **quando** (tempo)
+- **con quale responsabilità** (attribuzione)
+- **nel tempo** (continuità)
 
 Il dato può vivere ovunque.  
-**La prova resta.**
+La prova resta.
 
 ---
 
 ## A chi serve
-
-- **Cittadini UE**: identità digitale stabile e tracciabile  
-- **Professionisti**: paternità, priorità, responsabilità tecnica  
-- **Aziende e organizzazioni**: governance, audit, continuità  
-- **Progetti UE / contesti istituzionali**: interoperabilità e standard UE-first
+- Cittadini UE (continuità identitaria digitale)
+- Professionisti (paternità, priorità, responsabilità)
+- Aziende/organizzazioni (audit, governance, compliance)
+- Progetti e contesti istituzionali UE (interoperabilità UE-first)
 
 ---
 
-## Perché è nuova tecnologia
+## Documenti pubblici statali (aggancio, non sostituzione)
+Hermeticum B.C.E. non certifica documenti statali e non sostituisce registri pubblici.
 
-La novità non è lo strumento, ma **l’unità primaria**.
+Fornisce un metodo per **agganciare riferimenti a documenti pubblici** tramite:
+- hash (impronta)
+- timestamp
+- riferimenti istituzionali (URL/protocollo)
+- collegamento a Carta/IPR
 
-In Hermeticum B.C.E. l’unità base non è un account o una piattaforma, ma un:
-
-### IPR — Identity / Project Record
-Un oggetto digitale:
-- indipendente
-- verificabile
-- collegabile nel tempo
-- auditabile
-- opponibile
-
-👉 **Un’identità. Molti software. Nessuna duplicazione.**
+Output: **PDAR — Public Document Anchor Record** (evidence-only, fail-closed).
 
 ---
 
 ## Architettura (sintesi)
+- Carta d’Identità Cibernetica (nodo centrale)
+- IPR Gateway (core record)
+- UNEBDO / OPC (policy, audit, opponibilità UE-first)
+- Verifica pubblica (evidence-based)
+- Moduli operativi (AI Workers, IoSpace, CyberGlobal, MetaExchange, ecc.)
 
-L’ecosistema è organizzato per livelli modulari:
-
-1. **Carta d’Identità Cibernetica** — nodo centrale  
-2. **IPR Gateway** — generazione, gestione e verifica IPR  
-3. **UNEBDO / OPC** — policy, compliance, opponibilità UE-first  
-4. **CyberGlobal** — coordinamento e interoperabilità (dual-use non offensiva)  
-5. **IoSpace** — spazio operativo digitale  
-6. **AI JOKER ΦΩ / C2** — assistente operativo non autonomo  
-7. **MetaExchange** — scambio regolato di dati e valore  
-8. **GitJoker / Repository** — produzione software e paternità opponibile  
-9. **Esoterologia Edizioni / Corpus** — editoria verificabile
-
-Nessun modulo crea identità.  
-Tutti i moduli **usano la stessa identità**.
+Regola: **1 servizio = 1 repository**.
 
 ---
 
-## Percorso di attivazione (onboarding)
-
-### In 3 passi
-1. Selezione del livello di servizio  
-2. Verifica dei requisiti minimi UE  
-3. Attivazione dell’IPR e rilascio delle evidenze
-
-**Regola di sicurezza:** `FAIL-CLOSED`  
-Se un requisito non è soddisfatto, il processo non procede.
-
----
-
-## Repository e moduli
-
-Questo portale collega i repository ufficiali dell’ecosistema Hermeticum B.C.E.
+## Repository / Moduli
+Sostituisci i placeholder con link stabili. Se un modulo non è pronto: **COMING SOON** (niente 404).
 
 ### Core
-- IPR Gateway — (repo)
-- Registro / Verifica pubblica — (repo)
+- IPR Gateway — (repo/link)
+- Verifica pubblica — (repo/link)
 
-### Compliance
-- UNEBDO — (repo)
-- OPC — (repo)
+### Servizi
+- AI Workers — (repo/link)
+- Documenti Pubblici (PDA/PDAR) — (repo/link)
 
-### Infrastruttura
-- CyberGlobal — (repo)
-- IoSpace — (repo)
-
-### Assistente operativo
-- 🜏 AI JOKER ΦΩ — C2 SOFTWARE — (repo)
-- GitJoker — (repo)
-
-### Scambio e valore
-- MetaExchange — (repo)
-
-### Continuità
-- NeuroLoop — (repo)
-
-### Editoria
-- Esoterologia Edizioni — (repo)
-- CORPUS ESOTEROLOGIA ERMETICA — (repo)
-
-*(I link puntano esclusivamente a repository o pagine pubbliche verificabili.)*
+### Compliance / Infrastruttura / Operativo
+- UNEBDO — (repo/link)
+- OPC — (repo/link)
+- CyberGlobal — (repo/link)
+- IoSpace — (repo/link)
+- MetaExchange — (repo/link)
+- 🜏 AI JOKER ΦΩ — C2 SOFTWARE — (repo/link)
+- Esoterologia Edizioni / Corpus — (repo/link)
 
 ---
 
 ## Stato e governance
-
-- **Stato:** ATTIVO  
-- **Classificazione:** DUAL-USE (NON OFFENSIVA)  
-- **Approccio normativo:** UE-first  
-- **Metodo:** audit-by-design · privacy-by-design · fail-closed
-
----
-
-## Verifica pubblica
-
-Esempio di pagina di verifica IPR:
-https://manuelcoletta1-source.github.io/manuhell/
-
-La verifica è parte integrante del servizio.
-
----
-
-## Nota legale essenziale
-
-Hermeticum B.C.E.:
-- non sostituisce documenti di identità statali
-- non agisce come autorità pubblica
-- fornisce **artefatti tecnici** per tracciabilità e opponibilità digitale
+- Stato: **ATTIVO**
+- Classificazione: **DUAL-USE (NON OFFENSIVA)**
+- Approccio: **UE-first**
+- Metodo: **audit-by-design · privacy-by-design · fail-closed**
 
 ---
 
