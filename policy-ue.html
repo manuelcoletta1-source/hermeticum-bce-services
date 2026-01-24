@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermeticum B.C.E. — Policy UE (UE-first)</title>
+  <meta name="description" content="Policy UE di Hermeticum B.C.E.: orientamento UE-first, GDPR, minimizzazione dei dati, auditabilità, sicurezza by design. Chiarezza su cosa è e cosa non è." />
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a9abb3;
+      --accent:#7bdcff;
+      --ok:#5cffb0;
+      --warn:#ffd27b;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    header,main,footer{max-width:1040px;margin:0 auto;padding:18px}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      border:1px solid var(--line);background:rgba(15,17,23,.75);
+      border-radius:16px;padding:14px 16px;backdrop-filter: blur(6px);
+    }
+    .brand{display:flex;flex-direction:column;gap:2px}
+    .brand b{letter-spacing:.4px}
+    .brand small{color:var(--muted)}
+    nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+    nav a{
+      padding:8px 10px;border:1px solid transparent;border-radius:12px;color:var(--text);
+      background:transparent
+    }
+    nav a:hover{border-color:var(--line);background:rgba(255,255,255,.03);text-decoration:none}
+    .hero{margin-top:14px;border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:18px}
+    .hero h1{margin:0 0 8px 0;font-size:22px}
+    .hero p{margin:0;color:var(--muted)}
+    .pillrow{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border:1px solid var(--line);border-radius:999px;
+      background:rgba(255,255,255,.02);color:var(--text);font-size:13px
+    }
+    .grid{margin-top:14px;display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .card{
+      grid-column:span 12;
+      border:1px solid var(--line);background:var(--panel);
+      border-radius:18px;padding:16px
+    }
+    @media (min-width: 900px){
+      .card.half{grid-column:span 6}
+    }
+    .card h2{margin:0 0 10px 0;font-size:18px}
+    .card h3{margin:14px 0 8px 0;font-size:15px}
+    .muted{color:var(--muted)}
+    ul{margin:8px 0 0 18px}
+    li{margin:6px 0}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 9px;border-radius:999px;border:1px solid var(--line);
+      font-size:12px;color:var(--text);background:rgba(255,255,255,.02)
+    }
+    .badge.ok{border-color:rgba(92,255,176,.25)}
+    .badge.warn{border-color:rgba(255,210,123,.25)}
+    .note{
+      margin-top:12px;padding:12px 12px;border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;background:rgba(255,255,255,.02);color:var(--muted)
+    }
+    .ctaRow{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:10px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.04);color:var(--text)
+    }
+    .btn:hover{background:rgba(255,255,255,.07);text-decoration:none}
+    .btn.primary{border-color:rgba(123,220,255,.25);background:rgba(123,220,255,.08)}
+    .footer{
+      border-top:1px solid var(--line);
+      margin-top:16px;padding-top:14px;color:var(--muted);font-size:13px
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <b>Hermeticum B.C.E.</b>
+        <small>Policy UE — orientamento UE-first</small>
+      </div>
+      <nav aria-label="Navigazione">
+        <a href="index.html">Home</a>
+        <a href="percorso.html">Percorso</a>
+        <a href="settori.html">Settori</a>
+        <a href="services.html">Servizi</a>
+        <a href="onboarding-base.html">Onboarding</a>
+        <a href="pdar.html">Documenti (PDAR)</a>
+      </nav>
+    </div>
+
+    <section class="hero">
+      <h1>Policy UE (UE-first)</h1>
+      <p>
+        Questa pagina spiega in modo chiaro cosa significa <b>UE-first</b> in Hermeticum B.C.E.,
+        quali principi adottiamo e quali limiti dichiariamo apertamente.
+      </p>
+
+      <div class="pillrow">
+        <span class="pill">🇪🇺 GDPR</span>
+        <span class="pill">🔐 Minimizzazione dati</span>
+        <span class="pill">🧾 Accountability</span>
+        <span class="pill">🧰 Audit-by-design</span>
+        <span class="pill">🛡️ Security by design</span>
+      </div>
+
+      <div class="note">
+        <b>Chiarezza fondamentale:</b> UE-first è un orientamento progettuale.
+        <b>Non</b> è una certificazione ufficiale UE e <b>non</b> sostituisce identità o documenti statali.
+      </div>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="onboarding-base.html">Avvia IPR Base</a>
+        <a class="btn" href="settori.html">Vedi i Settori</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="grid">
+
+      <article class="card half">
+        <h2>Principi UE adottati</h2>
+        <ul>
+          <li><b>GDPR</b>: minimizzazione, limitazione delle finalità, accountability.</li>
+          <li><b>Security by design</b>: la sicurezza è strutturale, non aggiunta dopo.</li>
+          <li><b>Auditabilità</b>: le prove sono verificabili nel tempo.</li>
+          <li><b>Trasparenza</b>: regole e limiti esplicitati pubblicamente.</li>
+        </ul>
+      </article>
+
+      <article class="card half">
+        <h2>Cosa significa per il cliente</h2>
+        <ul>
+          <li>Meno dati esposti, più controllo personale.</li>
+          <li>Prove verificabili senza dipendere da un provider centrale.</li>
+          <li>Portabilità delle evidenze nel tempo e nello spazio UE.</li>
+        </ul>
+      </article>
+
+      <article class="card half">
+        <h2>Cosa NON è</h2>
+        <ul>
+          <li>Non è una certificazione UE.</li>
+          <li>Non sostituisce SPID, CIE, eIDAS o identità statali.</li>
+          <li>Non è una banca dati centrale.</li>
+          <li>Non conserva dati personali in chiaro.</li>
+        </ul>
+      </article>
+
+      <article class="card half">
+        <h2>Implementazione pratica</h2>
+        <ul>
+          <li>Hash dei documenti come prove di integrità.</li>
+          <li>Timestamp per la continuità temporale.</li>
+          <li>Separazione tra contenuto e prova.</li>
+          <li>Verifiche pubbliche o private a livelli.</li>
+        </ul>
+      </article>
+
+    </section>
+
+    <footer class="footer">
+      <div>
+        <b>Hermeticum B.C.E.</b> — Policy UE-first.
+        Orientamento a GDPR, minimizzazione, auditabilità.
+        Non certificazione UE.
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
