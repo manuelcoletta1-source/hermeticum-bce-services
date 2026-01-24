@@ -2,189 +2,154 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hermeticum B.C.E. — Services</title>
-  <meta name="description" content="Hermeticum B.C.E. Services — Identità verificabili, evidenze crittografiche, UE-first, privacy by design." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hermeticum B.C.E. Services — Gateway di accesso ai servizi, IPR Base e moduli operativi UE-first." />
+
   <style>
-    :root{
-      color-scheme: dark;
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#b8b8b8;
-      --accent:#6ae3ff;
-      --warn:#ffd36a;
-    }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.55;
+      background: #0b0c10;
+      color: #e8e8e8;
     }
-    header, main, footer{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header{ padding-top: 32px; }
-    h1{
-      margin:0 0 8px;
-      font-size: 28px;
-      letter-spacing: .3px;
-    }
-    h2{
-      margin: 22px 0 10px;
-      font-size: 18px;
-      letter-spacing: .2px;
-    }
-    p{ margin: 10px 0; }
-    a{ color: var(--accent); text-decoration: none; }
-    a:hover{ text-decoration: underline; }
 
-    .card{
-      border: 1px solid var(--line);
+    header, main, footer {
+      max-width: 1000px;
+      margin: auto;
+      padding: 28px;
+    }
+
+    h1 { margin: 0 0 8px 0; font-size: 2.2rem; }
+    h2 { margin-top: 0; }
+
+    .muted { color: #9aa0a6; font-size: 0.95em; }
+
+    .card {
+      background: #0f1117;
+      border: 1px solid #24262b;
       border-radius: 16px;
-      background: var(--panel);
-      padding: 18px;
-      margin-top: 16px;
+      padding: 20px;
+      margin-bottom: 22px;
     }
-    .pill{
-      display:inline-block;
-      padding: 4px 10px;
-      border:1px solid var(--line);
-      border-radius: 999px;
-      font-size: 12px;
-      color: var(--muted);
-      background: rgba(255,255,255,0.03);
-      margin-right: 6px;
-    }
-    .disclaimer{
-      border-left: 3px solid var(--warn);
-      padding: 12px 14px;
-      margin-top: 14px;
-      background: rgba(255,211,106,0.08);
-      border-radius: 12px;
-      font-size: 14px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      margin-top: 14px;
-    }
-    .cta{
-      display:inline-block;
-      margin-top: 12px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: var(--accent);
-      color:#000;
-      font-weight:600;
-    }
-    .cta.secondary{
-      background: transparent;
-      color: var(--accent);
-      border:1px solid var(--line);
-      margin-left: 8px;
-    }
-    .muted{ color: var(--muted); }
 
-    footer{
-      margin-top: 40px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
+    a {
+      color: #7aa7ff;
+      text-decoration: none;
+      font-weight: 600;
     }
-    footer a{ color: var(--muted); }
+
+    a:hover { text-decoration: underline; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #1f6feb;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      border-top: 1px solid #24262b;
+      color: #9aa0a6;
+      font-size: 0.85em;
+    }
   </style>
 </head>
 
 <body>
 
 <header>
-  <span class="pill">UE-first</span>
-  <span class="pill">Privacy by design</span>
-  <span class="pill">Zero data retention</span>
-
   <h1>Hermeticum B.C.E. — Services</h1>
   <p class="muted">
-    Infrastruttura leggera per <strong>evidenze crittografiche</strong>, identità verificabili
-    e processi <strong>auditabili</strong>, progettata secondo standard europei.
+    Gateway di accesso all’ecosistema Hermeticum B.C.E.<br/>
+    Identità · Tracciabilità · Operatività UE-first
   </p>
-
-  <div class="disclaimer">
-    <strong>Nota importante:</strong><br />
-    “UE-first” indica uno <strong>standard di riferimento progettuale</strong> (GDPR, minimizzazione, auditabilità).
-    <strong>Non è una certificazione ufficiale UE</strong> e non sostituisce documenti statali
-    come Carta d’Identità o passaporto.
-  </div>
 </header>
 
 <main>
 
   <section class="card">
-    <h2>Cos’è questo servizio</h2>
-    <p>
-      Hermeticum B.C.E. Services consente di generare <strong>prove verificabili</strong>
-      (hash crittografici e bundle locali) per attestare integrità, coerenza e continuità
-      nel tempo di dati e documenti, <strong>senza inviare nulla a server</strong>.
-    </p>
-    <p>
-      Tutte le operazioni avvengono <strong>nel browser dell’utente</strong>.
+    <h2>Cos’è questo portale</h2>
+    <p class="muted">
+      Questo sito è il punto di ingresso ufficiale ai servizi Hermeticum B.C.E.
+      Qui si genera l’IPR Base e si accede ai moduli operativi.
+      Nessuna operazione sensibile viene eseguita lato server.
     </p>
   </section>
 
   <section class="card">
-    <h2>Cosa puoi fare</h2>
+    <h2>1 · Onboarding & IPR Base</h2>
+    <p class="muted">
+      L’IPR (Identity Primary Record) è il prerequisito
+      per accedere ai servizi avanzati.
+    </p>
+    <a class="btn" href="./onboarding-base.html">Avvia onboarding IPR</a>
+  </section>
+
+  <section class="card">
+    <h2>2 · Moduli Operativi</h2>
+
     <div class="grid">
-      <div>
-        <strong>IPR Base</strong>
+      <div class="card">
+        <h3>AI JOKER — Workers</h3>
         <p class="muted">
-          Genera un evidence bundle locale con hash e metadati verificabili.
+          Cockpit Human-in-the-Loop per interazione operatore ↔ AI,
+          con audit append-only e gating IPR.
         </p>
+        <a href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank">
+          Apri AI Workers →
+        </a>
       </div>
-      <div>
-        <strong>PDAR</strong>
+
+      <div class="card">
+        <h3>UNEBDO</h3>
         <p class="muted">
-          Proof of Data & Record: tracciabilità e verifica offline.
+          Dispositivo giuridico-computabile dell’ecosistema Hermeticum B.C.E.
         </p>
+        <a href="https://manuelcoletta1-source.github.io/unebdo/" target="_blank">
+          Apri UNEBDO →
+        </a>
       </div>
-      <div>
-        <strong>AI Workers (preview)</strong>
+
+      <div class="card">
+        <h3>IPR Core / Gate / Comply</h3>
         <p class="muted">
-          Moduli AI orientati a verifica, controllo e coerenza.
+          Lifecycle, policy e conformità dell’identità IPR.
         </p>
+        <a href="https://github.com/manuelcoletta1-source/ipr-core" target="_blank">
+          Vai ai moduli →
+        </a>
       </div>
     </div>
-
-    <a class="cta" href="./onboarding-base.html">Attiva IPR Base</a>
-    <a class="cta secondary" href="./services.html">Vedi servizi</a>
   </section>
 
   <section class="card">
-    <h2>Principi chiave</h2>
-    <ul>
-      <li>nessun caricamento dati su server</li>
-      <li>hash locali (es. SHA-512)</li>
-      <li>verifica offline indipendente</li>
-      <li>orientamento UE-first</li>
-      <li>fail-closed, audit-by-design</li>
-    </ul>
+    <h2>Sicurezza e governance</h2>
+    <p class="muted">
+      Hermeticum B.C.E. è progettato secondo principi:
+      audit-by-design, fail-closed, minimizzazione dei dati,
+      interoperabilità UE.
+    </p>
   </section>
 
 </main>
 
 <footer>
-  <p>
-    © Hermeticum B.C.E. — Services<br />
-    <a href="./privacy.html">Privacy</a> ·
-    <a href="./terms.html">Terms</a> ·
-    <a href="./security.html">Security</a>
-    <span> — UE-first · audit-by-design · fail-closed</span>
-  </p>
+  Hermeticum B.C.E. · Gateway Services<br/>
+  UE-first · Audit-by-design · Zero data retention
 </footer>
 
 </body>
