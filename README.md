@@ -1,143 +1,69 @@
 # Hermeticum B.C.E. — Services
 
-> **Evidenze crittografiche. Identità verificabili. Zero data retention.**
+**Hermeticum B.C.E.** (*Blindata · Computabile · Evolutiva*) è il **gateway ufficiale**
+dell’ecosistema Hermeticum B.C.E.  
+Questo repository fornisce **onboarding, servizi di base e punti di accesso**
+ai moduli operativi, nel rispetto di principi **UE-first**, **audit-by-design**
+e **minimizzazione dei dati**.
 
-**Hermeticum B.C.E. — Services** è il punto di ingresso pubblico dell’ecosistema **Hermeticum B.C.E.**  
-Fornisce strumenti **client-side** per generare **prove verificabili** (hash e bundle locali) secondo principi **UE-first**, **privacy by design** e **audit-by-design**.
-
-➡️ Nessun dato viene inviato, archiviato o tracciato su server.
-
----
-
-## Stato del progetto
-🟢 **ATTIVO — Trust Pack completo**
-
-- onboarding guidato 1-2-3
-- policy pubbliche (Privacy, Terms, Security)
-- verifica offline supportata
+> Qui non si “opera”.  
+> Qui si **entra** nel sistema.
 
 ---
 
-## Principi chiave
-- **Client-side only** (browser dell’utente)
-- **Zero data retention**
-- **Hash locali** (SHA-512)
-- **Verifica offline indipendente**
-- **Fail-closed**
-- **UE-first** come standard di riferimento progettuale
-
-> ⚠️ **Nota importante**  
-> “UE-first” indica un orientamento progettuale (GDPR, minimizzazione, auditabilità).  
-> **Non è una certificazione ufficiale UE** e **non sostituisce documenti statali** (CIE, passaporto, ecc.).
+## Funzione del repository
+- Onboarding dell’utente / operatore
+- Generazione **IPR Base** (Identity Primary Record)
+- Hashing locale e bundle crittografici
+- Accesso controllato ai moduli operativi (AI, C2, Governance)
 
 ---
 
-## Cosa fa questo servizio
-- genera **hash crittografici locali** per documenti
-- crea **Evidence Bundle** (JSON) verificabili offline
-- abilita un **IPR Base** come ancora tecnica personale
-- non carica, non salva, non traccia dati
+## Cos’è l’IPR Base
+L’**IPR Base** è una **ancora identitaria crittografica** che:
+- collega una persona reale o entità operativa
+- produce evidenze verificabili (hash, timestamp, bundle)
+- abilita l’accesso ai servizi Hermeticum B.C.E.
+- NON è un documento di identità statale
+- NON sostituisce documenti UE esistenti
 
-## Cosa NON fa
-- non è un’identità statale
-- non è una certificazione pubblica UE
-- non protegge da dispositivi o browser compromessi
-- non archivia documenti o dati personali
+L’IPR è **locale, verificabile e opponibile**.
 
 ---
 
-## Onboarding — Procedura guidata 1-2-3
+## Moduli collegati
+Questo gateway collega e abilita:
 
-1. **Dati minimi (locali)**  
-   Codice Fiscale obbligatorio.  
-   Modalità *Minimale* o *Completa* (sempre locale).
+- **AI JOKER Workers**  
+  Cockpit operativo Human-in-the-Loop (operatore ↔ AI)  
+  👉 https://manuelcoletta1-source.github.io/ai-joker-workers/
 
-2. **Documento & Hash**  
-   Selezione file (PDF/JPG/PNG…).  
-   Calcolo **SHA-512** nel browser.
+- **UNEBDO**  
+  Dispositivo giuridico-computabile  
+  👉 https://manuelcoletta1-source.github.io/unebdo/
 
-3. **Bundle & Download**  
-   Generazione **IPR Base / Evidence Bundle (JSON)**.  
-   Download locale e verifica offline consigliata.
+- **IPR Core / Gate / Comply**  
+  Lifecycle, policy e conformità dell’identità
 
-👉 Avvia onboarding:  
-https://manuelcoletta1-source.github.io/hermeticum-bce-services/onboarding-base.html
-
----
-
-## Verifica offline (consigliata)
-
-```bash
-# Linux / macOS
-shasum -a 512 FILE
-
-# Windows PowerShell
-Get-FileHash -Algorithm SHA512 .\FILE
-
-Confronta l’hash con quello presente nel bundle JSON.
-
+- **CyberGlobal / MetaExchange / OPC / IoSpace**  
+  Moduli infrastrutturali dell’ecosistema
 
 ---
 
-Trust Pack (policy pubbliche)
-
-Privacy Policy → privacy.html
-
-Terms of Use → terms.html
-
-Security & Verification → security.html
-
-
-Tutti i documenti sono pubblici e linkati dalla home.
-
+## Principi di sicurezza
+- Zero data retention lato server
+- Tutte le operazioni critiche avvengono **nel browser**
+- Fail-closed by default
+- Audit ed evidenze esportabili
 
 ---
 
-Output principali
+## Stato
+🟢 **ATTIVO — Gateway di accesso ufficiale**
 
-HBCE-IPR-BASE (JSON)
-Bundle locale contenente:
-
-metadati
-
-hash del documento
-
-timestamp
-
-note di verifica
-
-
-Versione schema attuale: v0.1.0
-
+Questo repository è stabile.
+Le funzionalità operative risiedono nei moduli dedicati.
 
 ---
-
-A chi è rivolto
-
-individui che vogliono prove verificabili senza cedere dati
-
-sviluppatori e auditor
-
-progetti UE-oriented che richiedono tracciabilità senza centralizzazione
-
-
-
----
-
-Repository correlati
-
-Questo repository è la vetrina e l’ingresso utente.
-
-Altri moduli (technology, AI workers, corpus) vivono in repository dedicati e non sono richiesti per l’uso base.
-
-
----
-
-Licenza e nota finale
-
-Questo progetto fornisce strumenti tecnici, non riconoscimenti legali o istituzionali.
-L’uso è a responsabilità dell’utente finale.
 
 © Hermeticum B.C.E.
-UE-first · audit-by-design · fail-closed
-
