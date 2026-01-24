@@ -4,153 +4,108 @@
   <meta charset="UTF-8" />
   <title>Hermeticum B.C.E. — Services</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Hermeticum B.C.E. Services — Gateway di accesso ai servizi, IPR Base e moduli operativi UE-first." />
-
+  <meta name="description" content="Gateway ufficiale Hermeticum B.C.E.: IPR Base, evidence, accesso ai moduli operativi (UE-first, audit-by-design)." />
   <style>
-    :root { color-scheme: dark; }
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #0b0c10;
-      color: #e8e8e8;
+    :root{ color-scheme: dark; }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:#0b0c10; color:#e8e8e8; }
+    header, main, footer{ max-width:1040px; margin:auto; padding:26px; }
+    h1{ margin:0 0 8px 0; font-size:2.25rem; }
+    .muted{ color:#9aa0a6; font-size:.95em; }
+    .card{ background:#0f1117; border:1px solid #24262b; border-radius:16px; padding:18px; margin-bottom:16px; }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:14px; }
+    a{ color:#7aa7ff; text-decoration:none; font-weight:650; }
+    a:hover{ text-decoration:underline; }
+    .btn{
+      display:inline-block; padding:10px 14px; border-radius:12px;
+      background:#1f6feb; color:#fff; font-weight:800; text-decoration:none;
     }
-
-    header, main, footer {
-      max-width: 1000px;
-      margin: auto;
-      padding: 28px;
+    .btn2{
+      display:inline-block; padding:10px 14px; border-radius:12px;
+      border:1px solid #24262b; background:#0b0c10; color:#e8e8e8; font-weight:800; text-decoration:none;
     }
-
-    h1 { margin: 0 0 8px 0; font-size: 2.2rem; }
-    h2 { margin-top: 0; }
-
-    .muted { color: #9aa0a6; font-size: 0.95em; }
-
-    .card {
-      background: #0f1117;
-      border: 1px solid #24262b;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 22px;
-    }
-
-    a {
-      color: #7aa7ff;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    a:hover { text-decoration: underline; }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: #1f6feb;
-      color: #fff;
-      font-weight: 700;
-    }
-
-    footer {
-      text-align: center;
-      border-top: 1px solid #24262b;
-      color: #9aa0a6;
-      font-size: 0.85em;
-    }
+    .tag{ display:inline-block; padding:3px 10px; border-radius:999px; border:1px solid #24262b; background:#0b0c10; font-size:.85em; }
+    footer{ text-align:center; border-top:1px solid #24262b; color:#9aa0a6; font-size:.85em; }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
   </style>
 </head>
 
 <body>
-
 <header>
   <h1>Hermeticum B.C.E. — Services</h1>
   <p class="muted">
-    Gateway di accesso all’ecosistema Hermeticum B.C.E.<br/>
-    Identità · Tracciabilità · Operatività UE-first
+    Gateway ufficiale dell’ecosistema Hermeticum B.C.E.: <strong>IPR Base</strong>, evidence,
+    e accesso ai moduli operativi in ottica <strong>UE-first</strong> e <strong>audit-by-design</strong>.
   </p>
+
+  <div class="row">
+    <a class="btn" href="./onboarding-base.html">Avvia onboarding IPR →</a>
+    <a class="btn2" href="./catalog.html">Catalogo moduli →</a>
+    <a class="btn2" href="./privacy.html">Privacy →</a>
+    <a class="btn2" href="./terms.html">Terms →</a>
+  </div>
 </header>
 
 <main>
 
   <section class="card">
-    <h2>Cos’è questo portale</h2>
-    <p class="muted">
-      Questo sito è il punto di ingresso ufficiale ai servizi Hermeticum B.C.E.
-      Qui si genera l’IPR Base e si accede ai moduli operativi.
-      Nessuna operazione sensibile viene eseguita lato server.
-    </p>
-  </section>
-
-  <section class="card">
-    <h2>1 · Onboarding & IPR Base</h2>
-    <p class="muted">
-      L’IPR (Identity Primary Record) è il prerequisito
-      per accedere ai servizi avanzati.
-    </p>
-    <a class="btn" href="./onboarding-base.html">Avvia onboarding IPR</a>
-  </section>
-
-  <section class="card">
-    <h2>2 · Moduli Operativi</h2>
-
+    <h2 style="margin-top:0;">Cosa succede qui (in 20 secondi)</h2>
     <div class="grid">
       <div class="card">
-        <h3>AI JOKER — Workers</h3>
-        <p class="muted">
-          Cockpit Human-in-the-Loop per interazione operatore ↔ AI,
-          con audit append-only e gating IPR.
-        </p>
-        <a href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank">
-          Apri AI Workers →
-        </a>
+        <div class="tag">ENTRY</div>
+        <h3>IPR Base</h3>
+        <p class="muted">Generi un bundle identitario (JSON) e le evidenze (hash) localmente, nel browser.</p>
       </div>
-
       <div class="card">
-        <h3>UNEBDO</h3>
-        <p class="muted">
-          Dispositivo giuridico-computabile dell’ecosistema Hermeticum B.C.E.
-        </p>
-        <a href="https://manuelcoletta1-source.github.io/unebdo/" target="_blank">
-          Apri UNEBDO →
-        </a>
+        <div class="tag">CONTROL</div>
+        <h3>Policy & conformità</h3>
+        <p class="muted">UNEBDO + IPR-GATE/COMPLY definiscono regole fail-closed e opponibilità.</p>
       </div>
-
       <div class="card">
-        <h3>IPR Core / Gate / Comply</h3>
-        <p class="muted">
-          Lifecycle, policy e conformità dell’identità IPR.
-        </p>
-        <a href="https://github.com/manuelcoletta1-source/ipr-core" target="_blank">
-          Vai ai moduli →
-        </a>
+        <div class="tag">OPERATION</div>
+        <h3>Operatività</h3>
+        <p class="muted">Con IPR valido accedi al cockpit (AI Workers) e ai workflow operativi.</p>
       </div>
     </div>
   </section>
 
   <section class="card">
-    <h2>Sicurezza e governance</h2>
-    <p class="muted">
-      Hermeticum B.C.E. è progettato secondo principi:
-      audit-by-design, fail-closed, minimizzazione dei dati,
-      interoperabilità UE.
-    </p>
+    <h2 style="margin-top:0;">Accesso rapido ai moduli</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>AI JOKER — Workers</h3>
+        <p class="muted">Cockpit operatore ↔ AI, audit locale append-only, gating IPR.</p>
+        <a href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noreferrer">Apri cockpit →</a>
+      </div>
+
+      <div class="card">
+        <h3>UNEBDO</h3>
+        <p class="muted">Dispositivo giuridico-computabile (policy opponibili).</p>
+        <a href="https://manuelcoletta1-source.github.io/unebdo/" target="_blank" rel="noreferrer">Apri UNEBDO →</a>
+      </div>
+
+      <div class="card">
+        <h3>GitJoker-C2</h3>
+        <p class="muted">Publishing C2, compliance e tracciabilità per GitHub.</p>
+        <a href="https://manuelcoletta1-source.github.io/gitjoker-c2/" target="_blank" rel="noreferrer">Apri GitJoker-C2 →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 style="margin-top:0;">Principi di sicurezza</h2>
+    <ul class="muted" style="margin:0; padding-left:18px;">
+      <li>Operazioni critiche eseguite nel browser (default: zero data retention lato server).</li>
+      <li>Fail-closed: nessuna operazione senza prerequisiti (IPR valido / policy).</li>
+      <li>Audit-by-design: export di evidenze e log dove applicabile.</li>
+    </ul>
   </section>
 
 </main>
 
 <footer>
-  Hermeticum B.C.E. · Gateway Services<br/>
-  UE-first · Audit-by-design · Zero data retention
+  Hermeticum B.C.E. · Services Gateway<br/>
+  UE-first · Audit-by-design · Minimizzazione dati
 </footer>
-
 </body>
 </html>
