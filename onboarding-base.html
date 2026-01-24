@@ -1,343 +1,594 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — Attivazione Base</title>
-  <meta name="description" content="Attivazione Base Carta d’Identità Cibernetica: dati minimi + hashing locale dei file CIE. Nessun upload documento. Output: Bundle + PDAR + IPR (download)." />
+  <title>Attivazione IPR Base — Hermeticum B.C.E. Services</title>
+  <meta name="description" content="Attivazione guidata IPR Base (1-2-3) — hashing locale, evidenze verificabili, zero data retention." />
   <style>
     :root{
-      --bg:#0b0c10; --panel:#0f1117; --line:#24262b;
-      --text:#e8e8e8; --muted:#9aa0a6; --accent:#6aa9ff;
-      --ok:#2bd576; --warn:#ffcc66;
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#b8b8b8;
+      --accent:#6ae3ff;
+      --warn:#ffd36a;
+      --ok:#73ffb3;
+      --bad:#ff7a7a;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-    header, main, footer{max-width:980px;margin:0 auto;padding:20px}
-    header{border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
-    a{color:var(--text);text-decoration:none}
-    a:hover{color:var(--accent)}
-    .muted{color:var(--muted)}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:16px}
-    label{display:block;margin-top:10px;font-size:0.95rem}
-    input[type="text"], input[type="date"], input[type="file"]{
-      width:100%;margin-top:6px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);
-      background:rgba(255,255,255,0.03);color:var(--text)
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
     }
-    .row{display:flex;flex-wrap:wrap;gap:12px}
-    .col{flex:1;min-width:240px}
+    header, main, footer{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header{ padding-top: 28px; padding-bottom: 10px; }
+    a{ color: var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .brand{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    h1{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: .2px;
+    }
+    .sub{ color: var(--muted); font-size: 13px; }
+
+    .card{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      padding: 18px;
+      margin-top: 14px;
+    }
+    h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+
+    .disclaimer{
+      border-left: 3px solid var(--warn);
+      padding: 12px 14px;
+      background: rgba(255,211,106,0.08);
+      border-radius: 12px;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    .steps{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .step-pill{
+      border:1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: rgba(255,255,255,0.12);
+      border:1px solid var(--line);
+    }
+    .step-pill.active{
+      color: var(--text);
+      border-color: rgba(106,227,255,0.35);
+      background: rgba(106,227,255,0.06);
+    }
+    .step-pill.active .dot{
+      background: var(--accent);
+      border-color: rgba(106,227,255,0.6);
+    }
+    .step-pill.done{
+      color: var(--text);
+      border-color: rgba(115,255,179,0.35);
+      background: rgba(115,255,179,0.06);
+    }
+    .step-pill.done .dot{
+      background: var(--ok);
+      border-color: rgba(115,255,179,0.6);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    label{
+      display:block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    input, select{
+      width:100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      outline: none;
+    }
+    input:focus, select:focus{
+      border-color: rgba(106,227,255,0.55);
+      box-shadow: 0 0 0 3px rgba(106,227,255,0.08);
+    }
+
+    .row{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 12px;
+    }
     .btn{
-      display:inline-block;padding:10px 14px;border:1px solid var(--line);
-      border-radius:10px;background:var(--panel);color:var(--text);cursor:pointer
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor:pointer;
     }
-    .btn.primary{border-color:var(--accent);color:#fff}
-    .btn:disabled{opacity:0.45;cursor:not-allowed}
-    pre{
-      white-space:pre-wrap;word-break:break-word;
-      background:rgba(0,0,0,0.25);border:1px solid var(--line);
-      padding:12px;border-radius:12px;color:var(--text);margin:10px 0 0
+    .btn:hover{ border-color: rgba(106,227,255,0.35); }
+    .btn.primary{
+      background: var(--accent);
+      color:#000;
+      border-color: transparent;
     }
-    .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:0.8rem;color:var(--muted)}
-    .pill.ok{border-color:rgba(43,213,118,0.35);color:rgba(43,213,118,0.95)}
-    .note{font-size:0.9rem}
+    .btn.primary:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+    .btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    .small{ font-size: 13px; color: var(--muted); }
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.5px;
+      word-break: break-all;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+
+    details summary{
+      cursor:pointer;
+      color: var(--accent);
+      margin-top: 10px;
+    }
+    .footer-links{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status-ok{ color: var(--ok); }
+    .status-bad{ color: var(--bad); }
+    .hide{ display:none; }
   </style>
 </head>
 
 <body>
-<header>
-  <div>
-    <strong>Hermeticum B.C.E.</strong>
-    <div class="muted" style="font-size:0.85rem">Attivazione Base · Carta d’Identità Cibernetica</div>
-  </div>
-  <nav class="muted" style="font-size:0.95rem">
-    <a href="index.html">Home</a> ·
-    <a href="services.html">Servizi</a>
-  </nav>
-</header>
+  <header>
+    <div class="brand">
+      <div>
+        <h1>Attivazione IPR Base</h1>
+        <div class="sub">Procedura guidata 1-2-3 · hashing locale · zero data retention</div>
 
-<main>
+        <div class="disclaimer">
+          <strong>Nota:</strong> questa procedura genera evidenze <strong>localmente</strong> nel tuo browser.
+          “UE-first” è un riferimento progettuale (GDPR, minimizzazione, auditabilità) e
+          <strong>non è una certificazione ufficiale UE</strong>. Non sostituisce documenti statali.
+        </div>
 
-  <section class="card">
-    <h1 style="margin:0 0 8px">Attivazione Base</h1>
-    <p class="muted" style="margin:0">
-      Inserisci i dati minimi e seleziona i file CIE (fronte/retro).
-      Il sistema calcola l’hash <strong>nel browser</strong>. I documenti <strong>non vengono caricati</strong>.
-      Al termine puoi scaricare: <strong>Bundle</strong>, <strong>PDAR CIE</strong> e <strong>IPR Base</strong>.
-    </p>
-    <p class="muted note" style="margin:10px 0 0">
-      Regola: <strong>fail-closed</strong>. Se mancano i file o gli hash, l’attivazione non procede.
-    </p>
-  </section>
-
-  <section class="card">
-    <h2 style="margin:0 0 8px">Dati minimi (uso interno)</h2>
-
-    <div class="row">
-      <div class="col">
-        <label for="nome">Nome</label>
-        <input id="nome" type="text" autocomplete="given-name" placeholder="Es. Manuel" />
+        <div class="steps" aria-label="stato procedura">
+          <div id="pill1" class="step-pill active"><span class="dot"></span> 1) Dati minimi</div>
+          <div id="pill2" class="step-pill"><span class="dot"></span> 2) Documento &amp; Hash</div>
+          <div id="pill3" class="step-pill"><span class="dot"></span> 3) Bundle &amp; Download</div>
+        </div>
       </div>
-      <div class="col">
-        <label for="cognome">Cognome</label>
-        <input id="cognome" type="text" autocomplete="family-name" placeholder="Es. Coletta" />
+
+      <div class="sub">
+        <a href="./index.html">Home</a> · <a href="./services.html">Servizi</a>
       </div>
     </div>
+  </header>
 
-    <div class="row">
-      <div class="col">
-        <label for="nascita">Data di nascita</label>
-        <input id="nascita" type="date" />
+  <main>
+    <!-- STEP 1 -->
+    <section id="step1" class="card">
+      <h2>Step 1 — Dati minimi (solo sul tuo dispositivo)</h2>
+      <p class="small">
+        Questi campi servono solo a creare un bundle coerente e verificabile <strong>localmente</strong>.
+        Nulla viene inviato o archiviato.
+      </p>
+
+      <div class="grid">
+        <div>
+          <label for="cf">Codice Fiscale (obbligatorio)</label>
+          <input id="cf" type="text" placeholder="es. RSSMRA80A01H501U" autocomplete="off" />
+        </div>
+        <div>
+          <label for="mode">Modalità</label>
+          <select id="mode">
+            <option value="minimal">Minimale (solo CF + file)</option>
+            <option value="full">Completa (anagrafica locale)</option>
+          </select>
+        </div>
       </div>
-      <div class="col">
-        <label for="luogo">Luogo di nascita</label>
-        <input id="luogo" type="text" placeholder="Es. Bologna (BO)" />
+
+      <div id="fullBlock" class="grid hide" style="margin-top:12px;">
+        <div>
+          <label for="nome">Nome</label>
+          <input id="nome" type="text" placeholder="Nome" autocomplete="off" />
+        </div>
+        <div>
+          <label for="cognome">Cognome</label>
+          <input id="cognome" type="text" placeholder="Cognome" autocomplete="off" />
+        </div>
+        <div>
+          <label for="nascita">Data di nascita</label>
+          <input id="nascita" type="date" />
+        </div>
+        <div>
+          <label for="luogo">Luogo di nascita</label>
+          <input id="luogo" type="text" placeholder="Comune / Provincia" autocomplete="off" />
+        </div>
       </div>
-    </div>
 
-    <label for="cf">Codice Fiscale (uso interno, NON pubblicato)</label>
-    <input id="cf" type="text" inputmode="latin" autocapitalize="characters" placeholder="Es. CLT..." />
-
-    <p class="muted note" style="margin:10px 0 0">
-      Nei record pubblici si usano solo evidenze (hash) e metadati minimali. Il CF non viene esportato in chiaro.
-    </p>
-  </section>
-
-  <section class="card">
-    <h2 style="margin:0 0 8px">Documento (CIE) — hashing locale</h2>
-
-    <div class="row">
-      <div class="col">
-        <label for="cieFront">CIE fronte (file)</label>
-        <input id="cieFront" type="file" accept="image/*,application/pdf" />
+      <div class="row">
+        <button id="to2" class="btn primary" disabled>Continua → Step 2</button>
+        <span id="s1status" class="small"></span>
       </div>
-      <div class="col">
-        <label for="cieBack">CIE retro (file)</label>
-        <input id="cieBack" type="file" accept="image/*,application/pdf" />
+
+      <details>
+        <summary>Perché chiediamo questi dati?</summary>
+        <p class="small">
+          Per generare un bundle locale con metadati coerenti e verificabili. Se non vuoi inserire anagrafica,
+          usa la modalità <strong>Minimale</strong>.
+        </p>
+      </details>
+    </section>
+
+    <!-- STEP 2 -->
+    <section id="step2" class="card hide">
+      <h2>Step 2 — Seleziona un documento e calcola l’hash (SHA-512)</h2>
+      <p class="small">
+        Il file resta sul tuo dispositivo. L’hash è una “impronta” che permette la verifica di integrità.
+      </p>
+
+      <div class="grid">
+        <div>
+          <label for="doc">Documento (PDF/JPG/PNG…)</label>
+          <input id="doc" type="file" />
+        </div>
+        <div>
+          <label>Stato</label>
+          <input id="docInfo" type="text" value="Nessun file selezionato" readonly />
+        </div>
       </div>
-    </div>
 
-    <!-- TOOLBAR UNICA (4 bottoni) -->
-    <div class="row" style="margin-top:12px">
-      <button class="btn primary" id="btnHash">Calcola hash</button>
-      <button class="btn" id="btnDownload" disabled>Scarica Bundle (JSON)</button>
-      <button class="btn" id="btnDownloadPDAR" disabled>Scarica PDAR CIE (JSON)</button>
-      <button class="btn primary" id="btnDownloadIPR" disabled>Scarica IPR Base (JSON)</button>
-      <span class="pill" id="statePill">Stato: in attesa</span>
-    </div>
+      <div class="row">
+        <button id="hashBtn" class="btn primary" disabled>Calcola SHA-512</button>
+        <button id="back1" class="btn">← Indietro</button>
+        <span id="s2status" class="small"></span>
+      </div>
 
-    <div class="card" style="margin-top:14px">
-      <h3 style="margin:0 0 8px">Hash calcolati</h3>
-      <div class="muted note">Fronte:</div>
-      <pre id="outFront">(non calcolato)</pre>
-      <div class="muted note" style="margin-top:10px">Retro:</div>
-      <pre id="outBack">(non calcolato)</pre>
-    </div>
+      <div id="hashBox" class="mono hide" aria-label="hash sha-512"></div>
 
-    <div class="card" style="margin-top:14px">
-      <h3 style="margin:0 0 8px">Bundle (anteprima)</h3>
-      <pre id="outJson">{}</pre>
-    </div>
+      <details>
+        <summary>Verifica offline (consigliata)</summary>
+        <div class="mono">
+          Linux/macOS: <code>shasum -a 512 FILE</code><br />
+          Windows PowerShell: <code>Get-FileHash -Algorithm SHA512 .\FILE</code>
+        </div>
+      </details>
 
-    <p class="muted note" style="margin:10px 0 0">
-      Output privati: Bundle, PDAR e IPR sono file scaricati localmente.
-    </p>
-  </section>
+      <div class="footer-links">
+        <span class="muted">Link:</span>
+        <a href="./privacy.html">Privacy</a>
+        <a href="./terms.html">Terms</a>
+        <a href="./security.html">Security</a>
+      </div>
+    </section>
 
-</main>
+    <!-- STEP 3 -->
+    <section id="step3" class="card hide">
+      <h2>Step 3 — Genera bundle e scarica</h2>
+      <p class="small">
+        Il bundle contiene metadati e hash per verificare integrità e coerenza. È un file locale.
+      </p>
 
-<footer>
-  <p class="muted">
-    Hermeticum B.C.E. — Attivazione Base · UE-first · GDPR minimization · fail-closed
-  </p>
-</footer>
+      <div class="row">
+        <button id="bundleBtn" class="btn primary" disabled>Genera Bundle (JSON)</button>
+        <button id="downloadBtn" class="btn" disabled>Scarica</button>
+        <button id="back2" class="btn">← Indietro</button>
+        <span id="s3status" class="small"></span>
+      </div>
 
-<script>
-  const $ = (id) => document.getElementById(id);
+      <div id="bundlePreview" class="mono hide"></div>
 
-  function nowISO(){ return new Date().toISOString(); }
+      <div class="footer-links">
+        <span class="muted">Link:</span>
+        <a href="./privacy.html">Privacy</a>
+        <a href="./terms.html">Terms</a>
+        <a href="./security.html">Security</a>
+        <a href="./index.html">Home</a>
+      </div>
+    </section>
+  </main>
 
-  function toHex(buffer){
-    const bytes = new Uint8Array(buffer);
-    let hex = "";
-    for (const b of bytes) hex += b.toString(16).padStart(2, "0");
-    return hex;
-  }
+  <footer class="muted" style="max-width:980px;margin:40px auto 0;padding:20px;border-top:1px solid #24262b;font-size:13px;">
+    © Hermeticum B.C.E. — Services ·
+    <a href="./privacy.html">Privacy</a> ·
+    <a href="./terms.html">Terms</a> ·
+    <a href="./security.html">Security</a>
+    <span> — UE-first · audit-by-design · fail-closed</span>
+  </footer>
 
-  function setPill(text, ok){
-    const pill = $("statePill");
-    pill.textContent = text;
-    pill.className = "pill" + (ok ? " ok" : "");
-  }
+  <script>
+    // --- helpers
+    const $ = (id) => document.getElementById(id);
 
-  function downloadJSON(obj, filename){
-    const data = JSON.stringify(obj, null, 2);
-    const blob = new Blob([data], {type: "application/json"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  }
-
-  async function hashFileWithFallback(file){
-    const buf = await file.arrayBuffer();
-    try{
-      const digest = await crypto.subtle.digest("SHA-512", buf);
-      return { alg: "sha512", hex: toHex(digest) };
-    }catch(e){
-      const digest = await crypto.subtle.digest("SHA-256", buf);
-      return { alg: "sha256", hex: toHex(digest) };
-    }
-  }
-
-  function subjectMinimal(){
-    const nome = $("nome").value.trim();
-    const cognome = $("cognome").value.trim();
-    const nascita = $("nascita").value;
-    const luogo = $("luogo").value.trim();
-    const cf = $("cf").value.trim().toUpperCase();
-
-    return {
-      given_name: nome || null,
-      family_name: cognome || null,
-      birth_date: nascita || null,
-      birth_place: luogo || null,
-      tax_code_internal: cf ? "[COLLECTED-PRIVATE]" : null
-    };
-  }
-
-  function makeIPRId(subj){
-    const baseA = (subj.given_name || "PRIVATE").replace(/\s+/g,"-");
-    const baseB = (subj.family_name || "PRIVATE").replace(/\s+/g,"-");
-    const stamp = new Date().toISOString().slice(0,10).replaceAll("-","");
-    return `IPR-${(baseA+"-"+baseB).toUpperCase()}-BASE-${stamp}-0001`;
-  }
-
-  function buildBundle(subj, evidence){
-    return {
-      bundle_version: "1.0",
-      type: "BaseActivationEvidenceBundle",
-      namespace: "Hermeticum B.C.E.",
-      service: "Services / Base Activation",
-      created_at_utc: nowISO(),
-      subject_minimal: subj,
-      evidence,
-      privacy: {
-        no_document_upload: true,
-        store_hash_only: true,
-        public_records_no_plaintext_ids: true
-      },
-      fail_closed: [
-        "Missing CIE front/back hash -> STOP"
-      ]
-    };
-  }
-
-  function buildPDAR(iprId, evidence){
-    return {
-      pdar_version: "1.0",
-      type: "PublicDocumentAnchorRecord",
-      namespace: "Hermeticum B.C.E.",
-      service: "Services / Base Activation",
-      status: "VALID-PRIVATE",
-      subject: { ipr_id: iprId, holder_display_name: "[PRIVATE]", jurisdiction: "IT / UE" },
-      identity_document: { doc_type: "Carta d’Identità (CIE)", scope: "KYC private evidence", storage: "NO-DOCUMENT-STORAGE" },
-      evidence,
-      compliance: { ue_first: true, gdpr_minimization: true, fail_closed: true }
-    };
-  }
-
-  function buildIPR(iprId){
-    return {
-      ipr_version: "1.0",
-      type: "IPR",
-      namespace: "Hermeticum B.C.E.",
-      ipr_id: iprId,
-      status: "BASE-ACTIVE",
-      issued_at_utc: nowISO(),
-      privacy: { public_records_no_plaintext_ids: true, store_hash_only: true },
-      policy: { ue_first: true, gdpr_minimization: true, fail_closed: true },
-      links_private: {
-        pdar_cie_filename: "PDAR-CIE-IT.json",
-        evidence_bundle_filename: "HERMETICUM-BASE-EVIDENCE-BUNDLE.json"
+    function setPills(step){
+      const p1 = $("pill1"), p2 = $("pill2"), p3 = $("pill3");
+      [p1,p2,p3].forEach(p => p.classList.remove("active"));
+      if(step === 1){
+        p1.classList.add("active");
+      }else if(step === 2){
+        p1.classList.add("done");
+        p2.classList.add("active");
+      }else if(step === 3){
+        p1.classList.add("done");
+        p2.classList.add("done");
+        p3.classList.add("active");
       }
-    };
-  }
-
-  let __bundle = null, __pdar = null, __ipr = null, __iprId = null;
-
-  // inizializzazione
-  $("btnDownload").disabled = true;
-  $("btnDownloadPDAR").disabled = true;
-  $("btnDownloadIPR").disabled = true;
-
-  $("btnHash").addEventListener("click", async () => {
-    const f = $("cieFront").files[0];
-    const b = $("cieBack").files[0];
-
-    if (!f || !b){
-      setPill("Stato: FAIL-CLOSED (mancano file CIE)", false);
-      alert("Seleziona CIE fronte e retro. Il processo è fail-closed.");
-      return;
     }
 
-    try{
-      setPill("Stato: calcolo hash…", false);
-      $("btnHash").disabled = true;
+    function showStep(n){
+      $("step1").classList.toggle("hide", n !== 1);
+      $("step2").classList.toggle("hide", n !== 2);
+      $("step3").classList.toggle("hide", n !== 3);
+      setPills(n);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-      const front = await hashFileWithFallback(f);
-      const back  = await hashFileWithFallback(b);
+    // --- state
+    let state = {
+      mode: "minimal",
+      cf: "",
+      nome: "",
+      cognome: "",
+      nascita: "",
+      luogo: "",
+      file: null,
+      fileHashHex: "",
+      bundleJson: "",
+      bundleBlob: null
+    };
 
-      $("outFront").textContent = `${front.alg.toUpperCase()}: ${front.hex}`;
-      $("outBack").textContent  = `${back.alg.toUpperCase()}: ${back.hex}`;
+    // --- Step 1 logic
+    const cf = $("cf");
+    const mode = $("mode");
+    const fullBlock = $("fullBlock");
+    const to2 = $("to2");
+    const s1status = $("s1status");
 
-      const subj = subjectMinimal();
-      const evidence = {
-        cie_front: { alg: front.alg, hash: front.hex },
-        cie_back:  { alg: back.alg,  hash: back.hex }
+    function validateStep1(){
+      state.cf = (cf.value || "").trim().toUpperCase();
+
+      // Very light validation (length only) — avoids false negatives
+      const cfOk = state.cf.length >= 8;
+
+      if(state.mode === "full"){
+        state.nome = ($("nome").value || "").trim();
+        state.cognome = ($("cognome").value || "").trim();
+        state.nascita = ($("nascita").value || "").trim();
+        state.luogo = ($("luogo").value || "").trim();
+
+        const fullOk = state.nome.length >= 2 && state.cognome.length >= 2 && state.nascita.length > 0 && state.luogo.length >= 2;
+        to2.disabled = !(cfOk && fullOk);
+        s1status.textContent = to2.disabled ? "Compila CF e anagrafica (locale) per proseguire." : "OK. Puoi continuare.";
+      }else{
+        to2.disabled = !cfOk;
+        s1status.textContent = to2.disabled ? "Inserisci almeno il Codice Fiscale per proseguire." : "OK. Puoi continuare.";
+      }
+    }
+
+    mode.addEventListener("change", () => {
+      state.mode = mode.value;
+      fullBlock.classList.toggle("hide", state.mode !== "full");
+      validateStep1();
+    });
+    cf.addEventListener("input", validateStep1);
+    ["nome","cognome","nascita","luogo"].forEach(id => {
+      const el = $(id);
+      if(el) el.addEventListener("input", validateStep1);
+      if(el && el.type === "date") el.addEventListener("change", validateStep1);
+    });
+
+    to2.addEventListener("click", () => showStep(2));
+
+    // --- Step 2 logic
+    const doc = $("doc");
+    const docInfo = $("docInfo");
+    const hashBtn = $("hashBtn");
+    const back1 = $("back1");
+    const s2status = $("s2status");
+    const hashBox = $("hashBox");
+
+    doc.addEventListener("change", () => {
+      state.file = doc.files && doc.files[0] ? doc.files[0] : null;
+      state.fileHashHex = "";
+      hashBox.classList.add("hide");
+      hashBox.textContent = "";
+      $("bundleBtn").disabled = true;
+      $("downloadBtn").disabled = true;
+      $("bundlePreview").classList.add("hide");
+      $("bundlePreview").textContent = "";
+      state.bundleJson = "";
+      state.bundleBlob = null;
+
+      if(state.file){
+        docInfo.value = `${state.file.name} (${state.file.type || "tipo sconosciuto"}, ${state.file.size} bytes)`;
+        hashBtn.disabled = false;
+        s2status.textContent = "File selezionato. Calcola l’hash.";
+      }else{
+        docInfo.value = "Nessun file selezionato";
+        hashBtn.disabled = true;
+        s2status.textContent = "";
+      }
+    });
+
+    back1.addEventListener("click", () => showStep(1));
+
+    async function sha512Hex(file){
+      const buf = await file.arrayBuffer();
+      const hashBuf = await crypto.subtle.digest("SHA-512", buf);
+      const hashArr = Array.from(new Uint8Array(hashBuf));
+      return hashArr.map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    hashBtn.addEventListener("click", async () => {
+      if(!state.file) return;
+
+      hashBtn.disabled = true;
+      s2status.textContent = "Calcolo hash in corso…";
+      try{
+        const hex = await sha512Hex(state.file);
+        state.fileHashHex = hex;
+        hashBox.textContent = `SHA-512:\n${hex}`;
+        hashBox.classList.remove("hide");
+        s2status.innerHTML = `<span class="status-ok">Hash calcolato.</span> Vai allo Step 3.`;
+        $("pill2").classList.add("done");
+        showStep(3);
+        $("bundleBtn").disabled = false;
+      }catch(e){
+        console.error(e);
+        s2status.innerHTML = `<span class="status-bad">Errore:</span> impossibile calcolare l’hash in questo browser.`;
+      }finally{
+        hashBtn.disabled = false;
+      }
+    });
+
+    // --- Step 3 logic
+    const bundleBtn = $("bundleBtn");
+    const downloadBtn = $("downloadBtn");
+    const back2 = $("back2");
+    const s3status = $("s3status");
+    const bundlePreview = $("bundlePreview");
+
+    back2.addEventListener("click", () => showStep(2));
+
+    function makeBundle(){
+      const now = new Date();
+      const iso = now.toISOString();
+
+      const bundle = {
+        schema: "HBCE-IPR-BASE",
+        version: "0.1.0",
+        created_at: iso,
+        ue_first: true,
+        privacy_by_design: true,
+        zero_data_retention: true,
+        subject: {
+          mode: state.mode,
+          cf: state.cf,
+          ...(state.mode === "full" ? {
+            nome: state.nome,
+            cognome: state.cognome,
+            nascita: state.nascita,
+            luogo: state.luogo
+          } : {})
+        },
+        document: {
+          name: state.file ? state.file.name : null,
+          type: state.file ? (state.file.type || null) : null,
+          size_bytes: state.file ? state.file.size : null,
+          sha512: state.fileHashHex || null
+        },
+        notes: [
+          "Bundle generato localmente nel browser dell’utente (client-side).",
+          "UE-first è standard di riferimento progettuale: non è certificazione ufficiale UE.",
+          "Non sostituisce documenti statali. Verifica offline consigliata."
+        ]
       };
 
-      __bundle = buildBundle(subj, evidence);
-      __iprId = makeIPRId(subj);
-      __pdar = buildPDAR(__iprId, evidence);
-      __ipr  = buildIPR(__iprId);
-
-      $("outJson").textContent = JSON.stringify(__bundle, null, 2);
-
-      $("btnDownload").disabled = false;
-      $("btnDownloadPDAR").disabled = false;
-      $("btnDownloadIPR").disabled = false;
-
-      setPill(`Stato: IPR Base pronto (${front.alg.toUpperCase()})`, true);
-
-    }catch(e){
-      console.error(e);
-      setPill("Stato: ERRORE hashing", false);
-      alert("Errore durante il calcolo hash. Prova a cambiare file o browser e riprova.");
-    }finally{
-      $("btnHash").disabled = false;
+      return JSON.stringify(bundle, null, 2);
     }
-  });
 
-  $("btnDownload").addEventListener("click", () => {
-    if (!__bundle){ alert("Calcola prima gli hash."); return; }
-    downloadJSON(__bundle, "HERMETICUM-BASE-EVIDENCE-BUNDLE.json");
-  });
+    bundleBtn.addEventListener("click", () => {
+      if(!state.file || !state.fileHashHex){
+        s3status.innerHTML = `<span class="status-bad">Errore:</span> serve un file con hash calcolato (Step 2).`;
+        return;
+      }
+      state.bundleJson = makeBundle();
+      state.bundleBlob = new Blob([state.bundleJson], { type: "application/json" });
 
-  $("btnDownloadPDAR").addEventListener("click", () => {
-    if (!__pdar){ alert("Calcola prima gli hash."); return; }
-    downloadJSON(__pdar, "PDAR-CIE-IT.json");
-  });
+      bundlePreview.textContent = state.bundleJson;
+      bundlePreview.classList.remove("hide");
 
-  $("btnDownloadIPR").addEventListener("click", () => {
-    if (!__ipr){ alert("Calcola prima gli hash."); return; }
-    const filename = (__iprId || "IPR-BASE") + ".json";
-    downloadJSON(__ipr, filename);
-  });
-</script>
+      downloadBtn.disabled = false;
+      s3status.innerHTML = `<span class="status-ok">Bundle generato.</span> Ora puoi scaricare.`;
+    });
 
+    downloadBtn.addEventListener("click", () => {
+      if(!state.bundleBlob) return;
+
+      const safeCf = (state.cf || "CF").replace(/[^A-Z0-9]/g, "").slice(0, 16);
+      const fname = `HBCE_IPR_BASE_${safeCf}_${new Date().toISOString().slice(0,10)}.json`;
+
+      const url = URL.createObjectURL(state.bundleBlob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fname;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      s3status.innerHTML = `<span class="status-ok">Download avviato:</span> ${fname}`;
+      $("pill3").classList.add("done");
+    });
+
+    // init
+    validateStep1();
+    showStep(1);
+  </script>
 </body>
 </html>
