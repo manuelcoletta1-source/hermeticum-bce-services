@@ -2,410 +2,159 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Catalogo — BioCyber Identity Card | HERMETICUM B.C.E.</title>
+  <title>Hermeticum B.C.E. — Catalogo Servizi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Catalogo ufficiale BioCyber Identity Card: livelli BASE, OPPONIBILE, FORTE (STRONG) con prezzi in abbonamento e potenzialità. Servizi di ancoraggio IPFS/BTC/ETH. UE-first." />
+  <meta name="description" content="Catalogo servizi Hermeticum B.C.E. — ENTRY, CONTROL, OPERATION (UE-first, audit-by-design)." />
   <style>
-    :root{
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#9aa0a6;
-      --accent:#7aa2ff;
-      --good:#8ce99a;
-      --warn:#ffd43b;
-      --bad:#ff6b6b;
-    }
+    :root{ color-scheme: dark; }
     *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
-    }
-
-    header{ border-bottom:1px solid var(--line); background:var(--bg); }
-    .brandwrap{
-      max-width:980px; margin:0 auto; padding:28px 20px 16px; text-align:center;
-    }
-    .brand{
-      margin:0; font-size:2.4rem; letter-spacing:0.12em; font-weight:600;
-    }
-    .brandsub{ margin:10px 0 0; color:var(--muted); font-size:0.95rem; }
-
-    .nav{
-      display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
-      margin-top:10px; font-size:0.95rem;
-    }
-    a{ color:var(--accent); text-decoration:none; }
+    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:#0b0c10; color:#e8e8e8; }
+    header, main, footer{ max-width:1040px; margin:auto; padding:26px; }
+    h1{ margin:0 0 6px 0; font-size:2.1rem; }
+    h2{ margin-top:0; }
+    .muted{ color:#9aa0a6; font-size:.95em; }
+    .card{ background:#0f1117; border:1px solid #24262b; border-radius:16px; padding:18px; margin-bottom:18px; }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
+    a{ color:#7aa7ff; text-decoration:none; font-weight:650; }
     a:hover{ text-decoration:underline; }
-
-    .pagehead, main, footer{
-      max-width:980px; margin:0 auto; padding:20px 20px;
-    }
-    footer{
-      border-top:1px solid var(--line);
-      color:var(--muted); font-size:0.9rem;
-      margin-top:60px; padding:22px 20px;
-    }
-
-    h1{ margin:0 0 10px; font-size:1.9rem; }
-    h2{ margin-top:36px; font-size:1.35rem; }
-    h3{ margin-top:18px; font-size:1.1rem; }
-    p{ max-width:860px; }
-    .muted{ color:var(--muted); }
-
-    .status{
-      display:inline-flex; align-items:center; gap:10px;
-      margin-top:12px; padding:6px 12px; border-radius:999px;
-      border:1px solid var(--line); background:var(--panel);
-      color:var(--muted); font-size:0.85rem;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:50%;
-      background:var(--good);
-      box-shadow:0 0 0 3px rgba(140,233,154,0.12);
-      display:inline-block;
-    }
-
-    .grid{
-      display:grid; grid-template-columns: repeat(12, 1fr);
-      gap:14px; margin-top:16px;
-    }
-    .col4{ grid-column: span 12; }
-    .col6{ grid-column: span 12; }
-    @media (min-width: 920px){
-      .col4{ grid-column: span 4; }
-      .col6{ grid-column: span 6; }
-    }
-
-    .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:18px;
-      margin-top:16px;
-    }
-    .kicker{
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-      font-size:0.78rem;
-      color:var(--muted);
+    .tag{
+      display:inline-block; padding:3px 10px; border-radius:999px;
+      border:1px solid #24262b; background:#0b0c10; font-size:.8em;
       margin-bottom:6px;
     }
-    .highlight{
-      outline:2px solid rgba(122,162,255,0.25);
-      box-shadow: 0 0 0 4px rgba(122,162,255,0.06);
-    }
-
-    .tagrow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
-    .tag{
-      border:1px solid var(--line);
-      background:#0b0c10;
-      padding:4px 9px;
-      border-radius:999px;
-      font-size:0.8rem;
-      color:var(--muted);
-    }
-
-    ul{ padding-left:20px; margin:10px 0 0; }
-    li{ margin:6px 0; }
-
-    .note{
-      border-left:3px solid var(--accent);
-      padding:10px 12px;
-      background: rgba(122,162,255,0.08);
-      border-radius:10px;
-      margin-top:12px;
-    }
-    .warn{
-      border-left-color:var(--warn);
-      background: rgba(255,212,59,0.10);
-    }
-    .bad{
-      border-left-color:var(--bad);
-      background: rgba(255,107,107,0.10);
-    }
-
-    .mono{
-      font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-      background:#0b0c10;
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:14px;
-      overflow-x:auto;
-      white-space:pre;
-      margin-top:12px;
-    }
-
-    .btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-    .btn{
-      display:inline-block;
-      padding:9px 12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:#0b0c10;
-      color:var(--text);
-      font-size:0.95rem;
-    }
-
-    .price{
-      font-size:1.05rem;
-      margin:10px 0 0;
-    }
-    .price strong{
-      font-size:1.15rem;
-      letter-spacing:0.01em;
-    }
-    .small{ font-size:0.92rem; }
-    code{ color: #c6d0ff; }
+    footer{ text-align:center; border-top:1px solid #24262b; color:#9aa0a6; font-size:.85em; }
   </style>
 </head>
 
 <body>
-
 <header>
-  <div class="brandwrap">
-    <h1 class="brand">HERMETICUM&nbsp;B.C.E.</h1>
-    <p class="brandsub">Blindata · Computabile · Evolutiva</p>
-
-    <nav class="nav">
-      <a href="./index.html">Home</a>
-      <a href="./services.html">Servizi</a>
-      <a href="./catalog.html"><strong>Catalogo</strong></a>
-      <a href="./create.html">Attivazione</a>
-      <a href="./use-cases.html">Use Cases</a>
-      <a href="./verify.html">Verifica</a>
-      <a href="./governance.html">Governance</a>
-      <a href="./README.md">README</a>
-    </nav>
-
-    <div class="status"><span class="dot"></span>EU Pilot — Catalogo ufficiale</div>
-  </div>
-</header>
-
-<section class="pagehead">
-  <h1>Catalogo — BioCyber Identity Card</h1>
+  <h1>Catalogo Servizi</h1>
   <p class="muted">
-    <strong>HERMETICUM B.C.E. nasce per la sicurezza digitale europea dell’individuo.</strong><br/>
-    La BioCyber Identity Card è un servizio continuativo che abilita attribuzione umana verificabile,
-    accountability ex-ante e prova digitale opponibile nel tempo.
+    Mappa completa dei moduli Hermeticum B.C.E.<br/>
+    Struttura operativa stile banca: <strong>ENTRY → CONTROL → OPERATION</strong>.
   </p>
-
-  <div class="note warn">
-    Non è un documento civile. Non sostituisce CIE o passaporto.
-    Pubblicazione predefinita: <strong>hash-only</strong> (nessun dato personale).
-  </div>
-</section>
+  <p class="muted">
+    <a href="./index.html">← Torna al Gateway Services</a>
+  </p>
+</header>
 
 <main>
 
-  <section>
-    <h2>Livelli di servizio (abbonamento)</h2>
+  <!-- ENTRY -->
+  <section class="card">
+    <h2>ENTRY — Identità & Evidence</h2>
     <p class="muted">
-      La card non “si compra”: <strong>si mantiene attiva</strong>.
-      La verifica resta sempre riproducibile: ricalcolo hash, confronto manifest, controllo riferimenti.
+      Creazione dell’identità operativa e delle evidenze iniziali.
+      Nessuna operazione è consentita senza passare da qui.
     </p>
 
     <div class="grid">
-
-      <!-- LEVEL 1 -->
-      <div class="card col4">
-        <div class="kicker">Livello 1</div>
-        <h3>BASE</h3>
-        <p class="muted">Identità tecnica + sicurezza minima continua (fail-closed).</p>
-
-        <p class="price"><strong>€9 / mese</strong> · <strong>€90 / anno</strong> <span class="muted small">(2 mesi inclusi)</span></p>
-
-        <ul>
-          <li>IPR/HRR attivo (radice umana tecnica)</li>
-          <li>Manifest Level 1 (machine-readable)</li>
-          <li>Hash SHA-512 + timestamp certificato</li>
-          <li>Evidence Bundle privato</li>
-          <li>DGV: ALLOW/REVIEW/DENY/FAIL_CLOSED</li>
-        </ul>
-
-        <div class="tagrow">
-          <span class="tag">Hash + Timestamp</span>
-          <span class="tag">Fail-Closed</span>
-          <span class="tag">Privacy-by-design</span>
-        </div>
-
-        <div class="note">
-          Documentazione: <code>/onboarding/manifest-level1.json</code>
-        </div>
-
-        <div class="btnrow">
-          <a class="btn" href="./create.html">Attiva Level 1</a>
-          <a class="btn" href="./verify.html">Come verificare</a>
-        </div>
+      <div class="card">
+        <div class="tag">ENTRY</div>
+        <h3>IPR Base — Onboarding</h3>
+        <p class="muted">
+          Generazione IPR Base, hashing locale, bundle JSON ed evidence esportabili.
+        </p>
+        <a href="./onboarding-base.html">Avvia onboarding →</a>
       </div>
 
-      <!-- LEVEL 2 -->
-      <div class="card col4 highlight">
-        <div class="kicker">Livello 2 — Standard</div>
-        <h3>OPPONIBILE</h3>
-        <p class="muted">Sicurezza pubblicamente verificabile (senza pubblicare dati personali).</p>
-
-        <p class="price"><strong>€29 / mese</strong> · <strong>€290 / anno</strong></p>
-
-        <ul>
-          <li>Tutto il livello BASE</li>
-          <li>Evidence pubblicabile (manifest + hash)</li>
-          <li><strong>IPFS</strong> (CID) per bundle pubblico</li>
-          <li><strong>1 chain pubblica</strong> (BTC <em>oppure</em> ETH)</li>
-          <li>Public Proof opponibile</li>
-        </ul>
-
-        <div class="tagrow">
-          <span class="tag">IPFS</span>
-          <span class="tag">BTC o ETH</span>
-          <span class="tag">Audit-ready</span>
-        </div>
-
-        <div class="note">
-          Documentazione: <code>/onboarding/manifest-level2-opposable.json</code><br/>
-          Upgrade: <code>/onboarding/UPGRADE-BASE-TO-OPPOSABLE.md</code>
-        </div>
-
-        <div class="btnrow">
-          <a class="btn" href="./create.html">Upgrade a Level 2</a>
-          <a class="btn" href="./evidence/README.md">Evidence</a>
-        </div>
-      </div>
-
-      <!-- LEVEL 3 -->
-      <div class="card col4">
-        <div class="kicker">Livello 3</div>
-        <h3>FORTE / ISTITUZIONALE (STRONG)</h3>
-        <p class="muted">Massima opponibilità + policy LTA-ready (memoria nel tempo).</p>
-
-        <p class="price"><strong>€79 / mese</strong> · <strong>€790 / anno</strong></p>
-
-        <ul>
-          <li>Tutto il livello OPPONIBILE</li>
-          <li><strong>IPFS + Bitcoin + Ethereum</strong> (multi-ancora)</li>
-          <li>Doppia ridondanza temporale</li>
-          <li>Evidence Bundle strutturato</li>
-          <li>Policy <strong>LTA-ready</strong> (retention/recheck)</li>
-        </ul>
-
-        <div class="tagrow">
-          <span class="tag">IPFS</span>
-          <span class="tag">Bitcoin</span>
-          <span class="tag">Ethereum</span>
-          <span class="tag">LTA-ready</span>
-        </div>
-
-        <div class="note warn">
-          Documentazione: <code>/onboarding/manifest-level3-strong.json</code><br/>
-          Upgrade: <code>/onboarding/UPGRADE-OPPOSABLE-TO-STRONG.md</code>
-        </div>
-
-        <div class="btnrow">
-          <a class="btn" href="./create.html">Upgrade a Level 3</a>
-          <a class="btn" href="./governance.html">Scope & Non-goals</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="note">
-      Regola: se un controllo o un riferimento di prova non è verificabile → esito <strong>FAIL_CLOSED</strong>.
-      Il sistema deve fermarsi.
-    </div>
-  </section>
-
-  <section>
-    <h2>Potenzialità per livello (in breve)</h2>
-    <div class="card">
-      <ul>
-        <li><strong>BASE</strong>: sicurezza minima continua, radice umana, prove private, hash+timestamp.</li>
-        <li><strong>OPPONIBILE</strong>: terze parti verificano senza fiducia, IPFS + 1 chain, prove pubblicabili (hash-only).</li>
-        <li><strong>FORTE</strong>: multi-ancora + LTA-ready, resilienza a contestazioni nel tempo e contesti istituzionali.</li>
-      </ul>
-      <div class="btnrow">
-        <a class="btn" href="./use-cases.html">Vedi casi d’uso</a>
-        <a class="btn" href="./verify.html">Vedi verifica</a>
+      <div class="card">
+        <div class="tag">ENTRY</div>
+        <h3>IPR Gateway</h3>
+        <p class="muted">
+          Gateway IPR-Personale: identity anchoring, tracciabilità, onboarding avanzato.
+        </p>
+        <a href="https://github.com/manuelcoletta1-source/hermeticum-bce-ipr" target="_blank" rel="noreferrer">
+          Vai al repository →
+        </a>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>Servizi di ancoraggio (componente tecnico)</h2>
+  <!-- CONTROL -->
+  <section class="card">
+    <h2>CONTROL — Policy, conformità, opponibilità</h2>
     <p class="muted">
-      Gli ancoraggi rendono opponibile l’evidenza. Il principio resta invariato:
-      <strong>ricalcola e confronta</strong>.
+      Livello di controllo ex-ante ed ex-post.
+      Tutte le decisioni sono <strong>fail-closed</strong> e auditabili.
     </p>
 
     <div class="grid">
-      <div class="card col6">
-        <div class="kicker">Anchoring</div>
-        <h3>IPFS (CID)</h3>
-        <ul>
-          <li>pubblicazione bundle pubblico (manifest + hash)</li>
-          <li>identificatore verificabile: CID</li>
-          <li>contenuto privo di dati personali (hash-only)</li>
-        </ul>
-        <div class="mono">Output:
-- CID (IPFS)
-- bundleHash (SHA-512)
-- reference: /evidence/ (se pubblicato)</div>
+      <div class="card">
+        <div class="tag">CONTROL</div>
+        <h3>UNEBDO</h3>
+        <p class="muted">
+          Dispositivo giuridico-computabile: policy opponibili e governance UE-first.
+        </p>
+        <a href="https://manuelcoletta1-source.github.io/unebdo/" target="_blank" rel="noreferrer">
+          Apri UNEBDO →
+        </a>
       </div>
 
-      <div class="card col6">
-        <div class="kicker">Anchoring</div>
-        <h3>Bitcoin / Ethereum</h3>
-        <ul>
-          <li>ancoraggio hash radice su chain pubblica</li>
-          <li>Bitcoin: tempo forte (timestamp pubblico)</li>
-          <li>Ethereum: riferimento di processo (smart-ready)</li>
-        </ul>
-        <div class="mono">Output:
-- BTC TXID (opzionale)
-- EVM TX hash (opzionale)
-- hashAnchored: manifestHash</div>
+      <div class="card">
+        <div class="tag">CONTROL</div>
+        <h3>IPR-CORE</h3>
+        <p class="muted">
+          Nucleo tecnico IPR: struttura dati, lifecycle, versioning e ancoraggi.
+        </p>
+        <a href="https://github.com/manuelcoletta1-source/ipr-core" target="_blank" rel="noreferrer">
+          Vai al repository →
+        </a>
       </div>
-    </div>
 
-    <div class="note warn">
-      L’ancoraggio pubblico non implica pubblicazione di identità: si pubblicano hash e riferimenti,
-      non dati personali.
-    </div>
-  </section>
+      <div class="card">
+        <div class="tag">CONTROL</div>
+        <h3>IPR-GATE</h3>
+        <p class="muted">
+          Controllo ex-ante: autorizzazioni, policy enforcement, fail-closed.
+        </p>
+        <a href="https://github.com/manuelcoletta1-source/ipr-gate" target="_blank" rel="noreferrer">
+          Vai al repository →
+        </a>
+      </div>
 
-  <section>
-    <h2>Addon (servizi opzionali)</h2>
-    <div class="card">
-      <h3>Conservazione Evidence (mensile)</h3>
-      <ul>
-        <li><strong>€5 / mese</strong> — BASE</li>
-        <li><strong>€10 / mese</strong> — OPPONIBILE</li>
-        <li><strong>€20 / mese</strong> — FORTE</li>
-      </ul>
-
-      <h3>Eventi extra ad alto carico</h3>
-      <ul>
-        <li><strong>€5 / evento</strong> oltre soglia standard</li>
-      </ul>
-
-      <div class="note">
-        Nessun lock-in: la verificabilità storica resta possibile tramite hash e manifest, anche a servizio terminato.
+      <div class="card">
+        <div class="tag">CONTROL</div>
+        <h3>IPR-COMPLY</h3>
+        <p class="muted">
+          Valutazione di conformità, sospensione e decadenza secondo Lex Hermeticum.
+        </p>
+        <a href="https://github.com/manuelcoletta1-source/ipr-comply." target="_blank" rel="noreferrer">
+          Vai al repository →
+        </a>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>Come si attiva</h2>
-    <div class="card">
-      <p class="muted">
-        L’attivazione Level 1 è la porta d’ingresso. Level 2 e Level 3 sono upgrade senza perdere lo storico.
-      </p>
-      <div class="btnrow">
-        <a class="btn" href="./create.html">Procedura di attivazione</a>
-        <a class="btn" href="./onboarding/README.md">Onboarding (file)</a>
+  <!-- OPERATION -->
+  <section class="card">
+    <h2>OPERATION — Cockpit & Workflow</h2>
+    <p class="muted">
+      Livello operativo. Accesso consentito solo con IPR valido
+      e policy soddisfatte.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="tag">OPERATION</div>
+        <h3>AI JOKER — Workers</h3>
+        <p class="muted">
+          Cockpit operatore ↔ AI, audit locale append-only, tracciabilità sessioni.
+        </p>
+        <a href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noreferrer">
+          Apri cockpit →
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="tag">OPERATION</div>
+        <h3>GitJoker-C2</h3>
+        <p class="muted">
+          Command & Control per publishing GitHub, compliance e traceability.
+        </p>
+        <a href="https://manuelcoletta1-source.github.io/gitjoker-c2/" target="_blank" rel="noreferrer">
+          Apri GitJoker-C2 →
+        </a>
       </div>
     </div>
   </section>
@@ -413,11 +162,8 @@
 </main>
 
 <footer>
-  <p>
-    HERMETICUM B.C.E. — Catalogo<br/>
-    Sicurezza digitale europea dell’individuo · UE-first · evidence-first · fail-closed.
-  </p>
+  Hermeticum B.C.E. · Catalogo Servizi<br/>
+  UE-first · Audit-by-design · Fail-closed
 </footer>
-
 </body>
 </html>
