@@ -1,0 +1,32 @@
+<h2>Nota</h2>
+<p>
+  Questo <b>Evidence Pack è già operativo</b>.
+  Include file reali e verificabili:
+</p>
+
+<ul>
+  <li>
+    <a href="./manifest.json" class="mono">manifest.json</a> — descrizione dello schema e delle regole operative
+  </li>
+  <li>
+    <a href="./hashes/SHA256SUMS.txt" class="mono">hashes/SHA256SUMS.txt</a> — digest pubblici (SHA-256)
+  </li>
+  <li>
+    <a href="./proofs/proof-template.md" class="mono">proofs/proof-template.md</a> — procedura di prova ripetibile
+  </li>
+  <li>
+    <a href="./attachments/example.pdf" class="mono">attachments/example.pdf</a> — allegato demo (non sensibile)
+  </li>
+</ul>
+
+<p>
+  Usa la pagina <a href="../verify/"><b>Verify</b></a> per confrontare gli hash
+  e controllare l’integrità degli artefatti.
+</p>
+
+<p class="mono">
+  Regola operativa: ogni modifica a un file → rigenerare l’hash →
+  aggiornare <span class="mono">SHA256SUMS.txt</span>.
+</p>
+
+<span class="hint">fail-closed: se manca la prova, la dichiarazione non vale</span>
