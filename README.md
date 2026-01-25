@@ -1,76 +1,85 @@
-# HERMETICUM — Services
+# OPC — Opponibilità Policy Computabile
+**HERMETICUM B.C.E.**
 
-**HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA**  
-**HERMETICUM B.C.E. S.r.l.**
-
----
-
-## Scopo
-
-Questo repository ospita il **portale servizi** dell’ecosistema HERMETICUM.
-
-Fornisce servizi operativi per:
-- identità primaria verificabile (IPR)
-- governance computabile
-- audit-by-design
-- operatività digitale UE-first
+Modulo **CORE STANDARD** di Hermeticum B.C.E.  
+OPC definisce **come le policy diventano decisioni computabili**, deterministiche e opponibili.
 
 ---
 
-## Cosa NON è
+## STANDARD ROLE
+OPC è il **motore decisionale**.
+- Valuta policy computabili
+- Produce decisioni **ALLOW / DENY**
+- NON esegue azioni
+- NON gestisce identità
+- NON memorizza evidenze
 
-- non è uno standard normativo
-- non è un registro civile
-- non è un sistema decisionale politico
-
----
-
-## Cosa È
-
-- uno **strato di servizi** che implementa standard e policy
-- un punto di accesso operativo per utenti e istituzioni
-- un hub di moduli interoperabili
+OPC decide. Altri eseguono.
 
 ---
 
-## Standard di riferimento
+## INPUT CONTRACT
+OPC accetta esclusivamente input strutturati e verificabili:
 
-I servizi implementano lo standard europeo candidato:
+- **Policy** (formalizzata, versionata)
+- **Context** (azione richiesta, risorsa, tempo)
+- **IPR State** (fornito da moduli IPR, non calcolato da OPC)
 
-**IPR-GOV-EU v0.1**  
-https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/
-
----
-
-## Struttura del repository
-
-- `index.html` → portale servizi
-- `onboarding/` → attivazione IPR
-- `modules/` → moduli dell’ecosistema
-- `governance/` → ruoli, policy, mandati
-- `catalog/` → catalogo servizi
-- `evidence/` → audit e opponibilità
-- `verify/` → verifica pubblica
+Input non validi o incompleti ⇒ **DENY**.
 
 ---
 
-## Principi operativi
+## OUTPUT GUARANTEES
+OPC produce:
 
-- UE-first
-- fail-closed
-- minimizzazione dei dati
-- separazione dei ruoli
-- verificabilità indipendente
+- Decisione deterministica: `ALLOW` o `DENY`
+- Motivazione tecnica (policy applicata)
+- Riferimento versionato della policy
 
----
-
-## Stato
-
-- **Tipo:** Service Portal
-- **Ambito:** Operatività digitale e governance
-- **Allineamento:** IPR-GOV-EU
+Stesso input ⇒ **stesso output**. Sempre.
 
 ---
 
-**HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA**  
-**HERMETICUM B.C.E. S.r.l.**
+## FAILURE MODE (FAIL-CLOSED)
+- Assenza di policy valida ⇒ **DENY**
+- Ambiguità ⇒ **DENY**
+- Errore ⇒ **DENY**
+
+OPC **non degrada** mai in modalità permissiva.
+
+---
+
+## TRACE / EVIDENCE
+OPC **non conserva evidenze**, ma:
+
+- espone dati sufficienti affinché
+- moduli downstream (es. `unebdo`, `ipr-gate`)
+- possano generare evidenza opponibile
+
+Ogni decisione è **ricostruibile a posteriori**.
+
+---
+
+## NON RESPONSABILITÀ
+OPC **NON**:
+- identifica soggetti
+- autentica utenti
+- esegue operazioni
+- persiste dati
+
+Queste funzioni sono deliberate **fuori scope**.
+
+---
+
+## COMPLIANCE
+OPC è conforme allo **STANDARD Hermeticum B.C.E.** se e solo se:
+- opera in modalità fail-closed
+- produce decisioni deterministiche
+- separa decisione ed esecuzione
+
+---
+
+## LINK
+- **STANDARD:** https://github.com/manuelcoletta1-source/hermeticum-bce-services/blob/main/STANDARD.md
+- **UNEBDO:** https://github.com/manuelcoletta1-source/unebdo
+- **IPR CORE:** https://github.com/manuelcoletta1-source/ipr-core
