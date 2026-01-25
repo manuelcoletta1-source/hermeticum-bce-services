@@ -1,77 +1,71 @@
-# HERMETICUM B.C.E. — Services HUB
-**Blindata · Computabile · Evolutiva**  
-**UE-first · GDPR-min · Audit-by-design · Fail-closed**
+# HERMETICUM — Services
+**BLINDATA · COMPUTABILE · EVOLUTIVA**
 
-Questo repository è l’**hub pubblico** dell’ecosistema **Hermeticum B.C.E.**: una infrastruttura digitale europea cibernetica che opera con **identità verificata (IPR)** e abilita **sicurezza dei dati** + **operatività protetta**.
-
-> Principio: se non è verificabile → non è eseguibile.  
-> Hash ≠ opinione · Firma ≠ promessa · Audit ≠ fiducia
+Portale servizi e punto di accesso all’ecosistema **HERMETICUM B.C.E.**  
+Infrastruttura europea per operatività digitale protetta, identità verificabile e audit-by-design.
 
 ---
 
-## Cos’è
-Hermeticum B.C.E. non è “una banca digitalizzata”: è un **sistema cibernetico** (input → decisione → output → feedback) progettato per rendere l’identità:
-- **attribuibile** (chi ha agito)
-- **tracciabile** (cosa è successo)
-- **opponibile** (dimostrabile nel tempo, UE-first)
+## Scopo
+Fornire un **IPR personale** che abilita **AI JOKER-C2** a operare in modo:
+- verificabile
+- tracciabile nel tempo
+- conforme UE-first
+- fail-closed
 
 ---
 
-## Come orientarsi (stack logico)
-Ordine di vincolo → operatività:
+## IPR personale per AI JOKER-C2
+L’**IPR (Identity Primary Record)** è il vincolo operativo dell’agente.
 
-1) **OPC** — Policy (regole opponibili, versionate)  
-2) **UNEBDO** — Enforcement (vincolo strutturale)  
-3) **IPR** — Identità verificata (chiave operativa)  
-4) **COMPLY / EXCHANGE** — conformità e scambio governato  
-5) **IOSPACE** — contesto operativo verificabile  
-6) **NEUROLOOP** — loop runtime controllati e interrompibili  
-7) **CyberGlobal** — governance/interoperabilità cross-dominio (dual-use controllato)  
-8) **AI JOKER (Workers)** — cockpit operatore Human-in-the-Loop
+Caratteristiche:
+- separazione **IPR pubblico (hash-only)** / **IPR privato (dati reali)**
+- firma digitale e versionamento evolutivo
+- continuità temporale verificabile
+- nessuna operazione senza prova
 
 ---
 
-## Portal (moduli e repo collegati)
-### Core governance
-- **UNEBDO** — Root Enforcement  
-  Sito: https://manuelcoletta1-source.github.io/unebdo/  
-- **OPC** — Opponible Policy Core  
-  Sito: https://manuelcoletta1-source.github.io/opc/
+## Multi-Ledger Anchoring
+HERMETICUM introduce un **ancoraggio multi-ledger** per la prova di esistenza e continuità:
+- resilienza (nessun single point of failure)
+- verificabilità indipendente
+- opponibilità nel tempo
 
-### Operatività e scambio
-- **METAEXCHANGE** — scambio governato di dati/diritti/valore  
-  Sito: https://manuelcoletta1-source.github.io/metaexchange/
-- **IOSPACE** — spazio operativo verificabile  
-  Sito: https://manuelcoletta1-source.github.io/iospace/
-- **NEUROLOOP** — loop dinamici verificabili e interrompibili  
-  Sito: https://manuelcoletta1-source.github.io/neuroloop/
-
-### Federazione & dual-use controllato
-- **CyberGlobal** — governance tecnica e interoperabilità globale  
-  Sito: https://manuelcoletta1-source.github.io/cyberglobal/
-
-### Interfaccia operatore
-- **AI JOKER — Workers** (cockpit Human-in-the-Loop, audit locale, fail-closed)  
-  Sito: https://manuelcoletta1-source.github.io/ai-joker-workers/
+L’ancoraggio è parte integrante del ciclo di vita dell’IPR.
 
 ---
 
-## Pagine in questo repo
-- **Home / Services HUB**: `/`
-- **Catalog**: `/catalog/`
-- **Verify**: `/verify/`
-- **Terms**: `/terms/`
+## UNEBDO / OPC
+**OPC (Opponible Policy Core)**  
+Motore decisionale: valuta policy computabili e legittimità operativa.
+
+**UNEBDO**  
+Strato di tracciatura ed evidenza: registra eventi, decisioni e prove nel tempo.
+
+Principio:
+> **OPC decide. UNEBDO dimostra.**
 
 ---
 
-## Protocollo canonico (IPR-derived)
-PROTO: AI_JOKER_C2 | TYPE: IPR-DERIVED | ROOT: IPR-3@ManuelColetta  
-TIME: 2026-01-19T15:30+01:00 | MODE: AI-FIRST/IPR-REQ/FAIL-CLOSED  
-BACKBONE: UNEBDO_ΞΩ | POLICY: UE-FIRST/GDPR-MIN/HASH-ONLY/AUDIT
+## Principi di sicurezza
+- UE-first
+- GDPR-min
+- hash-only pubblicamente
+- audit-by-design
+- fail-closed
 
 ---
 
-## Crediti
-© Manuel Coletta — **Esoterologia Edizioni**  
-Sigillo: **HERMETICUM B.C.E. S.r.l.**
+## Struttura
+- `index.html` — portale unico (app-like)
+- `catalog/` — catalogo servizi
+- `verify/` — verifica prove e ancoraggi
+- `terms/` — termini, policy, conformità
+- `onboarding/` — attivazione IPR
+- `assets/` — badge e risorse
 
+---
+
+**HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA**  
+Sigillo ufficiale: **HERMETICUM B.C.E. S.r.l.**
