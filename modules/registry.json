@@ -1,0 +1,45 @@
+{
+  "schema": "HBCE-MODULE-REGISTRY-1.0",
+  "project": "Hermeticum B.C.E.",
+  "role": "canonical-orchestration-map",
+  "principles": ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "AUDIT-BY-DESIGN", "FAIL-CLOSED"],
+  "modules": [
+    {
+      "module_id": "HBCE-MOD-IDENTITY",
+      "name": "Identity",
+      "alias": "IPR",
+      "purpose": "Continuità dell’identità operativa nel tempo.",
+      "status": "ACTIVE",
+      "entrypoint": "https://manuelcoletta1-source.github.io/hermeticum-bce-services/#entry",
+      "notes": "Senza IPR non esiste istanza personale/aziendale."
+    },
+    {
+      "module_id": "HBCE-MOD-POLICY",
+      "name": "Policy",
+      "alias": "OPC",
+      "purpose": "Policy opponibili: deterministiche, versionate, fail-closed.",
+      "status": "ACTIVE",
+      "entrypoint": "https://manuelcoletta1-source.github.io/opc/",
+      "policy_index": "https://manuelcoletta1-source.github.io/opc/policy/",
+      "notes": "Le regole non si interpretano: si applicano."
+    },
+    {
+      "module_id": "HBCE-MOD-EXECUTION",
+      "name": "Execution",
+      "alias": "AI JOKER-C2",
+      "purpose": "Execution layer AI-first vincolato da IPR e OPC.",
+      "status": "ACTIVE",
+      "entrypoint": "https://manuelcoletta1-source.github.io/ai-joker-workers/",
+      "notes": "Senza IPR: DENY. Senza evidence: nessuna evoluzione."
+    },
+    {
+      "module_id": "HBCE-MOD-EVIDENCE",
+      "name": "Evidence",
+      "alias": "Audit / Decision Log",
+      "purpose": "Traccia append-only delle azioni: output opponibile nel tempo (hash-only).",
+      "status": "PLANNED",
+      "entrypoint": "https://manuelcoletta1-source.github.io/hermeticum-bce-services/",
+      "notes": "Modulo previsto: registry prima dell’implementazione."
+    }
+  ]
+}
