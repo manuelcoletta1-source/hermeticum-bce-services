@@ -2,264 +2,190 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Hermeticum B.C.E. — Services</title>
+  <title>Hermeticum B.C.E. — Banca Dati Cibernetica Europea</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description"
-        content="Hermeticum B.C.E. Services — Infrastruttura europea di identità, tracciabilità e sicurezza cibernetica UE-first." />
-
+  <meta name="description" content="Hermeticum B.C.E. — Infrastruttura digitale europea cibernetica. Identità verificata (IPR), sicurezza del dato e operatività protetta. UE-first, audit-by-design, fail-closed." />
   <style>
     :root{
-      --bg:#0b0d11;
-      --panel:#10131a;
-      --line:#1f2430;
-      --text:#e6e8ec;
-      --muted:#9aa3b2;
-      --accent:#4da3ff;
-      --ok:#3bd18a;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a9acb2;
+      --accent:#7cf3ff;
     }
-
     *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.55;
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1060px;margin:0 auto;padding:22px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}
+    .brand{display:flex;flex-direction:column;gap:4px}
+    .kicker{font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+    nav{display:flex;flex-wrap:wrap;gap:10px}
+    .pill{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:8px 10px;border-radius:999px;font-size:13px}
+    .hero{display:grid;gap:14px;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+    h1{font-size:28px;margin:0}
+    .lead{color:var(--muted);margin:0}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+    .btn{border:1px solid var(--line);padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.03);font-weight:600}
+    .btn.primary{border-color:rgba(124,243,255,.35);box-shadow:0 0 0 1px rgba(124,243,255,.15) inset}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:14px}
+    .card{grid-column:span 6;border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:14px}
+    .card h2{margin:0 0 6px 0;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .mini{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+    .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:999px}
+    .section{margin-top:18px}
+    .section h2{font-size:16px;margin:0 0 10px 0;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+    .portal{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .portal .item{grid-column:span 4;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02);padding:14px}
+    .item .title{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .item h3{margin:0;font-size:16px}
+    .item p{margin:8px 0 0 0;color:var(--muted);font-size:13px}
+    footer{margin-top:22px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:13px}
+    @media (max-width:860px){
+      .card{grid-column:span 12}
+      .portal .item{grid-column:span 12}
     }
-
-    header{
-      padding:56px 24px;
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg,#0c0f16,#0b0d11);
-    }
-
-    header h1{
-      margin:0 0 14px;
-      font-size:2.3rem;
-      letter-spacing:0.3px;
-    }
-
-    header p{
-      margin:0;
-      max-width:760px;
-      color:var(--muted);
-      font-size:1.05rem;
-    }
-
-    main{
-      max-width:1100px;
-      margin:0 auto;
-      padding:56px 24px;
-    }
-
-    section{
-      margin-bottom:72px;
-    }
-
-    h2{
-      font-size:1.6rem;
-      margin:0 0 18px;
-      border-left:4px solid var(--accent);
-      padding-left:12px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:24px;
-    }
-
-    .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:26px;
-    }
-
-    .card h3{
-      margin:0 0 10px;
-      font-size:1.15rem;
-    }
-
-    .card p{
-      margin:0;
-      color:var(--muted);
-      font-size:0.95rem;
-    }
-
-    .badge{
-      display:inline-block;
-      margin-top:14px;
-      font-size:0.72rem;
-      padding:4px 9px;
-      border-radius:7px;
-      border:1px solid var(--line);
-      color:var(--ok);
-      letter-spacing:0.4px;
-    }
-
-    .architecture{
-      max-width:860px;
-      color:var(--muted);
-      font-size:1rem;
-    }
-
-    .flow{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:18px;
-    }
-
-    .step{
-      padding:18px;
-      border:1px dashed var(--line);
-      border-radius:12px;
-      font-size:0.9rem;
-      color:var(--muted);
-    }
-
-    footer{
-      border-top:1px solid var(--line);
-      padding:36px 24px;
-      text-align:center;
-      color:var(--muted);
-      font-size:0.85rem;
-    }
-
-    a{color:var(--accent);text-decoration:none}
   </style>
 </head>
 
 <body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="kicker">HERMETICUM B.C.E. · UE-FIRST · GDPR-MIN · AUDIT</div>
+      </div>
+      <nav>
+        <a class="pill" href="#cose">Cos’è</a>
+        <a class="pill" href="#aijoker">AI JOKER</a>
+        <a class="pill" href="#ipr">IPR</a>
+        <a class="pill" href="#portal">Portal</a>
+        <a class="pill" href="catalog/">Catalog</a>
+        <a class="pill" href="verify/">Verify</a>
+        <a class="pill" href="terms/">Terms</a>
+      </nav>
+    </header>
 
-<header>
-  <h1>Hermeticum B.C.E. — Services</h1>
-  <p>
-    Infrastruttura europea per <strong>identità digitale</strong>,
-    <strong>tracciabilità crittografica</strong> e
-    <strong>sicurezza cibernetica</strong>.
-    Progettata secondo principi <strong>UE-first</strong>,
-    audit-by-design e fail-closed.
-  </p>
-</header>
+    <section class="hero" id="cose">
+      <h1>La prima Banca Dati Cibernetica Europea</h1>
+      <p class="lead">
+        La cybersicurezza non protegge file. Protegge persone. Nel digitale il dato non è un oggetto: il dato sei tu.
+        Hermeticum B.C.E. rende l’identità verificabile, tracciabile e opponibile nel tempo.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="verify/">Attiva IPR</a>
+        <a class="btn" href="https://manuelcoletta1-source.github.io/ai-joker-workers/">Accedi ad AI JOKER</a>
+      </div>
+      <div class="mini">
+        <span class="tag">Velocità algoritmica</span>
+        <span class="tag">Precisione non-umana</span>
+        <span class="tag">Sicurezza crittografica</span>
+        <span class="tag">Continuità nel tempo</span>
+        <span class="tag">Fail-closed</span>
+        <span class="tag">Audit-by-design</span>
+      </div>
+    </section>
 
-<main>
-
-  <!-- CORE -->
-  <section>
-    <h2>Servizio Centrale</h2>
     <div class="grid">
-
-      <div class="card">
-        <h3>IPR — Identity Primary Record</h3>
-        <p>
-          Ancora crittografica individuale che collega una persona reale,
-          documentazione europea e prove pubbliche verificabili nel tempo.
-        </p>
-        <span class="badge">CORE SERVICE</span>
-      </div>
-
-      <div class="card">
-        <h3>AI JOKER-C2</h3>
-        <p>
-          Livello di comando e controllo cognitivo che orchestra
-          l’interazione tra utente e l’intero stack software Hermeticum B.C.E.
-        </p>
-        <span class="badge">COGNITIVE C2</span>
-      </div>
-
+      <section class="card">
+        <h2>Cibernetica, non burocrazia</h2>
+        <p>Input → decisione → output → feedback. Hermeticum è progettato come sistema cibernetico nativo, non come banca digitalizzata.</p>
+      </section>
+      <section class="card" id="aijoker">
+        <h2>AI, non operatori</h2>
+        <p>Qui non esiste “dipende dall’operatore”. Il cliente dialoga con AI JOKER: regole stabili, decisioni ripetibili, tracce verificabili.</p>
+      </section>
+      <section class="card">
+        <h2>Cybersicurezza del dato a livello digitale</h2>
+        <p>Ogni azione è attribuita, regolata e tracciata. Se manca una prova, il sistema non decide: blocca.</p>
+        <p style="margin-top:8px;color:var(--muted)">Hash ≠ opinione · Firma ≠ promessa · Audit ≠ fiducia</p>
+      </section>
+      <section class="card" id="ipr">
+        <h2>IPR</h2>
+        <p>L’Identity Primary Record trasforma una persona in identità operativa verificabile nel tempo.</p>
+        <div class="mini">
+          <span class="tag">Attribuzione certa</span>
+          <span class="tag">Continuità temporale</span>
+          <span class="tag">Opponibilità UE-first</span>
+        </div>
+      </section>
     </div>
-  </section>
 
-  <!-- ARCHITETTURA -->
-  <section>
-    <h2>Architettura Operativa</h2>
-    <p class="architecture">
-      Hermeticum B.C.E. non utilizza software isolati.
-      I <strong>sei moduli operativi</strong> lavorano sempre
-      <strong>all’unisono</strong> con l’utente e con
-      <strong>AI JOKER-C2</strong>, formando un unico
-      sistema operativo cognitivo, tracciabile e auditabile
-      secondo standard europei.
-    </p>
-  </section>
+    <section class="section" id="portal">
+      <h2>Portal</h2>
 
-  <!-- SIX SOFTWARE -->
-  <section>
-    <h2>Stack Software Sincrono (6)</h2>
-    <div class="grid">
+      <div class="portal">
+        <div class="item">
+          <div class="title">
+            <h3>UNEBDO</h3>
+            <a class="pill" href="https://manuelcoletta1-source.github.io/unebdo/">Apri</a>
+          </div>
+          <p>Root Enforcement. Se non è verificabile → non è eseguibile.</p>
+        </div>
 
-      <div class="card">
-        <h3>CyberGlobal</h3>
-        <p>
-          Infrastruttura DUAL-USE per coordinamento,
-          interoperabilità e sicurezza cibernetica
-          in contesti civili e istituzionali.
-        </p>
-        <span class="badge">DUAL-USE LAYER</span>
+        <div class="item">
+          <div class="title">
+            <h3>OPC</h3>
+            <a class="pill" href="https://manuelcoletta1-source.github.io/opc/">Apri</a>
+          </div>
+          <p>Opponible Policy Core. Regole esplicite, versionate, citabili nel tempo.</p>
+        </div>
+
+        <div class="item">
+          <div class="title">
+            <h3>MetaExchange</h3>
+            <a class="pill" href="https://manuelcoletta1-source.github.io/metaexchange/">Apri</a>
+          </div>
+          <p>Scambio governato di dati/diritti/valore: conforme prima di scambiare.</p>
+        </div>
+
+        <div class="item">
+          <div class="title">
+            <h3>IoSpace</h3>
+            <a class="pill" href="https://manuelcoletta1-source.github.io/iospace/">Apri</a>
+          </div>
+          <p>Spazio operativo verificabile: contesto, vincoli e tracciabilità dell’azione.</p>
+        </div>
+
+        <div class="item">
+          <div class="title">
+            <h3>NeuroLoop</h3>
+            <a class="pill" href="https://manuelcoletta1-source.github.io/neuroloop/">Apri</a>
+          </div>
+          <p>Loop runtime controllati e interrompibili: auditabilità iterazione per iterazione.</p>
+        </div>
+
+        <div class="item">
+          <div class="title">
+            <h3>CyberGlobal</h3>
+            <a class="pill" href="https://manuelcoletta1-source.github.io/cyberglobal/">Apri</a>
+          </div>
+          <p>Governance tecnica e interoperabilità cross-dominio (dual-use controllato, UE-first).</p>
+        </div>
+
+        <div class="item">
+          <div class="title">
+            <h3>AI JOKER — Workers</h3>
+            <a class="pill" href="https://manuelcoletta1-source.github.io/ai-joker-workers/">Apri</a>
+          </div>
+          <p>Cockpit Human-in-the-Loop: sessione operatore↔AI, audit locale, fail-closed di default.</p>
+        </div>
+
+        <div class="item">
+          <div class="title">
+            <h3>Catalog / Verify / Terms</h3>
+            <a class="pill" href="catalog/">Apri</a>
+          </div>
+          <p>Catalogo servizi, attivazione/verifica IPR, condizioni e principi di uso UE-first.</p>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>UNEBDO ΦΩ</h3>
-        <p>
-          Strato di enforcement tecnico-legale per
-          opponibilità, audit e continuità normativa UE-first.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>OPC — Opposable Policy Core</h3>
-        <p>
-          Politiche tecniche opponibili,
-          versionate e verificabili nel tempo.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>MetaExchange</h3>
-        <p>
-          Scambio controllato di dati, valore
-          e diritti digitali in ambienti regolati.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>NeuroLoop</h3>
-        <p>
-          Feedback cognitivo e apprendimento continuo
-          dell’intero sistema operativo.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>IoSpace</h3>
-        <p>
-          Spazio operativo digitale dell’identità
-          e dei servizi connessi all’IPR.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FLOW -->
-  <section>
-    <h2>Flusso Operativo Standard</h2>
-    <div class="flow">
-      <div class="step">1 · Identificazione UE dell’utente</div>
-      <div class="step">2 · Generazione prove e hash</div>
-      <div class="step">3 · Ancoraggio IPFS / Blockchain</div>
-      <div class="step">4 · Attivazione AI JOKER-C2</div>
-      <div class="step">5 · Operatività continua e audit</div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  © Hermeticum B.C.E. — Infrastruttura europea di sicurezza digitale · UE-first · Audit-by-design
-</footer>
-
+    <footer>
+      Hermeticum B.C.E. — Banca dati cibernetica UE-first. Il dato sei tu. L’IPR è la tua chiave. <br/>
+      © Manuel Coletta · Esoterologia Edizioni
+    </footer>
+  </div>
 </body>
 </html>
