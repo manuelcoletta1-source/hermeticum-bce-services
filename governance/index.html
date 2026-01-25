@@ -3,226 +3,144 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Governance — Hermeticum B.C.E.</title>
-  <meta name="description" content="Governance del Circuito Cibernetico Europeo basato su IPR. Principi UE-first, responsabilità, livelli e opponibilità." />
-
+  <title>Governance — HERMETICUM Services</title>
+  <meta name="description" content="Governance UE-first dell’ecosistema HERMETICUM: responsabilità, controllo, audit e opposabilità." />
   <style>
     :root{
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --line:#252836;
-      --text:#e9e9ef;
-      --muted:#a5a7b6;
-      --accent:#7aa2ff;
-      --ok:#43d19e;
-      --radius:16px;
-      --max: 960px;
+      --bg:#0b0c10; --panel:#0f1117; --line:#24262b; --text:#e8e8e8; --muted:#a9abb3;
+      --shadow:0 12px 36px rgba(0,0,0,.35); --r:16px; --r2:22px; --max:1100px;
     }
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      background: var(--bg);
+      background:radial-gradient(1200px 700px at 20% 0%, #121525 0%, rgba(18,21,37,0) 55%),
+                 radial-gradient(900px 600px at 80% 10%, #141b2a 0%, rgba(20,27,42,0) 55%),
+                 var(--bg);
       color:var(--text);
-      font: 15px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial, sans-serif;
-    }
-    a{ color:var(--accent); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    header{
-      border-bottom:1px solid var(--line);
-      background: rgba(11,12,16,.85);
-    }
-    header .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:18px 20px;
-    }
-    header h1{
-      margin:0;
-      font-size:22px;
+      font:15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       letter-spacing:.2px;
     }
-    header p{
-      margin:6px 0 0;
-      color:var(--muted);
-      max-width:70ch;
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r2);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow); position:sticky; top:14px; z-index:10; backdrop-filter: blur(10px);
     }
-
-    main{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:24px 20px 40px;
+    .brand{font-weight:900; letter-spacing:.6px}
+    .nav{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{
+      padding:8px 10px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(255,255,255,.03); color:var(--muted); font-weight:800; transition:.15s ease;
     }
-
-    section{
-      margin-bottom:26px;
-      padding:18px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background: var(--panel);
+    .chip:hover{transform:translateY(-1px); color:var(--text); background:rgba(255,255,255,.05)}
+    .hero{
+      margin-top:18px; border:1px solid var(--line); border-radius:var(--r2); padding:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
     }
-    section h2{
-      margin:0 0 10px;
-      font-size:18px;
-      letter-spacing:.2px;
+    .mark{margin:0 0 6px; font-weight:900}
+    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
+    h1{margin:0 0 8px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted); max-width:90ch}
+    .grid{display:grid; gap:12px; margin-top:14px}
+    @media (min-width:900px){ .grid{grid-template-columns:1fr 1fr} }
+    .card{
+      border:1px solid var(--line); border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      padding:16px; box-shadow:var(--shadow);
     }
-    section p{
-      margin:0 0 10px;
-      color:var(--muted);
+    .card h2{margin:0 0 6px; font-size:18px}
+    .card p{margin:0; color:var(--muted)}
+    .list{margin:10px 0 0; padding-left:16px; color:var(--muted)}
+    .list li{margin:6px 0}
+    .callout{
+      margin-top:14px; border:1px dashed rgba(255,255,255,.18); border-radius:var(--r);
+      padding:14px; background:rgba(255,255,255,.02); color:var(--muted); font-weight:800;
     }
-    ul{
-      margin:8px 0 0;
-      padding-left:18px;
-      color:var(--muted);
-    }
-    li{ margin:6px 0; }
-
-    .level{
-      border-left:4px solid var(--accent);
-      padding-left:14px;
-      margin-top:12px;
-    }
-    .tag{
-      display:inline-block;
-      padding:4px 10px;
-      margin-right:6px;
-      font-size:12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      color:var(--muted);
-      background: rgba(255,255,255,.03);
-    }
-
-    footer{
-      border-top:1px solid var(--line);
-      padding:18px 20px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    footer .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      gap:12px;
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+    .footer{
+      margin-top:18px; color:var(--muted); font-size:12px; padding:14px 2px 0;
+      display:flex; gap:10px; justify-content:space-between; border-top:1px solid var(--line);
     }
   </style>
 </head>
-
 <body>
-
-<header>
   <div class="wrap">
-    <h1>Governance del Circuito</h1>
-    <p>
-      Principi di governo, responsabilità e opponibilità del
-      <strong>Circuito Cibernetico Europeo basato su IPR</strong>.
-      La governance non è politica: è <em>tecnica, verificabile e UE-first</em>.
-    </p>
-  </div>
-</header>
+    <div class="top">
+      <div class="brand">Governance</div>
+      <div class="nav">
+        <a class="chip" href="../">Home</a>
+        <a class="chip" href="../catalog/">Catalog</a>
+        <a class="chip" href="../onboarding/">Onboarding</a>
+        <a class="chip" href="../verify/">Verify</a>
+        <a class="chip" href="../terms/">Terms</a>
+      </div>
+    </div>
 
-<main>
+    <header class="hero">
+      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
+      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
 
-  <section>
-    <h2>Principi Fondamentali</h2>
-    <ul>
-      <li><strong>UE-first</strong>: allineamento prioritario a normative, principi e interoperabilità europee.</li>
-      <li><strong>Audit-by-design</strong>: ogni operazione rilevante deve poter essere verificata a posteriori.</li>
-      <li><strong>Fail-closed</strong>: in assenza di prova, consenso o validazione, l’operazione è negata.</li>
-      <li><strong>Opponibilità</strong>: le tracce prodotte possono essere esibite come evidenza tecnica.</li>
-      <li><strong>Neutralità tecnologica</strong>: nessun lock-in obbligatorio su vendor o stack specifici.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Livelli di Governance</h2>
-
-    <div class="level">
-      <span class="tag">Livello 1</span>
-      <h3>IPR Personale</h3>
-      <p>
-        Il soggetto titolare dell’IPR mantiene il controllo primario
-        su identità, consensi, deleghe e continuità nel tempo.
+      <h1>Governance UE-first</h1>
+      <p class="sub">
+        La governance definisce <b>chi può fare cosa</b>, <b>in quali condizioni</b> e
+        <b>con quali prove</b>. In HERMETICUM la governance è <b>computabile</b>,
+        <b>tracciabile</b> e <b>opponibile</b>.
       </p>
-      <ul>
-        <li>Controllo individuale e revocabile</li>
-        <li>Tracce legate a identità reale</li>
-        <li>Nessuna delega implicita</li>
-      </ul>
-    </div>
+    </header>
 
-    <div class="level">
-      <span class="tag">Livello 2</span>
-      <h3>IPR Aziendale</h3>
-      <p>
-        Le entità giuridiche operano tramite IPR aziendali con
-        responsabilità, deleghe esplicite e auditabilità.
-      </p>
-      <ul>
-        <li>Deleghe formali e tracciate</li>
-        <li>Responsabilità operativa opponibile</li>
-        <li>Compatibilità con audit e compliance</li>
-      </ul>
-    </div>
+    <section class="grid">
+      <div class="card">
+        <h2>Principi di governo</h2>
+        <ul class="list">
+          <li>UE-first e conformità by design</li>
+          <li>separazione poteri: decisione vs evidenza</li>
+          <li>responsabilità personale tramite IPR</li>
+          <li>audit continuo e verificabilità indipendente</li>
+        </ul>
+      </div>
 
-    <div class="level">
-      <span class="tag">Livello 3</span>
-      <h3>IPR Governativo</h3>
-      <p>
-        Livello istituzionale dedicato a standard, interoperabilità,
-        vigilanza tecnica e infrastrutture critiche.
-      </p>
-      <ul>
-        <li>Definizione di standard e policy tecniche</li>
-        <li>Interoperabilità tra sistemi e registri</li>
-        <li>Supervisione, non controllo individuale</li>
-      </ul>
-    </div>
-  </section>
+      <div class="card">
+        <h2>Ruoli</h2>
+        <ul class="list">
+          <li><b>Utente</b>: titolare dell’IPR e responsabile delle azioni</li>
+          <li><b>AI JOKER-C2</b>: agente operativo vincolato da policy</li>
+          <li><b>OPC</b>: autorità decisionale computabile</li>
+          <li><b>UNEBDO</b>: autorità di tracciatura ed evidenza</li>
+        </ul>
+      </div>
+    </section>
 
-  <section>
-    <h2>Ruolo di Hermeticum B.C.E.</h2>
-    <p>
-      Hermeticum B.C.E. opera come <strong>infrastruttura tecnica</strong>
-      e <strong>gateway di servizio</strong>.
-      Non esercita potere sovrano, né controllo sui soggetti,
-      ma fornisce strumenti verificabili per identità, prova e continuità.
-    </p>
-    <ul>
-      <li>Nessuna autorità centrale sui dati personali</li>
-      <li>Nessuna intelligenza decisionale autonoma</li>
-      <li>Supporto tecnico a modelli di governance UE</li>
-    </ul>
-  </section>
+    <section class="grid">
+      <div class="card">
+        <h2>Meccanismo decisionale</h2>
+        <p>
+          Ogni azione passa da <b>OPC</b> (ALLOW / DENY) e viene registrata da
+          <b>UNEBDO</b> con tempo canonico.
+        </p>
+        <div class="callout">
+          Formula: <b>policy → decisione → evidenza → opponibilità</b>
+        </div>
+      </div>
 
-  <section>
-    <h2>AI e Automazione</h2>
-    <p>
-      Componenti di automazione (es. AI Joker) operano esclusivamente
-      come <strong>strumenti associati a un IPR</strong>.
-    </p>
-    <ul>
-      <li>Nessuna autonomia giuridica</li>
-      <li>Azioni sempre riconducibili a un IPR</li>
-      <li>Audit e revoca sempre possibili</li>
-    </ul>
-  </section>
+      <div class="card">
+        <h2>Fail-closed istituzionale</h2>
+        <p>
+          In assenza di policy valida o di evidenza completa,
+          l’azione è automaticamente negata.
+        </p>
+        <div class="callout">
+          Niente eccezioni, niente override manuali.
+        </div>
+      </div>
+    </section>
 
-</main>
-
-<footer>
-  <div class="wrap">
-    <div>
-      <strong>HERMETICUM B.C.E.</strong><br/>
-      Governance — Circuito Cibernetico Europeo basato su IPR
-    </div>
-    <div>
-      <a href="../index.html">← Services Gateway</a>
+    <div class="footer">
+      <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+      <div>HERMETICUM B.C.E. S.r.l.</div>
     </div>
   </div>
-</footer>
-
 </body>
 </html>
