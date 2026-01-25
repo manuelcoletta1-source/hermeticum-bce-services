@@ -1,47 +1,73 @@
-# 🜏 HERMETICUM B.C.E. — Services Gateway
+# Hermeticum B.C.E. — Services
+## Spazio di continuità operativa
 
-Repository “gateway” del **Circuito Cibernetico Europeo basato su IPR**.
-
-Questo repo espone:
-- accesso ai livelli **IPR Personale / Aziendale / Governativo**
-- **catalogo servizi** (orientato a UX)
-- **verify** (prove/evidenze pubbliche)
-- principi base di **governance** e perimetro (UE-first, audit-by-design, fail-closed)
-
-> Obiettivo: rendere leggibile e opponibile l’accesso all’identità operativa verificabile (IPR) e ai servizi connessi.
+Hermeticum B.C.E. è **uno spazio di continuità operativa**  
+in cui identità, decisioni e azioni mantengono coerenza nel tempo,
+indipendentemente dallo strumento che le esegue.
 
 ---
 
-## Livelli IPR
+## Cos’è (definizione operativa)
 
-- **IPR Personale**: identità individuale con prova, tracciabilità e continuità nel tempo.
-- **IPR Aziendale**: identità operativa per imprese/enti con deleghe, audit e compliance.
-- **IPR Governativo**: strato istituzionale per standard, interoperabilità e vigilanza tecnica.
+Hermeticum B.C.E. non è una piattaforma né un servizio isolato.  
+È un **ambiente operativo** in cui:
 
----
-
-## Struttura del repository
-
-- `/index.html` — ingresso istituzionale (IPR al centro)
-- `/catalog/` — catalogo servizi e pacchetti IPR
-- `/verify/` — prove, evidenze, controlli (pubblici e ispezionabili)
-- `/governance/` — principi, policy, opponibilità e perimetro
-- `/terms/` — condizioni e note d’uso
-- `/assets/` — risorse grafiche e componenti UI
+- l’identità non si resetta (IPR)
+- le decisioni sono vincolate da regole (OPC)
+- l’AI esegue come funzione (AI JOKER-C2)
+- ogni azione resta verificabile nel tempo (audit)
 
 ---
 
-## Link rapidi
+## I quattro pilastri
 
-- **Sito**: GitHub Pages del repository
-- **Catalog**: `./catalog/`
-- **Verify**: `./verify/`
-- **Governance**: `./governance/`
-- **Terms**: `./terms/`
+### Identità — IPR
+Continuità dell’identità operativa nel tempo.
+
+### Decisione — OPC
+Policy deterministiche, pubbliche, opponibili.
+
+### Esecuzione — AI JOKER-C2
+AI vincolata che opera solo entro identità e regole.
+
+### Traccia — Audit
+Registro append-only delle azioni.
 
 ---
 
-## Nota operativa
+## Cosa NON è
 
-Questo repository è una **vetrina di servizio**.
-Dettagli tecnici estesi (prove, allegati, chain-of-custody, ecc.) restano concentrati in `verify/` e nelle relative evidenze versionate.
+Hermeticum B.C.E. **non è**:
+- un chatbot
+- un’AI autonoma
+- un wallet
+- una piattaforma social
+
+È uno spazio dove **si risponde delle azioni nel tempo**.
+
+---
+
+## Perché “continuità operativa”
+
+La continuità qui non serve a ricordare.  
+Serve a **mantenere responsabilità e coerenza delle azioni**.
+
+Cambiano strumenti, ruoli, contesti.  
+Lo spazio resta.
+
+---
+
+## Collegamenti
+
+- OPC — Opponible Policy Core  
+  https://manuelcoletta1-source.github.io/opc/
+
+- AI JOKER-C2 — Execution Layer  
+  https://manuelcoletta1-source.github.io/ai-joker-workers/
+
+---
+
+## Chiusura
+
+Hermeticum B.C.E. non promette futuro.  
+Garantisce **coerenza nel presente che attraversa il tempo**.
