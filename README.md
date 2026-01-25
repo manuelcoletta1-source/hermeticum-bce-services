@@ -1,110 +1,66 @@
-# HERMETICUM B.C.E. PLATFORM
-**Piattaforma europea per identità digitale verificabile e prova opponibile nel tempo**
+# HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA
+**HERMETICUM B.C.E. S.r.l.**
 
-Hermeticum B.C.E. è una **piattaforma digitale europea (UE-first)**
-che fornisce **continuità, integrità e verificabilità**
-dell’identità digitale e delle evidenze associate.
+> **Hermeticum B.C.E. è un’infrastruttura digitale europea di identità cibernetica verificabile, progettata per garantire sicurezza dei dati, continuità operativa e opponibilità giuridica nell’era dell’intelligenza artificiale.**
 
-La piattaforma è progettata per essere utilizzata da:
-- cittadini
-- professionisti e imprese
-- istituzioni e tribunali
+Repository piattaforma: **Gateway UE-ready** (punto di ingresso).  
+Portale: https://manuelcoletta1-source.github.io/hermeticum-bce-services/
 
 ---
 
-## Obiettivo della Piattaforma
+## Cosa NON è
+- Non è un “account”
+- Non è un “wallet”
+- Non è una “AI commerciale”
+- Non è un social
 
-I sistemi digitali attuali presentano limiti strutturali:
-- difficoltà di verifica indipendente
-- assenza di continuità nel lungo periodo
-- dipendenza da sistemi centralizzati
-- incertezza sull’opponibilità temporale
-
-Hermeticum B.C.E. affronta questi limiti fornendo
-un **layer di piattaforma** che garantisce:
-- integrità dei dati
-- prova tecnica riproducibile
-- validità nel tempo
-- auditabilità UE-first
+## Cos’è (operativamente)
+Un **gateway** che introduce e coordina un sistema di:
+- **IPR (Identity Primary Record)** → identità verificabile e continua nel tempo
+- **Proof / Evidence** → hash e artefatti verificabili
+- **Audit** → tracciabilità e opponibilità
+- **Orchestrazione** → AI JOKER-C2 come C2 operativo (non chat)
 
 ---
 
-## Ruolo di Hermeticum B.C.E.
+## Architettura: 6 moduli (un unico organismo)
+I moduli operano **all’unisono** con l’utente e **AI JOKER-C2**.
 
-Hermeticum B.C.E. **non è un’applicazione**
-e **non è un singolo servizio**.
+| Modulo | 3 parole (funzione canonica) | Portal |
+|---|---|---|
+| **UNEBDO** | **Norme · Prove · Opponibilità** | https://manuelcoletta1-source.github.io/unebdo/ |
+| **OPC** | **Policy · Controllo · Coerenza** | https://manuelcoletta1-source.github.io/opc/ |
+| **MetaExchange** | **Valore · Scambio · Tracciabilità** | https://manuelcoletta1-source.github.io/metaexchange/ |
+| **IoSpace** | **Ambiente · Operazioni · Isolamento** | https://manuelcoletta1-source.github.io/iospace/ |
+| **NeuroLoop** | **Feedback · Apprendimento · Continuità** | https://manuelcoletta1-source.github.io/neuroloop/ |
+| **CyberGlobal** | **Interoperabilità · Coordinamento · Resilienza** | https://manuelcoletta1-source.github.io/cyberglobal/ |
 
-È una **piattaforma infrastrutturale** che:
-- coordina record primari di identità (IPR)
-- separa dato, prova e governance
-- abilita verifica indipendente
-- supporta contesti legali e istituzionali
-
-La piattaforma **estende** i sistemi esistenti,
-non li sostituisce.
-
----
-
-## Domini di Accesso
-
-Hermeticum B.C.E. opera attraverso **tre domini distinti**.
-
-### Cittadino (UE)
-Accesso semplificato per la protezione dell’identità digitale
-e dei documenti nel tempo.
-
-### Professionista / Tecnico
-Accesso tecnico per integrazione, audit,
-verifica e valutazione architetturale.
-
-### Istituzione / Tribunale
-Accesso istituzionale per verifica neutra,
-opponibilità e riproducibilità della prova.
-
-Ogni dominio utilizza **linguaggio e strumenti dedicati**.
+**AI JOKER-C2**: **Orchestrazione · Decisione · Supervisione**  
+Workers/portal: https://manuelcoletta1-source.github.io/ai-joker-workers/
 
 ---
 
-## Principi Fondamentali
+## Verifica (Proof → Evidence → Audit)
+Pattern operativo:
+**dato → hash → evidence → audit**
 
-- **UE-first**: allineamento ai quadri normativi europei
-- **Separazione dei livelli**: dato ≠ prova ≠ governance
-- **Neutralità tecnologica**
-- **Auditabilità by design**
-- **Validità a lungo termine**
-
----
-
-## Cosa la Piattaforma NON è
-
-Hermeticum B.C.E.:
-- non è un social network
-- non è un sistema finanziario
-- non è un registro legale
-- non prende decisioni
-- non sostituisce le autorità pubbliche
-
-Fornisce **strumenti tecnici di verifica**, non giudizio.
+Cartelle chiave in questo repo:
+- `/onboarding` → flusso di ingresso
+- `/evidence` → esempi e allegati verificabili
+- `/catalog` → catalogo servizi / moduli
 
 ---
 
-## Contesto Ecosistemico
-
-Questo repository rappresenta il **control plane della piattaforma**.
-
-I moduli operativi (identità, verifica, governance, intelligenza)
-sono mantenuti in repository dedicati e integrati tramite il layer piattaforma.
-
----
-
-## Stato
-
-Architettura di piattaforma: **stabile**  
-Orientamento: **platform-first**  
-Sviluppo: **attivo**
+## Governance UE-first
+Principi operativi:
+- **GDPR-min** (minimizzazione dei dati)
+- **HASH-only** (prove > dati)
+- **Audit-by-design** (tracciabilità)
+- **Fail-closed** (sicurezza per default)
 
 ---
 
-**HERMETICUM B.C.E.**  
-Blindata · Computabile · Evolutiva  
-HERMETICUM B.C.E. S.r.l.
+## Link rapidi
+- Portal services: https://manuelcoletta1-source.github.io/hermeticum-bce-services/
+- Technology: https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology/
+- IPR Gov EU Standard: https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/
