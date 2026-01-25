@@ -1,4 +1,4 @@
-# Hermeticum B.C.E. — Services
+# 🜏 Hermeticum B.C.E. — Services
 **Blindata · Computabile · Evolutiva**
 
 Questo repository è il **gateway ufficiale dei servizi** dell’ecosistema **Hermeticum B.C.E.**.  
