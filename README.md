@@ -1,57 +1,67 @@
 # Hermeticum B.C.E. — Services
+**Blindata · Computabile · Evolutiva**
 
-Questo repository documenta e presenta i **servizi ufficiali**
-dell’ecosistema **Hermeticum B.C.E. (Blindata · Computabile · Evolutiva)**.
-
-È il punto di riferimento per comprendere **cosa può fare un utente**
-all’interno dell’infrastruttura Hermeticum e **come accedervi**.
+Questo repository è il **gateway ufficiale dei servizi** dell’ecosistema **Hermeticum B.C.E.**.  
+Non contiene codice applicativo critico: descrive, organizza e rende **verificabili** servizi reali, attivabili e auditabili secondo criteri **UE-first**.
 
 ---
 
-## Scopo del repository
-
+## Scopo
 Questo repository ha funzione:
+- informativa (cosa esiste)
+- orientativa (come esplorare)
+- operativa (come attivare e verificare)
 
-- informativa
-- orientativa
-- di accesso ai servizi
-
-Non contiene codice applicativo critico,
-ma descrive **servizi reali, attivabili e verificabili**.
+Hermeticum B.C.E. non chiede fiducia: **produce prove**.
 
 ---
 
-## Quale problema risolve
-
+## Problema affrontato (contesto UE)
 Nel contesto europeo attuale:
-
 - l’identità digitale è frammentata
 - le tracce non sono persistenti
-- la responsabilità tecnica è opaca
+- la responsabilità tecnica è spesso opaca
 
-Hermeticum B.C.E. introduce servizi che permettono:
+Hermeticum B.C.E. introduce servizi che consentono:
+- continuità identitaria nel tempo
+- tracciabilità opponibile
+- governance tecnica computabile
 
-- continuità identitaria
-- tracciabilità opponibile nel tempo
-- governance computabile UE-first
+---
+
+## Architettura dei servizi (UX-first)
+
+Il sito è organizzato per **ridurre attrito cognitivo** e separare esplorazione da attivazione.
+
+### Entry point
+- **Home** → panoramica e orientamento
+- **Catalog** → mappa dei servizi
+- **Terms** → regole operative (UE-first)
+
+### Flusso operativo
+1. **Create**  
+   Generazione locale di manifest e struttura evidence (nessun upload).
+2. **Evidence**  
+   Pubblicazione di prove: manifest, hash, template, allegati non sensibili.
+3. **Verify**  
+   Controllo indipendente e ripetibile (fail-closed).
+
+Questo ciclo è completo e dimostrabile.
 
 ---
 
 ## Servizi principali
 
 ### IPR Personale
-Identità digitale individuale ancorata crittograficamente,
-verificabile pubblicamente e persistente nel tempo.
+Identità operativa individuale, ancorata a documentazione UE e resa verificabile tramite prove crittografiche.
 
-### IPR Professionale
-Identità operativa per professionisti, sistemi e progetti,
-con responsabilità tecnica e continuità storica.
+### IPR Professionale / Organizzativo
+Continuità identitaria per professionisti, progetti e sistemi, con responsabilità tecnica storicizzata.
 
-### Moduli Infrastrutturali
-Componenti strutturali dell’ecosistema, tra cui:
-
-- CyberGlobal
+### Moduli infrastrutturali
+Componenti strutturali dell’ecosistema Hermeticum B.C.E., tra cui:
 - UNEBDO
+- CyberGlobal
 - OPC
 - MetaExchange
 - IoSpace
@@ -59,26 +69,70 @@ Componenti strutturali dell’ecosistema, tra cui:
 
 ---
 
-## Fiducia e conformità
+## Evidence Pack (cuore del sistema)
 
-I servizi Hermeticum B.C.E. sono progettati secondo principi:
+Il repository include un **Evidence Pack reale**, composto da:
+- `evidence/manifest.json`
+- `evidence/hashes/SHA256SUMS.txt`
+- `evidence/proofs/proof-template.md`
+- `evidence/attachments/example.pdf`
 
-- UE-first
-- GDPR by design
-- audit-by-design
-- assenza di dark patterns
-- tracciabilità verificabile
-
----
-
-## Stato del repository
-
-🟢 **ATTIVO**  
-Repository di servizio e orientamento, in evoluzione controllata.
+Ogni file è verificabile.  
+Ogni modifica richiede rigenerazione degli hash.  
+Se una prova manca → **fail-closed**.
 
 ---
 
-## Entità responsabile
+## Principi non negoziabili
 
-**HERMETICUM B.C.E. S.r.l.**  
-Infrastrutture digitali e sistemi di governance computabile.
+- **UE-first**  
+  Riferimento normativo e operativo europeo.
+- **GDPR-min**  
+  Minimizzazione dei dati, preferenza per hash-only.
+- **Audit-by-design**  
+  Ogni processo produce evidenze.
+- **Opponibilità**  
+  Le dichiarazioni devono essere verificabili da terzi.
+- **Fail-closed**  
+  In assenza di prova, il sistema si ferma.
+
+---
+
+## Documenti di audit e governance
+Il repository include documentazione formale:
+- `AUDIT.md`
+- `CROSS-AUDIT.md`
+- `PROOF.md`
+- `FREEZE.md`
+- `STATUS.md`
+- `POLICY.md`
+- `CHANGELOG.md`
+
+Questi documenti fanno parte integrante del servizio.
+
+---
+
+## Cosa NON è questo repository
+- non è un wallet
+- non è un KYC provider
+- non è un sistema di sorveglianza
+- non è un’arma
+- non è marketing
+
+È un **dispositivo tecnico di prova**.
+
+---
+
+## Stato
+**Operational — Proof-ready**
+
+Ogni elemento pubblicato in questo repository è pensato per essere:
+- letto
+- verificato
+- contestato
+- replicato
+
+---
+
+**Hermeticum B.C.E.**  
+Decidi. Tracci. Rimani nel tempo.
