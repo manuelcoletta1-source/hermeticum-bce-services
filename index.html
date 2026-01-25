@@ -1,314 +1,353 @@
-<!-- FILE: index.html -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — Services</title>
-  <meta name="description" content="Hermeticum B.C.E. — Services: ingresso, esplorazione e attivazione IPR (UE-first, audit-by-design)." />
-  <meta name="theme-color" content="#0b0c10" />
+  <title>Hermeticum B.C.E. — Services Gateway</title>
+  <meta name="description" content="Hermeticum B.C.E. — Circuito Cibernetico Europeo basato su IPR. Accesso a IPR Personale, Aziendale, Governativo e verifica pubblica." />
+
   <style>
     :root{
-      color-scheme: dark;
       --bg:#0b0c10;
       --panel:#0f1117;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#a7abb6;
+      --panel2:#0c0e14;
+      --line:#252836;
+      --text:#e9e9ef;
+      --muted:#a5a7b6;
       --accent:#7aa2ff;
-      --good:#64d2ff;
-      --warn:#ffd166;
+      --ok:#43d19e;
+      --warn:#ffd479;
+      --danger:#ff6b6b;
+
       --radius:16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --max: 1040px;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --max: 1120px;
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 15% -10%, rgba(122,162,255,.15), transparent 60%),
-                  radial-gradient(900px 500px at 90% 0%, rgba(100,210,255,.10), transparent 55%),
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(122,162,255,.12), transparent 60%),
+                  radial-gradient(900px 600px at 90% 20%, rgba(67,209,158,.10), transparent 55%),
                   var(--bg);
       color:var(--text);
-      line-height:1.45;
+      font: 15px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", Arial, sans-serif;
     }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
-    header{position:sticky; top:0; z-index:10; backdrop-filter: blur(10px); background: rgba(11,12,16,.7); border-bottom:1px solid rgba(36,38,43,.6);}
-    .topbar{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 22px; max-width:var(--max); margin:0 auto;}
-    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ color:var(--accent); }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding:24px; }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      background: rgba(11,12,16,.75);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(37,40,54,.65);
+    }
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:14px 24px;
+      max-width:var(--max); margin:0 auto;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width:240px;
+    }
     .mark{
-      width:38px; height:38px; border-radius:12px; border:1px solid rgba(36,38,43,.9);
-      background: linear-gradient(180deg, rgba(122,162,255,.18), rgba(15,17,23,.9));
+      width:40px; height:40px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(122,162,255,.35), rgba(67,209,158,.18));
+      border:1px solid rgba(122,162,255,.25);
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
       display:grid; place-items:center;
-      box-shadow: var(--shadow);
       font-weight:700;
+      letter-spacing:.5px;
     }
-    .brand b{letter-spacing:.4px}
-    .brand small{display:block; color:var(--muted); font-weight:500}
-    nav{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
-    .pill{
-      text-decoration:none; border:1px solid rgba(36,38,43,.9); background: rgba(15,17,23,.75);
-      padding:8px 10px; border-radius:999px; color:var(--muted);
-      transition: transform .08s ease, border-color .08s ease, color .08s ease;
-      font-size: 13px;
+    .brand h1{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      color:var(--muted);
     }
-    .pill:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.6); color:var(--text)}
-    .hero{padding:26px 0 12px}
-    .grid{display:grid; grid-template-columns: 1.25fr .75fr; gap:16px}
-    @media (max-width: 920px){ .grid{grid-template-columns:1fr} nav{justify-content:flex-start} }
-    .card{
-      background: rgba(15,17,23,.78);
-      border:1px solid rgba(36,38,43,.9);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: var(--shadow);
+    .brand strong{
+      display:block;
+      font-size:16px;
+      letter-spacing:.2px;
+      text-transform:none;
+      color:var(--text);
     }
-    h1{margin:0 0 10px; font-size: 30px; line-height:1.15}
-    h2{margin:0 0 10px; font-size: 16px; color:var(--muted); font-weight:600; letter-spacing:.2px}
-    p{margin:0 0 12px; color:var(--muted)}
-    .lead{color:var(--text); font-size: 15px}
-    .ctaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:11px 12px; border-radius: 14px;
-      border:1px solid rgba(36,38,43,.95);
-      background: linear-gradient(180deg, rgba(122,162,255,.16), rgba(15,17,23,.9));
-      text-decoration:none; color:var(--text);
-      font-weight:650;
-      transition: transform .08s ease, border-color .08s ease;
-      min-width: 180px;
+
+    nav{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end;
     }
-    .btn:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.65)}
-    .btn.secondary{
-      background: rgba(15,17,23,.75);
-      color: var(--muted);
+    .navlink{
+      padding:8px 10px;
+      border:1px solid rgba(37,40,54,.8);
+      border-radius:999px;
+      background: rgba(15,17,23,.45);
+      color:var(--muted);
+      font-size:13px;
     }
-    .btn.secondary:hover{color:var(--text); border-color: rgba(100,210,255,.55)}
-    .kpi{display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:10px}
-    .kpi .box{
-      border:1px solid rgba(36,38,43,.9);
-      border-radius: 14px;
-      padding:12px;
-      background: rgba(11,12,16,.45);
+    .navlink:hover{
+      border-color: rgba(122,162,255,.35);
+      color:var(--text);
     }
-    .box b{display:block; font-size: 14px; margin-bottom:2px}
-    .box span{color:var(--muted); font-size: 13px}
-    .section{margin-top:16px}
-    .tiles{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
-    @media (max-width: 920px){ .tiles{grid-template-columns:1fr} }
-    .tile{
-      border:1px solid rgba(36,38,43,.9);
-      border-radius: var(--radius);
-      padding:16px;
-      background: rgba(15,17,23,.72);
-      text-decoration:none;
-      transition: transform .08s ease, border-color .08s ease;
+
+    .hero{
+      padding:34px 0 18px;
     }
-    .tile:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.5)}
-    .tile h3{margin:0 0 6px; font-size: 15px}
-    .tile p{margin:0; font-size: 13px}
-    .tagRow{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-    .tag{
-      border:1px solid rgba(36,38,43,.9);
-      border-radius: 999px;
-      padding:6px 8px;
-      font-size: 12px;
-      color: var(--muted);
-      background: rgba(11,12,16,.35);
-    }
-    .rule{height:1px; background: rgba(36,38,43,.8); margin: 14px 0}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
-    footer{padding:18px 0 32px; color:var(--muted); font-size: 12px}
-    .footgrid{display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center}
-    .smalllinks{display:flex; flex-wrap:wrap; gap:10px}
-    .smalllinks a{color:var(--muted); text-decoration:none}
-    .smalllinks a:hover{color:var(--text)}
     .badge{
       display:inline-flex; align-items:center; gap:8px;
-      border:1px solid rgba(36,38,43,.9);
-      padding:8px 10px; border-radius: 999px;
-      background: rgba(15,17,23,.65);
-      color: var(--muted);
+      border:1px solid rgba(37,40,54,.9);
+      background: rgba(15,17,23,.55);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
     }
-    .dot{width:8px; height:8px; border-radius:99px; background: rgba(100,210,255,.85)}
+    .dot{
+      width:9px; height:9px; border-radius:999px;
+      background: var(--ok);
+      box-shadow: 0 0 0 6px rgba(67,209,158,.12);
+    }
+
+    .hero h2{
+      margin:14px 0 10px;
+      font-size:34px;
+      line-height:1.15;
+      letter-spacing:-.4px;
+    }
+    .hero p{
+      margin:0;
+      max-width: 70ch;
+      color:var(--muted);
+      font-size:16px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    .card{
+      grid-column: span 4;
+      background: linear-gradient(180deg, rgba(15,17,23,.9), rgba(12,14,20,.88));
+      border:1px solid rgba(37,40,54,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+      min-height: 220px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .card small{
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      font-size:12px;
+    }
+    .card h3{ margin:0; font-size:18px; letter-spacing:.2px; }
+    .card p{ margin:0; color:var(--muted); }
+
+    .pillrow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+    .pill{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(37,40,54,.9);
+      background: rgba(15,17,23,.5);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    .cta{
+      margin-top:auto;
+      display:flex; gap:10px; flex-wrap:wrap;
+      padding-top:8px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(37,40,54,.95);
+      background: rgba(15,17,23,.65);
+      color:var(--text);
+      font-weight:600;
+      font-size:13px;
+    }
+    .btn.primary{
+      border-color: rgba(122,162,255,.45);
+      background: linear-gradient(135deg, rgba(122,162,255,.22), rgba(67,209,158,.12));
+    }
+    .btn:hover{
+      border-color: rgba(122,162,255,.45);
+      transform: translateY(-1px);
+      transition: transform .12s ease;
+    }
+
+    .section{
+      margin-top:22px;
+      padding:18px;
+      border:1px solid rgba(37,40,54,.9);
+      border-radius: var(--radius);
+      background: rgba(15,17,23,.55);
+    }
+    .section h4{ margin:0 0 8px; font-size:14px; letter-spacing:.3px; }
+    .section ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+    .section li{ margin:6px 0; }
+
+    .footer{
+      margin-top:26px;
+      padding:18px 0 28px;
+      color:var(--muted);
+      font-size:13px;
+      border-top:1px solid rgba(37,40,54,.75);
+    }
+    .footer .row{
+      display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center;
+    }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+
+    @media (max-width: 980px){
+      .card{ grid-column: span 6; }
+      .hero h2{ font-size:28px; }
+    }
+    @media (max-width: 640px){
+      .brand{ min-width:auto; }
+      nav{ justify-content:flex-start; }
+      .card{ grid-column: span 12; min-height:auto; }
+    }
   </style>
 </head>
 
 <body>
   <header>
     <div class="topbar">
-      <a class="brand" href="./" aria-label="Hermeticum B.C.E. — Services">
-        <div class="mark">🜏</div>
+      <div class="brand">
+        <div class="mark">HB</div>
         <div>
-          <b>Hermeticum B.C.E.</b>
-          <small>Services · UE-first · audit-by-design</small>
+          <h1>HERMETICUM B.C.E.</h1>
+          <strong>Services Gateway — Circuito Cibernetico Europeo (IPR)</strong>
         </div>
-      </a>
+      </div>
 
-      <nav aria-label="Navigazione">
-        <a class="pill" href="#explore">Esplora</a>
-        <a class="pill" href="#activate">Attiva</a>
-        <a class="pill" href="#trust">Trust</a>
-        <a class="pill" href="./onboarding/">Onboarding</a>
-        <a class="pill" href="./evidence/">Evidence</a>
+      <nav>
+        <a class="navlink" href="./catalog/">Catalog</a>
+        <a class="navlink" href="./verify/">Verify</a>
+        <a class="navlink" href="./governance/">Governance</a>
+        <a class="navlink" href="./terms/">Terms</a>
+        <a class="navlink" href="https://github.com/manuelcoletta1-source/hermeticum-bce-services">Repo</a>
       </nav>
     </div>
   </header>
 
   <main class="wrap">
-    <section class="hero grid">
-      <div class="card">
-        <h1>Un ingresso operativo nel digitale europeo.</h1>
-        <p class="lead">
-          <b>Hermeticum B.C.E. — Services</b> è la vetrina applicativa dell’ecosistema:
-          esplori i moduli, capisci come funziona la verifica, e <b>attivi un IPR personale</b>
-          quando sei pronto.
-        </p>
-
-        <div class="tagRow" aria-label="Tag">
-          <span class="tag">Identità verificabile</span>
-          <span class="tag">Tracciabilità nel tempo</span>
-          <span class="tag">Opponibilità & audit</span>
-          <span class="tag">UE-first</span>
-        </div>
-
-        <div class="ctaRow">
-          <a class="btn" href="#activate">Attiva IPR (porta d’ingresso)</a>
-          <a class="btn secondary" href="#explore">Esplora moduli & servizi</a>
-        </div>
-
-        <div class="rule"></div>
-
-        <h2>Regola di orientamento</h2>
-        <p>
-          Non devi capire tutto subito. Qui separiamo:
-          <b>Esplorazione</b> (capire) e <b>Attivazione</b> (agire).
-        </p>
-      </div>
-
-      <aside class="card">
-        <h2>Stato del repository</h2>
-        <div class="kpi" role="list">
-          <div class="box" role="listitem">
-            <b>Entry-point</b>
-            <span>Services come “porta” pubblica</span>
-          </div>
-          <div class="box" role="listitem">
-            <b>Fail-closed</b>
-            <span>niente promesse non verificabili</span>
-          </div>
-          <div class="box" role="listitem">
-            <b>Evidence</b>
-            <span>template & prove pubbliche</span>
-          </div>
-          <div class="box" role="listitem">
-            <b>Onboarding</b>
-            <span>percorso guidato, step-by-step</span>
-          </div>
-        </div>
-
-        <div class="rule"></div>
-
-        <div class="badge" aria-label="Signature">
-          <span class="dot" aria-hidden="true"></span>
-          <span><span class="mono">B.C.E.Hermeticum</span> · Services</span>
-        </div>
-      </aside>
+    <section class="hero" id="top">
+      <span class="badge"><span class="dot"></span> UE-first • Audit-by-design • Fail-closed (gateway)</span>
+      <h2>Circuito Cibernetico Europeo basato su <span style="color:var(--accent)">IPR</span></h2>
+      <p>
+        Qui si attiva l’accesso ai tre livelli di identità operativa verificabile:
+        <strong>IPR Personale</strong>, <strong>IPR Aziendale</strong>, <strong>IPR Governativo</strong>.
+        Ogni IPR abilita tracciabilità, continuità nel tempo e prova pubblica verificabile.
+      </p>
     </section>
 
-    <section id="explore" class="section">
-      <div class="card">
-        <h2>Esplora</h2>
+    <section class="grid" aria-label="Ingressi IPR">
+      <!-- IPR PERSONALE -->
+      <article class="card">
+        <small>Livello 1</small>
+        <h3>IPR Personale</h3>
         <p>
-          Tre stanze. Non un labirinto. Parti da ciò che ti serve: servizi, tecnologia, o corpus.
+          Identità cibernetica individuale: legame con documentazione UE, prova di integrità,
+          continuità temporale e tracciabilità opponibile.
         </p>
-
-        <div class="tiles" role="list">
-          <a class="tile" role="listitem" href="./catalog/">
-            <h3>Catalog</h3>
-            <p>Panoramica dei servizi, livelli e output attesi (senza fumo).</p>
-          </a>
-
-          <a class="tile" role="listitem" href="https://manuelcoletta1-source.github.io/hermeticum-bce-technology/" target="_blank" rel="noopener">
-            <h3>Technology</h3>
-            <p>Stack, moduli e repository tecnici dell’ecosistema Hermeticum B.C.E.</p>
-          </a>
-
-          <a class="tile" role="listitem" href="./terms/">
-            <h3>Terms</h3>
-            <p>Regole operative: UE-first, audit-by-design, opposability, fail-closed.</p>
-          </a>
+        <div class="pillrow">
+          <span class="pill">Cittadino</span>
+          <span class="pill">Prova</span>
+          <span class="pill">Traccia</span>
+          <span class="pill">Tempo</span>
         </div>
-      </div>
+        <div class="cta">
+          <a class="btn primary" href="./catalog/#ipr-personale">Apri catalogo</a>
+          <a class="btn" href="./verify/">Verifica</a>
+        </div>
+      </article>
+
+      <!-- IPR AZIENDALE -->
+      <article class="card">
+        <small>Livello 2</small>
+        <h3>IPR Aziendale</h3>
+        <p>
+          Identità operativa per imprese ed enti: responsabilità, deleghe, auditabilità,
+          catene di prova e interoperabilità UE-first.
+        </p>
+        <div class="pillrow">
+          <span class="pill">Impresa</span>
+          <span class="pill">Deleghe</span>
+          <span class="pill">Audit</span>
+          <span class="pill">Compliance</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="./catalog/#ipr-aziendale">Apri catalogo</a>
+          <a class="btn" href="./governance/">Governance</a>
+        </div>
+      </article>
+
+      <!-- IPR GOVERNATIVO -->
+      <article class="card">
+        <small>Livello 3</small>
+        <h3>IPR Governativo</h3>
+        <p>
+          Strato istituzionale: standard, interoperabilità, vigilanza tecnica,
+          registro e prova pubblica per sistemi critici.
+        </p>
+        <div class="pillrow">
+          <span class="pill">Istituzioni</span>
+          <span class="pill">Standard</span>
+          <span class="pill">Interoperabilità</span>
+          <span class="pill">Vigilanza</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="./catalog/#ipr-governativo">Apri catalogo</a>
+          <a class="btn" href="./verify/">Evidence</a>
+        </div>
+      </article>
     </section>
 
-    <section id="activate" class="section">
-      <div class="card">
-        <h2>Attiva</h2>
-        <p>
-          L’IPR personale è la “chiave” che collega persona reale, documenti UE e tracce verificabili.
-          Attivalo solo quando vuoi passare da esplorazione a operatività.
-        </p>
-
-        <div class="tiles" role="list">
-          <a class="tile" role="listitem" href="./onboarding/">
-            <h3>Onboarding IPR</h3>
-            <p>Percorso guidato: cosa serve, come si genera, cosa viene pubblicato.</p>
-          </a>
-
-          <a class="tile" role="listitem" href="./verify/">
-            <h3>Verify</h3>
-            <p>Controllo integrità: hash, evidenze, verifiche ripetibili.</p>
-          </a>
-
-          <a class="tile" role="listitem" href="./create/">
-            <h3>Create</h3>
-            <p>Generazione artefatti IPR: template, struttura e output standard.</p>
-          </a>
-        </div>
-      </div>
+    <section class="section" id="principi">
+      <h4>Principi operativi (sintesi)</h4>
+      <ul>
+        <li><strong>IPR</strong> come asse centrale: identità → prova → traccia → tempo.</li>
+        <li><strong>UE-first</strong>: impostazione normativa e auditabile per contesti europei.</li>
+        <li><strong>Fail-closed</strong>: in assenza di prova/consenso/validazione, il sistema non concede operazioni.</li>
+        <li><strong>Verify pubblica</strong>: le evidenze sono separabili, ispezionabili, versionate.</li>
+      </ul>
     </section>
 
-    <section id="trust" class="section">
-      <div class="card">
-        <h2>Trust (come si costruisce qui)</h2>
-        <p>
-          La fiducia non viene chiesta: viene <b>dimostrata</b>.
-          Per questo il sito punta su evidenze, ripetibilità e tracciabilità.
-        </p>
-
-        <div class="tiles" role="list">
-          <a class="tile" role="listitem" href="./evidence/">
-            <h3>Evidence Pack</h3>
-            <p>Esempi pubblici: allegati, prove, verifiche, struttura auditabile.</p>
-          </a>
-
-          <a class="tile" role="listitem" href="./docs/">
-            <h3>Docs</h3>
-            <p>Documentazione operativa: policy, procedure, standard di output.</p>
-          </a>
-
-          <a class="tile" role="listitem" href="https://github.com/manuelcoletta1-source/hermeticum-bce-services" target="_blank" rel="noopener">
-            <h3>Repository</h3>
-            <p>Codice e versioning: ogni modifica è tracciata e leggibile.</p>
-          </a>
-        </div>
-      </div>
+    <section class="section" id="start">
+      <h4>Inizia qui</h4>
+      <ul>
+        <li><a href="./catalog/">Catalogo servizi</a> — livelli IPR e pacchetti operativi</li>
+        <li><a href="./verify/">Verify</a> — prove, evidenze e controlli</li>
+        <li><a href="./governance/">Governance</a> — principi, policy, opponibilità</li>
+        <li><a href="./terms/">Terms</a> — condizioni e perimetro</li>
+      </ul>
     </section>
 
-    <footer class="wrap">
-      <div class="footgrid">
+    <footer class="footer">
+      <div class="row">
         <div>
-          <div class="mono">HERMETICUM B.C.E. — Services</div>
-          <div>UE-first · GDPR-min · Hash-only dove possibile · Audit by design</div>
+          <strong>HERMETICUM B.C.E.</strong> — Services Gateway<br/>
+          <span class="mono">IPR-based European Cybernetic Circuit</span>
         </div>
-        <div class="smalllinks" aria-label="Link utili">
-          <a href="./">Home</a>
-          <a href="./catalog/">Catalog</a>
-          <a href="./terms/">Terms</a>
-          <a href="./onboarding/">Onboarding</a>
-          <a href="./evidence/">Evidence</a>
+        <div>
+          <a class="navlink" href="#top">↑ top</a>
         </div>
       </div>
     </footer>
