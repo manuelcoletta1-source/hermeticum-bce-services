@@ -1,0 +1,123 @@
+# HERMETICUM B.C.E. — INSTITUTION
+**European Platform for Verifiable Digital Proof and Identity Continuity**
+
+Hermeticum B.C.E. is a **UE-first digital platform** designed to support
+**independent verification, integrity assessment and time-based opponibility**
+of digital identity records and related evidence.
+
+The platform is intended for use by
+**public institutions, regulators and judicial authorities**
+as a **neutral technical instrument of verification**.
+
+---
+
+## Institutional Purpose
+
+Digital evidence and identity records often suffer from:
+- disputed timestamps
+- uncertain integrity
+- dependency on private or centralized systems
+- lack of long-term verifiability
+
+Hermeticum B.C.E. addresses these issues by providing
+a platform that enables **technical proof independent from the parties involved**.
+
+---
+
+## Platform Function
+
+Hermeticum B.C.E. does **not** issue legal decisions.
+It does **not** interpret law.
+It does **not** enforce outcomes.
+
+Its sole function is to:
+- enable verification of integrity
+- provide reproducible proof of existence at a given time
+- support auditability and opponibility of digital records
+
+---
+
+## Verification Capabilities
+
+The platform enables institutions to:
+- verify that a digital record has not been altered
+- verify that a record existed at a specific point in time
+- reproduce verification independently
+- audit the verification process
+
+Verification does not require trust in a single operator or vendor.
+
+---
+
+## Identity Primary Record (IPR)
+
+Hermeticum B.C.E. relies on the concept of an
+**Identity Primary Record (IPR)**:
+
+- a technical record representing identity-related data
+- cryptographically verifiable
+- time-anchored through public mechanisms
+- separable from personal data storage
+
+The IPR functions as a **technical reference**, not as a legal identity issuer.
+
+---
+
+## Opponibility and Time Anchoring
+
+The platform supports:
+- public time anchoring
+- integrity proof through cryptographic equivalence
+- long-term reproducibility of verification
+
+These properties enable **technical opponibility**
+in administrative and judicial contexts.
+
+---
+
+## Governance and Neutrality
+
+Hermeticum B.C.E. is designed according to the following principles:
+- technological neutrality
+- separation of data, proof and governance
+- non-dependence on a single ledger or authority
+- auditability by design
+
+The platform is compatible with **European regulatory frameworks**
+and intended to complement existing identity and evidence systems.
+
+---
+
+## Institutional Boundaries
+
+Hermeticum B.C.E. is:
+- not a certification authority
+- not a legal registry
+- not a decision-making system
+- not a replacement for public institutions
+
+It provides **technical verification**, not legal authority.
+
+---
+
+## Ecosystem Role
+
+This repository documents the **institutional access domain**
+of the Hermeticum B.C.E. platform.
+
+Operational and technical components are maintained separately
+and integrated through the platform control layer.
+
+---
+
+## Status
+
+Institutional access: **available**  
+Audit and verification focus: **active**  
+Regulatory alignment: **UE-first**
+
+---
+
+**HERMETICUM B.C.E.**  
+Blindata · Computabile · Evolutiva  
+HERMETICUM B.C.E. S.r.l.
