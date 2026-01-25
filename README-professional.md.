@@ -1,0 +1,139 @@
+# HERMETICUM B.C.E. — PROFESSIONAL
+**Piattaforma europea per identità digitale verificabile e prova opponibile nel tempo**
+
+Hermeticum B.C.E. è una **piattaforma digitale UE-first**
+progettata per fornire **continuità, integrità e verificabilità**
+dell’identità digitale e delle evidenze associate.
+
+È destinata a professionisti, tecnici, imprese e operatori legal-tech
+che necessitano di **prova tecnica riproducibile e auditabile nel tempo**.
+
+---
+
+## Obiettivo Professionale
+
+I sistemi digitali attuali presentano criticità strutturali:
+- dipendenza da database centralizzati
+- difficoltà di verifica indipendente
+- assenza di opponibilità tecnica nel lungo periodo
+- sovrapposizione tra dato, prova e governance
+
+Hermeticum B.C.E. introduce una piattaforma che **separa chiaramente**
+questi livelli e consente **verifica tecnica indipendente**.
+
+---
+
+## Ruolo della Piattaforma
+
+Hermeticum B.C.E. **non è un’applicazione** e **non è un singolo servizio**.
+
+Opera come **layer infrastrutturale** che:
+- coordina record primari di identità (IPR)
+- fornisce meccanismi di verifica dell’integrità
+- abilita ancoraggio temporale pubblico
+- supporta audit e opponibilità UE-first
+
+La piattaforma è progettata per **integrazione**, non per sostituzione
+dei sistemi esistenti.
+
+---
+
+## Identity Primary Record (IPR)
+
+L’IPR rappresenta il **record tecnico primario** dell’identità.
+
+Caratteristiche:
+- struttura verificabile crittograficamente
+- separazione tra dato e prova
+- riferimento stabile nel tempo
+- utilizzabile come base di audit e verifica
+
+L’IPR **non è un documento legale**,
+ma un **oggetto tecnico di coerenza e continuità**.
+
+---
+
+## Verifica e Prova
+
+La piattaforma consente:
+- verifica di integrità tramite equivalenza crittografica
+- verifica di esistenza a una data certa
+- riproducibilità del processo di verifica
+- indipendenza dall’operatore che ha generato il dato
+
+Queste proprietà abilitano **prova tecnica opponibile**.
+
+---
+
+## Architettura a Layer
+
+Hermeticum B.C.E. è strutturata secondo una logica modulare:
+
+- **Identity Layer** (IPR)
+- **Proof Layer** (verifica e ancoraggio temporale)
+- **Governance Layer** (UE-first, audit, policy)
+- **Intelligence Layer** (supporto operativo e orchestrazione)
+
+Ogni layer è progettato per essere:
+- ispezionabile
+- auditabile
+- non monolitico
+
+---
+
+## Neutralità Tecnologica
+
+La piattaforma:
+- non dipende da un singolo ledger
+- non impone un vendor specifico
+- non richiede fiducia in un’autorità privata
+
+È progettata per **coesistere con sistemi pubblici e privati**,
+mantenendo neutralità tecnologica.
+
+---
+
+## Ambiti di Utilizzo
+
+Hermeticum B.C.E. è adatta a:
+- integrazioni enterprise
+- sistemi di identità cross-border
+- gestione di evidenze digitali
+- compliance e audit
+- supporto a contenziosi e verifiche tecniche
+
+---
+
+## Limiti della Piattaforma
+
+Hermeticum B.C.E.:
+- non prende decisioni
+- non interpreta norme
+- non sostituisce autorità legali
+- non agisce come certificatore
+
+Fornisce **strumenti tecnici di verifica**, non giudizio.
+
+---
+
+## Contesto Ecosistemico
+
+Questo repository documenta il **dominio Professional**
+della piattaforma Hermeticum B.C.E.
+
+I moduli operativi sono mantenuti in repository dedicati
+e coordinati tramite il layer di piattaforma.
+
+---
+
+## Stato
+
+Dominio Professional: **attivo**  
+Architettura: **stabile**  
+Integrazione e audit: **in corso**
+
+---
+
+**HERMETICUM B.C.E.**  
+Blindata · Computabile · Evolutiva  
+HERMETICUM B.C.E. S.r.l.
