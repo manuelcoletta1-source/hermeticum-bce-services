@@ -1,71 +1,241 @@
-# HERMETICUM B.C.E. PLATFORM
-**Piattaforma europea per identità digitale verificabile e prova nel tempo**
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HERMETICUM B.C.E. PLATFORM</title>
+  <meta name="description" content="Piattaforma europea UE-first per identità digitale verificabile e prova opponibile nel tempo." />
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#b8bcc7;
+      --accent:#d7d7d7;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background: radial-gradient(1200px 800px at 20% 0%, rgba(255,255,255,.06), transparent 60%),
+                  radial-gradient(1000px 700px at 90% 20%, rgba(255,255,255,.04), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding: 28px 18px 46px;
+    }
+    header{
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+      justify-content:space-between;
+      padding: 18px 18px 6px;
+      border: 1px solid var(--line);
+      background: rgba(15,17,23,.75);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .brand h1{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: .6px;
+    }
+    .brand p{
+      margin:6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 760px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .card{
+      border: 1px solid var(--line);
+      background: rgba(15,17,23,.65);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      min-height: 250px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size: 16px;
+      letter-spacing:.3px;
+    }
+    .card p{
+      margin:0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .bul{
+      margin: 0;
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .bul li{margin:6px 0}
+    .cta{
+      margin-top: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 12px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,.03);
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      font-size: 13px;
+      color: var(--text);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      gap:8px;
+      white-space: nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22)}
+    .muted{
+      color: var(--muted);
+      font-size: 12px;
+    }
+    footer{
+      margin-top: 14px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      background: rgba(15,17,23,.55);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .footrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .sep{opacity:.35}
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+      header{flex-direction:column}
+      .tag{align-self:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1>HERMETICUM B.C.E. PLATFORM</h1>
+        <p>
+          Piattaforma digitale europea <strong>UE-first</strong> per <strong>identità verificabile</strong>,
+          <strong>integrità</strong> e <strong>prova opponibile nel tempo</strong>.
+          Un layer superiore di coerenza e verifica, utilizzabile da cittadini, professionisti e istituzioni.
+        </p>
+      </div>
+      <div class="tag">Blindata · Computabile · Evolutiva</div>
+    </header>
 
-Hermeticum B.C.E. è una **piattaforma digitale UE-first**
-progettata per fornire **identità verificabile, integrità dei dati
-e prova opponibile nel tempo**.
+    <section class="grid" aria-label="Domini di accesso">
+      <article class="card">
+        <div>
+          <h2>👤 Cittadino (UE)</h2>
+          <p>
+            Accesso semplificato per proteggere identità digitale e documenti nel tempo,
+            anche in contesti transfrontalieri.
+          </p>
+          <ul class="bul">
+            <li>Identità digitale verificabile</li>
+            <li>Protezione dell’integrità dei documenti</li>
+            <li>Continuità tra Stati UE</li>
+          </ul>
+        </div>
+        <div class="cta">
+          <span class="muted">Documentazione dedicata</span>
+          <a class="btn" href="README-citizen.md">Apri Citizen</a>
+        </div>
+      </article>
 
-La piattaforma è strutturata per servire **tre domini di accesso distinti**,
-ciascuno con linguaggio, funzioni e responsabilità dedicate.
+      <article class="card">
+        <div>
+          <h2>🧩 Professionista / Tecnico</h2>
+          <p>
+            Dominio tecnico per integrazione, audit, verifica e valutazione architetturale
+            in contesti enterprise e legal-tech.
+          </p>
+          <ul class="bul">
+            <li>Architettura a layer e neutralità tecnologica</li>
+            <li>Identity Primary Record (IPR)</li>
+            <li>Workflow di verifica e audit</li>
+          </ul>
+        </div>
+        <div class="cta">
+          <span class="muted">Documentazione tecnica</span>
+          <a class="btn" href="README-professional.md">Apri Professional</a>
+        </div>
+      </article>
 
----
+      <article class="card">
+        <div>
+          <h2>⚖️ Istituzione / Tribunale</h2>
+          <p>
+            Dominio istituzionale per verifica neutra dell’integrità, opponibilità temporale
+            e riproducibilità della prova.
+          </p>
+          <ul class="bul">
+            <li>Verifica indipendente</li>
+            <li>Data certa e opponibilità</li>
+            <li>Tracciabilità e audit</li>
+          </ul>
+        </div>
+        <div class="cta">
+          <span class="muted">Uso istituzionale</span>
+          <a class="btn" href="README-institution.md">Apri Institution</a>
+        </div>
+      </article>
+    </section>
 
-## Seleziona il tuo dominio di accesso
-
-### 👤 Cittadino (UE)
-Per le persone che desiderano proteggere la propria identità digitale
-e i documenti importanti nel tempo, anche in contesti transfrontalieri.
-
-- Identità digitale verificabile  
-- Protezione dell’integrità dei documenti  
-- Continuità nel tempo e tra Stati UE  
-
-➡️ **[Accesso Cittadino](README-citizen.md)**
-
----
-
-### 🧩 Professionista / Tecnico
-Per ingegneri, imprese, operatori legal-tech e consulenti ICT
-che necessitano di **verifica tecnica riproducibile e auditabilità**.
-
-- Architettura della piattaforma  
-- Identity Primary Record (IPR)  
-- Verifica, prova e audit  
-
-➡️ **[Accesso Professional](README-professional.md)**
-
----
-
-### ⚖️ Istituzione / Tribunale
-Per pubbliche amministrazioni, autorità di controllo e organi giudiziari
-che richiedono **strumenti tecnici neutri di verifica e opponibilità**.
-
-- Verifica dell’integrità  
-- Data certa e opponibilità temporale  
-- Tracciabilità e audit  
-
-➡️ **[Accesso Istituzionale](README-institution.md)**
-
----
-
-## Principi della Piattaforma
-
-- Progettazione **UE-first**
-- Separazione tra dato, prova e governance
-- Neutralità tecnologica
-- Auditabilità e verificabilità indipendente
-- Validità nel lungo periodo
-
----
-
-## Ruolo della Piattaforma
-
-Hermeticum B.C.E. **non sostituisce** i sistemi esistenti.
-Opera come **layer superiore di coerenza, prova e verifica**,
-a supporto di cittadini, professionisti e istituzioni.
-
----
-
-**HERMETICUM B.C.E.**  
-Blindata · Computabile · Evolutiva  
-HERMETICUM B.C.E. S.r.l.
+    <footer>
+      <div class="footrow">
+        <div>
+          <strong>Principi:</strong> UE-first · Separazione dato/prova/governance · Auditabilità · Neutralità tecnologica · Validità nel lungo periodo
+        </div>
+        <div class="sep">|</div>
+        <div><strong>HERMETICUM B.C.E. S.r.l.</strong></div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
