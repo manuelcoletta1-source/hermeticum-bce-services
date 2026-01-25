@@ -1,17 +1,5 @@
-{
-  "schema": "HBCE-EVIDENCE-MANIFEST-1.0",
-  "system": "Hermeticum B.C.E. — Services",
-  "module": "Evidence",
-  "principles": ["UE-first", "GDPR-min", "audit-by-design", "opponibility", "fail-closed"],
-  "generated_at": "2026-01-25T00:00:00Z",
-  "hash_algorithm": "SHA-256",
-  "version": "1.0.0",
-  "subject_label": "DEMO-EVIDENCE-PACK",
-  "document_reference": "DOCREF:HASH-ONLY",
-  "public_outputs": {
-    "hashes_file": "hashes/SHA256SUMS.txt",
-    "proof_template": "proofs/proof-template.md",
-    "attachments_dir": "attachments/"
-  },
-  "notes": "Manifest demo: nessun dato personale in chiaro. Sostituire subject_label e document_reference con valori minimizzati reali."
-}
+# Hermeticum B.C.E. — Evidence Pack
+# Algorithm: SHA-256
+# Format: <sha256><space><space><relative_path>
+
+cff49cc17e93210efee0d6c84158dfd6d0e0b44bb3809f46ce3a242b0f1f284b  attachments/example.pdf
