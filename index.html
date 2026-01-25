@@ -2,130 +2,226 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hermeticum B.C.E. — Services</title>
-  <meta name="description" content="Hermeticum B.C.E. è uno spazio di continuità operativa sopra Internet: identità, regole ed esecuzione coerenti nel tempo." />
-  <meta name="theme-color" content="#0b0c10" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hermeticum B.C.E. Services — Infrastruttura europea di identità, tracciabilità e sicurezza digitale." />
+
   <style>
     :root{
-      --bg:#0b0c10;--panel:#0f1117;--line:#24262b;
-      --text:#e8e8e8;--muted:#a6acb8;--accent:#7cf6c8;
-      --radius:16px;--max:980px;
-      --mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      --sans:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --bg:#0b0d11;
+      --panel:#10131a;
+      --line:#1f2430;
+      --text:#e6e8ec;
+      --muted:#9aa3b2;
+      --accent:#4da3ff;
+      --ok:#3bd18a;
     }
+
     *{box-sizing:border-box}
     body{
-      margin:0;font-family:var(--sans);color:var(--text);line-height:1.45;
-      background:radial-gradient(900px 520px at 25% 0%, rgba(124,246,200,.11), transparent 60%),var(--bg);
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 56px}
+
     header{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      padding:14px 16px;border-radius:var(--radius);
-      border:1px solid var(--line);background:rgba(15,17,23,.85)
+      padding:48px 24px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#0c0f16,#0b0d11);
     }
-    .brand{font-weight:900}
-    .badge{
-      margin-left:10px;padding:6px 10px;border-radius:999px;
-      border:1px solid rgba(124,246,200,.35);
-      background:rgba(124,246,200,.08);
-      font-family:var(--mono);font-size:12px
+
+    header h1{
+      margin:0 0 12px;
+      font-size:2.2rem;
+      letter-spacing:0.3px;
     }
-    .btn{
-      padding:9px 12px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(15,17,23,.88);font-weight:800;font-size:12.5px
+
+    header p{
+      margin:0;
+      max-width:720px;
+      color:var(--muted);
+      font-size:1.05rem;
     }
-    .hero{
-      margin-top:16px;padding:22px;border-radius:var(--radius);
-      border:1px solid var(--line);background:rgba(15,17,23,.75)
+
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:48px 24px;
     }
-    h1{margin:0 0 10px;font-size:28px}
-    p{margin:0;color:var(--muted)}
-    .pills{margin-top:10px}
-    .pill{
-      display:inline-block;margin:6px 6px 0 0;padding:6px 10px;
-      border-radius:999px;border:1px solid var(--line);
-      font-size:12px;color:var(--muted)
+
+    section{
+      margin-bottom:64px;
     }
-    .grid{margin-top:18px;display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+
+    h2{
+      font-size:1.6rem;
+      margin:0 0 16px;
+      border-left:4px solid var(--accent);
+      padding-left:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:24px;
+    }
+
     .card{
-      grid-column:span 6;padding:18px;border-radius:var(--radius);
-      border:1px solid var(--line);background:rgba(15,17,23,.70)
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:24px;
     }
-    .card.full{grid-column:span 12}
-    h2{margin:0 0 8px;font-size:16px}
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.15rem;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    .badge{
+      display:inline-block;
+      margin-top:12px;
+      font-size:0.75rem;
+      padding:4px 8px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      color:var(--ok);
+    }
+
+    .flow{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+    }
+
+    .step{
+      padding:16px;
+      border:1px dashed var(--line);
+      border-radius:10px;
+      font-size:0.9rem;
+      color:var(--muted);
+    }
+
     footer{
-      margin-top:22px;padding:16px;border-radius:var(--radius);
-      border:1px solid var(--line);background:rgba(15,17,23,.6);
-      font-size:12.5px;color:var(--muted)
+      border-top:1px solid var(--line);
+      padding:32px 24px;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.85rem;
     }
-    @media(max-width:900px){
-      .card{grid-column:span 12}
-      h1{font-size:24px}
-    }
+
+    a{color:var(--accent);text-decoration:none}
   </style>
 </head>
+
 <body>
-<div class="wrap">
 
 <header>
-  <div class="brand">
-    Hermeticum B.C.E. — Services
-    <span class="badge">ROOT</span>
-  </div>
-  <div style="display:flex;gap:10px;flex-wrap:wrap">
-    <a class="btn" href="#modules">Moduli</a>
-    <a class="btn" href="#entry">Ingresso</a>
-  </div>
+  <h1>Hermeticum B.C.E. — Services</h1>
+  <p>
+    Infrastruttura europea per <strong>identità digitale</strong>,
+    <strong>tracciabilità crittografica</strong> e
+    <strong>continuità operativa</strong>.
+    Progettata secondo principi <strong>UE-first</strong>,
+    audit-by-design e fail-closed.
+  </p>
 </header>
 
-<section class="hero">
-  <h1>Spazio di continuità operativa</h1>
-  <p>
-    Uno strato sopra Internet in cui identità, decisioni ed esecuzione
-    mantengono coerenza e responsabilità nel tempo.
-  </p>
-  <div class="pills">
-    <span class="pill">IPR</span>
-    <span class="pill">OPC</span>
-    <span class="pill">AI JOKER-C2</span>
-    <span class="pill">Audit</span>
-  </div>
-</section>
+<main>
 
-<section class="grid" id="modules">
-  <div class="card">
-    <h2>Identity</h2>
-    <p>Continuità dell’identità operativa (IPR).</p>
-  </div>
-  <div class="card">
-    <h2>Policy</h2>
-    <p>Regole opponibili e deterministiche (OPC).</p>
-  </div>
-  <div class="card">
-    <h2>Execution</h2>
-    <p>Esecuzione AI vincolata (AI JOKER-C2).</p>
-  </div>
-  <div class="card">
-    <h2>Evidence</h2>
-    <p>Traccia append-only delle azioni (Audit).</p>
-  </div>
+  <section>
+    <h2>Servizi Fondamentali</h2>
+    <div class="grid">
 
-  <div class="card full" id="entry">
-    <h2>Ingresso minimo</h2>
-    <p>
-      Attiva identità → accetta policy → esegui → produci evidenza.
-    </p>
-  </div>
-</section>
+      <div class="card">
+        <h3>IPR — Identity Primary Record</h3>
+        <p>
+          Ancora crittografica individuale che collega persona reale,
+          documenti UE e tracce pubbliche verificabili nel tempo.
+        </p>
+        <span class="badge">CORE SERVICE</span>
+      </div>
+
+      <div class="card">
+        <h3>UNEBDO ΦΩ</h3>
+        <p>
+          Strato di enforcement tecnico-legale per opponibilità,
+          audit e continuità normativa europea.
+        </p>
+        <span class="badge">UE ENFORCEMENT</span>
+      </div>
+
+      <div class="card">
+        <h3>AI JOKER — C2</h3>
+        <p>
+          Sistema di comando cognitivo per gestione,
+          verifica e orchestrazione dei processi IPR.
+        </p>
+        <span class="badge">CONTROL LAYER</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Moduli Operativi</h2>
+    <div class="grid">
+
+      <div class="card">
+        <h3>OPC — Opposable Policy Core</h3>
+        <p>
+          Politiche tecniche opponibili, versionate e verificabili.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>MetaExchange</h3>
+        <p>
+          Scambio controllato di dati, valore e diritti digitali.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>NeuroLoop</h3>
+        <p>
+          Feedback cognitivo e apprendimento continuo del sistema.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>IoSpace</h3>
+        <p>
+          Spazio operativo digitale per identità e servizi connessi.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Flusso Operativo Standard</h2>
+    <div class="flow">
+      <div class="step">1 · Identificazione UE</div>
+      <div class="step">2 · Generazione hash e prove</div>
+      <div class="step">3 · Ancoraggio IPFS / Blockchain</div>
+      <div class="step">4 · Attivazione AI JOKER-C2</div>
+      <div class="step">5 · Audit e continuità nel tempo</div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  Services è il punto di orientamento.  
-  Non esegue, non decide: orchestra.
+  © Hermeticum B.C.E. — Sistema europeo di sicurezza digitale · UE-first · Audit-by-design
 </footer>
 
-</div>
 </body>
 </html>
