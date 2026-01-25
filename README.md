@@ -1,73 +1,135 @@
 # Hermeticum B.C.E. — Services
-## Spazio di continuità operativa
+## Mappa ufficiale dello spazio di continuità operativa
 
-Hermeticum B.C.E. è **uno spazio di continuità operativa**  
-in cui identità, decisioni e azioni mantengono coerenza nel tempo,
-indipendentemente dallo strumento che le esegue.
+Hermeticum B.C.E. è **uno spazio di continuità operativa sopra Internet**.  
+Questo repository **Services** ne è la **mappa ufficiale**.
 
----
-
-## Cos’è (definizione operativa)
-
-Hermeticum B.C.E. non è una piattaforma né un servizio isolato.  
-È un **ambiente operativo** in cui:
-
-- l’identità non si resetta (IPR)
-- le decisioni sono vincolate da regole (OPC)
-- l’AI esegue come funzione (AI JOKER-C2)
-- ogni azione resta verificabile nel tempo (audit)
+Qui non si esegue.  
+Qui si **orchestrano** identità, regole, esecuzione e traccia.
 
 ---
 
-## I quattro pilastri
+## Cos’è uno spazio di continuità operativa
 
-### Identità — IPR
-Continuità dell’identità operativa nel tempo.
+Uno spazio di continuità operativa è un ambiente in cui:
 
-### Decisione — OPC
-Policy deterministiche, pubbliche, opponibili.
+- l’identità non si resetta nel tempo
+- le decisioni sono vincolate da regole opponibili
+- l’esecuzione è controllata
+- le azioni restano verificabili e difendibili
 
-### Esecuzione — AI JOKER-C2
-AI vincolata che opera solo entro identità e regole.
-
-### Traccia — Audit
-Registro append-only delle azioni.
-
----
-
-## Cosa NON è
-
-Hermeticum B.C.E. **non è**:
-- un chatbot
-- un’AI autonoma
-- un wallet
-- una piattaforma social
-
-È uno spazio dove **si risponde delle azioni nel tempo**.
+Non è una piattaforma.  
+Non è un’applicazione.  
+È un **livello di responsabilità persistente**.
 
 ---
 
-## Perché “continuità operativa”
+## Ruolo di Services
 
-La continuità qui non serve a ricordare.  
-Serve a **mantenere responsabilità e coerenza delle azioni**.
+Services è il **punto di verità** dell’ecosistema Hermeticum B.C.E.
 
-Cambiano strumenti, ruoli, contesti.  
-Lo spazio resta.
+- dichiara cosa esiste
+- definisce i moduli
+- collega i repository
+- stabilisce l’ordine corretto
 
----
-
-## Collegamenti
-
-- OPC — Opponible Policy Core  
-  https://manuelcoletta1-source.github.io/opc/
-
-- AI JOKER-C2 — Execution Layer  
-  https://manuelcoletta1-source.github.io/ai-joker-workers/
+Nessuna decisione viene presa qui.  
+Nessuna AI opera qui.
 
 ---
 
-## Chiusura
+## Architettura a moduli
 
-Hermeticum B.C.E. non promette futuro.  
-Garantisce **coerenza nel presente che attraversa il tempo**.
+Hermeticum B.C.E. è composto da quattro domini operativi:
+
+### 1. Identity — IPR
+Identità operativa continua nel tempo.  
+Senza IPR non esiste istanza personale o aziendale.
+
+> Stato: **attivo / in evoluzione**
+
+---
+
+### 2. Policy — OPC
+Opponible Policy Core.  
+Policy deterministiche, versionate, fail-closed.
+
+- accesso
+- evoluzione
+- limiti di responsabilità
+
+> Repository: https://manuelcoletta1-source.github.io/opc/
+
+---
+
+### 3. Execution — AI JOKER-C2
+Execution layer AI-first vincolato da IPR e OPC.
+
+- senza IPR → DENY
+- senza evidence → nessuna evoluzione
+
+> Repository: https://manuelcoletta1-source.github.io/ai-joker-workers/
+
+---
+
+### 4. Evidence — Audit
+Traccia append-only delle azioni.
+
+- hash-only
+- GDPR-min
+- audit-by-design
+
+> Stato: **in arrivo**
+
+---
+
+## Flusso minimo di ingresso
+
+```text
+Attivazione IPR
+      ↓
+Accettazione policy OPC
+      ↓
+Esecuzione (AI JOKER-C2)
+      ↓
+Produzione evidence (audit)
+
+Questo flusso è deterministico.
+Se una condizione manca, il sistema si ferma.
+
+
+---
+
+Cosa NON è Hermeticum B.C.E.
+
+Hermeticum B.C.E. non è:
+
+un nuovo Internet
+
+un social network
+
+un’AI autonoma
+
+un wallet
+
+
+È uno strato di continuità e responsabilità sopra l’infrastruttura esistente.
+
+
+---
+
+Destinatari
+
+Questo spazio è progettato per:
+
+Unione Europea (compliance, continuità, interoperabilità)
+
+Pubblica Amministrazione (fascicolo operativo persistente)
+
+Imprese (governance dell’AI e delle decisioni)
+
+
+Lo stesso sistema, tre linguaggi diversi.
+
+
+
