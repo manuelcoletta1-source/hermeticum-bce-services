@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermeticum B.C.E. — Onboarding IPR</title>
+  <meta name="description" content="Onboarding IPR: cosa serve, cosa viene generato, cosa viene pubblicato. Percorso guidato UE-first e audit-by-design." />
+  <meta name="theme-color" content="#0b0c10" />
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a7abb6;
+      --accent:#7aa2ff;
+      --good:#64d2ff;
+      --warn:#ffd166;
+      --radius:16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --max: 1040px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 15% -10%, rgba(122,162,255,.12), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(100,210,255,.08), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.45;
+    }
+    a{color:inherit; text-decoration:none}
+    header{position:sticky; top:0; z-index:10; backdrop-filter: blur(10px); background: rgba(11,12,16,.7); border-bottom:1px solid rgba(36,38,43,.6);}
+    .topbar{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 22px; max-width:var(--max); margin:0 auto;}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+    .mark{
+      width:38px; height:38px; border-radius:12px; border:1px solid rgba(36,38,43,.9);
+      background: linear-gradient(180deg, rgba(122,162,255,.18), rgba(15,17,23,.9));
+      display:grid; place-items:center;
+      box-shadow: var(--shadow);
+      font-weight:700;
+    }
+    .brand b{letter-spacing:.4px}
+    .brand small{display:block; color:var(--muted); font-weight:500}
+    nav{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
+    .pill{
+      border:1px solid rgba(36,38,43,.9); background: rgba(15,17,23,.75);
+      padding:8px 10px; border-radius:999px; color:var(--muted);
+      transition: transform .08s ease, border-color .08s ease, color .08s ease;
+      font-size: 13px;
+    }
+    .pill:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.6); color:var(--text)}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:16px}
+    @media (max-width: 920px){ .grid{grid-template-columns:1fr} nav{justify-content:flex-start} }
+    .card{
+      background: rgba(15,17,23,.78);
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    h1{margin:0 0 10px; font-size: 30px; line-height:1.15}
+    h2{margin:0 0 10px; font-size: 16px; color:var(--muted); font-weight:600; letter-spacing:.2px}
+    p{margin:0 0 12px; color:var(--muted)}
+    .lead{color:var(--text); font-size: 15px}
+    .rule{height:1px; background: rgba(36,38,43,.8); margin: 14px 0}
+    .steps{display:grid; gap:10px; margin-top:10px}
+    .step{
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: 14px;
+      padding:12px;
+      background: rgba(11,12,16,.45);
+    }
+    .step b{display:block; margin-bottom:4px}
+    .hint{
+      display:inline-block;
+      margin-top:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(11,12,16,.35);
+      color: var(--muted);
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    .callout{
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: var(--radius);
+      padding:14px;
+      background: rgba(15,17,23,.65);
+    }
+    .ok{color: var(--good)}
+    .warn{color: var(--warn)}
+    footer{padding:18px 0 32px; color:var(--muted); font-size: 12px}
+    .smalllinks{display:flex; flex-wrap:wrap; gap:10px}
+    .smalllinks a{color:var(--muted)}
+    .smalllinks a:hover{color:var(--text)}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <a class="brand" href="../" aria-label="Hermeticum B.C.E. — Services">
+        <div class="mark">🜏</div>
+        <div>
+          <b>Hermeticum B.C.E.</b>
+          <small>Onboarding IPR · percorso guidato</small>
+        </div>
+      </a>
+      <nav aria-label="Navigazione">
+        <a class="pill" href="../">Home</a>
+        <a class="pill" href="../catalog/">Catalog</a>
+        <a class="pill" href="../terms/">Terms</a>
+        <a class="pill" href="../evidence/">Evidence</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+      <div class="card">
+        <h1>Onboarding IPR</h1>
+        <p class="lead">
+          Questo percorso spiega <b>cosa serve</b>, <b>cosa viene generato</b> e <b>cosa viene pubblicato</b>.
+          Nessuna attivazione automatica: prima capisci, poi decidi.
+        </p>
+
+        <div class="rule"></div>
+
+        <h2>1) Cosa serve (input)</h2>
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <b>Documento UE (es. CIE)</b>
+            <p>Dati minimi necessari per creare un riferimento verificabile.</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Codice Fiscale / Identificatore fiscale</b>
+            <p>Usato come elemento di coerenza con l’identità legale.</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Un allegato opzionale</b>
+            <p>Un PDF o file “test” per dimostrare il flusso di hash e verifica.</p>
+          </div>
+        </div>
+        <span class="hint">GDPR-min: raccogliere solo ciò che serve</span>
+
+        <div class="rule"></div>
+
+        <h2>2) Cosa viene generato (output)</h2>
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <b>Digest / Hash verificabili</b>
+            <p>Impronte crittografiche per attestare integrità e immutabilità logica.</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Evidence Pack</b>
+            <p>Struttura standard di prove: template + esempi + verifiche ripetibili.</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Manifest IPR</b>
+            <p>Un file descrittivo con regole operative, versioning e riferimenti (fail-closed).</p>
+          </div>
+        </div>
+        <span class="hint">audit-by-design: ogni output deve essere verificabile</span>
+
+        <div class="rule"></div>
+
+        <h2>3) Cosa viene pubblicato (trasparenza)</h2>
+        <div class="callout">
+          <p><b class="ok">✔ Pubblico</b>: hash, template, strutture di prova, riferimenti tecnici necessari alla verifica.</p>
+          <p><b class="warn">✖ Non pubblico</b>: dati personali in chiaro, documenti integrali, informazioni non necessarie alla verifica.</p>
+          <p class="mono">Principio: hash-only dove possibile · minimizzazione dati · opponibilità verificabile.</p>
+        </div>
+
+        <div class="rule"></div>
+
+        <h2>4) Percorso operativo (4 passi)</h2>
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <b>Step A — Preparazione</b>
+            <p>Raccogli input minimi e definisci cosa vuoi rendere verificabile.</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Step B — Generazione</b>
+            <p>Crei digest/hash e manifest secondo struttura standard.</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Step C — Evidence</b>
+            <p>Compili l’evidence pack e rendi ripetibile la verifica.</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Step D — Verifica</b>
+            <p>Controllo indipendente: chiunque può verificare gli hash pubblicati.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2>Checkpoint (anti-ansia)</h2>
+        <p>
+          Questo onboarding è fatto per ridurre l’attrito e aumentare controllo.
+          Se qualcosa non è verificabile, il sistema deve fermarsi (fail-closed).
+        </p>
+
+        <div class="rule"></div>
+
+        <h2>Link rapidi</h2>
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <b>Evidence</b>
+            <p><a href="../evidence/">Apri Evidence Pack</a></p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Verify</b>
+            <p><a href="../verify/">Apri Verify</a></p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Create</b>
+            <p><a href="../create/">Apri Create</a></p>
+          </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <h2>Nota UE-first</h2>
+        <p>
+          L’IPR non “sostituisce” identità legali UE: le usa come base, e aggiunge
+          tracciabilità crittografica verificabile.
+        </p>
+
+        <span class="hint mono">UE-first · GDPR-min · audit-by-design</span>
+      </aside>
+    </section>
+
+    <footer class="wrap">
+      <div class="smalllinks" aria-label="Link utili">
+        <a href="../">Home</a>
+        <a href="../catalog/">Catalog</a>
+        <a href="../terms/">Terms</a>
+        <a href="../evidence/">Evidence</a>
+      </div>
+      <p class="mono">HERMETICUM B.C.E. — Onboarding IPR</p>
+    </footer>
+  </main>
+</body>
+</html>
