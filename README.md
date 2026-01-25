@@ -1,138 +1,47 @@
-# 🜏 Hermeticum B.C.E. — Services
-**Blindata · Computabile · Evolutiva**
+# 🜏 HERMETICUM B.C.E. — Services Gateway
 
-Questo repository è il **gateway ufficiale dei servizi** dell’ecosistema **Hermeticum B.C.E.**.  
-Non contiene codice applicativo critico: descrive, organizza e rende **verificabili** servizi reali, attivabili e auditabili secondo criteri **UE-first**.
+Repository “gateway” del **Circuito Cibernetico Europeo basato su IPR**.
 
----
+Questo repo espone:
+- accesso ai livelli **IPR Personale / Aziendale / Governativo**
+- **catalogo servizi** (orientato a UX)
+- **verify** (prove/evidenze pubbliche)
+- principi base di **governance** e perimetro (UE-first, audit-by-design, fail-closed)
 
-## Scopo
-Questo repository ha funzione:
-- informativa (cosa esiste)
-- orientativa (come esplorare)
-- operativa (come attivare e verificare)
-
-Hermeticum B.C.E. non chiede fiducia: **produce prove**.
+> Obiettivo: rendere leggibile e opponibile l’accesso all’identità operativa verificabile (IPR) e ai servizi connessi.
 
 ---
 
-## Problema affrontato (contesto UE)
-Nel contesto europeo attuale:
-- l’identità digitale è frammentata
-- le tracce non sono persistenti
-- la responsabilità tecnica è spesso opaca
+## Livelli IPR
 
-Hermeticum B.C.E. introduce servizi che consentono:
-- continuità identitaria nel tempo
-- tracciabilità opponibile
-- governance tecnica computabile
+- **IPR Personale**: identità individuale con prova, tracciabilità e continuità nel tempo.
+- **IPR Aziendale**: identità operativa per imprese/enti con deleghe, audit e compliance.
+- **IPR Governativo**: strato istituzionale per standard, interoperabilità e vigilanza tecnica.
 
 ---
 
-## Architettura dei servizi (UX-first)
+## Struttura del repository
 
-Il sito è organizzato per **ridurre attrito cognitivo** e separare esplorazione da attivazione.
-
-### Entry point
-- **Home** → panoramica e orientamento
-- **Catalog** → mappa dei servizi
-- **Terms** → regole operative (UE-first)
-
-### Flusso operativo
-1. **Create**  
-   Generazione locale di manifest e struttura evidence (nessun upload).
-2. **Evidence**  
-   Pubblicazione di prove: manifest, hash, template, allegati non sensibili.
-3. **Verify**  
-   Controllo indipendente e ripetibile (fail-closed).
-
-Questo ciclo è completo e dimostrabile.
+- `/index.html` — ingresso istituzionale (IPR al centro)
+- `/catalog/` — catalogo servizi e pacchetti IPR
+- `/verify/` — prove, evidenze, controlli (pubblici e ispezionabili)
+- `/governance/` — principi, policy, opponibilità e perimetro
+- `/terms/` — condizioni e note d’uso
+- `/assets/` — risorse grafiche e componenti UI
 
 ---
 
-## Servizi principali
+## Link rapidi
 
-### IPR Personale
-Identità operativa individuale, ancorata a documentazione UE e resa verificabile tramite prove crittografiche.
-
-### IPR Professionale / Organizzativo
-Continuità identitaria per professionisti, progetti e sistemi, con responsabilità tecnica storicizzata.
-
-### Moduli infrastrutturali
-Componenti strutturali dell’ecosistema Hermeticum B.C.E., tra cui:
-- UNEBDO
-- CyberGlobal
-- OPC
-- MetaExchange
-- IoSpace
-- NeuroLoop
+- **Sito**: GitHub Pages del repository
+- **Catalog**: `./catalog/`
+- **Verify**: `./verify/`
+- **Governance**: `./governance/`
+- **Terms**: `./terms/`
 
 ---
 
-## Evidence Pack (cuore del sistema)
+## Nota operativa
 
-Il repository include un **Evidence Pack reale**, composto da:
-- `evidence/manifest.json`
-- `evidence/hashes/SHA256SUMS.txt`
-- `evidence/proofs/proof-template.md`
-- `evidence/attachments/example.pdf`
-
-Ogni file è verificabile.  
-Ogni modifica richiede rigenerazione degli hash.  
-Se una prova manca → **fail-closed**.
-
----
-
-## Principi non negoziabili
-
-- **UE-first**  
-  Riferimento normativo e operativo europeo.
-- **GDPR-min**  
-  Minimizzazione dei dati, preferenza per hash-only.
-- **Audit-by-design**  
-  Ogni processo produce evidenze.
-- **Opponibilità**  
-  Le dichiarazioni devono essere verificabili da terzi.
-- **Fail-closed**  
-  In assenza di prova, il sistema si ferma.
-
----
-
-## Documenti di audit e governance
-Il repository include documentazione formale:
-- `AUDIT.md`
-- `CROSS-AUDIT.md`
-- `PROOF.md`
-- `FREEZE.md`
-- `STATUS.md`
-- `POLICY.md`
-- `CHANGELOG.md`
-
-Questi documenti fanno parte integrante del servizio.
-
----
-
-## Cosa NON è questo repository
-- non è un wallet
-- non è un KYC provider
-- non è un sistema di sorveglianza
-- non è un’arma
-- non è marketing
-
-È un **dispositivo tecnico di prova**.
-
----
-
-## Stato
-**Operational — Proof-ready**
-
-Ogni elemento pubblicato in questo repository è pensato per essere:
-- letto
-- verificato
-- contestato
-- replicato
-
----
-
-**Hermeticum B.C.E.**  
-Decidi. Tracci. Rimani nel tempo.
+Questo repository è una **vetrina di servizio**.
+Dettagli tecnici estesi (prove, allegati, chain-of-custody, ecc.) restano concentrati in `verify/` e nelle relative evidenze versionate.
