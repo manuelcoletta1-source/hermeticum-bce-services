@@ -4,73 +4,78 @@
   <meta charset="UTF-8" />
   <title>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Piattaforma europea di identità cibernetica verificabile. Sicurezza, continuità operativa, opponibilità giuridica." />
+  <meta name="description" content="Gateway unico UE-first: identità cibernetica verificabile, sicurezza dati, continuità operativa, opponibilità giuridica." />
   <style>
     :root{
       --bg:#0b0c10;
       --panel:#0f1117;
+      --panel2:#10131a;
       --line:#24262b;
       --text:#e8e8e8;
       --muted:#a7b0be;
       --accent:#7aa2ff;
-      --shadow:0 12px 34px rgba(0,0,0,.4);
+      --ok:#63d2a2;
+      --warn:#ffd479;
+      --bad:#ff6b6b;
+      --shadow:0 12px 34px rgba(0,0,0,.40);
       --r:18px;
       --max:1200px;
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:
-        radial-gradient(1100px 650px at 15% 0%,rgba(122,162,255,.12),transparent 55%),
-        radial-gradient(900px 600px at 85% 10%,rgba(99,210,162,.10),transparent 60%),
-        var(--bg);
       color:var(--text);
+      background:
+        radial-gradient(1100px 650px at 15% 0%, rgba(122,162,255,.12), transparent 55%),
+        radial-gradient(900px 600px at 85% 10%, rgba(99,210,162,.10), transparent 60%),
+        var(--bg);
     }
     a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 72px}
     header{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter:blur(12px);
-      background:rgba(11,12,16,.85);
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(11,12,16,.86);
       border-bottom:1px solid var(--line);
     }
     .top{
       max-width:var(--max);
       margin:0 auto;
-      padding:16px 20px;
+      padding:14px 20px;
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
+    .brand{line-height:1.1}
     .brand b{letter-spacing:.6px}
     .brand small{display:block;color:var(--muted);font-size:12.5px}
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:32px 20px 72px;
+    nav{display:flex; gap:8px; flex-wrap:wrap}
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(15,17,23,.65);
+      color:var(--muted);
+      font-size:13px;
     }
-    h1{margin:0 0 10px;font-size:36px}
-    h2{margin:0 0 8px;font-size:22px}
-    p{margin:0;color:var(--muted);line-height:1.6}
+    .pill:hover{color:var(--text); border-color:rgba(122,162,255,.55)}
+    section{scroll-margin-top:84px; margin-top:22px}
+    h1{margin:0 0 10px; font-size:36px}
+    h2{margin:0 0 10px; font-size:22px}
+    p{margin:0; color:var(--muted); line-height:1.6}
     .hero{
       border:1px solid var(--line);
       background:linear-gradient(180deg,rgba(15,17,23,.88),rgba(15,17,23,.55));
       border-radius:calc(var(--r)+10px);
       box-shadow:var(--shadow);
-      padding:36px;
+      padding:34px;
     }
-    .flow{
-      margin-top:14px;
-      font-size:14px;
-      color:var(--muted);
-    }
+    .flow{margin-top:14px; font-size:14px; color:var(--muted)}
     .flow b{color:var(--text)}
-    .badges{
-      margin-top:18px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+    .badges{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap}
     .badge{
       border:1px solid var(--line);
       background:rgba(16,19,26,.65);
@@ -80,50 +85,77 @@
       color:var(--muted);
     }
     .badge b{color:var(--text)}
-    section{margin-top:26px}
-    .grid3{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-    @media (max-width:1000px){.grid3{grid-template-columns:1fr}}
+    .grid2{display:grid; grid-template-columns:1.15fr .85fr; gap:16px; margin-top:16px}
+    @media (max-width:980px){.grid2{grid-template-columns:1fr}}
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    @media (max-width:980px){.grid3{grid-template-columns:1fr}}
     .card{
       border:1px solid var(--line);
       background:rgba(16,19,26,.55);
       border-radius:var(--r);
-      padding:22px;
+      padding:20px;
       box-shadow:var(--shadow);
     }
-    .cta{
+    .card.soft{
+      background:rgba(15,17,23,.55);
+      box-shadow:none;
+    }
+    .card h3{margin:0 0 6px; font-size:18px}
+    .mini{margin-top:10px; font-size:13px; color:var(--muted); line-height:1.55}
+    .ctaRow{margin-top:14px; display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
       display:inline-block;
-      margin-top:14px;
-      padding:10px 16px;
+      padding:10px 14px;
       border-radius:14px;
-      border:1px solid rgba(122,162,255,.55);
-      background:rgba(122,162,255,.18);
+      border:1px solid var(--line);
+      background:rgba(16,19,26,.75);
       font-size:14px;
+      color:var(--text);
     }
-    .mods{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
+    .btn.primary{
+      border-color:rgba(122,162,255,.55);
+      background:rgba(122,162,255,.18);
     }
-    @media (max-width:1000px){.mods{grid-template-columns:1fr}}
+    .btn:hover{border-color:rgba(122,162,255,.55)}
+    .mods{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:12px}
+    @media (max-width:980px){.mods{grid-template-columns:1fr}}
     .mod{
       border:1px solid var(--line);
       background:rgba(15,17,23,.55);
       border-radius:var(--r);
       padding:16px;
-      font-size:14px;
       color:var(--muted);
+      font-size:14px;
     }
     .mod b{color:var(--text)}
+    code.inline{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size:12.5px;
+      padding:2px 6px;
+      border:1px solid var(--line);
+      background:rgba(15,17,23,.55);
+      border-radius:10px;
+      color:var(--text);
+      white-space:nowrap;
+    }
+    .example{
+      margin-top:14px;
+      border:1px dashed var(--line);
+      background:rgba(15,17,23,.55);
+      border-radius:var(--r);
+      padding:14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size:12.5px;
+      color:var(--muted);
+      line-height:1.6;
+    }
     footer{
       margin-top:42px;
       border-top:1px solid var(--line);
       padding-top:20px;
       font-size:12.5px;
       color:var(--muted);
+      line-height:1.6;
     }
   </style>
 </head>
@@ -133,56 +165,101 @@
   <div class="top">
     <div class="brand">
       <b>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</b>
-      <small>HERMETICUM B.C.E. S.r.l.</small>
+      <small>HERMETICUM B.C.E. S.r.l. · PLATFORM (Gateway Unico)</small>
     </div>
+    <nav>
+      <a class="pill" href="#gateway">Gateway</a>
+      <a class="pill" href="#domini">Domini</a>
+      <a class="pill" href="#architettura">Architettura</a>
+      <a class="pill" href="#verify">Verify</a>
+      <a class="pill" href="#governance">Governance</a>
+      <a class="pill" href="#ecosistema">Ecosistema</a>
+    </nav>
   </div>
 </header>
 
 <div class="wrap">
-  <section class="hero">
+
+  <section id="gateway" class="hero">
     <h1>HERMETICUM B.C.E. PLATFORM</h1>
     <p>
-      Infrastruttura digitale europea di
-      <b>identità cibernetica verificabile</b>,
-      progettata per garantire
-      <b>sicurezza dei dati</b>,
-      <b>continuità operativa</b> e
-      <b>opponibilità giuridica</b>
-      nell’era dell’intelligenza artificiale.
+      Infrastruttura digitale europea di <b>identità cibernetica verificabile</b>,
+      progettata per garantire <b>sicurezza dei dati</b>, <b>continuità operativa</b> e
+      <b>opponibilità giuridica</b> nell’era dell’intelligenza artificiale.
     </p>
 
-    <div class="flow">
-      <b>IPR → Gateway → Moduli → Evidence → Audit</b>
-    </div>
+    <div class="flow"><b>IPR → Gateway → Moduli → Evidence → Audit</b></div>
 
     <div class="badges">
       <div class="badge"><b>Policy:</b> UE-first · GDPR-min · HASH-only</div>
       <div class="badge"><b>Security:</b> Fail-closed · Audit-by-design</div>
       <div class="badge"><b>Control:</b> AI JOKER-C2</div>
     </div>
-  </section>
 
-  <section>
-    <div class="grid3">
-      <div class="card">
-        <h2>Citizen</h2>
-        <p>Identità personale verificabile, continuità digitale, prova opponibile.</p>
-        <a class="cta" href="./citizen.html">Accedi</a>
+    <div class="grid2">
+      <div class="card soft">
+        <h2>Cos’è (operativamente)</h2>
+        <p>
+          Non è un account. Non è un wallet. Non è una AI conversazionale.
+          È un <b>gateway infrastrutturale</b> che collega IPR, prove tecniche e audit,
+          con governance UE-first.
+        </p>
+        <div class="mini">
+          Regola: <b>meno dato, più prova</b>. Il sistema preferisce <code class="inline">hash</code> e <code class="inline">evidence</code>
+          per ridurre esposizione e aumentare verificabilità.
+        </div>
+        <div class="ctaRow">
+          <a class="btn primary" href="#domini">Vai ai domini</a>
+          <a class="btn" href="#verify">Vai a verify</a>
+          <a class="btn" href="#governance">Vai a governance</a>
+        </div>
       </div>
-      <div class="card">
-        <h2>Professional</h2>
-        <p>Operatività verificabile, responsabilità, audit e tracciabilità.</p>
-        <a class="cta" href="./professional.html">Accedi</a>
-      </div>
-      <div class="card">
-        <h2>Institution</h2>
-        <p>Governance tecnica, interoperabilità, resilienza UE-first.</p>
-        <a class="cta" href="./institution.html">Accedi</a>
+
+      <div class="card soft">
+        <h2>IPR (Identity Primary Record)</h2>
+        <p>
+          L’IPR collega identità, tempo e continuità operativa. È la chiave di accesso
+          verificabile che abilita tracciabilità e opponibilità nel tempo.
+        </p>
+        <div class="mini">
+          Pattern canonico: <code class="inline">dato → hash → evidence → audit</code>
+        </div>
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="domini">
+    <h2>Domini di accesso</h2>
+    <div class="grid3">
+      <div class="card">
+        <h3 id="citizen">Citizen</h3>
+        <p>Identità personale verificabile, continuità digitale, prova opponibile.</p>
+        <div class="mini">
+          1) Collega/crea IPR · 2) Genera hash · 3) Produci evidence verificabili
+        </div>
+      </div>
+      <div class="card">
+        <h3 id="professional">Professional</h3>
+        <p>Operatività verificabile, responsabilità, audit e tracciabilità.</p>
+        <div class="mini">
+          1) IPR professionale · 2) Policy/ruoli · 3) Evidence e audit continuo
+        </div>
+      </div>
+      <div class="card">
+        <h3 id="institution">Institution</h3>
+        <p>Governance tecnica, interoperabilità, resilienza UE-first.</p>
+        <div class="mini">
+          1) IPR istituzionale · 2) Policy e supervisione · 3) Monitoraggio auditabile
+        </div>
+      </div>
+    </div>
+
+    <div class="mini" style="margin-top:12px;">
+      Nota: questi domini non sono “prodotti diversi”. Sono <b>modalità di accesso</b> allo stesso organismo infrastrutturale.
+    </div>
+  </section>
+
+  <section id="architettura">
     <h2>Architettura (organismo unico)</h2>
     <div class="mods">
       <div class="mod"><b>UNEBDO</b> — Norme · Prove · Opponibilità</div>
@@ -192,32 +269,155 @@
       <div class="mod"><b>NeuroLoop</b> — Feedback · Apprendimento · Continuità</div>
       <div class="mod"><b>CyberGlobal</b> — Interoperabilità · Coordinamento · Resilienza</div>
     </div>
-    <p style="margin-top:12px;color:var(--muted)">
-      <b>AI JOKER-C2</b> — Orchestrazione · Decisione · Supervisione
-    </p>
+    <div class="mini" style="margin-top:12px;">
+      <b>AI JOKER-C2</b> — Orchestrazione · Decisione · Supervisione (C2 operativo, non chat).
+    </div>
   </section>
 
-  <section class="grid3">
-    <div class="card">
-      <h2>Verify</h2>
-      <p>Schema tecnico: dato → hash → evidence → audit.</p>
-      <a class="cta" href="./verify.html">Verifica</a>
+  <section id="verify">
+    <h2>Verify (Proof · Evidence · Audit)</h2>
+    <div class="grid3">
+      <div class="card soft">
+        <h3>Dato</h3>
+        <p>Informazione originale (documento/evento). Esposizione minima.</p>
+      </div>
+      <div class="card soft">
+        <h3>Hash</h3>
+        <p>Impronta crittografica non reversibile e verificabile.</p>
+      </div>
+      <div class="card soft">
+        <h3>Evidence → Audit</h3>
+        <p>Artefatto riproducibile che collega hash, tempo e contesto, verificabile nel tempo.</p>
+      </div>
     </div>
-    <div class="card">
-      <h2>Governance UE</h2>
-      <p>UE-first · GDPR-min · HASH-only · Fail-closed.</p>
-      <a class="cta" href="./governance.html">Governance</a>
+
+    <div class="example">
+Esempio (semplificato)
+FILE: contratto.pdf
+HASH (SHA-256): 9f2c1a0e...e7b4
+EVIDENCE: evidence-2026-01-25.json
+TIMESTAMP: 2026-01-25T15:30:00+01:00
+ESITO: verificabile / opponibile
     </div>
-    <div class="card">
-      <h2>Ecosistema</h2>
-      <p>Accesso informativo ai repository e portali dell’infrastruttura.</p>
+  </section>
+
+  <section id="governance">
+    <h2>Governance UE-first</h2>
+    <div class="grid3">
+      <div class="card">
+        <h3>UE-first</h3>
+        <p>Standard normativo UE come riferimento operativo e tecnico.</p>
+      </div>
+      <div class="card">
+        <h3>GDPR-min</h3>
+        <p>Minimizzazione dati personali: prova > dato.</p>
+      </div>
+      <div class="card">
+        <h3>Fail-closed & Audit</h3>
+        <p>Sicurezza per default: ciò che non è verificato non passa. Tracciabilità incorporata.</p>
+      </div>
+    </div>
+    <div class="mini" style="margin-top:12px;">
+      Principio: <b>Audit-by-design</b> + <b>HASH-only</b> come riduzione dell’esposizione e aumento dell’opponibilità.
+    </div>
+  </section>
+
+  <section id="ecosistema">
+    <h2>Ecosistema (repos & portali)</h2>
+    <div class="grid3">
+      <div class="card">
+        <h3>UNEBDO</h3>
+        <p>Norme · Prove · Opponibilità</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://manuelcoletta1-source.github.io/unebdo/">Portale</a>
+          <a class="btn" href="https://github.com/manuelcoletta1-source/unebdo">Repo</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>OPC</h3>
+        <p>Policy · Controllo · Coerenza</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://manuelcoletta1-source.github.io/opc/">Portale</a>
+          <a class="btn" href="https://github.com/manuelcoletta1-source/opc">Repo</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>MetaExchange</h3>
+        <p>Valore · Scambio · Tracciabilità</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://manuelcoletta1-source.github.io/metaexchange/">Portale</a>
+          <a class="btn" href="https://github.com/manuelcoletta1-source/metaexchange">Repo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid3" style="margin-top:16px;">
+      <div class="card">
+        <h3>IoSpace</h3>
+        <p>Ambiente · Operazioni · Isolamento</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://manuelcoletta1-source.github.io/iospace/">Portale</a>
+          <a class="btn" href="https://github.com/manuelcoletta1-source/iospace">Repo</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>NeuroLoop</h3>
+        <p>Feedback · Apprendimento · Continuità</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://manuelcoletta1-source.github.io/neuroloop/">Portale</a>
+          <a class="btn" href="https://github.com/manuelcoletta1-source/neuroloop">Repo</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>CyberGlobal</h3>
+        <p>Interoperabilità · Coordinamento · Resilienza</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://manuelcoletta1-source.github.io/cyberglobal/">Portale</a>
+          <a class="btn" href="https://github.com/manuelcoletta1-source/cyberglobal">Repo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid3" style="margin-top:16px;">
+      <div class="card">
+        <h3>AI JOKER Workers</h3>
+        <p>Orchestrazione · Decisione · Supervisione</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://manuelcoletta1-source.github.io/ai-joker-workers/">Portale</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Technology</h3>
+        <p>Repository tecnico di riferimento</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology/">Repo</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>IPR Gov EU Standard</h3>
+        <p>Standard normativo e governance UE-first</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/">Portale</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini" style="margin-top:12px;">
+      Nota: il Gateway è l’unico entrypoint. I repo sono moduli/estensioni e documentazione tecnica.
     </div>
   </section>
 
   <footer>
     <b>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</b><br/>
-    HERMETICUM B.C.E. S.r.l. · Piattaforma europea di identità cibernetica verificabile
+    HERMETICUM B.C.E. S.r.l. · UE-first · GDPR-min · HASH-only · Audit-by-design · Fail-closed
   </footer>
+
 </div>
 </body>
 </html>
