@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermeticum B.C.E. — Verify</title>
+  <meta name="description" content="Verify: controlli ripetibili (hash, integrità, evidence pack). UE-first, audit-by-design, fail-closed." />
+  <meta name="theme-color" content="#0b0c10" />
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a7abb6;
+      --accent:#7aa2ff;
+      --good:#64d2ff;
+      --warn:#ffd166;
+      --bad:#ff6b6b;
+      --radius:16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --max: 1040px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 15% -10%, rgba(122,162,255,.10), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(100,210,255,.06), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit; text-decoration:none}
+    header{position:sticky; top:0; z-index:10; backdrop-filter: blur(10px); background: rgba(11,12,16,.7); border-bottom:1px solid rgba(36,38,43,.6);}
+    .topbar{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 22px; max-width:var(--max); margin:0 auto;}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+    .mark{
+      width:38px; height:38px; border-radius:12px; border:1px solid rgba(36,38,43,.9);
+      background: linear-gradient(180deg, rgba(122,162,255,.18), rgba(15,17,23,.9));
+      display:grid; place-items:center;
+      box-shadow: var(--shadow);
+      font-weight:700;
+    }
+    .brand b{letter-spacing:.4px}
+    .brand small{display:block; color:var(--muted); font-weight:500}
+    nav{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
+    .pill{
+      border:1px solid rgba(36,38,43,.9); background: rgba(15,17,23,.75);
+      padding:8px 10px; border-radius:999px; color:var(--muted);
+      transition: transform .08s ease, border-color .08s ease, color .08s ease;
+      font-size: 13px;
+    }
+    .pill:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.6); color:var(--text)}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:16px}
+    @media (max-width: 920px){ .grid{grid-template-columns:1fr} nav{justify-content:flex-start} }
+    .card{
+      background: rgba(15,17,23,.78);
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    h1{margin:0 0 10px; font-size: 30px; line-height:1.15}
+    h2{margin:18px 0 10px; font-size: 16px; color:var(--muted); font-weight:700; letter-spacing:.2px}
+    p{margin:0 0 12px; color:var(--muted)}
+    .lead{color:var(--text); font-size: 15px}
+    .rule{height:1px; background: rgba(36,38,43,.8); margin: 14px 0}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    .steps{display:grid; gap:10px; margin-top:10px}
+    .step{
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: 14px;
+      padding:12px;
+      background: rgba(11,12,16,.45);
+    }
+    .step b{display:block; margin-bottom:4px}
+    .hint{
+      display:inline-block;
+      margin-top:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(11,12,16,.35);
+      color: var(--muted);
+    }
+    .callout{
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: var(--radius);
+      padding:14px;
+      background: rgba(11,12,16,.35);
+    }
+    .ok{color: var(--good)}
+    .warn{color: var(--warn)}
+    .bad{color: var(--bad)}
+    .field{margin-top:10px}
+    label{display:block; color:var(--muted); font-size: 13px; margin-bottom:6px}
+    input, textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(15,17,23,.78);
+      color: var(--text);
+      padding:10px 12px;
+      outline:none;
+    }
+    textarea{min-height:90px; resize: vertical}
+    .btnrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    button{
+      border-radius:14px;
+      border:1px solid rgba(36,38,43,.95);
+      background: linear-gradient(180deg, rgba(122,162,255,.16), rgba(15,17,23,.9));
+      color: var(--text);
+      padding:11px 12px;
+      font-weight:650;
+      cursor:pointer;
+      transition: transform .08s ease, border-color .08s ease;
+      min-width: 180px;
+    }
+    button:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.65)}
+    .secondary{
+      background: rgba(15,17,23,.75);
+      color: var(--muted);
+    }
+    .secondary:hover{color:var(--text); border-color: rgba(100,210,255,.55)}
+    .result{
+      margin-top:12px;
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: 14px;
+      padding:12px;
+      background: rgba(15,17,23,.65);
+      overflow:auto;
+    }
+    footer{padding:18px 0 32px; color:var(--muted); font-size: 12px}
+    .smalllinks{display:flex; flex-wrap:wrap; gap:10px}
+    .smalllinks a{color:var(--muted)}
+    .smalllinks a:hover{color:var(--text)}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <a class="brand" href="../" aria-label="Hermeticum B.C.E. — Services">
+        <div class="mark">🜏</div>
+        <div>
+          <b>Hermeticum B.C.E.</b>
+          <small>Verify · controlli ripetibili</small>
+        </div>
+      </a>
+      <nav aria-label="Navigazione">
+        <a class="pill" href="../">Home</a>
+        <a class="pill" href="../catalog/">Catalog</a>
+        <a class="pill" href="../onboarding/">Onboarding</a>
+        <a class="pill" href="../terms/">Terms</a>
+        <a class="pill" href="../evidence/">Evidence</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+      <div class="card">
+        <h1>Verify</h1>
+        <p class="lead">
+          Verifica = ripetibilità. Qui trovi un percorso chiaro per controllare
+          <b>integrità</b> e <b>coerenza</b> degli artefatti (hash + evidence).
+          Se un requisito non è soddisfatto, si ferma tutto (<b>fail-closed</b>).
+        </p>
+
+        <div class="rule"></div>
+
+        <h2>Percorso di verifica (3 livelli)</h2>
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <b>Livello 1 — Integrità</b>
+            <p>Confronto hash: “questo file è lo stesso?”</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Livello 2 — Evidence</b>
+            <p>Controllo struttura: template, allegati, riferimenti, versione.</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Livello 3 — Opponibilità</b>
+            <p>Verifica indipendente: terzi possono replicare i controlli.</p>
+          </div>
+        </div>
+
+        <span class="hint">Nota: questa pagina NON calcola hash sul server. Ti guida e ti aiuta a confrontare.</span>
+
+        <div class="rule"></div>
+
+        <h2>Strumento rapido: confronto hash</h2>
+        <p>
+          Incolla l’hash dichiarato e l’hash calcolato localmente (stesso algoritmo).
+          Se coincidono → integrità OK. Se non coincidono → stop.
+        </p>
+
+        <div class="field">
+          <label for="decl">Hash dichiarato (pubblico)</label>
+          <input id="decl" class="mono" placeholder="es. SHA-256: 3a7bd3e2360a..." />
+        </div>
+
+        <div class="field">
+          <label for="calc">Hash calcolato (locale)</label>
+          <input id="calc" class="mono" placeholder="es. SHA-256: 3a7bd3e2360a..." />
+        </div>
+
+        <div class="btnrow">
+          <button id="btnCheck">Confronta</button>
+          <button class="secondary" id="btnClear">Pulisci</button>
+        </div>
+
+        <div id="out" class="result mono" aria-live="polite">
+          Output: in attesa di confronto…
+        </div>
+
+        <div class="rule"></div>
+
+        <h2>Come calcolare hash (locale)</h2>
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <b>Windows (PowerShell)</b>
+            <p class="mono">Get-FileHash .\file.pdf -Algorithm SHA256</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>macOS / Linux (Terminal)</b>
+            <p class="mono">shasum -a 256 file.pdf</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>ChromeOS (Terminal Linux)</b>
+            <p class="mono">sha256sum file.pdf</p>
+          </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <h2>Fail-closed (regola pratica)</h2>
+        <div class="callout">
+          <p><b class="ok">✔ OK</b>: hash coincide + evidence pack coerente + versione indicata.</p>
+          <p><b class="warn">△ ATTENZIONE</b>: hash coincide ma manca evidence/versione → non opponibile.</p>
+          <p><b class="bad">✖ STOP</b>: hash non coincide → artefatto non integro (non usare).</p>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2>Checklist minima</h2>
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <b>Algoritmo</b>
+            <p>Stesso algoritmo su entrambe le parti (es. SHA-256).</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Fonte</b>
+            <p>Hash dichiarato preso da un punto pubblico tracciato (repo/evidence).</p>
+          </div>
+          <div class="step" role="listitem">
+            <b>Versione</b>
+            <p>Template/procedura con versione esplicita.</p>
+          </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <h2>Link rapidi</h2>
+        <ul style="margin:0 0 12px 18px; color:var(--muted)">
+          <li><a href="../evidence/">Evidence Pack</a></li>
+          <li><a href="../onboarding/">Onboarding IPR</a></li>
+          <li><a href="../terms/">Terms</a></li>
+          <li><a href="../create/">Create</a></li>
+        </ul>
+
+        <div class="rule"></div>
+
+        <h2>Nota</h2>
+        <p>
+          Questa pagina è “strumento di orientamento e confronto”.
+          Per calcolo hash automatico in-browser servirà un modulo dedicato (in roadmap).
+        </p>
+
+        <span class="hint mono">UE-first · audit-by-design · fail-closed</span>
+      </aside>
+    </section>
+
+    <footer class="wrap">
+      <div class="smalllinks" aria-label="Link utili">
+        <a href="../">Home</a>
+        <a href="../catalog/">Catalog</a>
+        <a href="../onboarding/">Onboarding</a>
+        <a href="../terms/">Terms</a>
+        <a href="../evidence/">Evidence</a>
+      </div>
+      <p class="mono">HERMETICUM B.C.E. — Verify</p>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const decl = document.getElementById('decl');
+      const calc = document.getElementById('calc');
+      const out  = document.getElementById('out');
+      const btnCheck = document.getElementById('btnCheck');
+      const btnClear = document.getElementById('btnClear');
+
+      function norm(s){
+        return (s || "")
+          .trim()
+          .replace(/\s+/g, "")
+          .toLowerCase();
+      }
+
+      btnCheck.addEventListener('click', () => {
+        const a = norm(decl.value);
+        const b = norm(calc.value);
+
+        if(!a || !b){
+          out.textContent = "Output: inserisci entrambi gli hash (dichiarato + calcolato).";
+          return;
+        }
+
+        // Supporto input tipo "sha-256: ABC..." o solo digest
+        const ax = a.replace(/^sha-?256:|^sha256:/, "");
+        const bx = b.replace(/^sha-?256:|^sha256:/, "");
+
+        if(ax === bx){
+          out.textContent = "OK ✅  Hash coincide. Integrità confermata (Livello 1).";
+        } else {
+          out.textContent = "STOP ❌  Hash NON coincide. Artefatto non integro (fail-closed).";
+        }
+      });
+
+      btnClear.addEventListener('click', () => {
+        decl.value = "";
+        calc.value = "";
+        out.textContent = "Output: in attesa di confronto…";
+        decl.focus();
+      });
+    })();
+  </script>
+</body>
+</html>
