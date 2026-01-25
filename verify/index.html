@@ -4,154 +4,181 @@
   <meta charset="UTF-8" />
   <title>HERMETICUM B.C.E. — Verify</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Verifica Hermeticum B.C.E.: dato → hash → evidence → audit. Prova tecnica opponibile UE-first." />
+  <meta name="description" content="HERMETICUM B.C.E. — Verifica pubblica hash, evidenze e ancoraggi crittografici. HASH-only, audit-by-design." />
+
   <style>
     :root{
       --bg:#0b0c10;
       --panel:#0f1117;
       --line:#24262b;
       --text:#e8e8e8;
-      --muted:#a7b0be;
-      --accent:#7aa2ff;
-      --ok:#63d2a2;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --r:16px;
-      --max:900px;
+      --muted:#9aa0a6;
+      --accent:#6ee7b7;
     }
     *{box-sizing:border-box}
     body{
-      margin:0; color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:radial-gradient(900px 600px at 20% 0%,rgba(122,162,255,.12),transparent 55%),
-                 var(--bg);
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
     }
-    a{color:inherit;text-decoration:none}
     header{
+      padding:28px;
       border-bottom:1px solid var(--line);
-      background:rgba(11,12,16,.85);
+      background:linear-gradient(180deg,var(--panel),var(--bg));
     }
-    .top{
-      max-width:var(--max); margin:0 auto; padding:14px 18px;
-      display:flex; justify-content:space-between; align-items:center;
+    h1{ margin:0; font-size:1.7rem; letter-spacing:0.04em; }
+    header p{ margin:10px 0 0; color:var(--muted); max-width:880px; }
+
+    nav{
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
     }
-    .brand b{letter-spacing:.5px}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 56px}
-    h1{margin:0 0 8px; font-size:28px}
-    p{margin:0; color:var(--muted); line-height:1.55}
-    .hero{
+    nav a{
+      color:var(--text);
+      text-decoration:none;
+      padding:8px 14px;
       border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(15,17,23,.85),rgba(15,17,23,.55));
-      border-radius:calc(var(--r)+6px);
-      box-shadow:var(--shadow);
-      padding:26px;
+      border-radius:6px;
+      background:var(--panel);
+      font-size:0.9rem;
     }
-    .flow{
-      margin-top:12px;
-      font-size:15px;
+    nav a:hover{ color:var(--accent); border-color:var(--accent); }
+
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:36px 24px;
+    }
+    section{
+      margin-bottom:44px;
+      max-width:920px;
+    }
+    h2{
+      font-size:1.25rem;
+      margin-bottom:12px;
+    }
+    p{
       color:var(--muted);
+      line-height:1.45;
     }
-    .flow b{color:var(--text)}
-    .grid{margin-top:16px; display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}}
-    .card{
+    code, pre{
+      background:#0d1117;
       border:1px solid var(--line);
-      background:rgba(16,19,26,.55);
-      border-radius:var(--r);
-      padding:16px;
+      border-radius:8px;
+      padding:10px 12px;
+      color:var(--text);
+      display:block;
+      margin-top:10px;
+      overflow-x:auto;
+      font-size:0.9rem;
     }
-    .card b{letter-spacing:.3px}
-    .step{font-size:13px; color:var(--muted); margin-top:6px}
-    .example{
-      margin-top:16px;
+    .note{
       border:1px dashed var(--line);
-      border-radius:var(--r);
-      padding:16px;
-      background:rgba(15,17,23,.55);
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size:12.5px;
+      border-radius:10px;
+      padding:14px 16px;
+      background:rgba(15,17,23,0.55);
       color:var(--muted);
     }
     footer{
-      margin-top:22px;
       border-top:1px solid var(--line);
-      padding-top:16px;
-      font-size:12.5px;
+      padding:26px;
+      font-size:0.85rem;
       color:var(--muted);
     }
   </style>
 </head>
 
 <body>
+
 <header>
-  <div class="top">
-    <div class="brand">
-      <b>HERMETICUM B.C.E. — VERIFY</b>
-    </div>
-    <a href="./index.html" style="font-size:13px;color:var(--muted)">← Gateway</a>
-  </div>
+  <h1>Verify</h1>
+  <p>
+    Questa pagina descrive come verificare pubblicamente identità, policy ed evidenze
+    dell’ecosistema HERMETICUM B.C.E. tramite hash e ancoraggi crittografici.
+    Nessun dato personale viene esposto.
+  </p>
+
+  <nav>
+    <a href="./index.html">Platform</a>
+    <a href="./modules.html">Modules</a>
+    <a href="#hash">Hash</a>
+    <a href="#anchors">Anchors</a>
+    <a href="#evidence">Evidence</a>
+    <a href="#principles">Principles</a>
+  </nav>
 </header>
 
-<div class="wrap">
-  <section class="hero">
-    <h1>Verifica tecnica</h1>
+<main>
+
+  <section id="hash">
+    <h2>1. Verifica HASH (principio HASH-only)</h2>
     <p>
-      In Hermeticum B.C.E. la fiducia non è una promessa:
-      è una <b>verifica tecnica ripetibile</b>, progettata per essere
-      <b>auditabile</b> e <b>opponibile</b> nel tempo.
+      Tutti gli artefatti verificabili (IPR, policy, documenti tecnici)
+      sono rappresentati da impronte crittografiche.
+      La verifica consiste nel ricalcolare l’hash e confrontarlo con quello pubblicato.
     </p>
 
-    <div class="flow">
-      <b>dato → hash → evidence → audit</b>
+    <p><strong>Esempio SHA-256 (Linux / macOS):</strong></p>
+    <pre>sha256sum nomefile.ext</pre>
+
+    <p><strong>Esempio SHA-256 (Windows PowerShell):</strong></p>
+    <pre>Get-FileHash nomefile.ext -Algorithm SHA256</pre>
+  </section>
+
+  <section id="anchors">
+    <h2>2. Ancoraggi crittografici</h2>
+    <p>
+      Gli hash principali possono essere ancorati a sistemi esterni
+      (es. IPFS, blockchain pubbliche) per garantire:
+    </p>
+    <p>
+      – esistenza nel tempo<br>
+      – non modificabilità retroattiva<br>
+      – verificabilità indipendente
+    </p>
+
+    <div class="note">
+      La piattaforma non richiede fiducia: richiede solo verifica.
     </div>
   </section>
 
-  <section class="grid">
-    <div class="card">
-      <b>Dato</b>
-      <div class="step">
-        Informazione originale (documento, evento, identità).<br/>
-        Non viene esposta oltre il necessario.
-      </div>
-    </div>
+  <section id="evidence">
+    <h2>3. Evidence pubbliche</h2>
+    <p>
+      Le evidenze (proof, manifest, policy) sono pubblicate in repository
+      pubblici dell’ecosistema e possono essere scaricate e verificate localmente.
+    </p>
+    <p>
+      Ogni evidenza è:
+      – versionata<br>
+      – hashata<br>
+      – opponibile
+    </p>
+  </section>
 
-    <div class="card">
-      <b>Hash</b>
-      <div class="step">
-        Impronta crittografica del dato.<br/>
-        Non reversibile, verificabile.
-      </div>
-    </div>
+  <section id="principles">
+    <h2>4. Principi di verifica</h2>
+    <p>
+      – UE-first<br>
+      – GDPR-minimizzazione<br>
+      – HASH-only (no dati grezzi)<br>
+      – Audit-by-design<br>
+      – Fail-closed
+    </p>
 
-    <div class="card">
-      <b>Evidence</b>
-      <div class="step">
-        Artefatto che collega hash, tempo e contesto.<br/>
-        Conservabile e riproducibile.
-      </div>
-    </div>
-
-    <div class="card">
-      <b>Audit</b>
-      <div class="step">
-        Verifica indipendente nel tempo.<br/>
-        Base per opponibilità giuridica.
-      </div>
+    <div class="note">
+      Se un artefatto non è verificabile, per definizione non è valido.
     </div>
   </section>
 
-  <div class="example">
-    Esempio (semplificato):<br/><br/>
-    FILE: contratto.pdf<br/>
-    HASH (SHA-256): 9f2c1a0e...e7b4<br/>
-    EVIDENCE: evidence-2026-01-25.json<br/>
-    TIMESTAMP: 2026-01-25T15:30:00+01:00<br/>
-    ESITO: verificabile / opponibile
-  </div>
+</main>
 
-  <footer>
-    HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-    HERMETICUM B.C.E. S.r.l. · Verify
-  </footer>
-</div>
+<footer>
+  HERMETICUM B.C.E. S.r.l. — Verifica pubblica e opponibilità tecnica
+</footer>
+
 </body>
 </html>
