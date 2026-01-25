@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermeticum B.C.E. — Catalog</title>
+  <meta name="description" content="Catalogo servizi Hermeticum B.C.E.: orientamento, IPR personale, verifica e servizi operativi UE-first." />
+  <meta name="theme-color" content="#0b0c10" />
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a7abb6;
+      --accent:#7aa2ff;
+      --radius:16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --max: 1040px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color:var(--text);
+      line-height:1.45;
+    }
+    a{color:inherit; text-decoration:none}
+    header, main, footer{max-width:var(--max); margin:0 auto; padding:22px}
+    header{
+      border-bottom:1px solid var(--line);
+    }
+    h1{margin:0 0 10px; font-size:30px}
+    h2{margin:0 0 6px; font-size:18px}
+    p{margin:0 0 12px; color:var(--muted)}
+    .lead{color:var(--text)}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+    .card{
+      background: var(--panel);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+      transition: transform .08s ease, border-color .08s ease;
+    }
+    .card:hover{
+      transform: translateY(-1px);
+      border-color: rgba(122,162,255,.6);
+    }
+    .tag{
+      display:inline-block;
+      margin-top:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--line);
+      background:#0b0c10;
+    }
+    footer{
+      font-size:12px;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+    }
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Catalogo Servizi</h1>
+    <p class="lead">
+      Qui trovi una panoramica chiara di cosa esiste nell’ecosistema
+      <b>Hermeticum B.C.E.</b>.  
+      Nessun obbligo, nessuna attivazione automatica.
+    </p>
+    <p>
+      Esplora. Comprendi. Attiva solo se e quando serve.
+    </p>
+  </header>
+
+  <main>
+    <div class="grid">
+
+      <section class="card">
+        <h2>IPR Personale</h2>
+        <p>
+          Identità operativa verificabile che collega una persona reale,
+          documenti UE e tracce crittografiche nel tempo.
+        </p>
+        <p>
+          È la porta di accesso all’operatività Hermeticum.
+        </p>
+        <span class="tag">Identità · Traccia · Continuità</span>
+      </section>
+
+      <section class="card">
+        <h2>Verifica & Evidence</h2>
+        <p>
+          Meccanismi pubblici di controllo: hash, allegati,
+          prove ripetibili e verifiche indipendenti.
+        </p>
+        <p>
+          La fiducia non è dichiarata: è dimostrata.
+        </p>
+        <span class="tag">Audit · Hash · Opponibilità</span>
+      </section>
+
+      <section class="card">
+        <h2>Servizi Operativi</h2>
+        <p>
+          Moduli e processi che utilizzano l’IPR come base:
+          continuità, delega, interoperabilità.
+        </p>
+        <p>
+          Pensati per cittadini, professionisti e sistemi.
+        </p>
+        <span class="tag">Servizi · Moduli · UE-first</span>
+      </section>
+
+      <section class="card">
+        <h2>Accesso Tecnico</h2>
+        <p>
+          Repository, documentazione e stack tecnologico
+          per chi deve integrare, verificare o auditare.
+        </p>
+        <p>
+          Nessuna black box.
+        </p>
+        <span class="tag">Tecnologia · Repo · Trasparenza</span>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <p class="mono">
+      HERMETICUM B.C.E. — Catalog  
+      UE-first · GDPR-min · audit-by-design
+    </p>
+  </footer>
+</body>
+</html>
