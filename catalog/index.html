@@ -3,150 +3,233 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — Catalog</title>
-  <meta name="description" content="Catalogo servizi Hermeticum B.C.E.: orientamento, IPR personale, verifica e servizi operativi UE-first." />
-  <meta name="theme-color" content="#0b0c10" />
+  <title>Catalog — HERMETICUM Services</title>
+  <meta name="description" content="Catalogo servizi: cosa abilita l’IPR personale per AI JOKER-C2. Soglia operativa: con IPR puoi, senza IPR no." />
   <style>
     :root{
-      color-scheme: dark;
       --bg:#0b0c10;
       --panel:#0f1117;
       --line:#24262b;
       --text:#e8e8e8;
-      --muted:#a7abb6;
-      --accent:#7aa2ff;
-      --radius:16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --max: 1040px;
+      --muted:#a9abb3;
+      --shadow:0 12px 36px rgba(0,0,0,.35);
+      --r:16px;
+      --r2:22px;
+      --max:1100px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
+      background:radial-gradient(1200px 700px at 20% 0%, #121525 0%, rgba(18,21,37,0) 55%),
+                 radial-gradient(900px 600px at 80% 10%, #141b2a 0%, rgba(20,27,42,0) 55%),
+                 var(--bg);
       color:var(--text);
-      line-height:1.45;
+      font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      letter-spacing:.2px;
     }
     a{color:inherit; text-decoration:none}
-    header, main, footer{max-width:var(--max); margin:0 auto; padding:22px}
-    header{
-      border-bottom:1px solid var(--line);
-    }
-    h1{margin:0 0 10px; font-size:30px}
-    h2{margin:0 0 6px; font-size:18px}
-    p{margin:0 0 12px; color:var(--muted)}
-    .lead{color:var(--text)}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-      gap:14px;
-      margin-top:18px;
-    }
-    .card{
-      background: var(--panel);
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px;
       border:1px solid var(--line);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: var(--shadow);
-      transition: transform .08s ease, border-color .08s ease;
+      border-radius:var(--r2);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      position:sticky; top:14px; z-index:10;
+      backdrop-filter: blur(10px);
     }
-    .card:hover{
-      transform: translateY(-1px);
-      border-color: rgba(122,162,255,.6);
-    }
-    .tag{
-      display:inline-block;
-      margin-top:10px;
-      padding:6px 10px;
+    .brand{font-weight:900; letter-spacing:.6px}
+    .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .chip{
+      padding:8px 10px;
+      border:1px solid var(--line);
       border-radius:999px;
-      font-size:12px;
+      background:rgba(255,255,255,.03);
       color:var(--muted);
+      font-weight:700;
+      transition:.15s ease;
+    }
+    .chip:hover{transform:translateY(-1px); color:var(--text); background:rgba(255,255,255,.05)}
+    .hero{
+      margin-top:18px;
       border:1px solid var(--line);
-      background:#0b0c10;
+      border-radius:var(--r2);
+      padding:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
     }
-    footer{
-      font-size:12px;
+    .mark{margin:0 0 6px; font-weight:900; letter-spacing:.4px}
+    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
+    h1{margin:0 0 8px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted); max-width:80ch}
+    .grid{display:grid; gap:12px; margin-top:14px}
+    @media (min-width:900px){ .grid{grid-template-columns:1fr 1fr} }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .card h2{margin:0 0 6px; font-size:18px}
+    .card p{margin:0; color:var(--muted)}
+    .list{margin:10px 0 0; padding:0; list-style:none}
+    .list li{
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(0,0,0,.15);
+      margin-top:8px;
+      color:var(--text);
+      font-weight:700;
+    }
+    .list li small{display:block; color:var(--muted); font-weight:700; margin-top:2px}
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
+      margin:18px 0 10px;
+    }
+    .sectionTitle h3{margin:0; font-size:16px}
+    .sectionTitle span{color:var(--muted); font-size:12px; font-weight:800}
+
+    .tiers{display:grid; gap:12px}
+    @media (min-width:860px){ .tiers{grid-template-columns:repeat(3,1fr)} }
+    .tier{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      padding:14px;
+      box-shadow:var(--shadow);
+      min-height:210px;
+    }
+    .tier b{display:block; font-size:16px; margin-bottom:6px}
+    .tier .meta{color:var(--muted); font-weight:800; font-size:12px; text-transform:uppercase; letter-spacing:1px}
+    .tier ul{margin:10px 0 0; padding-left:16px; color:var(--muted)}
+    .tier li{margin:6px 0}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+
+    .callout{
+      margin-top:14px;
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius:var(--r);
+      padding:14px;
+      background:rgba(255,255,255,.02);
       color:var(--muted);
-      border-top:1px solid var(--line);
+      font-weight:700;
     }
-    .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    .footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      padding:14px 2px 0;
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between;
+      border-top:1px solid var(--line);
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>Catalogo Servizi</h1>
-    <p class="lead">
-      Qui trovi una panoramica chiara di cosa esiste nell’ecosistema
-      <b>Hermeticum B.C.E.</b>.  
-      Nessun obbligo, nessuna attivazione automatica.
-    </p>
-    <p>
-      Esplora. Comprendi. Attiva solo se e quando serve.
-    </p>
-  </header>
-
-  <main>
-    <div class="grid">
-
-      <section class="card">
-        <h2>IPR Personale</h2>
-        <p>
-          Identità operativa verificabile che collega una persona reale,
-          documenti UE e tracce crittografiche nel tempo.
-        </p>
-        <p>
-          È la porta di accesso all’operatività Hermeticum.
-        </p>
-        <span class="tag">Identità · Traccia · Continuità</span>
-      </section>
-
-      <section class="card">
-        <h2>Verifica & Evidence</h2>
-        <p>
-          Meccanismi pubblici di controllo: hash, allegati,
-          prove ripetibili e verifiche indipendenti.
-        </p>
-        <p>
-          La fiducia non è dichiarata: è dimostrata.
-        </p>
-        <span class="tag">Audit · Hash · Opponibilità</span>
-      </section>
-
-      <section class="card">
-        <h2>Servizi Operativi</h2>
-        <p>
-          Moduli e processi che utilizzano l’IPR come base:
-          continuità, delega, interoperabilità.
-        </p>
-        <p>
-          Pensati per cittadini, professionisti e sistemi.
-        </p>
-        <span class="tag">Servizi · Moduli · UE-first</span>
-      </section>
-
-      <section class="card">
-        <h2>Accesso Tecnico</h2>
-        <p>
-          Repository, documentazione e stack tecnologico
-          per chi deve integrare, verificare o auditare.
-        </p>
-        <p>
-          Nessuna black box.
-        </p>
-        <span class="tag">Tecnologia · Repo · Trasparenza</span>
-      </section>
-
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">Catalog</div>
+      <div class="nav">
+        <a class="chip" href="../">Home</a>
+        <a class="chip" href="../onboarding/">Onboarding</a>
+        <a class="chip" href="../verify/">Verify</a>
+        <a class="chip" href="../terms/">Terms</a>
+      </div>
     </div>
-  </main>
 
-  <footer>
-    <p class="mono">
-      HERMETICUM B.C.E. — Catalog  
-      UE-first · GDPR-min · audit-by-design
-    </p>
-  </footer>
+    <header class="hero">
+      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
+      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
+
+      <h1>La soglia operativa: con IPR puoi. Senza IPR no.</h1>
+      <p class="sub">
+        Questo catalogo descrive <b>cosa abilita l’IPR personale</b> per l’operatività con <b>AI JOKER-C2</b>.
+        In HERMETICUM l’IPR non è un profilo: è il requisito minimo per <b>responsabilità, prova e continuità</b>.
+      </p>
+
+      <div class="grid" aria-label="Con IPR / Senza IPR">
+        <div class="card">
+          <h2>Con IPR (abilitato)</h2>
+          <p>Operi nel perimetro reale: tracciabile, verificabile, opponibile.</p>
+          <ul class="list">
+            <li>Scuola / Formazione <small>Attività e risultati con evidenza verificabile.</small></li>
+            <li>Lavoro / Professione <small>Decisioni e output con responsabilità e audit.</small></li>
+            <li>Esperimenti / Esper-simenti <small>Test versionati con continuità temporale.</small></li>
+            <li>AI JOKER-C2 operativo <small>Policy-driven, <span class="mono">fail-closed</span>, audit-by-design.</small></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Senza IPR (negato)</h2>
+          <p>Rimani in modalità non opponibile: niente continuità, niente prova.</p>
+          <ul class="list">
+            <li>Nessuna certificazione <small>Scuola/lavoro/esperimenti non hanno valore verificabile.</small></li>
+            <li>Nessuna operatività auditabile <small>Non puoi produrre evidenze opponibili.</small></li>
+            <li>AI JOKER-C2 non operativo <small>Manca identità+policy+prova ⇒ <span class="mono">fail-closed</span>.</small></li>
+            <li>Nessun accesso a contesti sensibili <small>Perimetro UE-first richiede tracciabilità.</small></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        Principio: <b>se non è tracciabile, non è reale. Se non è verificabile, non è accettabile.</b>
+      </div>
+    </header>
+
+    <section aria-label="Livelli IPR">
+      <div class="sectionTitle">
+        <h3>Livelli IPR</h3>
+        <span>progressivi, fail-closed</span>
+      </div>
+
+      <div class="tiers">
+        <div class="tier">
+          <div class="meta">Livello 1</div>
+          <b>START</b>
+          <div class="sub">Ingresso minimo: identità operativa e prova base.</div>
+          <ul>
+            <li>IPR creato e firmato</li>
+            <li>hash-only pubblico</li>
+            <li>prima evidenza verificabile</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <div class="meta">Livello 2</div>
+          <b>STRONG</b>
+          <div class="sub">Operatività estesa: policy + evidenze strutturate.</div>
+          <ul>
+            <li>policy OPC applicate</li>
+            <li>eventi tracciati UNEBDO</li>
+            <li>verifica consistente</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <div class="meta">Livello 3</div>
+          <b>ANCHOR</b>
+          <div class="sub">Continuità nel tempo: prova multi-ledger.</div>
+          <ul>
+            <li>ancoraggio multi-ledger</li>
+            <li>resilienza e verificabilità indipendente</li>
+            <li>stati versionati nel tempo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        Nota UE-first: pubblico = <b>prove</b> (<span class="mono">hash-only</span>). privato = <b>dati reali</b> (mai esposti).
+      </div>
+    </section>
+
+    <div class="footer">
+      <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+      <div>HERMETICUM B.C.E. S.r.l.</div>
+    </div>
+  </div>
 </body>
 </html>
