@@ -2,10 +2,9 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>HERMETICUM B.C.E. PLATFORM</title>
+  <title>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Piattaforma europea di identità cibernetica verificabile. Sicurezza, continuità operativa, opponibilità giuridica." />
-  <meta name="robots" content="index, follow" />
   <style>
     :root{
       --bg:#0b0c10;
@@ -14,43 +13,51 @@
       --text:#e8e8e8;
       --muted:#a7b0be;
       --accent:#7aa2ff;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --r:16px;
-      --max:1100px;
+      --shadow:0 12px 34px rgba(0,0,0,.4);
+      --r:18px;
+      --max:1200px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background:
-        radial-gradient(1000px 600px at 15% 0%, rgba(122,162,255,.12), transparent 55%),
-        radial-gradient(900px 600px at 85% 10%, rgba(99,210,162,.10), transparent 60%),
+        radial-gradient(1100px 650px at 15% 0%,rgba(122,162,255,.12),transparent 55%),
+        radial-gradient(900px 600px at 85% 10%,rgba(99,210,162,.10),transparent 60%),
         var(--bg);
       color:var(--text);
     }
     a{color:inherit;text-decoration:none}
     header{
       position:sticky; top:0; z-index:10;
-      backdrop-filter:blur(10px);
-      background:rgba(11,12,16,.8);
+      backdrop-filter:blur(12px);
+      background:rgba(11,12,16,.85);
       border-bottom:1px solid var(--line);
     }
     .top{
-      max-width:var(--max); margin:0 auto;
-      padding:14px 18px;
-      display:flex; justify-content:space-between; align-items:center;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-    .brand b{letter-spacing:.5px}
-    .brand small{display:block;color:var(--muted)}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 64px}
-    h1{margin:0 0 10px; font-size:34px}
-    p{margin:0; color:var(--muted); line-height:1.55}
+    .brand b{letter-spacing:.6px}
+    .brand small{display:block;color:var(--muted);font-size:12.5px}
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:32px 20px 72px;
+    }
+    h1{margin:0 0 10px;font-size:36px}
+    h2{margin:0 0 8px;font-size:22px}
+    p{margin:0;color:var(--muted);line-height:1.6}
     .hero{
       border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(15,17,23,.85),rgba(15,17,23,.55));
-      border-radius:calc(var(--r)+8px);
+      background:linear-gradient(180deg,rgba(15,17,23,.88),rgba(15,17,23,.55));
+      border-radius:calc(var(--r)+10px);
       box-shadow:var(--shadow);
-      padding:32px;
+      padding:36px;
     }
     .flow{
       margin-top:14px;
@@ -59,39 +66,39 @@
     }
     .flow b{color:var(--text)}
     .badges{
-      margin-top:16px;
-      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
     .badge{
       border:1px solid var(--line);
       background:rgba(16,19,26,.65);
-      padding:10px 12px;
+      padding:10px 14px;
       border-radius:999px;
       font-size:13px;
       color:var(--muted);
     }
     .badge b{color:var(--text)}
-    section{margin-top:22px}
+    section{margin-top:26px}
     .grid3{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:14px;
+      gap:16px;
     }
-    @media (max-width:980px){.grid3{grid-template-columns:1fr}}
+    @media (max-width:1000px){.grid3{grid-template-columns:1fr}}
     .card{
       border:1px solid var(--line);
       background:rgba(16,19,26,.55);
       border-radius:var(--r);
-      padding:20px;
+      padding:22px;
       box-shadow:var(--shadow);
     }
-    .card h2{margin:0 0 6px; font-size:20px}
-    .card p{font-size:14px}
     .cta{
-      margin-top:14px;
       display:inline-block;
-      padding:10px 14px;
-      border-radius:12px;
+      margin-top:14px;
+      padding:10px 16px;
+      border-radius:14px;
       border:1px solid rgba(122,162,255,.55);
       background:rgba(122,162,255,.18);
       font-size:14px;
@@ -99,22 +106,22 @@
     .mods{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:12px;
+      gap:14px;
     }
-    @media (max-width:980px){.mods{grid-template-columns:1fr}}
+    @media (max-width:1000px){.mods{grid-template-columns:1fr}}
     .mod{
       border:1px solid var(--line);
       background:rgba(15,17,23,.55);
       border-radius:var(--r);
-      padding:14px;
-      font-size:13px;
+      padding:16px;
+      font-size:14px;
       color:var(--muted);
     }
     .mod b{color:var(--text)}
     footer{
-      margin-top:36px;
+      margin-top:42px;
       border-top:1px solid var(--line);
-      padding-top:18px;
+      padding-top:20px;
       font-size:12.5px;
       color:var(--muted);
     }
@@ -160,24 +167,23 @@
       <div class="card">
         <h2>Citizen</h2>
         <p>Identità personale verificabile, continuità digitale, prova opponibile.</p>
-        <a class="cta" href="./citizen.html">Apri Citizen</a>
+        <a class="cta" href="./citizen.html">Accedi</a>
       </div>
-
       <div class="card">
         <h2>Professional</h2>
         <p>Operatività verificabile, responsabilità, audit e tracciabilità.</p>
-        <a class="cta" href="./professional.html">Apri Professional</a>
+        <a class="cta" href="./professional.html">Accedi</a>
       </div>
-
       <div class="card">
         <h2>Institution</h2>
-        <p>Governance, interoperabilità, resilienza UE-first.</p>
-        <a class="cta" href="./institution.html">Apri Institution</a>
+        <p>Governance tecnica, interoperabilità, resilienza UE-first.</p>
+        <a class="cta" href="./institution.html">Accedi</a>
       </div>
     </div>
   </section>
 
   <section>
+    <h2>Architettura (organismo unico)</h2>
     <div class="mods">
       <div class="mod"><b>UNEBDO</b> — Norme · Prove · Opponibilità</div>
       <div class="mod"><b>OPC</b> — Policy · Controllo · Coerenza</div>
@@ -186,24 +192,25 @@
       <div class="mod"><b>NeuroLoop</b> — Feedback · Apprendimento · Continuità</div>
       <div class="mod"><b>CyberGlobal</b> — Interoperabilità · Coordinamento · Resilienza</div>
     </div>
+    <p style="margin-top:12px;color:var(--muted)">
+      <b>AI JOKER-C2</b> — Orchestrazione · Decisione · Supervisione
+    </p>
   </section>
 
   <section class="grid3">
     <div class="card">
       <h2>Verify</h2>
-      <p>Schema tecnico di verifica: dato → hash → evidence → audit.</p>
-      <a class="cta" href="./verify.html">Vai a Verify</a>
+      <p>Schema tecnico: dato → hash → evidence → audit.</p>
+      <a class="cta" href="./verify.html">Verifica</a>
     </div>
-
     <div class="card">
       <h2>Governance UE</h2>
-      <p>Principi UE-first, GDPR-min, HASH-only, fail-closed.</p>
-      <a class="cta" href="./governance.html">Vai a Governance</a>
+      <p>UE-first · GDPR-min · HASH-only · Fail-closed.</p>
+      <a class="cta" href="./governance.html">Governance</a>
     </div>
-
     <div class="card">
-      <h2>AI JOKER-C2</h2>
-      <p>Orchestrazione, decisione e supervisione del sistema.</p>
+      <h2>Ecosistema</h2>
+      <p>Accesso informativo ai repository e portali dell’infrastruttura.</p>
     </div>
   </section>
 
