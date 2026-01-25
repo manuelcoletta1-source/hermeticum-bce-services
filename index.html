@@ -1,239 +1,359 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <title>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HERMETICUM B.C.E. PLATFORM</title>
-  <meta name="description" content="Piattaforma europea UE-first per identità digitale verificabile e prova opponibile nel tempo." />
+  <meta name="description" content="Infrastruttura digitale europea di identità cibernetica verificabile: sicurezza dei dati, continuità operativa, opponibilità giuridica." />
   <style>
     :root{
       --bg:#0b0c10;
       --panel:#0f1117;
+      --panel2:#10131a;
       --line:#24262b;
       --text:#e8e8e8;
-      --muted:#b8bcc7;
-      --accent:#d7d7d7;
+      --muted:#a7b0be;
+      --accent:#7aa2ff;
+      --ok:#63d2a2;
+      --warn:#ffd479;
+      --bad:#ff6b6b;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 16px;
+      --r:16px;
+      --max:1100px;
     }
-    *{box-sizing:border-box}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      background: radial-gradient(1200px 800px at 20% 0%, rgba(255,255,255,.06), transparent 60%),
-                  radial-gradient(1000px 700px at 90% 20%, rgba(255,255,255,.04), transparent 55%),
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(122,162,255,.10), transparent 55%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(99,210,162,.08), transparent 60%),
                   var(--bg);
       color:var(--text);
-      line-height:1.5;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding: 28px 18px 46px;
-    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 18px 60px; }
     header{
-      display:flex;
-      gap:16px;
-      align-items:flex-start;
-      justify-content:space-between;
-      padding: 18px 18px 6px;
-      border: 1px solid var(--line);
-      background: rgba(15,17,23,.75);
+      position:sticky; top:0; z-index:20;
       backdrop-filter: blur(10px);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      background: rgba(11,12,16,.72);
+      border-bottom:1px solid rgba(36,38,43,.75);
     }
-    .brand h1{
-      margin:0;
-      font-size: 22px;
-      letter-spacing: .6px;
+    .topbar{ max-width:var(--max); margin:0 auto; padding:14px 18px; display:flex; gap:14px; align-items:center; justify-content:space-between; }
+    .brand{
+      display:flex; flex-direction:column; gap:4px; line-height:1.1;
     }
-    .brand p{
-      margin:6px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 760px;
-    }
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 12px;
-      white-space: nowrap;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 14px;
-    }
-    .card{
-      border: 1px solid var(--line);
+    .brand .t{ font-weight:800; letter-spacing:.5px; }
+    .brand .s{ color:var(--muted); font-size:12.5px; }
+    nav{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+    .pill{
+      border:1px solid rgba(36,38,43,.9);
       background: rgba(15,17,23,.65);
-      border-radius: var(--radius);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .pill:hover{ color:var(--text); border-color:rgba(122,162,255,.55); }
+    .hero{
+      margin-top:22px;
+      border:1px solid rgba(36,38,43,.9);
+      background: linear-gradient(180deg, rgba(15,17,23,.85), rgba(15,17,23,.55));
+      border-radius:calc(var(--r) + 6px);
       box-shadow: var(--shadow);
-      padding: 16px;
-      min-height: 250px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
+      padding:26px;
     }
-    .card h2{
-      margin:0 0 8px;
-      font-size: 16px;
-      letter-spacing:.3px;
+    .kicker{ color:var(--muted); font-size:13px; letter-spacing:.2px; }
+    h1{ margin:10px 0 8px; font-size:32px; letter-spacing:.2px; }
+    .core{
+      margin:0; color:var(--text); font-size:16px; line-height:1.55;
     }
-    .card p{
-      margin:0 0 12px;
-      color: var(--muted);
-      font-size: 13px;
+    .badgeRow{ margin-top:16px; display:flex; flex-wrap:wrap; gap:10px; }
+    .badge{
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(16,19,26,.65);
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
     }
-    .bul{
-      margin: 0;
-      padding-left: 16px;
-      color: var(--muted);
-      font-size: 13px;
+    .badge b{ color:var(--text); font-weight:700; }
+    .grid{ margin-top:18px; display:grid; grid-template-columns: 1.2fr .8fr; gap:14px; }
+    @media (max-width: 920px){ .grid{ grid-template-columns:1fr; } }
+    .card{
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(15,17,23,.75);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding:18px;
     }
-    .bul li{margin:6px 0}
-    .cta{
-      margin-top: 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      padding: 12px 12px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255,255,255,.03);
-    }
+    .card h2{ margin:0 0 10px; font-size:18px; }
+    .card p{ margin:0; color:var(--muted); line-height:1.55; font-size:14px; }
+    .ctaRow{ margin-top:14px; display:flex; flex-wrap:wrap; gap:10px; }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 10px 12px;
+      display:inline-flex; gap:10px; align-items:center; justify-content:center;
+      padding:10px 12px;
       border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      font-size: 13px;
-      color: var(--text);
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      gap:8px;
-      white-space: nowrap;
+      border:1px solid rgba(36,38,43,.95);
+      background: rgba(16,19,26,.75);
+      color:var(--text);
+      font-size:14px;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22)}
-    .muted{
-      color: var(--muted);
-      font-size: 12px;
+    .btn:hover{ border-color: rgba(122,162,255,.55); }
+    .btn.primary{
+      background: rgba(122,162,255,.18);
+      border-color: rgba(122,162,255,.55);
     }
-    footer{
-      margin-top: 14px;
-      padding: 16px 18px;
-      border: 1px solid var(--line);
+    .btn .dot{
+      width:8px; height:8px; border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(122,162,255,.12);
+    }
+    section{ scroll-margin-top:84px; margin-top:18px; }
+    .modules{ display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:12px; }
+    @media (max-width: 980px){ .modules{ grid-template-columns:1fr; } }
+    .mod{
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(16,19,26,.55);
+      border-radius: var(--r);
+      padding:14px;
+    }
+    .mod .name{ font-weight:800; letter-spacing:.2px; }
+    .mod .tri{ margin-top:6px; font-size:13px; color:var(--muted); }
+    .tri b{ color:var(--text); }
+    .mod .links{ margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+    .chip{
+      font-size:12.5px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(36,38,43,.9);
       background: rgba(15,17,23,.55);
-      border-radius: var(--radius);
-      color: var(--muted);
-      font-size: 12px;
+      color:var(--muted);
     }
-    .footrow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
+    .chip:hover{ color:var(--text); border-color: rgba(99,210,162,.45); }
+    .mini{ margin-top:10px; font-size:13px; color:var(--muted); line-height:1.55; }
+    .hl{ color:var(--text); font-weight:700; }
+    footer{
+      margin-top:22px;
+      border-top:1px solid rgba(36,38,43,.9);
+      padding-top:16px;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.6;
     }
-    .sep{opacity:.35}
-    @media (max-width: 980px){
-      .grid{grid-template-columns: 1fr}
-      header{flex-direction:column}
-      .tag{align-self:flex-start}
+    code.inline{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12.5px;
+      padding: 2px 6px;
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(15,17,23,.55);
+      border-radius: 8px;
+      color: var(--text);
+      white-space: nowrap;
     }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <header>
+  <header>
+    <div class="topbar">
       <div class="brand">
-        <h1>HERMETICUM B.C.E. PLATFORM</h1>
-        <p>
-          Piattaforma digitale europea <strong>UE-first</strong> per <strong>identità verificabile</strong>,
-          <strong>integrità</strong> e <strong>prova opponibile nel tempo</strong>.
-          Un layer superiore di coerenza e verifica, utilizzabile da cittadini, professionisti e istituzioni.
-        </p>
+        <div class="t">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        <div class="s">HERMETICUM B.C.E. S.r.l.</div>
       </div>
-      <div class="tag">Blindata · Computabile · Evolutiva</div>
-    </header>
+      <nav>
+        <a class="pill" href="#gateway">Gateway</a>
+        <a class="pill" href="#moduli">Moduli</a>
+        <a class="pill" href="#verifica">Verifica</a>
+        <a class="pill" href="#governance">Governance UE</a>
+        <a class="pill" href="#links">Repos</a>
+      </nav>
+    </div>
+  </header>
 
-    <section class="grid" aria-label="Domini di accesso">
-      <article class="card">
-        <div>
-          <h2>👤 Cittadino (UE)</h2>
-          <p>
-            Accesso semplificato per proteggere identità digitale e documenti nel tempo,
-            anche in contesti transfrontalieri.
-          </p>
-          <ul class="bul">
-            <li>Identità digitale verificabile</li>
-            <li>Protezione dell’integrità dei documenti</li>
-            <li>Continuità tra Stati UE</li>
-          </ul>
-        </div>
-        <div class="cta">
-          <span class="muted">Documentazione dedicata</span>
-          <a class="btn" href="README-citizen.md">Apri Citizen</a>
-        </div>
-      </article>
+  <div class="wrap">
+    <section id="gateway" class="hero">
+      <div class="kicker">Infrastruttura digitale europea — identità verificabile • continuità operativa • audit</div>
+      <h1>Gateway UE-ready</h1>
+      <p class="core">
+        <span class="hl">Hermeticum B.C.E.</span> è un’infrastruttura digitale europea di <span class="hl">identità cibernetica verificabile</span>,
+        progettata per garantire <span class="hl">sicurezza dei dati</span>, <span class="hl">continuità operativa</span> e
+        <span class="hl">opponibilità giuridica</span> nell’era dell’intelligenza artificiale.
+      </p>
 
-      <article class="card">
-        <div>
-          <h2>🧩 Professionista / Tecnico</h2>
-          <p>
-            Dominio tecnico per integrazione, audit, verifica e valutazione architetturale
-            in contesti enterprise e legal-tech.
-          </p>
-          <ul class="bul">
-            <li>Architettura a layer e neutralità tecnologica</li>
-            <li>Identity Primary Record (IPR)</li>
-            <li>Workflow di verifica e audit</li>
-          </ul>
-        </div>
-        <div class="cta">
-          <span class="muted">Documentazione tecnica</span>
-          <a class="btn" href="README-professional.md">Apri Professional</a>
-        </div>
-      </article>
+      <div class="badgeRow">
+        <div class="badge"><b>Policy:</b> UE-first • GDPR-min • HASH-only • Audit</div>
+        <div class="badge"><b>Mode:</b> Fail-closed • Proof-by-design</div>
+        <div class="badge"><b>Orchestrazione:</b> AI JOKER-C2</div>
+      </div>
 
-      <article class="card">
-        <div>
-          <h2>⚖️ Istituzione / Tribunale</h2>
+      <div class="grid">
+        <div class="card">
+          <h2>Cos’è (in 3 righe)</h2>
           <p>
-            Dominio istituzionale per verifica neutra dell’integrità, opponibilità temporale
-            e riproducibilità della prova.
+            Non è un “account”. Non è un “wallet”. Non è una “AI commerciale”.<br/>
+            È un <span class="hl">sistema di accesso e continuità</span> basato su un record identitario (IPR) verificabile,
+            con prove tecniche (hash/evidence) e governance UE-first.
           </p>
-          <ul class="bul">
-            <li>Verifica indipendente</li>
-            <li>Data certa e opponibilità</li>
-            <li>Tracciabilità e audit</li>
-          </ul>
+
+          <div class="ctaRow">
+            <a class="btn primary" href="#moduli"><span class="dot"></span>Vedi i 6 moduli</a>
+            <a class="btn" href="#verifica">Verifica & evidence</a>
+            <a class="btn" href="#governance">Governance UE</a>
+          </div>
         </div>
-        <div class="cta">
-          <span class="muted">Uso istituzionale</span>
-          <a class="btn" href="README-institution.md">Apri Institution</a>
+
+        <div class="card">
+          <h2>IPR (concetto operativo)</h2>
+          <p>
+            L’<span class="hl">IPR</span> (Identity Primary Record) collega identità, continuità nel tempo e verificabilità.
+            Il sistema preferisce <span class="hl">hash</span> e <span class="hl">prove</span> al posto di dati superflui.
+          </p>
+          <div class="mini">
+            Regola d’oro: <span class="hl">meno dato, più prova</span>.<br/>
+            Ogni passaggio deve essere <span class="hl">auditabile</span> e <span class="hl">opponibile</span>.
+          </div>
         </div>
-      </article>
+      </div>
+    </section>
+
+    <section id="moduli">
+      <div class="card">
+        <h2>Architettura: 6 moduli in un unico organismo</h2>
+        <p>
+          I moduli non sono “repo separati”: sono <span class="hl">organi</span> che operano all’unisono con
+          <span class="hl">AI JOKER-C2</span> e l’utente. La ripetizione delle funzioni (3 parole) è intenzionale:
+          è <span class="hl">compressione cognitiva</span>, non marketing.
+        </p>
+
+        <div class="modules">
+          <div class="mod">
+            <div class="name">UNEBDO</div>
+            <div class="tri"><b>Norme</b> · <b>Prove</b> · <b>Opponibilità</b></div>
+            <div class="mini">Trasforma eventi tecnici in fatti verificabili e opponibili nel tempo.</div>
+            <div class="links">
+              <a class="chip" href="https://manuelcoletta1-source.github.io/unebdo/">Portal</a>
+              <a class="chip" href="https://github.com/manuelcoletta1-source/unebdo">Repo</a>
+            </div>
+          </div>
+
+          <div class="mod">
+            <div class="name">OPC</div>
+            <div class="tri"><b>Policy</b> · <b>Controllo</b> · <b>Coerenza</b></div>
+            <div class="mini">Blocca contraddizioni: regole, stati, permessi, opponibilità decisionale.</div>
+            <div class="links">
+              <a class="chip" href="https://manuelcoletta1-source.github.io/opc/">Portal</a>
+              <a class="chip" href="https://github.com/manuelcoletta1-source/opc">Repo</a>
+            </div>
+          </div>
+
+          <div class="mod">
+            <div class="name">MetaExchange</div>
+            <div class="tri"><b>Valore</b> · <b>Scambio</b> · <b>Tracciabilità</b></div>
+            <div class="mini">Gestisce flussi e scambi preservando origine, contesto, prova e audit.</div>
+            <div class="links">
+              <a class="chip" href="https://manuelcoletta1-source.github.io/metaexchange/">Portal</a>
+              <a class="chip" href="https://github.com/manuelcoletta1-source/metaexchange">Repo</a>
+            </div>
+          </div>
+
+          <div class="mod">
+            <div class="name">IoSpace</div>
+            <div class="tri"><b>Ambiente</b> · <b>Operazioni</b> · <b>Isolamento</b></div>
+            <div class="mini">Spazio operativo protetto: accesso, sessioni, isolamento, sicurezza.</div>
+            <div class="links">
+              <a class="chip" href="https://manuelcoletta1-source.github.io/iospace/">Portal</a>
+              <a class="chip" href="https://github.com/manuelcoletta1-source/iospace">Repo</a>
+            </div>
+          </div>
+
+          <div class="mod">
+            <div class="name">NeuroLoop</div>
+            <div class="tri"><b>Feedback</b> · <b>Apprendimento</b> · <b>Continuità</b></div>
+            <div class="mini">Memoria operativa: feedback, miglioramento, continuità tra cicli e audit.</div>
+            <div class="links">
+              <a class="chip" href="https://manuelcoletta1-source.github.io/neuroloop/">Portal</a>
+              <a class="chip" href="https://github.com/manuelcoletta1-source/neuroloop">Repo</a>
+            </div>
+          </div>
+
+          <div class="mod">
+            <div class="name">CyberGlobal</div>
+            <div class="tri"><b>Interoperabilità</b> · <b>Coordinamento</b> · <b>Resilienza</b></div>
+            <div class="mini">Scala: interconnessione, governance tecnica, resilienza multi-dominio.</div>
+            <div class="links">
+              <a class="chip" href="https://manuelcoletta1-source.github.io/cyberglobal/">Portal</a>
+              <a class="chip" href="https://github.com/manuelcoletta1-source/cyberglobal">Repo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mini" style="margin-top:12px;">
+          <span class="hl">AI JOKER-C2</span> (Orchestrazione · Decisione · Supervisione) coordina i moduli e l’utente:
+          non è “chat”, è <span class="hl">C2 operativo</span>.
+        </div>
+      </div>
+    </section>
+
+    <section id="verifica">
+      <div class="card">
+        <h2>Verifica (Proof, Evidence, Audit)</h2>
+        <p>
+          La fiducia non è una promessa: è una <span class="hl">verifica</span>.
+          L’utente può produrre artefatti verificabili (hash / evidence) e conservarli in percorsi auditabili.
+        </p>
+        <div class="mini">
+          Pattern: <span class="hl">dato → hash → evidence → audit</span><br/>
+          Obiettivo: ridurre l’esposizione del dato e aumentare la prova.
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn" href="https://github.com/manuelcoletta1-source/hermeticum-bce-services/tree/main/evidence">Cartella evidence</a>
+          <a class="btn" href="https://github.com/manuelcoletta1-source/hermeticum-bce-services/tree/main/onboarding">Onboarding</a>
+          <a class="btn" href="https://github.com/manuelcoletta1-source/hermeticum-bce-services/tree/main/catalog">Catalog</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="governance">
+      <div class="card">
+        <h2>Governance UE (UE-first)</h2>
+        <p>
+          Principi operativi:
+          <span class="hl">GDPR-min</span> (minimizzazione),
+          <span class="hl">HASH-only</span> (prove al posto dei dati),
+          <span class="hl">Audit-by-design</span> (tracciabilità),
+          <span class="hl">Fail-closed</span> (sicurezza per default).
+        </p>
+        <div class="mini">
+          Nota: “UE-first” qui significa standard normativo e operativo di riferimento,
+          progettato per essere interoperabile e verificabile.
+        </div>
+      </div>
+    </section>
+
+    <section id="links">
+      <div class="card">
+        <h2>Repos & Portali</h2>
+        <p>Accesso rapido ai nodi principali dell’ecosistema.</p>
+        <div class="ctaRow">
+          <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-services/">Portal Services</a>
+          <a class="btn" href="https://manuelcoletta1-source.github.io/ai-joker-workers/">AI JOKER Workers</a>
+          <a class="btn" href="https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology/">Technology (repo)</a>
+          <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/">IPR Gov EU Standard</a>
+        </div>
+        <div class="mini" style="margin-top:12px;">
+          Suggerimento operativo: la piattaforma va letta come flusso
+          <code class="inline">IPR → Gateway → Moduli → Evidence → Audit</code>.
+        </div>
+      </div>
     </section>
 
     <footer>
-      <div class="footrow">
-        <div>
-          <strong>Principi:</strong> UE-first · Separazione dato/prova/governance · Auditabilità · Neutralità tecnologica · Validità nel lungo periodo
-        </div>
-        <div class="sep">|</div>
-        <div><strong>HERMETICUM B.C.E. S.r.l.</strong></div>
+      <div><b>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</b></div>
+      <div>HERMETICUM B.C.E. S.r.l.</div>
+      <div style="margin-top:8px;">
+        Questo portale è un gateway informativo e operativo. I moduli descritti operano in coordinamento con policy UE-first,
+        minimizzazione dati e verificabilità (hash/evidence/audit).
       </div>
     </footer>
   </div>
