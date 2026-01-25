@@ -1,66 +1,113 @@
 # HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA
 **HERMETICUM B.C.E. S.r.l.**
 
-> **Hermeticum B.C.E. è un’infrastruttura digitale europea di identità cibernetica verificabile, progettata per garantire sicurezza dei dati, continuità operativa e opponibilità giuridica nell’era dell’intelligenza artificiale.**
+> **Hermeticum B.C.E. Platform è un’infrastruttura digitale europea di identità cibernetica verificabile, progettata per garantire sicurezza dei dati, continuità operativa e opponibilità giuridica nell’era dell’intelligenza artificiale.**
 
-Repository piattaforma: **Gateway UE-ready** (punto di ingresso).  
-Portale: https://manuelcoletta1-source.github.io/hermeticum-bce-services/
-
----
-
-## Cosa NON è
-- Non è un “account”
-- Non è un “wallet”
-- Non è una “AI commerciale”
-- Non è un social
-
-## Cos’è (operativamente)
-Un **gateway** che introduce e coordina un sistema di:
-- **IPR (Identity Primary Record)** → identità verificabile e continua nel tempo
-- **Proof / Evidence** → hash e artefatti verificabili
-- **Audit** → tracciabilità e opponibilità
-- **Orchestrazione** → AI JOKER-C2 come C2 operativo (non chat)
+🌐 **Gateway ufficiale:**  
+https://manuelcoletta1-source.github.io/hermeticum-bce-platform/
 
 ---
 
-## Architettura: 6 moduli (un unico organismo)
-I moduli operano **all’unisono** con l’utente e **AI JOKER-C2**.
+## Cos’è (in breve)
+Hermeticum B.C.E. Platform **non è**:
+- un account
+- un wallet
+- una AI conversazionale
+- un social network
 
-| Modulo | 3 parole (funzione canonica) | Portal |
-|---|---|---|
-| **UNEBDO** | **Norme · Prove · Opponibilità** | https://manuelcoletta1-source.github.io/unebdo/ |
-| **OPC** | **Policy · Controllo · Coerenza** | https://manuelcoletta1-source.github.io/opc/ |
-| **MetaExchange** | **Valore · Scambio · Tracciabilità** | https://manuelcoletta1-source.github.io/metaexchange/ |
-| **IoSpace** | **Ambiente · Operazioni · Isolamento** | https://manuelcoletta1-source.github.io/iospace/ |
-| **NeuroLoop** | **Feedback · Apprendimento · Continuità** | https://manuelcoletta1-source.github.io/neuroloop/ |
-| **CyberGlobal** | **Interoperabilità · Coordinamento · Resilienza** | https://manuelcoletta1-source.github.io/cyberglobal/ |
-
-**AI JOKER-C2**: **Orchestrazione · Decisione · Supervisione**  
-Workers/portal: https://manuelcoletta1-source.github.io/ai-joker-workers/
+È un **gateway infrastrutturale europeo** basato su:
+- **IPR (Identity Primary Record)**
+- **prove tecniche (hash / evidence)**
+- **audit-by-design**
+- **governance UE-first**
 
 ---
 
-## Verifica (Proof → Evidence → Audit)
-Pattern operativo:
-**dato → hash → evidence → audit**
+## Flusso operativo canonico
 
-Cartelle chiave in questo repo:
-- `/onboarding` → flusso di ingresso
-- `/evidence` → esempi e allegati verificabili
-- `/catalog` → catalogo servizi / moduli
+IPR → Gateway → Moduli → Evidence → Audit
+
+La fiducia non è dichiarata: è **verificata**.
+
+---
+
+## Domini di accesso
+
+### Citizen  
+Identità personale verificabile, continuità digitale, prova opponibile.  
+→ `citizen.html`
+
+### Professional  
+Operatività verificabile, responsabilità, audit e tracciabilità.  
+→ `professional.html`
+
+### Institution  
+Governance tecnica, interoperabilità, resilienza UE-first.  
+→ `institution.html`
+
+---
+
+## Architettura (un unico organismo)
+
+I moduli non operano separatamente: lavorano **all’unisono** con l’utente e **AI JOKER-C2**.
+
+- **UNEBDO** — Norme · Prove · Opponibilità  
+- **OPC** — Policy · Controllo · Coerenza  
+- **MetaExchange** — Valore · Scambio · Tracciabilità  
+- **IoSpace** — Ambiente · Operazioni · Isolamento  
+- **NeuroLoop** — Feedback · Apprendimento · Continuità  
+- **CyberGlobal** — Interoperabilità · Coordinamento · Resilienza  
+
+**AI JOKER-C2**  
+→ Orchestrazione · Decisione · Supervisione
+
+---
+
+## Verifica
+Pagina dedicata: `verify.html`
+
+Schema tecnico:
+
+dato → hash → evidence → audit
+
+Obiettivo:
+- ridurre esposizione del dato
+- aumentare verificabilità e opponibilità
 
 ---
 
 ## Governance UE-first
-Principi operativi:
+Pagina dedicata: `governance.html`
+
+Principi incorporati nell’architettura:
+- **UE-first** (standard normativo di riferimento)
 - **GDPR-min** (minimizzazione dei dati)
 - **HASH-only** (prove > dati)
-- **Audit-by-design** (tracciabilità)
 - **Fail-closed** (sicurezza per default)
+- **Audit-by-design** (tracciabilità continua)
 
 ---
 
-## Link rapidi
-- Portal services: https://manuelcoletta1-source.github.io/hermeticum-bce-services/
-- Technology: https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology/
-- IPR Gov EU Standard: https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/
+## Stato del progetto
+- Gateway: **ATTIVO**
+- Domini: **Citizen / Professional / Institution**
+- Verifica: **ATTIVA**
+- Governance: **ATTIVA**
+- Architettura: **MODULARE, COERENTE, UE-READY**
+
+---
+
+## Nota finale
+Hermeticum B.C.E. Platform è progettata come **infrastruttura**, non come prodotto.
+È pensata per:
+- cittadini
+- professionisti
+- istituzioni
+che richiedono **continuità digitale verificabile** in contesti critici.
+
+---
+
+**HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA**  
+**HERMETICUM B.C.E. S.r.l.**
+
+
