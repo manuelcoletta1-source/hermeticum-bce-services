@@ -1,598 +1,71 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HERMETICUM B.C.E. — Services</title>
-  <meta name="description" content="HERMETICUM B.C.E. — Standard operativo UE-first per identità, policy ed evidenze opponibili. Blindata · Computabile · Evolutiva." />
+# HERMETICUM B.C.E. PLATFORM
+**Piattaforma europea per identità digitale verificabile e prova nel tempo**
 
-  <style>
-    :root{
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --panel2:#0c0e14;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#a5a7ad;
-      --accent:#8cf0ff;
-      --warn:#ffcf7a;
-      --ok:#9bffb2;
-      --bad:#ff8f8f;
-      --shadow: 0 14px 30px rgba(0,0,0,.35);
-      --radius: 16px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      --max: 1080px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: var(--sans);
-      background: radial-gradient(900px 500px at 20% -10%, rgba(140,240,255,.12), transparent 55%),
-                  radial-gradient(900px 500px at 90% 10%, rgba(155,255,178,.10), transparent 55%),
-                  var(--bg);
-      color: var(--text);
-      line-height:1.5;
-    }
-    a{color:inherit; text-decoration:none}
-    a:hover{color:var(--accent)}
-    .wrap{max-width:var(--max); margin:0 auto; padding: 20px 16px 56px}
-    .topbar{
-      position: sticky; top:0; z-index:10;
-      background: rgba(11,12,16,.75);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(36,38,43,.8);
-    }
-    .topbar-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 10px 16px;
-      gap:10px;
-    }
-    .brand{
-      display:flex; flex-direction:column; gap:2px;
-      min-width: 220px;
-    }
-    .brand .hallmark{
-      font-weight:800;
-      letter-spacing:.4px;
-      font-size: 14px;
-    }
-    .brand .company{
-      font-size:12px;
-      color:var(--muted);
-    }
-    nav{
-      display:flex; flex-wrap:wrap;
-      gap:10px;
-      justify-content:flex-end;
-    }
-    .navlink{
-      font-size:13px;
-      color:var(--muted);
-      padding:8px 10px;
-      border:1px solid rgba(36,38,43,.8);
-      border-radius:999px;
-      background: rgba(15,17,23,.35);
-    }
-    .navlink:hover{
-      color:var(--text);
-      border-color: rgba(140,240,255,.35);
-      background: rgba(15,17,23,.6);
-    }
+Hermeticum B.C.E. è una **piattaforma digitale UE-first**
+progettata per fornire **identità verificabile, integrità dei dati
+e prova opponibile nel tempo**.
 
-    header.hero{
-      padding: 26px 0 14px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    @media (max-width: 920px){
-      .hero-grid{grid-template-columns: 1fr}
-    }
-    .card{
-      background: linear-gradient(180deg, rgba(15,17,23,.95), rgba(12,14,20,.95));
-      border: 1px solid rgba(36,38,43,.85);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 16px;
-    }
-    .title{
-      font-size: 28px;
-      margin: 0 0 6px;
-      letter-spacing:.2px;
-    }
-    .subtitle{
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .pillrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
-    .pill{
-      font-family: var(--mono);
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(36,38,43,.85);
-      background: rgba(11,12,16,.35);
-      color: var(--text);
-    }
-    .pill.ok{border-color: rgba(155,255,178,.35)}
-    .pill.warn{border-color: rgba(255,207,122,.35)}
-    .pill.info{border-color: rgba(140,240,255,.35)}
-    .cta{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(36,38,43,.9);
-      background: rgba(15,17,23,.55);
-      font-weight:700;
-      font-size: 13px;
-      cursor:pointer;
-    }
-    .btn.primary{
-      border-color: rgba(140,240,255,.35);
-      background: rgba(140,240,255,.10);
-    }
-    .btn.primary:hover{background: rgba(140,240,255,.15)}
-    .btn:hover{
-      border-color: rgba(140,240,255,.25);
-      background: rgba(15,17,23,.75);
-    }
+La piattaforma è strutturata per servire **tre domini di accesso distinti**,
+ciascuno con linguaggio, funzioni e responsabilità dedicate.
 
-    h2.section{
-      margin: 18px 0 10px;
-      font-size: 16px;
-      letter-spacing:.2px;
-      color: var(--text);
-    }
-    .muted{color:var(--muted)}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 12px;
-    }
-    .col-6{grid-column: span 6}
-    .col-4{grid-column: span 4}
-    .col-8{grid-column: span 8}
-    .col-12{grid-column: span 12}
-    @media (max-width: 920px){
-      .col-6,.col-4,.col-8{grid-column: span 12}
-    }
-    .kpi{
-      display:flex; flex-direction:column; gap:6px;
-    }
-    .kpi .k{font-family:var(--mono); font-size:12px; color:var(--muted)}
-    .kpi .v{font-size:14px}
-    .list{
-      display:flex; flex-direction:column; gap:10px;
-      margin:0; padding:0; list-style:none;
-    }
-    .item{
-      border:1px solid rgba(36,38,43,.85);
-      border-radius: 14px;
-      padding: 12px;
-      background: rgba(11,12,16,.25);
-    }
-    .item h3{
-      margin:0 0 6px;
-      font-size:14px;
-      letter-spacing:.2px;
-    }
-    .item p{margin:0; color:var(--muted); font-size:13px}
-    .item .meta{
-      margin-top:8px;
-      display:flex; flex-wrap:wrap; gap:8px;
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .tag{
-      padding: 4px 8px;
-      border:1px solid rgba(36,38,43,.85);
-      border-radius: 999px;
-      background: rgba(15,17,23,.35);
-    }
-    .tag.ok{border-color: rgba(155,255,178,.35); color: var(--ok)}
-    .tag.warn{border-color: rgba(255,207,122,.35); color: var(--warn)}
-    .tag.info{border-color: rgba(140,240,255,.35); color: var(--accent)}
-    code, pre{
-      font-family: var(--mono);
-    }
-    pre{
-      margin:0;
-      border:1px solid rgba(36,38,43,.85);
-      border-radius: 14px;
-      padding: 12px;
-      background: rgba(11,12,16,.35);
-      overflow:auto;
-      color: var(--text);
-      font-size: 12px;
-      line-height:1.45;
-    }
-    footer{
-      margin-top: 18px;
-      border-top: 1px solid rgba(36,38,43,.85);
-      padding-top: 14px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .footgrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      align-items:start;
-    }
-    @media (max-width: 920px){
-      .footgrid{grid-template-columns: 1fr}
-    }
-  </style>
-</head>
+---
 
-<body>
-  <div class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <div class="hallmark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-        <div class="company">HERMETICUM B.C.E. S.r.l.</div>
-      </div>
+## Seleziona il tuo dominio di accesso
 
-      <nav aria-label="Primary">
-        <a class="navlink" href="#standard">Standard</a>
-        <a class="navlink" href="#map">Repository Map</a>
-        <a class="navlink" href="#verify">Verify</a>
-        <a class="navlink" href="#catalog">Catalog</a>
-        <a class="navlink" href="#terms">Terms</a>
-      </nav>
-    </div>
-  </div>
+### 👤 Cittadino (UE)
+Per le persone che desiderano proteggere la propria identità digitale
+e i documenti importanti nel tempo, anche in contesti transfrontalieri.
 
-  <div class="wrap">
-    <header class="hero">
-      <div class="hero-grid">
-        <section class="card" id="standard">
-          <h1 class="title">Hermeticum B.C.E.</h1>
-          <p class="subtitle">
-            Standard operativo UE-first per <strong>identità</strong>, <strong>policy</strong> ed <strong>evidenze</strong> digitali
-            <strong>opponibili nel tempo</strong>. Nessuna fiducia implicita. Nessuna esecuzione senza policy valida.
-          </p>
+- Identità digitale verificabile  
+- Protezione dell’integrità dei documenti  
+- Continuità nel tempo e tra Stati UE  
 
-          <div class="pillrow" aria-label="Status">
-            <span class="pill info">STANDARD: declared</span>
-            <span class="pill ok">MODE: fail-closed</span>
-            <span class="pill warn">AUDIT: by design</span>
-          </div>
+➡️ **[Accesso Cittadino](README-citizen.md)**
 
-          <div class="cta">
-            <a class="btn primary" href="./STANDARD.md">Leggi STANDARD.md</a>
-            <a class="btn" href="#verify">Verifica evidenza</a>
-            <a class="btn" href="#map">Apri mappa repo</a>
-          </div>
+---
 
-          <h2 class="section">Invarianti</h2>
-          <div class="grid">
-            <div class="col-4 card" style="padding:12px">
-              <div class="kpi">
-                <div class="k">Blindata</div>
-                <div class="v">Nessuna fiducia implicita. Separazione identità/decisione/esecuzione. Evidenza sempre.</div>
-              </div>
-            </div>
-            <div class="col-4 card" style="padding:12px">
-              <div class="kpi">
-                <div class="k">Computabile</div>
-                <div class="v">Decisioni deterministiche. Policy eseguibili. Audit riproducibile da terzi.</div>
-              </div>
-            </div>
-            <div class="col-4 card" style="padding:12px">
-              <div class="kpi">
-                <div class="k">Evolutiva</div>
-                <div class="v">Versionamento esplicito. Continuità temporale. Nessuna rottura retroattiva.</div>
-              </div>
-            </div>
-          </div>
-        </section>
+### 🧩 Professionista / Tecnico
+Per ingegneri, imprese, operatori legal-tech e consulenti ICT
+che necessitano di **verifica tecnica riproducibile e auditabilità**.
 
-        <aside class="card">
-          <h2 class="section">Compliance Surface</h2>
-          <p class="muted" style="margin-top:0">
-            Questa pagina è un entrypoint tecnico. Qui si dichiarano vincoli e criteri di verifica.
-            Le implementazioni sono subordinate allo standard.
-          </p>
+- Architettura della piattaforma  
+- Identity Primary Record (IPR)  
+- Verifica, prova e audit  
 
-          <h2 class="section">Quick Verify</h2>
-          <p class="muted" style="margin-top:0">Flusso minimo (manuale) per controllo integrità e tracciabilità.</p>
-          <pre>
-1) acquisisci documento/artefatto
-2) calcola hash (SHA-256 o SHA-512)
-3) associa evento + timestamp + policy applicata
-4) conserva evidenza (file + hash + metadati)
-5) verifica indipendente: stesso input → stesso hash → stessa decisione
-          </pre>
+➡️ **[Accesso Professional](README-professional.md)**
 
-          <div class="cta" style="margin-top:12px">
-            <a class="btn" href="#verify">Vai a Verify</a>
-            <a class="btn" href="#terms">Vai a Terms</a>
-          </div>
-        </aside>
-      </div>
-    </header>
+---
 
-    <section class="card" id="map">
-      <h2 class="section">Official Repository Map</h2>
-      <p class="muted" style="margin-top:0">
-        Mappa ufficiale dei repository. Struttura pensata per leggibilità istituzionale e adozione standard.
-      </p>
+### ⚖️ Istituzione / Tribunale
+Per pubbliche amministrazioni, autorità di controllo e organi giudiziari
+che richiedono **strumenti tecnici neutri di verifica e opponibilità**.
 
-      <div class="grid">
-        <div class="col-6">
-          <h2 class="section">Core Standard</h2>
-          <ul class="list">
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/hermeticum-bce-services">hermeticum-bce-services</a></h3>
-              <p>Entrypoint pubblico + definizione standard (STANDARD.md) + navigazione.</p>
-              <div class="meta"><span class="tag ok">CORE</span><span class="tag info">ENTRYPOINT</span></div>
-            </li>
+- Verifica dell’integrità  
+- Data certa e opponibilità temporale  
+- Tracciabilità e audit  
 
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology">Hermeticum-B.C.E.-Technology</a></h3>
-              <p>Repository tecnologico ufficiale e reference architecture.</p>
-              <div class="meta"><span class="tag ok">CORE</span><span class="tag info">REFERENCE</span></div>
-            </li>
+➡️ **[Accesso Istituzionale](README-institution.md)**
 
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/opc">opc</a> · <a href="https://github.com/manuelcoletta1-source/unebdo">unebdo</a></h3>
-              <p>Policy computabile (OPC) + backbone giuridico-computabile (UNEBDO).</p>
-              <div class="meta"><span class="tag ok">CORE</span><span class="tag info">POLICY</span><span class="tag warn">FAIL-CLOSED</span></div>
-            </li>
+---
 
-            <li class="item">
-              <h3>
-                <a href="https://github.com/manuelcoletta1-source/ipr-core">ipr-core</a> ·
-                <a href="https://github.com/manuelcoletta1-source/ipr-gate">ipr-gate</a> ·
-                <a href="https://github.com/manuelcoletta1-source/ipr-exchange">ipr-exchange</a> ·
-                <a href="https://github.com/manuelcoletta1-source/ipr-comply">ipr-comply</a>
-              </h3>
-              <p>Nucleo IPR: struttura, lifecycle, controllo ex-ante, scambio e conformità.</p>
-              <div class="meta"><span class="tag ok">CORE</span><span class="tag info">IPR</span></div>
-            </li>
-          </ul>
-        </div>
+## Principi della Piattaforma
 
-        <div class="col-6">
-          <h2 class="section">Extensions</h2>
-          <ul class="list">
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/iospace">iospace</a></h3>
-              <p>Spazio identitario digitale: contesto operativo e sessione identitaria.</p>
-              <div class="meta"><span class="tag info">EXT</span></div>
-            </li>
+- Progettazione **UE-first**
+- Separazione tra dato, prova e governance
+- Neutralità tecnologica
+- Auditabilità e verificabilità indipendente
+- Validità nel lungo periodo
 
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/neuroloop">neuroloop</a></h3>
-              <p>Feedback deterministico: osservazione, correlazione, proposta (non esecuzione).</p>
-              <div class="meta"><span class="tag info">EXT</span><span class="tag warn">NO AUTONOMY</span></div>
-            </li>
+---
 
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/metaexchange">metaexchange</a></h3>
-              <p>Layer di scambio tracciato (dati/diritti/valore) subordinato a policy e IPR valido.</p>
-              <div class="meta"><span class="tag info">EXT</span></div>
-            </li>
+## Ruolo della Piattaforma
 
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/cyberglobal">cyberglobal</a></h3>
-              <p>Governance e interoperabilità in ambienti multi-soggetto e multi-giurisdizione.</p>
-              <div class="meta"><span class="tag info">EXT</span></div>
-            </li>
+Hermeticum B.C.E. **non sostituisce** i sistemi esistenti.
+Opera come **layer superiore di coerenza, prova e verifica**,
+a supporto di cittadini, professionisti e istituzioni.
 
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/ue-ipr-registry">ue-ipr-registry</a> · <a href="https://github.com/manuelcoletta1-source/ipr-gov-eu-standard">ipr-gov-eu-standard</a></h3>
-              <p>Registro sperimentale e candidato standard di governance computabile UE.</p>
-              <div class="meta"><span class="tag info">EXT</span><span class="tag ok">EU</span></div>
-            </li>
-          </ul>
-        </div>
+---
 
-        <div class="col-6">
-          <h2 class="section">Reference Implementations</h2>
-          <ul class="list">
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/gitjoker-c2">gitjoker-c2</a></h3>
-              <p>Orchestrazione e publishing su GitHub. Reference implementation (non parte del core standard).</p>
-              <div class="meta"><span class="tag warn">REF</span><span class="tag info">C2 TOOLING</span></div>
-            </li>
-
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/ai-joker-workers">ai-joker-workers</a></h3>
-              <p>Bridge operativo IPR ↔ workflow. Standardizza input/output e sessioni (reference).</p>
-              <div class="meta"><span class="tag warn">REF</span><span class="tag info">WORKFLOWS</span></div>
-            </li>
-
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/hermeticum-bce-ai-workers">hermeticum-bce-ai-workers</a></h3>
-              <p>Rende verificabile il contributo umano nei processi assistiti da AI (reference).</p>
-              <div class="meta"><span class="tag warn">REF</span><span class="tag info">AI WORK</span></div>
-            </li>
-
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/hermeticum-bce-ipr">hermeticum-bce-ipr</a></h3>
-              <p>Gateway onboarding IPR personale (reference entry, subordinato allo standard).</p>
-              <div class="meta"><span class="tag warn">REF</span><span class="tag info">ONBOARD</span></div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-6">
-          <h2 class="section">Archived / Editorial</h2>
-          <ul class="list">
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica">corpus-esoterologia-ermetica</a></h3>
-              <p>Corpus editoriale: fondazione dottrinale e disciplinare (separato dallo stack tecnico).</p>
-              <div class="meta"><span class="tag">ARCHIVE</span><span class="tag info">EDITORIAL</span></div>
-            </li>
-            <li class="item">
-              <h3>
-                <a href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica-volume-I">volume I</a> ·
-                <a href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica-volume-2">volume II</a> ·
-                <a href="https://github.com/manuelcoletta1-source/lex-hermeticum-volume-3">volume III</a>
-              </h3>
-              <p>Volumi del Corpus: introduzione, Matrix 2026, Lex Hermeticum.</p>
-              <div class="meta"><span class="tag">ARCHIVE</span><span class="tag info">EDITORIAL</span></div>
-            </li>
-            <li class="item">
-              <h3>
-                <a href="https://github.com/manuelcoletta1-source/apocalipsis">apocalipsis</a> ·
-                <a href="https://github.com/manuelcoletta1-source/il-portale-dell-anticristo">il-portale-dell-anticristo</a> ·
-                <a href="https://github.com/manuelcoletta1-source/esoterologia-edizioni-ipr5">esoterologia-edizioni-ipr5</a>
-              </h3>
-              <p>Opere editoriali autonome e atti opponibili (non parte del core standard tecnico).</p>
-              <div class="meta"><span class="tag">ARCHIVE</span><span class="tag info">EDITORIAL</span></div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="card" id="verify" style="margin-top:12px">
-      <h2 class="section">Verify</h2>
-      <p class="muted" style="margin-top:0">
-        Verifica indipendente: stesso input → stesso hash. Nessuna fiducia implicita. Evidenza opponibile.
-      </p>
-
-      <div class="grid">
-        <div class="col-6">
-          <h2 class="section">Formato evidenza (minimo)</h2>
-          <pre>{
-  "artifact": "nome-file.ext",
-  "hash_alg": "SHA-256 | SHA-512",
-  "hash": "…",
-  "timestamp": "ISO-8601",
-  "policy": "policy-id / policy-hash",
-  "decision": "ALLOW | DENY",
-  "module": "ipr-gate / ipr-comply / …",
-  "notes": "opzionale"
-}</pre>
-          <p class="muted" style="margin:10px 0 0">
-            Questo è un formato minimale e umano. Le implementazioni possono estenderlo, ma non indebolirlo.
-          </p>
-        </div>
-
-        <div class="col-6">
-          <h2 class="section">Percorsi utili</h2>
-          <ul class="list">
-            <li class="item">
-              <h3><a href="./STANDARD.md">STANDARD.md</a></h3>
-              <p>Definizione standard: invarianti, requisiti minimi, verificabilità.</p>
-              <div class="meta"><span class="tag ok">SOURCE OF TRUTH</span></div>
-            </li>
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/ipr-core">ipr-core</a></h3>
-              <p>Struttura e lifecycle IPR. Base per evidenze e continuità temporale.</p>
-              <div class="meta"><span class="tag info">IPR</span></div>
-            </li>
-            <li class="item">
-              <h3><a href="https://github.com/manuelcoletta1-source/opc">opc</a> · <a href="https://github.com/manuelcoletta1-source/unebdo">unebdo</a></h3>
-              <p>Policy computabile + enforcement backbone.</p>
-              <div class="meta"><span class="tag info">POLICY</span><span class="tag warn">FAIL-CLOSED</span></div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="card" id="catalog" style="margin-top:12px">
-      <h2 class="section">Catalog</h2>
-      <p class="muted" style="margin-top:0">
-        Catalogo operativo (alto livello). Qui si descrive “cosa garantisce” ogni layer, non la sua narrativa.
-      </p>
-
-      <div class="grid">
-        <div class="col-4">
-          <div class="item">
-            <h3>Identity (IPR)</h3>
-            <p>Record primario, versionato e verificabile. Continuità temporale e opponibilità.</p>
-            <div class="meta"><span class="tag info">ipr-core</span><span class="tag info">ipr-gate</span></div>
-          </div>
-        </div>
-
-        <div class="col-4">
-          <div class="item">
-            <h3>Policy (OPC / UNEBDO)</h3>
-            <p>Regole computabili ex-ante. Fail-closed. Decisione deterministica.</p>
-            <div class="meta"><span class="tag info">opc</span><span class="tag info">unebdo</span></div>
-          </div>
-        </div>
-
-        <div class="col-4">
-          <div class="item">
-            <h3>Evidence (Verify)</h3>
-            <p>Evidenze verificabili indipendentemente. Audit riproducibile.</p>
-            <div class="meta"><span class="tag info">verify</span><span class="tag warn">audit</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="card" id="terms" style="margin-top:12px">
-      <h2 class="section">Terms</h2>
-      <p class="muted" style="margin-top:0">
-        Regole minime di utilizzo pubblico: chiarisce che questo è uno standard operativo e che le implementazioni
-        devono mantenere vincoli e verificabilità.
-      </p>
-
-      <ul class="list">
-        <li class="item">
-          <h3>Non-ambiguità</h3>
-          <p>Se un comportamento non è autorizzato da policy valida, viene negato (fail-closed).</p>
-        </li>
-        <li class="item">
-          <h3>Verificabilità</h3>
-          <p>L’evidenza deve essere verificabile da terzi senza accesso privilegiato.</p>
-        </li>
-        <li class="item">
-          <h3>Separazione ruoli</h3>
-          <p>Identità, decisione ed esecuzione sono separati. Nessun modulo deve “fare tutto”.</p>
-        </li>
-      </ul>
-
-      <p class="muted" style="margin:10px 0 0">
-        Nota: per termini legali completi, creare un file dedicato <code>TERMS.md</code> e linkarlo qui.
-      </p>
-    </section>
-
-    <footer>
-      <div class="footgrid">
-        <div>
-          <div><strong>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</strong></div>
-          <div>HERMETICUM B.C.E. S.r.l.</div>
-          <div class="muted" style="margin-top:6px">
-            Questa pagina è un entrypoint tecnico. Il documento normativo interno è <a href="./STANDARD.md">STANDARD.md</a>.
-          </div>
-        </div>
-
-        <div>
-          <div class="muted">
-            Link rapidi:
-            <a href="./STANDARD.md">STANDARD</a> ·
-            <a href="https://github.com/manuelcoletta1-source/hermeticum-bce-services">Repo</a> ·
-            <a href="#verify">Verify</a>
-          </div>
-          <div class="muted" style="margin-top:6px">
-            UE-first · Fail-Closed · Audit-by-Design
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
-</body>
-</html>
+**HERMETICUM B.C.E.**  
+Blindata · Computabile · Evolutiva  
+HERMETICUM B.C.E. S.r.l.
