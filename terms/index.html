@@ -3,218 +3,152 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — Terms</title>
-  <meta name="description" content="Termini operativi Hermeticum B.C.E.: UE-first, GDPR-min, audit-by-design, opponibilità e fail-closed." />
-  <meta name="theme-color" content="#0b0c10" />
+  <title>Terms — HERMETICUM Services</title>
+  <meta name="description" content="Termini e principi operativi UE-first. Fail-closed, audit-by-design, hash-only." />
   <style>
     :root{
-      color-scheme: dark;
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#a7abb6;
-      --accent:#7aa2ff;
-      --good:#64d2ff;
-      --warn:#ffd166;
-      --bad:#ff6b6b;
-      --radius:16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --max: 1040px;
+      --bg:#0b0c10; --panel:#0f1117; --line:#24262b; --text:#e8e8e8; --muted:#a9abb3;
+      --shadow:0 12px 36px rgba(0,0,0,.35); --r:16px; --r2:22px; --max:1100px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 15% -10%, rgba(122,162,255,.10), transparent 60%),
-                  radial-gradient(900px 500px at 90% 0%, rgba(100,210,255,.06), transparent 55%),
-                  var(--bg);
+      background:radial-gradient(1200px 700px at 20% 0%, #121525 0%, rgba(18,21,37,0) 55%),
+                 radial-gradient(900px 600px at 80% 10%, #141b2a 0%, rgba(20,27,42,0) 55%),
+                 var(--bg);
       color:var(--text);
-      line-height:1.5;
+      font:15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      letter-spacing:.2px;
     }
     a{color:inherit; text-decoration:none}
-    header{position:sticky; top:0; z-index:10; backdrop-filter: blur(10px); background: rgba(11,12,16,.7); border-bottom:1px solid rgba(36,38,43,.6);}
-    .topbar{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 22px; max-width:var(--max); margin:0 auto;}
-    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
-    .mark{
-      width:38px; height:38px; border-radius:12px; border:1px solid rgba(36,38,43,.9);
-      background: linear-gradient(180deg, rgba(122,162,255,.18), rgba(15,17,23,.9));
-      display:grid; place-items:center;
-      box-shadow: var(--shadow);
-      font-weight:700;
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r2);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow); position:sticky; top:14px; z-index:10; backdrop-filter: blur(10px);
     }
-    .brand b{letter-spacing:.4px}
-    .brand small{display:block; color:var(--muted); font-weight:500}
-    nav{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
-    .pill{
-      border:1px solid rgba(36,38,43,.9); background: rgba(15,17,23,.75);
-      padding:8px 10px; border-radius:999px; color:var(--muted);
-      transition: transform .08s ease, border-color .08s ease, color .08s ease;
-      font-size: 13px;
+    .brand{font-weight:900; letter-spacing:.6px}
+    .nav{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{
+      padding:8px 10px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(255,255,255,.03); color:var(--muted); font-weight:800; transition:.15s ease;
     }
-    .pill:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.6); color:var(--text)}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
-    .grid{display:grid; grid-template-columns: 1.15fr .85fr; gap:16px}
-    @media (max-width: 920px){ .grid{grid-template-columns:1fr} nav{justify-content:flex-start} }
+    .chip:hover{transform:translateY(-1px); color:var(--text); background:rgba(255,255,255,.05)}
+    .hero{
+      margin-top:18px; border:1px solid var(--line); border-radius:var(--r2); padding:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+    }
+    .mark{margin:0 0 6px; font-weight:900}
+    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
+    h1{margin:0 0 8px; font-size:28px; line-height:1.15}
+    .sub{margin:0; color:var(--muted); max-width:85ch}
+    .section{margin-top:16px}
     .card{
-      background: rgba(15,17,23,.78);
-      border:1px solid rgba(36,38,43,.9);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: var(--shadow);
+      border:1px solid var(--line); border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      padding:16px; box-shadow:var(--shadow);
+      margin-top:12px;
     }
-    h1{margin:0 0 10px; font-size: 30px; line-height:1.15}
-    h2{margin:18px 0 10px; font-size: 16px; color:var(--muted); font-weight:700; letter-spacing:.2px}
-    p{margin:0 0 12px; color:var(--muted)}
-    .lead{color:var(--text); font-size: 15px}
-    .rule{height:1px; background: rgba(36,38,43,.8); margin: 14px 0}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
-    ul{margin:0 0 12px 18px; color:var(--muted)}
-    li{margin:6px 0}
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      border:1px solid rgba(36,38,43,.9);
-      padding:8px 10px; border-radius: 999px;
-      background: rgba(11,12,16,.35);
-      color: var(--muted);
-      font-size: 12px;
-      margin: 6px 6px 0 0;
-    }
-    .dot{width:8px; height:8px; border-radius:99px; background: rgba(100,210,255,.85)}
+    .card h2{margin:0 0 6px; font-size:18px}
+    .card p{margin:0; color:var(--muted)}
+    .list{margin:10px 0 0; padding-left:16px; color:var(--muted)}
+    .list li{margin:6px 0}
     .callout{
-      border:1px solid rgba(36,38,43,.9);
-      border-radius: var(--radius);
-      padding:14px;
-      background: rgba(11,12,16,.35);
+      margin-top:14px; border:1px dashed rgba(255,255,255,.18); border-radius:var(--r);
+      padding:14px; background:rgba(255,255,255,.02); color:var(--muted); font-weight:800;
     }
-    .ok{color: var(--good)}
-    .warn{color: var(--warn)}
-    .bad{color: var(--bad)}
-    footer{padding:18px 0 32px; color:var(--muted); font-size: 12px}
-    .smalllinks{display:flex; flex-wrap:wrap; gap:10px}
-    .smalllinks a{color:var(--muted)}
-    .smalllinks a:hover{color:var(--text)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+    .footer{
+      margin-top:18px; color:var(--muted); font-size:12px; padding:14px 2px 0;
+      display:flex; gap:10px; justify-content:space-between; border-top:1px solid var(--line);
+    }
   </style>
 </head>
-
 <body>
-  <header>
-    <div class="topbar">
-      <a class="brand" href="../" aria-label="Hermeticum B.C.E. — Services">
-        <div class="mark">🜏</div>
-        <div>
-          <b>Hermeticum B.C.E.</b>
-          <small>Terms · regole operative & opponibilità</small>
-        </div>
-      </a>
-      <nav aria-label="Navigazione">
-        <a class="pill" href="../">Home</a>
-        <a class="pill" href="../catalog/">Catalog</a>
-        <a class="pill" href="../onboarding/">Onboarding</a>
-        <a class="pill" href="../evidence/">Evidence</a>
-      </nav>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">Terms</div>
+      <div class="nav">
+        <a class="chip" href="../">Home</a>
+        <a class="chip" href="../catalog/">Catalog</a>
+        <a class="chip" href="../onboarding/">Onboarding</a>
+        <a class="chip" href="../verify/">Verify</a>
+      </div>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="grid">
+    <header class="hero">
+      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
+      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
+
+      <h1>Termini e principi operativi</h1>
+      <p class="sub">
+        Questa sezione definisce i <b>principi vincolanti</b> dell’ecosistema HERMETICUM.
+        L’uso dei servizi implica accettazione di un modello <b>UE-first</b>,
+        <b>audit-by-design</b> e <b>fail-closed</b>.
+      </p>
+    </header>
+
+    <section class="section">
       <div class="card">
-        <h1>Terms (Regole Operative)</h1>
-        <p class="lead">
-          Questa pagina descrive i principi tecnici e procedurali usati in <b>Hermeticum B.C.E. — Services</b>.
-          Non è una promessa commerciale: è un set di vincoli verificabili.
-        </p>
-
-        <div class="rule"></div>
-
-        <h2>Principi non negoziabili</h2>
-        <ul>
-          <li><b>UE-first</b>: riferimento normativo e operativo basato su standard e prassi UE.</li>
-          <li><b>GDPR-min</b>: minimizzazione dei dati; preferenza per <span class="mono">hash-only</span> dove possibile.</li>
-          <li><b>Audit-by-design</b>: ogni step deve produrre evidenze controllabili.</li>
-          <li><b>Opponibilità</b>: ciò che viene dichiarato deve poter essere verificato indipendentemente.</li>
-          <li><b>Fail-closed</b>: se un requisito non è soddisfatto, il flusso deve fermarsi.</li>
-        </ul>
-
-        <div class="rule"></div>
-
-        <h2>Definizioni essenziali</h2>
-        <p><b>IPR Personale</b>: artefatto operativo che collega una persona reale a prove verificabili nel tempo.</p>
-        <p><b>Evidence Pack</b>: insieme standard di template e allegati per la verifica pubblica e ripetibile.</p>
-        <p><b>Digest/Hash</b>: impronta crittografica usata per attestare integrità senza esporre contenuti.</p>
-
-        <div class="rule"></div>
-
-        <h2>Policy dati</h2>
-        <div class="callout">
-          <p><b class="ok">✔ Preferito</b>: hash, metadati minimi, template, procedure verificabili.</p>
-          <p><b class="warn">△ Limitato</b>: dati personali in chiaro solo quando necessario e con scopo esplicito.</p>
-          <p><b class="bad">✖ Evitato</b>: pubblicazione di documenti integrali, PII non necessaria, “data hoarding”.</p>
-          <p class="mono">Principio: minimizzazione + separazione tra contenuto e prova.</p>
-        </div>
-
-        <div class="rule"></div>
-
-        <h2>Verifica & responsabilità</h2>
+        <h2>Principio di verificabilità</h2>
         <p>
-          Le verifiche sono progettate per essere ripetibili. Tuttavia:
+          Ogni attività reale deve essere <b>verificabile a posteriori</b>.
+          Eventi, decisioni e risultati sono validi solo se accompagnati da prove tracciate.
         </p>
-        <ul>
-          <li>Questo repository non certifica identità legali UE: si appoggia a documenti e procedure già esistenti.</li>
-          <li>Ogni utilizzatore è responsabile di fornire input corretti e di rispettare le leggi applicabili.</li>
-          <li>In caso di ambiguità o dati insufficienti, il sistema deve fermarsi (fail-closed).</li>
+        <ul class="list">
+          <li>assenza di prova ⇒ attività non valida</li>
+          <li>assenza di continuità ⇒ attività non opponibile</li>
         </ul>
-
-        <div class="rule"></div>
-
-        <h2>Versioning & tracciabilità</h2>
-        <p>
-          Le modifiche al sistema sono tracciate via repository (commit, diff, versioning).
-          Le evidenze pubbliche devono indicare chiaramente la versione del template/procedura usata.
-        </p>
-        <span class="badge"><span class="dot" aria-hidden="true"></span> audit-by-design</span>
-        <span class="badge"><span class="dot" aria-hidden="true"></span> hash-only (where possible)</span>
-        <span class="badge"><span class="dot" aria-hidden="true"></span> fail-closed</span>
       </div>
 
-      <aside class="card">
-        <h2>Uso consigliato</h2>
+      <div class="card">
+        <h2>Fail-closed</h2>
         <p>
-          Leggi questa pagina come “regole del gioco”.
-          Se una pagina del sito o un template viola questi principi, è un bug da correggere.
+          Il sistema opera in modalità <b>fail-closed</b>:
+          in mancanza di identità, firma, policy o evidenza, l’operazione è negata.
         </p>
-
-        <div class="rule"></div>
-
-        <h2>Link rapidi</h2>
-        <ul>
-          <li><a href="../onboarding/">Onboarding IPR</a></li>
-          <li><a href="../evidence/">Evidence Pack</a></li>
-          <li><a href="../verify/">Verify</a></li>
-          <li><a href="../create/">Create</a></li>
+        <ul class="list">
+          <li>nessuna eccezione manuale</li>
+          <li>nessuna fiducia implicita</li>
         </ul>
+      </div>
 
-        <div class="rule"></div>
-
-        <h2>Nota (chiara e sobria)</h2>
+      <div class="card">
+        <h2>UE-first / GDPR-min</h2>
         <p>
-          Questo è un framework tecnico-operativo. Non è un’arma e non è un sistema offensivo.
-          È progettato per interoperabilità, sicurezza e governance con standard UE-first.
+          HERMETICUM è progettato secondo i principi UE-first e GDPR-min.
+          I dati personali non sono mai esposti pubblicamente.
         </p>
+        <ul class="list">
+          <li>pubblico = <b>hash-only</b></li>
+          <li>privato = dati reali (off-chain)</li>
+        </ul>
+      </div>
 
-        <span class="badge mono">UE-first · GDPR-min · Opponibile</span>
-      </aside>
+      <div class="card">
+        <h2>OPC e UNEBDO</h2>
+        <p>
+          Le decisioni operative sono determinate da <b>OPC</b> (policy computabili)
+          e dimostrate da <b>UNEBDO</b> (tracciatura ed evidenza).
+        </p>
+        <ul class="list">
+          <li>OPC produce esiti deterministici (ALLOW / DENY)</li>
+          <li>UNEBDO registra eventi e continuità temporale</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        Principio finale: <b>niente prova, niente operazione</b>.  
+        La fiducia non è concessa, è verificata.
+      </div>
     </section>
 
-    <footer class="wrap">
-      <div class="smalllinks" aria-label="Link utili">
-        <a href="../">Home</a>
-        <a href="../catalog/">Catalog</a>
-        <a href="../onboarding/">Onboarding</a>
-        <a href="../evidence/">Evidence</a>
-      </div>
-      <p class="mono">HERMETICUM B.C.E. — Terms</p>
-    </footer>
-  </main>
+    <div class="footer">
+      <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+      <div>HERMETICUM B.C.E. S.r.l.</div>
+    </div>
+  </div>
 </body>
 </html>
