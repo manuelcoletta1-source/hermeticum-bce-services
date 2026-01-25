@@ -1,135 +1,77 @@
-# Hermeticum B.C.E. — Services
-## Mappa ufficiale dello spazio di continuità operativa
+# HERMETICUM B.C.E. — Services HUB
+**Blindata · Computabile · Evolutiva**  
+**UE-first · GDPR-min · Audit-by-design · Fail-closed**
 
-Hermeticum B.C.E. è **uno spazio di continuità operativa sopra Internet**.  
-Questo repository **Services** ne è la **mappa ufficiale**.
+Questo repository è l’**hub pubblico** dell’ecosistema **Hermeticum B.C.E.**: una infrastruttura digitale europea cibernetica che opera con **identità verificata (IPR)** e abilita **sicurezza dei dati** + **operatività protetta**.
 
-Qui non si esegue.  
-Qui si **orchestrano** identità, regole, esecuzione e traccia.
-
----
-
-## Cos’è uno spazio di continuità operativa
-
-Uno spazio di continuità operativa è un ambiente in cui:
-
-- l’identità non si resetta nel tempo
-- le decisioni sono vincolate da regole opponibili
-- l’esecuzione è controllata
-- le azioni restano verificabili e difendibili
-
-Non è una piattaforma.  
-Non è un’applicazione.  
-È un **livello di responsabilità persistente**.
+> Principio: se non è verificabile → non è eseguibile.  
+> Hash ≠ opinione · Firma ≠ promessa · Audit ≠ fiducia
 
 ---
 
-## Ruolo di Services
-
-Services è il **punto di verità** dell’ecosistema Hermeticum B.C.E.
-
-- dichiara cosa esiste
-- definisce i moduli
-- collega i repository
-- stabilisce l’ordine corretto
-
-Nessuna decisione viene presa qui.  
-Nessuna AI opera qui.
+## Cos’è
+Hermeticum B.C.E. non è “una banca digitalizzata”: è un **sistema cibernetico** (input → decisione → output → feedback) progettato per rendere l’identità:
+- **attribuibile** (chi ha agito)
+- **tracciabile** (cosa è successo)
+- **opponibile** (dimostrabile nel tempo, UE-first)
 
 ---
 
-## Architettura a moduli
+## Come orientarsi (stack logico)
+Ordine di vincolo → operatività:
 
-Hermeticum B.C.E. è composto da quattro domini operativi:
-
-### 1. Identity — IPR
-Identità operativa continua nel tempo.  
-Senza IPR non esiste istanza personale o aziendale.
-
-> Stato: **attivo / in evoluzione**
-
----
-
-### 2. Policy — OPC
-Opponible Policy Core.  
-Policy deterministiche, versionate, fail-closed.
-
-- accesso
-- evoluzione
-- limiti di responsabilità
-
-> Repository: https://manuelcoletta1-source.github.io/opc/
+1) **OPC** — Policy (regole opponibili, versionate)  
+2) **UNEBDO** — Enforcement (vincolo strutturale)  
+3) **IPR** — Identità verificata (chiave operativa)  
+4) **COMPLY / EXCHANGE** — conformità e scambio governato  
+5) **IOSPACE** — contesto operativo verificabile  
+6) **NEUROLOOP** — loop runtime controllati e interrompibili  
+7) **CyberGlobal** — governance/interoperabilità cross-dominio (dual-use controllato)  
+8) **AI JOKER (Workers)** — cockpit operatore Human-in-the-Loop
 
 ---
 
-### 3. Execution — AI JOKER-C2
-Execution layer AI-first vincolato da IPR e OPC.
+## Portal (moduli e repo collegati)
+### Core governance
+- **UNEBDO** — Root Enforcement  
+  Sito: https://manuelcoletta1-source.github.io/unebdo/  
+- **OPC** — Opponible Policy Core  
+  Sito: https://manuelcoletta1-source.github.io/opc/
 
-- senza IPR → DENY
-- senza evidence → nessuna evoluzione
+### Operatività e scambio
+- **METAEXCHANGE** — scambio governato di dati/diritti/valore  
+  Sito: https://manuelcoletta1-source.github.io/metaexchange/
+- **IOSPACE** — spazio operativo verificabile  
+  Sito: https://manuelcoletta1-source.github.io/iospace/
+- **NEUROLOOP** — loop dinamici verificabili e interrompibili  
+  Sito: https://manuelcoletta1-source.github.io/neuroloop/
 
-> Repository: https://manuelcoletta1-source.github.io/ai-joker-workers/
+### Federazione & dual-use controllato
+- **CyberGlobal** — governance tecnica e interoperabilità globale  
+  Sito: https://manuelcoletta1-source.github.io/cyberglobal/
 
----
-
-### 4. Evidence — Audit
-Traccia append-only delle azioni.
-
-- hash-only
-- GDPR-min
-- audit-by-design
-
-> Stato: **in arrivo**
-
----
-
-## Flusso minimo di ingresso
-
-```text
-Attivazione IPR
-      ↓
-Accettazione policy OPC
-      ↓
-Esecuzione (AI JOKER-C2)
-      ↓
-Produzione evidence (audit)
-
-Questo flusso è deterministico.
-Se una condizione manca, il sistema si ferma.
-
+### Interfaccia operatore
+- **AI JOKER — Workers** (cockpit Human-in-the-Loop, audit locale, fail-closed)  
+  Sito: https://manuelcoletta1-source.github.io/ai-joker-workers/
 
 ---
 
-Cosa NON è Hermeticum B.C.E.
-
-Hermeticum B.C.E. non è:
-
-un nuovo Internet
-
-un social network
-
-un’AI autonoma
-
-un wallet
-
-
-È uno strato di continuità e responsabilità sopra l’infrastruttura esistente.
-
+## Pagine in questo repo
+- **Home / Services HUB**: `/`
+- **Catalog**: `/catalog/`
+- **Verify**: `/verify/`
+- **Terms**: `/terms/`
 
 ---
 
-Destinatari
+## Protocollo canonico (IPR-derived)
+PROTO: AI_JOKER_C2 | TYPE: IPR-DERIVED | ROOT: IPR-3@ManuelColetta  
+TIME: 2026-01-19T15:30+01:00 | MODE: AI-FIRST/IPR-REQ/FAIL-CLOSED  
+BACKBONE: UNEBDO_ΞΩ | POLICY: UE-FIRST/GDPR-MIN/HASH-ONLY/AUDIT
 
-Questo spazio è progettato per:
+---
 
-Unione Europea (compliance, continuità, interoperabilità)
-
-Pubblica Amministrazione (fascicolo operativo persistente)
-
-Imprese (governance dell’AI e delle decisioni)
-
-
-Lo stesso sistema, tre linguaggi diversi.
-
-
+## Crediti
+© Manuel Coletta — **Esoterologia Edizioni**  
+Sigillo: **HERMETICUM B.C.E. S.r.l.**
 
