@@ -23,43 +23,70 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
     .top{
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
       padding:14px 16px; border:1px solid var(--line); border-radius:var(--r2);
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       box-shadow:var(--shadow); position:sticky; top:14px; z-index:10; backdrop-filter: blur(10px);
     }
-    .brand{font-weight:900; letter-spacing:.6px}
-    .nav{display:flex; gap:10px; flex-wrap:wrap}
+    .brand{font-weight:900; letter-spacing:.6px; white-space:nowrap}
+    .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
     .chip{
       padding:8px 10px; border:1px solid var(--line); border-radius:999px;
       background:rgba(255,255,255,.03); color:var(--muted); font-weight:800;
+      transition:.15s ease;
     }
-    .chip:hover{color:var(--text); background:rgba(255,255,255,.06)}
+    .chip:hover{transform:translateY(-1px); color:var(--text); background:rgba(255,255,255,.06)}
     .hero{
       margin-top:18px; border:1px solid var(--line); border-radius:var(--r2);
       padding:22px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       box-shadow:var(--shadow);
     }
+    .mark{margin:0 0 6px; font-weight:900}
+    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
     h1{margin:0 0 8px; font-size:30px; line-height:1.15}
-    .sub{margin:0; color:var(--muted); max-width:90ch}
+    .sub{margin:0; color:var(--muted); max-width:92ch}
     .cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
     .btn{
       padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
       background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
-      font-weight:900;
+      font-weight:900; transition:.15s ease;
     }
+    .btn:hover{transform:translateY(-1px)}
     .btn.primary{background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08))}
-    .grid{display:grid; gap:12px; margin-top:16px}
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
+      margin:18px 0 10px;
+    }
+    .sectionTitle h2{margin:0; font-size:16px}
+    .sectionTitle span{color:var(--muted); font-weight:900; font-size:12px}
+    .grid{display:grid; gap:12px}
     @media (min-width:900px){ .grid{grid-template-columns:repeat(3,1fr)} }
     .card{
       border:1px solid var(--line); border-radius:var(--r);
       background:rgba(255,255,255,.03); padding:16px; box-shadow:var(--shadow);
+      transition:.15s ease; min-height:140px; display:block;
     }
-    .card b{display:block; margin-bottom:6px}
+    .card:hover{transform:translateY(-2px); background:rgba(255,255,255,.045)}
+    .card b{display:block; margin-bottom:6px; font-size:16px}
+    .card p{margin:0; color:var(--muted)}
+    .tag{
+      display:inline-block; margin-top:10px; padding:6px 8px;
+      border:1px solid var(--line); border-radius:999px; color:var(--muted);
+      font-weight:900; font-size:12px; background:rgba(0,0,0,.14);
+    }
+    .callout{
+      margin-top:14px;
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius:var(--r);
+      padding:14px;
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      font-weight:800;
+    }
     .footer{
       margin-top:18px; color:var(--muted); font-size:12px;
       padding-top:14px; border-top:1px solid var(--line);
-      display:flex; justify-content:space-between; gap:10px;
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
     }
   </style>
 </head>
@@ -71,51 +98,99 @@
         <a class="chip" href="./catalog/">Catalog</a>
         <a class="chip" href="./onboarding/">Onboarding</a>
         <a class="chip" href="./verify/">Verify</a>
+        <a class="chip" href="./evidence/">Evidence</a>
+        <a class="chip" href="./terms/">Terms</a>
         <a class="chip" href="./modules/">Modules</a>
         <a class="chip" href="./governance/">Governance</a>
+        <a class="chip" href="./cta/">CTA</a>
+        <a class="chip" href="./create/">Create</a>
+        <a class="chip" href="./assets/brand.html">Brand</a>
       </div>
     </div>
 
     <section class="hero">
-      <h1>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</h1>
+      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
+      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
+
+      <h1>IPR personale per operatività reale con AI JOKER-C2.</h1>
       <p class="sub">
-        Ecosistema cibernetico per operatività reale con <b>IPR personale</b>.
         Senza IPR non puoi certificare studio, lavoro o esperimenti.
-        Con IPR abiliti <b>AI JOKER-C2</b> in modalità UE-first, auditabile e fail-closed.
+        Con IPR operi in modalità UE-first, auditabile e fail-closed:
+        policy computabili (OPC), evidenze tracciate (UNEBDO), continuità nel tempo.
       </p>
+
       <div class="cta">
         <a class="btn primary" href="./onboarding/">Attiva IPR</a>
         <a class="btn" href="./catalog/">Cosa abilita</a>
         <a class="btn" href="./verify/">Verifica prove</a>
+        <a class="btn" href="./cta/">Call To Action</a>
+      </div>
+
+      <div class="callout">
+        Principio: <b>se non è verificabile, non è reale</b>. Niente prova → niente operazione.
       </div>
     </section>
 
-    <section class="grid">
-      <div class="card">
+    <div class="sectionTitle">
+      <h2>Percorsi principali</h2>
+      <span>service-first</span>
+    </div>
+
+    <div class="grid">
+      <a class="card" href="./catalog/">
         <b>Catalog</b>
-        <p class="sub">Cosa puoi fare con IPR / senza IPR no.</p>
-      </div>
-      <div class="card">
+        <p>Con IPR puoi / senza IPR no: scuola, lavoro, esperimenti.</p>
+        <span class="tag">capabilities</span>
+      </a>
+
+      <a class="card" href="./onboarding/">
         <b>Onboarding</b>
-        <p class="sub">Attivazione IPR e ingresso nel perimetro operativo.</p>
-      </div>
-      <div class="card">
+        <p>Attivazione IPR, livelli e ingresso nel perimetro operativo.</p>
+        <span class="tag">activation</span>
+      </a>
+
+      <a class="card" href="./verify/">
         <b>Verify</b>
-        <p class="sub">Hash, evidence, continuità temporale.</p>
-      </div>
-      <div class="card">
-        <b>Modules</b>
-        <p class="sub">I moduli che operano all’unisono.</p>
-      </div>
-      <div class="card">
-        <b>Governance</b>
-        <p class="sub">Ruoli, policy, controllo UE-first.</p>
-      </div>
-      <div class="card">
+        <p>Verifica hash, evidenze e continuità temporale.</p>
+        <span class="tag">verification</span>
+      </a>
+
+      <a class="card" href="./evidence/">
         <b>Evidence</b>
-        <p class="sub">Prove pubbliche e opponibilità.</p>
-      </div>
-    </section>
+        <p>Prove pubbliche e opponibilità: cosa vale e cosa no.</p>
+        <span class="tag">proof</span>
+      </a>
+
+      <a class="card" href="./terms/">
+        <b>Terms</b>
+        <p>UE-first, GDPR-min, audit-by-design, fail-closed.</p>
+        <span class="tag">rules</span>
+      </a>
+
+      <a class="card" href="./modules/">
+        <b>Modules</b>
+        <p>I moduli che operano all’unisono con AI JOKER-C2 e IPR.</p>
+        <span class="tag">ecosystem</span>
+      </a>
+
+      <a class="card" href="./governance/">
+        <b>Governance</b>
+        <p>Ruoli, controllo computabile, responsabilità e opposabilità.</p>
+        <span class="tag">control</span>
+      </a>
+
+      <a class="card" href="./create/">
+        <b>Create</b>
+        <p>Generazione manifest IPR (strumento operativo).</p>
+        <span class="tag">tooling</span>
+      </a>
+
+      <a class="card" href="./assets/brand.html">
+        <b>Brand</b>
+        <p>Uso canonico del marchio e sigillo ufficiale.</p>
+        <span class="tag">seal</span>
+      </a>
+    </div>
 
     <div class="footer">
       <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
