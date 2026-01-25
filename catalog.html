@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hermeticum B.C.E. — Catalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Catalogo servizi Hermeticum B.C.E. — piani UE-first con stack software sincrono e AI JOKER-C2." />
+
+  <style>
+    :root{
+      --bg:#0b0d11;
+      --panel:#10131a;
+      --line:#1f2430;
+      --text:#e6e8ec;
+      --muted:#9aa3b2;
+      --accent:#4da3ff;
+      --ok:#3bd18a;
+      --warn:#ffcc66;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    header{
+      padding:56px 24px 28px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#0c0f16,#0b0d11);
+    }
+    header h1{margin:0 0 12px;font-size:2.2rem;letter-spacing:0.3px}
+    header p{margin:0;max-width:860px;color:var(--muted);font-size:1.05rem}
+
+    nav{
+      max-width:1100px;
+      margin:0 auto;
+      padding:18px 24px 0;
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      border:1px solid var(--line);
+      padding:8px 10px;
+      border-radius:10px;
+      font-size:0.9rem;
+    }
+    nav a:hover{border-color:var(--accent);color:var(--text)}
+
+    main{max-width:1100px;margin:0 auto;padding:44px 24px}
+    section{margin-bottom:64px}
+    h2{
+      font-size:1.55rem;
+      margin:0 0 16px;
+      border-left:4px solid var(--accent);
+      padding-left:12px;
+    }
+
+    .note{
+      max-width:900px;
+      color:var(--muted);
+      background:rgba(255,255,255,0.02);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:18px 18px;
+    }
+    .note strong{color:var(--text)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:22px;
+      margin-top:18px;
+    }
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      min-height: 360px;
+    }
+    .card h3{margin:0;font-size:1.15rem}
+    .card p{margin:0;color:var(--muted);font-size:0.95rem}
+    .pill{
+      display:inline-block;
+      font-size:0.72rem;
+      padding:4px 9px;
+      border-radius:8px;
+      border:1px solid var(--line);
+      color:var(--ok);
+      letter-spacing:0.4px;
+      width:fit-content;
+    }
+    .price{
+      margin-top:2px;
+      border-top:1px solid var(--line);
+      padding-top:14px;
+      display:grid;
+      gap:6px;
+    }
+    .price .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap:12px;
+    }
+    .price .amt{
+      font-size:1.35rem;
+      font-weight:700;
+      letter-spacing:0.2px;
+    }
+    .price .sub{color:var(--muted);font-size:0.9rem}
+    ul{margin:0;padding-left:18px;color:var(--muted);font-size:0.93rem}
+    li{margin:8px 0}
+
+    .cta{
+      margin-top:auto;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-block;
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      color:var(--text);
+      font-size:0.92rem;
+    }
+    .btn.primary{border-color:var(--accent);color:var(--text)}
+    .btn:hover{border-color:var(--accent)}
+
+    .small{
+      color:var(--muted);
+      font-size:0.88rem;
+      max-width:900px;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      padding:36px 24px;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.85rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Catalogo Servizi — Hermeticum B.C.E.</h1>
+  <p>
+    Tutti i piani attivano lo stesso principio: <strong>utente + AI JOKER-C2 + 6 software</strong> (CyberGlobal, UNEBDO, OPC, MetaExchange, NeuroLoop, IoSpace)
+    che operano <strong>sempre all’unisono</strong>. La differenza tra i piani è il livello di profondità: prove, governance, audit e continuità.
+  </p>
+</header>
+
+<nav>
+  <a href="./index.html">Services</a>
+  <a href="./catalog.html">Catalog</a>
+  <a href="./verify.html">Verify</a>
+  <a href="./terms.html">Terms</a>
+</nav>
+
+<main>
+
+  <section>
+    <h2>Regola Operativa</h2>
+    <div class="note">
+      Hermeticum B.C.E. <strong>non fornisce moduli isolati</strong>.
+      Ogni piano abilita un’unica macchina: i <strong>sei software sincroni</strong> lavorano con l’utente e sono orchestrati da <strong>AI JOKER-C2</strong>.
+      In ottica UE-first, l’intero ciclo è progettato per <strong>tracciabilità</strong>, <strong>opponibilità</strong> e <strong>audit</strong>.
+    </div>
+  </section>
+
+  <section>
+    <h2>Piani (mensile / annuale)</h2>
+
+    <div class="grid">
+
+      <!-- L1 -->
+      <div class="card">
+        <div class="pill">IPR LEVEL 1</div>
+        <h3>Starter — Identità &amp; Traccia</h3>
+        <p>
+          Attivazione IPR e pipeline di base per prove verificabili.
+          Progettato per cittadini e professionisti che vogliono un’identità digitale con continuità.
+        </p>
+
+        <ul>
+          <li>Attivazione IPR + profilo operativo</li>
+          <li>Evidence pack base (hash + struttura di prova)</li>
+          <li>Flusso guidato per ancoraggi pubblici (quando applicabile)</li>
+          <li>AI JOKER-C2: assistenza operativa e controllo coerenza</li>
+          <li>Stack 6 software attivo (sincrono), profondità base</li>
+        </ul>
+
+        <div class="price">
+          <div class="row">
+            <span class="sub">Mensile</span>
+            <span class="amt">€19</span>
+          </div>
+          <div class="row">
+            <span class="sub">Annuale</span>
+            <span class="amt">€190</span>
+          </div>
+          <div class="sub">UE-first · audit-by-design · fail-closed</div>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="./onboarding/">Avvia onboarding</a>
+          <a class="btn" href="./verify.html">Verifica</a>
+        </div>
+      </div>
+
+      <!-- L2 -->
+      <div class="card">
+        <div class="pill">IPR LEVEL 2</div>
+        <h3>Professional — Governance &amp; Policy</h3>
+        <p>
+          Per attività, team e organizzazioni che richiedono policy opponibili,
+          versionamento e processi di compliance più strutturati.
+        </p>
+
+        <ul>
+          <li>Tutto L1</li>
+          <li>OPC (policy opponibili) con baseline operativa</li>
+          <li>Evidence pack esteso e tracciabilità incrementale</li>
+          <li>MetaExchange: scambio controllato (dati/diritti) in regime UE-first</li>
+          <li>AI JOKER-C2: orchestrazione e verifiche operative avanzate</li>
+        </ul>
+
+        <div class="price">
+          <div class="row">
+            <span class="sub">Mensile</span>
+            <span class="amt">€49</span>
+          </div>
+          <div class="row">
+            <span class="sub">Annuale</span>
+            <span class="amt">€490</span>
+          </div>
+          <div class="sub">Governance · policy · opponibilità</div>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="./onboarding/">Avvia onboarding</a>
+          <a class="btn" href="./terms.html">Termini</a>
+        </div>
+      </div>
+
+      <!-- L3 -->
+      <div class="card">
+        <div class="pill">IPR LEVEL 3</div>
+        <h3>Institutional — Audit &amp; Continuity</h3>
+        <p>
+          Per contesti istituzionali o ad alta sensibilità: audit continuo,
+          governance forte e interoperabilità (CyberGlobal) come strato di coordinamento.
+        </p>
+
+        <ul>
+          <li>Tutto L2</li>
+          <li>UNEBDO ΦΩ: enforcement tecnico-legale avanzato</li>
+          <li>CyberGlobal: interoperabilità e coordinamento multi-ente</li>
+          <li>NeuroLoop: feedback e adattamento controllato</li>
+          <li>IoSpace: spazio operativo digitale esteso</li>
+          <li>AI JOKER-C2: controllo C2 con tracciabilità e audit readiness</li>
+        </ul>
+
+        <div class="price">
+          <div class="row">
+            <span class="sub">Mensile</span>
+            <span class="amt">€99</span>
+          </div>
+          <div class="row">
+            <span class="sub">Annuale</span>
+            <span class="amt">€990</span>
+          </div>
+          <div class="sub"><span style="color:var(--warn)">Istituzionale</span> · audit · continuità</div>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="./onboarding/">Avvia onboarding</a>
+          <a class="btn" href="./verify.html">Verifica</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Nota su prezzi e compliance</h2>
+    <p class="small">
+      I prezzi sono una baseline di catalogo. In contesti istituzionali possono variare in base a requisiti,
+      integrazioni e livello di audit. Hermeticum B.C.E. è progettato in ottica UE-first: minimizzazione dati (GDPR),
+      tracciabilità e opponibilità dove applicabile.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  © Hermeticum B.C.E. — Catalogo servizi · UE-first · Audit-by-design
+</footer>
+
+</body>
+</html>
