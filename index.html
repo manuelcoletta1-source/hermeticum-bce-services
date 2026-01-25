@@ -1,11 +1,11 @@
-<!-- File: index.html  (repo: hermeticum-bce-services) -->
+<!-- Repo: hermeticum-bce-services | File: index.html -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hermeticum B.C.E. — La prima Banca Dati Cibernetica Europea</title>
-  <meta name="description" content="Hermeticum B.C.E. — La prima Banca Dati Cibernetica Europea. Cybersicurezza del dato a livello digitale. Il dato sei tu: IPR + AI JOKER + evidenze crittografiche UE-first." />
+  <meta name="description" content="Hermeticum B.C.E. — Banca Dati Cibernetica Europea UE-first: IPR (identità), OPC/UNEBDO (policy), Evidence (hash/audit) e AI JOKER-C2 personalizzata. Il dato sei tu." />
   <meta name="theme-color" content="#0b0c10" />
 
   <style>
@@ -19,6 +19,7 @@
       --accent:#7cf6c8;
       --accent2:#8aa2ff;
       --warn:#ffd37a;
+      --danger:#ff7a90;
       --radius:16px;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --max: 1120px;
@@ -63,7 +64,6 @@
       white-space: nowrap;
     }
     .tagline{color:var(--muted);font-size:12.5px}
-
     nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
     nav a{
       padding:8px 10px;border-radius:12px;
@@ -95,7 +95,7 @@
     }
     .hero > *{position:relative}
     h1{margin:0 0 12px;font-size:34px;line-height:1.1;letter-spacing:.2px}
-    .sub{margin:0 0 16px;color:var(--muted);max-width:920px;font-size:15px}
+    .sub{margin:0 0 16px;color:var(--muted);max-width:980px;font-size:15px}
     .sub b{color:var(--text)}
     .ctaRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .btn{
@@ -119,8 +119,7 @@
     }
     .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(124,246,200,.12)}
     .btn.secondary .dot{background:var(--accent2);box-shadow:0 0 0 4px rgba(138,162,255,.12)}
-    .btn.hub .dot{background:var(--warn);box-shadow:0 0 0 4px rgba(255,211,122,.12)}
-
+    .btn.warn .dot{background:var(--warn);box-shadow:0 0 0 4px rgba(255,211,122,.12)}
     .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .pill{
       display:inline-flex;align-items:center;gap:8px;
@@ -148,13 +147,68 @@
     .card p{margin:0;color:var(--muted);font-size:13.5px}
     ul.clean{margin:10px 0 0;padding:0 0 0 18px;color:var(--muted);font-size:13.5px}
     ul.clean li{margin:6px 0}
-
     .sectionTitle{
       margin:18px 0 10px;
       display:flex;align-items:center;gap:10px;
       font-size:14px;color:var(--text);
     }
     .sectionTitle .bar{height:1px;flex:1;background:linear-gradient(90deg, rgba(124,246,200,.35), rgba(36,38,43,0))}
+
+    .compare{
+      display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:10px
+    }
+    .box{
+      grid-column: span 6;
+      padding:16px;border-radius:var(--radius);
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(12,13,18,.55);
+      box-shadow: var(--shadow);
+    }
+    .box h3{margin:0 0 6px;font-size:14px}
+    .box p{margin:0;color:var(--muted);font-size:13px}
+
+    .tiers{
+      display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:10px
+    }
+    .tier{
+      grid-column: span 4;
+      padding:16px;border-radius:var(--radius);
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(12,13,18,.55);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .tier:before{
+      content:"";
+      position:absolute;inset:-2px;
+      background:
+        radial-gradient(380px 180px at 25% 20%, rgba(124,246,200,.10), transparent 60%),
+        radial-gradient(380px 180px at 80% 0%, rgba(138,162,255,.10), transparent 60%);
+      pointer-events:none;
+    }
+    .tier > *{position:relative}
+    .tier h3{margin:0 0 6px;font-size:14px}
+    .label{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;color:var(--muted);margin-bottom:10px
+    }
+    .tag{
+      padding:4px 8px;border-radius:999px;
+      border:1px solid rgba(36,38,43,.95);
+      background: rgba(15,17,23,.55);
+      font-family: var(--mono);
+      font-size:11px;
+      color: var(--text);
+    }
+    .tier ul{margin:10px 0 0;padding:0 0 0 18px;color:var(--muted);font-size:13px}
+    .tier li{margin:6px 0}
+    .foot{
+      margin-top:12px;padding-top:10px;
+      border-top:1px solid rgba(36,38,43,.9);
+      color: var(--muted);
+      font-size:12.5px;
+    }
 
     .modules{
       display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:10px
@@ -203,7 +257,8 @@
 
     @media (max-width: 980px){
       header{position:static}
-      .card{grid-column: span 12}
+      .card,.box{grid-column: span 12}
+      .tier{grid-column: span 12}
       .module{grid-column: span 12}
       h1{font-size:28px}
     }
@@ -219,12 +274,13 @@
           <div class="name">HERMETICUM B.C.E.</div>
           <span class="badge">UE-FIRST · GDPR-MIN · HASH-ONLY · AUDIT</span>
         </div>
-        <div class="tagline">Banca Dati Cibernetica — Identità (IPR) · Regole (OPC/UNEBDO) · Evidenze · AI JOKER</div>
+        <div class="tagline">La prima Banca Dati Cibernetica Europea — il dato sei tu: IPR → AI → prova → tempo</div>
       </div>
 
       <nav>
         <a href="#manifesto">Manifesto</a>
-        <a href="#ipraijoker">IPR + AI</a>
+        <a href="#ai">AI</a>
+        <a href="#servizi">Servizi</a>
         <a href="#moduli">Moduli</a>
         <a href="#portal">Portal</a>
       </nav>
@@ -240,9 +296,9 @@
       </p>
 
       <div class="ctaRow">
-        <a class="btn primary" href="#ipraijoker"><span class="dot"></span> Attiva IPR → AI JOKER</a>
-        <a class="btn secondary" href="onboarding/"><span class="dot"></span> Onboarding IPR</a>
-        <a class="btn hub" href="hub/"><span class="dot"></span> Entra nell’Hub tecnico</a>
+        <a class="btn primary" href="onboarding/"><span class="dot"></span> Attiva IPR</a>
+        <a class="btn secondary" href="catalog/"><span class="dot"></span> Catalogo servizi</a>
+        <a class="btn warn" href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noopener"><span class="dot"></span> Apri AI JOKER Workers</a>
       </div>
 
       <div class="kpis">
@@ -253,52 +309,147 @@
       </div>
 
       <div class="note">
-        <b>Attrattore cognitivo (vero):</b> se non è verificabile, non è vero.  
+        <b>Principio:</b> se non è verificabile, non è vero.  
         Qui “dipende dall’operatore” non esiste: il cliente parla con <span class="mono">AI</span>, non con sportelli.
       </div>
     </section>
 
-    <!-- COSA SIGNIFICA -->
-    <section class="grid" id="ipraijoker">
+    <!-- DEFINIZIONE CIBERNETICA + IPR -->
+    <section class="grid" id="ai">
       <div class="card">
-        <h2>“Cibernetica” significa controllo + comunicazione</h2>
+        <h2>Cibernetica = controllo + comunicazione</h2>
         <p>
-          Un sistema cibernetico fa sempre la stessa cosa: <b>input → decisione → output → feedback</b>.  
-          Hermeticum B.C.E. è progettato per essere cibernetico nativo: regole, tracce, audit. Non narrativa.
+          Un sistema cibernetico fa sempre la stessa cosa: <b>input → decisione → output → feedback</b>.
+          Hermeticum B.C.E. è progettato per essere cibernetico nativo: policy, evidenze, audit.
         </p>
         <ul class="clean">
-          <li><b>Input</b>: dati, documenti, richieste</li>
-          <li><b>Decisione</b>: policy (OPC/UNEBDO)</li>
-          <li><b>Output</b>: esiti, attestazioni, scambi</li>
-          <li><b>Feedback</b>: versioni, audit, evoluzione</li>
+          <li><b>Input</b>: dati, richieste, documenti</li>
+          <li><b>Decisione</b>: regole applicate (OPC/UNEBDO)</li>
+          <li><b>Output</b>: esito + motivazione + traccia</li>
+          <li><b>Feedback</b>: evoluzione versionata nel tempo</li>
         </ul>
       </div>
 
       <div class="card">
-        <h2>Il dato sei tu: IPR</h2>
+        <h2>IPR = identità operativa nel tempo</h2>
         <p>
-          L’IPR (Identity Primary Record) trasforma l’identità in un fatto operativo: attribuibile,
-          verificabile, continuo nel tempo. Non “profilo”: <b>ancora</b>.
+          L’IPR (Identity Primary Record) non è un profilo. È un’ancora:
+          attribuisce, struttura e mantiene continuità. In ottica UE-first, pubblica solo il minimo: <b>hash-only</b>.
         </p>
         <ul class="clean">
-          <li><b>Attribuzione</b> (chi)</li>
-          <li><b>Tracciabilità</b> (cosa)</li>
-          <li><b>Tempo</b> (quando)</li>
-          <li><b>Opponibilità</b> (perché vale)</li>
+          <li><b>Chi</b> (attribuzione)</li>
+          <li><b>Cosa</b> (traccia)</li>
+          <li><b>Quando</b> (tempo)</li>
+          <li><b>Perché vale</b> (opponibilità)</li>
         </ul>
       </div>
 
       <div class="card full">
-        <div class="sectionTitle">AI JOKER via IPR <span class="bar"></span></div>
-        <p style="margin:0;color:var(--muted);font-size:13.5px">
-          Un’AI standard diventa <b>AI JOKER personalizzata</b> quando viene istanziata tramite IPR:
-          stessa base, ma profilo operativo, regole applicate e continuità governate dall’azienda (UE-first).
-        </p>
-        <div class="kpis">
-          <span class="pill"><b>BASE</b> · identità + continuità</span>
-          <span class="pill"><b>PRO</b> · tracciabilità opponibile</span>
-          <span class="pill"><b>ENTERPRISE</b> · governance & audit</span>
+        <div class="sectionTitle">AI generica vs AI JOKER-C2 (via IPR) <span class="bar"></span></div>
+
+        <div class="compare">
+          <div class="box">
+            <h3>AI generica (GPT, Gemini, Grok)</h3>
+            <p>
+              È un <b>cervello generalista</b>: potente, rapido, utile.  
+              Ma da sola resta <b>non opponibile</b>: identità e continuità dipendono dalla sessione e dal provider,
+              non da una struttura verificabile.
+            </p>
+            <div class="kpis">
+              <span class="pill">capacità generali</span>
+              <span class="pill">contesto volatile</span>
+              <span class="pill">prove non strutturate</span>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>AI JOKER-C2 (solo con IPR)</h3>
+            <p>
+              Stesso “cervello” possibile, ma con <b>anima operativa</b> (metafora tecnica):  
+              l’IPR introduce identità verificabile, continuità temporale, policy e evidenze auditabili.
+              Risultato: AI <b>professionale UE-first</b>.
+            </p>
+            <div class="kpis">
+              <span class="pill"><b>IPR</b> · identità</span>
+              <span class="pill"><b>OPC</b> · regole</span>
+              <span class="pill"><b>Evidence</b> · hash</span>
+              <span class="pill"><b>Audit</b> · tempo</span>
+            </div>
+          </div>
         </div>
+
+        <div class="note" style="margin-top:12px">
+          <b>Metafora controllata:</b> “cervello” = modello AI. “anima” = IPR (identità + continuità + governance + prove).  
+          Niente magia: solo struttura verificabile e evoluzione nel tempo.
+        </div>
+      </div>
+
+      <div class="card full">
+        <div class="sectionTitle">AI Evolutiva Personale (con IPR) <span class="bar"></span></div>
+        <p style="margin:0;color:var(--muted);font-size:13.5px">
+          Un’AI diventa <b>evolutiva personale</b> quando la tua continuità entra nel sistema tramite IPR:
+          percorso scolastico, lavorativo, esplorativo (in forma minimizzata e verificabile), regole applicate (OPC/UNEBDO),
+          e evidenze (hash/audit). Non “memoria casuale”: <b>storia operativa versionata</b>.
+        </p>
+        <div class="kpis" style="margin-top:12px">
+          <span class="pill"><b>Percorso</b> · competenze</span>
+          <span class="pill"><b>Versioning</b> · evoluzione</span>
+          <span class="pill"><b>Fail-closed</b> · requisito o stop</span>
+          <span class="pill"><b>UE-first</b> · GDPR-min</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIZI -->
+    <section id="servizi">
+      <div class="sectionTitle">Servizi AI JOKER (via IPR) <span class="bar"></span></div>
+      <p class="sub">
+        Tre livelli, una logica: <b>IPR → istanza AI → policy → evidenze → continuità</b>.  
+        Modello <b>mensile / annuale</b> (no una tantum) per sostenere evoluzione, audit e conformità.
+      </p>
+
+      <div class="tiers">
+        <div class="tier">
+          <h3>AI JOKER · BASE</h3>
+          <div class="label"><span class="tag">ENTRY</span> identità + continuità</div>
+          <ul>
+            <li>Attivazione AI JOKER via <b>IPR</b></li>
+            <li>Regole standard UE-first</li>
+            <li>Tracciabilità minimale (hash/versione)</li>
+            <li>Continuità base (non sessione effimera)</li>
+          </ul>
+          <div class="foot">Per privati ed early adopter.</div>
+        </div>
+
+        <div class="tier">
+          <h3>AI JOKER · PRO</h3>
+          <div class="label"><span class="tag">PRO</span> AI professionale tracciabile</div>
+          <ul>
+            <li>Evoluzione temporale <b>versionata</b></li>
+            <li>Policy operative (OPC)</li>
+            <li>Evidence verificabili (hash)</li>
+            <li>Audit light UE-first</li>
+          </ul>
+          <div class="foot">Per professionisti e PMI UE.</div>
+        </div>
+
+        <div class="tier">
+          <h3>AI JOKER · ENTERPRISE</h3>
+          <div class="label"><span class="tag">GOV</span> governance & audit</div>
+          <ul>
+            <li>IPR forte (personale/aziendale)</li>
+            <li>Audit completo + policy custom</li>
+            <li>Evidence opponibili nel tempo</li>
+            <li>Integrazione governance (UNEBDO)</li>
+          </ul>
+          <div class="foot">Per enti e contesti regolati.</div>
+        </div>
+      </div>
+
+      <div class="kpis" style="margin-top:12px">
+        <a class="btn primary" href="onboarding/"><span class="dot"></span> Attiva IPR</a>
+        <a class="btn secondary" href="terms/"><span class="dot"></span> Termini (UE-first)</a>
+        <a class="btn warn" href="evidence/"><span class="dot"></span> Evidence & verifica</a>
       </div>
     </section>
 
@@ -309,41 +460,46 @@
       <div class="modules">
         <div class="module">
           <h3>UNEBDO</h3>
-          <p>Backbone UE-first: regole, enforcement, audit.</p>
+          <p>Backbone UE-first: enforcement, audit, fail-closed.</p>
           <div class="links">
             <a href="https://manuelcoletta1-source.github.io/unebdo/" target="_blank" rel="noopener">Apri modulo</a>
+            <a href="https://github.com/manuelcoletta1-source/unebdo" target="_blank" rel="noopener">Repo</a>
           </div>
         </div>
 
         <div class="module">
           <h3>OPC</h3>
-          <p>Opponible Policy Core: policy applicate, non interpretate.</p>
+          <p>Opponible Policy Core: regole eseguibili e opponibili.</p>
           <div class="links">
             <a href="https://manuelcoletta1-source.github.io/opc/" target="_blank" rel="noopener">Apri modulo</a>
+            <a href="https://github.com/manuelcoletta1-source/opc" target="_blank" rel="noopener">Repo</a>
           </div>
         </div>
 
         <div class="module">
           <h3>MetaExchange</h3>
-          <p>Scambio di valore e tracciabilità: valute, prove, attributi.</p>
+          <p>Scambio di valore: attribuzione, prova, tracciabilità.</p>
           <div class="links">
             <a href="https://manuelcoletta1-source.github.io/metaexchange/" target="_blank" rel="noopener">Apri modulo</a>
+            <a href="https://github.com/manuelcoletta1-source/metaexchange" target="_blank" rel="noopener">Repo</a>
           </div>
         </div>
 
         <div class="module">
           <h3>AI JOKER Workers</h3>
-          <p>Interazione operativa AI-first: flussi, prerequisiti, fail-closed.</p>
+          <p>Cockpit operativo AI-first: workflow, audit locale, IPR Base.</p>
           <div class="links">
-            <a href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noopener">Apri modulo</a>
+            <a href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noopener">Apri</a>
+            <a href="https://github.com/manuelcoletta1-source/ai-joker-workers" target="_blank" rel="noopener">Repo</a>
           </div>
         </div>
 
         <div class="module">
           <h3>NeuroLoop</h3>
-          <p>Feedback & apprendimento: miglioramento controllato.</p>
+          <p>Feedback & miglioramento controllato nel tempo.</p>
           <div class="links">
             <a href="https://manuelcoletta1-source.github.io/neuroloop/" target="_blank" rel="noopener">Apri modulo</a>
+            <a href="https://github.com/manuelcoletta1-source/neuroloop" target="_blank" rel="noopener">Repo</a>
           </div>
         </div>
 
@@ -358,12 +514,12 @@
       </div>
     </section>
 
-    <!-- PORTAL / ENTRYPOINTS -->
+    <!-- PORTAL -->
     <section id="portal" class="grid">
       <div class="card full">
         <div class="sectionTitle">Entry points <span class="bar"></span></div>
         <p style="margin:0;color:var(--muted);font-size:13.5px">
-          Porta unica (questa pagina) → onboarding → attivazione IPR → AI JOKER → evidenze → audit.
+          Porta unica → onboarding → attivazione IPR → AI JOKER → evidenze → audit.
         </p>
 
         <div class="kpis" style="margin-top:12px">
@@ -374,7 +530,7 @@
         </div>
 
         <div class="note" style="margin-top:12px">
-          <b>Fail-closed:</b> se manca un requisito o una prova, il sistema non “interpreta”.  
+          <b>Fail-closed:</b> se manca un requisito o una prova, il sistema non interpreta.  
           <span class="mono">Blocca → registra → richiede evidenza.</span> Questo è “banca dati cibernetica” in pratica.
         </div>
       </div>
@@ -384,7 +540,8 @@
       <div><b>Hermeticum B.C.E.</b> — cybersicurezza del dato a livello digitale. Il dato sei tu: IPR → AI → prova → tempo.</div>
       <div class="mini">
         <a href="#manifesto">Su</a>
-        <a href="#ipraijoker">IPR+AI</a>
+        <a href="#ai">AI</a>
+        <a href="#servizi">Servizi</a>
         <a href="#moduli">Moduli</a>
       </div>
     </footer>
