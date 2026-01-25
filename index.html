@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — Spazio di Continuità Operativa</title>
-  <meta name="description" content="Hermeticum B.C.E. è uno spazio di continuità operativa: identità, decisioni e azioni coerenti nel tempo, vincolate da regole opponibili." />
+  <title>Hermeticum B.C.E. — Services</title>
+  <meta name="description" content="Hermeticum B.C.E. Services è la mappa ufficiale dello spazio di continuità operativa: Identity (IPR), Policy (OPC), Execution (AI JOKER-C2), Evidence (Audit)." />
   <meta name="theme-color" content="#0b0c10" />
 
   <style>
@@ -53,6 +53,12 @@
     }
     h1{margin:0 0 10px;font-size:28px}
     p{margin:0;color:var(--muted)}
+    .pills{margin-top:10px}
+    .pill{
+      display:inline-block;margin:6px 6px 0 0;padding:6px 10px;
+      border-radius:999px;border:1px solid var(--line);
+      font-size:12px;color:var(--muted)
+    }
 
     .grid{margin-top:18px;display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
     .card{
@@ -61,12 +67,6 @@
     }
     .card.full{grid-column:span 12}
     h2{margin:0 0 8px;font-size:16px}
-
-    .pill{
-      display:inline-block;margin:6px 6px 0 0;padding:6px 10px;
-      border-radius:999px;border:1px solid var(--line);
-      font-size:12px;color:var(--muted)
-    }
 
     footer{
       margin-top:22px;padding:16px;border-radius:var(--radius);
@@ -86,74 +86,93 @@
 
 <header>
   <div class="brand">
-    Hermeticum B.C.E.
-    <span class="badge">CONTINUITÀ OPERATIVA</span>
+    Hermeticum B.C.E. — Services
+    <span class="badge">MAPPA UFFICIALE</span>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap">
-    <a class="btn" href="https://manuelcoletta1-source.github.io/opc/" target="_blank">OPC</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank">AI JOKER-C2</a>
+    <a class="btn" href="#modules">Moduli</a>
+    <a class="btn" href="#entry">Ingresso</a>
   </div>
 </header>
 
 <section class="hero">
-  <h1>Uno spazio di continuità operativa</h1>
+  <h1>Spazio di continuità operativa</h1>
   <p>
-    Hermeticum B.C.E. è uno spazio in cui identità, decisioni e azioni
-    mantengono coerenza nel tempo, indipendentemente dallo strumento che le esegue.
+    Services è la mappa ufficiale dell’ecosistema: qui si entra, si comprende,
+    si collega identità, regole ed esecuzione.  
+    Non è un cockpit. È il punto di verità.
   </p>
-  <div>
-    <span class="pill">IPR</span>
-    <span class="pill">AI vincolata</span>
-    <span class="pill">policy opponibili</span>
-    <span class="pill">audit</span>
+  <div class="pills">
+    <span class="pill">Identity (IPR)</span>
+    <span class="pill">Policy (OPC)</span>
+    <span class="pill">Execution (AI JOKER-C2)</span>
+    <span class="pill">Evidence (Audit)</span>
   </div>
 </section>
 
-<section class="grid">
+<section class="grid" id="modules">
   <div class="card">
-    <h2>Identità (IPR)</h2>
+    <h2>Identity — IPR</h2>
     <p>
-      L’IPR garantisce continuità dell’identità operativa.
-      Non una sessione, ma una presenza nel tempo.
+      Identità operativa continua nel tempo.  
+      Senza IPR non esiste istanza personale.
     </p>
+    <div class="pills">
+      <a class="pill" href="#entry">Onboarding</a>
+      <a class="pill" href="#">IPR (in arrivo)</a>
+    </div>
   </div>
 
   <div class="card">
-    <h2>Decisione (OPC)</h2>
+    <h2>Policy — OPC</h2>
     <p>
-      Le decisioni sono regolate da policy deterministiche,
-      pubbliche e opponibili.
+      Policy opponibili: deterministiche, versionate, fail-closed.  
+      Qui le regole non si interpretano: si applicano.
     </p>
+    <div class="pills">
+      <a class="pill" href="https://manuelcoletta1-source.github.io/opc/" target="_blank" rel="noopener">OPC</a>
+      <a class="pill" href="https://manuelcoletta1-source.github.io/opc/policy/" target="_blank" rel="noopener">Policy</a>
+    </div>
   </div>
 
   <div class="card">
-    <h2>Esecuzione (AI JOKER-C2)</h2>
+    <h2>Execution — AI JOKER-C2</h2>
     <p>
-      L’AI opera come funzione vincolata:
-      esegue, non interpreta.
+      Execution layer AI-first vincolato da IPR e OPC.  
+      Senza IPR: DENY. Senza evidence: nessuna evoluzione.
     </p>
+    <div class="pills">
+      <a class="pill" href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noopener">Workers</a>
+    </div>
   </div>
 
   <div class="card">
-    <h2>Traccia (Audit)</h2>
+    <h2>Evidence — Audit</h2>
     <p>
-      Ogni azione produce una traccia verificabile,
-      append-only, nel tempo.
+      Traccia append-only delle azioni: output difendibile nel tempo.  
+      Hash-only, GDPR-min, audit-by-design.
     </p>
+    <div class="pills">
+      <a class="pill" href="#">Evidence (in arrivo)</a>
+    </div>
   </div>
 
-  <div class="card full">
-    <h2>Cosa rende questo spazio diverso</h2>
+  <div class="card full" id="entry">
+    <h2>Ingresso (minimo)</h2>
     <p>
-      Non promette intelligenza autonoma.
-      Garantisce coerenza, responsabilità e verificabilità delle azioni.
+      1) Attiva un IPR → 2) Accetta policy OPC → 3) Opera in AI JOKER-C2 → 4) Produci evidence.
+      <br /><br />
+      Onboarding pubblico:
+      <a href="https://github.com/manuelcoletta1-source/hermeticum-bce-services/tree/main/onboarding" target="_blank" rel="noopener" style="text-decoration:underline">
+        /onboarding
+      </a>
     </p>
   </div>
 </section>
 
 <footer>
-  Hermeticum B.C.E. non sostituisce le istituzioni.  
-  Trasferisce l’affidabilità istituzionale nello spazio digitale continuo.
+  Services orchestra i moduli.  
+  OPC vincola. AI JOKER-C2 esegue. L’audit rende opponibile.
 </footer>
 
 </div>
