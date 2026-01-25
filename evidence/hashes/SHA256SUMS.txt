@@ -1,8 +1,0 @@
-# Hermeticum B.C.E. — Evidence Pack (DEMO)
-# Algorithm: SHA-256
-# Format: <sha256><space><space><relative_path>
-# NOTE: valori demo. Rigenera con hash reali quando aggiungi/aggiorni gli allegati.
-
-0000000000000000000000000000000000000000000000000000000000000000  manifest.json
-0000000000000000000000000000000000000000000000000000000000000000  proofs/proof-template.md
-0000000000000000000000000000000000000000000000000000000000000000  attachments/example.pdf
