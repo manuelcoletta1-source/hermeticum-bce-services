@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hermeticum B.C.E. — Create</title>
+  <meta name="description" content="Create: genera manifest IPR e struttura evidence pack. UE-first, GDPR-min, audit-by-design, fail-closed." />
+  <meta name="theme-color" content="#0b0c10" />
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#a7abb6;
+      --accent:#7aa2ff;
+      --good:#64d2ff;
+      --warn:#ffd166;
+      --bad:#ff6b6b;
+      --radius:16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --max: 1040px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 15% -10%, rgba(122,162,255,.10), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(100,210,255,.06), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit; text-decoration:none}
+    header{position:sticky; top:0; z-index:10; backdrop-filter: blur(10px); background: rgba(11,12,16,.7); border-bottom:1px solid rgba(36,38,43,.6);}
+    .topbar{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 22px; max-width:var(--max); margin:0 auto;}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+    .mark{
+      width:38px; height:38px; border-radius:12px; border:1px solid rgba(36,38,43,.9);
+      background: linear-gradient(180deg, rgba(122,162,255,.18), rgba(15,17,23,.9));
+      display:grid; place-items:center;
+      box-shadow: var(--shadow);
+      font-weight:700;
+    }
+    .brand b{letter-spacing:.4px}
+    .brand small{display:block; color:var(--muted); font-weight:500}
+    nav{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
+    .pill{
+      border:1px solid rgba(36,38,43,.9); background: rgba(15,17,23,.75);
+      padding:8px 10px; border-radius:999px; color:var(--muted);
+      transition: transform .08s ease, border-color .08s ease, color .08s ease;
+      font-size: 13px;
+    }
+    .pill:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.6); color:var(--text)}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:16px}
+    @media (max-width: 920px){ .grid{grid-template-columns:1fr} nav{justify-content:flex-start} }
+    .card{
+      background: rgba(15,17,23,.78);
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    h1{margin:0 0 10px; font-size: 30px; line-height:1.15}
+    h2{margin:18px 0 10px; font-size: 16px; color:var(--muted); font-weight:700; letter-spacing:.2px}
+    p{margin:0 0 12px; color:var(--muted)}
+    .lead{color:var(--text); font-size: 15px}
+    .rule{height:1px; background: rgba(36,38,43,.8); margin: 14px 0}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    .field{margin-top:10px}
+    label{display:block; color:var(--muted); font-size: 13px; margin-bottom:6px}
+    input, textarea, select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(15,17,23,.78);
+      color: var(--text);
+      padding:10px 12px;
+      outline:none;
+    }
+    textarea{min-height:110px; resize: vertical}
+    .btnrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    button{
+      border-radius:14px;
+      border:1px solid rgba(36,38,43,.95);
+      background: linear-gradient(180deg, rgba(122,162,255,.16), rgba(15,17,23,.9));
+      color: var(--text);
+      padding:11px 12px;
+      font-weight:650;
+      cursor:pointer;
+      transition: transform .08s ease, border-color .08s ease;
+      min-width: 200px;
+    }
+    button:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.65)}
+    .secondary{
+      background: rgba(15,17,23,.75);
+      color: var(--muted);
+    }
+    .secondary:hover{color:var(--text); border-color: rgba(100,210,255,.55)}
+    .result{
+      margin-top:12px;
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: 14px;
+      padding:12px;
+      background: rgba(15,17,23,.65);
+      overflow:auto;
+      white-space: pre;
+    }
+    .hint{
+      display:inline-block;
+      margin-top:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(11,12,16,.35);
+      color: var(--muted);
+    }
+    .callout{
+      border:1px solid rgba(36,38,43,.9);
+      border-radius: var(--radius);
+      padding:14px;
+      background: rgba(11,12,16,.35);
+    }
+    .ok{color:#64d2ff}
+    .warn{color:#ffd166}
+    .bad{color:#ff6b6b}
+    ul{margin:0 0 12px 18px; color:var(--muted)}
+    footer{padding:18px 0 32px; color:var(--muted); font-size: 12px}
+    .smalllinks{display:flex; flex-wrap:wrap; gap:10px}
+    .smalllinks a{color:var(--muted)}
+    .smalllinks a:hover{color:var(--text)}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <a class="brand" href="../" aria-label="Hermeticum B.C.E. — Services">
+        <div class="mark">🜏</div>
+        <div>
+          <b>Hermeticum B.C.E.</b>
+          <small>Create · generator (manifest + structure)</small>
+        </div>
+      </a>
+      <nav aria-label="Navigazione">
+        <a class="pill" href="../">Home</a>
+        <a class="pill" href="../catalog/">Catalog</a>
+        <a class="pill" href="../onboarding/">Onboarding</a>
+        <a class="pill" href="../verify/">Verify</a>
+        <a class="pill" href="../terms/">Terms</a>
+        <a class="pill" href="../evidence/">Evidence</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+      <div class="card">
+        <h1>Create</h1>
+        <p class="lead">
+          Genera un <b>manifest IPR</b> e una <b>struttura standard</b> per l’evidence pack.
+          Questo strumento non invia dati: produce testo copiabile e verificabile.
+        </p>
+        <span class="hint">GDPR-min: usa identificatori minimi (evita dati personali in chiaro)</span>
+
+        <div class="rule"></div>
+
+        <h2>Input minimi</h2>
+
+        <div class="field">
+          <label for="subject">Soggetto (label pubblica)</label>
+          <input id="subject" placeholder="es. IPR-PERSONAL-0001 / ManuelColetta05 / Subject-Label" />
+        </div>
+
+        <div class="field">
+          <label for="scope">Scopo</label>
+          <select id="scope">
+            <option value="personal">Personale</option>
+            <option value="pro">Professionale</option>
+            <option value="org">Organizzazione</option>
+            <option value="test">Test / Demo</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="algo">Algoritmo hash</label>
+          <select id="algo">
+            <option value="SHA-256">SHA-256</option>
+            <option value="SHA-512">SHA-512</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="docref">Riferimento documento (minimizzato)</label>
+          <input id="docref" class="mono" placeholder="es. CIE:IT-****-LAST4 / DOCREF:HASH-ONLY" />
+        </div>
+
+        <div class="field">
+          <label for="notes">Note operative (opzionale)</label>
+          <textarea id="notes" placeholder="Vincoli, contesto, regole: niente PII in chiaro."></textarea>
+        </div>
+
+        <div class="btnrow">
+          <button id="btnGen">Genera manifest</button>
+          <button class="secondary" id="btnCopy">Copia output</button>
+          <button class="secondary" id="btnClear">Pulisci</button>
+        </div>
+
+        <div id="out" class="result mono" aria-live="polite">Output: in attesa…</div>
+
+        <div class="rule"></div>
+
+        <h2>Struttura consigliata (evidence pack)</h2>
+        <div class="callout mono">
+evidence/
+  README.md
+  manifest.json
+  hashes/
+    SHA256SUMS.txt
+  attachments/
+    example.pdf
+  proofs/
+    proof-template.md
+        </div>
+        <p>
+          <b class="ok">✔</b> Pubblica hash + template + struttura.  
+          <b class="warn">△</b> Pubblica metadati solo se necessari.  
+          <b class="bad">✖</b> Non pubblicare documenti personali integrali.
+        </p>
+      </div>
+
+      <aside class="card">
+        <h2>Regole (fail-closed)</h2>
+        <ul>
+          <li>Se non puoi verificare, non dichiarare.</li>
+          <li>Se non puoi minimizzare, separa contenuto e prova.</li>
+          <li>Se manca versione o algoritmo, l’evidenza non è opponibile.</li>
+        </ul>
+
+        <div class="rule"></div>
+
+        <h2>Link rapidi</h2>
+        <ul>
+          <li><a href="../verify/">Verify</a></li>
+          <li><a href="../evidence/">Evidence Pack</a></li>
+          <li><a href="../terms/">Terms</a></li>
+          <li><a href="../onboarding/">Onboarding</a></li>
+        </ul>
+
+        <div class="rule"></div>
+
+        <h2>Nota</h2>
+        <p>
+          Questo generatore crea un <b>manifest testuale</b>.  
+          Le ancore pubbliche (es. IPFS / blockchain) restano esterne e vanno aggiunte solo quando esistono davvero.
+        </p>
+        <span class="hint">audit-by-design · UE-first · GDPR-min</span>
+      </aside>
+    </section>
+
+    <footer class="wrap">
+      <div class="smalllinks" aria-label="Link utili">
+        <a href="../">Home</a>
+        <a href="../catalog/">Catalog</a>
+        <a href="../onboarding/">Onboarding</a>
+        <a href="../verify/">Verify</a>
+        <a href="../terms/">Terms</a>
+        <a href="../evidence/">Evidence</a>
+      </div>
+      <p class="mono">HERMETICUM B.C.E. — Create</p>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const $ = (id) => document.getElementById(id);
+
+      const subject = $("subject");
+      const scope   = $("scope");
+      const algo    = $("algo");
+      const docref  = $("docref");
+      const notes   = $("notes");
+      const out     = $("out");
+
+      const btnGen  = $("btnGen");
+      const btnCopy = $("btnCopy");
+      const btnClear= $("btnClear");
+
+      function nowISO(){
+        try { return new Date().toISOString(); }
+        catch(e){ return ""; }
+      }
+
+      function safeTrim(s){ return (s || "").trim(); }
+
+      function fail(msg){
+        out.textContent = "STOP ❌  " + msg + "\n\nRegola: fail-closed (niente output ambiguo).";
+      }
+
+      function makeManifest(){
+        const s = safeTrim(subject.value);
+        const d = safeTrim(docref.value);
+        const n = safeTrim(notes.value);
+
+        if(!s) return fail("Manca 'Soggetto (label pubblica)'.");
+        if(s.length < 4) return fail("Soggetto troppo corto: usa una label significativa.");
+        if(!d) return fail("Manca 'Riferimento documento (minimizzato)'.");
+        if(d.toLowerCase().includes("codice fiscale") || d.toLowerCase().includes("cf:") || d.toLowerCase().includes("cognome") || d.toLowerCase().includes("nome")){
+          return fail("Hai inserito PII probabile nel docref. Usa hash-only o last4/placeholder.");
+        }
+
+        const manifest = {
+          schema: "HBCE-IPR-MANIFEST-1.0",
+          system: "Hermeticum B.C.E. — Services",
+          module: "Create",
+          generated_at: nowISO(),
+          subject_label: s,
+          scope: scope.value,
+          hash_algorithm: algo.value,
+          document_reference: d,
+          principles: ["UE-first","GDPR-min","audit-by-design","opponibility","fail-closed"],
+          notes: n || undefined,
+          evidence_pack: {
+            expected_paths: [
+              "evidence/manifest.json",
+              "evidence/hashes/SHA256SUMS.txt",
+              "evidence/proofs/proof-template.md",
+              "evidence/attachments/"
+            ]
+          }
+        };
+
+        // Remove undefined fields (notes)
+        const cleaned = JSON.parse(JSON.stringify(manifest));
+        out.textContent = JSON.stringify(cleaned, null, 2);
+      }
+
+      btnGen.addEventListener("click", makeManifest);
+
+      btnCopy.addEventListener("click", async () => {
+        const txt = out.textContent || "";
+        if(!txt || txt.startsWith("Output:")) return;
+        try{
+          await navigator.clipboard.writeText(txt);
+          out.textContent = txt + "\n\nOK ✅  Copiato negli appunti.";
+        }catch(e){
+          out.textContent = txt + "\n\nATTENZIONE △  Copia non disponibile: seleziona e copia manualmente.";
+        }
+      });
+
+      btnClear.addEventListener("click", () => {
+        subject.value = "";
+        docref.value = "";
+        notes.value = "";
+        scope.value = "personal";
+        algo.value = "SHA-256";
+        out.textContent = "Output: in attesa…";
+        subject.focus();
+      });
+    })();
+  </script>
+</body>
+</html>
