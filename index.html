@@ -1,209 +1,394 @@
-<!-- File: index.html -->
+<!-- File: index.html  (repo: hermeticum-bce-services) -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hermeticum B.C.E. — Banca Dati Cibernetica Europea</title>
-  <meta name="description" content="La prima Banca Dati Cibernetica Europea. Cybersicurezza del dato a livello digitale. Il dato sei tu, tramite IPR." />
+  <title>Hermeticum B.C.E. — La prima Banca Dati Cibernetica Europea</title>
+  <meta name="description" content="Hermeticum B.C.E. — La prima Banca Dati Cibernetica Europea. Cybersicurezza del dato a livello digitale. Il dato sei tu: IPR + AI JOKER + evidenze crittografiche UE-first." />
   <meta name="theme-color" content="#0b0c10" />
+
   <style>
     :root{
       --bg:#0b0c10;
       --panel:#0f1117;
+      --panel2:#0c0d12;
       --line:#24262b;
       --text:#e8e8e8;
       --muted:#a6acb8;
       --accent:#7cf6c8;
-      --danger:#ff7a90;
+      --accent2:#8aa2ff;
+      --warn:#ffd37a;
       --radius:16px;
-      --max:1100px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --max: 1120px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family:var(--sans);
-      background:radial-gradient(900px 500px at 20% 0%, rgba(124,246,200,.10), transparent 60%),var(--bg);
       color:var(--text);
       line-height:1.45;
+      background:
+        radial-gradient(900px 540px at 20% 0%, rgba(124,246,200,.12), transparent 62%),
+        radial-gradient(900px 520px at 80% 10%, rgba(138,162,255,.10), transparent 58%),
+        radial-gradient(800px 520px at 55% 95%, rgba(255,211,122,.08), transparent 60%),
+        var(--bg);
     }
+    a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:28px 18px 60px}
+
     header{
-      display:flex;justify-content:space-between;align-items:center;gap:14px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
       padding:16px 18px;border-radius:var(--radius);
-      border:1px solid var(--line);background:rgba(15,17,23,.85)
+      border:1px solid rgba(36,38,43,.9);
+      background: linear-gradient(180deg, rgba(15,17,23,.86), rgba(12,13,18,.70));
+      box-shadow: var(--shadow);
+      position: sticky; top: 14px; z-index: 10;
+      backdrop-filter: blur(10px);
     }
-    .brand{font-weight:800}
+    .brand{display:flex;flex-direction:column;gap:4px}
+    .brand .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .brand .name{font-weight:900;letter-spacing:.2px}
     .badge{
-      margin-left:10px;padding:6px 10px;border-radius:999px;
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
       border:1px solid rgba(124,246,200,.35);
-      background:rgba(124,246,200,.08);
-      font-size:12px;font-family:var(--mono)
+      background: rgba(124,246,200,.08);
+      font-family: var(--mono);
+      font-size:12px;
+      white-space: nowrap;
     }
+    .tagline{color:var(--muted);font-size:12.5px}
+
+    nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
     nav a{
-      margin-left:8px;padding:8px 10px;border-radius:12px;
-      border:1px solid var(--line);font-size:12.5px;color:var(--muted);
-      text-decoration:none
+      padding:8px 10px;border-radius:12px;
+      border:1px solid rgba(36,38,43,.92);
+      background: rgba(12,13,18,.55);
+      color: var(--muted);
+      font-size:12.5px;
+      transition:.15s ease;
     }
-    nav a:hover{color:var(--text);border-color:var(--accent)}
+    nav a:hover{transform:translateY(-1px);color:var(--text);border-color:rgba(124,246,200,.35)}
+
     .hero{
-      margin-top:18px;padding:28px;border-radius:var(--radius);
-      border:1px solid var(--line);background:rgba(15,17,23,.75)
+      margin-top:18px;
+      padding:28px 22px;
+      border-radius: var(--radius);
+      border:1px solid rgba(36,38,43,.9);
+      background: linear-gradient(180deg, rgba(15,17,23,.76), rgba(12,13,18,.62));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
     }
-    h1{margin:0 0 12px;font-size:34px;line-height:1.1}
-    .sub{color:var(--muted);max-width:900px}
-    .cta{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+    .hero:before{
+      content:"";
+      position:absolute;inset:-2px;
+      background:
+        radial-gradient(520px 260px at 25% 20%, rgba(124,246,200,.14), transparent 60%),
+        radial-gradient(520px 260px at 78% 10%, rgba(138,162,255,.14), transparent 60%);
+      pointer-events:none;
+    }
+    .hero > *{position:relative}
+    h1{margin:0 0 12px;font-size:34px;line-height:1.1;letter-spacing:.2px}
+    .sub{margin:0 0 16px;color:var(--muted);max-width:920px;font-size:15px}
+    .sub b{color:var(--text)}
+    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .btn{
+      display:inline-flex;align-items:center;gap:10px;
       padding:10px 14px;border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(15,17,23,.9);color:var(--text);
-      font-weight:700;font-size:13px;text-decoration:none
+      border:1px solid rgba(36,38,43,.95);
+      background: rgba(15,17,23,.86);
+      color:var(--text);
+      font-size:13px;
+      font-weight:750;
+      transition:.15s ease;
     }
-    .btn.primary{border-color:var(--accent)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px}
-    .card{
-      grid-column:span 6;padding:18px;border-radius:var(--radius);
-      border:1px solid var(--line);background:rgba(15,17,23,.7)
+    .btn:hover{transform:translateY(-1px);border-color:rgba(124,246,200,.35)}
+    .btn.primary{
+      border-color: rgba(124,246,200,.45);
+      background: linear-gradient(180deg, rgba(124,246,200,.14), rgba(15,17,23,.86));
     }
-    .card.full{grid-column:span 12}
-    h2{margin:0 0 8px;font-size:16px}
-    p{margin:0;color:var(--muted);font-size:14px}
-    ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:13.5px}
+    .btn.secondary{
+      border-color: rgba(138,162,255,.45);
+      background: linear-gradient(180deg, rgba(138,162,255,.14), rgba(15,17,23,.86));
+    }
+    .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(124,246,200,.12)}
+    .btn.secondary .dot{background:var(--accent2);box-shadow:0 0 0 4px rgba(138,162,255,.12)}
+    .btn.hub .dot{background:var(--warn);box-shadow:0 0 0 4px rgba(255,211,122,.12)}
+
+    .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .pill{
-      display:inline-block;margin:6px 6px 0 0;padding:6px 10px;
-      border-radius:999px;border:1px solid var(--line);
-      font-size:12px;color:var(--muted)
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(36,38,43,.95);
+      background: rgba(12,13,18,.52);
+      color: var(--muted);
+      font-size:12px;
     }
+    .pill b{color:var(--text)}
+    .mono{font-family:var(--mono)}
+
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:14px}
+    .card{
+      grid-column: span 6;
+      padding:18px 16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(36,38,43,.9);
+      background: linear-gradient(180deg, rgba(15,17,23,.72), rgba(12,13,18,.60));
+      box-shadow: var(--shadow);
+      min-height: 160px;
+    }
+    .card.full{grid-column: span 12; min-height:auto}
+    .card h2{margin:0 0 8px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:13.5px}
+    ul.clean{margin:10px 0 0;padding:0 0 0 18px;color:var(--muted);font-size:13.5px}
+    ul.clean li{margin:6px 0}
+
+    .sectionTitle{
+      margin:18px 0 10px;
+      display:flex;align-items:center;gap:10px;
+      font-size:14px;color:var(--text);
+    }
+    .sectionTitle .bar{height:1px;flex:1;background:linear-gradient(90deg, rgba(124,246,200,.35), rgba(36,38,43,0))}
+
+    .modules{
+      display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:10px
+    }
+    .module{
+      grid-column: span 4;
+      padding:16px;border-radius:var(--radius);
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(12,13,18,.55);
+      box-shadow: var(--shadow);
+    }
+    .module h3{margin:0 0 6px;font-size:14px}
+    .module p{margin:0;color:var(--muted);font-size:12.8px}
+    .module .links{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
+    .module .links a{
+      padding:7px 10px;border-radius:12px;
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(15,17,23,.65);
+      color: var(--muted);
+      font-size:12px;
+    }
+    .module .links a:hover{color:var(--text);border-color:rgba(124,246,200,.35)}
+
+    .note{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,211,122,.28);
+      background: rgba(255,211,122,.06);
+      color: var(--muted);
+      font-size:13px;
+    }
+
     footer{
-      margin-top:22px;padding:16px;border-radius:var(--radius);
-      border:1px solid var(--line);background:rgba(15,17,23,.6);
-      font-size:12.5px;color:var(--muted)
+      margin-top:18px;
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(36,38,43,.9);
+      background: rgba(12,13,18,.55);
+      color: var(--muted);
+      font-size:12.5px;
+      display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;
     }
-    @media(max-width:900px){
-      .card{grid-column:span 12}
+    footer .mini a{margin-left:10px}
+    footer .mini a:hover{color:var(--text)}
+
+    @media (max-width: 980px){
+      header{position:static}
+      .card{grid-column: span 12}
+      .module{grid-column: span 12}
       h1{font-size:28px}
     }
   </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="wrap">
 
-<header>
-  <div class="brand">
-    HERMETICUM B.C.E.
-    <span class="badge">UE-FIRST · GDPR-MIN · AUDIT</span>
+    <header>
+      <div class="brand">
+        <div class="top">
+          <div class="name">HERMETICUM B.C.E.</div>
+          <span class="badge">UE-FIRST · GDPR-MIN · HASH-ONLY · AUDIT</span>
+        </div>
+        <div class="tagline">Banca Dati Cibernetica — Identità (IPR) · Regole (OPC/UNEBDO) · Evidenze · AI JOKER</div>
+      </div>
+
+      <nav>
+        <a href="#manifesto">Manifesto</a>
+        <a href="#ipraijoker">IPR + AI</a>
+        <a href="#moduli">Moduli</a>
+        <a href="#portal">Portal</a>
+      </nav>
+    </header>
+
+    <!-- HERO / ATTRATTORE -->
+    <section class="hero" id="manifesto">
+      <h1>La prima Banca Dati Cibernetica Europea</h1>
+      <p class="sub">
+        La cybersicurezza non protegge file. Protegge persone.  
+        Nel digitale il dato non è un oggetto: <b>il dato sei tu</b>.  
+        Hermeticum B.C.E. rende l’identità <b>verificabile</b>, <b>tracciabile</b> e <b>opponibile nel tempo</b>.
+      </p>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="#ipraijoker"><span class="dot"></span> Attiva IPR → AI JOKER</a>
+        <a class="btn secondary" href="onboarding/"><span class="dot"></span> Onboarding IPR</a>
+        <a class="btn hub" href="hub/"><span class="dot"></span> Entra nell’Hub tecnico</a>
+      </div>
+
+      <div class="kpis">
+        <span class="pill"><b>Velocità</b> · tempo macchina</span>
+        <span class="pill"><b>Precisione</b> · regole stabili</span>
+        <span class="pill"><b>Sicurezza</b> · prove crittografiche</span>
+        <span class="pill"><b>Tempo</b> · versioning & audit</span>
+      </div>
+
+      <div class="note">
+        <b>Attrattore cognitivo (vero):</b> se non è verificabile, non è vero.  
+        Qui “dipende dall’operatore” non esiste: il cliente parla con <span class="mono">AI</span>, non con sportelli.
+      </div>
+    </section>
+
+    <!-- COSA SIGNIFICA -->
+    <section class="grid" id="ipraijoker">
+      <div class="card">
+        <h2>“Cibernetica” significa controllo + comunicazione</h2>
+        <p>
+          Un sistema cibernetico fa sempre la stessa cosa: <b>input → decisione → output → feedback</b>.  
+          Hermeticum B.C.E. è progettato per essere cibernetico nativo: regole, tracce, audit. Non narrativa.
+        </p>
+        <ul class="clean">
+          <li><b>Input</b>: dati, documenti, richieste</li>
+          <li><b>Decisione</b>: policy (OPC/UNEBDO)</li>
+          <li><b>Output</b>: esiti, attestazioni, scambi</li>
+          <li><b>Feedback</b>: versioni, audit, evoluzione</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Il dato sei tu: IPR</h2>
+        <p>
+          L’IPR (Identity Primary Record) trasforma l’identità in un fatto operativo: attribuibile,
+          verificabile, continuo nel tempo. Non “profilo”: <b>ancora</b>.
+        </p>
+        <ul class="clean">
+          <li><b>Attribuzione</b> (chi)</li>
+          <li><b>Tracciabilità</b> (cosa)</li>
+          <li><b>Tempo</b> (quando)</li>
+          <li><b>Opponibilità</b> (perché vale)</li>
+        </ul>
+      </div>
+
+      <div class="card full">
+        <div class="sectionTitle">AI JOKER via IPR <span class="bar"></span></div>
+        <p style="margin:0;color:var(--muted);font-size:13.5px">
+          Un’AI standard diventa <b>AI JOKER personalizzata</b> quando viene istanziata tramite IPR:
+          stessa base, ma profilo operativo, regole applicate e continuità governate dall’azienda (UE-first).
+        </p>
+        <div class="kpis">
+          <span class="pill"><b>BASE</b> · identità + continuità</span>
+          <span class="pill"><b>PRO</b> · tracciabilità opponibile</span>
+          <span class="pill"><b>ENTERPRISE</b> · governance & audit</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULI -->
+    <section id="moduli">
+      <div class="sectionTitle">Moduli principali <span class="bar"></span></div>
+
+      <div class="modules">
+        <div class="module">
+          <h3>UNEBDO</h3>
+          <p>Backbone UE-first: regole, enforcement, audit.</p>
+          <div class="links">
+            <a href="https://manuelcoletta1-source.github.io/unebdo/" target="_blank" rel="noopener">Apri modulo</a>
+          </div>
+        </div>
+
+        <div class="module">
+          <h3>OPC</h3>
+          <p>Opponible Policy Core: policy applicate, non interpretate.</p>
+          <div class="links">
+            <a href="https://manuelcoletta1-source.github.io/opc/" target="_blank" rel="noopener">Apri modulo</a>
+          </div>
+        </div>
+
+        <div class="module">
+          <h3>MetaExchange</h3>
+          <p>Scambio di valore e tracciabilità: valute, prove, attributi.</p>
+          <div class="links">
+            <a href="https://manuelcoletta1-source.github.io/metaexchange/" target="_blank" rel="noopener">Apri modulo</a>
+          </div>
+        </div>
+
+        <div class="module">
+          <h3>AI JOKER Workers</h3>
+          <p>Interazione operativa AI-first: flussi, prerequisiti, fail-closed.</p>
+          <div class="links">
+            <a href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noopener">Apri modulo</a>
+          </div>
+        </div>
+
+        <div class="module">
+          <h3>NeuroLoop</h3>
+          <p>Feedback & apprendimento: miglioramento controllato.</p>
+          <div class="links">
+            <a href="https://manuelcoletta1-source.github.io/neuroloop/" target="_blank" rel="noopener">Apri modulo</a>
+          </div>
+        </div>
+
+        <div class="module">
+          <h3>IoSpace / CyberGlobal</h3>
+          <p>Spazio operativo + interoperabilità e governance.</p>
+          <div class="links">
+            <a href="https://manuelcoletta1-source.github.io/iospace/" target="_blank" rel="noopener">IoSpace</a>
+            <a href="https://manuelcoletta1-source.github.io/cyberglobal/" target="_blank" rel="noopener">CyberGlobal</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTAL / ENTRYPOINTS -->
+    <section id="portal" class="grid">
+      <div class="card full">
+        <div class="sectionTitle">Entry points <span class="bar"></span></div>
+        <p style="margin:0;color:var(--muted);font-size:13.5px">
+          Porta unica (questa pagina) → onboarding → attivazione IPR → AI JOKER → evidenze → audit.
+        </p>
+
+        <div class="kpis" style="margin-top:12px">
+          <span class="pill"><b>Onboarding</b> · <a class="mono" href="onboarding/">/onboarding/</a></span>
+          <span class="pill"><b>Catalog</b> · <a class="mono" href="catalog/">/catalog/</a></span>
+          <span class="pill"><b>Terms</b> · <a class="mono" href="terms/">/terms/</a></span>
+          <span class="pill"><b>Evidence</b> · <a class="mono" href="evidence/">/evidence/</a></span>
+        </div>
+
+        <div class="note" style="margin-top:12px">
+          <b>Fail-closed:</b> se manca un requisito o una prova, il sistema non “interpreta”.  
+          <span class="mono">Blocca → registra → richiede evidenza.</span> Questo è “banca dati cibernetica” in pratica.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div><b>Hermeticum B.C.E.</b> — cybersicurezza del dato a livello digitale. Il dato sei tu: IPR → AI → prova → tempo.</div>
+      <div class="mini">
+        <a href="#manifesto">Su</a>
+        <a href="#ipraijoker">IPR+AI</a>
+        <a href="#moduli">Moduli</a>
+      </div>
+    </footer>
+
   </div>
-  <nav>
-    <a href="#cos">Cos’è</a>
-    <a href="#ai">AI JOKER</a>
-    <a href="#ipr">IPR</a>
-    <a href="#portal">Portal</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <h1>La prima Banca Dati Cibernetica Europea</h1>
-  <p class="sub">
-    La cybersicurezza non protegge file. Protegge persone.  
-    Nel digitale il dato non è un oggetto: <b>il dato sei tu</b>.
-    Hermeticum B.C.E. rende l’identità verificabile, tracciabile e opponibile nel tempo.
-  </p>
-
-  <div class="cta">
-    <a class="btn primary" href="#ipr">Attiva IPR</a>
-    <a class="btn" href="#ai">Accedi ad AI JOKER</a>
-  </div>
-
-  <div>
-    <span class="pill">Velocità algoritmica</span>
-    <span class="pill">Precisione non-umana</span>
-    <span class="pill">Sicurezza crittografica</span>
-    <span class="pill">Continuità nel tempo</span>
-  </div>
-</section>
-
-<section id="cos" class="grid">
-  <div class="card">
-    <h2>Cibernetica, non burocrazia</h2>
-    <p>
-      Input → decisione → output → feedback.  
-      Hermeticum è progettato come sistema cibernetico nativo,
-      non come banca digitalizzata.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>AI, non operatori</h2>
-    <p>
-      Qui non esiste “dipende dall’operatore”.
-      Il cliente dialoga con AI JOKER: regole stabili,
-      decisioni ripetibili, tracce verificabili.
-    </p>
-  </div>
-
-  <div class="card full">
-    <h2>Cybersicurezza del dato a livello digitale</h2>
-    <p>
-      Ogni azione è attribuita, regolata e tracciata.
-      Se manca una prova, il sistema non decide: blocca.
-    </p>
-    <div>
-      <span class="pill">Hash ≠ opinione</span>
-      <span class="pill">Firma ≠ promessa</span>
-      <span class="pill">Audit ≠ fiducia</span>
-    </div>
-  </div>
-</section>
-
-<section id="ipr" class="grid">
-  <div class="card">
-    <h2>IPR</h2>
-    <p>
-      L’Identity Primary Record trasforma una persona
-      in identità operativa verificabile nel tempo.
-    </p>
-    <ul>
-      <li>Attribuzione certa</li>
-      <li>Continuità temporale</li>
-      <li>Opponibilità UE-first</li>
-    </ul>
-  </div>
-
-  <div class="card" id="ai">
-    <h2>AI JOKER</h2>
-    <p>
-      Un’AI standard diventa AI JOKER quando viene istanziata tramite IPR:
-      personalizzata, versionata, professionale.
-    </p>
-    <ul>
-      <li>BASE · identità + continuità</li>
-      <li>PRO · tracciabilità opponibile</li>
-      <li>ENTERPRISE · governance e audit</li>
-    </ul>
-  </div>
-</section>
-
-<section id="portal" class="grid">
-  <div class="card full">
-    <h2>Portal</h2>
-    <p>Accesso ai moduli dell’ecosistema Hermeticum B.C.E.</p>
-    <div class="cta">
-      <a class="btn" href="https://manuelcoletta1-source.github.io/unebdo/" target="_blank">UNEBDO</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/opc/" target="_blank">OPC</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/metaexchange/" target="_blank">MetaExchange</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank">AI JOKER</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  Hermeticum B.C.E. — Banca dati cibernetica UE-first.  
-  Il dato sei tu. L’IPR è la tua chiave.
-</footer>
-
-</div>
 </body>
 </html>
