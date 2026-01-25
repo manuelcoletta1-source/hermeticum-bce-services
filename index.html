@@ -4,32 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hermeticum B.C.E. — Services</title>
-  <meta name="description" content="Hermeticum B.C.E. Services è la mappa ufficiale dello spazio di continuità operativa: Identity (IPR), Policy (OPC), Execution (AI JOKER-C2), Evidence (Audit)." />
+  <meta name="description" content="Hermeticum B.C.E. è uno spazio di continuità operativa sopra Internet: identità, regole ed esecuzione coerenti nel tempo." />
   <meta name="theme-color" content="#0b0c10" />
-
   <style>
     :root{
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#a6acb8;
-      --accent:#7cf6c8;
-      --radius:16px;
-      --max:980px;
+      --bg:#0b0c10;--panel:#0f1117;--line:#24262b;
+      --text:#e8e8e8;--muted:#a6acb8;--accent:#7cf6c8;
+      --radius:16px;--max:980px;
       --mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       --sans:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
     *{box-sizing:border-box}
     body{
       margin:0;font-family:var(--sans);color:var(--text);line-height:1.45;
-      background:
-        radial-gradient(900px 520px at 25% 0%, rgba(124,246,200,.11), transparent 60%),
-        var(--bg);
+      background:radial-gradient(900px 520px at 25% 0%, rgba(124,246,200,.11), transparent 60%),var(--bg);
     }
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 56px}
-
     header{
       display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
       padding:14px 16px;border-radius:var(--radius);
@@ -46,7 +37,6 @@
       padding:9px 12px;border-radius:12px;border:1px solid var(--line);
       background:rgba(15,17,23,.88);font-weight:800;font-size:12.5px
     }
-
     .hero{
       margin-top:16px;padding:22px;border-radius:var(--radius);
       border:1px solid var(--line);background:rgba(15,17,23,.75)
@@ -59,7 +49,6 @@
       border-radius:999px;border:1px solid var(--line);
       font-size:12px;color:var(--muted)
     }
-
     .grid{margin-top:18px;display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
     .card{
       grid-column:span 6;padding:18px;border-radius:var(--radius);
@@ -67,27 +56,24 @@
     }
     .card.full{grid-column:span 12}
     h2{margin:0 0 8px;font-size:16px}
-
     footer{
       margin-top:22px;padding:16px;border-radius:var(--radius);
       border:1px solid var(--line);background:rgba(15,17,23,.6);
       font-size:12.5px;color:var(--muted)
     }
-
     @media(max-width:900px){
       .card{grid-column:span 12}
       h1{font-size:24px}
     }
   </style>
 </head>
-
 <body>
 <div class="wrap">
 
 <header>
   <div class="brand">
     Hermeticum B.C.E. — Services
-    <span class="badge">MAPPA UFFICIALE</span>
+    <span class="badge">ROOT</span>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap">
     <a class="btn" href="#modules">Moduli</a>
@@ -98,81 +84,46 @@
 <section class="hero">
   <h1>Spazio di continuità operativa</h1>
   <p>
-    Services è la mappa ufficiale dell’ecosistema: qui si entra, si comprende,
-    si collega identità, regole ed esecuzione.  
-    Non è un cockpit. È il punto di verità.
+    Uno strato sopra Internet in cui identità, decisioni ed esecuzione
+    mantengono coerenza e responsabilità nel tempo.
   </p>
   <div class="pills">
-    <span class="pill">Identity (IPR)</span>
-    <span class="pill">Policy (OPC)</span>
-    <span class="pill">Execution (AI JOKER-C2)</span>
-    <span class="pill">Evidence (Audit)</span>
+    <span class="pill">IPR</span>
+    <span class="pill">OPC</span>
+    <span class="pill">AI JOKER-C2</span>
+    <span class="pill">Audit</span>
   </div>
 </section>
 
 <section class="grid" id="modules">
   <div class="card">
-    <h2>Identity — IPR</h2>
-    <p>
-      Identità operativa continua nel tempo.  
-      Senza IPR non esiste istanza personale.
-    </p>
-    <div class="pills">
-      <a class="pill" href="#entry">Onboarding</a>
-      <a class="pill" href="#">IPR (in arrivo)</a>
-    </div>
+    <h2>Identity</h2>
+    <p>Continuità dell’identità operativa (IPR).</p>
   </div>
-
   <div class="card">
-    <h2>Policy — OPC</h2>
-    <p>
-      Policy opponibili: deterministiche, versionate, fail-closed.  
-      Qui le regole non si interpretano: si applicano.
-    </p>
-    <div class="pills">
-      <a class="pill" href="https://manuelcoletta1-source.github.io/opc/" target="_blank" rel="noopener">OPC</a>
-      <a class="pill" href="https://manuelcoletta1-source.github.io/opc/policy/" target="_blank" rel="noopener">Policy</a>
-    </div>
+    <h2>Policy</h2>
+    <p>Regole opponibili e deterministiche (OPC).</p>
   </div>
-
   <div class="card">
-    <h2>Execution — AI JOKER-C2</h2>
-    <p>
-      Execution layer AI-first vincolato da IPR e OPC.  
-      Senza IPR: DENY. Senza evidence: nessuna evoluzione.
-    </p>
-    <div class="pills">
-      <a class="pill" href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noopener">Workers</a>
-    </div>
+    <h2>Execution</h2>
+    <p>Esecuzione AI vincolata (AI JOKER-C2).</p>
   </div>
-
   <div class="card">
-    <h2>Evidence — Audit</h2>
-    <p>
-      Traccia append-only delle azioni: output difendibile nel tempo.  
-      Hash-only, GDPR-min, audit-by-design.
-    </p>
-    <div class="pills">
-      <a class="pill" href="#">Evidence (in arrivo)</a>
-    </div>
+    <h2>Evidence</h2>
+    <p>Traccia append-only delle azioni (Audit).</p>
   </div>
 
   <div class="card full" id="entry">
-    <h2>Ingresso (minimo)</h2>
+    <h2>Ingresso minimo</h2>
     <p>
-      1) Attiva un IPR → 2) Accetta policy OPC → 3) Opera in AI JOKER-C2 → 4) Produci evidence.
-      <br /><br />
-      Onboarding pubblico:
-      <a href="https://github.com/manuelcoletta1-source/hermeticum-bce-services/tree/main/onboarding" target="_blank" rel="noopener" style="text-decoration:underline">
-        /onboarding
-      </a>
+      Attiva identità → accetta policy → esegui → produci evidenza.
     </p>
   </div>
 </section>
 
 <footer>
-  Services orchestra i moduli.  
-  OPC vincola. AI JOKER-C2 esegue. L’audit rende opponibile.
+  Services è il punto di orientamento.  
+  Non esegue, non decide: orchestra.
 </footer>
 
 </div>
