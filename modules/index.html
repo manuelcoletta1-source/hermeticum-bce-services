@@ -2,144 +2,227 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
+  <title>HERMETICUM B.C.E. — Modules</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Modules — HERMETICUM Services</title>
-  <meta name="description" content="Hub dei moduli dell’ecosistema cibernetico HERMETICUM. Tutti i moduli operano all’unisono con AI JOKER-C2 e IPR." />
+  <meta name="description" content="HERMETICUM B.C.E. — Moduli della piattaforma: governance, compliance, exchange, operational space e orchestrazione AI." />
+
   <style>
     :root{
-      --bg:#0b0c10; --panel:#0f1117; --line:#24262b; --text:#e8e8e8; --muted:#a9abb3;
-      --shadow:0 12px 36px rgba(0,0,0,.35); --r:16px; --r2:22px; --max:1100px;
+      --bg:#0b0c10;
+      --panel:#0f1117;
+      --line:#24262b;
+      --text:#e8e8e8;
+      --muted:#9aa0a6;
+      --accent:#6ee7b7;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      background:radial-gradient(1200px 700px at 20% 0%, #121525 0%, rgba(18,21,37,0) 55%),
-                 radial-gradient(900px 600px at 80% 10%, #141b2a 0%, rgba(20,27,42,0) 55%),
-                 var(--bg);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif;
+      background:var(--bg);
       color:var(--text);
-      font:15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      letter-spacing:.2px;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
-    .top{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r2);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow); position:sticky; top:14px; z-index:10; backdrop-filter: blur(10px);
+    header{
+      padding:28px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,var(--panel),var(--bg));
     }
-    .brand{font-weight:900; letter-spacing:.6px}
-    .nav{display:flex; gap:10px; flex-wrap:wrap}
-    .chip{
-      padding:8px 10px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(255,255,255,.03); color:var(--muted); font-weight:800; transition:.15s ease;
+    h1{ margin:0; font-size:1.7rem; letter-spacing:0.04em; }
+    header p{ margin:10px 0 0; color:var(--muted); max-width:860px; }
+
+    nav{
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
     }
-    .chip:hover{transform:translateY(-1px); color:var(--text); background:rgba(255,255,255,.05)}
-    .hero{
-      margin-top:18px; border:1px solid var(--line); border-radius:var(--r2); padding:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
+    nav a{
+      color:var(--text);
+      text-decoration:none;
+      padding:8px 14px;
+      border:1px solid var(--line);
+      border-radius:6px;
+      background:var(--panel);
+      font-size:0.9rem;
     }
-    .mark{margin:0 0 6px; font-weight:900}
-    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
-    h1{margin:0 0 8px; font-size:28px; line-height:1.15}
-    .sub{margin:0; color:var(--muted); max-width:90ch}
-    .grid{display:grid; gap:12px; margin-top:14px}
-    @media (min-width:900px){ .grid{grid-template-columns:repeat(3,1fr)} }
+    nav a:hover{ color:var(--accent); border-color:var(--accent); }
+
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:36px 24px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
     .card{
-      border:1px solid var(--line); border-radius:var(--r);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      padding:16px; box-shadow:var(--shadow);
-      transition:.15s ease;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:170px;
     }
-    .card:hover{transform:translateY(-2px); background:rgba(255,255,255,.04)}
-    .card b{display:block; margin-bottom:6px; font-size:16px}
-    .card p{margin:0; color:var(--muted)}
-    .tag{display:inline-block; margin-top:8px; padding:6px 8px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-weight:800; font-size:12px}
-    .footer{
-      margin-top:18px; color:var(--muted); font-size:12px; padding:14px 2px 0;
-      display:flex; gap:10px; justify-content:space-between; border-top:1px solid var(--line);
+    .card h2{
+      margin:0;
+      font-size:1.05rem;
+      letter-spacing:0.02em;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:0.92rem;
+      line-height:1.35;
+    }
+    .links{
+      margin-top:auto;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn{
+      display:inline-block;
+      text-decoration:none;
+      color:var(--text);
+      border:1px solid var(--line);
+      background:#0d1117;
+      padding:7px 10px;
+      border-radius:8px;
+      font-size:0.88rem;
+    }
+    .btn:hover{
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+
+    .note{
+      margin-top:26px;
+      padding:14px 16px;
+      border:1px dashed var(--line);
+      border-radius:10px;
+      color:var(--muted);
+      background:rgba(15,17,23,0.55);
+      max-width:980px;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      padding:26px;
+      font-size:0.85rem;
+      color:var(--muted);
     }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">Modules</div>
-      <div class="nav">
-        <a class="chip" href="../">Home</a>
-        <a class="chip" href="../catalog/">Catalog</a>
-        <a class="chip" href="../onboarding/">Onboarding</a>
-        <a class="chip" href="../verify/">Verify</a>
-        <a class="chip" href="../terms/">Terms</a>
+
+<header>
+  <h1>HERMETICUM — Modules</h1>
+  <p>
+    I moduli sono componenti architetturali della piattaforma: cooperano in modalità deterministica,
+    UE-first, con audit-by-design. Nessun “service” isolato: tutto è piattaforma.
+  </p>
+
+  <nav>
+    <a href="./index.html">Platform</a>
+    <a href="#modules">Modules</a>
+    <a href="./index.html#verify">Verify</a>
+    <a href="./index.html#terms">Terms</a>
+  </nav>
+</header>
+
+<main id="modules">
+
+  <div class="grid">
+    <div class="card">
+      <h2>UNEBDO ΦΩ</h2>
+      <p>Compliance, enforcement, audit trail, opponibilità e controllo UE-first.</p>
+      <div class="links">
+        <a class="btn" href="https://manuelcoletta1-source.github.io/unebdo/" target="_blank" rel="noreferrer">Open</a>
+        <a class="btn" href="https://github.com/manuelcoletta1-source/unebdo" target="_blank" rel="noreferrer">Repo</a>
       </div>
     </div>
 
-    <header class="hero">
-      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
-      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
+    <div class="card">
+      <h2>OPC</h2>
+      <p>Opposable Policy Core: policy computabili, versionate e verificabili.</p>
+      <div class="links">
+        <a class="btn" href="https://manuelcoletta1-source.github.io/opc/" target="_blank" rel="noreferrer">Open</a>
+        <a class="btn" href="https://github.com/manuelcoletta1-source/opc" target="_blank" rel="noreferrer">Repo</a>
+      </div>
+    </div>
 
-      <h1>Moduli dell’ecosistema cibernetico</h1>
-      <p class="sub">
-        I moduli HERMETICUM operano <b>all’unisono</b> con <b>AI JOKER-C2</b> e l’<b>IPR personale</b>.
-        Nessun modulo è autonomo: ogni azione è vincolata da policy, prova e continuità temporale.
-      </p>
-    </header>
+    <div class="card">
+      <h2>MetaExchange</h2>
+      <p>Scambio verificabile di dati/valore con tracciabilità e regole opponibili.</p>
+      <div class="links">
+        <a class="btn" href="https://manuelcoletta1-source.github.io/metaexchange/" target="_blank" rel="noreferrer">Open</a>
+        <a class="btn" href="https://github.com/manuelcoletta1-source/metaexchange" target="_blank" rel="noreferrer">Repo</a>
+      </div>
+    </div>
 
-    <section class="grid">
-      <a class="card" href="https://manuelcoletta1-source.github.io/unebdo/" target="_blank" rel="noopener">
-        <b>UNEBDO</b>
-        <p>Tracciatura, evidenza e continuità temporale degli eventi.</p>
-        <span class="tag">evidence</span>
-      </a>
+    <div class="card">
+      <h2>IoSpace</h2>
+      <p>Spazio operativo: ambienti digitali controllati, accesso, sessioni, contenitori.</p>
+      <div class="links">
+        <a class="btn" href="https://manuelcoletta1-source.github.io/iospace/" target="_blank" rel="noreferrer">Open</a>
+        <a class="btn" href="https://github.com/manuelcoletta1-source/iospace" target="_blank" rel="noreferrer">Repo</a>
+      </div>
+    </div>
 
-      <a class="card" href="https://manuelcoletta1-source.github.io/opc/" target="_blank" rel="noopener">
-        <b>OPC</b>
-        <p>Motore di policy computabili e opponibili (ALLOW / DENY).</p>
-        <span class="tag">policy</span>
-      </a>
+    <div class="card">
+      <h2>NeuroLoop</h2>
+      <p>Continuità cognitiva: feedback, apprendimento, miglioramento e memoria operativa.</p>
+      <div class="links">
+        <a class="btn" href="https://manuelcoletta1-source.github.io/neuroloop/" target="_blank" rel="noreferrer">Open</a>
+        <a class="btn" href="https://github.com/manuelcoletta1-source/neuroloop" target="_blank" rel="noreferrer">Repo</a>
+      </div>
+    </div>
 
-      <a class="card" href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noopener">
-        <b>AI JOKER Workers</b>
-        <p>Orchestrazione C2 e coordinamento operativo.</p>
-        <span class="tag">c2</span>
-      </a>
+    <div class="card">
+      <h2>CyberGlobal</h2>
+      <p>Interoperabilità e governance tecnica in contesti civili/istituzionali e critici.</p>
+      <div class="links">
+        <a class="btn" href="https://manuelcoletta1-source.github.io/cyberglobal/" target="_blank" rel="noreferrer">Open</a>
+        <a class="btn" href="https://github.com/manuelcoletta1-source/cyberglobal" target="_blank" rel="noreferrer">Repo</a>
+      </div>
+    </div>
 
-      <a class="card" href="https://manuelcoletta1-source.github.io/iospace/" target="_blank" rel="noopener">
-        <b>IoSpace</b>
-        <p>Spazi operativi digitali controllati.</p>
-        <span class="tag">workspace</span>
-      </a>
+    <div class="card">
+      <h2>AI JOKER-C2</h2>
+      <p>Orchestrazione e C2: coordina i moduli, applica policy, gestisce flussi e audit.</p>
+      <div class="links">
+        <a class="btn" href="https://manuelcoletta1-source.github.io/ai-joker-workers/" target="_blank" rel="noreferrer">Open</a>
+        <a class="btn" href="https://github.com/manuelcoletta1-source/ai-joker-workers" target="_blank" rel="noreferrer">Repo</a>
+      </div>
+    </div>
 
-      <a class="card" href="https://manuelcoletta1-source.github.io/neuroloop/" target="_blank" rel="noopener">
-        <b>NeuroLoop</b>
-        <p>Feedback, apprendimento e telemetria controllata.</p>
-        <span class="tag">feedback</span>
-      </a>
-
-      <a class="card" href="https://manuelcoletta1-source.github.io/metaexchange/" target="_blank" rel="noopener">
-        <b>MetaExchange</b>
-        <p>Scambio regolato di valore e dati.</p>
-        <span class="tag">exchange</span>
-      </a>
-
-      <a class="card" href="https://manuelcoletta1-source.github.io/cyberglobal/" target="_blank" rel="noopener">
-        <b>CyberGlobal</b>
-        <p>Interoperabilità e sicurezza infrastrutturale UE-first.</p>
-        <span class="tag">interoperability</span>
-      </a>
-
-      <a class="card" href="https://manuelcoletta1-source.github.io/gitjoker-c2/" target="_blank" rel="noopener">
-        <b>GitJoker-C2</b>
-        <p>Versionamento, deploy e tracciatura su Git.</p>
-        <span class="tag">git</span>
-      </a>
-    </section>
-
-    <div class="footer">
-      <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-      <div>HERMETICUM B.C.E. S.r.l.</div>
+    <div class="card">
+      <h2>IPR-GOV-EU Standard</h2>
+      <p>Standard normativo e tecnico UE-first per IPR, audit, minimizzazione e opponibilità.</p>
+      <div class="links">
+        <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/" target="_blank" rel="noreferrer">Open</a>
+        <a class="btn" href="https://github.com/manuelcoletta1-source/ipr-gov-eu-standard" target="_blank" rel="noreferrer">Repo</a>
+      </div>
     </div>
   </div>
+
+  <div class="note">
+    Nota: se un link “Repo” non esiste con quel nome, non cambiare il testo dei moduli.
+    Correggi solo l’URL del repo mantenendo identico il titolo del modulo (canonico).
+  </div>
+
+</main>
+
+<footer>
+  HERMETICUM B.C.E. S.r.l. — Infrastruttura cibernetica europea
+</footer>
+
 </body>
 </html>
