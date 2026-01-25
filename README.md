@@ -1,127 +1,110 @@
 # HERMETICUM B.C.E. PLATFORM
-**European Platform for Verifiable Digital Identity and Proof in Time**
+**Piattaforma europea per identità digitale verificabile e prova opponibile nel tempo**
 
-Hermeticum B.C.E. is a **UE-first digital platform** providing
-**verifiable identity, integrity and legally opposable proof over time**
-for citizens, professionals and public institutions.
+Hermeticum B.C.E. è una **piattaforma digitale europea (UE-first)**
+che fornisce **continuità, integrità e verificabilità**
+dell’identità digitale e delle evidenze associate.
 
-The platform operates as a **control and access layer**
-that enables long-term validity, auditability and interoperability
-across digital identity systems.
-
----
-
-## Platform Objective
-
-Digital identity systems often lack:
-- continuity over time
-- independent verification
-- legal opponibility across jurisdictions
-
-Hermeticum B.C.E. addresses these limitations by introducing
-a platform that ensures:
-- integrity of identity-related data
-- public and verifiable time anchoring
-- reproducible audit and verification processes
-
-The platform **does not replace** existing identity solutions.
-It **extends them with a higher layer of proof and coherence**.
+La piattaforma è progettata per essere utilizzata da:
+- cittadini
+- professionisti e imprese
+- istituzioni e tribunali
 
 ---
 
-## Platform Role
+## Obiettivo della Piattaforma
 
-Hermeticum B.C.E. is **not an application** and **not a single service**.
+I sistemi digitali attuali presentano limiti strutturali:
+- difficoltà di verifica indipendente
+- assenza di continuità nel lungo periodo
+- dipendenza da sistemi centralizzati
+- incertezza sull’opponibilità temporale
 
-It functions as a **platform layer** that:
-- coordinates identity records (IPR)
-- separates data from proof mechanisms
-- enables independent verification
-- supports UE-first governance and audit requirements
-
----
-
-## Access Domains
-
-The platform exposes **three clearly separated access domains**.
-
-### Citizen (EU)
-For individuals requiring:
-- a verifiable digital identity
-- protection of documents and credentials over time
-- continuity across countries and legal contexts
-
-The citizen domain abstracts all technical complexity.
+Hermeticum B.C.E. affronta questi limiti fornendo
+un **layer di piattaforma** che garantisce:
+- integrità dei dati
+- prova tecnica riproducibile
+- validità nel tempo
+- auditabilità UE-first
 
 ---
 
-### Professional / Technical
-For engineers, enterprises and legal-tech operators.
+## Ruolo di Hermeticum B.C.E.
 
-Provides access to:
-- platform architecture
-- identity record structure (IPR)
-- verification and audit workflows
-- integration interfaces
+Hermeticum B.C.E. **non è un’applicazione**
+e **non è un singolo servizio**.
 
-This domain enables technical validation and system integration.
+È una **piattaforma infrastrutturale** che:
+- coordina record primari di identità (IPR)
+- separa dato, prova e governance
+- abilita verifica indipendente
+- supporta contesti legali e istituzionali
 
----
-
-### Institution / Tribunal
-For public administrations, regulators and judicial authorities.
-
-Focused on:
-- integrity verification
-- timestamp opponibility
-- audit traceability
-- technological neutrality
-
-The platform acts as a **neutral verification instrument**.
-It does not interpret, decide or enforce outcomes.
+La piattaforma **estende** i sistemi esistenti,
+non li sostituisce.
 
 ---
 
-## Core Principles
+## Domini di Accesso
 
-- **UE-first design** aligned with European regulatory frameworks
-- **Separation of concerns** between data, proof and governance
-- **Auditability** through reproducible verification
-- **Technology neutrality** and non-dependence on single vendors
-- **Long-term validity** of identity and proof
+Hermeticum B.C.E. opera attraverso **tre domini distinti**.
 
----
+### Cittadino (UE)
+Accesso semplificato per la protezione dell’identità digitale
+e dei documenti nel tempo.
 
-## Platform Boundaries
+### Professionista / Tecnico
+Accesso tecnico per integrazione, audit,
+verifica e valutazione architetturale.
 
-Hermeticum B.C.E. is:
-- not a social platform
-- not a financial system
-- not a proprietary identity silo
-- not an autonomous decision-maker
+### Istituzione / Tribunale
+Accesso istituzionale per verifica neutra,
+opponibilità e riproducibilità della prova.
 
-Its sole function is to provide **verifiable proof and continuity**.
+Ogni dominio utilizza **linguaggio e strumenti dedicati**.
 
 ---
 
-## Ecosystem Context
+## Principi Fondamentali
 
-This repository represents the **Platform Control Plane**.
-
-Operational components (identity, verification, governance, intelligence)
-are maintained in dedicated repositories and integrated through
-the platform layer.
-
----
-
-## Status
-
-Platform architecture: **stable**  
-Refactoring focus: **platform-first orientation**  
-Development state: **active**
+- **UE-first**: allineamento ai quadri normativi europei
+- **Separazione dei livelli**: dato ≠ prova ≠ governance
+- **Neutralità tecnologica**
+- **Auditabilità by design**
+- **Validità a lungo termine**
 
 ---
 
-**HERMETICUM B.C.E.**
+## Cosa la Piattaforma NON è
+
+Hermeticum B.C.E.:
+- non è un social network
+- non è un sistema finanziario
+- non è un registro legale
+- non prende decisioni
+- non sostituisce le autorità pubbliche
+
+Fornisce **strumenti tecnici di verifica**, non giudizio.
+
+---
+
+## Contesto Ecosistemico
+
+Questo repository rappresenta il **control plane della piattaforma**.
+
+I moduli operativi (identità, verifica, governance, intelligenza)
+sono mantenuti in repository dedicati e integrati tramite il layer piattaforma.
+
+---
+
+## Stato
+
+Architettura di piattaforma: **stabile**  
+Orientamento: **platform-first**  
+Sviluppo: **attivo**
+
+---
+
+**HERMETICUM B.C.E.**  
 Blindata · Computabile · Evolutiva  
 HERMETICUM B.C.E. S.r.l.
