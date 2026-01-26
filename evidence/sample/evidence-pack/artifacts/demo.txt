@@ -1,0 +1,4 @@
+HERMETICUM B.C.E. — Evidence Pack Demo
+
+Questo è un file di esempio.
+Se cambia anche un solo carattere, cambia l'hash.
