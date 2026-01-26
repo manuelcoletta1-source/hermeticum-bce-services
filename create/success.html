@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IPR Rilasciato — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Output post-rilascio IPR: salva manifest, conserva evidenze, avvia verifica.">
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
+    header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
+    header{padding-top:3.5rem}
+    h1{font-size:2.1rem;margin:0 0 .5rem}
+    .sub{opacity:.85}
+    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:1.5rem}
+    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
+    a{color:#9ad}
+    .cta{display:inline-block;margin:.5rem .4rem 0 0;padding:.7rem 1.1rem;border:1px solid #444;border-radius:4px;color:#fff;text-decoration:none;font-weight:500}
+    .cta.primary{border-color:#888}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    textarea{width:100%;min-height:220px;background:#0f0f0f;color:#e6e6e6;border:1px solid #222;border-radius:6px;padding:12px;box-sizing:border-box}
+    .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.75rem}
+    button{background:#111;color:#fff;border:1px solid #444;border-radius:4px;padding:.65rem 1rem;cursor:pointer;font-weight:600}
+    button.primary{border-color:#888}
+    .hint{opacity:.85;font-size:.95rem}
+    .ok{opacity:.95}
+    .warn{opacity:.9}
+    .line{height:1px;background:#222;margin:1.2rem 0}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Create / Output</div>
+  <h1>IPR rilasciato</h1>
+  <p class="sub">
+    Questo è l’output post-rilascio. Ora la regola è semplice:
+    <strong>salva</strong> → <strong>conserva</strong> → <strong>verifica</strong>.
+  </p>
+
+  <div style="margin-top:1rem;">
+    <a class="cta primary" href="../verify/">Verifica IPR</a>
+    <a class="cta" href="../evidence/">Evidence</a>
+    <a class="cta" href="../terms/">Termini</a>
+    <a class="cta" href="../">Home</a>
+  </div>
+</header>
+
+<section>
+  <h2>Esito</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Hai ottenuto</h3>
+      <ul>
+        <li><strong>Manifest IPR</strong> (testo strutturato)</li>
+        <li><strong>Evidenze</strong> (hash/verifiche)</li>
+        <li><strong>Riferimento</strong> (ID/handle)</li>
+      </ul>
+      <p class="hint">
+        Se uno di questi manca, la prova diventa fragile.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Fail-closed</h3>
+      <p class="warn">
+        Se la verifica non torna (mismatch, file mancanti, manifest incoerente),
+        l’esito è <strong>NON valido</strong>. Non “forzare” mai un valid.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Prossimo passo</h3>
+      <p class="ok">
+        Vai a <a href="../verify/">Verifica IPR</a> e ripeti i controlli.
+        La fiducia nasce qui, non in create.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Manifest IPR</h2>
+  <p class="sub">
+    Incolla qui il manifest generato (o recuperalo dal tuo output).  
+    Poi scaricalo come file <span class="mono">.json</span> o <span class="mono">.txt</span> e conservalo.
+  </p>
+
+  <div class="card">
+    <textarea id="manifest" placeholder="Incolla qui il tuo manifest IPR..."></textarea>
+
+    <div class="row">
+      <button class="primary" id="downloadJson">Scarica manifest (.json)</button>
+      <button id="downloadTxt">Scarica manifest (.txt)</button>
+      <button id="saveLocal">Salva in questo browser</button>
+      <button id="clearLocal">Pulisci</button>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="hint">
+      Suggerimento: conserva anche una copia “fredda” (USB/offline) se il contesto è auditabile.
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Checklist conservazione</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Minimo (BASE)</h3>
+      <ul>
+        <li>Manifest salvato</li>
+        <li>File originali (se usati)</li>
+        <li>Data/ora del rilascio</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Audit (STRONG)</h3>
+      <ul>
+        <li>Manifest + evidenze</li>
+        <li>Hash ricalcolati localmente</li>
+        <li>Log di verifica (esito)</li>
+        <li>Versioning (se aggiornato)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Organizzazioni (ENTERPRISE)</h3>
+      <ul>
+        <li>Policy conservazione interna</li>
+        <li>Ruoli e responsabilità</li>
+        <li>Catena di custodia</li>
+        <li>Audit trail completo</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
+  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
+    <div>
+      <strong>HERMETICUM B.C.E.</strong><br>
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
+    </div>
+    <div>
+      <a href="../legal/privacy.html">Privacy</a><br>
+      <a href="../legal/cookies.html">Cookies</a><br>
+      <a href="../legal/accessibility.html">Accessibility</a>
+    </div>
+    <div>
+      <a href="../legal/legal-notice.html">Legal notice</a><br>
+      <a href="../legal/contact.html">Contact</a>
+    </div>
+    <div>
+      Platform status: <strong>Experimental</strong><br>
+      Jurisdiction: <strong>EU</strong>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const el = document.getElementById("manifest");
+
+  // 1) Autoload: query param ?manifest=... OR localStorage
+  try {
+    const params = new URLSearchParams(location.search);
+    const qp = params.get("manifest");
+    if (qp && qp.trim().length > 0) {
+      el.value = decodeURIComponent(qp);
+    } else {
+      const saved = localStorage.getItem("hbce_ipr_manifest");
+      if (saved && saved.trim().length > 0) el.value = saved;
+    }
+  } catch (e) {}
+
+  function download(filename, content, mime) {
+    const blob = new Blob([content], { type: mime || "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2500);
+  }
+
+  document.getElementById("downloadJson").addEventListener("click", () => {
+    const txt = el.value.trim();
+    if (!txt) return alert("Incolla prima il manifest.");
+    // Se non è JSON valido, lo salva comunque come testo .json (scelta fail-open sul formato, non sul valore)
+    download("ipr-manifest.json", txt, "application/json;charset=utf-8");
+  });
+
+  document.getElementById("downloadTxt").addEventListener("click", () => {
+    const txt = el.value.trim();
+    if (!txt) return alert("Incolla prima il manifest.");
+    download("ipr-manifest.txt", txt, "text/plain;charset=utf-8");
+  });
+
+  document.getElementById("saveLocal").addEventListener("click", () => {
+    const txt = el.value.trim();
+    if (!txt) return alert("Incolla prima il manifest.");
+    localStorage.setItem("hbce_ipr_manifest", txt);
+    alert("Salvato in questo browser (localStorage).");
+  });
+
+  document.getElementById("clearLocal").addEventListener("click", () => {
+    localStorage.removeItem("hbce_ipr_manifest");
+    el.value = "";
+  });
+</script>
+
+</body>
+</html>
