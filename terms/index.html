@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms & Scope — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Termini d’uso, perimetro, limiti, esclusioni e principi UE-first per HERMETICUM B.C.E.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Termini & Perimetro — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Termini d’uso e perimetro sperimentale UE-first per HERMETICUM B.C.E.: limiti, esclusioni, uso consentito/vietato." />
   <style>
     body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
     header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
     header{padding-top:3.5rem}
     h1{font-size:2rem;margin:0 0 .5rem}
     .sub{opacity:.85}
+    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:1.5rem}
     .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
-    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
     a{color:#9ad}
     ul{margin-top:.5rem}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .warn{opacity:.9}
   </style>
 </head>
 <body>
@@ -24,8 +26,8 @@
   <div class="badge">Terms / Scope</div>
   <h1>Termini d’uso e perimetro</h1>
   <p class="sub">
-    Questi termini definiscono il perimetro sperimentale della piattaforma,
-    i limiti e le esclusioni, con impostazione UE-first e fail-closed.
+    HERMETICUM B.C.E. è una piattaforma <strong>sperimentale</strong> UE-first.
+    Questi termini definiscono cosa è consentito, cosa è vietato, e i limiti di responsabilità.
   </p>
 </header>
 
@@ -34,81 +36,111 @@
   <div class="grid">
     <div class="card">
       <h3>Sperimentale</h3>
-      <p>HERMETICUM B.C.E. è un progetto sperimentale di ricerca e sviluppo.</p>
+      <p>Ricerca e sviluppo, proof-of-concept, test controllati, documentazione pubblica.</p>
     </div>
     <div class="card">
-      <h3>Non qualificato</h3>
-      <p>Non è un servizio fiduciario qualificato e non sostituisce SPID/CIE/eIDAS.</p>
+      <h3>Non equivalenze</h3>
+      <ul>
+        <li>Non è SPID</li>
+        <li>Non è CIE</li>
+        <li>Non è un EUDI Wallet</li>
+        <li>Non è un servizio fiduciario qualificato</li>
+      </ul>
     </div>
     <div class="card">
-      <h3>UE-first</h3>
-      <p>Approccio orientato a conformità, minimizzazione dati e auditabilità.</p>
+      <h3>Principi</h3>
+      <ul>
+        <li><strong>UE-first</strong> (conformità e perimetro chiaro)</li>
+        <li><strong>GDPR-min</strong> (minimizzazione dati)</li>
+        <li><strong>Audit-by-design</strong> (tracciabilità verificabile)</li>
+        <li><strong>Fail-closed</strong> (in dubbio → non valido)</li>
+      </ul>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>2) Uso consentito</h2>
+  <h2>2) Cosa fa (e cosa non promette)</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>IPR (Identity Primary Record)</h3>
+      <p>
+        Un record tecnico di origine (manifest + evidenze/hash) pensato per integrità,
+        tracciabilità e continuità operativa.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Non promette</h3>
+      <ul>
+        <li>Riconoscimento istituzionale automatico</li>
+        <li>Valore legale automatico</li>
+        <li>Identificazione legale della persona</li>
+      </ul>
+      <p class="warn">L’interpretazione giuridica dipende dal contesto e dalle prove complessive.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>3) Uso consentito</h2>
   <ul>
-    <li>Generazione e gestione di IPR in ambito sperimentale</li>
-    <li>Verifica di integrità e tracciabilità (hash/evidenze)</li>
-    <li>Costruzione di flussi documentali auditabili</li>
-    <li>Ricerca, didattica, prototipazione, proof-of-concept</li>
+    <li>Generazione e verifica di IPR in ambito sperimentale</li>
+    <li>Gestione di evidenze (hash/manifest) per integrità e audit</li>
+    <li>Filiere documentali verificabili (versioning, changelog, conservazione)</li>
+    <li>Ricerca, formazione, prototipazione</li>
   </ul>
 </section>
 
 <section>
-  <h2>3) Uso vietato (zero ambiguità)</h2>
+  <h2>4) Uso vietato (esplicito)</h2>
   <div class="grid">
     <div class="card">
-      <h3>Abusi e frodi</h3>
+      <h3>Frodi e inganni</h3>
       <ul>
         <li>Impersonificazione o falsificazione identità</li>
-        <li>Produzione di documenti ingannevoli</li>
-        <li>Elusione controlli o manipolazione evidenze</li>
+        <li>Manipolazione di evidenze o catene di verifica</li>
+        <li>Creazione di documenti ingannevoli</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Illecito o dannoso</h3>
+      <h3>Danni / intrusione</h3>
       <ul>
-        <li>Attività che violano leggi UE o nazionali</li>
-        <li>Attacchi informatici, malware, intrusione</li>
-        <li>Uso per danneggiare persone o infrastrutture</li>
+        <li>Attacchi informatici, malware, accessi non autorizzati</li>
+        <li>Uso per danneggiare persone, dati o infrastrutture</li>
+        <li>Violazioni di leggi UE o nazionali</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Dual-use: perimetro</h3>
+      <h3>Contesti sensibili (dual-use)</h3>
       <p>
-        Qualsiasi utilizzo in contesti sensibili richiede governance, autorizzazioni
-        e conformità alle normative applicabili. In assenza di tali condizioni,
-        l’uso deve essere considerato <strong>non ammesso</strong>.
+        Qualsiasi utilizzo in contesti sensibili richiede governance, autorizzazioni e conformità
+        alle normative applicabili. In assenza di tali condizioni, l’uso è <strong>non ammesso</strong>.
       </p>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>4) Limiti e responsabilità</h2>
-  <ul>
-    <li>L’utente è responsabile di come usa output e evidenze.</li>
-    <li>La piattaforma non garantisce riconoscimento istituzionale.</li>
-    <li>La verifica è tecnica: non equivale a valore legale automatico.</li>
-    <li>Principio fail-closed: in caso di dubbio, la verifica è non valida.</li>
-  </ul>
-</section>
-
-<section>
-  <h2>5) Conservazione e buona pratica</h2>
+  <h2>5) Conservazione e catena di prova</h2>
   <p>
-    In contesti auditabili, la conservazione di manifest, evidenze, versioni e log
-    è parte integrante della catena di prova. Senza conservazione, la continuità operativa decade.
+    In contesti auditabili, la conservazione di <span class="mono">manifest</span>, evidenze, versioni e log
+    è parte della prova. Senza conservazione, la continuità operativa decade.
   </p>
 </section>
 
 <section>
-  <h2>6) Aggiornamenti</h2>
+  <h2>6) Responsabilità e limitazioni</h2>
+  <ul>
+    <li>La piattaforma fornisce strumenti tecnici “as-is” (senza garanzie implicite).</li>
+    <li>L’utente è responsabile dell’uso degli output e del rispetto delle normative.</li>
+    <li>In caso di dubbio o mismatch di verifica: <strong>fail-closed → non valido</strong>.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>7) Aggiornamenti</h2>
   <p>
-    Questi termini possono essere aggiornati per riflettere evoluzioni tecniche e normative.
+    Questi termini possono essere aggiornati per evoluzioni tecniche e normative.<br />
     Data: <strong>2026</strong>
   </p>
 </section>
@@ -116,20 +148,21 @@
 <footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
   <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
     <div>
-      <strong>HERMETICUM B.C.E.</strong><br>
-      Blindata · Computabile · Evolutiva
+      <strong>HERMETICUM B.C.E.</strong><br />
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
+      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
     </div>
     <div>
-      <a href="../legal/privacy.html">Privacy</a><br>
-      <a href="../legal/cookies.html">Cookies</a><br>
+      <a href="../legal/privacy.html">Privacy</a><br />
+      <a href="../legal/cookies.html">Cookies</a><br />
       <a href="../legal/accessibility.html">Accessibility</a>
     </div>
     <div>
-      <a href="../legal/legal-notice.html">Legal notice</a><br>
+      <a href="../legal/legal-notice.html">Legal notice</a><br />
       <a href="../legal/contact.html">Contact</a>
     </div>
     <div>
-      Platform status: <strong>Experimental</strong><br>
+      Platform status: <strong>Experimental</strong><br />
       Jurisdiction: <strong>EU</strong>
     </div>
   </div>
