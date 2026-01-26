@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA — Piattaforma IPR (UE)</title>
-  <meta name="description" content="Punto di ingresso UE-first per Identity Primary Record (IPR): creazione, catalogo, verifica, evidenze. Tracciabilità nel tempo, auditabile, fail-closed." />
+  <title>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA — Portale IPR (UE)</title>
+  <meta name="description" content="Portale UE-first per IPR (Identity Primary Record): registrazione, creazione manifest, verifica, catalogo livelli, evidenze. Privacy-by-default." />
   <meta name="color-scheme" content="dark light" />
   <style>
     :root{
       --bg:#0b0d10; --card:#12161c; --muted:#9aa4b2; --fg:#e8eef7;
-      --line:#232a34; --accent:#6ee7ff; --good:#6bff95; --warn:#ffd36e;
-      --max:1100px; --r:16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      font-synthesis-weight:none;
+      --line:#232a34; --accent:#6ee7ff; --good:#6bff95; --warn:#ffd36e; --bad:#ff6b6b;
+      --max:1120px; --r:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
     body{
-      margin:0; font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:radial-gradient(1200px 700px at 15% -10%, rgba(110,231,255,.12), transparent 60%),
-                 radial-gradient(900px 500px at 90% 0%, rgba(107,255,149,.10), transparent 55%),
-                 var(--bg);
+      margin:0;
+      font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1200px 700px at 15% -10%, rgba(110,231,255,.12), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(107,255,149,.10), transparent 55%),
+        var(--bg);
       color:var(--fg);
       line-height:1.45;
     }
@@ -27,70 +27,117 @@
     .wrap{max-width:var(--max); margin:0 auto; padding:24px}
     header{
       display:flex; align-items:center; justify-content:space-between; gap:16px;
-      padding:18px 20px; background:rgba(18,22,28,.75); border:1px solid var(--line);
-      border-radius:var(--r); box-shadow:var(--shadow); backdrop-filter: blur(10px);
+      padding:18px 20px;
+      background:rgba(18,22,28,.75);
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
       position:sticky; top:12px; z-index:50;
     }
     .brand{display:flex; flex-direction:column; gap:4px}
-    .mark{font-weight:800; letter-spacing:.4px}
+    .mark{font-weight:900; letter-spacing:.35px}
     .submark{color:var(--muted); font-size:.92rem}
-    nav{display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:flex-end}
+    nav{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; align-items:center}
     .pill{
       padding:8px 12px; border:1px solid var(--line); border-radius:999px;
       background:rgba(255,255,255,.03);
     }
     .pill:hover{border-color:rgba(110,231,255,.55)}
-    .cta{
+    .pill.cta{
       border-color:rgba(110,231,255,.45);
-      background:rgba(110,231,255,.08);
+      background:rgba(110,231,255,.10);
     }
-    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:18px; margin-top:18px}
+
     .card{
-      background:rgba(18,22,28,.82); border:1px solid var(--line); border-radius:var(--r);
-      padding:18px; box-shadow:var(--shadow);
+      background:rgba(18,22,28,.82);
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      padding:18px;
+      box-shadow:var(--shadow);
     }
-    h1{margin:0 0 10px 0; font-size:1.55rem}
+
+    .hero{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:16px;
+    }
+
+    h1{margin:0 0 10px 0; font-size:1.6rem}
     h2{margin:0 0 10px 0; font-size:1.1rem}
     p{margin:10px 0; color:rgba(232,238,247,.92)}
     .muted{color:var(--muted)}
-    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px}
-    .tile{
-      padding:16px; border-radius:var(--r); border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      min-height:150px;
-      display:flex; flex-direction:column; justify-content:space-between; gap:10px;
+    .small{font-size:.92rem}
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
     }
+    .btn:hover{border-color:rgba(110,231,255,.55)}
+    .btn.primary{
+      border-color:rgba(110,231,255,.45);
+      background:rgba(110,231,255,.12);
+    }
+    .btn.good{
+      border-color:rgba(107,255,149,.35);
+      background:rgba(107,255,149,.10);
+    }
+
+    .hr{height:1px; background:var(--line); margin:14px 0}
+
+    .kpi{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px}
+    .kpi .k{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:12px;
+      background:rgba(255,255,255,.02);
+    }
+    .k b{display:block; font-size:1.05rem}
     .tag{
       display:inline-flex; gap:8px; align-items:center;
-      padding:5px 10px; border-radius:999px; border:1px solid var(--line);
+      padding:5px 10px; border-radius:999px;
+      border:1px solid var(--line);
       color:var(--muted); font-size:.85rem;
       width:max-content;
     }
     .tag .dot{width:8px; height:8px; border-radius:999px; background:var(--accent)}
     .tag.good .dot{background:var(--good)}
     .tag.warn .dot{background:var(--warn)}
-    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 14px; border-radius:12px;
-      border:1px solid var(--line); background:rgba(255,255,255,.03);
+
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px}
+    .tile{
+      padding:16px;
+      border-radius:var(--r);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      min-height:155px;
+      display:flex; flex-direction:column; justify-content:space-between; gap:10px;
     }
-    .btn:hover{border-color:rgba(110,231,255,.55)}
-    .btn.primary{border-color:rgba(110,231,255,.45); background:rgba(110,231,255,.10)}
-    .kpi{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px}
-    .kpi .k{border:1px solid var(--line); border-radius:12px; padding:12px; background:rgba(255,255,255,.02)}
-    .k b{display:block; font-size:1.05rem}
-    footer{margin-top:18px; padding:16px; color:var(--muted); font-size:.92rem}
-    .legal{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px}
-    .small{font-size:.92rem}
-    code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
-    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
-    .hr{height:1px; background:var(--line); margin:14px 0}
+    .callout{
+      border:1px dashed rgba(110,231,255,.40);
+      background:rgba(110,231,255,.08);
+      padding:12px;
+      border-radius:12px;
+    }
+    .note{
+      border:1px dashed rgba(255,211,110,.45);
+      background:rgba(255,211,110,.08);
+      padding:12px;
+      border-radius:12px;
+    }
+
+    .section{margin-top:16px}
+
     @media (max-width: 980px){
+      header{position:relative; top:auto}
       .hero{grid-template-columns:1fr}
       .grid3{grid-template-columns:1fr}
-      .legal{grid-template-columns:1fr}
-      header{position:relative; top:auto}
+      .kpi{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -100,87 +147,84 @@
     <header aria-label="Barra principale">
       <div class="brand">
         <div class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-        <div class="submark">HERMETICUM B.C.E. S.r.l. — Punto di ingresso pubblico (UE-first)</div>
+        <div class="submark">HERMETICUM B.C.E. S.r.l. — Portale pubblico UE-first (IPR)</div>
       </div>
       <nav aria-label="Navigazione">
-        <a class="pill" href="./catalog/">Catalogo IPR</a>
-        <a class="pill cta" href="./create/">Crea IPR</a>
+        <a class="pill cta" href="./register/">Register</a>
+        <a class="pill" href="./create/">Crea IPR</a>
         <a class="pill" href="./verify/">Verifica</a>
+        <a class="pill" href="./catalog/">Catalogo</a>
         <a class="pill" href="./terms/">Termini</a>
       </nav>
     </header>
 
-    <section class="hero" aria-label="Hero">
+    <!-- HERO: ingresso diretto -->
+    <section class="hero" aria-label="Ingresso">
       <div class="card">
-        <h1>Infrastruttura europea per <span class="mono">IPR</span> (Identity Primary Record)</h1>
+        <h1>Portale europeo per <span class="mono">IPR</span> (Identity Primary Record)</h1>
         <p class="muted">
           Un <b>IPR</b> non è un account, non è un profilo, non è una certificazione.
-          È un <b>record minimo</b> che rende <b>osservabile nel tempo</b> una traccia:
-          verificabile, auditabile, senza promesse.
+          È un <b>record minimo</b> che rende una <b>traccia verificabile</b> osservabile nel tempo.
         </p>
 
-        <div class="kpi" aria-label="Punti chiave">
+        <div class="kpi" aria-label="Principi">
           <div class="k">
             <b>UE-first</b>
-            <div class="muted small">GDPR-min · hash-only · trasparenza operativa</div>
+            <div class="muted small">GDPR-min · trasparenza operativa</div>
           </div>
           <div class="k">
-            <b>Verificabile</b>
-            <div class="muted small">chiunque può controllare senza fidarsi</div>
+            <b>Hash-only</b>
+            <div class="muted small">pubblico: impronte e riferimenti</div>
           </div>
           <div class="k">
-            <b>Fail-closed</b>
-            <div class="muted small">se non è verificabile, non procede</div>
+            <b>Append-only</b>
+            <div class="muted small">ogni evoluzione è un nuovo evento</div>
           </div>
         </div>
 
         <div class="btnrow" aria-label="Azioni principali">
-          <a class="btn primary" href="./create/">→ Crea un IPR</a>
+          <a class="btn good primary" href="./register/">→ Entra e registra (ingresso)</a>
+          <a class="btn primary" href="./create/">→ Crea un IPR (manifest)</a>
           <a class="btn" href="./verify/">→ Verifica un IPR</a>
-          <a class="btn" href="./catalog/">→ Esplora il Catalogo</a>
         </div>
 
         <div class="hr"></div>
 
-        <p class="small muted">
-          Questa piattaforma espone procedure riproducibili: <b>creazione</b>, <b>verifica</b>, <b>evidenze</b>.
-          L’interpretazione è libera; la traccia è misurabile.
-        </p>
+        <div class="callout small">
+          <b>Valenza / opponibilità</b>: cresce con <b>evidenze verificabili</b> (traccia, tempo, audit, eventuale binding),
+          non con la quantità di dati personali inseriti.
+        </div>
       </div>
 
-      <aside class="card" aria-label="Scelta percorso">
-        <h2>Entra subito</h2>
-        <p class="muted small">
-          Scegli il percorso: stesso sistema, tre livelli di lettura.
-        </p>
+      <aside class="card" aria-label="Percorsi">
+        <h2>Scegli il percorso</h2>
+        <p class="muted small">Stesso sistema, tre livelli di lettura.</p>
 
-        <div class="grid3" style="grid-template-columns:1fr; margin-top:12px">
-          <div class="tile">
+        <div class="section">
+          <div class="tile" style="min-height:auto">
             <div>
               <div class="tag good"><span class="dot"></span> Cittadino</div>
-              <p class="small muted">
-                Vuoi una traccia personale verificabile, utile per continuità operativa e prova di precedenza.
-              </p>
+              <p class="small muted">Traccia personale verificabile, continuità operativa, prova di precedenza.</p>
             </div>
             <a class="btn" href="./catalog/#citizen">Apri percorso Cittadino</a>
           </div>
+        </div>
 
-          <div class="tile">
+        <div class="section">
+          <div class="tile" style="min-height:auto">
             <div>
               <div class="tag"><span class="dot"></span> Professionista / Impresa</div>
-              <p class="small muted">
-                Vuoi attestazioni, pacchetti di evidenze, gestione append-only e procedure per audit tecnico.
-              </p>
+              <p class="small muted">Pacchetti di evidenze, audit tecnico, processi append-only.</p>
             </div>
             <a class="btn" href="./catalog/#professional">Apri percorso Professionista</a>
           </div>
+        </div>
 
-          <div class="tile">
+        <div class="section">
+          <div class="tile" style="min-height:auto">
             <div>
               <div class="tag warn"><span class="dot"></span> Istituzione / Audit</div>
-              <p class="small muted">
-                Vuoi verifiche riproducibili, criteri minimi, e documentazione “citabile” in contesti formali.
-              </p>
+              <p class="small muted">Verifiche riproducibili, criteri minimi, documentazione citabile.</p>
             </div>
             <a class="btn" href="./catalog/#institution">Apri percorso Istituzione</a>
           </div>
@@ -188,83 +232,95 @@
       </aside>
     </section>
 
-    <section class="card" style="margin-top:18px" aria-label="Cos’è un IPR in pratica">
-      <h2>IPR, in pratica</h2>
-      <div class="grid3" aria-label="Definizioni operative">
+    <!-- Cosa fai qui (in 30 secondi) -->
+    <section class="card section" aria-label="Cosa puoi fare subito">
+      <h2>Cosa puoi fare subito</h2>
+      <div class="grid3">
         <div class="tile">
           <div>
-            <div class="tag"><span class="dot"></span> Oggetto</div>
+            <div class="tag"><span class="dot"></span> 1) Register</div>
             <p class="small muted">
-              Un testo o un file (o un pacchetto) che vuoi rendere <b>opponibile nel tempo</b>.
-              Senza forma non c’è traccia.
+              Ingresso UE-first: lingua, alias opzionale, percorso.
+              <b>Privacy by default</b>.
             </p>
           </div>
-          <a class="btn" href="./create/">Vai a “Crea IPR”</a>
+          <a class="btn primary" href="./register/">Vai a Register</a>
         </div>
 
+        <div class="tile">
+          <div>
+            <div class="tag"><span class="dot"></span> 2) Create</div>
+            <p class="small muted">
+              Genera il <b>manifest IPR</b> e la struttura minima per la tua traccia.
+            </p>
+          </div>
+          <a class="btn primary" href="./create/">Vai a Create</a>
+        </div>
+
+        <div class="tile">
+          <div>
+            <div class="tag"><span class="dot"></span> 3) Verify</div>
+            <p class="small muted">
+              Verifica indipendente: controlli riproducibili senza fidarsi.
+            </p>
+          </div>
+          <a class="btn" href="./verify/">Vai a Verify</a>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="note small">
+        <b>Nota UE:</b> se vuoi collegare identità reale, fallo come <b>binding</b> basato su prova (firma / evidenza),
+        e pubblica solo hash e riferimenti. Non trasformare il portale in raccolta anagrafica.
+      </div>
+    </section>
+
+    <!-- Spiegazione ultra-chiara: IPR ≠ account -->
+    <section class="card section" aria-label="Definizione operativa">
+      <h2>IPR (definizione operativa)</h2>
+      <p class="muted small">
+        Un IPR registra <b>precedenza osservabile</b>. Non certifica contenuti, non “convalida verità”, non promette protezione.
+      </p>
+      <div class="grid3">
         <div class="tile">
           <div>
             <div class="tag"><span class="dot"></span> Traccia</div>
             <p class="small muted">
-              L’impronta (<b>hash</b>) e i riferimenti di pubblicazione.
-              Se cambia il contenuto, cambia l’impronta: la riscrittura non è invisibile.
+              Hash del contenuto + manifest minimo. Se cambia un byte, cambia l’hash.
             </p>
           </div>
-          <a class="btn" href="./verify/">Vai a “Verifica”</a>
+          <a class="btn" href="./create/">Manifest (Create)</a>
         </div>
-
+        <div class="tile">
+          <div>
+            <div class="tag"><span class="dot"></span> Tempo</div>
+            <p class="small muted">
+              La precedenza diventa confrontabile quando è misurabile su un asse temporale coerente.
+            </p>
+          </div>
+          <a class="btn" href="./verify/">Controlli (Verify)</a>
+        </div>
         <div class="tile">
           <div>
             <div class="tag"><span class="dot"></span> Audit</div>
             <p class="small muted">
-              Una storia <b>append-only</b>: ogni evoluzione è un nuovo evento.
-              Non “aggiorni un profilo”: aggiungi tracce.
+              Append-only: ogni evoluzione è un nuovo evento, non un aggiornamento silenzioso.
             </p>
           </div>
-          <a class="btn" href="./catalog/">Vai al Catalogo</a>
+          <a class="btn" href="./catalog/">Livelli (Catalog)</a>
         </div>
       </div>
     </section>
 
-    <section class="legal" aria-label="Quadro UE-first" >
-      <div class="card">
-        <h2>Quadro UE-first</h2>
-        <p class="small muted">
-          Questo portale è progettato per minimizzare dati personali e massimizzare verificabilità.
-          Pubblica <b>solo il minimo opponibile</b>.
-        </p>
-        <ul class="small muted">
-          <li><b>GDPR-min:</b> niente dati inutili, preferenza hash e riferimenti.</li>
-          <li><b>Hash-only:</b> il contenuto può essere separato dal record; il record resta verificabile.</li>
-          <li><b>Audit-by-design:</b> log append-only, modifiche sempre tracciate.</li>
-          <li><b>Fail-closed:</b> se manca coerenza, la procedura si ferma.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>Trasparenza operativa</h2>
-        <p class="small muted">
-          Il sistema non “certifica verità”. Rende verificabile la precedenza e la persistenza della traccia.
-          Ogni pagina chiave ha una controparte di verifica.
-        </p>
-        <div class="btnrow">
-          <a class="btn" href="./verify/">Verifica</a>
-          <a class="btn" href="./terms/">Termini</a>
-          <a class="btn" href="./evidence/">Evidence</a>
-        </div>
-        <p class="small muted" style="margin-top:10px">
-          Nota: se <code>/evidence/</code> non esiste ancora, crea la cartella o rimuovi il pulsante.
-        </p>
-      </div>
-    </section>
-
-    <footer class="card" aria-label="Footer" style="margin-top:18px">
+    <!-- Footer -->
+    <footer class="card section" aria-label="Footer">
       <div class="small muted">
         <b>HERMETICUM B.C.E. S.r.l.</b> — Portale pubblico UE-first ·
-        <span class="mono">append-only</span> · <span class="mono">hash-only</span> · <span class="mono">fail-closed</span>
+        <span class="mono">GDPR-min</span> · <span class="mono">hash-only</span> · <span class="mono">append-only</span> · <span class="mono">fail-closed</span>
       </div>
       <div class="small muted" style="margin-top:8px">
-        © 2026 — Documentazione pubblica e verificabile. Nessuna promessa. Nessuna protezione. Solo precedenza.
+        © 2026 — Nessuna promessa. Nessuna protezione. Solo precedenza.
       </div>
     </footer>
   </div>
