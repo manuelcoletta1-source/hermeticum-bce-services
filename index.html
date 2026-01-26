@@ -1,347 +1,164 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="description" content="Portale europeo per registrazione e verifica di IPR (Identity Primary Record): tracce opponibili nel tempo, UE-first, GDPR-min, hash-only, auditabile." />
-  <title>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hermeticum B.C.E. — Nodo Bicibernetico Europeo</title>
+  <meta name="description" content="Nodo bicibernetico europeo a scala regionale. Coordinamento verificabile tra cittadini, quartieri, città e nazioni UE. GDPR-min, hash-only." />
   <style>
-    :root{
-      --bg:#0b0f14;
-      --card:#0f1620;
-      --line:#1f2a37;
-      --text:#e6edf3;
-      --muted:#9aa4b2;
-      --accent:#7dd3fc;
-      --accent2:#a78bfa;
-      --ok:#34d399;
-      --warn:#fbbf24;
-      --danger:#fb7185;
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-      --max: 1100px;
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      line-height: 1.6;
     }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(125,211,252,.18), transparent 60%),
-                  radial-gradient(900px 500px at 80% 0%, rgba(167,139,250,.16), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-      line-height:1.55;
+    header, section, footer {
+      max-width: 1100px;
+      margin: auto;
+      padding: 2.5rem 1.5rem;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 48px}
-    .topbar{
-      display:flex; gap:14px; align-items:center; justify-content:space-between;
-      padding:14px 16px; border:1px solid var(--line); border-radius:var(--radius);
-      background: rgba(15,22,32,.72); backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-      position: sticky; top: 12px; z-index: 20;
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
     }
-    .brand{
-      display:flex; gap:12px; align-items:center; min-width: 240px;
+    header p {
+      max-width: 720px;
+      color: #9da7b1;
     }
-    .mark{
-      width:34px; height:34px; border-radius:12px;
-      background: linear-gradient(135deg, rgba(125,211,252,.26), rgba(167,139,250,.22));
-      border:1px solid rgba(255,255,255,.10);
-      display:grid; place-items:center;
-      font-weight:800;
+    .box {
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      background: #0d1117;
     }
-    .brand h1{
-      margin:0;
-      font-size:14px;
-      letter-spacing:.3px;
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 0;
     }
-    .brand p{margin:0; font-size:12px; color:var(--muted)}
-    .nav{
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end;
+    ul {
+      padding-left: 1.2rem;
     }
-    .pill{
-      padding:8px 10px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background: rgba(15,22,32,.55);
-      font-size:12px;
-      color: var(--muted);
+    .territory code {
+      display: block;
+      background: #161b22;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
     }
-    .pill:hover{color:var(--text); border-color: rgba(125,211,252,.35)}
-    .hero{
-      padding:36px 6px 20px;
-      display:grid; gap:18px;
+    footer {
+      border-top: 1px solid #30363d;
+      font-size: 0.85rem;
+      color: #8b949e;
     }
-    .hero h2{
-      margin:0;
-      font-size:34px;
-      line-height:1.12;
-      letter-spacing: -.4px;
-    }
-    .hero .sub{
-      margin:0;
-      max-width: 72ch;
-      color: var(--muted);
-      font-size:15px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:16px;
-      align-items:stretch;
-      margin-top: 10px;
-    }
-    @media (max-width: 920px){
-      .grid{grid-template-columns:1fr}
-      .brand{min-width:unset}
-      .hero h2{font-size:28px}
-    }
-    .card{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background: rgba(15,22,32,.70);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-      padding:18px;
-    }
-    .card h3{margin:0 0 8px; font-size:16px}
-    .card p{margin:0; color:var(--muted); font-size:14px}
-    .ctaRow{
-      display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;
-    }
-    .btn{
-      display:inline-flex; gap:10px; align-items:center; justify-content:center;
-      padding:11px 14px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(11,15,20,.35);
-      color: var(--text);
-      font-weight: 650;
-      font-size: 13px;
-      cursor:pointer;
-      transition: transform .08s ease, border-color .12s ease, background .12s ease;
-    }
-    .btn:hover{transform: translateY(-1px); border-color: rgba(125,211,252,.35)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(125,211,252,.16), rgba(167,139,250,.14));
-      border-color: rgba(125,211,252,.35);
-    }
-    .btn.ok{border-color: rgba(52,211,153,.35)}
-    .btn.warn{border-color: rgba(251,191,36,.35)}
-    .kpi{
-      display:grid; grid-template-columns: 1fr 1fr;
-      gap:10px; margin-top: 12px;
-    }
-    .kpi .box{
-      padding:12px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(11,15,20,.32);
-    }
-    .kpi .box b{display:block; font-size:13px}
-    .kpi .box span{display:block; font-size:12px; color:var(--muted); margin-top:3px}
-    .section{
-      margin-top: 18px;
-      display:grid; gap:16px;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    @media (max-width: 920px){ .section{grid-template-columns:1fr} }
-    .path{
-      padding:18px;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: rgba(15,22,32,.58);
-    }
-    .path h4{margin:0 0 8px; font-size:15px}
-    .path p{margin:0; color:var(--muted); font-size:13px}
-    .tagRow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
-    .tag{
-      font-size:11px;
-      color: var(--muted);
-      border:1px solid var(--line);
-      padding:6px 8px;
-      border-radius:999px;
-      background: rgba(11,15,20,.32);
-    }
-    .notice{
-      margin-top: 16px;
-      border:1px dashed rgba(255,255,255,.18);
-      border-radius: var(--radius);
-      padding:14px 16px;
-      background: rgba(11,15,20,.22);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .footer{
-      margin-top: 24px;
-      padding-top: 18px;
-      border-top:1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-size: 12px;
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between;
-    }
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <!-- TOP BAR -->
-    <header class="topbar">
-      <div class="brand">
-        <div class="mark">HB</div>
-        <div>
-          <h1>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</h1>
-          <p>Infrastruttura UE-first · GDPR-min · hash-only · auditabile</p>
-        </div>
-      </div>
+<header>
+  <h1>HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA</h1>
+  <p>
+    Nodo Bicibernetico Europeo — Livello Regionale<br />
+    Infrastruttura di coordinamento verificabile per cittadini e territori dell’Unione Europea.
+  </p>
+</header>
 
-      <nav class="nav" aria-label="Navigazione">
-        <a class="pill" href="./create/">Create</a>
-        <a class="pill" href="./verify/">Verify</a>
-        <a class="pill" href="./catalog/">Catalog</a>
-        <a class="pill" href="./terms/">Terms</a>
-        <a class="pill" href="./about/">About</a>
-      </nav>
-    </header>
+<section class="box">
+  <h2>Cos’è questo nodo</h2>
+  <p>
+    Questo portale rappresenta un <strong>nodo bicibernetico europeo</strong> progettato per coordinare
+    eventi, identità e continuità operativa tra:
+  </p>
+  <ul>
+    <li>cittadini</li>
+    <li>quartieri</li>
+    <li>città</li>
+    <li>regioni</li>
+    <li>nazioni europee</li>
+  </ul>
+  <p>
+    Il sistema non raccoglie profili personali e non centralizza il potere.
+    Opera tramite <strong>eventi tracciabili</strong> e <strong>prove crittografiche</strong>.
+  </p>
+</section>
 
-    <!-- HERO -->
-    <section class="hero" role="region" aria-label="Ingresso">
-      <h2>Identità verificabile. Tracce opponibili nel tempo.</h2>
-      <p class="sub">
-        Questo portale consente di <b>registrare</b> e <b>verificare</b> precedenze digitali tramite IPR (Identity Primary Record),
-        minimizzando i dati personali e rendendo le tracce controllabili da terzi senza fiducia.
-      </p>
+<section class="box">
+  <h2>Principio bicibernetico</h2>
+  <p>
+    Il nodo opera su due domini coordinati:
+  </p>
+  <ul>
+    <li><strong>Dominio biologico</strong>: il cittadino reale, con responsabilità giuridica.</li>
+    <li><strong>Dominio cibernetico</strong>: l’estensione tecnica dell’identità (IPR + AI Joker-C2).</li>
+  </ul>
+  <p>
+    Le decisioni restano umane.  
+    La traccia è tecnica.  
+    La continuità è verificabile nel tempo.
+  </p>
+</section>
 
-      <div class="grid">
-        <!-- MAIN CTA -->
-        <div class="card">
-          <h3>Ingresso rapido</h3>
-          <p>
-            Scegli il tuo percorso. Il sistema è progettato per essere leggibile al cittadino e verificabile in audit.
-            Nessun account. Nessuna custodia dei tuoi dati: solo impronte crittografiche e tracce osservabili.
-          </p>
+<section class="box territory">
+  <h2>Architettura territoriale</h2>
+  <p>
+    La piattaforma utilizza una gerarchia territoriale normalizzata e interoperabile a livello UE:
+  </p>
+  <code>
+Planet<br/>
+└─ Europa<br/>
+&nbsp;&nbsp;└─ Italia<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;└─ Piemonte<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ Torino<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ Barriera di Milano<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ Soggetto (IPR / hash)
+  </code>
+</section>
 
-          <div class="ctaRow" style="margin-top:16px">
-            <a class="btn primary" href="./register/citizen-eu.html">Cittadino UE</a>
-            <a class="btn" href="./register/professional.html">Professionista / Impresa</a>
-            <a class="btn" href="./register/institution.html">Istituzione / Audit</a>
-          </div>
+<section class="box">
+  <h2>Identità e IPR</h2>
+  <p>
+    L’IPR (Identity Primary Record) è la chiave di continuità del sistema.
+    Non è un account e non è un documento.
+  </p>
+  <ul>
+    <li>nessun dato personale in chiaro</li>
+    <li>ancoraggio crittografico</li>
+    <li>audit append-only</li>
+    <li>verificabilità nel tempo</li>
+  </ul>
+</section>
 
-          <div class="kpi" aria-label="Principi operativi">
-            <div class="box">
-              <b>Hash-only</b>
-              <span>Minimizzazione dati (GDPR-min)</span>
-            </div>
-            <div class="box">
-              <b>Append-only</b>
-              <span>Ogni modifica è un nuovo evento</span>
-            </div>
-            <div class="box">
-              <b>Verificabile</b>
-              <span>Controllo terzo senza fiducia</span>
-            </div>
-            <div class="box">
-              <b>Fail-closed</b>
-              <span>Se non è verificabile, non procede</span>
-            </div>
-          </div>
+<section class="box">
+  <h2>Policy fondamentali</h2>
+  <ul>
+    <li><strong>UE-FIRST</strong>: progettato per il contesto normativo europeo</li>
+    <li><strong>GDPR-MIN</strong>: minimizzazione dei dati, privacy by design</li>
+    <li><strong>HASH-ONLY</strong>: nessuna informazione sensibile pubblicata</li>
+    <li><strong>FAIL-CLOSED</strong>: ciò che non è verificabile non entra</li>
+  </ul>
+</section>
 
-          <div class="notice">
-            <b>Nota legale/operativa:</b> l’IPR registra una <i>precedenza</i> e una <i>traccia</i>. Non sostituisce documenti ufficiali,
-            non garantisce diritti automatici e non promette riconoscimenti. Rende l’origine osservabile nel tempo.
-          </div>
-        </div>
+<section class="box">
+  <h2>AI Joker-C2</h2>
+  <p>
+    AI Joker-C2 è lo strato di coordinamento cibernetico.
+    Non decide e non governa.
+  </p>
+  <p>
+    Supporta coerenza dei processi, audit e continuità operativa uomo–macchina.
+  </p>
+</section>
 
-        <!-- QUICK ACTIONS -->
-        <div class="card">
-          <h3>Azioni essenziali</h3>
-          <p>Se sai già cosa ti serve, vai diretto.</p>
+<footer>
+  <p>
+    HERMETICUM B.C.E. S.r.l.<br/>
+    Nodo Bicibernetico Europeo — Infrastruttura sperimentale verificabile<br/>
+    Nessun dato personale viene raccolto o pubblicato su questo portale.
+  </p>
+</footer>
 
-          <div class="ctaRow">
-            <a class="btn ok" href="./create/">Crea un IPR</a>
-            <a class="btn warn" href="./verify/">Verifica una traccia</a>
-            <a class="btn" href="./catalog/">Consulta il catalogo</a>
-          </div>
-
-          <div class="notice" style="margin-top:14px">
-            <div><b class="mono">Suggerimento:</b> per iniziare da cittadino, entra da <b>“Cittadino UE”</b> e completa la registrazione territoriale.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PATHS -->
-      <div class="section" aria-label="Percorsi">
-        <div class="path">
-          <h4>Cittadino UE</h4>
-          <p>
-            Registrazione identità con contesto territoriale (nazione, regione, città, quartiere) e verifica minima.
-            Obiettivo: traccia opponibile nel tempo con dati minimizzati.
-          </p>
-          <div class="tagRow">
-            <span class="tag">UE-first</span>
-            <span class="tag">GDPR-min</span>
-            <span class="tag">hash-only</span>
-          </div>
-        </div>
-
-        <div class="path">
-          <h4>Professionista / Impresa</h4>
-          <p>
-            Tracciabilità di attività, opere, documenti e processi. Continuità operativa e verifiche ripetibili.
-            Obiettivo: ridurre ambiguità e aumentare opponibilità delle prove.
-          </p>
-          <div class="tagRow">
-            <span class="tag">audit-ready</span>
-            <span class="tag">append-only</span>
-            <span class="tag">proof pack</span>
-          </div>
-        </div>
-
-        <div class="path">
-          <h4>Istituzione / Audit</h4>
-          <p>
-            Verifica pubblica di tracce e coerenza temporale. Strumenti per controllare precedenze,
-            integrità e continuità senza dipendere dal gestore del portale.
-          </p>
-          <div class="tagRow">
-            <span class="tag">verifica terza parte</span>
-            <span class="tag">coerenza temporale</span>
-            <span class="tag">logica fail-closed</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ABOUT / FOUNDATIONS -->
-      <div class="card" style="margin-top:16px">
-        <h3>Fondamenti (senza obbligo di lettura)</h3>
-        <p>
-          Il portale è operativo anche senza teoria. I fondamenti spiegano <b>perché</b> l’IPR esiste e cosa significa
-          “opponibilità temporale”. La lettura è consigliata per contesti professionali e istituzionali.
-        </p>
-        <div class="ctaRow" style="margin-top:12px">
-          <a class="btn" href="./corpus/">Corpus / Fondamenti</a>
-          <a class="btn" href="./about/">Chi siamo</a>
-          <a class="btn" href="./terms/">Termini e limiti</a>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div>
-          <div><b>HERMETICUM B.C.E. S.r.l.</b></div>
-          <div>Marchio: <span class="mono">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</span></div>
-        </div>
-        <div>
-          <div class="mono">UE-first · GDPR-min · HASH-ONLY · AUDIT</div>
-          <div>GitHub Pages · Static portal · Verificabilità pubblica</div>
-        </div>
-      </div>
-    </section>
-
-  </div>
 </body>
 </html>
