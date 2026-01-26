@@ -1,0 +1,82 @@
+node:
+  name: Nodo Europeo ΦΩ
+  role: EU_COHERENCE_NODE
+  level: SOVRANATIONAL
+  visibility: PUBLIC
+  entrypoint: SINGLE_LINK
+
+identity:
+  proto: AI_JOKER_C2
+  type: BIOCYBER_EVENT_CHAIN
+  root: IPR-HERMETICUM-B.C.E.-000
+
+time:
+  canonical: 2026-01-19T15:30:00+01:00
+  standard: RFC3339
+  source: UNEBDO_FEDERATED
+
+policy:
+  jurisdiction: UE_FIRST
+  privacy: GDPR_MIN
+  data_model: HASH_ONLY
+  execution_model: FAIL_CLOSED
+  audit_model: APPEND_ONLY
+  silent_updates: FORBIDDEN
+
+sigma_chain:
+  hierarchy:
+    - ΦΩ-PLANET
+    - ΦΩ-EUROPA
+    - ΦΩ-ITALIA
+    - ΦΩ-REGIONE
+    - ΦΩ-PROVINCIA
+    - ΦΩ-ZONA
+    - ΦΩ-PERSONA
+
+events:
+  entry:
+    id: EVT-0012
+    name: REGISTRATION_GATE
+    scope: UE_CITIZEN_REQUEST
+    output:
+      registration_hash: SHA-256
+      status: PENDING
+
+  attestation:
+    id: EVT-EU-0001
+    name: EU_COHERENCE_ATTESTATION
+   scope: FEDERATED_AUDIT
+    output:
+      eu_status: [VALID, WARNING, FAIL]
+      attestation_hash: SHA-256
+      reason_code: REQUIRED
+
+metrology:
+  epsilon_max: "≤1e-9 s"
+  kappa_min: "≥0.997"
+  sigma_min: "≥0.995"
+  chi_tau_max: "≤0.60"
+
+anchors:
+  required: true
+  ledgers:
+    - IPFS
+    - BTC
+    - EVM
+
+interfaces:
+  public:
+    - /
+    - /register/
+    - /verify/
+    - /terms/
+
+principles:
+  - no_identity_promise
+  - no_account_model
+  - territorial_first
+  - verification_over_trust
+
+status:
+  operational: true
+  baseline: IMMUTABLE
