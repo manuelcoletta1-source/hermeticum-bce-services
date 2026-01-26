@@ -1,150 +1,85 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Citizen Journey — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Guida rapida per cittadini UE: cosa serve, cosa ottieni, cosa non ottieni, e come verificare un IPR.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cittadino UE — Nodo Europeo Biocibernetico | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Percorso cittadino UE: evento hash-only, IPR, verifica. Primato biologico, GDPR-min, fail-closed." />
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
-    header,section{max-width:1000px;margin:auto;padding:2.5rem 1rem}
-    header{padding-top:3.5rem}
-    h1{font-size:2rem;margin:0 0 .5rem}
-    .sub{opacity:.85}
-    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1.5rem}
-    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
-    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
-    a{color:#9ad}
-    .cta{display:inline-block;margin:.75rem .5rem 0 0;padding:.7rem 1.1rem;border:1px solid #444;border-radius:4px;color:#fff;text-decoration:none;font-weight:500}
-    .cta.primary{border-color:#888}
-    ul{margin-top:.5rem}
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
+    header,main,footer{max-width:980px;margin:auto;padding:2.2rem 1.5rem}
+    a{color:#58a6ff;text-decoration:none}
+    .box{border:1px solid #30363d;border-radius:12px;padding:1.3rem;background:#0d1117;margin-top:1rem}
+    p{color:#9da7b1}
+    .cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+    .btn{display:inline-block;padding:.7rem 1rem;border-radius:10px;border:1px solid #2ea043;background:#238636;color:#fff;font-weight:700}
+    .btn.secondary{background:#161b22;border:1px solid #30363d;color:#e6edf3}
+    ul{padding-left:1.2rem}
+    .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:.25rem .6rem;margin:.2rem .3rem 0 0;color:#9da7b1;font-size:.9rem}
+    footer{border-top:1px solid #30363d;color:#8b949e;font-size:.9rem}
   </style>
 </head>
 <body>
 
 <header>
-  <div class="badge">Citizen Journey</div>
-  <h1>Guida rapida per cittadini UE</h1>
-  <p class="sub">
-    Cosa serve, cosa ottieni e come funziona la verifica.
-    Linguaggio semplice, perimetro chiaro.
+  <h1>Cittadino UE</h1>
+  <p>
+    Percorso di ingresso per cittadini europei: tracciabilità verificabile con minimizzazione dati.
   </p>
-
-  <div style="margin-top:1rem;">
-    <a class="cta primary" href="../create/">Rilascia IPR</a>
-    <a class="cta" href="../verify/">Verifica IPR</a>
-    <a class="cta" href="../terms/">Termini</a>
-    <a class="cta" href="../">Home</a>
-  </div>
+  <p>
+    <span class="pill">BIOCIBERNETICO</span>
+    <span class="pill">PRIMATO BIOLOGICO</span>
+    <span class="pill">GDPR-MIN</span>
+    <span class="pill">HASH-ONLY</span>
+    <span class="pill">FAIL-CLOSED</span>
+  </p>
+  <p><a href="../">Home</a> · <a href="../terms/">Terms</a> · <a href="../privacy/">Privacy</a></p>
 </header>
 
-<section>
-  <h2>Prima di iniziare</h2>
-  <div class="steps">
-    <div class="card">
-      <h3>Cosa ti serve</h3>
-      <ul>
-        <li>Un browser moderno</li>
-        <li>Connessione internet</li>
-        <li>Dati che scegli tu di usare per costruire il tuo IPR</li>
-      </ul>
-      <p class="sub">Nota: piattaforma sperimentale. Non sostituisce SPID/CIE/eIDAS.</p>
-    </div>
+<main>
+  <div class="box">
+    <h2>Che cosa fai qui</h2>
+    <p>
+      Generi un evento <strong>hash-only</strong> legato al tuo contesto territoriale (nazione/regione/città/quartiere)
+      e a un riferimento identitario <strong>IPR</strong>. I dati personali restano off-chain sotto il tuo controllo.
+    </p>
+  </div>
 
-    <div class="card">
-      <h3>Cosa ottieni</h3>
-      <ul>
-        <li>Un IPR: record primario (radice) della tua identità tecnica</li>
-        <li>Un output verificabile (manifest + evidenze)</li>
-        <li>Una procedura di verifica ripetibile</li>
-      </ul>
-    </div>
+  <div class="box">
+    <h2>Principio biocibernetico (primato biologico)</h2>
+    <p>
+      Ogni evento nasce da un <strong>soggetto biologico reale</strong>.
+      L’IPR è un’estensione cibernetica verificabile: non è un account e non è un documento ufficiale.
+    </p>
+  </div>
 
-    <div class="card">
-      <h3>Cosa NON ottieni</h3>
-      <ul>
-        <li>Identità legale UE</li>
-        <li>Firma elettronica qualificata</li>
-        <li>Accesso automatico a servizi pubblici</li>
-      </ul>
+  <div class="box">
+    <h2>Passi operativi</h2>
+    <ul>
+      <li><strong>1)</strong> Prepara (off-chain) le tue prove/dati. Qui non li pubblichi.</li>
+      <li><strong>2)</strong> Genera un evento hash-only (territorio + IPR ref + SHA-256 del payload).</li>
+      <li><strong>3)</strong> Verifica l’evento (schema, policy, hash format; opzionale match con payload).</li>
+      <li><strong>4)</strong> Conserva off-chain il payload originale: è la tua continuità.</li>
+    </ul>
+
+    <div class="cta">
+      <a class="btn" href="../create/">Genera evento (Create)</a>
+      <a class="btn secondary" href="../verify/">Verifica evento (Verify)</a>
     </div>
   </div>
-</section>
 
-<section>
-  <h2>Il percorso in 5 step</h2>
-  <div class="steps">
-    <div class="card">
-      <h3>1) Generazione</h3>
-      <p>Vai su <a href="../create/">Rilascia IPR</a> e crea il tuo record primario.</p>
-      <p class="sub">Obiettivo: produrre un identificatore coerente e verificabile.</p>
-    </div>
-
-    <div class="card">
-      <h3>2) Conservazione</h3>
-      <p>Salva output e riferimenti (manifest/evidenze) in modo sicuro.</p>
-      <p class="sub">Se perdi i riferimenti, perdi la continuità.</p>
-    </div>
-
-    <div class="card">
-      <h3>3) Verifica</h3>
-      <p>Vai su <a href="../verify/">Verifica IPR</a> e controlla coerenza e integrità.</p>
-      <p class="sub">La verifica è il cuore della fiducia tecnica.</p>
-    </div>
-
-    <div class="card">
-      <h3>4) Aggiornamento</h3>
-      <p>Quando previsto, potrai creare derivazioni tracciate (versioni) senza cancellare il passato.</p>
-      <p class="sub">Non si riscrive la storia: si aggiunge traccia.</p>
-    </div>
-
-    <div class="card">
-      <h3>5) Uso pratico</h3>
-      <p>Usa l’IPR come riferimento in processi che richiedono audit e continuità documentale.</p>
-      <p class="sub">Esempi: dossier tecnici, prove di esistenza, filiere verificabili.</p>
-    </div>
+  <div class="box">
+    <h2>Limiti (importanti)</h2>
+    <ul>
+      <li>Non sostituisce CIE/SPID/eIDAS/EUDI Wallet.</li>
+      <li>Non garantisce diritti automatici o riconoscimenti.</li>
+      <li>Garantisce tracciabilità tecnica e auditabilità nel tempo.</li>
+    </ul>
   </div>
-</section>
+</main>
 
-<section>
-  <h2>Livelli (BASE / STRONG / ENTERPRISE)</h2>
-  <div class="steps">
-    <div class="card">
-      <h3>BASE</h3>
-      <p>Per avvio e test: identificazione minima e tracciabilità semplice.</p>
-    </div>
-    <div class="card">
-      <h3>STRONG</h3>
-      <p>Per contesti tecnici: evidenze più robuste e verifica più rigorosa.</p>
-    </div>
-    <div class="card">
-      <h3>ENTERPRISE</h3>
-      <p>Per organizzazioni: governance, ruoli, audit esteso, policy interne.</p>
-    </div>
-  </div>
-</section>
-
-<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
-  <div style="max-width:1000px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
-    <div>
-      <strong>HERMETICUM B.C.E.</strong><br>
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
-    </div>
-    <div>
-      <a href="../legal/privacy.html">Privacy</a><br>
-      <a href="../legal/cookies.html">Cookies</a><br>
-      <a href="../legal/accessibility.html">Accessibility</a>
-    </div>
-    <div>
-      <a href="../legal/legal-notice.html">Legal notice</a><br>
-      <a href="../legal/contact.html">Contact</a>
-    </div>
-    <div>
-      Platform status: <strong>Experimental</strong><br>
-      Jurisdiction: <strong>EU</strong>
-    </div>
-  </div>
+<footer>
+  <p>HERMETICUM B.C.E. S.r.l. — Cittadino UE</p>
 </footer>
 
 </body>
