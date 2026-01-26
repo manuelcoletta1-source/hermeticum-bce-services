@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — Registro Pubblico Minimo | Nodo Regionale Piemonte</title>
+  <meta name="description" content="Registro pubblico minimo (hash-only) del Nodo Regionale Piemonte: eventi append-only, verificabili, GDPR-min." />
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
+    header,main,footer{max-width:1100px;margin:auto;padding:2.4rem 1.5rem}
+    a{color:#58a6ff;text-decoration:none}
+    h1{font-size:2rem;margin:0 0 .5rem}
+    p{color:#9da7b1}
+    .box{border:1px solid #30363d;border-radius:14px;padding:1.5rem;background:#0d1117;margin-top:1.1rem}
+    .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:.25rem .65rem;margin:.2rem .3rem 0 0;color:#9da7b1;font-size:.9rem}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    table{width:100%;border-collapse:collapse;margin-top:.8rem}
+    th,td{border-bottom:1px solid #30363d;padding:.7rem .5rem;vertical-align:top}
+    th{color:#c9d1d9;text-align:left}
+    .note{border-left:3px solid #2ea043;padding-left:1rem;color:#c9d1d9}
+    .warn{border-left:3px solid #f85149;padding-left:1rem;color:#c9d1d9}
+    footer{border-top:1px solid #30363d;color:#8b949e;font-size:.9rem;margin-top:2.5rem}
+    code{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:.15rem .4rem}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Events — Registro Pubblico Minimo</h1>
+  <p>
+    Nodo Regionale Piemonte — registro <strong>hash-only</strong>, <strong>append-only</strong>, verificabile in audit.
+    Nessun dato personale in chiaro.
+  </p>
+  <div>
+    <span class="pill">UE-FIRST</span>
+    <span class="pill">GDPR-MIN</span>
+    <span class="pill">HASH-ONLY</span>
+    <span class="pill">APPEND-ONLY</span>
+    <span class="pill">FAIL-CLOSED</span>
+  </div>
+  <p style="margin-top:1rem">
+    <a href="../">Home</a> ·
+    <a href="../node/">Nodo Piemonte</a> ·
+    <a href="../register/">Register</a> ·
+    <a href="../verify/">Verify</a> ·
+    <a href="../manifest/">Manifest</a>
+  </p>
+</header>
+
+<main>
+
+  <div class="box">
+    <h2>Che cos’è questo registro</h2>
+    <p>
+      È un elenco pubblico di eventi minimizzati: ogni evento contiene metadati territoriali, riferimento IPR e <strong>hash</strong> del payload off-chain.
+      Il payload resta sotto controllo del soggetto/ente. La verifica è ripetibile e non richiede fiducia nel gestore.
+    </p>
+    <p class="note">
+      “Pubblico” qui significa: verificabile. Non significa: esporre contenuti.
+    </p>
+  </div>
+
+  <div class="box">
+    <h2>Baseline territoriale (Nodo Regionale Piemonte)</h2>
+    <p class="mono">
+      IT · Piemonte · Torino · Barriera di Milano
+    </p>
+    <p>
+      Struttura istituzionale: <strong>Regione → Città → Zona → Utente (IPR)</strong>.
+    </p>
+  </div>
+
+  <div class="box">
+    <h2>Eventi pubblicati</h2>
+    <p>
+      Ogni riga punta a un file <code>.json</code> nella cartella <code>/events</code>.
+      Se un file non esiste ancora, la riga resta come placeholder fino a commit.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tipo</th>
+          <th>Scopo</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody class="mono">
+        <tr>
+          <td>EVENT-0001</td>
+          <td>NODE_INIT</td>
+          <td>Inizializzazione nodo (baseline tecnica e territoriale)</td>
+          <td><a href="./EVENT-0001-NODE_INIT.json">EVENT-0001-NODE_INIT.json</a></td>
+        </tr>
+        <tr>
+          <td>EVENT-0002</td>
+          <td>NODE_ACTIVATION</td>
+          <td>Attivazione operativa dichiarata e tracciata (non claim storico universale)</td>
+          <td><a href="./EVENT-0002-NODE_ACTIVATION.json">EVENT-0002-NODE_ACTIVATION.json</a></td>
+        </tr>
+        <tr>
+          <td>EVENT-0003</td>
+          <td>SELF_DETERMINATION_RECORD</td>
+          <td>Evento di autodeterminazione (hash-only, off-chain)</td>
+          <td><a href="./EVENT-0003-SELF_DETERMINATION_RELIGIOUS.json">EVENT-0003-SELF_DETERMINATION_RELIGIOUS.json</a></td>
+        </tr>
+        <tr>
+          <td>EVENT-0004</td>
+          <td>IPR_REGION_NODE_JOIN</td>
+          <td>Attivazione IPR → ingresso come nodo foglia regionale</td>
+          <td><a href="./EVENT-0004-IPR_REGION_NODE_JOIN.json">EVENT-0004-IPR_REGION_NODE_JOIN.json</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="warn">
+      Se un evento è incompleto o non conforme a policy, non dovrebbe essere pubblicato: <strong>fail-closed</strong>.
+    </p>
+  </div>
+
+  <div class="box">
+    <h2>Checklist audit (minima)</h2>
+    <ul>
+      <li>Ogni evento è JSON parsabile e contiene i campi minimi del MANIFEST.</li>
+      <li><code>policy</code> include sempre: UE-FIRST, GDPR-MIN, HASH-ONLY, FAIL-CLOSED.</li>
+      <li><code>payload_hash</code> è nel formato <code>SHA-256:&lt;64-hex&gt;</code>.</li>
+      <li>Il territorio è completo: country/region/city/district.</li>
+      <li>Non esistono dati personali in chiaro nel JSON pubblico.</li>
+      <li>Verifica opzionale: con payload off-chain fornito dal soggetto, ricalcola hash e confronta in <a href="../verify/">Verify</a>.</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <p>HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA · HERMETICUM B.C.E. S.r.l.</p>
+  <p>Nodo Regionale Piemonte — Registro Pubblico Minimo (events)</p>
+</footer>
+
+</body>
+</html>
