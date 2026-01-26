@@ -1,154 +1,189 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nodo Europeo ΦΩ — Coerenza Digitale UE</title>
-  <meta name="description" content="Nodo Europeo ΦΩ. Ingresso ufficiale per il cittadino europeo. Evento opponibile, hash-only, UE-first.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nodo Europeo ΦΩ — Ingresso Cittadino UE</title>
+
+  <meta name="description" content="Nodo Europeo ΦΩ: ingresso unico per il cittadino europeo. Evento opponibile, hash-only, UE-first, fail-closed.">
   <meta name="robots" content="noindex,nofollow">
+
   <style>
-    :root {
-      --bg: #0b0e11;
-      --fg: #e6e6e6;
-      --muted: #9aa0a6;
-      --accent: #5eead4;
-      --danger: #f87171;
+    :root{
+      --bg:#0b0e11; --fg:#e6e6e6; --muted:#9aa0a6; --accent:#5eead4;
+      --card:#0f1318; --line:#1f2937; --ok:#34d399; --warn:#f87171;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial, sans-serif;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial, sans-serif;
-      line-height: 1.5;
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.5}
+    a{color:inherit}
+    .wrap{min-height:100vh;display:grid;place-items:center;padding:22px}
+    .shell{max-width:980px;width:100%}
+    .topbar{
+      display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+      margin-bottom:14px
     }
-    main {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
+    .pill{
+      display:inline-flex;gap:8px;align-items:center;
+      border:1px solid var(--line);border-radius:999px;padding:7px 12px;
+      color:var(--muted);font-size:.82rem
     }
-    .panel {
-      max-width: 720px;
-      width: 100%;
-      border: 1px solid #1f2937;
-      border-radius: 12px;
-      padding: 28px;
-      background: #0f1318;
-      box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    .pill b{color:var(--fg);font-weight:650}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .nav a{
+      text-decoration:none;
+      border:1px solid var(--line);border-radius:999px;
+      padding:7px 12px;font-size:.82rem;color:var(--muted)
     }
-    h1 {
-      margin: 0 0 8px 0;
-      font-size: 1.6rem;
-      letter-spacing: .2px;
+    .nav a:hover{color:var(--fg);border-color:#334155}
+    .card{
+      border:1px solid var(--line);border-radius:14px;background:var(--card);
+      box-shadow:0 10px 30px rgba(0,0,0,.45);
+      padding:26px
     }
-    .subtitle {
-      color: var(--muted);
-      margin-bottom: 20px;
+    h1{margin:0 0 8px 0;font-size:1.75rem;letter-spacing:.2px}
+    .sub{margin:0 0 18px 0;color:var(--muted);max-width:75ch}
+    .grid{display:grid;gap:14px}
+    @media(min-width:900px){ .grid.two{grid-template-columns:1.1fr .9fr} }
+    .box{
+      border:1px solid var(--line);border-radius:12px;background:#0b0e11;
+      padding:14px
     }
-    .badge {
-      display: inline-block;
-      border: 1px solid #1f2937;
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-size: .8rem;
-      color: var(--muted);
-      margin-bottom: 16px;
+    .box h2{margin:0 0 8px 0;font-size:1.02rem}
+    .box p{margin:0;color:var(--muted);font-size:.95rem}
+    ul{margin:10px 0 0 18px;color:var(--muted)}
+    li{margin:6px 0}
+    .cta{
+      display:grid;gap:10px;margin-top:14px
     }
-    .section {
-      margin: 18px 0;
-      padding-top: 18px;
-      border-top: 1px dashed #1f2937;
+    @media(min-width:700px){ .cta{grid-template-columns:1fr 1fr 1fr} }
+    .btn{
+      text-decoration:none;text-align:center;
+      padding:13px 14px;border-radius:12px;border:1px solid var(--line);
+      font-weight:750
     }
-    .section:first-of-type { border-top: none; padding-top: 0; }
-    ul {
-      margin: 8px 0 0 18px;
-      padding: 0;
+    .btn.primary{background:var(--accent);color:#022c22}
+    .btn.secondary{background:transparent;color:var(--fg)}
+    .btn.ghost{background:transparent;color:var(--muted)}
+    .btn:hover{border-color:#334155}
+    .mono{font-family:var(--mono);font-size:.88rem;color:var(--muted)}
+    .hr{height:1px;background:linear-gradient(90deg, transparent, #1f2937, transparent);margin:18px 0}
+    .foot{
+      display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+      margin-top:14px;color:var(--muted);font-size:.82rem
     }
-    li { margin: 6px 0; }
-    .cta {
-      margin-top: 24px;
-      display: grid;
-      gap: 12px;
+    code{
+      font-family:var(--mono);
+      border:1px solid var(--line);
+      background:#0b0e11;
+      padding:2px 6px;border-radius:8px;
+      color:var(--fg)
     }
-    a.button {
-      text-decoration: none;
-      text-align: center;
-      padding: 14px 18px;
-      border-radius: 10px;
-      border: 1px solid #1f2937;
-      color: #022c22;
-      background: var(--accent);
-      font-weight: 600;
-    }
-    .note {
-      font-size: .85rem;
-      color: var(--muted);
-    }
-    footer {
-      margin-top: 18px;
-      font-size: .8rem;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: space-between;
-    }
-    .warn { color: var(--danger); }
+    .warn{color:var(--warn);font-weight:750}
+    .ok{color:var(--ok);font-weight:750}
   </style>
 </head>
 
 <body>
-<main>
-  <div class="panel">
-    <span class="badge">Nodo Europeo ΦΩ · UE_FIRST · HASH_ONLY · FAIL_CLOSED</span>
+  <div class="wrap">
+    <div class="shell">
 
-    <h1>Ingresso Ufficiale — Nodo Europeo ΦΩ</h1>
-    <p class="subtitle">
-      Punto di coerenza digitale sovranazionale.  
-      Qui non crei un account. <strong>Generi un evento.</strong>
-    </p>
+      <div class="topbar">
+        <div class="pill">
+          <span>ΦΩ</span>
+          <b>Nodo Europeo</b>
+          <span>· UE_FIRST · HASH_ONLY · FAIL_CLOSED</span>
+        </div>
 
-    <div class="section">
-      <strong>Cosa succede qui</strong>
-      <ul>
-        <li>Generi una <em>richiesta territoriale</em> come cittadino UE.</li>
-        <li>L’evento è <strong>hash-only</strong> e tracciabile nel tempo.</li>
-        <li>La forza opponibile dipende dai dati che scegli di fornire.</li>
-      </ul>
+        <div class="nav" aria-label="Navigazione">
+          <a href="./register/">Register (EVT-0012)</a>
+          <a href="./verify/">Verify (SHA-256)</a>
+          <a href="./terms/">Termini</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h1>Ingresso unico per il cittadino europeo</h1>
+        <p class="sub">
+          Questo non è un sito di account. È una <strong>facciata di nodo</strong>:
+          l’utente genera un <strong>evento opponibile</strong> in modalità <code>APPEND_ONLY</code>.
+          Il Nodo Europeo valida <strong>coerenza</strong> (non identità) in modello <code>HASH_ONLY</code>.
+        </p>
+
+        <div class="grid two">
+          <div class="box">
+            <h2>Cosa fai qui (1 azione = 1 evento)</h2>
+            <ul>
+              <li>Compili una richiesta territoriale (nazione → regione → città → quartiere).</li>
+              <li>Il sistema produce <span class="ok">payload normalizzato</span> + <span class="ok">hash SHA-256</span>.</li>
+              <li>Stato iniziale: <code>PENDING</code> (nessuna promessa di identità).</li>
+            </ul>
+
+            <div class="hr"></div>
+
+            <h2>Cosa NON succede</h2>
+            <ul>
+              <li>Nessun profilo, nessun “login”.</li>
+              <li>Nessuna centralizzazione automatica di dati personali.</li>
+              <li>Nessun aggiornamento silenzioso: <code>NO_SILENT_UPDATES</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <h2>Protocollo operativo</h2>
+            <p class="mono">
+              PROTO: AI_JOKER_C2 · TYPE: BIOCYBER_EVENT_CHAIN<br>
+              AUDIT: APPEND_ONLY · BASELINE: IMMUTABLE<br>
+              POLICY: UE_FIRST · GDPR_MIN · HASH_ONLY · FAIL_CLOSED
+            </p>
+
+            <div class="hr"></div>
+
+            <h2>Σ-Chain</h2>
+            <p class="mono">
+              Planet → Europa → Italia → Regione → Provincia → Zona → Persona
+            </p>
+
+            <div class="hr"></div>
+
+            <h2>Regola dura (fail-closed)</h2>
+            <p class="muted" style="margin:0">
+              Se mancano certificazioni/ancoraggi richiesti, lo stato è <span class="warn">DENY</span>.
+              Nessuna esecuzione senza gate.
+            </p>
+          </div>
+        </div>
+
+        <div class="cta" aria-label="Azioni principali">
+          <a class="btn primary" href="./register/">Avvia richiesta cittadino UE</a>
+          <a class="btn secondary" href="./verify/">Verifica un hash (locale)</a>
+          <a class="btn ghost" href="./terms/">Leggi termini minimi</a>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="box">
+          <h2>Nota di sicurezza (GDPR-min)</h2>
+          <p>
+            Più informazioni fornisci, maggiore può essere la <strong>forza probatoria</strong> dell’evento.
+            Il Nodo Europeo, per design, opera su <strong>impronte</strong> e metadati di coerenza:
+            <code>MERKLE_ROOT</code>, <code>METROLOGY_METRICS</code>, <code>STATUS</code>.
+          </p>
+        </div>
+
+        <div class="foot">
+          <span>EVT-0012: <code>REGISTRATION_GATE</code> · Output: <code>registration_hash</code> + <code>PENDING</code></span>
+          <span>Link rapidi: <a href="./register/">register/</a> · <a href="./verify/">verify/</a> · <a href="./terms/">terms/</a></span>
+        </div>
+      </div>
+
+      <div class="foot" style="margin-top:12px">
+        <span class="mono">Nodo Europeo ΦΩ — Facciata (single-entry)</span>
+        <span class="mono">Audit-by-design · Append-only · Hash-only</span>
+      </div>
+
     </div>
-
-    <div class="section">
-      <strong>Cosa NON succede</strong>
-      <ul>
-        <li>Nessun profilo utente.</li>
-        <li>Nessuna centralizzazione di dati personali.</li>
-        <li>Nessun tracciamento commerciale.</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <strong>Base normativa</strong>
-      <ul>
-        <li>Politica: UE_FIRST · GDPR_MIN · HASH_ONLY</li>
-        <li>Audit: APPEND_ONLY · FAIL_CLOSED</li>
-        <li>Evento di ingresso: <code>EVT-0012 — REGISTRATION_GATE</code></li>
-      </ul>
-    </div>
-
-    <div class="cta">
-      <!-- Sostituisci l'href con il percorso reale del form EVT-0012 -->
-      <a class="button" href="./register/">Avvia richiesta come cittadino UE</a>
-      <p class="note warn">
-        Proseguendo accetti che ogni azione generi un evento opponibile.
-      </p>
-    </div>
-
-    <footer>
-      <span>Σ-Chain attiva: Planet → EU → IT → Regione → Zona → Persona</span>
-      <span>Tempo opponibile: UNEBDO / RFC3339</span>
-    </footer>
   </div>
-</main>
 </body>
 </html>
