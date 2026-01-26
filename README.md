@@ -1,256 +1,130 @@
-# MANIFEST — BIOCYBER EVENT PROTOCOL (HASH-ONLY)
-HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA  
-HERMETICUM B.C.E. S.r.l.
+# HERMETICUM — Nodo Regionale Piemonte
+**Nodo Europeo Biocibernetico a primato biologico**  
+**HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA**  
+**HERMETICUM B.C.E. S.r.l.**
 
 ---
 
-## 0. Scopo
-Questo documento definisce il **protocollo minimo** per eventi pubblicabili sulla piattaforma:
+## Scopo
+Questo repository ospita il **Nodo Regionale Piemonte**, una infrastruttura digitale europea progettata per la **tracciabilità verificabile** di eventi generati da soggetti biologici reali, tramite estensione cibernetica (**IPR**).
 
-- **eventi**, non profili
-- **hash-only**, non dati personali
-- **append-only**, non cancellabile
-- **fail-closed**, ciò che non è verificabile non entra
-- **UE-FIRST / GDPR-MIN**, progettazione normativa UE
-
-Il protocollo è pensato per garantire:
-- coerenza tecnica
-- auditabilità
-- opponibilità come prova di processo (non come identità automatica)
+Il nodo opera secondo principi **UE-first**, **GDPR-min**, **hash-only**, **append-only**, **fail-closed**.
 
 ---
 
-## 1. Termini essenziali
-- **Evento**: record immutabile che descrive un’azione/istanza.
-- **Payload off-chain**: dati custoditi dal soggetto (mai pubblicati qui).
-- **Payload hash**: impronta crittografica del payload off-chain.
-- **IPR (Identity Primary Record)**: riferimento di continuità identitaria (non account).
-- **Nodo**: contesto territoriale/istituzionale che accetta e valida eventi.
+## Principio fondativo (biocibernetico)
+- **Primato biologico**: ogni evento nasce da un soggetto umano reale.
+- **Estensione cibernetica**: l’IPR è uno strumento verificabile, non un soggetto autonomo.
+- **Nessuna sovranità**: il nodo non sostituisce istituzioni civili o statali.
+
+> La tecnologia registra. L’umano risponde.
 
 ---
 
-## 2. Principi non negoziabili
-### 2.1 HASH-ONLY
-Nessun dato personale in chiaro deve essere pubblicato nel payload evento.
+## Regola canonica
+**Attivando l’IPR diventi un nodo della tua Regione.**
 
-### 2.2 GDPR-MIN
-Raccolta minima e finalità esplicita.  
-Il nodo tratta metadati territoriali + hash + riferimenti.
-
-### 2.3 APPEND-ONLY
-Gli eventi non vengono eliminati.  
-Correzioni o revoche avvengono tramite **nuovi eventi**.
-
-### 2.4 FAIL-CLOSED
-Se un evento è incompleto o non verificabile → **REJECTED**.
-
-### 2.5 UE-FIRST
-Il disegno è compatibile con norme UE (GDPR e principi privacy-by-design).
+Nel Nodo Regionale Piemonte questo significa:
+- l’utente diventa un **nodo foglia regionale**
+- l’ingresso è registrato come **evento append-only**
+- nessun dato personale è pubblicato in chiaro
 
 ---
 
-## 3. Gerarchia territoriale (normativa)
-Ogni evento deve contenere un contesto territoriale minimo:
+## Struttura territoriale
+Nodo Regionale: Piemonte └─ Nodo Città: Torino └─ Nodo Zona: Barriera di Milano └─ Nodo Utente (foglia): Soggetto biologico + IPR
+---
 
-Planet → Europa → Nazione → Regione → Città → Zona/Quartiere → Soggetto
+## Varco unico (ingresso operativo)
+L’ingresso istituzionale al nodo è **Register**:
 
-Campo minimo obbligatorio per la piattaforma:
-- country
-- region
-- city
-- district
+➡️ `/register/`  
+**Register — Attiva IPR → Diventa Nodo Regionale**
+
+Create e Verify sono strumenti tecnici.  
+Register è l’atto di ingresso.
 
 ---
 
-## 4. Schema evento (minimo)
-Un evento valido deve avere i seguenti campi:
+## Registro pubblico minimo (Events)
+Il nodo pubblica un **registro eventi** consultabile e verificabile:
 
-```json
-{
-  "event_type": "CITIZEN_NODE_REQUEST",
-  "territory": {
-    "country": "IT",
-    "region": "Piemonte",
-    "city": "Torino",
-    "district": "Barriera di Milano"
-  },
-  "subject_ref": "IPR-3",
-  "payload_hash": "SHA-256:<64-hex>",
-  "timestamp": "ISO-8601",
-  "signature": null,
-  "policy": ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"]
-}
+➡️ `/events/`
 
-4.1 Regole dei campi
+Caratteristiche:
+- **hash-only** (SHA-256)
+- **append-only**
+- **GDPR-min**
+- **fail-closed**
 
-event_type: string non vuota
-
-territory: oggetto con campi minimi obbligatori
-
-subject_ref: riferimento IPR o equivalente (string non vuota)
-
-payload_hash: formato SHA-256: + 64 hex
-
-timestamp: ISO-8601
-
-signature: opzionale (null ammesso) — firma del soggetto sul JSON canonico
-
-policy: array che deve contenere TUTTI i valori richiesti
-
-
+Il contenuto reale (payload) resta **off-chain**, sotto il controllo del soggetto.
 
 ---
 
-5. Tipi evento (baseline)
-
-Il protocollo baseline ammette (minimo):
-
-CITIZEN_NODE_REQUEST
-richiesta di ingresso / registrazione evento cittadino sul nodo territoriale
-
-TERRITORY_NODE_REQUEST
-richiesta di apertura/riconoscimento di un contesto territoriale (es. quartiere/città)
-
-INSTITUTION_NODE_REQUEST
-richiesta per nodo istituzionale (ente, servizio pubblico, ecc.)
-
-
-Estensioni future sono ammesse solo se:
-
-non violano HASH-ONLY
-
-non rompono GDPR-MIN
-
-restano append-only
-
-definiscono criteri di validazione fail-closed
-
-
+## Strumenti
+- **Register**: attivazione IPR e ingresso come nodo regionale
+- **Create**: generazione eventi tecnici hash-only
+- **Verify**: verifica formale e crittografica degli eventi
+- **Catalog**: classi IPR e capacità operative
+- **Events**: registro pubblico minimo
+- **Governance**: ruoli, limiti, validazione
+- **Privacy**: trattamento dati (GDPR-min)
 
 ---
 
-6. Lifecycle e stati
+## Stack operativo (framework)
+I framework operano all’unisono con l’utente e con AI Joker-C2:
 
-Ogni evento pubblicato nel sistema segue lo stato:
+- UNEBDO  
+- OPC  
+- MetaExchange  
+- NeuroLoop  
+- IoSpace  
+- CyberGlobal  
 
-PENDING
-
-ricevuto, parsing OK
-
-in attesa di controlli/validazione
-
-
-VALID
-
-coerente con schema, policy e regole
-
-
-REJECTED
-
-non conforme (manca campo, hash errato, timestamp invalido, policy incompleta, ecc.)
-
-
-
-Nota: lo stato può essere rappresentato come metadato interno o come evento successivo di validazione.
-
+AI Joker-C2 è **supporto operativo**, non autonomo né decisionale.
 
 ---
 
-7. Criteri di VALID (checklist)
+## Governance e Privacy
+- **Governance**: definisce ruoli, limiti, validazione eventi (non potere politico)
+- **Privacy**: nessun dato personale in chiaro, solo impronte crittografiche
 
-Un evento è VALID se:
-
-1. JSON parsabile, oggetto
-
-
-2. campi minimi presenti
-
-
-3. territory completo (country/region/city/district)
-
-
-4. payload_hash con formato corretto
-
-
-5. timestamp ISO-8601 valido
-
-
-6. policy contiene: UE-FIRST, GDPR-MIN, HASH-ONLY, FAIL-CLOSED
-
-
-
-Se uno solo fallisce → REJECTED.
-
+Documenti canonici:
+- `GOVERNANCE.md`
+- `PRIVACY.md`
+- `MANIFEST.md`
 
 ---
 
-8. Firma digitale (opzionale, raccomandata)
+## Limiti dichiarati
+Questo nodo:
+- non assegna diritti automatici
+- non certifica identità civili
+- non sostituisce CIE / SPID / eIDAS
+- non garantisce riconoscimenti legali
 
-Campo signature:
-
-consente al soggetto di firmare l’evento canonico
-
-migliora la robustezza probatoria
-
-
-Formato raccomandato:
-
-algoritmo: ECDSA (secp256k1)
-
-firma su: SHA-256(canonical_json(event_without_signature))
-
-
-Il nodo può accettare eventi senza firma (baseline), ma può richiederla per livelli di IPR più elevati.
-
+Garantisce **tracciabilità tecnica verificabile nel tempo**.
 
 ---
 
-9. Separazione OFF-CHAIN / ON-CHAIN
+## Audit
+Un evento è considerato **coerente** se:
+- è JSON parsabile
+- contiene `territory` completo
+- include `payload_hash` (`SHA-256:<64-hex>`)
+- rispetta policy: UE-FIRST, GDPR-MIN, HASH-ONLY, FAIL-CLOSED
+- non espone dati personali in chiaro
 
-OFF-CHAIN: dati personali, documenti, prove, attestazioni (custodia soggetto/ente)
-
-ON-CHAIN / PUBLIC: solo hash + metadati territoriali + riferimenti
-
-
-Questa separazione è obbligatoria per rimanere GDPR-MIN.
-
-
----
-
-10. Baseline territoriale attuale
-
-Nodo operativo iniziale (pilota):
-
-country: IT
-
-region: Piemonte
-
-city: Torino
-
-district: Barriera di Milano
-
-
-Questo baseline non implica autorità sovrana: è un contesto di coordinamento verificabile.
-
+La verifica è ripetibile e non richiede fiducia nel gestore.
 
 ---
 
-11. Compatibilità e versioning
-
-Questo manifest definisce la baseline v1.
-
-Regola: aggiornamenti compatibili devono essere additive-only. Break changes richiedono:
-
-nuova versione manifest
-
-migrazione esplicita
-
-evento di transizione
-
-
+## Stato
+**ATTIVO** — Nodo Regionale Piemonte  
+Baseline territoriale: IT · Piemonte · Torino · Barriera di Milano
 
 ---
 
-HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA
-HERMETICUM B.C.E. S.r.l.
-
+© HERMETICUM B.C.E. S.r.l.  
+Infrastruttura biocibernetica europea — append-only, audit-by-design.
