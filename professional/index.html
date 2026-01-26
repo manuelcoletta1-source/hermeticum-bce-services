@@ -1,130 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Professional — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Mappatura professionale dell’IPR: cosa dimostra, cosa non dimostra, uso corretto in contesti tecnici e forensi. Fail-closed." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professionista / Impresa — Nodo Biocibernetico | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Percorso professionista/impresa: tracciabilità opere, audit, prove hash-only, continuità IPR." />
   <style>
-    :root{
-      --bg:#0b0f14; --card:#0f1620; --muted:#9fb0c3; --text:#e9f1fb; --line:#1b2735;
-      --ok:#a7f3d0; --no:#fca5a5; --warn:#fde68a;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
-    a{color:inherit}
-    .wrap{max-width:1040px;margin:0 auto;padding:22px 16px}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;border:1px solid var(--line);background:rgba(255,255,255,.02);padding:12px 14px;border-radius:16px}
-    .pill{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
-    h1{margin:14px 0 6px;font-size:24px}
-    h2{margin:0 0 8px;font-size:16px}
-    p{margin:0 0 10px;color:var(--muted)}
-    .grid{display:grid;gap:12px}
-    @media (min-width:980px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
-    .card{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:14px}
-    table{width:100%;border-collapse:collapse}
-    th,td{border:1px solid var(--line);padding:10px;vertical-align:top}
-    th{background:rgba(255,255,255,.03);text-align:left}
-    .tag{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px}
-    .yes{border-color:rgba(167,243,208,.35);background:rgba(167,243,208,.08);color:var(--ok)}
-    .no{border-color:rgba(252,165,165,.35);background:rgba(252,165,165,.08);color:var(--no)}
-    .warn{border-color:rgba(253,230,138,.35);background:rgba(253,230,138,.08);color:var(--warn)}
-    .mini{font-size:12px;color:var(--muted)}
-    footer{margin-top:14px;color:var(--muted);text-align:center}
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
+    header,main,footer{max-width:980px;margin:auto;padding:2.2rem 1.5rem}
+    a{color:#58a6ff;text-decoration:none}
+    .box{border:1px solid #30363d;border-radius:12px;padding:1.3rem;background:#0d1117;margin-top:1rem}
+    p{color:#9da7b1}
+    .cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+    .btn{display:inline-block;padding:.7rem 1rem;border-radius:10px;border:1px solid #2ea043;background:#238636;color:#fff;font-weight:700}
+    .btn.secondary{background:#161b22;border:1px solid #30363d;color:#e6edf3}
+    ul{padding-left:1.2rem}
+    .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:.25rem .6rem;margin:.2rem .3rem 0 0;color:#9da7b1;font-size:.9rem}
+    footer{border-top:1px solid #30363d;color:#8b949e;font-size:.9rem}
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <div class="nav">
-      <span class="pill"><a href="../create/">Create</a></span>
-      <span class="pill"><a href="../verify/">Verify</a></span>
-      <span class="pill"><a href="../evidence/">Evidence</a></span>
-      <span class="pill"><a href="../citizen/">Citizen</a></span>
-      <span class="pill"><a href="../">Home</a></span>
-      <span class="pill">fail-closed</span>
-    </div>
 
-    <h1>Uso professionale dell’IPR</h1>
-    <p>
-      Questa pagina chiarisce **perimetro, limiti e uso corretto** dell’IPR in contesti tecnici, forensi e di audit.
-      Nessuna promessa impropria: solo ciò che è verificabile.
-    </p>
+<header>
+  <h1>Professionista / Impresa</h1>
+  <p>Traccia opere, decisioni, consegne e precedenze con eventi hash-only e continuità IPR.</p>
+  <p>
+    <span class="pill">BIOCIBERNETICO</span>
+    <span class="pill">GDPR-MIN</span>
+    <span class="pill">HASH-ONLY</span>
+    <span class="pill">AUDIT</span>
+  </p>
+  <p><a href="../">Home</a> · <a href="../manifest/">Manifest</a> · <a href="../governance/">Governance</a></p>
+</header>
 
-    <div class="grid cols-2">
-      <div class="card">
-        <h2>Cosa dimostra un IPR</h2>
-        <ul class="mini">
-          <li><span class="tag yes">SÌ</span> Integrità del contenuto (hash verificabile).</li>
-          <li><span class="tag yes">SÌ</span> Coerenza tra file ↔ hash ↔ manifest.</li>
-          <li><span class="tag yes">SÌ</span> Ripetibilità della verifica nel tempo.</li>
-          <li><span class="tag yes">SÌ</span> Tracciabilità tecnica (append-only).</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>Cosa NON dimostra</h2>
-        <ul class="mini">
-          <li><span class="tag no">NO</span> Identità legale o personale.</li>
-          <li><span class="tag no">NO</span> Paternità giuridica automatica.</li>
-          <li><span class="tag no">NO</span> Validità o efficacia legale.</li>
-          <li><span class="tag no">NO</span> Intenzionalità o veridicità del contenuto.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:12px">
-      <h2>Mappatura d’uso (chiara)</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Contesto</th>
-            <th>Uso corretto</th>
-            <th>Limite</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Audit tecnico</td>
-            <td><span class="tag yes">SÌ</span> Verifica integrità e coerenza.</td>
-            <td><span class="tag warn">Limite</span> Non sostituisce audit normativo.</td>
-          </tr>
-          <tr>
-            <td>Forense digitale</td>
-            <td><span class="tag yes">SÌ</span> Supporto tecnico (hash, report).</td>
-            <td><span class="tag warn">Limite</span> Valutazione probatoria esterna.</td>
-          </tr>
-          <tr>
-            <td>Compliance interna</td>
-            <td><span class="tag yes">SÌ</span> Controlli append-only.</td>
-            <td><span class="tag warn">Limite</span> Dipende da policy aziendali.</td>
-          </tr>
-          <tr>
-            <td>Identità digitale</td>
-            <td><span class="tag no">NO</span> Non è un ID.</td>
-            <td><span class="tag no">NO</span> Usa SPID/CIE/eIDAS.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="card" style="margin-top:12px">
-      <h2>Regola finale (importante)</h2>
-      <p>
-        Un IPR è **evidenza tecnica**, non un titolo.
-        Può essere **portato** in un contesto istituzionale, ma non lo **sostituisce**.
-        Se qualcosa non è verificabile → <b>fail-closed</b>.
-      </p>
-    </div>
-
-    <footer>
-      <div style="margin-top:14px">
-        <b>HERMETICUM B.C.E.</b><br/>
-        HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-        HERMETICUM B.C.E. S.r.l.
-      </div>
-      <div class="mini" style="margin-top:8px">Platform status: Experimental · Jurisdiction: EU</div>
-    </footer>
+<main>
+  <div class="box">
+    <h2>Casi d’uso tipici</h2>
+    <ul>
+      <li>precedenza su documenti e deliverable (hash-only)</li>
+      <li>tracciabilità di revisioni (append-only)</li>
+      <li>audit interno/esterno (verifica ripetibile)</li>
+      <li>continuità di lavoro nel tempo con IPR</li>
+    </ul>
   </div>
+
+  <div class="box">
+    <h2>Come operare</h2>
+    <ul>
+      <li><strong>1)</strong> Mantieni il payload off-chain (contratti, file, prove).</li>
+      <li><strong>2)</strong> Genera evento hash-only per ogni milestone rilevante.</li>
+      <li><strong>3)</strong> Verifica e conserva le tracce in audit.</li>
+    </ul>
+
+    <div class="cta">
+      <a class="btn" href="../create/">Create</a>
+      <a class="btn secondary" href="../verify/">Verify</a>
+      <a class="btn secondary" href="../catalog/">Catalogo IPR</a>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Limiti</h2>
+    <p>
+      Questo sistema non sostituisce PEC, firme qualificate o strumenti normati.
+      Può affiancarli come strato di tracciabilità tecnica verificabile.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <p>HERMETICUM B.C.E. S.r.l. — Professionista / Impresa</p>
+</footer>
+
 </body>
 </html>
