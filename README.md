@@ -1,117 +1,163 @@
-# HERMETICUM B.C.E. — Platform
-**HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA**  
+# HERMETICUM B.C.E. — PLATFORM
+**BLINDATA · COMPUTABILE · EVOLUTIVA**  
 **HERMETICUM B.C.E. S.r.l.**
 
-Piattaforma sperimentale **UE-first** per la gestione tecnica di **IPR (Identity Primary Record)**:
-manifest + hash per **integrità**, **verificabilità** e **continuità operativa**.
-
-> Questa piattaforma **non** è un sistema di identità legale, **non** è un servizio fiduciario qualificato e **non** produce effetti giuridici automatici.  
-> Opera in regime **fail-closed**: se qualcosa non è verificabile, non viene “accettato”.
+Piattaforma europea per il cittadino, progettata per garantire
+**continuità digitale, tracciabilità e auditabilità**
+nell’accesso ai servizi civili fondamentali.
 
 ---
 
-## Cos’è (in una frase)
-Un **portale operativo** per creare, verificare e conservare **tracce tecniche riproducibili** (IPR) basate su hash, utili in contesti tecnici, professionali e di audit.
+## Scopo
+
+Questo repository rappresenta la **piattaforma centrale** di HERMETICUM B.C.E.
+
+La Platform è il **punto di ingresso unico** per il cittadino europeo
+verso servizi digitali strutturati secondo i principi UE:
+
+- minimizzazione dei dati (GDPR-min)
+- tracciabilità verificabile
+- audit-by-design
+- comportamento fail-closed
+- neutralità rispetto alle identità legali nazionali
+
+La Platform **non è un servizio di identità legale**  
+e **non sostituisce** SPID, CIE, eIDAS o EUDI Wallet.
 
 ---
 
-## Cosa NON è (perimetro chiaro)
-- ❌ SPID / CIE / eIDAS / EUDI Wallet  
-- ❌ Firma elettronica qualificata (QES)  
-- ❌ Autorità di certificazione o riconoscimento  
-- ❌ Prova legale automatica
+## Cos’è (in breve)
 
-La piattaforma **non sostituisce** sistemi istituzionali: li **precede** come strato tecnico di verificabilità.
+La Platform è una **infrastruttura civile digitale** che permette al cittadino di:
 
----
+- accedere ai servizi con identità UE esistenti
+- mantenere continuità nel tempo delle proprie interazioni digitali
+- verificare chi ha accesso ai propri dati
+- produrre evidenze opponibili e auditabili
 
-## Concetto chiave: IPR
-Un **IPR** è un record tecnico minimo che registra:
-- un **oggetto** (testo/file)  
-- un **hash** (SHA-256)  
-- un **manifest** leggibile e conservabile  
-
-Scopo: rendere possibile a un terzo **rifare i conti** senza fidarsi.
+Il tutto senza creare identità parallele o archivi centralizzati di dati sensibili.
 
 ---
 
-## Pipeline operativa (consigliata)
+## Cosa NON è
 
-1. **Create**  
-   Generi un **manifest IPR** con hash (SHA-256).  
-   → output tecnico, GDPR-min.
-
-2. **Output**  
-   Scarichi e **conservi** il manifest.  
-   → senza conservazione non esiste continuità.
-
-3. **Verify**  
-   Ricalcoli l’hash e confronti.  
-   → esito standard: **Valid / Invalid / Inconclusive**.
-
-4. **Evidence**  
-   Costruisci un **Evidence Pack** (file + hash + manifest + report).  
-   → catena minima di prova tecnica.
+- ❌ non è un sistema di identificazione legale
+- ❌ non è un wallet eIDAS
+- ❌ non è un sistema di sorveglianza
+- ❌ non è una piattaforma commerciale
+- ❌ non prende decisioni al posto del cittadino
 
 ---
 
-## Esiti (fail-closed)
-- **Valid**: struttura coerente + hash combacia.  
-- **Invalid**: mismatch o campi critici mancanti.  
-- **Inconclusive**: struttura ok ma contenuto non verificabile.
+## Principi Architetturali
 
-Nessun “quasi valido”.
-
----
-
-## Evidence Pack (in breve)
-Un Evidence Pack è una cartella che contiene:
-- `artifacts/` → file originali  
-- `hashes/` → hash locale (SHA-256)  
-- `ipr/` → manifest IPR + report di verifica  
-- `meta/` → README/changelog
-
-Serve a consentire una **verifica ripetibile** nel tempo.
-
----
-
-## Struttura del portale
-
-- `/` → Home (overview e accessi)
-- `/create/` → Generazione manifest IPR
-- `/verify/` → Verifica tecnica (hash/struttura)
-- `/evidence/` → Linee guida Evidence Pack + sample
-- `/citizen/` → Percorso introduttivo
-- `/professional/` → Percorso tecnico/istituzionale
-- `/terms/` → Perimetro e condizioni
-
----
-
-## Regole di utilizzo
 - **UE-first**  
-- **GDPR-min** (evita dati personali inutili)
-- **Hash-only** per l’integrità
-- **Append-only** (le evoluzioni sono nuovi eventi)
-- **Fail-closed** per ogni incoerenza
+  Allineamento ai principi normativi e operativi dell’Unione Europea.
+
+- **GDPR-min**  
+  Solo hash, metadati e attestazioni verificabili.  
+  Nessun dato superfluo.
+
+- **Audit-by-design**  
+  Ogni evento rilevante è tracciato, verificabile e opponibile.
+
+- **Fail-closed**  
+  In assenza di identità, consenso o policy → il sistema non opera.
+
+- **Separazione dei ruoli**  
+  Identità legale ≠ continuità tecnica ≠ servizi.
 
 ---
 
-## Stato del progetto
-- **Status:** Experimental  
-- **Jurisdiction:** EU  
-- **Audience:** Citizen · Professional · Technical · Forensic
+## Accesso del Cittadino
+
+Il cittadino accede alla Platform utilizzando **identità già riconosciute**:
+- SPID
+- CIE
+- eIDAS / EUDI Wallet (quando disponibile)
+
+La Platform genera **solo un’attestazione tecnica**
+per garantire continuità e tracciabilità delle operazioni.
+
+Nessuna duplicazione di identità.
+Nessuna appropriazione dei dati.
 
 ---
 
-## Avvertenze
-Questo progetto è **tecnico** e **sperimentale**.  
-Usalo solo se comprendi la differenza tra:
-- *verificabilità tecnica*  
-- *validità giuridica*
+## Aree Funzionali
 
-La piattaforma offre la prima.  
-La seconda dipende da contesti, norme e autorità esterne.
+La Platform espone quattro domini civili principali:
+
+- **Sanità**  
+  Metadati, consenso, registro accessi (EHDS-ready).
+
+- **Istruzione**  
+  Titoli, competenze e credenziali verificabili.
+
+- **Procedure Amministrative**  
+  Timeline procedurali e logica once-only.
+
+- **Emergenza / Soccorso**  
+  Accesso temporaneo e tracciato in situazioni critiche.
+
+Tutte le aree condividono:
+- una timeline unificata
+- evidenze verificabili
+- revoca e controllo da parte del cittadino
 
 ---
 
-© HERMETICUM B.C.E. S.r.l.
+## Struttura del Repository
+
+/index.html        → Portale pubblico /policy/           → Regole operative e limiti dichiarati /verify/           → Verifica pubblica delle evidenze /evidence/         → Esempi di manifest ed export /changelog/        → Evoluzione append-only /assets/           → Brand e risorse statiche
+
+---
+
+## Governance e AI
+
+La Platform può interfacciarsi con sistemi AI (es. AI JOKER-C2),
+ma **nessuna AI opera senza**:
+- identità valida
+- policy esplicita
+- tracciamento completo
+- possibilità di verifica e spegnimento
+
+---
+
+## Stato del Progetto
+
+- **Stato:** ACTIVE
+- **Ambito:** Civile / Europeo
+- **Maturità:** Infrastruttura in evoluzione controllata
+- **Adozione:** Cittadini, professionisti, istituzioni
+
+---
+
+## Licenza e Responsabilità
+
+Questo progetto è pubblicato per:
+- trasparenza
+- verifica pubblica
+- valutazione tecnica e istituzionale
+
+Non costituisce promessa di servizio,
+né sostituisce sistemi pubblici esistenti.
+
+---
+
+## Riferimenti
+
+- Ecosistema: **HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA**
+- Società: **HERMETICUM B.C.E. S.r.l.**
+- Standard: UE-first, GDPR, audit-by-design
+
+---
+
+## Contatto
+
+Manuel Coletta  
+Fondatore – HERMETICUM B.C.E.  
+Email: manuelcoletta1@gmail.com
+
+
+
