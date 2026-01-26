@@ -1,83 +1,69 @@
-# HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA  
-## Nodo Bicibernetico Europeo — Livello Regionale  
-**HERMETICUM B.C.E. S.r.l.**
+# MANIFEST — BIOCYBER EVENT PROTOCOL (HASH-ONLY)
+HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA  
+HERMETICUM B.C.E. S.r.l.
 
 ---
 
-## 1. Cos’è questa piattaforma
+## 0. Scopo
+Questo documento definisce il **protocollo minimo** per eventi pubblicabili sulla piattaforma:
 
-Questa piattaforma è un **Nodo Bicibernetico Europeo a scala regionale**, progettato per coordinare in modo verificabile:
+- **eventi**, non profili
+- **hash-only**, non dati personali
+- **append-only**, non cancellabile
+- **fail-closed**, ciò che non è verificabile non entra
+- **UE-FIRST / GDPR-MIN**, progettazione normativa UE
 
-- cittadini
-- quartieri
-- città
-- regioni
-- nazioni europee
-
-attraverso **identità tracciabile (IPR)**, **audit crittografico append-only** e **continuità operativa uomo–macchina**.
-
-Non è un social network.  
-Non è un database centralizzato.  
-Non è un sistema di sorveglianza.
-
-È un’infrastruttura di **coordinamento verificabile**.
+Il protocollo è pensato per garantire:
+- coerenza tecnica
+- auditabilità
+- opponibilità come prova di processo (non come identità automatica)
 
 ---
 
-## 2. Principio bicibernetico
-
-Il sistema opera su due domini coordinati:
-
-- **Dominio biologico**  
-  Il cittadino reale, con responsabilità giuridica.
-
-- **Dominio cibernetico**  
-  L’estensione tecnica dell’identità (IPR + AI Joker-C2), verificabile nel tempo.
-
-Le decisioni restano umane.  
-La traccia è tecnica.  
-La continuità è garantita.
+## 1. Termini essenziali
+- **Evento**: record immutabile che descrive un’azione/istanza.
+- **Payload off-chain**: dati custoditi dal soggetto (mai pubblicati qui).
+- **Payload hash**: impronta crittografica del payload off-chain.
+- **IPR (Identity Primary Record)**: riferimento di continuità identitaria (non account).
+- **Nodo**: contesto territoriale/istituzionale che accetta e valida eventi.
 
 ---
 
-## 3. Architettura territoriale
+## 2. Principi non negoziabili
+### 2.1 HASH-ONLY
+Nessun dato personale in chiaro deve essere pubblicato nel payload evento.
 
-La piattaforma adotta una **gerarchia territoriale normalizzata**, interoperabile a livello europeo:
+### 2.2 GDPR-MIN
+Raccolta minima e finalità esplicita.  
+Il nodo tratta metadati territoriali + hash + riferimenti.
 
-Planet └─ Europa └─ Nazione (es. IT) └─ Regione (es. Piemonte) └─ Città (es. Torino) └─ Zona / Quartiere (es. Barriera di Milano) └─ Soggetto (hash / IPR)
+### 2.3 APPEND-ONLY
+Gli eventi non vengono eliminati.  
+Correzioni o revoche avvengono tramite **nuovi eventi**.
 
-Ogni livello:
-- non duplica dati
-- non centralizza potere
-- aggiunge **contesto, responsabilità e tracciabilità**
+### 2.4 FAIL-CLOSED
+Se un evento è incompleto o non verificabile → **REJECTED**.
 
----
-
-## 4. Identità e IPR (Identity Primary Record)
-
-L’IPR è la **chiave di continuità** del sistema.
-
-Caratteristiche:
-- non è un account
-- non è un documento
-- non contiene dati personali in chiaro
-- è **ancorato crittograficamente** (multi-anchor)
-
-L’IPR collega:
-- eventi
-- decisioni
-- opere
-- responsabilità
-
-nel tempo.
+### 2.5 UE-FIRST
+Il disegno è compatibile con norme UE (GDPR e principi privacy-by-design).
 
 ---
 
-## 5. Modello di evento (hash-only)
+## 3. Gerarchia territoriale (normativa)
+Ogni evento deve contenere un contesto territoriale minimo:
 
-La piattaforma gestisce **eventi**, non profili.
+Planet → Europa → Nazione → Regione → Città → Zona/Quartiere → Soggetto
 
-Esempio concettuale di evento minimizzato:
+Campo minimo obbligatorio per la piattaforma:
+- country
+- region
+- city
+- district
+
+---
+
+## 4. Schema evento (minimo)
+Un evento valido deve avere i seguenti campi:
 
 ```json
 {
@@ -89,153 +75,177 @@ Esempio concettuale di evento minimizzato:
     "district": "Barriera di Milano"
   },
   "subject_ref": "IPR-3",
-  "payload_hash": "SHA-256(...)",
+  "payload_hash": "SHA-256:<64-hex>",
   "timestamp": "ISO-8601",
-  "signature": "ECDSA/secp256k1"
+  "signature": null,
+  "policy": ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"]
 }
 
-I dati personali:
+4.1 Regole dei campi
 
-restano off-chain
+event_type: string non vuota
 
-sotto il controllo del soggetto
+territory: oggetto con campi minimi obbligatori
 
-referenziati solo tramite hash
+subject_ref: riferimento IPR o equivalente (string non vuota)
 
+payload_hash: formato SHA-256: + 64 hex
 
+timestamp: ISO-8601
 
----
+signature: opzionale (null ammesso) — firma del soggetto sul JSON canonico
 
-6. Lifecycle degli eventi
-
-Ogni evento segue uno stato chiaro:
-
-PENDING → ricevuto, in verifica
-
-VALID → coerente con policy UE/GDPR
-
-REJECTED → non conforme
-
-
-Nessun evento viene cancellato.
-Il sistema è append-only.
-
-
----
-
-7. GDPR-Min by design
-
-La piattaforma è progettata secondo il principio GDPR-Min:
-
-minimizzazione dei dati
-
-nessun dato sensibile in chiaro
-
-hash come prova, non come contenuto
-
-separazione netta tra identità e informazione
-
-
-Riferimenti:
-
-GDPR art. 5 (principi)
-
-GDPR art. 6 (liceità)
-
-GDPR art. 25 (privacy by design)
+policy: array che deve contenere TUTTI i valori richiesti
 
 
 
 ---
 
-8. UE-FIRST Policy
+5. Tipi evento (baseline)
 
-Questa infrastruttura è pensata per l’Unione Europea:
+Il protocollo baseline ammette (minimo):
 
-interoperabilità tra nodi
+CITIZEN_NODE_REQUEST
+richiesta di ingresso / registrazione evento cittadino sul nodo territoriale
 
-rispetto delle competenze territoriali
+TERRITORY_NODE_REQUEST
+richiesta di apertura/riconoscimento di un contesto territoriale (es. quartiere/città)
 
-nessuna sostituzione delle istituzioni
-
-supporto a cittadini, professionisti, enti
-
-
-Il nodo regionale funge da hub di coordinamento, non da autorità sovrana.
+INSTITUTION_NODE_REQUEST
+richiesta per nodo istituzionale (ente, servizio pubblico, ecc.)
 
 
----
+Estensioni future sono ammesse solo se:
 
-9. AI Joker-C2
+non violano HASH-ONLY
 
-AI Joker-C2 è lo strato di coordinamento cibernetico:
+non rompono GDPR-MIN
 
-non decide
+restano append-only
 
-non giudica
-
-non governa
-
-
-Supporta:
-
-coerenza dei processi
-
-audit
-
-continuità operativa
-
-leggibilità tecnica del sistema
+definiscono criteri di validazione fail-closed
 
 
 
 ---
 
-10. Stato del nodo attuale
+6. Lifecycle e stati
 
-Nodo operativo iniziale:
+Ogni evento pubblicato nel sistema segue lo stato:
 
-Nazione: Italia
+PENDING
 
-Regione: Piemonte
+ricevuto, parsing OK
 
-Città: Torino
-
-Zona: Barriera di Milano
+in attesa di controlli/validazione
 
 
-Questo nodo funge da prima istanza regionale europea bicibernetica, in modalità pilota e verificabile.
+VALID
+
+coerente con schema, policy e regole
 
 
----
+REJECTED
 
-11. Governance e responsabilità
-
-Ogni soggetto resta responsabile delle proprie azioni
-
-Ogni evento è verificabile nel tempo
-
-Nessuna promessa di immunità o protezione automatica
+non conforme (manca campo, hash errato, timestamp invalido, policy incompleta, ecc.)
 
 
-Il sistema non garantisce verità.
-Garantisce traccia.
+
+Nota: lo stato può essere rappresentato come metadato interno o come evento successivo di validazione.
 
 
 ---
 
-12. Licenza e utilizzo
+7. Criteri di VALID (checklist)
 
-Uso sperimentale, infrastrutturale, auditabile.
-Ogni estensione deve rispettare:
+Un evento è VALID se:
 
-UE-FIRST
+1. JSON parsabile, oggetto
 
-GDPR-MIN
 
-HASH-ONLY
+2. campi minimi presenti
 
-FAIL-CLOSED
+
+3. territory completo (country/region/city/district)
+
+
+4. payload_hash con formato corretto
+
+
+5. timestamp ISO-8601 valido
+
+
+6. policy contiene: UE-FIRST, GDPR-MIN, HASH-ONLY, FAIL-CLOSED
+
+
+
+Se uno solo fallisce → REJECTED.
+
+
+---
+
+8. Firma digitale (opzionale, raccomandata)
+
+Campo signature:
+
+consente al soggetto di firmare l’evento canonico
+
+migliora la robustezza probatoria
+
+
+Formato raccomandato:
+
+algoritmo: ECDSA (secp256k1)
+
+firma su: SHA-256(canonical_json(event_without_signature))
+
+
+Il nodo può accettare eventi senza firma (baseline), ma può richiederla per livelli di IPR più elevati.
+
+
+---
+
+9. Separazione OFF-CHAIN / ON-CHAIN
+
+OFF-CHAIN: dati personali, documenti, prove, attestazioni (custodia soggetto/ente)
+
+ON-CHAIN / PUBLIC: solo hash + metadati territoriali + riferimenti
+
+
+Questa separazione è obbligatoria per rimanere GDPR-MIN.
+
+
+---
+
+10. Baseline territoriale attuale
+
+Nodo operativo iniziale (pilota):
+
+country: IT
+
+region: Piemonte
+
+city: Torino
+
+district: Barriera di Milano
+
+
+Questo baseline non implica autorità sovrana: è un contesto di coordinamento verificabile.
+
+
+---
+
+11. Compatibilità e versioning
+
+Questo manifest definisce la baseline v1.
+
+Regola: aggiornamenti compatibili devono essere additive-only. Break changes richiedono:
+
+nuova versione manifest
+
+migrazione esplicita
+
+evento di transizione
 
 
 
@@ -243,6 +253,4 @@ FAIL-CLOSED
 
 HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA
 HERMETICUM B.C.E. S.r.l.
-
----
 
