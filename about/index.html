@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About & Governance — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Informazioni, governance, versioning e roadmap della piattaforma HERMETICUM B.C.E.">
+  <title>Evidence & Verification — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Guida alle evidenze (hash, manifest, prove di integrità) e alla verifica tecnica per audit.">
   <style>
     body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
     header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
@@ -15,6 +15,8 @@
     .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
     .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
     a{color:#9ad}
+    pre,code{background:#0f0f0f;border:1px solid #222;border-radius:6px}
+    pre{padding:1rem;overflow:auto}
     ul{margin-top:.5rem}
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
   </style>
@@ -22,101 +24,117 @@
 <body>
 
 <header>
-  <div class="badge">About / Governance</div>
-  <h1>Informazioni, governance e roadmap</h1>
+  <div class="badge">Evidence / Verification</div>
+  <h1>Evidenze e verifica tecnica</h1>
   <p class="sub">
-    Questa pagina descrive come la piattaforma viene mantenuta, versionata e migliorata.
-    Obiettivo: rendere la gestione trasparente e auditabile.
+    Guida per cittadini avanzati, tecnici, revisori e contesti forensi.
+    Obiettivo: verificare integrità e coerenza di un IPR in modo ripetibile.
   </p>
+
+  <div style="margin-top:1rem;">
+    <a href="../verify/">Verifica IPR</a> ·
+    <a href="../create/">Rilascia IPR</a> ·
+    <a href="../terms/">Termini</a> ·
+    <a href="../">Home</a>
+  </div>
 </header>
 
 <section>
-  <h2>Che cos’è</h2>
-  <p>
-    HERMETICUM B.C.E. è una piattaforma sperimentale UE-first focalizzata su
-    identità tecnica (IPR), tracciabilità, auditabilità e continuità operativa.
-  </p>
-  <ul>
-    <li>Principi: <strong>UE-first</strong>, <strong>audit-by-design</strong>, <strong>fail-closed</strong></li>
-    <li>Ambito: ricerca e sperimentazione (non servizio fiduciario qualificato)</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Governance minima</h2>
+  <h2>Definizioni operative</h2>
   <div class="grid">
     <div class="card">
-      <h3>Responsabilità</h3>
-      <p>
-        Il mantenimento del codice e dei contenuti avviene tramite repository e storico commit.
-        Ogni modifica rilevante deve essere tracciabile.
-      </p>
+      <h3>Manifest</h3>
+      <p>Documento strutturato che descrive un IPR: metadati, versioni, riferimenti e hash.</p>
     </div>
     <div class="card">
-      <h3>Policy operative</h3>
-      <ul>
-        <li>Minimizzazione dati</li>
-        <li>Documentazione pubblica</li>
-        <li>Revisioni incrementali</li>
-        <li>Verifiche coerenti (fail-closed)</li>
-      </ul>
+      <h3>Hash</h3>
+      <p>Impronta crittografica di un contenuto. Se cambia anche 1 bit, l’hash cambia.</p>
     </div>
     <div class="card">
-      <h3>Canali</h3>
-      <p>
-        Comunicazioni e segnalazioni tramite pagina <a href="../legal/contact.html">Contact</a>.
-      </p>
+      <h3>Evidenza</h3>
+      <p>Insieme verificabile: file + hash + (eventuali) timestamp/anchor + log/versioning.</p>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Versioning</h2>
-  <p>
-    Versione piattaforma (indicativa): <span class="mono">v0.1</span><br>
-    Stato: <strong>Experimental</strong><br>
-    Giurisdizione di riferimento: <strong>Unione Europea</strong>
-  </p>
-  <p class="sub">
-    Nota: la versione può essere incrementata a ogni milestone e riflessa nei commit.
-  </p>
-</section>
-
-<section>
-  <h2>Roadmap (2026)</h2>
+  <h2>Cosa dimostra (e cosa no)</h2>
   <div class="grid">
     <div class="card">
-      <h3>Milestone A</h3>
+      <h3>Dimostra</h3>
       <ul>
-        <li>Citizen Journey + Professional View</li>
-        <li>Evidence & Verification (audit-grade)</li>
-        <li>Terms & Scope (perimetro e rischio)</li>
+        <li><strong>Integrità:</strong> il contenuto non è stato alterato (hash match)</li>
+        <li><strong>Coerenza:</strong> manifest ↔ hash ↔ file corrispondono</li>
+        <li><strong>Esistenza nel tempo:</strong> se ancorato, “esisteva” a una certa data</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Milestone B</h3>
+      <h3>NON dimostra automaticamente</h3>
       <ul>
-        <li>Mapping normativo (eIDAS2 / EUDI Wallet come riferimento)</li>
-        <li>Schema manifest stabilizzato</li>
-        <li>Procedure di conservazione evidenze</li>
+        <li>Identità legale della persona</li>
+        <li>Autenticità giuridica equivalente a firma qualificata</li>
+        <li>Riconoscimento istituzionale automatico</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Milestone C</h3>
-      <ul>
-        <li>Hardening UX (accessibilità / testing)</li>
-        <li>Changelog pubblico e release notes</li>
-        <li>Materiale “institution-ready”</li>
-      </ul>
+      <h3>Regola pratica</h3>
+      <p>Se mancano dati o c’è mismatch: esito <strong>Invalid</strong> o <strong>Inconclusive</strong>. Non forzare mai “Valid”.</p>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Changelog (minimo)</h2>
-  <p class="sub">Esempio di log sintetico. Aggiorna quando fai release significative.</p>
+  <h2>Procedura di verifica (audit-grade)</h2>
+  <ol>
+    <li>Recupera <strong>manifest</strong> e file associati.</li>
+    <li>Ricalcola gli <strong>hash</strong> in locale sui file.</li>
+    <li>Confronta con gli hash dichiarati nel manifest.</li>
+    <li>Se presente, verifica l’anchor/timestamp associato.</li>
+    <li>Registra esito e conserva evidenze/versioni.</li>
+  </ol>
+
+  <h3>Esempio CLI — SHA-256</h3>
+  <pre><code># Linux / macOS
+shasum -a 256 FILE.ext
+
+# Windows PowerShell
+Get-FileHash FILE.ext -Algorithm SHA256
+</code></pre>
+</section>
+
+<section>
+  <h2>Fail-closed</h2>
+  <p>
+    Principio operativo: se anche un solo controllo fallisce (hash diverso, file mancanti, manifest incoerente),
+    la verifica deve essere considerata <strong>NON valida</strong>.
+  </p>
+</section>
+
+<section>
+  <h2>Esiti standard</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Valid</h3>
+      <p>Match completo: manifest coerente, hash corretti, evidenze presenti.</p>
+    </div>
+    <div class="card">
+      <h3>Invalid</h3>
+      <p>Mismatch o alterazione: hash differente, file non coerenti, evidenze rotte.</p>
+    </div>
+    <div class="card">
+      <h3>Inconclusive</h3>
+      <p>Dati insufficienti: non si può concludere. Esito da trattare come non accettabile in audit.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Buona pratica di conservazione</h2>
   <ul>
-    <li><span class="mono">v0.1</span> — base UE-grade: legal pages, citizen/professional, evidence, terms</li>
+    <li>Conserva <span class="mono">manifest</span> e file originali</li>
+    <li>Conserva output di verifica (hash calcolati) con data/ora</li>
+    <li>Versiona modifiche e conserva changelog</li>
+    <li>Non sovrascrivere: aggiungi nuova traccia</li>
   </ul>
 </section>
 
@@ -124,7 +142,8 @@
   <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
     <div>
       <strong>HERMETICUM B.C.E.</strong><br>
-      Blindata · Computabile · Evolutiva
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
     </div>
     <div>
       <a href="../legal/privacy.html">Privacy</a><br>
