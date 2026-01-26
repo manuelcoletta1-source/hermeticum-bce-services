@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rilascia IPR — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Rilascio guidato di un IPR (Identity Primary Record): comprendi il processo, genera il record, verifica l’esito.">
+  <meta name="description" content="Rilascio guidato di un IPR (Identity Primary Record): comprendi il perimetro, genera il record, verifica l’esito.">
   <style>
     body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
     header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
@@ -20,6 +20,13 @@
     ul{margin-top:.5rem}
     .warn{opacity:.9}
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    textarea,input{width:100%;background:#0f0f0f;color:#e6e6e6;border:1px solid #222;border-radius:6px;padding:10px;box-sizing:border-box}
+    label{display:block;margin:.75rem 0 .25rem;opacity:.9}
+    button{background:#111;color:#fff;border:1px solid #444;border-radius:4px;padding:.7rem 1.1rem;cursor:pointer;font-weight:600}
+    button.primary{border-color:#888}
+    .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.75rem}
+    .line{height:1px;background:#222;margin:1.2rem 0}
+    .hint{opacity:.85;font-size:.95rem}
   </style>
 </head>
 
@@ -29,8 +36,8 @@
   <div class="badge">Create / IPR</div>
   <h1>Rilascia un IPR</h1>
   <p class="sub">
-    Stai per creare un <strong>IPR (Identity Primary Record)</strong>:  
-    un record tecnico di origine verificabile, progettato per integrità, audit e continuità operativa.
+    Stai creando un <strong>IPR (Identity Primary Record)</strong>: un record tecnico di origine
+    verificabile per integrità, audit e continuità operativa.
   </p>
 
   <div style="margin-top:1rem;">
@@ -42,26 +49,26 @@
 </header>
 
 <section>
-  <h2>Cosa stai facendo (in breve)</h2>
+  <h2>Prima di procedere</h2>
   <div class="grid">
     <div class="card">
-      <h3>Stai creando</h3>
+      <h3>Cosa stai facendo</h3>
       <p>
-        Un <strong>record primario</strong> che descrive l’origine di un contenuto o di un insieme di dati,
-        corredato da evidenze verificabili (hash).
+        Crei una <strong>radice tecnica</strong> (manifest + hash) che descrive l’origine di un contenuto
+        o di un insieme di dati.
       </p>
     </div>
     <div class="card">
-      <h3>Non stai creando</h3>
+      <h3>Cosa NON stai facendo</h3>
       <ul>
-        <li>un’identità legale</li>
-        <li>una firma elettronica qualificata</li>
-        <li>un accesso a servizi pubblici</li>
+        <li>Identità legale</li>
+        <li>Firma elettronica qualificata</li>
+        <li>Accesso a servizi pubblici</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Principio chiave</h3>
-      <p>
+      <h3>Regola chiave</h3>
+      <p class="warn">
         La fiducia nasce dalla <strong>verifica</strong>, non dalla creazione.
         In caso di dubbio → <strong>fail-closed</strong>.
       </p>
@@ -70,85 +77,63 @@
 </section>
 
 <section>
-  <h2>Il processo di rilascio (5 step)</h2>
+  <h2>Processo di rilascio (5 step)</h2>
   <div class="grid">
-    <div class="card">
-      <h3>1) Selezione contenuto</h3>
-      <p>
-        Scegli cosa vuoi ancorare: file, testo, riferimento o insieme strutturato di dati.
-      </p>
-    </div>
+    <div class="card"><strong>1)</strong> Selezione contenuto</div>
+    <div class="card"><strong>2)</strong> Generazione hash</div>
+    <div class="card"><strong>3)</strong> Creazione manifest</div>
+    <div class="card"><strong>4)</strong> (Opzionale) ancoraggio temporale</div>
+    <div class="card"><strong>5)</strong> Output IPR e verifica</div>
+  </div>
+</section>
 
-    <div class="card">
-      <h3>2) Generazione hash</h3>
-      <p>
-        Il sistema calcola le impronte crittografiche (<span class="mono">hash</span>) del contenuto.
-      </p>
-    </div>
+<section>
+  <h2>Dati di input (minimi)</h2>
+  <div class="card">
+    <label for="title">Titolo / riferimento</label>
+    <input id="title" placeholder="Esempio: Documento tecnico v1.0">
 
-    <div class="card">
-      <h3>3) Creazione manifest</h3>
-      <p>
-        Viene generato un <strong>manifest</strong> che descrive contenuto, hash e metadati essenziali.
-      </p>
-    </div>
+    <label for="description">Descrizione (facoltativa)</label>
+    <textarea id="description" placeholder="Descrizione sintetica del contenuto..."></textarea>
 
-    <div class="card">
-      <h3>4) (Opzionale) Ancoraggio</h3>
-      <p>
-        Se previsto, il manifest può essere ancorato temporalmente (proof of existence).
-      </p>
-    </div>
+    <label for="content">Contenuto di riferimento</label>
+    <textarea id="content" placeholder="Testo, hash esterno, riferimento a file, ecc."></textarea>
 
-    <div class="card">
-      <h3>5) Output IPR</h3>
-      <p>
-        Ottieni un riferimento IPR e le istruzioni per conservazione e verifica.
-      </p>
+    <div class="line"></div>
+
+    <p class="hint">
+      Usa solo dati che sei autorizzato a trattare. Vedi <a href="../terms/">Termini</a>.
+    </p>
+
+    <div class="row">
+      <button class="primary" id="releaseBtn">Rilascia IPR</button>
+      <a class="cta" href="success.html">Output IPR</a>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Cosa ottieni alla fine</h2>
+  <h2>Cosa ottieni</h2>
   <div class="grid">
     <div class="card">
-      <h3>Output tecnici</h3>
       <ul>
         <li>Manifest IPR (scaricabile)</li>
         <li>Hash verificabili</li>
-        <li>Riferimento IPR</li>
+        <li>Riferimento temporale locale</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Responsabilità</h3>
       <p class="warn">
-        Sei responsabile dei dati che usi e della loro conservazione.
+        Sei responsabile della <strong>conservazione</strong>.
         Senza conservazione non esiste continuità operativa.
       </p>
     </div>
     <div class="card">
-      <h3>Prossimo passo</h3>
       <p>
-        Verifica l’IPR per confermare integrità e coerenza.
+        Prossimo passo:
+        <a class="cta primary" href="../verify/">Verifica IPR</a>
       </p>
-      <a class="cta primary" href="../verify/">Vai a Verifica IPR</a>
     </div>
-  </div>
-</section>
-
-<section>
-  <h2>Rilascio IPR</h2>
-  <p class="sub">
-    Procedendo confermi di aver compreso il perimetro e i limiti del sistema.
-    Vedi <a href="../terms/">Termini</a>.
-  </p>
-
-  <!-- QUI RESTA IL TUO FORM / SCRIPT ESISTENTE -->
-  <div class="card">
-    <p class="sub">
-      ⬇️ Qui integra il form o lo script di generazione IPR già esistente.
-    </p>
   </div>
 </section>
 
@@ -174,6 +159,47 @@
     </div>
   </div>
 </footer>
+
+<script>
+  function sha256(str) {
+    const enc = new TextEncoder();
+    return crypto.subtle.digest('SHA-256', enc.encode(str)).then(buf =>
+      Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
+    );
+  }
+
+  async function releaseIPR() {
+    const title = document.getElementById('title').value.trim();
+    const description = document.getElementById('description').value.trim();
+    const content = document.getElementById('content').value.trim();
+
+    if (!title || !content) {
+      alert("Titolo e contenuto sono obbligatori.");
+      return;
+    }
+
+    const hash = await sha256(content);
+
+    const manifest = {
+      schema: "HBCE-IPR-1",
+      title,
+      description,
+      hash_sha256: hash,
+      released_at: new Date().toISOString(),
+      jurisdiction: "EU",
+      status: "experimental"
+    };
+
+    const manifestText = JSON.stringify(manifest, null, 2);
+
+    localStorage.setItem("hbce_ipr_manifest", manifestText);
+    localStorage.setItem("hbce_ipr_released_at", manifest.released_at);
+
+    window.location.href = "success.html";
+  }
+
+  document.getElementById('releaseBtn').addEventListener('click', releaseIPR);
+</script>
 
 </body>
 </html>
