@@ -1,168 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Evidence — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Evidence Pack: come costruire un pacchetto prova (file + hash + manifest + verify report) in modo ripetibile e verificabile. Fail-closed." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MANIFEST — Protocollo Eventi | HERMETICUM B.C.E.</title>
   <style>
-    :root{
-      --bg:#0b0f14; --card:#0f1620; --muted:#9fb0c3; --text:#e9f1fb; --line:#1b2735;
-      --accent:#7dd3fc; --good:#a7f3d0; --warn:#fde68a;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
-    a{color:inherit}
-    .wrap{max-width:1040px;margin:0 auto;padding:22px 16px}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;border:1px solid var(--line);background:rgba(255,255,255,.02);padding:12px 14px;border-radius:16px}
-    .pill{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
-    h1{margin:14px 0 6px;font-size:24px}
-    h2{margin:0 0 8px;font-size:16px}
-    p{margin:0 0 10px;color:var(--muted)}
-    .grid{display:grid;gap:12px}
-    @media (min-width:980px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
-    .card{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:14px}
-    .mini{font-size:12px;color:var(--muted)}
-    .tag{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px}
-    .tag.base{border-color:rgba(125,211,252,.35);background:rgba(125,211,252,.10);color:var(--accent)}
-    .tag.strong{border-color:rgba(167,243,208,.35);background:rgba(167,243,208,.08);color:var(--good)}
-    .tag.ent{border-color:rgba(253,230,138,.35);background:rgba(253,230,138,.08);color:var(--warn)}
-    pre{
-      margin:10px 0 0; padding:12px; border-radius:16px; border:1px solid var(--line);
-      background:rgba(0,0,0,.18); overflow:auto; color:var(--text); font-size:12px;
-    }
-    .hr{height:1px;background:var(--line);margin:14px 0}
-    ul{margin:0;padding-left:18px;color:var(--muted)}
-    footer{margin-top:14px;color:var(--muted);text-align:center}
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
+    main,header,footer{max-width:900px;margin:auto;padding:2.2rem 1.5rem}
+    a{color:#58a6ff;text-decoration:none}
+    .box{border:1px solid #30363d;border-radius:12px;padding:1.2rem;background:#0d1117}
+    p{color:#9da7b1}
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <div class="nav">
-      <span class="pill"><a href="../create/">Create</a></span>
-      <span class="pill"><a href="../verify/">Verify</a></span>
-      <span class="pill"><a href="../professional/">Professional</a></span>
-      <span class="pill"><a href="../citizen/">Citizen</a></span>
-      <span class="pill"><a href="../">Home</a></span>
-      <span class="pill">fail-closed</span>
-    </div>
+<header>
+  <h1>MANIFEST — Protocollo Eventi (Hash-Only)</h1>
+  <p>Specifiche tecniche minime: UE-first · GDPR-min · hash-only · append-only · fail-closed.</p>
+  <p><a href="../">Home</a> · <a href="../terms/">Terms</a> · <a href="../about/">About</a></p>
+</header>
 
-    <h1>Evidence Pack (catena minima di prova)</h1>
-    <p>
-      Un Evidence Pack è un pacchetto di elementi che permette a un terzo di verificare una cosa semplice:
-      <b>questo contenuto corrisponde a questo hash</b>, e questo hash è riferito da un <b>manifest IPR</b>.
-      Nessuna promessa legale, nessuna autorità nascosta: solo verificabilità ripetibile.
-    </p>
+<main>
+  <div class="box">
+    <h2>Primato biologico</h2>
+    <p>Ogni evento nasce da un soggetto biologico reale. La componente cibernetica è estensione tecnica non autonoma.</p>
 
-    <div class="grid cols-2">
-      <div class="card">
-        <h2>Cos’è (definizione operativa)</h2>
-        <p>
-          Evidence Pack = <b>file</b> + <b>hash locale</b> + <b>manifest IPR</b> + <b>report di verifica</b> + (opzionale) log/versioning.
-          Se manca un pezzo critico, il pacchetto non è “quasi valido”: è <b>incompleto</b>.
-        </p>
-
-        <div class="hr"></div>
-
-        <h2>Tre livelli (pratici)</h2>
-        <p class="mini">
-          Non sono “certificazioni”. Sono livelli di completezza della prova tecnica.
-        </p>
-        <ul class="mini">
-          <li><span class="tag base">BASE</span> — conservazione minima + integrità verificabile.</li>
-          <li><span class="tag strong">STRONG</span> — verifica ripetibile + report + versioning.</li>
-          <li><span class="tag ent">ENTERPRISE</span> — chain-of-custody + ruoli + policy conservazione + audit trail.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>Struttura cartella standard (consigliata)</h2>
-        <p class="mini">Nome cartella suggerito: <code>evidence-YYYYMMDD-HHMM-<i>ipr_id</i></code></p>
-        <pre>
-evidence-pack/
-  artifacts/
-    original-file.ext
-  hashes/
-    sha256.txt
-  ipr/
-    IPR-manifest.json
-    IPR-verify-report.json
-  meta/
-    README.txt
-    changelog.txt
-        </pre>
-        <p class="mini">
-          Regola: ciò che sta in <code>artifacts/</code> è “materiale”. Il resto sono tracce di controllo.
-        </p>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:12px">
-      <h2>Procedura (ripetibile)</h2>
-      <p>Obiettivo: rendere possibile a un terzo di rifare i calcoli senza fidarsi di te.</p>
-
-      <div class="hr"></div>
-
-      <h2>Step 1 — Hash locale del file (audit-grade)</h2>
-      <p class="mini">Esempi:</p>
-      <pre>
-Windows (PowerShell):
-  Get-FileHash .\artifacts\original-file.ext -Algorithm SHA256
-
-Linux/macOS:
-  shasum -a 256 ./artifacts/original-file.ext
-      </pre>
-
-      <h2>Step 2 — Salva l’hash in <code>hashes/sha256.txt</code></h2>
-      <pre>
-SHA-256: &lt;hex-64&gt;
-FILE: artifacts/original-file.ext
-GENERATED_AT_UTC: &lt;YYYY-MM-DDTHH:MM:SSZ&gt;
-TOOL: &lt;PowerShell Get-FileHash | shasum&gt;
-      </pre>
-
-      <h2>Step 3 — Inserisci il manifest IPR (da Create/Output)</h2>
-      <p class="mini">
-        Salva il manifest in <code>ipr/IPR-manifest.json</code>. Se il manifest è basato su testo incollato (Create UI),
-        mantieni coerente l’oggetto verificato: per file binari, usa sempre l’hash locale come riferimento primario nel pack.
-      </p>
-
-      <h2>Step 4 — Verifica e salva il report</h2>
-      <p class="mini">
-        Esegui Verify e salva il report in <code>ipr/IPR-verify-report.json</code>. Se manca il contenuto → esito tipico: Inconclusive.
-      </p>
-
-      <h2>Step 5 — Meta (spiegazione asciutta)</h2>
-      <pre>
-README.txt (minimo):
-- Che cosa contiene artifacts/
-- Quale file è stato hashato
-- Dove sta l’hash (sha256.txt)
-- Dove sta il manifest IPR
-- Dove sta il report Verify
-- Regola fail-closed: se mismatch → Invalid
-      </pre>
-
-      <div class="hr"></div>
-
-      <h2>Regole fail-closed (semplici)</h2>
-      <ul>
-        <li>Se l’hash ricalcolato ≠ hash salvato → il pack è <b>Invalid</b>.</li>
-        <li>Se manca il file o manca l’hash → pack <b>Incompleto</b>.</li>
-        <li>Se il manifest non contiene hash leggibile → <b>Invalid</b>.</li>
-        <li>Se c’è solo struttura, senza contenuto verificabile → <b>Inconclusive</b> (non usare come prova forte).</li>
-      </ul>
-    </div>
-
-    <footer>
-      <div style="margin-top:14px">
-        <b>HERMETICUM B.C.E.</b><br/>
-        HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-        HERMETICUM B.C.E. S.r.l.
-      </div>
-      <div class="mini" style="margin-top:8px">Platform status: Experimental · Jurisdiction: EU</div>
-    </footer>
+    <h2>Documento</h2>
+    <p>Leggi il protocollo completo nel file <strong>MANIFEST.md</strong> nel repository.</p>
   </div>
+</main>
+
+<footer>
+  <p>HERMETICUM B.C.E. S.r.l.</p>
+</footer>
 </body>
 </html>
