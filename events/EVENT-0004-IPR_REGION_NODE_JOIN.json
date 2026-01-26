@@ -1,0 +1,19 @@
+{
+  "event_id": "EVENT-0004",
+  "event_type": "IPR_REGION_NODE_JOIN",
+  "node_level": "USER_LEAF",
+  "rule": "IPR activation binds the biological subject to the regional node as a leaf node",
+  "region_node": "Piemonte",
+  "territory": {
+    "country": "IT",
+    "region": "Piemonte",
+    "city": "Torino",
+    "district": "Barriera di Milano"
+  },
+  "subject_ref": "IPR-3",
+  "payload_hash": "SHA-256:........................................................",
+  "timestamp": "2026-01-19T15:30:00+01:00",
+  "signature": null,
+  "policy": ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"],
+  "notes": "Evento di ingresso: attivazione IPR → nodo foglia regionale. Payload off-chain custodito dal soggetto."
+}
