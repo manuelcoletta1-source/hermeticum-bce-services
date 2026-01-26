@@ -1,0 +1,4 @@
+SHA-256: fe277bea9a978912ea3b347182056e8c15de0dfad500ea9ded0924f7d95fb7f7
+FILE: artifacts/demo.txt
+GENERATED_AT_UTC: 2026-01-26T08:00:00Z
+TOOL: shasum -a 256 ./artifacts/demo.txt
