@@ -1,163 +1,182 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
+  <title>HERMETICUM B.C.E. — Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HERMETICUM B.C.E. — Infrastruttura sperimentale UE-first per IPR (manifest + hash): integrità, audit, continuità operativa. Fail-closed." />
-  <title>HERMETICUM B.C.E. — Portal</title>
+
+  <meta name="description" content="Piattaforma europea per il cittadino. Continuità digitale, tracciabilità e auditabilità UE-first." />
+  <meta name="author" content="HERMETICUM B.C.E. S.r.l." />
+
   <style>
-    :root{
-      --bg:#0b0f14; --card:#0f1620; --muted:#9fb0c3; --text:#e9f1fb; --line:#1b2735;
-      --accent:#7dd3fc; --accent2:#a7f3d0; --warn:#fde68a;
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0e0f12;
+      color: #e6e6e6;
+      line-height: 1.6;
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
-    a{color:inherit}
-    .wrap{max-width:1040px;margin:0 auto;padding:28px 18px}
-    .topbar{display:flex;gap:14px;align-items:center;justify-content:space-between;border:1px solid var(--line);background:rgba(255,255,255,.02);padding:12px 14px;border-radius:16px}
-    .badges{display:flex;flex-wrap:wrap;gap:8px}
-    .badge{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
-    .brand h1{margin:14px 0 6px;font-size:28px;letter-spacing:.3px}
-    .brand .mark{font-weight:700}
-    .brand .sub{color:var(--muted)}
-    .grid{display:grid;gap:12px}
-    @media (min-width:860px){ .grid.cols-2{grid-template-columns:1fr 1fr} .grid.cols-3{grid-template-columns:1fr 1fr 1fr} }
-    .card{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:16px}
-    .card h2,.card h3{margin:0 0 8px}
-    .card p{margin:0 0 10px;color:var(--muted)}
-    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-    .btn{display:inline-flex;gap:8px;align-items:center;justify-content:center;border:1px solid var(--line);background:rgba(255,255,255,.03);padding:10px 12px;border-radius:14px;text-decoration:none}
-    .btn.primary{border-color:rgba(125,211,252,.35);background:rgba(125,211,252,.10)}
-    .btn.secondary{border-color:rgba(167,243,208,.35);background:rgba(167,243,208,.08)}
-    .mini{font-size:12px;color:var(--muted)}
-    .hr{height:1px;background:var(--line);margin:18px 0}
-    .list{margin:0;padding-left:18px;color:var(--muted)}
-    .kpi{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-    .k{border:1px solid var(--line);border-radius:14px;padding:10px 12px;min-width:210px;background:rgba(255,255,255,.02)}
-    .k b{display:block;margin-bottom:3px}
-    footer{margin-top:18px;color:var(--muted);text-align:center}
+    header, section, footer {
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem 1.5rem;
+    }
+    header {
+      padding-top: 3rem;
+    }
+    h1, h2, h3 {
+      font-weight: 600;
+      color: #ffffff;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    h2 {
+      margin-top: 2.5rem;
+      font-size: 1.4rem;
+    }
+    p {
+      color: #cfcfcf;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      border: 1px solid #444;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      border: 1px solid #2a2a2a;
+      padding: 1.2rem;
+      background: #14151a;
+    }
+    .card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .cta {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #3a3a3a;
+      background: #101116;
+    }
+    footer {
+      border-top: 1px solid #222;
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: #999;
+    }
+    a {
+      color: #9bbcff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="badges">
-        <span class="badge">UE-first</span>
-        <span class="badge">GDPR-min</span>
-        <span class="badge">audit-by-design</span>
-        <span class="badge">fail-closed</span>
-      </div>
-      <div class="mini">v0.1 · Experimental Jurisdiction: EU</div>
-    </div>
 
-    <div class="brand">
-      <h1>HERMETICUM B.C.E.</h1>
-      <div class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-      <div class="sub">HERMETICUM B.C.E. S.r.l.</div>
+<header>
+  <h1>HERMETICUM B.C.E. — Platform</h1>
+  <p><strong>BLINDATA · COMPUTABILE · EVOLUTIVA</strong></p>
+
+  <span class="badge">UE-first</span>
+  <span class="badge">GDPR-min</span>
+  <span class="badge">Audit-by-design</span>
+  <span class="badge">Fail-closed</span>
+
+  <p>
+    Piattaforma europea per il cittadino, progettata per garantire
+    <strong>continuità digitale, tracciabilità e controllo</strong>
+    nell’accesso ai servizi civili fondamentali.
+  </p>
+</header>
+
+<section>
+  <h2>A cosa serve</h2>
+  <p>
+    Questa piattaforma consente al cittadino europeo di interagire con servizi digitali
+    mantenendo una <strong>storia verificabile nel tempo</strong>,
+    senza creare identità parallele e senza centralizzare dati sensibili.
+  </p>
+</section>
+
+<section>
+  <h2>Cosa NON è</h2>
+  <p>
+    La Platform <strong>non sostituisce</strong> SPID, CIE, eIDAS o EUDI Wallet.
+    Non è un sistema di identificazione legale, né un wallet,
+    né una piattaforma commerciale.
+  </p>
+</section>
+
+<section>
+  <h2>Aree per il cittadino</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Sanità</h3>
+      <p>
+        Metadati sanitari, consenso e registro accessi.
+        Nessun referto archiviato.
+      </p>
     </div>
 
     <div class="card">
-      <h2>IPR: una radice tecnica verificabile (non un’identità legale)</h2>
+      <h3>Istruzione</h3>
       <p>
-        Qui si usa l’IPR (Identity Primary Record) per creare <b>continuità tracciabile</b> tra te, i tuoi file e i tuoi processi:
-        un <b>manifest</b> + <b>hash</b> che descrivono “questa cosa esisteva così”, verificabile in audit.
-        La fiducia non è narrativa: nasce dalla verifica. In caso di dubbio → <b>fail-closed</b>.
+        Titoli, competenze e credenziali verificabili,
+        portabili nel tempo.
       </p>
-
-      <div class="cta">
-        <a class="btn primary" href="./citizen/">Inizia come Citizen</a>
-        <a class="btn secondary" href="./professional/">Inizia come Professional</a>
-        <a class="btn" href="./create/">Rilascia IPR</a>
-        <a class="btn" href="./verify/">Verifica IPR</a>
-      </div>
-      <div class="mini" style="margin-top:10px">
-        Perimetro obbligatorio: IPR <b>non</b> è SPID/CIE/eIDAS, <b>non</b> è firma elettronica qualificata, <b>non</b> produce effetti giuridici automatici.
-      </div>
     </div>
 
-    <div class="hr"></div>
-
-    <div class="grid cols-2">
-      <div class="card">
-        <h3>La pipeline (in 60 secondi)</h3>
-        <p>Questa è la sequenza minima per ottenere un record “auditabile”.</p>
-        <div class="kpi">
-          <div class="k"><b>1) Create</b><span class="mini">Generi manifest + hash (radice tecnica)</span></div>
-          <div class="k"><b>2) Output</b><span class="mini">Salvi manifest/evidenze: senza conservazione non c’è continuità</span></div>
-          <div class="k"><b>3) Verify</b><span class="mini">Ricalcolo hash → esito Valid / Invalid / Inconclusive</span></div>
-          <div class="k"><b>4) Evidence</b><span class="mini">Costruisci il “pacchetto prova”: file + hash + log/versioning</span></div>
-        </div>
-        <div class="cta">
-          <a class="btn" href="./create/">Vai a Create</a>
-          <a class="btn" href="./output/">Vai a Output</a>
-          <a class="btn" href="./verify/">Vai a Verify</a>
-          <a class="btn" href="./evidence/">Vai a Evidence</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Cosa ottieni (in pratica)</h3>
-        <ul class="list">
-          <li><b>Integrità verificabile</b>: se cambia anche 1 bit, lo vedi (hash mismatch).</li>
-          <li><b>Coerenza</b>: manifest ↔ file ↔ evidenze devono combaciare, altrimenti fail-closed.</li>
-          <li><b>Continuità</b>: evoluzione per versioni/derivazioni, senza cancellare il passato.</li>
-          <li><b>Auditabilità</b>: procedura ripetibile (utile per contesti tecnici e forensi).</li>
-        </ul>
-
-        <div class="hr"></div>
-
-        <h3>Non equivale a (perimetro chiaro)</h3>
-        <ul class="list">
-          <li>Identità legale UE (SPID/CIE/eIDAS/EUDI Wallet)</li>
-          <li>Firma elettronica qualificata / servizio fiduciario qualificato</li>
-          <li>Riconoscimento istituzionale automatico</li>
-        </ul>
-
-        <div class="cta">
-          <a class="btn" href="./terms/">Termini</a>
-          <a class="btn" href="./normative/">Normative Mapping</a>
-          <a class="btn" href="./professional/">Vista tecnica / istituzionale</a>
-        </div>
-      </div>
+    <div class="card">
+      <h3>Procedure</h3>
+      <p>
+        Timeline amministrative e logica once-only
+        per ridurre la burocrazia ripetitiva.
+      </p>
     </div>
 
-    <div class="hr"></div>
-
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>Citizen</h3>
-        <p>Guida rapida: cosa serve, cosa ottieni, come usare Verify senza ambiguità.</p>
-        <a class="btn" href="./citizen/">Apri Citizen Journey</a>
-      </div>
-      <div class="card">
-        <h3>Professional / Institution</h3>
-        <p>Definizione operativa + esiti standard + conservazione e governance minima.</p>
-        <a class="btn" href="./professional/">Apri vista tecnica</a>
-      </div>
-      <div class="card">
-        <h3>Evidence</h3>
-        <p>Definizioni + procedura “audit-grade” + esempi CLI per SHA-256.</p>
-        <a class="btn" href="./evidence/">Apri Evidence</a>
-      </div>
+    <div class="card">
+      <h3>Emergenza</h3>
+      <p>
+        Accesso temporaneo e tracciato
+        in situazioni critiche.
+      </p>
     </div>
-
-    <footer>
-      <div style="margin:14px 0 6px">
-        <b>HERMETICUM B.C.E.</b><br/>
-        HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-        HERMETICUM B.C.E. S.r.l.
-      </div>
-      <div class="mini" style="margin-bottom:10px">Platform status: Experimental · Jurisdiction: EU</div>
-      <div class="cta" style="justify-content:center">
-        <a class="btn" href="./privacy/">Privacy</a>
-        <a class="btn" href="./cookies/">Cookies</a>
-        <a class="btn" href="./accessibility/">Accessibility</a>
-        <a class="btn" href="./legal/">Legal notice</a>
-        <a class="btn" href="./contact/">Contact</a>
-        <a class="btn" href="./credits/">Credits</a>
-      </div>
-    </footer>
   </div>
+</section>
+
+<section class="cta">
+  <h2>Trasparenza e verifica</h2>
+  <p>
+    Ogni funzione della Platform è progettata per essere
+    <strong>verificabile pubblicamente</strong>.
+  </p>
+  <p>
+    → <a href="./verify/">Verifica pubblica</a><br />
+    → <a href="./policy/">Policy e limiti dichiarati</a><br />
+    → <a href="./changelog/">Changelog append-only</a>
+  </p>
+</section>
+
+<footer>
+  <p>
+    © HERMETICUM B.C.E. S.r.l. — Infrastruttura civile europea.<br />
+    Questo portale non costituisce promessa di servizio
+    né sostituisce sistemi pubblici esistenti.
+  </p>
+</footer>
+
 </body>
 </html>
