@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register — IPR | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Registrazione UE-first per IPR: privacy by default, hash-only, livelli di evidenza verificabili." />
+  <meta name="color-scheme" content="dark light" />
+  <style>
+    :root{
+      --bg:#0b0d10; --card:#12161c; --muted:#9aa4b2; --fg:#e8eef7;
+      --line:#232a34; --accent:#6ee7ff; --good:#6bff95; --warn:#ffd36e; --bad:#ff6b6b;
+      --max:1100px; --r:16px; --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:radial-gradient(1200px 700px at 15% -10%, rgba(110,231,255,.12), transparent 60%),
+                 radial-gradient(900px 500px at 90% 0%, rgba(107,255,149,.10), transparent 55%),
+                 var(--bg);
+      color:var(--fg); line-height:1.45;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:18px 20px; background:rgba(18,22,28,.75); border:1px solid var(--line);
+      border-radius:var(--r); box-shadow:var(--shadow); backdrop-filter: blur(10px);
+    }
+    .brand{display:flex; flex-direction:column; gap:4px}
+    .mark{font-weight:800; letter-spacing:.4px}
+    .submark{color:var(--muted); font-size:.92rem}
+    nav{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end}
+    .pill{
+      padding:8px 12px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(255,255,255,.03);
+    }
+    .pill:hover{border-color:rgba(110,231,255,.55)}
+    .cta{border-color:rgba(110,231,255,.45); background:rgba(110,231,255,.08)}
+    .card{
+      margin-top:18px;
+      background:rgba(18,22,28,.82); border:1px solid var(--line); border-radius:var(--r);
+      padding:18px; box-shadow:var(--shadow);
+    }
+    h1{margin:0 0 10px 0; font-size:1.45rem}
+    h2{margin:0 0 10px 0; font-size:1.1rem}
+    p{margin:10px 0; color:rgba(232,238,247,.92)}
+    .muted{color:var(--muted)}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .tile{
+      padding:16px; border-radius:var(--r); border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .tag{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:5px 10px; border-radius:999px; border:1px solid var(--line);
+      color:var(--muted); font-size:.85rem;
+      width:max-content;
+    }
+    .tag .dot{width:8px; height:8px; border-radius:999px; background:var(--accent)}
+    .tag.good .dot{background:var(--good)}
+    .tag.warn .dot{background:var(--warn)}
+    .tag.bad  .dot{background:var(--bad)}
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:12px;
+      border:1px solid var(--line); background:rgba(255,255,255,.03);
+      cursor:pointer;
+    }
+    .btn:hover{border-color:rgba(110,231,255,.55)}
+    .btn.primary{border-color:rgba(110,231,255,.45); background:rgba(110,231,255,.10)}
+    .small{font-size:.92rem}
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    .hr{height:1px; background:var(--line); margin:14px 0}
+    label{display:block; font-size:.92rem; color:var(--muted); margin:10px 0 6px}
+    input, select, textarea{
+      width:100%; padding:10px 12px; border-radius:12px;
+      border:1px solid var(--line); background:rgba(0,0,0,.25); color:var(--fg);
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{border-color:rgba(110,231,255,.55)}
+    .note{
+      border:1px dashed rgba(255,211,110,.45);
+      background:rgba(255,211,110,.08);
+      padding:12px; border-radius:12px;
+    }
+    .ok{
+      border:1px dashed rgba(107,255,149,.45);
+      background:rgba(107,255,149,.08);
+      padding:12px; border-radius:12px;
+    }
+    .danger{
+      border:1px dashed rgba(255,107,107,.45);
+      background:rgba(255,107,107,.08);
+      padding:12px; border-radius:12px;
+    }
+    .meter{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px; border-radius:12px; border:1px solid var(--line); background:rgba(255,255,255,.02);
+    }
+    .meter b{font-size:1.05rem}
+    .meter .lvl{color:var(--muted)}
+    .lvlchip{padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.02); font-size:.85rem}
+    @media (max-width: 980px){
+      .grid2{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header aria-label="Barra principale">
+      <div class="brand">
+        <div class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        <div class="submark">HERMETICUM B.C.E. S.r.l. — Register (UE-first, privacy-by-default)</div>
+      </div>
+      <nav aria-label="Navigazione">
+        <a class="pill" href="../">Home</a>
+        <a class="pill" href="../catalog/">Catalogo</a>
+        <a class="pill" href="../verify/">Verifica</a>
+        <a class="pill cta" href="../create/">Crea IPR</a>
+        <a class="pill" href="../terms/">Termini</a>
+      </nav>
+    </header>
+
+    <section class="card">
+      <h1>Registrazione (non account): <span class="mono">IPR Registration</span></h1>
+      <p class="muted small">
+        Questa pagina non crea “profili”.  
+        Crea un <b>record minimo</b> per collegare una traccia a un percorso verificabile.  
+        <b>Privacy by default:</b> i dati personali non aumentano l’opponibilità della traccia; aumentano solo esposizione e rischio.
+      </p>
+
+      <div class="note small">
+        <b>Regola UE-first:</b> più “valenza” si ottiene con <b>più evidenze verificabili</b> (hash, tempo, prove, firme), non con più campi anagrafici.
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="grid2">
+        <div class="tile">
+          <div class="tag good"><span class="dot"></span> Step 1 — Dati minimi (consigliato)</div>
+
+          <label for="localeCountry">Nazione (facoltativa, per localizzazione)</label>
+          <select id="localeCountry" name="localeCountry">
+            <option value="">— Non indicare —</option>
+            <option>Italia</option>
+            <option>Francia</option>
+            <option>Germania</option>
+            <option>Spagna</option>
+            <option>Altro (UE/Extra UE)</option>
+          </select>
+
+          <label for="preferredLang">Lingua</label>
+          <select id="preferredLang" name="preferredLang" required>
+            <option value="it" selected>Italiano</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+          </select>
+
+          <label for="alias">Alias (facoltativo)</label>
+          <input id="alias" name="alias" placeholder="es. MC-Node-01 (evita nome reale)" />
+
+          <label for="contact">Email (facoltativa, solo notifiche)</label>
+          <input id="contact" name="contact" type="email" placeholder="email@dominio.tld" />
+
+          <div class="btnrow">
+            <a class="btn primary" href="../create/">→ Vai a Crea IPR (manifest)</a>
+            <a class="btn" href="../verify/">→ Vai a Verifica</a>
+          </div>
+
+          <p class="muted small">
+            Output atteso: manifest IPR + riferimenti verificabili. Nessun “account” richiesto.
+          </p>
+        </div>
+
+        <div class="tile">
+          <div class="tag warn"><span class="dot"></span> Step 2 — Dati personali (opzionali, sconsigliati)</div>
+
+          <div class="danger small">
+            <b>Attenzione:</b> inserire nome/cognome/città/quartiere non rende la traccia “più opponibile”.
+            Se vuoi più forza, usa livelli di evidenza (vedi sotto): prove, firme, audit.
+          </div>
+
+          <label for="region">Regione (facoltativa)</label>
+          <input id="region" name="region" placeholder="es. Piemonte" />
+
+          <label for="city">Città (facoltativa)</label>
+          <input id="city" name="city" placeholder="es. Torino" />
+
+          <label for="district">Quartiere (facoltativo)</label>
+          <input id="district" name="district" placeholder="es. San Salvario" />
+
+          <label for="firstName">Nome (facoltativo)</label>
+          <input id="firstName" name="firstName" placeholder="Nome" />
+
+          <label for="lastName">Cognome (facoltativo)</label>
+          <input id="lastName" name="lastName" placeholder="Cognome" />
+
+          <label for="notes">Note (facoltative, evita dati sensibili)</label>
+          <textarea id="notes" name="notes" rows="3" placeholder="Solo informazioni non sensibili, se proprio servono."></textarea>
+
+          <div class="ok small">
+            <b>UE-first:</b> se vuoi collegare identità reale, usa <b>binding</b> tramite prova (es. firma) e pubblica solo hash/riferimenti.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Livello di evidenza (questa è la “valenza” reale)</h2>
+      <p class="muted small">
+        L’opponibilità cresce quando cresce la <b>verificabilità</b>, non quando cresce la quantità di PII.
+      </p>
+
+      <div class="grid3">
+        <div class="tile">
+          <div class="tag"><span class="dot"></span> Trace</div>
+          <p class="small muted">
+            Hash del contenuto + manifest minimo.  
+            Se cambia un byte, cambia l’hash. Niente riscritture invisibili.
+          </p>
+          <div class="lvlchip">Livello: Base</div>
+        </div>
+
+        <div class="tile">
+          <div class="tag"><span class="dot"></span> Time</div>
+          <p class="small muted">
+            Timestamp esterno / ancoraggi.  
+            Serve per rendere la precedenza più difficile da contestare.
+          </p>
+          <div class="lvlchip">Livello: Medio</div>
+        </div>
+
+        <div class="tile">
+          <div class="tag"><span class="dot"></span> Identity Binding</div>
+          <p class="small muted">
+            Collegamento identità tramite prova (es. firma).  
+            Pubblico: solo hash/riferimenti. Privato: dati reali.
+          </p>
+          <div class="lvlchip">Livello: Alto</div>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="meter" aria-label="Sintesi livelli">
+        <div>
+          <b>Obiettivo UE:</b> “più prova” → “più opponibilità”
+          <div class="lvl small muted">Non “più dati personali”.</div>
+        </div>
+        <div class="btnrow" style="margin:0">
+          <a class="btn primary" href="../create/">Vai a Crea IPR</a>
+          <a class="btn" href="../verify/">Vai a Verifica</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Nota operativa</h2>
+      <p class="muted small">
+        Questa pagina è statica e non invia dati. Serve come interfaccia UE-first per guidare l’utente verso:
+        <b>Create</b> (manifest) e <b>Verify</b> (controllo riproducibile).
+      </p>
+      <p class="muted small">
+        Se vuoi davvero “registrazione con salvataggio”, va progettata come:
+        <b>private by default</b>, con <b>consenso esplicito</b>, retention chiara, e pubblicazione solo di hash.
+      </p>
+    </section>
+
+    <footer class="card" aria-label="Footer">
+      <div class="small muted">
+        <b>HERMETICUM B.C.E. S.r.l.</b> — Register · <span class="mono">GDPR-min</span> · <span class="mono">hash-only</span> · <span class="mono">fail-closed</span>
+      </div>
+      <div class="small muted" style="margin-top:8px">
+        © 2026 — Nessuna promessa. Nessuna protezione. Solo precedenza.
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
