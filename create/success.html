@@ -1,230 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IPR Rilasciato — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Output post-rilascio IPR: salva manifest, conserva evidenze, avvia verifica (fail-closed).">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create / Output — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Output IPR: scarica manifest, conserva evidenze, passa a Verify. Fail-closed." />
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
-    header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
-    header{padding-top:3.5rem}
-    h1{font-size:2.1rem;margin:0 0 .5rem}
-    .sub{opacity:.85}
-    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:1.5rem}
-    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
-    a{color:#9ad}
-    .cta{display:inline-block;margin:.5rem .4rem 0 0;padding:.7rem 1.1rem;border:1px solid #444;border-radius:4px;color:#fff;text-decoration:none;font-weight:500}
-    .cta.primary{border-color:#888}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    textarea{width:100%;min-height:240px;background:#0f0f0f;color:#e6e6e6;border:1px solid #222;border-radius:6px;padding:12px;box-sizing:border-box}
-    .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.75rem}
-    button{background:#111;color:#fff;border:1px solid #444;border-radius:4px;padding:.65rem 1rem;cursor:pointer;font-weight:600}
-    button.primary{border-color:#888}
-    .hint{opacity:.85;font-size:.95rem}
-    .warn{opacity:.9}
-    .line{height:1px;background:#222;margin:1.2rem 0}
-    .pill{display:inline-block;border:1px solid #333;border-radius:999px;padding:.25rem .65rem;font-size:.85rem;opacity:.9}
+    :root{--bg:#0b0f14;--card:#0f1620;--muted:#9fb0c3;--text:#e9f1fb;--line:#1b2735;--accent:#7dd3fc;--warn:#fde68a;}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:22px 16px}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;border:1px solid var(--line);background:rgba(255,255,255,.02);padding:12px 14px;border-radius:16px}
+    .pill{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+    .card{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:14px;margin-top:12px}
+    h1{margin:14px 0 6px;font-size:22px}
+    p{margin:0 0 10px;color:var(--muted)}
+    pre{margin:10px 0 0;padding:12px;border-radius:16px;border:1px solid var(--line);background:rgba(0,0,0,.18);overflow:auto;color:var(--text);font-size:12px}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button, .btn{
+      border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--text);
+      padding:10px 12px; border-radius:14px; cursor:pointer; text-decoration:none; display:inline-flex;align-items:center;gap:8px;
+    }
+    .btn.primary{border-color:rgba(125,211,252,.35);background:rgba(125,211,252,.10)}
+    .mini{font-size:12px;color:var(--muted)}
+    .warn{color:var(--warn)}
+    footer{margin-top:14px;color:var(--muted);text-align:center}
   </style>
 </head>
 <body>
+  <div class="wrap">
+    <div class="nav">
+      <span class="pill"><a href="../verify/">Verifica ora</a></span>
+      <span class="pill"><a href="../evidence/">Evidence</a></span>
+      <span class="pill"><a href="../terms/">Termini</a></span>
+      <span class="pill"><a href="../">Home</a></span>
+      <span class="pill">fail-closed</span>
+    </div>
 
-<header>
-  <div class="badge">Create / Output</div>
-  <h1>IPR rilasciato</h1>
-  <p class="sub">
-    Output post-rilascio: <strong>salva</strong> → <strong>conserva</strong> → <strong>verifica</strong>.
-    In dubbio → <strong>fail-closed</strong>.
-  </p>
+    <h1>IPR rilasciato — Output</h1>
+    <p>Salva → conserva → verifica. Se qualcosa manca o non torna → <b>fail-closed</b>. 5</p>
 
-  <div style="margin-top:1rem;">
-    <a class="cta primary" href="../verify/">Verifica ora</a>
-    <a class="cta" href="../evidence/">Evidence</a>
-    <a class="cta" href="../terms/">Termini</a>
-    <a class="cta" href="../">Home</a>
-  </div>
-</header>
-
-<section>
-  <h2>Esito</h2>
-  <div class="grid">
     <div class="card">
-      <h3>Stato</h3>
-      <div class="pill" id="statePill">—</div>
-      <p class="hint" id="stateMsg">Caricamento manifest…</p>
+      <h2 style="margin:0 0 8px;font-size:16px">Manifest IPR</h2>
+      <p id="status" class="mini warn">Caricamento manifest dal browser…</p>
+      <pre id="manifest">{ }</pre>
+
+      <div class="btns">
+        <a class="btn primary" href="../verify/">Verifica IPR</a>
+        <button id="btnDownloadJson">Scarica (.json)</button>
+        <button id="btnDownloadTxt">Scarica (.txt)</button>
+        <button id="btnCopy">Copia</button>
+        <button id="btnClear">Pulisci dal browser</button>
+      </div>
+
+      <div class="mini" style="margin-top:10px">
+        Buona pratica: conserva anche esito di verifica + versioning/changelog (vedi Evidence). 6
+      </div>
     </div>
 
     <div class="card">
-      <h3>Cosa fare adesso</h3>
-      <ol>
-        <li>Scarica il manifest</li>
-        <li>Conserva file/evidenze in modo coerente</li>
-        <li>Vai a <a href="../verify/">Verifica IPR</a></li>
-      </ol>
-    </div>
-
-    <div class="card">
-      <h3>Perimetro</h3>
-      <p class="warn">
-        Questo output è <strong>tecnico</strong>. Non è identità legale, non è firma qualificata,
-        non produce effetti automatici.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Manifest IPR</h2>
-  <p class="sub">
-    Il manifest viene caricato automaticamente dal browser (<span class="mono">localStorage</span>) se disponibile.
-    Puoi anche incollarlo manualmente.
-  </p>
-
-  <div class="card">
-    <textarea id="manifest" placeholder="Incolla qui il tuo manifest IPR..."></textarea>
-
-    <div class="row">
-      <button class="primary" id="downloadJson">Scarica (.json)</button>
-      <button id="downloadTxt">Scarica (.txt)</button>
-      <button id="saveLocal">Salva nel browser</button>
-      <button id="clearAll">Pulisci</button>
-    </div>
-
-    <div class="line"></div>
-
-    <p class="hint">
-      Buona pratica: conserva anche <strong>output di verifica</strong> e versioni (vedi <a href="../evidence/">Evidence</a>).
-    </p>
-  </div>
-</section>
-
-<section>
-  <h2>Checklist conservazione</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>BASE</h3>
-      <ul>
-        <li>Manifest salvato</li>
-        <li>Data/ora del rilascio</li>
-        <li>File originali (se usati)</li>
+      <h2 style="margin:0 0 8px;font-size:16px">Checklist conservazione (rapida)</h2>
+      <ul class="mini" style="margin:0;padding-left:16px">
+        <li><b>BASE</b>: manifest salvato + data/ora rilascio + file originali (se usati).</li>
+        <li><b>STRONG</b>: hash ricalcolati localmente + esito Verify registrato + versioning.</li>
+        <li><b>ENTERPRISE</b>: policy conservazione + ruoli + catena di custodia + audit trail.</li>
       </ul>
     </div>
 
-    <div class="card">
-      <h3>STRONG (audit)</h3>
-      <ul>
-        <li>Manifest + evidenze</li>
-        <li>Hash ricalcolati localmente</li>
-        <li>Esito verifica registrato</li>
-        <li>Versioning/changelog</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>ENTERPRISE</h3>
-      <ul>
-        <li>Policy conservazione</li>
-        <li>Ruoli e responsabilità</li>
-        <li>Catena di custodia</li>
-        <li>Audit trail completo</li>
-      </ul>
-    </div>
+    <footer>
+      <div style="margin-top:14px">
+        <b>HERMETICUM B.C.E.</b><br/>
+        HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
+        HERMETICUM B.C.E. S.r.l.
+      </div>
+      <div class="mini" style="margin-top:8px">Platform status: Experimental · Jurisdiction: EU</div>
+    </footer>
   </div>
-</section>
 
-<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
-  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
-    <div>
-      <strong>HERMETICUM B.C.E.</strong><br>
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
-    </div>
-    <div>
-      <a href="../legal/privacy.html">Privacy</a><br>
-      <a href="../legal/cookies.html">Cookies</a><br>
-      <a href="../legal/accessibility.html">Accessibility</a>
-    </div>
-    <div>
-      <a href="../legal/legal-notice.html">Legal notice</a><br>
-      <a href="../legal/contact.html">Contact</a>
-    </div>
-    <div>
-      Platform status: <strong>Experimental</strong><br>
-      Jurisdiction: <strong>EU</strong>
-    </div>
-  </div>
-</footer>
+  <script>
+    const KEY = "HBCE_IPR_MANIFEST";
+    const elMan = document.getElementById("manifest");
+    const elStatus = document.getElementById("status");
+    let manifestText = "";
 
-<script>
-  const el = document.getElementById("manifest");
-  const pill = document.getElementById("statePill");
-  const msg  = document.getElementById("stateMsg");
-
-  function setState(label, text) {
-    pill.textContent = label;
-    msg.textContent = text || "";
-  }
-
-  function download(filename, content, mime) {
-    const blob = new Blob([content], { type: mime || "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 2500);
-  }
-
-  function loadLocal() {
-    try {
-      const saved = localStorage.getItem("hbce_ipr_manifest");
-      if (saved && saved.trim().length > 0) {
-        el.value = saved;
-        setState("READY", "Manifest caricato dal browser. Procedi con download o verifica.");
-      } else {
-        setState("EMPTY", "Nessun manifest trovato nel browser. Incolla manualmente o torna a Create.");
+    function load(){
+      const raw = localStorage.getItem(KEY);
+      if(!raw){
+        elStatus.textContent = "FAIL-CLOSED: nessun manifest trovato nel browser. Torna su Create e rigenera.";
+        elMan.textContent = "{ }";
+        return;
       }
-    } catch (e) {
-      setState("ERROR", "Impossibile accedere a localStorage nel browser corrente.");
+      try{
+        const obj = JSON.parse(raw);
+        manifestText = JSON.stringify(obj, null, 2);
+        elMan.textContent = manifestText;
+        elStatus.textContent = "OK: manifest caricato dal browser (localStorage). Ora scarica e conserva.";
+      }catch(e){
+        elStatus.textContent = "FAIL-CLOSED: manifest corrotto/non JSON. Rigenera da Create.";
+        elMan.textContent = "{ }";
+      }
     }
-  }
 
-  // Autoload
-  loadLocal();
-
-  document.getElementById("downloadJson").addEventListener("click", () => {
-    const txt = el.value.trim();
-    if (!txt) return alert("Manifest vuoto: incolla o carica dal browser.");
-    download("ipr-manifest.json", txt, "application/json;charset=utf-8");
-  });
-
-  document.getElementById("downloadTxt").addEventListener("click", () => {
-    const txt = el.value.trim();
-    if (!txt) return alert("Manifest vuoto: incolla o carica dal browser.");
-    download("ipr-manifest.txt", txt, "text/plain;charset=utf-8");
-  });
-
-  document.getElementById("saveLocal").addEventListener("click", () => {
-    const txt = el.value.trim();
-    if (!txt) return alert("Manifest vuoto: incolla prima il manifest.");
-    localStorage.setItem("hbce_ipr_manifest", txt);
-    localStorage.setItem("hbce_ipr_saved_at", new Date().toISOString());
-    setState("SAVED", "Manifest salvato nel browser.");
-
-    if (confirm("Manifest salvato. Vuoi verificare subito l’IPR?")) {
-      window.location.href = "../verify/";
+    function download(filename, text){
+      const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
     }
-  });
 
-  document.getElementById("clearAll").addEventListener("click", () => {
-    try { localStorage.removeItem("hbce_ipr_manifest"); } catch(e){}
-    el.value = "";
-    setState("EMPTY", "Pulito. Nessun manifest presente.");
-  });
-</script>
+    document.getElementById("btnDownloadJson").addEventListener("click", ()=>{
+      if(!manifestText) return;
+      download("IPR-manifest.json", manifestText);
+    });
 
+    document.getElementById("btnDownloadTxt").addEventListener("click", ()=>{
+      if(!manifestText) return;
+      download("IPR-manifest.txt", manifestText);
+    });
+
+    document.getElementById("btnCopy").addEventListener("click", async ()=>{
+      if(!manifestText) return;
+      await navigator.clipboard.writeText(manifestText);
+      elStatus.textContent = "OK: copiato negli appunti.";
+    });
+
+    document.getElementById("btnClear").addEventListener("click", ()=>{
+      localStorage.removeItem(KEY);
+      localStorage.removeItem("HBCE_IPR_CONTENT");
+      elStatus.textContent = "Pulito dal browser. (Se serve, rigenera da Create.)";
+      elMan.textContent = "{ }";
+      manifestText = "";
+    });
+
+    load();
+  </script>
 </body>
 </html>
