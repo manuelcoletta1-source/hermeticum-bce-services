@@ -1,370 +1,250 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Verify — Firma a Tre Ancore (IPR) | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Verifica pubblica della firma digitale a tre ancore per IPR: IPFS (CID), Bitcoin (TXID), Ethereum (TX). HERMETICUM B.C.E. — UE-first." />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifica IPR — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Verifica tecnica di un IPR: coerenza manifest, integrità hash, esito standard (valid/invalid/inconclusive) con fail-closed.">
   <style>
-    :root{
-      --bg:#0b0f14; --panel:#0f1621; --text:#e7eef7; --muted:#b8c4d4;
-      --line:#243043; --accent:#7aa7ff; --ok:#6ee7b7; --warn:#fbbf24; --danger:#fb7185;
-      --r:16px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 800px at 10% 0%, #101a2a 0%, var(--bg) 55%) no-repeat;
-      color:var(--text);
-      line-height:1.6;
-    }
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
-
-    .topbar{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r);
-      background: rgba(255,255,255,.02);
-    }
-    .nav a{
-      display:inline-block; padding:8px 10px; border-radius:999px;
-      border:1px solid var(--line); margin-right:8px;
-      background: rgba(255,255,255,.02); color:var(--muted); font-size:13px;
-    }
-    .nav a.active{background: rgba(122,167,255,.14); color:var(--text); border-color: rgba(122,167,255,.35)}
-
-    header{
-      margin-top:14px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:22px 20px;
-      background: linear-gradient(180deg, rgba(122,167,255,.10), rgba(255,255,255,.02));
-    }
-    h1{margin:0; font-size:28px; line-height:1.25}
-    .sub{margin:10px 0 0; color:var(--muted); max-width:960px}
-    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    .pill{
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:7px 10px;
-      background: rgba(255,255,255,.02);
-      font-size:12px;
-      color:var(--muted);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:14px;
-      margin-top:14px;
-    }
-    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
-
-    .card{
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:18px;
-      background: rgba(255,255,255,.02);
-    }
-    h2{margin:0 0 10px; font-size:18px}
-    h3{margin:16px 0 8px; font-size:15px}
-    p{margin:10px 0; color:var(--muted)}
-    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
-    li{margin:6px 0}
-
-    label{display:block; margin:10px 0 6px; color:var(--text); font-size:13px; font-weight:650}
-    input{
-      width:100%;
-      padding:11px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.25);
-      color: var(--text);
-      outline:none;
-    }
-    input::placeholder{color:#7d8aa0}
-
-    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-    @media (max-width: 720px){ .row{grid-template-columns:1fr} }
-
-    .cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 12px; border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(122,167,255,.14);
-      color:var(--text); font-weight:650;
-      cursor:pointer;
-    }
-    .btn.secondary{
-      background: rgba(255,255,255,.03);
-      font-weight:600;
-      color:var(--text);
-    }
-
-    .notice{
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:12px 12px;
-      background: rgba(255,255,255,.02);
-      color: var(--muted);
-      font-size:13px;
-      margin-top:12px;
-    }
-    .quote{
-      border-left:3px solid rgba(122,167,255,.55);
-      padding:10px 12px;
-      margin:12px 0 0;
-      background: rgba(122,167,255,.07);
-      border-radius:12px;
-      color:var(--text);
-    }
-    code.block{
-      display:block;
-      padding:10px 12px;
-      border-radius:14px;
-      background: rgba(0,0,0,.30);
-      border:1px solid var(--line);
-      color:#d7e6ff;
-      overflow:auto;
-      font-size:12px;
-      line-height:1.45;
-      white-space:pre;
-    }
-    .hr{height:1px; background:var(--line); margin:14px 0}
-
-    .links a{
-      display:inline-block;
-      margin-right:10px;
-      margin-bottom:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      color: var(--muted);
-      font-size:13px;
-    }
-
-    footer{
-      margin-top:18px;
-      color:var(--muted);
-      font-size:12px;
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      opacity:.95;
-    }
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
+    header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
+    header{padding-top:3.5rem}
+    h1{font-size:2.2rem;margin:0 0 .5rem}
+    .sub{opacity:.85}
+    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:1.5rem}
+    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
+    a{color:#9ad}
+    textarea,input{width:100%;background:#0f0f0f;color:#e6e6e6;border:1px solid #222;border-radius:6px;padding:10px;box-sizing:border-box}
+    label{display:block;margin:.75rem 0 .25rem;opacity:.9}
+    .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.75rem}
+    button{background:#111;color:#fff;border:1px solid #444;border-radius:4px;padding:.7rem 1.1rem;cursor:pointer;font-weight:600}
+    button.primary{border-color:#888}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .line{height:1px;background:#222;margin:1.2rem 0}
+    .status{padding:.6rem .9rem;border:1px solid #444;border-radius:6px;display:inline-block}
+    .hint{opacity:.85;font-size:.95rem}
   </style>
 </head>
-
 <body>
-  <main class="wrap">
 
-    <div class="topbar">
-      <div>
-        <strong>HERMETICUM B.C.E.</strong><br/>
-        <span style="color:var(--muted); font-size:12px;">HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</span>
+<header>
+  <div class="badge">Verify / IPR</div>
+  <h1>Verifica IPR</h1>
+  <p class="sub">
+    Verifica tecnica della coerenza e integrità di un IPR (manifest + hash).
+    Regola: se qualcosa non torna → <strong>fail-closed</strong>.
+  </p>
+
+  <div style="margin-top:1rem;">
+    <a href="../create/">Create</a> ·
+    <a href="../create/success.html">Output IPR</a> ·
+    <a href="../evidence/">Evidence</a> ·
+    <a href="../terms/">Termini</a> ·
+    <a href="../">Home</a>
+  </div>
+</header>
+
+<section>
+  <h2>Input</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Manifest IPR</h3>
+      <p class="hint">Precaricato automaticamente se presente nel browser (localStorage).</p>
+      <textarea id="manifest" placeholder="Incolla qui il manifest IPR..."></textarea>
+
+      <div class="row">
+        <button class="primary" id="loadLocal">Carica dal browser</button>
+        <button id="clearLocal">Pulisci</button>
       </div>
-
-      <nav class="nav" aria-label="Navigazione">
-        <a href="../">Home</a>
-        <a href="../catalog/">Classi IPR</a>
-        <a href="../ai/">AI e IPR</a>
-        <a href="../create/">Rilascia IPR</a>
-        <a class="active" href="./">Verifica</a>
-        <a href="../terms/">Termini</a>
-      </nav>
     </div>
 
-    <header>
-      <h1>Verify — Firma digitale a tre ancore</h1>
-      <p class="sub">
-        Inserisci <strong>IPFS CID</strong>, <strong>Bitcoin TXID</strong> e <strong>Ethereum TX</strong>
-        per verificare pubblicamente l’ancoraggio di un IPR.
-        La verifica è indipendente dalla classe (BASE/STRONG/ENTERPRISE): la firma digitale è la stessa.
+    <div class="card">
+      <h3>Contenuto (opzionale)</h3>
+      <p class="hint">
+        Se incolli lo stesso contenuto usato in Create, possiamo ricalcolare l’hash e verificare l’integrità.
+        Se non lo fornisci, la verifica sarà <strong>Inconclusive</strong> sull’integrità del contenuto.
       </p>
+      <textarea id="content" placeholder="Incolla qui il contenuto originale (opzionale)..."></textarea>
+    </div>
 
-      <div class="pillrow">
-        <div class="pill">IPFS = esistenza</div>
-        <div class="pill">Bitcoin = tempo</div>
-        <div class="pill">Ethereum = tracciabilità</div>
+    <div class="card">
+      <h3>Esito</h3>
+      <div id="result" class="status">—</div>
+      <div class="line"></div>
+      <div class="hint" id="details">Nessuna verifica eseguita.</div>
+
+      <div class="row">
+        <button class="primary" id="verifyBtn">Esegui verifica</button>
+        <button id="saveManifest">Salva manifest nel browser</button>
       </div>
-    </header>
+    </div>
+  </div>
+</section>
 
-    <section class="grid">
+<section>
+  <h2>Esiti standard</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Valid</h3>
+      <p>Manifest coerente e (se fornito il contenuto) hash verificato.</p>
+    </div>
+    <div class="card">
+      <h3>Invalid</h3>
+      <p>Mancanze o mismatch (schema, campi obbligatori, hash non coincide).</p>
+    </div>
+    <div class="card">
+      <h3>Inconclusive</h3>
+      <p>Dati insufficienti (es. contenuto non fornito): non accettare come prova in audit.</p>
+    </div>
+  </div>
+</section>
 
-      <article class="card">
-        <h2>Inserisci gli anchor</h2>
-        <p>
-          Questa pagina genera link di verifica verso explorer pubblici.
-          Non raccoglie né invia dati: la verifica avviene sui network pubblici.
-        </p>
+<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
+  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
+    <div>
+      <strong>HERMETICUM B.C.E.</strong><br>
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
+    </div>
+    <div>
+      <a href="../legal/privacy.html">Privacy</a><br>
+      <a href="../legal/cookies.html">Cookies</a><br>
+      <a href="../legal/accessibility.html">Accessibility</a>
+    </div>
+    <div>
+      <a href="../legal/legal-notice.html">Legal notice</a><br>
+      <a href="../legal/contact.html">Contact</a>
+    </div>
+    <div>
+      Platform status: <strong>Experimental</strong><br>
+      Jurisdiction: <strong>EU</strong>
+    </div>
+  </div>
+</footer>
 
-        <label for="cid">IPFS CID</label>
-        <input id="cid" placeholder="Es. bafkrei..." />
+<script>
+  const manifestEl = document.getElementById("manifest");
+  const contentEl  = document.getElementById("content");
+  const resultEl   = document.getElementById("result");
+  const detailsEl  = document.getElementById("details");
 
-        <label for="btc">Bitcoin TXID</label>
-        <input id="btc" placeholder="Es. 9eeb29b6..." />
+  function setResult(state, msg) {
+    resultEl.textContent = state;
+    detailsEl.textContent = msg || "";
+  }
 
-        <label for="eth">Ethereum TX</label>
-        <input id="eth" placeholder="Es. 0xf65e..." />
+  function safeGetLocalManifest() {
+    try {
+      return localStorage.getItem("hbce_ipr_manifest") || "";
+    } catch(e) { return ""; }
+  }
 
-        <div class="cta">
-          <button class="btn" type="button" onclick="build()">Genera link di verifica</button>
-          <button class="btn secondary" type="button" onclick="resetAll()">Reset</button>
-        </div>
+  function loadFromLocal() {
+    const saved = safeGetLocalManifest();
+    if (saved && saved.trim().length > 0) {
+      manifestEl.value = saved;
+      setResult("—", "Manifest caricato dal browser.");
+    } else {
+      alert("Nessun manifest trovato nel browser (localStorage).");
+    }
+  }
 
-        <div class="notice">
-          <strong>Nota:</strong> la validità “di sistema” di un IPR (stato, classe, audit) può richiedere controlli aggiuntivi.
-          Questa pagina verifica la <strong>firma pubblica a tre ancore</strong>.
-        </div>
-      </article>
+  function clearAll() {
+    manifestEl.value = "";
+    contentEl.value = "";
+    setResult("—", "Pulito.");
+  }
 
-      <aside class="card">
-        <h2>Output verifica</h2>
-        <p>Link generati (cliccabili):</p>
+  function saveManifestLocal() {
+    const txt = manifestEl.value.trim();
+    if (!txt) return alert("Manifest vuoto: nulla da salvare.");
+    localStorage.setItem("hbce_ipr_manifest", txt);
+    localStorage.setItem("hbce_ipr_saved_at", new Date().toISOString());
+    alert("Manifest salvato nel browser.");
+  }
 
-        <div id="links" class="links">
-          <span style="color:var(--muted); font-size:13px;">Compila i campi e clicca “Genera link di verifica”.</span>
-        </div>
+  async function sha256(str) {
+    const enc = new TextEncoder();
+    const buf = await crypto.subtle.digest("SHA-256", enc.encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
 
-        <div class="hr"></div>
+  function parseManifest(txt) {
+    try {
+      return { ok: true, data: JSON.parse(txt) };
+    } catch (e) {
+      return { ok: false, err: "Manifest non è JSON valido." };
+    }
+  }
 
-        <h2>Checklist rapida</h2>
-        <ul>
-          <li><strong>IPFS</strong>: il CID apre il contenuto (record / manifest / proof).</li>
-          <li><strong>Bitcoin</strong>: il TXID mostra timestamp e conferme.</li>
-          <li><strong>Ethereum</strong>: la TX mostra tracciabilità e dati associati.</li>
-        </ul>
+  function validateSchema(m) {
+    // Schema minimo per HBCE-IPR-1 (coerente con create)
+    const required = ["schema", "title", "hash_sha256", "released_at", "jurisdiction", "status"];
+    for (const k of required) {
+      if (!(k in m)) return { ok: false, err: "Campo mancante: " + k };
+      if (typeof m[k] !== "string" || m[k].trim().length === 0) return { ok: false, err: "Campo vuoto/non valido: " + k };
+    }
+    if (m.schema !== "HBCE-IPR-1") return { ok: false, err: "Schema non riconosciuto: " + m.schema };
+    if (m.jurisdiction !== "EU") return { ok: false, err: "Jurisdiction non valida: " + m.jurisdiction };
+    if (!/^([a-f0-9]{64})$/i.test(m.hash_sha256)) return { ok: false, err: "hash_sha256 non è un SHA-256 valido." };
+    return { ok: true };
+  }
 
-        <div class="quote">
-          La firma digitale è uguale per tutte le classi.
-          Cambia solo <strong>cosa viene firmato</strong> (identità / ruolo / processi).
-        </div>
-
-        <div class="hr"></div>
-
-        <h2>Formato (esempio)</h2>
-        <code id="out" class="block">IPFS CID: — 
-BTC TXID: — 
-ETH TX: —</code>
-      </aside>
-
-    </section>
-
-    <footer>
-      <div>© HERMETICUM B.C.E. S.r.l. — Infrastruttura europea di identità primaria (IPR)</div>
-      <div>
-        <a href="../">Home</a> ·
-        <a href="../catalog/">Catalog</a> ·
-        <a href="../ai/">AI</a> ·
-        <a href="../create/">Create</a> ·
-        <a href="../terms/">Terms</a>
-      </div>
-    </footer>
-
-  </main>
-
-  <script>
-    function safe(v){ return (v || "").toString().trim(); }
-
-    function isHex64(s){ return /^[a-fA-F0-9]{64}$/.test(s); }
-    function isEthTx(s){ return /^0x[a-fA-F0-9]{64}$/.test(s); }
-    function looksLikeCID(s){
-      // minimal heuristic for CIDv0/v1 common forms
-      return /^Qm[1-9A-HJ-NP-Za-km-z]{44}$/.test(s) || /^b[a-z2-7]{20,}$/.test(s);
+  async function verify() {
+    const mtxt = manifestEl.value.trim();
+    if (!mtxt) {
+      setResult("Invalid", "Manifest mancante.");
+      return;
     }
 
-    function build(){
-      const cid = safe(document.getElementById("cid").value);
-      const btc = safe(document.getElementById("btc").value);
-      const eth = safe(document.getElementById("eth").value);
-
-      const out = document.getElementById("out");
-      out.textContent = `IPFS CID: ${cid || "—"}\nBTC TXID: ${btc || "—"}\nETH TX: ${eth || "—"}`;
-
-      const links = document.getElementById("links");
-      links.innerHTML = "";
-
-      // IPFS links (public gateways)
-      if(cid){
-        const a1 = document.createElement("a");
-        a1.href = `https://ipfs.io/ipfs/${encodeURIComponent(cid)}`;
-        a1.target = "_blank"; a1.rel = "noopener noreferrer";
-        a1.textContent = "IPFS Gateway (ipfs.io)";
-        links.appendChild(a1);
-
-        const a2 = document.createElement("a");
-        a2.href = `https://gateway.pinata.cloud/ipfs/${encodeURIComponent(cid)}`;
-        a2.target = "_blank"; a2.rel = "noopener noreferrer";
-        a2.textContent = "IPFS Gateway (pinata)";
-        links.appendChild(a2);
-
-        const warn = document.createElement("div");
-        warn.style.marginTop = "8px";
-        warn.style.color = "var(--muted)";
-        warn.style.fontSize = "13px";
-        warn.textContent = looksLikeCID(cid) ? "" : "Nota: il CID inserito non sembra un formato tipico (controlla eventuali spazi o errori).";
-        if(warn.textContent) links.appendChild(warn);
-      }
-
-      // BTC explorers
-      if(btc){
-        const b1 = document.createElement("a");
-        b1.href = `https://mempool.space/tx/${encodeURIComponent(btc)}`;
-        b1.target = "_blank"; b1.rel = "noopener noreferrer";
-        b1.textContent = "Bitcoin Explorer (mempool.space)";
-        links.appendChild(b1);
-
-        const b2 = document.createElement("a");
-        b2.href = `https://www.blockchain.com/btc/tx/${encodeURIComponent(btc)}`;
-        b2.target = "_blank"; b2.rel = "noopener noreferrer";
-        b2.textContent = "Bitcoin Explorer (blockchain.com)";
-        links.appendChild(b2);
-
-        const warn2 = document.createElement("div");
-        warn2.style.marginTop = "8px";
-        warn2.style.color = "var(--muted)";
-        warn2.style.fontSize = "13px";
-        warn2.textContent = isHex64(btc) ? "" : "Nota: un TXID Bitcoin è tipicamente una stringa esadecimale da 64 caratteri.";
-        if(warn2.textContent) links.appendChild(warn2);
-      }
-
-      // ETH explorers
-      if(eth){
-        const e1 = document.createElement("a");
-        e1.href = `https://etherscan.io/tx/${encodeURIComponent(eth)}`;
-        e1.target = "_blank"; e1.rel = "noopener noreferrer";
-        e1.textContent = "Ethereum Explorer (Etherscan)";
-        links.appendChild(e1);
-
-        const e2 = document.createElement("a");
-        e2.href = `https://blockscout.com/eth/mainnet/tx/${encodeURIComponent(eth)}`;
-        e2.target = "_blank"; e2.rel = "noopener noreferrer";
-        e2.textContent = "Ethereum Explorer (Blockscout)";
-        links.appendChild(e2);
-
-        const warn3 = document.createElement("div");
-        warn3.style.marginTop = "8px";
-        warn3.style.color = "var(--muted)";
-        warn3.style.fontSize = "13px";
-        warn3.textContent = isEthTx(eth) ? "" : "Nota: una TX Ethereum è tipicamente 0x + 64 caratteri esadecimali.";
-        if(warn3.textContent) links.appendChild(warn3);
-      }
-
-      if(!cid && !btc && !eth){
-        links.innerHTML = '<span style="color:var(--muted); font-size:13px;">Inserisci almeno un valore per generare link di verifica.</span>';
-      }
+    const parsed = parseManifest(mtxt);
+    if (!parsed.ok) {
+      setResult("Invalid", parsed.err);
+      return;
     }
 
-    function resetAll(){
-      document.getElementById("cid").value = "";
-      document.getElementById("btc").value = "";
-      document.getElementById("eth").value = "";
-      document.getElementById("links").innerHTML = '<span style="color:var(--muted); font-size:13px;">Compila i campi e clicca “Genera link di verifica”.</span>';
-      document.getElementById("out").textContent = "IPFS CID: — \nBTC TXID: — \nETH TX: —";
+    const m = parsed.data;
+    const schema = validateSchema(m);
+    if (!schema.ok) {
+      setResult("Invalid", schema.err);
+      return;
     }
-  </script>
+
+    const content = contentEl.value.trim();
+
+    // Se non ho contenuto, non posso verificare integrità del contenuto → Inconclusive
+    if (!content) {
+      setResult(
+        "Inconclusive",
+        "Manifest coerente. Integrità del contenuto NON verificabile: contenuto originale non fornito (fail-closed in audit)."
+      );
+      return;
+    }
+
+    const h = await sha256(content);
+    if (h.toLowerCase() !== String(m.hash_sha256).toLowerCase()) {
+      setResult("Invalid", "Mismatch hash: contenuto non corrisponde al manifest (fail-closed).");
+      return;
+    }
+
+    setResult("Valid", "Manifest coerente e hash verificato: integrità confermata.");
+  }
+
+  // Autoload all’apertura pagina
+  (function autoLoad() {
+    const saved = safeGetLocalManifest();
+    if (saved && saved.trim().length > 0) {
+      manifestEl.value = saved;
+      setResult("—", "Manifest precaricato dal browser. Premi “Esegui verifica”.");
+    }
+  })();
+
+  document.getElementById("loadLocal").addEventListener("click", loadFromLocal);
+  document.getElementById("clearLocal").addEventListener("click", clearAll);
+  document.getElementById("saveManifest").addEventListener("click", saveManifestLocal);
+  document.getElementById("verifyBtn").addEventListener("click", verify);
+</script>
+
 </body>
 </html>
