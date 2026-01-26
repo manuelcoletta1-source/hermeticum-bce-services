@@ -1,154 +1,146 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Evidence — HERMETICUM Services</title>
-  <meta name="description" content="Evidence pubbliche: prove, hash, decisioni OPC e tracciatura UNEBDO. Niente prova, niente operazione." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evidence & Verification — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Guida alle evidenze (hash, manifest, prove di integrità) e alla verifica tecnica per audit.">
   <style>
-    :root{
-      --bg:#0b0c10; --panel:#0f1117; --line:#24262b; --text:#e8e8e8; --muted:#a9abb3;
-      --shadow:0 12px 36px rgba(0,0,0,.35); --r:16px; --r2:22px; --max:1100px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:radial-gradient(1200px 700px at 20% 0%, #121525 0%, rgba(18,21,37,0) 55%),
-                 radial-gradient(900px 600px at 80% 10%, #141b2a 0%, rgba(20,27,42,0) 55%),
-                 var(--bg);
-      color:var(--text);
-      font:15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      letter-spacing:.2px;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
-    .top{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r2);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow); position:sticky; top:14px; z-index:10; backdrop-filter: blur(10px);
-    }
-    .brand{font-weight:900; letter-spacing:.6px}
-    .nav{display:flex; gap:10px; flex-wrap:wrap}
-    .chip{
-      padding:8px 10px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(255,255,255,.03); color:var(--muted); font-weight:800; transition:.15s ease;
-    }
-    .chip:hover{transform:translateY(-1px); color:var(--text); background:rgba(255,255,255,.05)}
-    .hero{
-      margin-top:18px; border:1px solid var(--line); border-radius:var(--r2); padding:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-    }
-    .mark{margin:0 0 6px; font-weight:900}
-    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
-    h1{margin:0 0 8px; font-size:28px; line-height:1.15}
-    .sub{margin:0; color:var(--muted); max-width:85ch}
-    .grid{display:grid; gap:12px; margin-top:14px}
-    @media (min-width:900px){ .grid{grid-template-columns:1fr 1fr} }
-    .card{
-      border:1px solid var(--line); border-radius:var(--r);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      padding:16px; box-shadow:var(--shadow);
-    }
-    .card h2{margin:0 0 6px; font-size:18px}
-    .card p{margin:0; color:var(--muted)}
-    .list{margin:10px 0 0; padding:0; list-style:none}
-    .list li{
-      padding:8px 10px; border:1px solid var(--line); border-radius:12px;
-      background:rgba(0,0,0,.15); margin-top:8px; font-weight:800;
-    }
-    .list li small{display:block; color:var(--muted); font-weight:700; margin-top:2px}
-    .callout{
-      margin-top:14px; border:1px dashed rgba(255,255,255,.18); border-radius:var(--r);
-      padding:14px; background:rgba(255,255,255,.02); color:var(--muted); font-weight:800;
-    }
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-    .footer{
-      margin-top:18px; color:var(--muted); font-size:12px; padding:14px 2px 0;
-      display:flex; gap:10px; justify-content:space-between; border-top:1px solid var(--line);
-    }
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
+    header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
+    header{padding-top:3.5rem}
+    h1{font-size:2rem;margin:0 0 .5rem}
+    .sub{opacity:.85}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:1.5rem}
+    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
+    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
+    a{color:#9ad}
+    code,pre{background:#0f0f0f;border:1px solid #222;border-radius:6px}
+    pre{padding:1rem;overflow:auto}
+    ul{margin-top:.5rem}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">Evidence</div>
-      <div class="nav">
-        <a class="chip" href="../">Home</a>
-        <a class="chip" href="../catalog/">Catalog</a>
-        <a class="chip" href="../onboarding/">Onboarding</a>
-        <a class="chip" href="../verify/">Verify</a>
-        <a class="chip" href="../terms/">Terms</a>
-      </div>
+
+<header>
+  <div class="badge">Evidence / Verification</div>
+  <h1>Evidenze e verifica tecnica</h1>
+  <p class="sub">
+    Questa pagina descrive come verificare integrità e coerenza di un IPR in modo auditabile.
+    È una guida per cittadini avanzati, tecnici, revisori e contesti forensi.
+  </p>
+</header>
+
+<section>
+  <h2>Definizioni operative</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Manifest</h3>
+      <p>Documento strutturato che descrive un IPR e i suoi riferimenti (metadati, versioni, hash).</p>
     </div>
-
-    <header class="hero">
-      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
-      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
-
-      <h1>Evidence pubbliche e opponibilità</h1>
-      <p class="sub">
-        Le evidence sono gli <b>artefatti verificabili</b> che dimostrano identità, decisioni e continuità.
-        In HERMETICUM non esiste fiducia implicita: <b>solo prove controllabili</b>.
-      </p>
-
-      <div class="grid">
-        <div class="card">
-          <h2>Tipi di evidence</h2>
-          <ul class="list">
-            <li>Hash pubblici <small>Impronte verificabili (<span class="mono">hash-only</span>).</small></li>
-            <li>Decisioni OPC <small>Esiti deterministici (ALLOW / DENY).</small></li>
-            <li>Eventi UNEBDO <small>Tracciatura con tempo canonico.</small></li>
-            <li>Anchor multi-ledger <small>Prova di esistenza e continuità.</small></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h2>Cosa NON è un’evidence</h2>
-          <ul class="list">
-            <li>Documenti non firmati <small>Nessun valore opponibile.</small></li>
-            <li>Screenshot <small>Non verificabili.</small></li>
-            <li>Dichiarazioni <small>Senza prova ⇒ nulle.</small></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="callout">
-        Regola: <b>un’evidence è valida solo se verificabile indipendentemente</b>.
-        In assenza di verifica → <span class="mono">fail-closed</span>.
-      </div>
-    </header>
-
-    <section>
-      <div class="grid">
-        <div class="card">
-          <h2>Come usare le evidence</h2>
-          <ul class="list">
-            <li>1) Recupera l’hash <small>Da IPR, evento o output.</small></li>
-            <li>2) Verifica la fonte <small>UNEBDO / OPC.</small></li>
-            <li>3) Controlla il tempo <small>Sequenza coerente.</small></li>
-            <li>4) Confronta <small>Risultato valido o nullo.</small></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h2>Opponibilità</h2>
-          <p>
-            Un risultato è opponibile solo se supportato da evidence complete:
-            identità, decisione, evento e continuità.
-          </p>
-          <div class="callout">
-            Pubblico = prove. Privato = dati reali. Sempre.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="footer">
-      <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-      <div>HERMETICUM B.C.E. S.r.l.</div>
+    <div class="card">
+      <h3>Hash</h3>
+      <p>Impronta crittografica di un contenuto. Se cambia anche 1 carattere, l’hash cambia.</p>
+    </div>
+    <div class="card">
+      <h3>Evidenza</h3>
+      <p>Insieme di elementi verificabili: file, hash, timestamp/anchor, log, riferimenti.</p>
     </div>
   </div>
+</section>
+
+<section>
+  <h2>Cosa dimostra (e cosa no)</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Dimostra</h3>
+      <ul>
+        <li>Integrità: il contenuto non è stato alterato</li>
+        <li>Coerenza: manifest ↔ hash ↔ file corrispondono</li>
+        <li>Esistenza nel tempo: se ancorato, “esisteva” a una certa data</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>NON dimostra automaticamente</h3>
+      <ul>
+        <li>Identità legale della persona</li>
+        <li>Autenticità giuridica equivalente a firma qualificata</li>
+        <li>Autorità pubblica o riconoscimento istituzionale</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Nota importante</h3>
+      <p>L’interpretazione forense/giuridica dipende dal contesto e dal perimetro probatorio.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Procedura di verifica (semplice)</h2>
+  <ol>
+    <li>Recupera <strong>manifest</strong> e i file associati.</li>
+    <li>Ricalcola l’<strong>hash</strong> dei file in locale.</li>
+    <li>Confronta gli hash calcolati con quelli dichiarati nel manifest.</li>
+    <li>Se presente, verifica l’anchor/timestamp associato.</li>
+  </ol>
+
+  <h3>Esempio (CLI) — SHA-256</h3>
+  <pre><code># Linux / macOS
+shasum -a 256 FILE.ext
+
+# Windows PowerShell
+Get-FileHash FILE.ext -Algorithm SHA256
+</code></pre>
+</section>
+
+<section>
+  <h2>Fail-closed (regola di sicurezza)</h2>
+  <p>
+    Se anche un solo controllo fallisce (hash diverso, manifest incoerente, file mancanti),
+    la verifica deve essere considerata <strong>NON valida</strong>.
+    Questo è il principio fail-closed: meglio fermarsi che accettare una prova dubbia.
+  </p>
+</section>
+
+<section>
+  <h2>Collegamento ai flussi</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Verifica online</h3>
+      <p>Usa la pagina <a href="../verify/">Verifica IPR</a> per controlli guidati.</p>
+    </div>
+    <div class="card">
+      <h3>Rilascio</h3>
+      <p>Usa <a href="../create/">Rilascia IPR</a> per generare un IPR e il suo output.</p>
+    </div>
+    <div class="card">
+      <h3>Per audit</h3>
+      <p>Conserva evidenze, versioni e riferimenti: la conservazione è parte della prova.</p>
+    </div>
+  </div>
+</section>
+
+<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
+  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
+    <div>
+      <strong>HERMETICUM B.C.E.</strong><br>
+      Blindata · Computabile · Evolutiva
+    </div>
+    <div>
+      <a href="../legal/privacy.html">Privacy</a><br>
+      <a href="../legal/cookies.html">Cookies</a><br>
+      <a href="../legal/accessibility.html">Accessibility</a>
+    </div>
+    <div>
+      <a href="../legal/legal-notice.html">Legal notice</a><br>
+      <a href="../legal/contact.html">Contact</a>
+    </div>
+    <div>
+      Platform status: <strong>Experimental</strong><br>
+      Jurisdiction: <strong>EU</strong>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
