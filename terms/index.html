@@ -1,235 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Termini e Principi — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Termini, principi e policy UE-first di HERMETICUM B.C.E. — IPR, AI responsabile, GDPR-min, audit-by-design." />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms & Scope — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Termini d’uso, perimetro, limiti, esclusioni e principi UE-first per HERMETICUM B.C.E.">
   <style>
-    :root{
-      --bg:#0b0f14; --panel:#0f1621; --text:#e7eef7; --muted:#b8c4d4;
-      --line:#243043; --accent:#7aa7ff; --ok:#6ee7b7; --warn:#fbbf24; --danger:#fb7185;
-      --r:16px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 800px at 10% 0%, #101a2a 0%, var(--bg) 55%) no-repeat;
-      color:var(--text);
-      line-height:1.65;
-    }
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
-    .topbar{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r);
-      background: rgba(255,255,255,.02);
-    }
-    .nav a{
-      display:inline-block; padding:8px 10px; border-radius:999px;
-      border:1px solid var(--line); margin-right:8px;
-      background: rgba(255,255,255,.02); color:var(--muted); font-size:13px;
-    }
-    .nav a.active{background: rgba(122,167,255,.14); color:var(--text); border-color: rgba(122,167,255,.35)}
-    header{
-      margin-top:14px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:22px 20px;
-      background: linear-gradient(180deg, rgba(122,167,255,.10), rgba(255,255,255,.02));
-    }
-    h1{margin:0; font-size:28px; line-height:1.25}
-    h2{margin-top:28px; font-size:20px}
-    h3{margin-top:18px; font-size:16px}
-    p{margin:10px 0; color:var(--muted)}
-    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
-    li{margin:6px 0}
-    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    .pill{
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:7px 10px;
-      background: rgba(255,255,255,.02);
-      font-size:12px;
-      color:var(--muted);
-    }
-    .card{
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:18px;
-      background: rgba(255,255,255,.02);
-      margin-top:14px;
-    }
-    .quote{
-      border-left:3px solid rgba(122,167,255,.55);
-      padding:10px 12px;
-      margin:12px 0 0;
-      background: rgba(122,167,255,.07);
-      border-radius:12px;
-      color:var(--text);
-    }
-    footer{
-      margin-top:18px;
-      color:var(--muted);
-      font-size:12px;
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      opacity:.95;
-    }
-    .hr{height:1px; background:var(--line); margin:18px 0}
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
+    header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
+    header{padding-top:3.5rem}
+    h1{font-size:2rem;margin:0 0 .5rem}
+    .sub{opacity:.85}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:1.5rem}
+    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
+    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
+    a{color:#9ad}
+    ul{margin-top:.5rem}
   </style>
 </head>
-
 <body>
-  <main class="wrap">
 
-    <div class="topbar">
-      <div>
-        <strong>HERMETICUM B.C.E.</strong><br/>
-        <span style="color:var(--muted); font-size:12px;">HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</span>
-      </div>
+<header>
+  <div class="badge">Terms / Scope</div>
+  <h1>Termini d’uso e perimetro</h1>
+  <p class="sub">
+    Questi termini definiscono il perimetro sperimentale della piattaforma,
+    i limiti e le esclusioni, con impostazione UE-first e fail-closed.
+  </p>
+</header>
 
-      <nav class="nav" aria-label="Navigazione">
-        <a href="../">Home</a>
-        <a href="../catalog/">Classi IPR</a>
-        <a href="../ai/">AI e IPR</a>
-        <a href="../create/">Rilascia IPR</a>
-        <a href="../verify/">Verifica</a>
-        <a class="active" href="./">Termini</a>
-      </nav>
+<section>
+  <h2>1) Natura del servizio</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Sperimentale</h3>
+      <p>HERMETICUM B.C.E. è un progetto sperimentale di ricerca e sviluppo.</p>
     </div>
+    <div class="card">
+      <h3>Non qualificato</h3>
+      <p>Non è un servizio fiduciario qualificato e non sostituisce SPID/CIE/eIDAS.</p>
+    </div>
+    <div class="card">
+      <h3>UE-first</h3>
+      <p>Approccio orientato a conformità, minimizzazione dati e auditabilità.</p>
+    </div>
+  </div>
+</section>
 
-    <header>
-      <h1>Termini, Principi e Policy</h1>
-      <p>
-        Questa pagina definisce i <strong>principi operativi</strong> di HERMETICUM B.C.E.,
-        il perimetro dell’IPR e le condizioni di utilizzo della piattaforma,
-        secondo un modello <strong>UE-first</strong>.
-      </p>
+<section>
+  <h2>2) Uso consentito</h2>
+  <ul>
+    <li>Generazione e gestione di IPR in ambito sperimentale</li>
+    <li>Verifica di integrità e tracciabilità (hash/evidenze)</li>
+    <li>Costruzione di flussi documentali auditabili</li>
+    <li>Ricerca, didattica, prototipazione, proof-of-concept</li>
+  </ul>
+</section>
 
-      <div class="pillrow">
-        <div class="pill">UE-first</div>
-        <div class="pill">GDPR-min</div>
-        <div class="pill">hash-only</div>
-        <div class="pill">audit-by-design</div>
-        <div class="pill">fail-closed</div>
-      </div>
-    </header>
-
-    <section class="card">
-      <h2>1. Natura del servizio</h2>
-      <p>
-        HERMETICUM B.C.E. fornisce un servizio di <strong>rilascio di IPR (Identity Primary Record)</strong>,
-        inteso come <strong>identità digitale primaria computabile</strong>.
-      </p>
+<section>
+  <h2>3) Uso vietato (zero ambiguità)</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Abusi e frodi</h3>
       <ul>
-        <li>L’IPR <strong>non è</strong> un documento di identità statale.</li>
-        <li>L’IPR <strong>non sostituisce</strong> CIE, Codice Fiscale o SPID.</li>
-        <li>L’IPR <strong>integra</strong> l’identità esistente per usi digitali avanzati.</li>
+        <li>Impersonificazione o falsificazione identità</li>
+        <li>Produzione di documenti ingannevoli</li>
+        <li>Elusione controlli o manipolazione evidenze</li>
       </ul>
-    </section>
-
-    <section class="card">
-      <h2>2. Dati e protezione (GDPR-min)</h2>
-      <p>
-        Il rilascio dell’IPR utilizza <strong>dati minimi e strutturali</strong>,
-        necessari esclusivamente all’ancoraggio identitario.
-      </p>
+    </div>
+    <div class="card">
+      <h3>Illecito o dannoso</h3>
       <ul>
-        <li>I dati identificativi non sono pubblicati.</li>
-        <li>I record sono gestiti in modalità <strong>hash-only</strong>.</li>
-        <li>Non è effettuata profilazione comportamentale.</li>
+        <li>Attività che violano leggi UE o nazionali</li>
+        <li>Attacchi informatici, malware, intrusione</li>
+        <li>Uso per danneggiare persone o infrastrutture</li>
       </ul>
-      <div class="quote">
-        Principio guida: <strong>verificabilità senza esposizione</strong>.
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>3. Firma digitale a tre ancore</h2>
+    </div>
+    <div class="card">
+      <h3>Dual-use: perimetro</h3>
       <p>
-        Ogni IPR è sigillato da una firma digitale composta da tre ancore crittografiche:
-        IPFS (esistenza), Bitcoin (tempo), Ethereum (tracciabilità).
+        Qualsiasi utilizzo in contesti sensibili richiede governance, autorizzazioni
+        e conformità alle normative applicabili. In assenza di tali condizioni,
+        l’uso deve essere considerato <strong>non ammesso</strong>.
       </p>
-      <p>
-        La firma è identica per tutte le classi di IPR.  
-        Cambia esclusivamente <strong>l’oggetto firmato</strong> e quindi la responsabilità.
-      </p>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="card">
-      <h2>4. Classi di IPR e responsabilità</h2>
-      <ul>
-        <li><strong>IPR BASE</strong> — firma dell’identità (esistenza digitale).</li>
-        <li><strong>IPR STRONG</strong> — firma di identità + ruolo + azioni rilevanti.</li>
-        <li><strong>IPR ENTERPRISE</strong> — firma di identità organizzativa + processi.</li>
-      </ul>
-      <p>
-        La sicurezza crittografica è la stessa per tutte le classi.
-        L’utente sceglie il livello di <strong>responsabilità</strong>.
-      </p>
-    </section>
+<section>
+  <h2>4) Limiti e responsabilità</h2>
+  <ul>
+    <li>L’utente è responsabile di come usa output e evidenze.</li>
+    <li>La piattaforma non garantisce riconoscimento istituzionale.</li>
+    <li>La verifica è tecnica: non equivale a valore legale automatico.</li>
+    <li>Principio fail-closed: in caso di dubbio, la verifica è non valida.</li>
+  </ul>
+</section>
 
-    <section class="card">
-      <h2>5. Intelligenza Artificiale</h2>
-      <p>
-        HERMETICUM B.C.E. <strong>non fornisce AI autonoma</strong>.
-        L’IPR rende l’uso dell’AI <strong>tracciabile, responsabile e auditabile</strong>.
-      </p>
-      <ul>
-        <li>L’AI non sostituisce il giudizio umano.</li>
-        <li>Ogni uso rilevante dell’AI resta attribuibile.</li>
-        <li>La responsabilità finale è sempre umana o organizzativa.</li>
-      </ul>
-    </section>
+<section>
+  <h2>5) Conservazione e buona pratica</h2>
+  <p>
+    In contesti auditabili, la conservazione di manifest, evidenze, versioni e log
+    è parte integrante della catena di prova. Senza conservazione, la continuità operativa decade.
+  </p>
+</section>
 
-    <section class="card">
-      <h2>6. Audit e verificabilità</h2>
-      <p>
-        Il sistema è progettato secondo principi di <strong>audit-by-design</strong> e
-        <strong>fail-closed</strong>.
-      </p>
-      <ul>
-        <li>Gli eventi rilevanti sono verificabili.</li>
-        <li>La continuità temporale è dimostrabile.</li>
-        <li>I meccanismi sono orientati a contesti professionali e istituzionali UE.</li>
-      </ul>
-    </section>
+<section>
+  <h2>6) Aggiornamenti</h2>
+  <p>
+    Questi termini possono essere aggiornati per riflettere evoluzioni tecniche e normative.
+    Data: <strong>2026</strong>
+  </p>
+</section>
 
-    <section class="card">
-      <h2>7. Limitazioni di responsabilità</h2>
-      <p>
-        L’IPR fornisce una base tecnica di identità e tracciabilità.
-        Non garantisce automaticamente conformità normativa dell’utente
-        né sostituisce obblighi legali o professionali.
-      </p>
-    </section>
+<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
+  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
+    <div>
+      <strong>HERMETICUM B.C.E.</strong><br>
+      Blindata · Computabile · Evolutiva
+    </div>
+    <div>
+      <a href="../legal/privacy.html">Privacy</a><br>
+      <a href="../legal/cookies.html">Cookies</a><br>
+      <a href="../legal/accessibility.html">Accessibility</a>
+    </div>
+    <div>
+      <a href="../legal/legal-notice.html">Legal notice</a><br>
+      <a href="../legal/contact.html">Contact</a>
+    </div>
+    <div>
+      Platform status: <strong>Experimental</strong><br>
+      Jurisdiction: <strong>EU</strong>
+    </div>
+  </div>
+</footer>
 
-    <section class="card">
-      <h2>8. Giurisdizione e principi europei</h2>
-      <p>
-        HERMETICUM B.C.E. opera secondo principi e valori dell’Unione Europea:
-        trasparenza, proporzionalità, responsabilità, tutela dei diritti fondamentali.
-      </p>
-      <div class="quote">
-        Infrastruttura europea di identità primaria,
-        progettata per il mondo digitale e dell’intelligenza artificiale.
-      </div>
-    </section>
-
-    <footer>
-      <div>© HERMETICUM B.C.E. S.r.l. — Infrastruttura europea di identità primaria (IPR)</div>
-      <div>
-        <a href="../">Home</a> ·
-        <a href="../catalog/">Catalog</a> ·
-        <a href="../ai/">AI</a> ·
-        <a href="../create/">Create</a> ·
-        <a href="../verify/">Verify</a>
-      </div>
-    </footer>
-
-  </main>
 </body>
 </html>
