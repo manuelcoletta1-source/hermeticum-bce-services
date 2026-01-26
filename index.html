@@ -3,35 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HERMETICUM B.C.E. — Identity & Audit Platform (EU-first)</title>
-  <meta name="description" content="Piattaforma sperimentale UE-first per IPR (Identity Primary Record): integrità, audit-by-design, continuità operativa.">
+  <title>HERMETICUM B.C.E. — Blindata · Computabile · Evolutiva</title>
+  <meta name="description" content="HERMETICUM B.C.E. introduce l’IPR: una chiave personale (record tecnico) che crea storico verificabile per lavori, dati e AI. UE-first, audit-by-design.">
   <style>
     body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
     header,section{max-width:1200px;margin:auto;padding:3rem 1rem}
-    header{text-align:center;padding-top:4rem}
-    h1{font-size:2.4rem;margin:0 0 .6rem}
+    header{padding-top:4rem}
+    h1{font-size:2.6rem;margin:0 0 .6rem}
     h2{margin:0 0 .75rem}
     .sub{opacity:.85}
-    .cta{display:inline-block;margin:.6rem .45rem 0 0;padding:.75rem 1.15rem;border:1px solid #444;border-radius:6px;color:#fff;text-decoration:none;font-weight:700}
+    .kicker{letter-spacing:.08em;text-transform:uppercase;font-size:.82rem;opacity:.85}
+    .pill{display:inline-block;border:1px solid #333;border-radius:999px;padding:.25rem .7rem;font-size:.85rem;opacity:.92;margin-right:.4rem;margin-top:.4rem}
+    .cta{display:inline-block;margin:.7rem .5rem 0 0;padding:.8rem 1.2rem;border:1px solid #444;border-radius:8px;color:#fff;text-decoration:none;font-weight:800}
     .cta.primary{border-color:#888}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1.5rem}
-    .card{border:1px solid #222;background:#111;border-radius:10px;padding:1.5rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1.6rem}
+    .card{border:1px solid #222;background:#111;border-radius:12px;padding:1.5rem}
     a{color:#9ad}
     ul{margin:.5rem 0 0 1.2rem}
-    .pill{display:inline-block;border:1px solid #333;border-radius:999px;padding:.2rem .65rem;font-size:.85rem;opacity:.9}
-    .kicker{letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;opacity:.85}
-    .line{height:1px;background:#222;margin:1.25rem 0}
+    .line{height:1px;background:#222;margin:1.6rem 0}
   </style>
 </head>
 
 <body>
 
 <header>
-  <div class="kicker">UE-first · GDPR-min · audit-by-design</div>
+  <div class="kicker">UE-first · GDPR-min · audit-by-design · fail-closed</div>
   <h1>HERMETICUM B.C.E.</h1>
 
-  <div class="sub">
-    HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+  <div class="sub" style="font-size:1.05rem;">
+    <strong>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</strong><br>
     <strong>HERMETICUM B.C.E. S.r.l.</strong>
   </div>
 
@@ -40,86 +40,113 @@
     <span class="pill">Jurisdiction: EU</span>
   </div>
 
-  <p class="sub" style="margin-top:1.1rem;max-width:920px;margin-left:auto;margin-right:auto;">
-    Piattaforma sperimentale per rilasciare e verificare un <strong>IPR (Identity Primary Record)</strong>:
-    un record tecnico di origine verificabile (<strong>manifest + hash</strong>) per integrità, audit e continuità operativa.
+  <p class="sub" style="margin-top:1.2rem;max-width:980px;">
+    Noi facciamo una cosa diversa: introduciamo l’<strong>IPR</strong>,
+    una <strong>chiave personale</strong> (record tecnico verificabile) che
+    crea uno <strong>storico</strong> dei tuoi lavori e dati.
+    Questo storico permette <strong>continuità</strong>, <strong>versioning</strong> e
+    <strong>evoluzione</strong> — anche quando lavori con strumenti di AI.
   </p>
 
-  <div style="margin-top:1.4rem;">
-    <a class="cta primary" href="create/">Rilascia IPR</a>
+  <div style="margin-top:1.2rem;">
+    <a class="cta primary" href="citizen/">Inizia come Citizen</a>
+    <a class="cta" href="professional/">Inizia come Professional</a>
+    <a class="cta" href="create/">Rilascia IPR</a>
     <a class="cta" href="verify/">Verifica IPR</a>
-    <a class="cta" href="create/success.html">Output IPR</a>
   </div>
 
-  <div class="line" style="max-width:920px;margin-left:auto;margin-right:auto;"></div>
+  <div class="line"></div>
 
-  <div class="grid" style="margin-top:1rem;">
-    <div class="card" style="text-align:left;">
-      <h2 style="margin:0 0 .4rem;">Start here — Citizen</h2>
+  <div class="grid">
+    <div class="card">
+      <h2>Cos’è l’IPR</h2>
       <p class="sub">
-        Percorso semplice: crea → conserva → verifica. Per persone fisiche e casi d’uso personali.
+        Un <strong>Identity Primary Record</strong> è un record di origine:
+        <strong>manifest + hash</strong> che descrive “questa cosa esisteva così”.
       </p>
-      <a class="pill" href="citizen/">Apri Citizen</a>
-    </div>
-
-    <div class="card" style="text-align:left;">
-      <h2 style="margin:0 0 .4rem;">Start here — Professional</h2>
-      <p class="sub">
-        Linguaggio audit-grade: coerenza, catena di prova, conservazione, esiti valid/invalid/inconclusive.
-      </p>
-      <a class="pill" href="professional/">Apri Professional</a>
-    </div>
-
-    <div class="card" style="text-align:left;">
-      <h2 style="margin:0 0 .4rem;">Cosa è / cosa non è</h2>
       <ul>
-        <li><strong>È:</strong> verifica tecnica, integrità, tracciabilità (manifest + hash)</li>
-        <li><strong>Non è:</strong> SPID/CIE/EUDI Wallet</li>
-        <li><strong>Non è:</strong> firma elettronica qualificata / servizio fiduciario qualificato</li>
+        <li>crea storico verificabile</li>
+        <li>supporta versioni e derivazioni</li>
+        <li>riduce ambiguità nei passaggi tra persone, sistemi e AI</li>
       </ul>
-      <a class="pill" href="terms/">Leggi i Termini</a>
+    </div>
+
+    <div class="card">
+      <h2>Cosa ottieni (in pratica)</h2>
+      <ul>
+        <li><strong>chiave tecnica</strong> per collegare lavori nel tempo</li>
+        <li><strong>integrità</strong> verificabile (se cambia, lo vedi)</li>
+        <li><strong>continuità operativa</strong> (storico → evoluzione)</li>
+      </ul>
+      <p class="sub">
+        La fiducia nasce dalla verifica: in dubbio → <strong>fail-closed</strong>.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Dove siamo diversi</h2>
+      <p class="sub">
+        Molti sistemi “identità/AI” creano output.  
+        Noi creiamo <strong>continuità tracciabile</strong> tra:
+      </p>
+      <ul>
+        <li>te</li>
+        <li>i tuoi lavori (file, dati, documenti)</li>
+        <li>i processi (rilascio, verifica, conservazione)</li>
+        <li>gli strumenti di AI (storico e contesto evolutivo)</li>
+      </ul>
     </div>
   </div>
 </header>
 
 <section>
-  <h2>Il processo (1 riga per step)</h2>
+  <h2>Il percorso (semplice)</h2>
   <div class="grid">
     <div class="card">
-      <h3>1) Create</h3>
-      <p class="sub">Atto guidato: perimetro esplicito + generazione manifest e hash.</p>
-      <a class="pill" href="create/">Vai a Create</a>
+      <h3>1) Rilascia</h3>
+      <p class="sub">Generi un IPR (manifest + hash) come chiave di origine.</p>
+      <a href="create/">Vai a Create</a>
     </div>
     <div class="card">
-      <h3>2) Output</h3>
-      <p class="sub">Scarica e conserva il manifest: senza conservazione non c’è continuità.</p>
-      <a class="pill" href="create/success.html">Vai a Output</a>
+      <h3>2) Conserva</h3>
+      <p class="sub">Scarichi e conservi il manifest: lo storico vive se lo preservi.</p>
+      <a href="create/success.html">Vai a Output</a>
     </div>
     <div class="card">
-      <h3>3) Verify</h3>
-      <p class="sub">Verifica coerente e fail-closed: valid / invalid / inconclusive.</p>
-      <a class="pill" href="verify/">Vai a Verify</a>
+      <h3>3) Verifica</h3>
+      <p class="sub">Verifica tecnica con esiti standard (valid/invalid/inconclusive).</p>
+      <a href="verify/">Vai a Verify</a>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Materiale per audit e contesti forensi</h2>
+  <h2>Perimetro (chiaro, UE-grade)</h2>
   <div class="grid">
     <div class="card">
-      <h3>Evidence</h3>
-      <p class="sub">Checklist, definizioni operative, CLI SHA-256 e regola fail-closed.</p>
-      <a class="pill" href="evidence/">Apri Evidence</a>
+      <h3>È</h3>
+      <ul>
+        <li>strumento tecnico di integrità e audit</li>
+        <li>storico verificabile dei lavori</li>
+        <li>base per continuità e versioning</li>
+      </ul>
     </div>
     <div class="card">
-      <h3>About</h3>
-      <p class="sub">Missione, governance minima, roadmap v0.1 → v0.3.</p>
-      <a class="pill" href="about/">Apri About</a>
+      <h3>Non è</h3>
+      <ul>
+        <li>SPID / CIE / EUDI Wallet</li>
+        <li>firma elettronica qualificata</li>
+        <li>servizio fiduciario qualificato</li>
+      </ul>
     </div>
     <div class="card">
-      <h3>Catalogo classi</h3>
-      <p class="sub">BASE / STRONG / ENTERPRISE: cambia la responsabilità, non la sicurezza.</p>
-      <a class="pill" href="catalog/">Apri Catalogo</a>
+      <h3>Approfondimenti</h3>
+      <ul>
+        <li><a href="terms/">Termini</a></li>
+        <li><a href="normative/">Normative Mapping</a></li>
+        <li><a href="evidence/">Evidence</a></li>
+        <li><a href="about/">About</a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -137,8 +164,8 @@
       <a href="legal/accessibility.html">Accessibility</a>
     </div>
     <div>
-      <a href="terms/">Termini</a><br>
-      <a href="normative/">Normative</a><br>
+      <a href="legal/legal-notice.html">Legal notice</a><br>
+      <a href="legal/contact.html">Contact</a><br>
       <a href="credits/">Credits</a>
     </div>
     <div>
