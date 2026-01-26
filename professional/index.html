@@ -1,11 +1,10 @@
-<a class="cta" href="professional/">Professional</a>
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Professional & Institution — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Vista tecnica e istituzionale della piattaforma HERMETICUM B.C.E.: per professionisti, enti e contesti di verifica.">
+  <meta name="description" content="Vista tecnica e istituzionale: IPR, evidenze, verifica, limiti e governance della piattaforma HERMETICUM B.C.E.">
   <style>
     body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
     header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
@@ -17,6 +16,7 @@
     .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
     a{color:#9ad}
     ul{margin-top:.5rem}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
   </style>
 </head>
 <body>
@@ -25,9 +25,16 @@
   <div class="badge">Professional / Institution</div>
   <h1>Vista tecnica e istituzionale</h1>
   <p class="sub">
-    Questa sezione descrive HERMETICUM B.C.E. per contesti professionali,
-    audit tecnici, valutazioni istituzionali e comparazioni normative.
+    Sezione orientata a professionisti, enti, revisori e contesti di verifica.
+    Focus: integrità, tracciabilità, continuità operativa e perimetro (non equivalenze).
   </p>
+
+  <div style="margin-top:1rem;">
+    <a href="../verify/">Verifica IPR</a> ·
+    <a href="../evidence/">Evidence</a> ·
+    <a href="../terms/">Termini</a> ·
+    <a href="../">Home</a>
+  </div>
 </header>
 
 <section>
@@ -35,67 +42,83 @@
   <div class="grid">
     <div class="card">
       <h3>Professionisti</h3>
-      <p>IT, cybersecurity, compliance, legale-tech, architetture distribuite.</p>
+      <p>Cybersecurity, IT architecture, compliance, legal-tech, audit.</p>
     </div>
     <div class="card">
       <h3>Organizzazioni</h3>
-      <p>Imprese, fondazioni, enti di ricerca, PA in contesti sperimentali.</p>
+      <p>Imprese, enti, PA in ambito sperimentale: processi documentali, filiere, evidenze.</p>
     </div>
     <div class="card">
       <h3>Istituzioni / Tribunali</h3>
-      <p>Valutazione tecnica di tracciabilità, integrità e continuità documentale.</p>
+      <p>Valutazione tecnica di coerenza e integrità (catena di prova), non attestazione legale automatica.</p>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Che cos’è l’IPR (vista tecnica)</h2>
+  <h2>IPR (Identity Primary Record) — definizione operativa</h2>
   <p>
-    L’IPR (Identity Primary Record) è un record di origine che funge da
-    <strong>radice verificabile</strong> per identità e processi digitali.
-    Non è un’identità legale, ma un riferimento tecnico opponibile nel tempo.
+    L’IPR è un record di origine che funge da <strong>radice tecnica verificabile</strong>.
+    È composto tipicamente da <strong>manifest</strong> e <strong>evidenze</strong> (hash, riferimenti, versioning).
   </p>
   <ul>
-    <li>Identificatore primario</li>
-    <li>Tracciabilità temporale</li>
-    <li>Audit-by-design</li>
-    <li>Fail-closed logic</li>
+    <li><strong>Integrità:</strong> contenuto non alterato (hash match)</li>
+    <li><strong>Coerenza:</strong> manifest ↔ evidenze ↔ file</li>
+    <li><strong>Continuità:</strong> evoluzione per derivazioni/versioni, senza cancellare la storia</li>
+    <li><strong>Fail-closed:</strong> in caso di mismatch, verifica non valida</li>
   </ul>
 </section>
 
 <section>
-  <h2>Verifica e opponibilità tecnica</h2>
+  <h2>Non equivalenze (obbligatorie)</h2>
   <div class="grid">
     <div class="card">
-      <h3>Verifica</h3>
-      <p>La verifica consiste nel controllo di coerenza tra IPR, manifest ed evidenze (hash).</p>
+      <h3>Identità legale</h3>
+      <p>IPR non è un’identità legale e non sostituisce SPID/CIE/eIDAS.</p>
     </div>
     <div class="card">
-      <h3>Tempo</h3>
-      <p>L’ancoraggio nel tempo consente di dimostrare esistenza e integrità a una certa data.</p>
+      <h3>Firma qualificata</h3>
+      <p>IPR non è un servizio fiduciario qualificato e non equivale a firma elettronica qualificata.</p>
     </div>
     <div class="card">
-      <h3>Limiti</h3>
-      <p>L’opponibilità è tecnica, non giuridica automatica. L’interpretazione resta al contesto.</p>
+      <h3>Effetti automatici</h3>
+      <p>La verifica è tecnica: l’interpretazione giuridica dipende dal contesto probatorio complessivo.</p>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Relazione con standard UE</h2>
-  <ul>
-    <li>Non sostituisce eIDAS / eIDAS2 / EUDI Wallet</li>
-    <li>Compatibile come strato tecnico di supporto e verifica</li>
-    <li>Progetto UE-first, sperimentale, non qualificato</li>
-  </ul>
+  <h2>Verifica (audit-grade)</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Procedura</h3>
+      <ol>
+        <li>Recupera manifest + file associati</li>
+        <li>Ricalcola hash in locale</li>
+        <li>Confronta con hash dichiarati</li>
+        <li>Se presente, verifica anchor/timestamp</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Esito</h3>
+      <ul>
+        <li><strong>Valid:</strong> match completo e coerenza</li>
+        <li><strong>Invalid:</strong> mismatch o mancanze → fail-closed</li>
+        <li><strong>Inconclusive:</strong> dati insufficienti → non accettare come prova</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Conservazione</h3>
+      <p>Manifest, evidenze, versioni e log devono essere conservati: senza conservazione non esiste catena di prova.</p>
+    </div>
+  </div>
 </section>
 
 <section>
-  <h2>Stato e governance</h2>
+  <h2>Governance minima</h2>
   <p>
-    Stato piattaforma: <strong>Experimental</strong><br>
-    Ambito: ricerca, sperimentazione, proof-of-concept avanzati<br>
-    Giurisdizione di riferimento: <strong>Unione Europea</strong>
+    La governance operativa è basata su tracciabilità delle modifiche (commit), policy pubbliche e versione.
+    Vedi: <a href="../about/">About</a>.
   </p>
 </section>
 
@@ -103,7 +126,8 @@
   <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
     <div>
       <strong>HERMETICUM B.C.E.</strong><br>
-      Blindata · Computabile · Evolutiva
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
     </div>
     <div>
       <a href="../legal/privacy.html">Privacy</a><br>
