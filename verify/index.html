@@ -1,250 +1,340 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verifica IPR — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Verifica tecnica di un IPR: coerenza manifest, integrità hash, esito standard (valid/invalid/inconclusive) con fail-closed.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verify / IPR — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Verifica un IPR: controlla struttura del manifest e (se disponibile) ricalcola SHA-256 per confermare integrità. Fail-closed." />
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
-    header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
-    header{padding-top:3.5rem}
-    h1{font-size:2.2rem;margin:0 0 .5rem}
-    .sub{opacity:.85}
-    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:1.5rem}
-    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
-    a{color:#9ad}
-    textarea,input{width:100%;background:#0f0f0f;color:#e6e6e6;border:1px solid #222;border-radius:6px;padding:10px;box-sizing:border-box}
-    label{display:block;margin:.75rem 0 .25rem;opacity:.9}
-    .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.75rem}
-    button{background:#111;color:#fff;border:1px solid #444;border-radius:4px;padding:.7rem 1.1rem;cursor:pointer;font-weight:600}
-    button.primary{border-color:#888}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    .line{height:1px;background:#222;margin:1.2rem 0}
-    .status{padding:.6rem .9rem;border:1px solid #444;border-radius:6px;display:inline-block}
-    .hint{opacity:.85;font-size:.95rem}
+    :root{
+      --bg:#0b0f14; --card:#0f1620; --muted:#9fb0c3; --text:#e9f1fb; --line:#1b2735;
+      --accent:#7dd3fc; --good:#a7f3d0; --bad:#fca5a5; --warn:#fde68a;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+    a{color:inherit}
+    .wrap{max-width:1040px;margin:0 auto;padding:22px 16px}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;border:1px solid var(--line);background:rgba(255,255,255,.02);padding:12px 14px;border-radius:16px}
+    .pill{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+    h1{margin:14px 0 6px;font-size:24px}
+    p{margin:0 0 10px;color:var(--muted)}
+    .grid{display:grid;gap:12px}
+    @media (min-width:980px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
+    .card{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:14px}
+    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:12px}
+    textarea,input{
+      width:100%; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--text);
+      padding:10px 10px; border-radius:14px; outline:none;
+    }
+    textarea{min-height:190px; resize:vertical}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button,.btn{
+      border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--text);
+      padding:10px 12px; border-radius:14px; cursor:pointer; text-decoration:none; display:inline-flex;align-items:center;gap:8px;
+    }
+    button.primary{border-color:rgba(125,211,252,.35);background:rgba(125,211,252,.10)}
+    .mini{font-size:12px;color:var(--muted)}
+    .status{border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(255,255,255,.02)}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px}
+    .tag.valid{border-color:rgba(167,243,208,.35);background:rgba(167,243,208,.08);color:var(--good)}
+    .tag.invalid{border-color:rgba(252,165,165,.35);background:rgba(252,165,165,.08);color:var(--bad)}
+    .tag.incon{border-color:rgba(253,230,138,.35);background:rgba(253,230,138,.08);color:var(--warn)}
+    pre{
+      margin:10px 0 0; padding:12px; border-radius:16px; border:1px solid var(--line);
+      background:rgba(0,0,0,.18); overflow:auto; color:var(--text); font-size:12px;
+    }
+    footer{margin-top:14px;color:var(--muted);text-align:center}
   </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <div class="nav">
+      <span class="pill"><a href="../create/">Create</a></span>
+      <span class="pill"><a href="../evidence/">Evidence</a></span>
+      <span class="pill"><a href="../professional/">Professional</a></span>
+      <span class="pill"><a href="../">Home</a></span>
+      <span class="pill">fail-closed</span>
+    </div>
 
-<header>
-  <div class="badge">Verify / IPR</div>
-  <h1>Verifica IPR</h1>
-  <p class="sub">
-    Verifica tecnica della coerenza e integrità di un IPR (manifest + hash).
-    Regola: se qualcosa non torna → <strong>fail-closed</strong>.
-  </p>
+    <h1>Verifica un IPR</h1>
+    <p>
+      Verifica = confronto riproducibile. Nessuna promessa, nessuna autorità: solo coerenza tra <b>manifest</b> e <b>hash</b>.
+      Esito: <b>Valid / Invalid / Inconclusive</b>.
+    </p>
 
-  <div style="margin-top:1rem;">
-    <a href="../create/">Create</a> ·
-    <a href="../create/success.html">Output IPR</a> ·
-    <a href="../evidence/">Evidence</a> ·
-    <a href="../terms/">Termini</a> ·
-    <a href="../">Home</a>
-  </div>
-</header>
+    <div class="grid cols-2">
+      <div class="card">
+        <h2 style="margin:0 0 8px;font-size:16px">1) Manifest</h2>
+        <p class="mini">Incolla il manifest JSON oppure carica un file .json. (Prefill automatico se arrivi da Create/Output.)</p>
 
-<section>
-  <h2>Input</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Manifest IPR</h3>
-      <p class="hint">Precaricato automaticamente se presente nel browser (localStorage).</p>
-      <textarea id="manifest" placeholder="Incolla qui il manifest IPR..."></textarea>
+        <label>Carica manifest (.json)</label>
+        <input id="fileManifest" type="file" accept=".json,application/json" />
 
-      <div class="row">
-        <button class="primary" id="loadLocal">Carica dal browser</button>
-        <button id="clearLocal">Pulisci</button>
+        <label>Manifest (JSON)</label>
+        <textarea id="taManifest" placeholder="{ ... }"></textarea>
+
+        <div class="btns">
+          <button id="btnPrefill">Prefill da browser</button>
+          <button id="btnClearManifest">Pulisci</button>
+        </div>
+
+        <div class="mini" style="margin-top:8px">
+          Campi attesi (minimo): <code>proto</code>, <code>version</code>, <code>ipr_id</code>, <code>created_at_utc</code>,
+          <code>policy</code>, <code>object.hash.alg</code>, <code>object.hash.value</code>.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 style="margin:0 0 8px;font-size:16px">2) Contenuto (opzionale)</h2>
+        <p>
+          Se fornisci il contenuto, ricalcoliamo SHA-256 e confrontiamo.
+          Se non lo fornisci, possiamo solo verificare la <b>struttura</b> → esito tipico: <b>Inconclusive</b>.
+        </p>
+
+        <label>Contenuto (testo)</label>
+        <textarea id="taContent" placeholder="Incolla qui il testo originale usato per generare l’hash (Create)."></textarea>
+
+        <div class="btns">
+          <button id="btnPrefillContent">Prefill contenuto</button>
+          <button id="btnClearContent">Pulisci</button>
+        </div>
+
+        <div class="mini" style="margin-top:8px">
+          Per file binari: usa la procedura Evidence (hash locale del file) e confronta manualmente il valore con il manifest.
+        </div>
       </div>
     </div>
 
-    <div class="card">
-      <h3>Contenuto (opzionale)</h3>
-      <p class="hint">
-        Se incolli lo stesso contenuto usato in Create, possiamo ricalcolare l’hash e verificare l’integrità.
-        Se non lo fornisci, la verifica sarà <strong>Inconclusive</strong> sull’integrità del contenuto.
-      </p>
-      <textarea id="content" placeholder="Incolla qui il contenuto originale (opzionale)..."></textarea>
-    </div>
+    <div class="card" style="margin-top:12px">
+      <h2 style="margin:0 0 8px;font-size:16px">3) Esito + report</h2>
+      <div class="status" id="statusBox">
+        <span class="tag incon" id="tagResult">Inconclusive</span>
+        <div class="mini" id="statusText" style="margin-top:8px">Nessuna verifica eseguita.</div>
+        <pre id="report">{ }</pre>
+      </div>
 
-    <div class="card">
-      <h3>Esito</h3>
-      <div id="result" class="status">—</div>
-      <div class="line"></div>
-      <div class="hint" id="details">Nessuna verifica eseguita.</div>
+      <div class="btns">
+        <button class="primary" id="btnVerify">Verifica</button>
+        <button id="btnCopyReport">Copia report</button>
+        <button id="btnDownloadReport">Scarica report (.json)</button>
+      </div>
 
-      <div class="row">
-        <button class="primary" id="verifyBtn">Esegui verifica</button>
-        <button id="saveManifest">Salva manifest nel browser</button>
+      <div class="mini" style="margin-top:10px">
+        Fail-closed: se un elemento critico è mancante o incoerente, l’esito non diventa “quasi valido”. Diventa <b>Invalid</b> o <b>Inconclusive</b>.
       </div>
     </div>
+
+    <footer>
+      <div style="margin-top:14px">
+        <b>HERMETICUM B.C.E.</b><br/>
+        HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
+        HERMETICUM B.C.E. S.r.l.
+      </div>
+      <div class="mini" style="margin-top:8px">Platform status: Experimental · Jurisdiction: EU</div>
+    </footer>
   </div>
-</section>
 
-<section>
-  <h2>Esiti standard</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Valid</h3>
-      <p>Manifest coerente e (se fornito il contenuto) hash verificato.</p>
-    </div>
-    <div class="card">
-      <h3>Invalid</h3>
-      <p>Mancanze o mismatch (schema, campi obbligatori, hash non coincide).</p>
-    </div>
-    <div class="card">
-      <h3>Inconclusive</h3>
-      <p>Dati insufficienti (es. contenuto non fornito): non accettare come prova in audit.</p>
-    </div>
-  </div>
-</section>
+  <script>
+    const KEY_MANIFEST = "HBCE_IPR_MANIFEST";
+    const KEY_CONTENT  = "HBCE_IPR_CONTENT";
 
-<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
-  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
-    <div>
-      <strong>HERMETICUM B.C.E.</strong><br>
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
-    </div>
-    <div>
-      <a href="../legal/privacy.html">Privacy</a><br>
-      <a href="../legal/cookies.html">Cookies</a><br>
-      <a href="../legal/accessibility.html">Accessibility</a>
-    </div>
-    <div>
-      <a href="../legal/legal-notice.html">Legal notice</a><br>
-      <a href="../legal/contact.html">Contact</a>
-    </div>
-    <div>
-      Platform status: <strong>Experimental</strong><br>
-      Jurisdiction: <strong>EU</strong>
-    </div>
-  </div>
-</footer>
+    const taManifest = document.getElementById("taManifest");
+    const taContent  = document.getElementById("taContent");
+    const tagResult  = document.getElementById("tagResult");
+    const statusText = document.getElementById("statusText");
+    const reportEl   = document.getElementById("report");
 
-<script>
-  const manifestEl = document.getElementById("manifest");
-  const contentEl  = document.getElementById("content");
-  const resultEl   = document.getElementById("result");
-  const detailsEl  = document.getElementById("details");
-
-  function setResult(state, msg) {
-    resultEl.textContent = state;
-    detailsEl.textContent = msg || "";
-  }
-
-  function safeGetLocalManifest() {
-    try {
-      return localStorage.getItem("hbce_ipr_manifest") || "";
-    } catch(e) { return ""; }
-  }
-
-  function loadFromLocal() {
-    const saved = safeGetLocalManifest();
-    if (saved && saved.trim().length > 0) {
-      manifestEl.value = saved;
-      setResult("—", "Manifest caricato dal browser.");
-    } else {
-      alert("Nessun manifest trovato nel browser (localStorage).");
-    }
-  }
-
-  function clearAll() {
-    manifestEl.value = "";
-    contentEl.value = "";
-    setResult("—", "Pulito.");
-  }
-
-  function saveManifestLocal() {
-    const txt = manifestEl.value.trim();
-    if (!txt) return alert("Manifest vuoto: nulla da salvare.");
-    localStorage.setItem("hbce_ipr_manifest", txt);
-    localStorage.setItem("hbce_ipr_saved_at", new Date().toISOString());
-    alert("Manifest salvato nel browser.");
-  }
-
-  async function sha256(str) {
-    const enc = new TextEncoder();
-    const buf = await crypto.subtle.digest("SHA-256", enc.encode(str));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
-  }
-
-  function parseManifest(txt) {
-    try {
-      return { ok: true, data: JSON.parse(txt) };
-    } catch (e) {
-      return { ok: false, err: "Manifest non è JSON valido." };
-    }
-  }
-
-  function validateSchema(m) {
-    // Schema minimo per HBCE-IPR-1 (coerente con create)
-    const required = ["schema", "title", "hash_sha256", "released_at", "jurisdiction", "status"];
-    for (const k of required) {
-      if (!(k in m)) return { ok: false, err: "Campo mancante: " + k };
-      if (typeof m[k] !== "string" || m[k].trim().length === 0) return { ok: false, err: "Campo vuoto/non valido: " + k };
-    }
-    if (m.schema !== "HBCE-IPR-1") return { ok: false, err: "Schema non riconosciuto: " + m.schema };
-    if (m.jurisdiction !== "EU") return { ok: false, err: "Jurisdiction non valida: " + m.jurisdiction };
-    if (!/^([a-f0-9]{64})$/i.test(m.hash_sha256)) return { ok: false, err: "hash_sha256 non è un SHA-256 valido." };
-    return { ok: true };
-  }
-
-  async function verify() {
-    const mtxt = manifestEl.value.trim();
-    if (!mtxt) {
-      setResult("Invalid", "Manifest mancante.");
-      return;
+    function setResult(kind, msg){
+      tagResult.className = "tag " + (kind === "Valid" ? "valid" : (kind === "Invalid" ? "invalid" : "incon"));
+      tagResult.textContent = kind;
+      statusText.textContent = msg;
     }
 
-    const parsed = parseManifest(mtxt);
-    if (!parsed.ok) {
-      setResult("Invalid", parsed.err);
-      return;
+    function toHex(buf){
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
     }
 
-    const m = parsed.data;
-    const schema = validateSchema(m);
-    if (!schema.ok) {
-      setResult("Invalid", schema.err);
-      return;
+    async function sha256Hex(text){
+      const enc = new TextEncoder();
+      const data = enc.encode(text);
+      const hash = await crypto.subtle.digest("SHA-256", data);
+      return toHex(hash);
     }
 
-    const content = contentEl.value.trim();
-
-    // Se non ho contenuto, non posso verificare integrità del contenuto → Inconclusive
-    if (!content) {
-      setResult(
-        "Inconclusive",
-        "Manifest coerente. Integrità del contenuto NON verificabile: contenuto originale non fornito (fail-closed in audit)."
-      );
-      return;
+    function safeParseManifest(){
+      const raw = taManifest.value.trim();
+      if(!raw) return { ok:false, error:"Manifest mancante." };
+      try{
+        const obj = JSON.parse(raw);
+        return { ok:true, obj };
+      }catch(e){
+        return { ok:false, error:"Manifest non è JSON valido." };
+      }
     }
 
-    const h = await sha256(content);
-    if (h.toLowerCase() !== String(m.hash_sha256).toLowerCase()) {
-      setResult("Invalid", "Mismatch hash: contenuto non corrisponde al manifest (fail-closed).");
-      return;
+    function getPath(obj, path){
+      return path.split(".").reduce((acc,k)=> (acc && acc[k] !== undefined ? acc[k] : undefined), obj);
     }
 
-    setResult("Valid", "Manifest coerente e hash verificato: integrità confermata.");
-  }
-
-  // Autoload all’apertura pagina
-  (function autoLoad() {
-    const saved = safeGetLocalManifest();
-    if (saved && saved.trim().length > 0) {
-      manifestEl.value = saved;
-      setResult("—", "Manifest precaricato dal browser. Premi “Esegui verifica”.");
+    function validateStructure(m){
+      const required = [
+        "proto","version","ipr_id","created_at_utc","policy",
+        "object.hash.alg","object.hash.value"
+      ];
+      const missing = required.filter(p => getPath(m,p) === undefined || getPath(m,p) === "");
+      if(missing.length) return { ok:false, missing };
+      if(getPath(m,"object.hash.alg") !== "SHA-256") return { ok:false, missing:[], error:"Algoritmo hash non supportato (atteso SHA-256)." };
+      const hv = getPath(m,"object.hash.value");
+      if(typeof hv !== "string" || hv.length !== 64) return { ok:false, missing:[], error:"Hash value non valido (atteso hex 64 chars)." };
+      return { ok:true };
     }
-  })();
 
-  document.getElementById("loadLocal").addEventListener("click", loadFromLocal);
-  document.getElementById("clearLocal").addEventListener("click", clearAll);
-  document.getElementById("saveManifest").addEventListener("click", saveManifestLocal);
-  document.getElementById("verifyBtn").addEventListener("click", verify);
-</script>
+    function makeReportBase(){
+      return {
+        verifier: "HERMETICUM_BCE_VERIFY",
+        version: "0.1",
+        verified_at_utc: new Date().toISOString(),
+        result: "Inconclusive",
+        notes: [],
+        checks: {}
+      };
+    }
 
+    document.getElementById("fileManifest").addEventListener("change", async (ev)=>{
+      const f = ev.target.files && ev.target.files[0];
+      if(!f) return;
+      const txt = await f.text();
+      taManifest.value = txt;
+    });
+
+    document.getElementById("btnPrefill").addEventListener("click", ()=>{
+      const raw = localStorage.getItem(KEY_MANIFEST);
+      if(!raw){
+        setResult("Inconclusive","Nessun manifest trovato nel browser (localStorage).");
+        return;
+      }
+      taManifest.value = raw;
+      setResult("Inconclusive","Manifest precaricato dal browser. Ora premi Verifica.");
+    });
+
+    document.getElementById("btnPrefillContent").addEventListener("click", ()=>{
+      const raw = localStorage.getItem(KEY_CONTENT);
+      if(!raw){
+        setResult("Inconclusive","Nessun contenuto trovato nel browser (localStorage).");
+        return;
+      }
+      taContent.value = raw;
+      setResult("Inconclusive","Contenuto precaricato dal browser. Ora premi Verifica.");
+    });
+
+    document.getElementById("btnClearManifest").addEventListener("click", ()=>{
+      taManifest.value = "";
+    });
+
+    document.getElementById("btnClearContent").addEventListener("click", ()=>{
+      taContent.value = "";
+    });
+
+    document.getElementById("btnVerify").addEventListener("click", async ()=>{
+      const rep = makeReportBase();
+
+      const parsed = safeParseManifest();
+      if(!parsed.ok){
+        rep.result = "Invalid";
+        rep.notes.push(parsed.error);
+        rep.checks.structure = { ok:false, reason: parsed.error };
+        reportEl.textContent = JSON.stringify(rep, null, 2);
+        setResult("Invalid", parsed.error);
+        return;
+      }
+
+      const m = parsed.obj;
+      rep.checks.manifest = {
+        ipr_id: m.ipr_id,
+        created_at_utc: m.created_at_utc,
+        hash_alg: getPath(m,"object.hash.alg"),
+        hash_value: getPath(m,"object.hash.value")
+      };
+
+      const vs = validateStructure(m);
+      if(!vs.ok){
+        rep.result = "Invalid";
+        if(vs.missing && vs.missing.length){
+          rep.notes.push("Campi mancanti: " + vs.missing.join(", "));
+          rep.checks.structure = { ok:false, missing: vs.missing };
+          reportEl.textContent = JSON.stringify(rep, null, 2);
+          setResult("Invalid","Manifest incompleto → Invalid (fail-closed).");
+          return;
+        }
+        rep.notes.push(vs.error || "Struttura manifest non valida.");
+        rep.checks.structure = { ok:false, reason: vs.error || "invalid" };
+        reportEl.textContent = JSON.stringify(rep, null, 2);
+        setResult("Invalid", vs.error || "Struttura non valida.");
+        return;
+      }
+
+      rep.checks.structure = { ok:true };
+
+      const content = taContent.value;
+      if(!content || content.trim().length < 1){
+        rep.result = "Inconclusive";
+        rep.notes.push("Contenuto non fornito: verificata solo struttura manifest.");
+        rep.checks.hash = { ok:false, reason:"no-content" };
+        reportEl.textContent = JSON.stringify(rep, null, 2);
+        setResult("Inconclusive","Struttura OK, ma contenuto assente → Inconclusive.");
+        return;
+      }
+
+      const computed = await sha256Hex(content);
+      const declared = getPath(m,"object.hash.value");
+      rep.checks.hash = {
+        declared,
+        computed,
+        match: computed === declared
+      };
+
+      if(computed === declared){
+        rep.result = "Valid";
+        rep.notes.push("Hash match: contenuto coerente col manifest.");
+        reportEl.textContent = JSON.stringify(rep, null, 2);
+        setResult("Valid","Valid: hash combacia → integrità verificata.");
+        return;
+      }else{
+        rep.result = "Invalid";
+        rep.notes.push("Hash mismatch: contenuto NON coerente col manifest.");
+        reportEl.textContent = JSON.stringify(rep, null, 2);
+        setResult("Invalid","Invalid: hash mismatch (fail-closed).");
+        return;
+      }
+    });
+
+    document.getElementById("btnCopyReport").addEventListener("click", async ()=>{
+      const txt = reportEl.textContent || "";
+      await navigator.clipboard.writeText(txt);
+      setResult(tagResult.textContent, "Report copiato negli appunti.");
+    });
+
+    document.getElementById("btnDownloadReport").addEventListener("click", ()=>{
+      const txt = reportEl.textContent || "{}";
+      const blob = new Blob([txt], {type:"application/json;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "IPR-verify-report.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    // Auto-prefill soft (non intrusivo)
+    (function(){
+      const m = localStorage.getItem(KEY_MANIFEST);
+      if(m && !taManifest.value.trim()) taManifest.value = m;
+      const c = localStorage.getItem(KEY_CONTENT);
+      if(c && !taContent.value.trim()) taContent.value = c;
+    })();
+  </script>
 </body>
 </html>
