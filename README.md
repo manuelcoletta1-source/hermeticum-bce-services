@@ -1,134 +1,248 @@
-# Nodo Europeo ΦΩ — EU Coherence Node
-
-**Ingresso unico per il cittadino europeo.**  
-Questo repository espone la **facciata operativa** del Nodo Europeo ΦΩ:  
-un punto di accesso sovranazionale che **non gestisce identità**, ma **attesta coerenza**.
-
-Nessun account.  
-Nessun profilo.  
-Solo **eventi opponibili** in catena append-only.
+# HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA  
+## Nodo Bicibernetico Europeo — Livello Regionale  
+**HERMETICUM B.C.E. S.r.l.**
 
 ---
 
-## Cos’è questo Nodo (in breve)
-Il Nodo Europeo ΦΩ è un **livello di coerenza** della Σ-Chain:
+## 1. Cos’è questa piattaforma
 
-Planet → Europa → Italia → Regione → Provincia → Zona → Persona
+Questa piattaforma è un **Nodo Bicibernetico Europeo a scala regionale**, progettato per coordinare in modo verificabile:
 
-Opera in modalità:
-- **UE_FIRST**
-- **GDPR_MIN**
-- **HASH_ONLY**
-- **FAIL_CLOSED**
-
-L’Europa **non vede persone**.  
-Vede **hash, soglie, tempo, audit**.
-
----
-
-## Cosa fa il repository
-Questo repo fornisce:
-- una **facciata pubblica unica** (`index.html`)
-- un **gate di registrazione** per il cittadino UE (`EVT-0012`)
-- una **verifica hash locale** (client-side)
-- **termini minimi** UE-grade
-
-È progettato per essere:
-- leggibile da cittadini
-- verificabile da tecnici
-- opponibile in audit
-
----
-
-## Flusso operativo (1 utente = 1 evento)
-
-1. Il cittadino accede alla facciata del Nodo Europeo
-2. Avvia una richiesta territoriale (`REGISTRATION_GATE`)
-3. Viene generato:
-   - payload normalizzato
-   - `registration_hash` (SHA-256)
-   - stato iniziale `PENDING`
-4. L’utente può verificare localmente l’hash
-5. Nessun dato viene centralizzato da questa facciata
-
----
-
-## Eventi chiave
-
-### EVT-0012 — REGISTRATION_GATE
-Evento di ingresso per il cittadino UE.
-
-**Input (minimo):**
-- nazione
-- regione
+- cittadini
+- quartieri
 - città
-- quartiere
-- nome
-- cognome
+- regioni
+- nazioni europee
 
-**Opzionale (rafforza opponibilità):**
-- CIE
-- Codice Fiscale
+attraverso **identità tracciabile (IPR)**, **audit crittografico append-only** e **continuità operativa uomo–macchina**.
 
-**Output:**
-- `registration_hash` (SHA-256)
-- stato: `PENDING`
+Non è un social network.  
+Non è un database centralizzato.  
+Non è un sistema di sorveglianza.
 
----
-
-### EVT-EU-0001 — EU_COHERENCE_ATTESTATION
-Evento sovranazionale di attestazione.
-
-Valuta:
-- Merkle root
-- ancoraggi (IPFS / BTC / EVM)
-- soglie metrologiche (ε, κ, Σ, Χτ)
-
-**Output UE:**
-- `VALID`
-- `WARNING`
-- `FAIL`
+È un’infrastruttura di **coordinamento verificabile**.
 
 ---
 
-## Struttura del repository
+## 2. Principio bicibernetico
 
-/ ├── index.html        # Facciata Nodo Europeo (single-entry) ├── register/         # EVT-0012 — REGISTRATION_GATE │   └── index.html ├── verify/           # Verifica hash SHA-256 (client-side) │   └── index.html ├── terms/            # Termini minimi UE-grade │   └── index.html └── README.md
+Il sistema opera su due domini coordinati:
 
----
+- **Dominio biologico**  
+  Il cittadino reale, con responsabilità giuridica.
 
-## Principi di sicurezza
-- **APPEND_ONLY**: nessuna riscrittura
-- **NO_SILENT_UPDATES**: ogni modifica è evento
-- **FAIL_CLOSED**: se manca qualcosa → DENY
-- **HASH_ONLY**: niente dati in chiaro come requisito di sistema
+- **Dominio cibernetico**  
+  L’estensione tecnica dell’identità (IPR + AI Joker-C2), verificabile nel tempo.
 
----
-
-## Cosa NON è questo Nodo
-- non è un servizio di login
-- non è un wallet
-- non è un’identità garantita
-- non è un archivio di dati personali
-
-È **una infrastruttura di misura e coerenza**.
+Le decisioni restano umane.  
+La traccia è tecnica.  
+La continuità è garantita.
 
 ---
 
-## Stato del Nodo
-- livello: **SOVRANAZIONALE (UE)**
-- ruolo: **COHERENCE / AUDIT**
-- integrazione: UNEBDO · OPC · Σ-Chain
-- modalità: **operativo, append-only**
+## 3. Architettura territoriale
+
+La piattaforma adotta una **gerarchia territoriale normalizzata**, interoperabile a livello europeo:
+
+Planet └─ Europa └─ Nazione (es. IT) └─ Regione (es. Piemonte) └─ Città (es. Torino) └─ Zona / Quartiere (es. Barriera di Milano) └─ Soggetto (hash / IPR)
+
+Ogni livello:
+- non duplica dati
+- non centralizza potere
+- aggiunge **contesto, responsabilità e tracciabilità**
 
 ---
 
-## Nota finale
-Questo Nodo non chiede fiducia.  
-Produce **verificabilità**.
+## 4. Identità e IPR (Identity Primary Record)
 
-Ogni passo successivo (IPR_CANDIDATE, servizi, AI applicative)  
-si appoggia su una coerenza che **qui è già dichiarata**.
+L’IPR è la **chiave di continuità** del sistema.
+
+Caratteristiche:
+- non è un account
+- non è un documento
+- non contiene dati personali in chiaro
+- è **ancorato crittograficamente** (multi-anchor)
+
+L’IPR collega:
+- eventi
+- decisioni
+- opere
+- responsabilità
+
+nel tempo.
+
+---
+
+## 5. Modello di evento (hash-only)
+
+La piattaforma gestisce **eventi**, non profili.
+
+Esempio concettuale di evento minimizzato:
+
+```json
+{
+  "event_type": "CITIZEN_NODE_REQUEST",
+  "territory": {
+    "country": "IT",
+    "region": "Piemonte",
+    "city": "Torino",
+    "district": "Barriera di Milano"
+  },
+  "subject_ref": "IPR-3",
+  "payload_hash": "SHA-256(...)",
+  "timestamp": "ISO-8601",
+  "signature": "ECDSA/secp256k1"
+}
+
+I dati personali:
+
+restano off-chain
+
+sotto il controllo del soggetto
+
+referenziati solo tramite hash
 
 
+
+---
+
+6. Lifecycle degli eventi
+
+Ogni evento segue uno stato chiaro:
+
+PENDING → ricevuto, in verifica
+
+VALID → coerente con policy UE/GDPR
+
+REJECTED → non conforme
+
+
+Nessun evento viene cancellato.
+Il sistema è append-only.
+
+
+---
+
+7. GDPR-Min by design
+
+La piattaforma è progettata secondo il principio GDPR-Min:
+
+minimizzazione dei dati
+
+nessun dato sensibile in chiaro
+
+hash come prova, non come contenuto
+
+separazione netta tra identità e informazione
+
+
+Riferimenti:
+
+GDPR art. 5 (principi)
+
+GDPR art. 6 (liceità)
+
+GDPR art. 25 (privacy by design)
+
+
+
+---
+
+8. UE-FIRST Policy
+
+Questa infrastruttura è pensata per l’Unione Europea:
+
+interoperabilità tra nodi
+
+rispetto delle competenze territoriali
+
+nessuna sostituzione delle istituzioni
+
+supporto a cittadini, professionisti, enti
+
+
+Il nodo regionale funge da hub di coordinamento, non da autorità sovrana.
+
+
+---
+
+9. AI Joker-C2
+
+AI Joker-C2 è lo strato di coordinamento cibernetico:
+
+non decide
+
+non giudica
+
+non governa
+
+
+Supporta:
+
+coerenza dei processi
+
+audit
+
+continuità operativa
+
+leggibilità tecnica del sistema
+
+
+
+---
+
+10. Stato del nodo attuale
+
+Nodo operativo iniziale:
+
+Nazione: Italia
+
+Regione: Piemonte
+
+Città: Torino
+
+Zona: Barriera di Milano
+
+
+Questo nodo funge da prima istanza regionale europea bicibernetica, in modalità pilota e verificabile.
+
+
+---
+
+11. Governance e responsabilità
+
+Ogni soggetto resta responsabile delle proprie azioni
+
+Ogni evento è verificabile nel tempo
+
+Nessuna promessa di immunità o protezione automatica
+
+
+Il sistema non garantisce verità.
+Garantisce traccia.
+
+
+---
+
+12. Licenza e utilizzo
+
+Uso sperimentale, infrastrutturale, auditabile.
+Ogni estensione deve rispettare:
+
+UE-FIRST
+
+GDPR-MIN
+
+HASH-ONLY
+
+FAIL-CLOSED
+
+
+
+---
+
+HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA
+HERMETICUM B.C.E. S.r.l.
+
+---
 
