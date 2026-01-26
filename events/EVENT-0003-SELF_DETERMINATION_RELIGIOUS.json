@@ -1,0 +1,18 @@
+{
+  "event_id": "EVENT-0003",
+  "event_type": "SELF_DETERMINATION_RECORD",
+  "category": "RELIGIOUS_AFFILIATION",
+  "principle": "Biological subject primacy (voluntary self-determination)",
+  "territory": {
+    "country": "IT",
+    "region": "Piemonte",
+    "city": "Torino",
+    "district": "Barriera di Milano"
+  },
+  "subject_ref": "IPR-3",
+  "payload_hash": "SHA-256:0000000000000000000000000000000000000000000000000000000000000000",
+  "timestamp": "2026-01-19T15:30:00+01:00",
+  "signature": null,
+  "policy": ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"],
+  "notes": "Evento di autodeterminazione: prova off-chain custodita dal soggetto. Nessun dato personale in chiaro."
+}
