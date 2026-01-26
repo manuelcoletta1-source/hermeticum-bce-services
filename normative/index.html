@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Normative Mapping — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Mappatura tra HERMETICUM B.C.E. (IPR) e il quadro UE eIDAS2 / EUDI Wallet: allineamenti, differenze, limiti.">
+  <meta name="description" content="Mappatura tra HERMETICUM B.C.E. (IPR) e quadro UE eIDAS2 / EUDI Wallet: allineamenti, differenze, limiti.">
   <style>
     body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
     header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
@@ -32,6 +32,14 @@
     Questa pagina confronta HERMETICUM B.C.E. (IPR) con il quadro UE su identità digitale.
     Obiettivo: ridurre ambiguità e rendere valutabile l’allineamento tecnico.
   </p>
+
+  <div style="margin-top:1rem;">
+    <a href="../professional/">Professional</a> ·
+    <a href="../evidence/">Evidence</a> ·
+    <a href="../terms/">Termini</a> ·
+    <a href="../about/">About</a> ·
+    <a href="../">Home</a>
+  </div>
 </header>
 
 <section>
@@ -40,28 +48,29 @@
     <div class="card">
       <h3>HERMETICUM B.C.E. / IPR</h3>
       <p class="ok">
-        L’IPR è una radice tecnica verificabile (manifest + evidenze/hash), progettata per tracciabilità,
+        L’IPR è una radice tecnica verificabile (manifest + evidenze/hash) progettata per tracciabilità,
         auditabilità e continuità operativa.
       </p>
       <p class="warn">
-        Non è un’identità legale e non conferisce effetti giuridici automatici.
+        Non è un’identità legale e non produce effetti giuridici automatici.
       </p>
     </div>
+
     <div class="card">
       <h3>Quadro UE (riferimento)</h3>
       <p class="ok">
-        Il quadro eIDAS (come modificato) e l’ecosistema EUDI Wallet definiscono un modello europeo
-        per identità digitale e credenziali verificabili, con ruoli, requisiti e interoperabilità.
+        Il quadro eIDAS2 e l’ecosistema EUDI Wallet definiscono un modello UE per identità digitale e credenziali,
+        con ruoli, requisiti e interoperabilità cross-border.
       </p>
       <p class="warn">
-        Questa pagina è descrittiva: non sostituisce testi normativi o atti attuativi.
+        Questa pagina è descrittiva e non sostituisce testi normativi o atti attuativi.
       </p>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Mappatura rapida (cosa combacia / cosa no)</h2>
+  <h2>Mappatura rapida</h2>
 
   <table>
     <thead>
@@ -75,49 +84,49 @@
     <tbody>
       <tr>
         <td><strong>Identificazione legale</strong></td>
-        <td>eID riconosciuta, emessa/gestita secondo schemi e requisiti UE.</td>
-        <td>Record tecnico verificabile, non equivalenza a eID legale.</td>
+        <td>eID riconosciuta secondo requisiti UE e modelli di fiducia.</td>
+        <td>Record tecnico verificabile. Non equivale a eID legale.</td>
         <td class="warn">Non equivalente</td>
       </tr>
 
       <tr>
         <td><strong>Wallet / credenziali</strong></td>
-        <td>Wallet con ruoli (issuer, wallet, relying party) e interoperabilità cross-border.</td>
-        <td>IPR può fungere da “radice tecnica” per flussi auditabili, ma non è un wallet UE.</td>
+        <td>Wallet con ruoli (issuer, wallet, relying party) e interoperabilità.</td>
+        <td>IPR può supportare flussi auditabili, ma non è un wallet UE.</td>
         <td class="warn">Complementare</td>
       </tr>
 
       <tr>
         <td><strong>Integrità e verificabilità</strong></td>
-        <td>Verifica di credenziali/attributi secondo standard e trust model.</td>
+        <td>Verifica di credenziali/attributi in un trust model.</td>
         <td>Verifica manifest↔hash↔evidenze; fail-closed; conservazione prove.</td>
         <td class="ok">Allineabile (tecnico)</td>
       </tr>
 
       <tr>
         <td><strong>Trust model</strong></td>
-        <td>Ruoli e responsabilità formalizzate (issuer, wallet provider, relying party, ecc.).</td>
-        <td>Ruoli descritti a livello architetturale, non formalizzati come schema UE.</td>
+        <td>Ruoli e responsabilità formalizzati e soggetti a requisiti.</td>
+        <td>Ruoli descritti a livello architetturale, non qualificati come schema UE.</td>
         <td class="warn">Parziale</td>
       </tr>
 
       <tr>
         <td><strong>Firma / servizi fiduciari</strong></td>
-        <td>Servizi fiduciari qualificati con requisiti specifici.</td>
+        <td>Servizi fiduciari (anche qualificati) con requisiti specifici.</td>
         <td>IPR non è servizio fiduciario qualificato e non pretende di esserlo.</td>
         <td class="warn">Non applicabile</td>
       </tr>
 
       <tr>
         <td><strong>Privacy & minimizzazione</strong></td>
-        <td>Requisiti di protezione dati e sicurezza nell’ecosistema.</td>
-        <td>UE-first + minimizzazione + policy pubbliche (privacy/cookies/accessibility).</td>
+        <td>Protezione dati e sicurezza nell’ecosistema UE.</td>
+        <td>UE-first + GDPR-min + policy pubbliche (privacy/cookies/accessibility).</td>
         <td class="ok">Allineabile</td>
       </tr>
 
       <tr>
         <td><strong>Auditabilità</strong></td>
-        <td>Controlli, conformità, assurance secondo regole/atti.</td>
+        <td>Controlli e assurance secondo regole/atti applicabili.</td>
         <td>Audit-by-design: evidenze, versioning, changelog, fail-closed.</td>
         <td class="ok">Forte (tecnico)</td>
       </tr>
@@ -129,43 +138,41 @@
   <h2>Posizionamento consigliato (senza overclaim)</h2>
   <div class="grid">
     <div class="card">
-      <h3>Come “strato tecnico”</h3>
+      <h3>Strato tecnico</h3>
       <p>
-        Usa l’IPR come strato di <strong>tracciabilità e prova tecnica</strong>
-        sopra processi e identità già regolati (dove richiesto).
+        Usa l’IPR come strato di <strong>tracciabilità e prova tecnica</strong> sopra processi già regolati
+        (quando pertinente).
       </p>
     </div>
     <div class="card">
-      <h3>Come “filtro anti-frode”</h3>
+      <h3>Filtro anti-manomissione</h3>
       <p>
-        L’evidenza (hash/manifest) è utile per rilevare alterazioni e incoerenze nei flussi documentali.
+        Evidenze (hash/manifest) utili per rilevare alterazioni e incoerenze nei flussi documentali.
       </p>
     </div>
     <div class="card">
-      <h3>Come “strumento audit”</h3>
+      <h3>Audit e conservazione</h3>
       <p>
-        In contesti di verifica: conserva manifest, evidenze e versioni. Senza conservazione, niente prova.
+        La prova dipende dalla conservazione: manifest, evidenze, versioni e log.
       </p>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Riferimenti (testuali, non sostitutivi)</h2>
-  <ul>
-    <li>Regolamento eIDAS (UE) 910/2014 come modificato dal Reg. (UE) 2024/1183.</li>
-    <li>Architettura e Reference Framework dell’ecosistema EUDI Wallet (ARF) come riferimento tecnico pubblico.</li>
-  </ul>
+  <h2>Nota di aggiornamento</h2>
   <p class="sub">
-    Nota: gli atti attuativi e le specifiche evolvono. Questa pagina va aggiornata per release significative.
+    Il quadro normativo e le specifiche tecniche evolvono. Questa pagina va aggiornata per release significative.
   </p>
+  <p>Data: <strong>2026</strong></p>
 </section>
 
 <footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
   <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
     <div>
       <strong>HERMETICUM B.C.E.</strong><br>
-      Blindata · Computabile · Evolutiva
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
     </div>
     <div>
       <a href="../legal/privacy.html">Privacy</a><br>
