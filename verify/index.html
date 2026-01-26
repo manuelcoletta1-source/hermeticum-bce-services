@@ -1,184 +1,370 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <title>HERMETICUM B.C.E. — Verify</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HERMETICUM B.C.E. — Verifica pubblica hash, evidenze e ancoraggi crittografici. HASH-only, audit-by-design." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verify — Firma a Tre Ancore (IPR) | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Verifica pubblica della firma digitale a tre ancore per IPR: IPFS (CID), Bitcoin (TXID), Ethereum (TX). HERMETICUM B.C.E. — UE-first." />
 
   <style>
     :root{
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#9aa0a6;
-      --accent:#6ee7b7;
+      --bg:#0b0f14; --panel:#0f1621; --text:#e7eef7; --muted:#b8c4d4;
+      --line:#243043; --accent:#7aa7ff; --ok:#6ee7b7; --warn:#fbbf24; --danger:#fb7185;
+      --r:16px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif;
-      background:var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 10% 0%, #101a2a 0%, var(--bg) 55%) no-repeat;
       color:var(--text);
+      line-height:1.6;
     }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
+
+    .topbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r);
+      background: rgba(255,255,255,.02);
+    }
+    .nav a{
+      display:inline-block; padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line); margin-right:8px;
+      background: rgba(255,255,255,.02); color:var(--muted); font-size:13px;
+    }
+    .nav a.active{background: rgba(122,167,255,.14); color:var(--text); border-color: rgba(122,167,255,.35)}
+
     header{
-      padding:28px;
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg,var(--panel),var(--bg));
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px 20px;
+      background: linear-gradient(180deg, rgba(122,167,255,.10), rgba(255,255,255,.02));
     }
-    h1{ margin:0; font-size:1.7rem; letter-spacing:0.04em; }
-    header p{ margin:10px 0 0; color:var(--muted); max-width:880px; }
+    h1{margin:0; font-size:28px; line-height:1.25}
+    .sub{margin:10px 0 0; color:var(--muted); max-width:960px}
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .pill{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 10px;
+      background: rgba(255,255,255,.02);
+      font-size:12px;
+      color:var(--muted);
+    }
 
-    nav{
-      margin-top:18px;
-      display:flex;
-      flex-wrap:wrap;
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
       gap:14px;
+      margin-top:14px;
     }
-    nav a{
-      color:var(--text);
-      text-decoration:none;
-      padding:8px 14px;
-      border:1px solid var(--line);
-      border-radius:6px;
-      background:var(--panel);
-      font-size:0.9rem;
-    }
-    nav a:hover{ color:var(--accent); border-color:var(--accent); }
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
 
-    main{
-      max-width:1100px;
-      margin:0 auto;
-      padding:36px 24px;
-    }
-    section{
-      margin-bottom:44px;
-      max-width:920px;
-    }
-    h2{
-      font-size:1.25rem;
-      margin-bottom:12px;
-    }
-    p{
-      color:var(--muted);
-      line-height:1.45;
-    }
-    code, pre{
-      background:#0d1117;
+    .card{
       border:1px solid var(--line);
-      border-radius:8px;
-      padding:10px 12px;
+      border-radius:22px;
+      padding:18px;
+      background: rgba(255,255,255,.02);
+    }
+    h2{margin:0 0 10px; font-size:18px}
+    h3{margin:16px 0 8px; font-size:15px}
+    p{margin:10px 0; color:var(--muted)}
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    li{margin:6px 0}
+
+    label{display:block; margin:10px 0 6px; color:var(--text); font-size:13px; font-weight:650}
+    input{
+      width:100%;
+      padding:11px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline:none;
+    }
+    input::placeholder{color:#7d8aa0}
+
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    @media (max-width: 720px){ .row{grid-template-columns:1fr} }
+
+    .cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(122,167,255,.14);
+      color:var(--text); font-weight:650;
+      cursor:pointer;
+    }
+    .btn.secondary{
+      background: rgba(255,255,255,.03);
+      font-weight:600;
       color:var(--text);
+    }
+
+    .notice{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px 12px;
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      font-size:13px;
+      margin-top:12px;
+    }
+    .quote{
+      border-left:3px solid rgba(122,167,255,.55);
+      padding:10px 12px;
+      margin:12px 0 0;
+      background: rgba(122,167,255,.07);
+      border-radius:12px;
+      color:var(--text);
+    }
+    code.block{
       display:block;
-      margin-top:10px;
-      overflow-x:auto;
-      font-size:0.9rem;
+      padding:10px 12px;
+      border-radius:14px;
+      background: rgba(0,0,0,.30);
+      border:1px solid var(--line);
+      color:#d7e6ff;
+      overflow:auto;
+      font-size:12px;
+      line-height:1.45;
+      white-space:pre;
     }
-    .note{
-      border:1px dashed var(--line);
-      border-radius:10px;
-      padding:14px 16px;
-      background:rgba(15,17,23,0.55);
-      color:var(--muted);
+    .hr{height:1px; background:var(--line); margin:14px 0}
+
+    .links a{
+      display:inline-block;
+      margin-right:10px;
+      margin-bottom:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      font-size:13px;
     }
+
     footer{
-      border-top:1px solid var(--line);
-      padding:26px;
-      font-size:0.85rem;
+      margin-top:18px;
       color:var(--muted);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      opacity:.95;
     }
   </style>
 </head>
 
 <body>
+  <main class="wrap">
 
-<header>
-  <h1>Verify</h1>
-  <p>
-    Questa pagina descrive come verificare pubblicamente identità, policy ed evidenze
-    dell’ecosistema HERMETICUM B.C.E. tramite hash e ancoraggi crittografici.
-    Nessun dato personale viene esposto.
-  </p>
+    <div class="topbar">
+      <div>
+        <strong>HERMETICUM B.C.E.</strong><br/>
+        <span style="color:var(--muted); font-size:12px;">HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</span>
+      </div>
 
-  <nav>
-    <a href="./index.html">Platform</a>
-    <a href="./modules.html">Modules</a>
-    <a href="#hash">Hash</a>
-    <a href="#anchors">Anchors</a>
-    <a href="#evidence">Evidence</a>
-    <a href="#principles">Principles</a>
-  </nav>
-</header>
-
-<main>
-
-  <section id="hash">
-    <h2>1. Verifica HASH (principio HASH-only)</h2>
-    <p>
-      Tutti gli artefatti verificabili (IPR, policy, documenti tecnici)
-      sono rappresentati da impronte crittografiche.
-      La verifica consiste nel ricalcolare l’hash e confrontarlo con quello pubblicato.
-    </p>
-
-    <p><strong>Esempio SHA-256 (Linux / macOS):</strong></p>
-    <pre>sha256sum nomefile.ext</pre>
-
-    <p><strong>Esempio SHA-256 (Windows PowerShell):</strong></p>
-    <pre>Get-FileHash nomefile.ext -Algorithm SHA256</pre>
-  </section>
-
-  <section id="anchors">
-    <h2>2. Ancoraggi crittografici</h2>
-    <p>
-      Gli hash principali possono essere ancorati a sistemi esterni
-      (es. IPFS, blockchain pubbliche) per garantire:
-    </p>
-    <p>
-      – esistenza nel tempo<br>
-      – non modificabilità retroattiva<br>
-      – verificabilità indipendente
-    </p>
-
-    <div class="note">
-      La piattaforma non richiede fiducia: richiede solo verifica.
+      <nav class="nav" aria-label="Navigazione">
+        <a href="../">Home</a>
+        <a href="../catalog/">Classi IPR</a>
+        <a href="../ai/">AI e IPR</a>
+        <a href="../create/">Rilascia IPR</a>
+        <a class="active" href="./">Verifica</a>
+        <a href="../terms/">Termini</a>
+      </nav>
     </div>
-  </section>
 
-  <section id="evidence">
-    <h2>3. Evidence pubbliche</h2>
-    <p>
-      Le evidenze (proof, manifest, policy) sono pubblicate in repository
-      pubblici dell’ecosistema e possono essere scaricate e verificate localmente.
-    </p>
-    <p>
-      Ogni evidenza è:
-      – versionata<br>
-      – hashata<br>
-      – opponibile
-    </p>
-  </section>
+    <header>
+      <h1>Verify — Firma digitale a tre ancore</h1>
+      <p class="sub">
+        Inserisci <strong>IPFS CID</strong>, <strong>Bitcoin TXID</strong> e <strong>Ethereum TX</strong>
+        per verificare pubblicamente l’ancoraggio di un IPR.
+        La verifica è indipendente dalla classe (BASE/STRONG/ENTERPRISE): la firma digitale è la stessa.
+      </p>
 
-  <section id="principles">
-    <h2>4. Principi di verifica</h2>
-    <p>
-      – UE-first<br>
-      – GDPR-minimizzazione<br>
-      – HASH-only (no dati grezzi)<br>
-      – Audit-by-design<br>
-      – Fail-closed
-    </p>
+      <div class="pillrow">
+        <div class="pill">IPFS = esistenza</div>
+        <div class="pill">Bitcoin = tempo</div>
+        <div class="pill">Ethereum = tracciabilità</div>
+      </div>
+    </header>
 
-    <div class="note">
-      Se un artefatto non è verificabile, per definizione non è valido.
-    </div>
-  </section>
+    <section class="grid">
 
-</main>
+      <article class="card">
+        <h2>Inserisci gli anchor</h2>
+        <p>
+          Questa pagina genera link di verifica verso explorer pubblici.
+          Non raccoglie né invia dati: la verifica avviene sui network pubblici.
+        </p>
 
-<footer>
-  HERMETICUM B.C.E. S.r.l. — Verifica pubblica e opponibilità tecnica
-</footer>
+        <label for="cid">IPFS CID</label>
+        <input id="cid" placeholder="Es. bafkrei..." />
 
+        <label for="btc">Bitcoin TXID</label>
+        <input id="btc" placeholder="Es. 9eeb29b6..." />
+
+        <label for="eth">Ethereum TX</label>
+        <input id="eth" placeholder="Es. 0xf65e..." />
+
+        <div class="cta">
+          <button class="btn" type="button" onclick="build()">Genera link di verifica</button>
+          <button class="btn secondary" type="button" onclick="resetAll()">Reset</button>
+        </div>
+
+        <div class="notice">
+          <strong>Nota:</strong> la validità “di sistema” di un IPR (stato, classe, audit) può richiedere controlli aggiuntivi.
+          Questa pagina verifica la <strong>firma pubblica a tre ancore</strong>.
+        </div>
+      </article>
+
+      <aside class="card">
+        <h2>Output verifica</h2>
+        <p>Link generati (cliccabili):</p>
+
+        <div id="links" class="links">
+          <span style="color:var(--muted); font-size:13px;">Compila i campi e clicca “Genera link di verifica”.</span>
+        </div>
+
+        <div class="hr"></div>
+
+        <h2>Checklist rapida</h2>
+        <ul>
+          <li><strong>IPFS</strong>: il CID apre il contenuto (record / manifest / proof).</li>
+          <li><strong>Bitcoin</strong>: il TXID mostra timestamp e conferme.</li>
+          <li><strong>Ethereum</strong>: la TX mostra tracciabilità e dati associati.</li>
+        </ul>
+
+        <div class="quote">
+          La firma digitale è uguale per tutte le classi.
+          Cambia solo <strong>cosa viene firmato</strong> (identità / ruolo / processi).
+        </div>
+
+        <div class="hr"></div>
+
+        <h2>Formato (esempio)</h2>
+        <code id="out" class="block">IPFS CID: — 
+BTC TXID: — 
+ETH TX: —</code>
+      </aside>
+
+    </section>
+
+    <footer>
+      <div>© HERMETICUM B.C.E. S.r.l. — Infrastruttura europea di identità primaria (IPR)</div>
+      <div>
+        <a href="../">Home</a> ·
+        <a href="../catalog/">Catalog</a> ·
+        <a href="../ai/">AI</a> ·
+        <a href="../create/">Create</a> ·
+        <a href="../terms/">Terms</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    function safe(v){ return (v || "").toString().trim(); }
+
+    function isHex64(s){ return /^[a-fA-F0-9]{64}$/.test(s); }
+    function isEthTx(s){ return /^0x[a-fA-F0-9]{64}$/.test(s); }
+    function looksLikeCID(s){
+      // minimal heuristic for CIDv0/v1 common forms
+      return /^Qm[1-9A-HJ-NP-Za-km-z]{44}$/.test(s) || /^b[a-z2-7]{20,}$/.test(s);
+    }
+
+    function build(){
+      const cid = safe(document.getElementById("cid").value);
+      const btc = safe(document.getElementById("btc").value);
+      const eth = safe(document.getElementById("eth").value);
+
+      const out = document.getElementById("out");
+      out.textContent = `IPFS CID: ${cid || "—"}\nBTC TXID: ${btc || "—"}\nETH TX: ${eth || "—"}`;
+
+      const links = document.getElementById("links");
+      links.innerHTML = "";
+
+      // IPFS links (public gateways)
+      if(cid){
+        const a1 = document.createElement("a");
+        a1.href = `https://ipfs.io/ipfs/${encodeURIComponent(cid)}`;
+        a1.target = "_blank"; a1.rel = "noopener noreferrer";
+        a1.textContent = "IPFS Gateway (ipfs.io)";
+        links.appendChild(a1);
+
+        const a2 = document.createElement("a");
+        a2.href = `https://gateway.pinata.cloud/ipfs/${encodeURIComponent(cid)}`;
+        a2.target = "_blank"; a2.rel = "noopener noreferrer";
+        a2.textContent = "IPFS Gateway (pinata)";
+        links.appendChild(a2);
+
+        const warn = document.createElement("div");
+        warn.style.marginTop = "8px";
+        warn.style.color = "var(--muted)";
+        warn.style.fontSize = "13px";
+        warn.textContent = looksLikeCID(cid) ? "" : "Nota: il CID inserito non sembra un formato tipico (controlla eventuali spazi o errori).";
+        if(warn.textContent) links.appendChild(warn);
+      }
+
+      // BTC explorers
+      if(btc){
+        const b1 = document.createElement("a");
+        b1.href = `https://mempool.space/tx/${encodeURIComponent(btc)}`;
+        b1.target = "_blank"; b1.rel = "noopener noreferrer";
+        b1.textContent = "Bitcoin Explorer (mempool.space)";
+        links.appendChild(b1);
+
+        const b2 = document.createElement("a");
+        b2.href = `https://www.blockchain.com/btc/tx/${encodeURIComponent(btc)}`;
+        b2.target = "_blank"; b2.rel = "noopener noreferrer";
+        b2.textContent = "Bitcoin Explorer (blockchain.com)";
+        links.appendChild(b2);
+
+        const warn2 = document.createElement("div");
+        warn2.style.marginTop = "8px";
+        warn2.style.color = "var(--muted)";
+        warn2.style.fontSize = "13px";
+        warn2.textContent = isHex64(btc) ? "" : "Nota: un TXID Bitcoin è tipicamente una stringa esadecimale da 64 caratteri.";
+        if(warn2.textContent) links.appendChild(warn2);
+      }
+
+      // ETH explorers
+      if(eth){
+        const e1 = document.createElement("a");
+        e1.href = `https://etherscan.io/tx/${encodeURIComponent(eth)}`;
+        e1.target = "_blank"; e1.rel = "noopener noreferrer";
+        e1.textContent = "Ethereum Explorer (Etherscan)";
+        links.appendChild(e1);
+
+        const e2 = document.createElement("a");
+        e2.href = `https://blockscout.com/eth/mainnet/tx/${encodeURIComponent(eth)}`;
+        e2.target = "_blank"; e2.rel = "noopener noreferrer";
+        e2.textContent = "Ethereum Explorer (Blockscout)";
+        links.appendChild(e2);
+
+        const warn3 = document.createElement("div");
+        warn3.style.marginTop = "8px";
+        warn3.style.color = "var(--muted)";
+        warn3.style.fontSize = "13px";
+        warn3.textContent = isEthTx(eth) ? "" : "Nota: una TX Ethereum è tipicamente 0x + 64 caratteri esadecimali.";
+        if(warn3.textContent) links.appendChild(warn3);
+      }
+
+      if(!cid && !btc && !eth){
+        links.innerHTML = '<span style="color:var(--muted); font-size:13px;">Inserisci almeno un valore per generare link di verifica.</span>';
+      }
+    }
+
+    function resetAll(){
+      document.getElementById("cid").value = "";
+      document.getElementById("btc").value = "";
+      document.getElementById("eth").value = "";
+      document.getElementById("links").innerHTML = '<span style="color:var(--muted); font-size:13px;">Compila i campi e clicca “Genera link di verifica”.</span>';
+      document.getElementById("out").textContent = "IPFS CID: — \nBTC TXID: — \nETH TX: —";
+    }
+  </script>
 </body>
 </html>
