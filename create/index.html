@@ -3,225 +3,453 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Create / IPR — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Rilascia un IPR: genera un manifest minimo + hash (SHA-256) per integrità, audit e continuità. UE-first, GDPR-min, fail-closed." />
+  <title>Create — IPR Manifest | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Generatore statico UE-first di manifest IPR: prefill da register, hash-only, append-only, fail-closed." />
+  <meta name="color-scheme" content="dark light" />
   <style>
     :root{
-      --bg:#0b0f14; --card:#0f1620; --muted:#9fb0c3; --text:#e9f1fb; --line:#1b2735;
-      --accent:#7dd3fc; --warn:#fde68a;
+      --bg:#0b0d10; --card:#12161c; --muted:#9aa4b2; --fg:#e8eef7;
+      --line:#232a34; --accent:#6ee7ff; --good:#6bff95; --warn:#ffd36e; --bad:#ff6b6b;
+      --max:1120px; --r:16px; --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
-    a{color:inherit}
-    .wrap{max-width:980px;margin:0 auto;padding:22px 16px}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;border:1px solid var(--line);background:rgba(255,255,255,.02);padding:12px 14px;border-radius:16px}
-    .pill{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
-    h1{margin:14px 0 6px;font-size:24px}
-    h2{margin:0 0 8px;font-size:16px}
-    p{margin:0 0 10px;color:var(--muted)}
-    .grid{display:grid;gap:12px}
-    @media (min-width:860px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
-    .card{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:14px}
-    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:12px}
-    input, textarea, select{
-      width:100%; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--text);
-      padding:10px 10px; border-radius:14px; outline:none;
+    body{
+      margin:0; font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1200px 700px at 15% -10%, rgba(110,231,255,.12), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(107,255,149,.10), transparent 55%),
+        var(--bg);
+      color:var(--fg); line-height:1.45;
     }
-    textarea{min-height:140px; resize:vertical}
-    .row{display:grid;gap:10px}
-    @media (min-width:860px){ .row.two{grid-template-columns:1fr 1fr} }
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button{
-      border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--text);
-      padding:10px 12px; border-radius:14px; cursor:pointer;
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:18px 20px; background:rgba(18,22,28,.75); border:1px solid var(--line);
+      border-radius:var(--r); box-shadow:var(--shadow); backdrop-filter: blur(10px);
+      position:sticky; top:12px; z-index:50;
     }
-    button.primary{border-color:rgba(125,211,252,.35);background:rgba(125,211,252,.10)}
-    .mini{font-size:12px;color:var(--muted)}
+    .brand{display:flex; flex-direction:column; gap:4px}
+    .mark{font-weight:900; letter-spacing:.35px}
+    .submark{color:var(--muted); font-size:.92rem}
+    nav{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; align-items:center}
+    .pill{
+      padding:8px 12px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(255,255,255,.03);
+    }
+    .pill:hover{border-color:rgba(110,231,255,.55)}
+    .pill.cta{border-color:rgba(110,231,255,.45); background:rgba(110,231,255,.10)}
+    .card{
+      margin-top:18px;
+      background:rgba(18,22,28,.82); border:1px solid var(--line); border-radius:var(--r);
+      padding:18px; box-shadow:var(--shadow);
+    }
+    h1{margin:0 0 10px 0; font-size:1.45rem}
+    h2{margin:0 0 10px 0; font-size:1.1rem}
+    p{margin:10px 0; color:rgba(232,238,247,.92)}
+    .muted{color:var(--muted)}
+    .small{font-size:.92rem}
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    .hr{height:1px; background:var(--line); margin:14px 0}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .tile{
+      padding:16px; border-radius:var(--r); border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      display:flex; flex-direction:column; gap:10px;
+    }
+    label{display:block; font-size:.92rem; color:var(--muted); margin:10px 0 6px}
+    input, select, textarea{
+      width:100%; padding:10px 12px; border-radius:12px;
+      border:1px solid var(--line); background:rgba(0,0,0,.25); color:var(--fg);
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{border-color:rgba(110,231,255,.55)}
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:10px 14px; border-radius:12px;
+      border:1px solid var(--line); background:rgba(255,255,255,.03);
+      cursor:pointer;
+    }
+    .btn:hover{border-color:rgba(110,231,255,.55)}
+    .btn.primary{border-color:rgba(110,231,255,.45); background:rgba(110,231,255,.12)}
+    .btn.good{border-color:rgba(107,255,149,.35); background:rgba(107,255,149,.10)}
+    .note{
+      border:1px dashed rgba(255,211,110,.45);
+      background:rgba(255,211,110,.08);
+      padding:12px; border-radius:12px;
+    }
+    .ok{
+      border:1px dashed rgba(107,255,149,.45);
+      background:rgba(107,255,149,.08);
+      padding:12px; border-radius:12px;
+    }
     pre{
-      margin:10px 0 0; padding:12px; border-radius:16px; border:1px solid var(--line);
-      background:rgba(0,0,0,.18); overflow:auto; color:var(--text); font-size:12px;
+      margin:0;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.30);
+      overflow:auto;
+      font-size:.9rem;
+      line-height:1.35;
     }
-    .warn{color:var(--warn)}
-    footer{margin-top:14px;color:var(--muted);text-align:center}
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 10px; border-radius:999px; border:1px solid var(--line);
+      background:rgba(255,255,255,.02); color:var(--muted); font-size:.85rem;
+      width:max-content;
+    }
+    .badge .dot{width:8px; height:8px; border-radius:999px; background:var(--accent)}
+    .badge.good .dot{background:var(--good)}
+    .badge.warn .dot{background:var(--warn)}
+    @media (max-width: 980px){
+      header{position:relative; top:auto}
+      .grid2{grid-template-columns:1fr}
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="nav">
-      <span class="pill">UE-first</span>
-      <span class="pill">GDPR-min</span>
-      <span class="pill">audit-by-design</span>
-      <span class="pill">fail-closed</span>
-      <span class="pill"><a href="../citizen/">Citizen</a></span>
-      <span class="pill"><a href="../professional/">Professional</a></span>
-      <span class="pill"><a href="../verify/">Verify</a></span>
-      <span class="pill"><a href="../">Home</a></span>
-    </div>
+    <header aria-label="Barra principale">
+      <div class="brand">
+        <div class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        <div class="submark">HERMETICUM B.C.E. S.r.l. — Create (manifest IPR, static)</div>
+      </div>
+      <nav aria-label="Navigazione">
+        <a class="pill" href="../">Home</a>
+        <a class="pill cta" href="../register/">Register</a>
+        <a class="pill" href="../verify/">Verifica</a>
+        <a class="pill" href="../catalog/">Catalogo</a>
+        <a class="pill" href="../terms/">Termini</a>
+      </nav>
+    </header>
 
-    <h1>Rilascia un IPR (manifest + hash)</h1>
-    <p>
-      Qui generi un <b>record tecnico di origine</b>: un manifest minimo + hash (SHA-256).
-      Regola: la fiducia nasce dalla verifica. Se qualcosa non torna → <b>fail-closed</b>.
-    </p>
+    <section class="card">
+      <h1>Crea un <span class="mono">manifest IPR</span></h1>
+      <p class="muted small">
+        Generatore statico: non invia dati, non salva profili.
+        Il manifest descrive <b>precedenza e verificabilità</b> (hash-only, append-only, fail-closed).
+      </p>
 
-    <div class="grid cols-2">
-      <div class="card">
-        <h2>Input (minimo, GDPR-min)</h2>
-        <p>Evita dati personali inutili. L’IPR registra precedenza e integrità, non identità legale.</p>
+      <div class="note small">
+        <b>Regola:</b> il manifest non “certifica verità”. Registra che una traccia è stata definita e resa verificabile.
+      </div>
+    </section>
 
-        <label for="title">Titolo / riferimento *</label>
-        <input id="title" placeholder="es. Specifica v1 — Documento X — Release Y" />
+    <section class="card">
+      <h2>Contesto (prefill da Register)</h2>
+      <div class="grid2">
+        <div class="tile">
+          <div class="badge good"><span class="dot"></span> Percorso</div>
+          <label for="path">Path</label>
+          <select id="path">
+            <option value="citizen">citizen</option>
+            <option value="professional">professional</option>
+            <option value="institution">institution</option>
+          </select>
 
-        <label for="desc">Descrizione (facoltativa, 1 riga)</label>
-        <input id="desc" placeholder="es. Manifest di rilascio tecnico (nessun dato personale)" />
+          <label for="lang">Lingua</label>
+          <select id="lang">
+            <option value="it">it</option>
+            <option value="en">en</option>
+            <option value="fr">fr</option>
+            <option value="es">es</option>
+          </select>
 
-        <div class="row two">
-          <div>
-            <label for="scope">Scope</label>
-            <select id="scope">
-              <option value="personal">personal</option>
-              <option value="professional">professional</option>
-              <option value="institution">institution</option>
-            </select>
+          <label for="alias">Alias (opzionale)</label>
+          <input id="alias" placeholder="es. EU-NODE-001" />
+        </div>
+
+        <div class="tile">
+          <div class="badge warn"><span class="dot"></span> Localizzazione (opzionale)</div>
+          <label for="country">Country</label>
+          <input id="country" placeholder="es. IT" />
+
+          <label for="region">Region</label>
+          <input id="region" placeholder="es. Piemonte" />
+
+          <label for="city">City</label>
+          <input id="city" placeholder="es. Torino" />
+
+          <label for="district">District</label>
+          <input id="district" placeholder="es. San Salvario" />
+
+          <p class="muted small">
+            Questi campi sono contesto UI. Non aumentano l’opponibilità della traccia.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Oggetto della traccia (minimo)</h2>
+      <div class="grid2">
+        <div class="tile">
+          <div class="badge good"><span class="dot"></span> Traccia</div>
+
+          <label for="iprId">IPR-ID</label>
+          <input id="iprId" placeholder="es. IPR-YYYYMMDD-XXXX" />
+
+          <label for="canonicalTime">Tempo canonico (ISO 8601)</label>
+          <input id="canonicalTime" placeholder="es. 2026-01-19T15:30+01:00" />
+
+          <label for="objectType">Tipo oggetto</label>
+          <select id="objectType">
+            <option value="text">text</option>
+            <option value="file">file</option>
+            <option value="bundle">bundle</option>
+            <option value="repo">repo</option>
+            <option value="release">release</option>
+          </select>
+
+          <label for="objectRef">Riferimento oggetto (minimo)</label>
+          <input id="objectRef" placeholder="es. nomefile.pdf / repo:org/proj / release:v1.0" />
+
+          <label for="objectHash">Hash dell’oggetto (SHA-256 consigliato)</label>
+          <input id="objectHash" placeholder="es. sha256:..." />
+
+          <label for="desc">Descrizione (una riga, non narrativa)</label>
+          <input id="desc" placeholder="es. Manifest operativo IPR — v1" />
+
+          <div class="ok small" style="margin-top:10px">
+            <b>Fail-closed:</b> senza hash e tempo canonico, il manifest non è valido.
           </div>
-          <div>
-            <label for="hashAlg">Hash</label>
-            <select id="hashAlg" disabled>
-              <option>SHA-256</option>
-            </select>
+        </div>
+
+        <div class="tile">
+          <div class="badge"><span class="dot"></span> Policy & Anchors</div>
+
+          <label for="policy">Policy</label>
+          <input id="policy" value="UE-FIRST/GDPR-MIN/HASH-ONLY/AUDIT/FAIL-CLOSED" />
+
+          <label for="ipfsCid">IPFS CID (opzionale)</label>
+          <input id="ipfsCid" placeholder="es. bafk..." />
+
+          <label for="btcTx">Bitcoin TXID (opzionale)</label>
+          <input id="btcTx" placeholder="es. 9eeb..." />
+
+          <label for="ethTx">Ethereum TX (opzionale)</label>
+          <input id="ethTx" placeholder="es. 0x..." />
+
+          <div class="btnrow">
+            <button class="btn primary" id="genBtn" type="button">→ Genera manifest</button>
+            <button class="btn" id="clearBtn" type="button">Pulisci</button>
           </div>
-        </div>
 
-        <label for="content">Contenuto di riferimento *</label>
-        <textarea id="content" placeholder="Incolla qui il testo o un contenuto rappresentativo. (Se è un file, incolla il suo testo o una stringa di riferimento coerente)"></textarea>
-
-        <div class="mini warn">
-          Nota: questa UI genera hash dal testo incollato. Per file binari, la procedura “audit-grade” è: hash locale del file + manifest (vedi Evidence).
-        </div>
-
-        <div class="btns">
-          <button class="primary" id="btnGenerate">Genera IPR</button>
-          <button id="btnClear">Pulisci</button>
-        </div>
-
-        <div class="mini" style="margin-top:10px">
-          Perimetro: non è SPID/CIE/EUDI Wallet, non è firma qualificata, non produce effetti giuridici automatici. 2
+          <p class="muted small">
+            Le ancore sono riferimenti: possono essere aggiunte dopo (append-only) come nuovo evento.
+          </p>
         </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h2>Output (manifest minimo)</h2>
-        <p>
-          Quando generi, salviamo il manifest nel browser (localStorage) e ti mandiamo alla pagina <b>Output</b> per scaricare e conservare.
-          Senza conservazione non esiste continuità operativa. 3
-        </p>
+    <section class="card">
+      <h2>Manifest generato</h2>
+      <p class="muted small">
+        Copia o scarica. Nessun invio a server.
+      </p>
 
-        <div class="mini">Anteprima manifest (solo dopo “Genera IPR”):</div>
-        <pre id="preview">{ }</pre>
+      <pre id="out" aria-label="Output manifest">{}</pre>
 
-        <div class="hr" style="height:1px;background:var(--line);margin:14px 0"></div>
-
-        <h2>Esiti “fail-closed” (cosa aspettarsi)</h2>
-        <ul class="mini" style="margin:0;padding-left:16px">
-          <li><b>Valid</b>: manifest coerente + (se fornito contenuto) hash verificato.</li>
-          <li><b>Invalid</b>: mismatch o campi obbligatori mancanti.</li>
-          <li><b>Inconclusive</b>: dati insufficienti (es. contenuto non disponibile) → non usare come prova.</li>
-        </ul>
-        <div class="mini" style="margin-top:8px">Questi esiti sono definiti in Verify. 4</div>
+      <div class="btnrow">
+        <button class="btn good" id="copyBtn" type="button">Copia JSON</button>
+        <button class="btn primary" id="downloadBtn" type="button">Scarica .json</button>
+        <a class="btn" href="../verify/">Vai a Verify</a>
       </div>
-    </div>
 
-    <footer>
-      <div style="margin-top:14px">
-        <b>HERMETICUM B.C.E.</b><br/>
-        HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-        HERMETICUM B.C.E. S.r.l.
+      <p class="muted small" id="status" style="margin-top:10px"></p>
+    </section>
+
+    <footer class="card" style="margin-top:18px">
+      <div class="small muted">
+        <b>HERMETICUM B.C.E. S.r.l.</b> — Create · <span class="mono">hash-only</span> · <span class="mono">append-only</span> · <span class="mono">fail-closed</span>
       </div>
-      <div class="mini" style="margin-top:8px">Platform status: Experimental · Jurisdiction: EU</div>
+      <div class="small muted" style="margin-top:8px">
+        © 2026 — Nessuna promessa. Nessuna protezione. Solo precedenza.
+      </div>
     </footer>
   </div>
 
   <script>
-    function uuidLike(){
-      // non è un UUID “spec”, ma è sufficiente per identificatore locale (record tecnico).
-      return "ipr-" + crypto.getRandomValues(new Uint32Array(4)).join("-");
-    }
+    (function(){
+      const qs = new URLSearchParams(window.location.search);
 
-    async function sha256Hex(text){
-      const enc = new TextEncoder();
-      const data = enc.encode(text);
-      const hash = await crypto.subtle.digest("SHA-256", data);
-      const bytes = Array.from(new Uint8Array(hash));
-      return bytes.map(b => b.toString(16).padStart(2,"0")).join("");
-    }
+      const el = (id) => document.getElementById(id);
+      const out = el('out');
+      const status = el('status');
 
-    function isoNow(){
-      // timestamp leggibile e confrontabile
-      return new Date().toISOString();
-    }
+      const fields = {
+        path: el('path'),
+        lang: el('lang'),
+        alias: el('alias'),
+        country: el('country'),
+        region: el('region'),
+        city: el('city'),
+        district: el('district'),
 
-    function buildManifest({title, desc, scope, hashHex}){
-      return {
-        proto: "HERMETICUM_BCE_IPR",
-        version: "0.1",
-        ipr_id: uuidLike(),
-        created_at_utc: isoNow(),
-        jurisdiction: "EU",
-        policy: ["UE-first","GDPR-min","HASH-only","AUDIT","FAIL-CLOSED"],
-        scope,
-        object: {
-          title,
-          description: desc || "",
-          hash: {
-            alg: "SHA-256",
-            value: hashHex
+        iprId: el('iprId'),
+        canonicalTime: el('canonicalTime'),
+        objectType: el('objectType'),
+        objectRef: el('objectRef'),
+        objectHash: el('objectHash'),
+        desc: el('desc'),
+
+        policy: el('policy'),
+        ipfsCid: el('ipfsCid'),
+        btcTx: el('btcTx'),
+        ethTx: el('ethTx')
+      };
+
+      // Prefill da register/?...
+      function prefill(){
+        const get = (k) => (qs.get(k) || '').trim();
+
+        const path = get('path');
+        if(path) fields.path.value = path;
+
+        const lang = get('lang');
+        if(lang) fields.lang.value = lang;
+
+        const alias = get('alias'); if(alias) fields.alias.value = alias;
+        const country = get('country'); if(country) fields.country.value = country;
+        const region = get('region'); if(region) fields.region.value = region;
+        const city = get('city'); if(city) fields.city.value = city;
+        const district = get('district'); if(district) fields.district.value = district;
+
+        // Defaults utili
+        if(!fields.canonicalTime.value){
+          // Non imponiamo "tempo canonico" del sistema: l'utente deve inserirlo.
+          fields.canonicalTime.value = "";
+        }
+        if(!fields.iprId.value){
+          // ID suggerito, non vincolante
+          const d = new Date();
+          const y = d.getFullYear();
+          const m = String(d.getMonth()+1).padStart(2,'0');
+          const da = String(d.getDate()).padStart(2,'0');
+          fields.iprId.value = `IPR-${y}${m}${da}-0001`;
+        }
+      }
+
+      function clean(v){ return (v || '').trim(); }
+
+      function buildManifest(){
+        // Fail-closed minimo
+        const iprId = clean(fields.iprId.value);
+        const canonicalTime = clean(fields.canonicalTime.value);
+        const objectHash = clean(fields.objectHash.value);
+
+        if(!iprId || !canonicalTime || !objectHash){
+          status.textContent = "Errore: IPR-ID, Tempo canonico e Hash oggetto sono obbligatori (fail-closed).";
+          status.style.color = "rgba(255,107,107,.95)";
+          return null;
+        }
+
+        const manifest = {
+          proto: "IPR_MANIFEST",
+          version: "1.0",
+          ipr_id: iprId,
+          time: {
+            canonical: canonicalTime
+          },
+          scope: {
+            path: clean(fields.path.value) || "citizen",
+            lang: clean(fields.lang.value) || "it"
+          },
+          subject: {
+            alias: clean(fields.alias.value) || null,
+            locale: {
+              country: clean(fields.country.value) || null,
+              region: clean(fields.region.value) || null,
+              city: clean(fields.city.value) || null,
+              district: clean(fields.district.value) || null
+            }
+          },
+          object: {
+            type: clean(fields.objectType.value) || "text",
+            ref: clean(fields.objectRef.value) || null,
+            hash: objectHash,
+            desc: clean(fields.desc.value) || null
+          },
+          policy: clean(fields.policy.value) || "UE-FIRST/GDPR-MIN/HASH-ONLY/AUDIT/FAIL-CLOSED",
+          anchors: {
+            ipfs: clean(fields.ipfsCid.value) || null,
+            btc: clean(fields.btcTx.value) || null,
+            eth: clean(fields.ethTx.value) || null
+          },
+          audit: {
+            mutability: "APPEND_ONLY",
+            note: "Any evolution is a new event (no silent updates)."
+          }
+        };
+
+        // Ripulisci null annidati (estetica)
+        function stripNulls(obj){
+          if(obj && typeof obj === 'object'){
+            for(const k of Object.keys(obj)){
+              const v = obj[k];
+              if(v === null || v === "") delete obj[k];
+              else if(typeof v === 'object') stripNulls(v);
+            }
           }
         }
-      };
-    }
+        stripNulls(manifest);
 
-    function setPreview(obj){
-      document.getElementById("preview").textContent = JSON.stringify(obj, null, 2);
-    }
-
-    function fail(msg){
-      alert("FAIL-CLOSED: " + msg);
-      throw new Error(msg);
-    }
-
-    document.getElementById("btnClear").addEventListener("click", () => {
-      document.getElementById("title").value = "";
-      document.getElementById("desc").value = "";
-      document.getElementById("content").value = "";
-      setPreview({});
-    });
-
-    document.getElementById("btnGenerate").addEventListener("click", async () => {
-      try{
-        const title = document.getElementById("title").value.trim();
-        const desc = document.getElementById("desc").value.trim();
-        const scope = document.getElementById("scope").value;
-        const content = document.getElementById("content").value;
-
-        if(!title) fail("Titolo / riferimento obbligatorio.");
-        if(!content || content.trim().length < 8) fail("Contenuto obbligatorio (minimo 8 caratteri).");
-
-        const hashHex = await sha256Hex(content);
-        const manifest = buildManifest({title, desc, scope, hashHex});
-
-        // preview + storage
-        setPreview(manifest);
-        localStorage.setItem("HBCE_IPR_MANIFEST", JSON.stringify(manifest));
-        localStorage.setItem("HBCE_IPR_CONTENT", content); // serve a Verify (opzionale)
-
-        // redirect a output
-        window.location.href = "./success.html";
-      }catch(e){
-        // fail-closed: non fare altro
-        console.error(e);
+        status.textContent = "OK: manifest generato localmente (nessun invio).";
+        status.style.color = "rgba(107,255,149,.95)";
+        return manifest;
       }
-    });
+
+      function setOutput(manifest){
+        out.textContent = JSON.stringify(manifest, null, 2);
+      }
+
+      function downloadJSON(text, filename){
+        const blob = new Blob([text], {type: "application/json"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      // Hooks
+      el('genBtn').addEventListener('click', () => {
+        const m = buildManifest();
+        if(m) setOutput(m);
+      });
+
+      el('clearBtn').addEventListener('click', () => {
+        window.location.href = "./";
+      });
+
+      el('copyBtn').addEventListener('click', async () => {
+        try{
+          await navigator.clipboard.writeText(out.textContent);
+          status.textContent = "Copiato negli appunti.";
+          status.style.color = "rgba(107,255,149,.95)";
+        }catch(e){
+          status.textContent = "Impossibile copiare (permessi browser).";
+          status.style.color = "rgba(255,211,110,.95)";
+        }
+      });
+
+      el('downloadBtn').addEventListener('click', () => {
+        const txt = out.textContent || "{}";
+        const iprId = clean(fields.iprId.value) || "ipr";
+        downloadJSON(txt, `${iprId}.json`);
+      });
+
+      // Init
+      prefill();
+      // Output iniziale vuoto controllato
+      out.textContent = JSON.stringify({ info: "Compila i campi e genera il manifest." }, null, 2);
+    })();
   </script>
 </body>
 </html>
