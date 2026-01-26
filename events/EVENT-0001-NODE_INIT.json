@@ -2,7 +2,8 @@
   "event_id": "EVENT-0001",
   "event_type": "NODE_INIT",
   "node_level": "REGIONAL",
-  "node_name": "Nodo Bicibernetico Europeo — Piemonte",
+  "node_name": "Nodo Regionale Piemonte — Nodo Europeo Biocibernetico",
+  "principle": "Biological subject primacy over cybernetic extension",
   "territory": {
     "country": "IT",
     "region": "Piemonte",
@@ -10,16 +11,11 @@
     "district": "Barriera di Milano"
   },
   "subject_ref": "IPR-3",
-  "purpose": "Avvio operativo del nodo regionale come hub di coordinamento verificabile (hash-only) tra cittadini, territori e nodi interoperabili UE.",
+  "purpose": "Inizializzazione del nodo regionale come hub istituzionale di coordinamento verificabile (hash-only) per Regione→Città→Zona→Utente(IPR).",
   "protocol_ref": {
     "manifest": "MANIFEST.md",
     "governance": "GOVERNANCE.md",
     "privacy": "PRIVACY.md"
-  },
-  "anchors": {
-    "ipfs": "bafkreidhv73vqrxoweog33ls3rnwrgyicio234pcuks6mnep76yh56pj5q",
-    "btc": "9eeb29b67f4a649d563b95560fda5ddaa84777b13515f936837fc93d28554b45",
-    "eth": "0xf65eb314a1edd392fc15fcd9c65d22060ca39cbac04fcfcb48b978062500a7eff"
   },
   "payload_hash": "SHA-256:0000000000000000000000000000000000000000000000000000000000000000",
   "timestamp": "2026-01-19T15:30:00+01:00",
