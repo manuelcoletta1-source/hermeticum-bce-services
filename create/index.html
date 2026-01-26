@@ -1,205 +1,227 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rilascia IPR — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Rilascio guidato di un IPR (Identity Primary Record): comprendi il perimetro, genera il record, verifica l’esito.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create / IPR — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Rilascia un IPR: genera un manifest minimo + hash (SHA-256) per integrità, audit e continuità. UE-first, GDPR-min, fail-closed." />
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
-    header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
-    header{padding-top:3.5rem}
-    h1{font-size:2.2rem;margin:0 0 .5rem}
-    h2{margin-top:0}
-    .sub{opacity:.85}
-    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:1.5rem}
-    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
-    .cta{display:inline-block;margin:.5rem .4rem 0 0;padding:.7rem 1.1rem;border:1px solid #444;border-radius:4px;color:#fff;text-decoration:none;font-weight:500}
-    .cta.primary{border-color:#888}
-    ul{margin-top:.5rem}
-    .warn{opacity:.9}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    textarea,input{width:100%;background:#0f0f0f;color:#e6e6e6;border:1px solid #222;border-radius:6px;padding:10px;box-sizing:border-box}
-    label{display:block;margin:.75rem 0 .25rem;opacity:.9}
-    button{background:#111;color:#fff;border:1px solid #444;border-radius:4px;padding:.7rem 1.1rem;cursor:pointer;font-weight:600}
-    button.primary{border-color:#888}
-    .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.75rem}
-    .line{height:1px;background:#222;margin:1.2rem 0}
-    .hint{opacity:.85;font-size:.95rem}
+    :root{
+      --bg:#0b0f14; --card:#0f1620; --muted:#9fb0c3; --text:#e9f1fb; --line:#1b2735;
+      --accent:#7dd3fc; --warn:#fde68a;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:22px 16px}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;border:1px solid var(--line);background:rgba(255,255,255,.02);padding:12px 14px;border-radius:16px}
+    .pill{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+    h1{margin:14px 0 6px;font-size:24px}
+    h2{margin:0 0 8px;font-size:16px}
+    p{margin:0 0 10px;color:var(--muted)}
+    .grid{display:grid;gap:12px}
+    @media (min-width:860px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
+    .card{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:14px}
+    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:12px}
+    input, textarea, select{
+      width:100%; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--text);
+      padding:10px 10px; border-radius:14px; outline:none;
+    }
+    textarea{min-height:140px; resize:vertical}
+    .row{display:grid;gap:10px}
+    @media (min-width:860px){ .row.two{grid-template-columns:1fr 1fr} }
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{
+      border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--text);
+      padding:10px 12px; border-radius:14px; cursor:pointer;
+    }
+    button.primary{border-color:rgba(125,211,252,.35);background:rgba(125,211,252,.10)}
+    .mini{font-size:12px;color:var(--muted)}
+    pre{
+      margin:10px 0 0; padding:12px; border-radius:16px; border:1px solid var(--line);
+      background:rgba(0,0,0,.18); overflow:auto; color:var(--text); font-size:12px;
+    }
+    .warn{color:var(--warn)}
+    footer{margin-top:14px;color:var(--muted);text-align:center}
   </style>
 </head>
 
 <body>
-
-<header>
-  <div class="badge">Create / IPR</div>
-  <h1>Rilascia un IPR</h1>
-  <p class="sub">
-    Stai creando un <strong>IPR (Identity Primary Record)</strong>: un record tecnico di origine
-    verificabile per integrità, audit e continuità operativa.
-  </p>
-
-  <div style="margin-top:1rem;">
-    <a class="cta" href="../citizen/">Citizen</a>
-    <a class="cta" href="../professional/">Professional</a>
-    <a class="cta" href="../verify/">Verifica</a>
-    <a class="cta" href="../">Home</a>
-  </div>
-</header>
-
-<section>
-  <h2>Prima di procedere</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Cosa stai facendo</h3>
-      <p>
-        Crei una <strong>radice tecnica</strong> (manifest + hash) che descrive l’origine di un contenuto
-        o di un insieme di dati.
-      </p>
+  <div class="wrap">
+    <div class="nav">
+      <span class="pill">UE-first</span>
+      <span class="pill">GDPR-min</span>
+      <span class="pill">audit-by-design</span>
+      <span class="pill">fail-closed</span>
+      <span class="pill"><a href="../citizen/">Citizen</a></span>
+      <span class="pill"><a href="../professional/">Professional</a></span>
+      <span class="pill"><a href="../verify/">Verify</a></span>
+      <span class="pill"><a href="../">Home</a></span>
     </div>
-    <div class="card">
-      <h3>Cosa NON stai facendo</h3>
-      <ul>
-        <li>Identità legale</li>
-        <li>Firma elettronica qualificata</li>
-        <li>Accesso a servizi pubblici</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Regola chiave</h3>
-      <p class="warn">
-        La fiducia nasce dalla <strong>verifica</strong>, non dalla creazione.
-        In caso di dubbio → <strong>fail-closed</strong>.
-      </p>
-    </div>
-  </div>
-</section>
 
-<section>
-  <h2>Processo di rilascio (5 step)</h2>
-  <div class="grid">
-    <div class="card"><strong>1)</strong> Selezione contenuto</div>
-    <div class="card"><strong>2)</strong> Generazione hash</div>
-    <div class="card"><strong>3)</strong> Creazione manifest</div>
-    <div class="card"><strong>4)</strong> (Opzionale) ancoraggio temporale</div>
-    <div class="card"><strong>5)</strong> Output IPR e verifica</div>
-  </div>
-</section>
-
-<section>
-  <h2>Dati di input (minimi)</h2>
-  <div class="card">
-    <label for="title">Titolo / riferimento</label>
-    <input id="title" placeholder="Esempio: Documento tecnico v1.0">
-
-    <label for="description">Descrizione (facoltativa)</label>
-    <textarea id="description" placeholder="Descrizione sintetica del contenuto..."></textarea>
-
-    <label for="content">Contenuto di riferimento</label>
-    <textarea id="content" placeholder="Testo, hash esterno, riferimento a file, ecc."></textarea>
-
-    <div class="line"></div>
-
-    <p class="hint">
-      Usa solo dati che sei autorizzato a trattare. Vedi <a href="../terms/">Termini</a>.
+    <h1>Rilascia un IPR (manifest + hash)</h1>
+    <p>
+      Qui generi un <b>record tecnico di origine</b>: un manifest minimo + hash (SHA-256).
+      Regola: la fiducia nasce dalla verifica. Se qualcosa non torna → <b>fail-closed</b>.
     </p>
 
-    <div class="row">
-      <button class="primary" id="releaseBtn">Rilascia IPR</button>
-      <a class="cta" href="success.html">Output IPR</a>
+    <div class="grid cols-2">
+      <div class="card">
+        <h2>Input (minimo, GDPR-min)</h2>
+        <p>Evita dati personali inutili. L’IPR registra precedenza e integrità, non identità legale.</p>
+
+        <label for="title">Titolo / riferimento *</label>
+        <input id="title" placeholder="es. Specifica v1 — Documento X — Release Y" />
+
+        <label for="desc">Descrizione (facoltativa, 1 riga)</label>
+        <input id="desc" placeholder="es. Manifest di rilascio tecnico (nessun dato personale)" />
+
+        <div class="row two">
+          <div>
+            <label for="scope">Scope</label>
+            <select id="scope">
+              <option value="personal">personal</option>
+              <option value="professional">professional</option>
+              <option value="institution">institution</option>
+            </select>
+          </div>
+          <div>
+            <label for="hashAlg">Hash</label>
+            <select id="hashAlg" disabled>
+              <option>SHA-256</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="content">Contenuto di riferimento *</label>
+        <textarea id="content" placeholder="Incolla qui il testo o un contenuto rappresentativo. (Se è un file, incolla il suo testo o una stringa di riferimento coerente)"></textarea>
+
+        <div class="mini warn">
+          Nota: questa UI genera hash dal testo incollato. Per file binari, la procedura “audit-grade” è: hash locale del file + manifest (vedi Evidence).
+        </div>
+
+        <div class="btns">
+          <button class="primary" id="btnGenerate">Genera IPR</button>
+          <button id="btnClear">Pulisci</button>
+        </div>
+
+        <div class="mini" style="margin-top:10px">
+          Perimetro: non è SPID/CIE/EUDI Wallet, non è firma qualificata, non produce effetti giuridici automatici. 2
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Output (manifest minimo)</h2>
+        <p>
+          Quando generi, salviamo il manifest nel browser (localStorage) e ti mandiamo alla pagina <b>Output</b> per scaricare e conservare.
+          Senza conservazione non esiste continuità operativa. 3
+        </p>
+
+        <div class="mini">Anteprima manifest (solo dopo “Genera IPR”):</div>
+        <pre id="preview">{ }</pre>
+
+        <div class="hr" style="height:1px;background:var(--line);margin:14px 0"></div>
+
+        <h2>Esiti “fail-closed” (cosa aspettarsi)</h2>
+        <ul class="mini" style="margin:0;padding-left:16px">
+          <li><b>Valid</b>: manifest coerente + (se fornito contenuto) hash verificato.</li>
+          <li><b>Invalid</b>: mismatch o campi obbligatori mancanti.</li>
+          <li><b>Inconclusive</b>: dati insufficienti (es. contenuto non disponibile) → non usare come prova.</li>
+        </ul>
+        <div class="mini" style="margin-top:8px">Questi esiti sono definiti in Verify. 4</div>
+      </div>
     </div>
+
+    <footer>
+      <div style="margin-top:14px">
+        <b>HERMETICUM B.C.E.</b><br/>
+        HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
+        HERMETICUM B.C.E. S.r.l.
+      </div>
+      <div class="mini" style="margin-top:8px">Platform status: Experimental · Jurisdiction: EU</div>
+    </footer>
   </div>
-</section>
 
-<section>
-  <h2>Cosa ottieni</h2>
-  <div class="grid">
-    <div class="card">
-      <ul>
-        <li>Manifest IPR (scaricabile)</li>
-        <li>Hash verificabili</li>
-        <li>Riferimento temporale locale</li>
-      </ul>
-    </div>
-    <div class="card">
-      <p class="warn">
-        Sei responsabile della <strong>conservazione</strong>.
-        Senza conservazione non esiste continuità operativa.
-      </p>
-    </div>
-    <div class="card">
-      <p>
-        Prossimo passo:
-        <a class="cta primary" href="../verify/">Verifica IPR</a>
-      </p>
-    </div>
-  </div>
-</section>
-
-<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
-  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
-    <div>
-      <strong>HERMETICUM B.C.E.</strong><br>
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
-    </div>
-    <div>
-      <a href="../legal/privacy.html">Privacy</a><br>
-      <a href="../legal/cookies.html">Cookies</a><br>
-      <a href="../legal/accessibility.html">Accessibility</a>
-    </div>
-    <div>
-      <a href="../legal/legal-notice.html">Legal notice</a><br>
-      <a href="../legal/contact.html">Contact</a>
-    </div>
-    <div>
-      Platform status: <strong>Experimental</strong><br>
-      Jurisdiction: <strong>EU</strong>
-    </div>
-  </div>
-</footer>
-
-<script>
-  function sha256(str) {
-    const enc = new TextEncoder();
-    return crypto.subtle.digest('SHA-256', enc.encode(str)).then(buf =>
-      Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
-    );
-  }
-
-  async function releaseIPR() {
-    const title = document.getElementById('title').value.trim();
-    const description = document.getElementById('description').value.trim();
-    const content = document.getElementById('content').value.trim();
-
-    if (!title || !content) {
-      alert("Titolo e contenuto sono obbligatori.");
-      return;
+  <script>
+    function uuidLike(){
+      // non è un UUID “spec”, ma è sufficiente per identificatore locale (record tecnico).
+      return "ipr-" + crypto.getRandomValues(new Uint32Array(4)).join("-");
     }
 
-    const hash = await sha256(content);
+    async function sha256Hex(text){
+      const enc = new TextEncoder();
+      const data = enc.encode(text);
+      const hash = await crypto.subtle.digest("SHA-256", data);
+      const bytes = Array.from(new Uint8Array(hash));
+      return bytes.map(b => b.toString(16).padStart(2,"0")).join("");
+    }
 
-    const manifest = {
-      schema: "HBCE-IPR-1",
-      title,
-      description,
-      hash_sha256: hash,
-      released_at: new Date().toISOString(),
-      jurisdiction: "EU",
-      status: "experimental"
-    };
+    function isoNow(){
+      // timestamp leggibile e confrontabile
+      return new Date().toISOString();
+    }
 
-    const manifestText = JSON.stringify(manifest, null, 2);
+    function buildManifest({title, desc, scope, hashHex}){
+      return {
+        proto: "HERMETICUM_BCE_IPR",
+        version: "0.1",
+        ipr_id: uuidLike(),
+        created_at_utc: isoNow(),
+        jurisdiction: "EU",
+        policy: ["UE-first","GDPR-min","HASH-only","AUDIT","FAIL-CLOSED"],
+        scope,
+        object: {
+          title,
+          description: desc || "",
+          hash: {
+            alg: "SHA-256",
+            value: hashHex
+          }
+        }
+      };
+    }
 
-    localStorage.setItem("hbce_ipr_manifest", manifestText);
-    localStorage.setItem("hbce_ipr_released_at", manifest.released_at);
+    function setPreview(obj){
+      document.getElementById("preview").textContent = JSON.stringify(obj, null, 2);
+    }
 
-    window.location.href = "success.html";
-  }
+    function fail(msg){
+      alert("FAIL-CLOSED: " + msg);
+      throw new Error(msg);
+    }
 
-  document.getElementById('releaseBtn').addEventListener('click', releaseIPR);
-</script>
+    document.getElementById("btnClear").addEventListener("click", () => {
+      document.getElementById("title").value = "";
+      document.getElementById("desc").value = "";
+      document.getElementById("content").value = "";
+      setPreview({});
+    });
 
+    document.getElementById("btnGenerate").addEventListener("click", async () => {
+      try{
+        const title = document.getElementById("title").value.trim();
+        const desc = document.getElementById("desc").value.trim();
+        const scope = document.getElementById("scope").value;
+        const content = document.getElementById("content").value;
+
+        if(!title) fail("Titolo / riferimento obbligatorio.");
+        if(!content || content.trim().length < 8) fail("Contenuto obbligatorio (minimo 8 caratteri).");
+
+        const hashHex = await sha256Hex(content);
+        const manifest = buildManifest({title, desc, scope, hashHex});
+
+        // preview + storage
+        setPreview(manifest);
+        localStorage.setItem("HBCE_IPR_MANIFEST", JSON.stringify(manifest));
+        localStorage.setItem("HBCE_IPR_CONTENT", content); // serve a Verify (opzionale)
+
+        // redirect a output
+        window.location.href = "./success.html";
+      }catch(e){
+        // fail-closed: non fare altro
+        console.error(e);
+      }
+    });
+  </script>
 </body>
 </html>
