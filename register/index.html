@@ -1,266 +1,251 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EVT-0012 — REGISTRATION_GATE</title>
-  <meta name="description" content="EVT-0012 — REGISTRATION_GATE. Richiesta cittadino UE. Hash-only, UE-first, fail-closed." />
-  <meta name="robots" content="noindex,nofollow" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — Attiva IPR → Diventa Nodo Regionale | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Varco unico: attiva IPR e diventa nodo foglia del Nodo Regionale Piemonte. UE-first, GDPR-min, hash-only, fail-closed." />
   <style>
-    :root{
-      --bg:#0b0e11; --fg:#e6e6e6; --muted:#9aa0a6; --accent:#5eead4;
-      --card:#0f1318; --line:#1f2937; --warn:#f87171; --ok:#34d399;
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
+    header,main,footer{max-width:1100px;margin:auto;padding:2.4rem 1.5rem}
+    a{color:#58a6ff;text-decoration:none}
+    h1{font-size:2rem;margin:0 0 .5rem}
+    p,label{color:#9da7b1}
+    .box{border:1px solid #30363d;border-radius:12px;padding:1.4rem;background:#0d1117;margin-top:1rem}
+    .grid{display:grid;grid-template-columns:1fr;gap:1rem}
+    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+    input,select,textarea{
+      width:100%;box-sizing:border-box;background:#161b22;color:#e6edf3;border:1px solid #30363d;border-radius:10px;
+      padding:.8rem;font-size:1rem;outline:none
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,sans-serif;line-height:1.45}
-    main{min-height:100vh;display:grid;place-items:center;padding:24px}
-    .panel{max-width:860px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
-    h1{margin:0 0 6px 0;font-size:1.45rem}
-    .sub{color:var(--muted);margin:0 0 18px 0}
-    .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.8rem;color:var(--muted);margin-bottom:14px}
-    .grid{display:grid;gap:12px}
-    @media(min-width:760px){ .grid.two{grid-template-columns:1fr 1fr} }
-    label{display:block;font-size:.9rem;margin:0 0 6px 2px;color:var(--muted)}
-    input, select, textarea{
-      width:100%; padding:12px 12px; border-radius:10px;
-      border:1px solid var(--line); background:#0b0e11; color:var(--fg);
-      outline:none;
-    }
-    input:focus, select:focus, textarea:focus{border-color:#334155}
-    .row{display:grid;gap:12px}
-    .section{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
-    .hint{font-size:.85rem;color:var(--muted);margin-top:8px}
-    .actions{display:grid;gap:10px;margin-top:14px}
-    @media(min-width:760px){ .actions{grid-template-columns:1fr 1fr} }
+    textarea{min-height:170px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr;gap:.75rem}
+    @media(min-width:900px){.row{grid-template-columns:1fr 1fr}}
+    .btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
     button{
-      padding:13px 16px;border-radius:10px;border:1px solid var(--line);
-      background:var(--accent); color:#022c22; font-weight:700; cursor:pointer;
+      background:#238636;border:1px solid #2ea043;color:#fff;border-radius:10px;padding:.7rem 1rem;
+      cursor:pointer;font-weight:800
     }
-    button.secondary{background:transparent;color:var(--fg)}
-    .box{
-      margin-top:12px; padding:14px; border:1px solid var(--line); border-radius:10px;
-      background:#0b0e11;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:.85rem; white-space:pre-wrap; word-break:break-word;
-    }
-    .status{font-size:.9rem;margin-top:10px}
-    .ok{color:var(--ok)}
-    .warn{color:var(--warn)}
-    a{color:var(--accent);text-decoration:none}
-    .foot{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:var(--muted);font-size:.8rem}
-    .mini{font-size:.85rem;color:var(--muted)}
-    .req{color:var(--warn);font-weight:700;margin-left:6px}
+    button.secondary{background:#161b22;border:1px solid #30363d;color:#e6edf3}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    pre{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:1rem;overflow:auto}
+    .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:.25rem .6rem;margin:.2rem .3rem 0 0;color:#9da7b1;font-size:.9rem}
+    .warn{border-left:3px solid #f85149;padding-left:1rem;color:#c9d1d9}
+    .ok{border-left:3px solid #2ea043;padding-left:1rem;color:#c9d1d9}
+    footer{border-top:1px solid #30363d;color:#8b949e;font-size:.9rem}
   </style>
 </head>
-
 <body>
-<main>
-  <div class="panel">
-    <span class="badge">EVT-0012 · REGISTRATION_GATE · UE_FIRST · HASH_ONLY · FAIL_CLOSED</span>
-    <h1>Richiesta Cittadino UE</h1>
-    <p class="sub">
-      Qui non crei un account: generi un <strong>evento territoriale</strong>.  
-      L’output è un <strong>hash</strong> (SHA-256) del payload normalizzato. Nessun invio automatico.
+
+<header>
+  <h1>Register — Attiva IPR → Diventa Nodo Regionale</h1>
+  <p>
+    Varco unico del <strong>Nodo Regionale Piemonte</strong>.
+    Attivare un IPR significa creare un legame verificabile tra <strong>soggetto biologico</strong> e territorio (Regione→Città→Zona),
+    tramite evento <strong>hash-only</strong>.
+  </p>
+  <div>
+    <span class="pill">BIOCIBERNETICO</span>
+    <span class="pill">PRIMATO BIOLOGICO</span>
+    <span class="pill">UE-FIRST</span>
+    <span class="pill">GDPR-MIN</span>
+    <span class="pill">HASH-ONLY</span>
+    <span class="pill">FAIL-CLOSED</span>
+  </div>
+  <p class="warn">
+    Non inserire documenti o dati personali sensibili in chiaro. Il portale genera e pubblica solo l’hash del payload off-chain.
+  </p>
+  <p><a href="../">Home</a> · <a href="../node/">Nodo Piemonte</a> · <a href="../verify/">Verify</a> · <a href="../privacy/">Privacy</a></p>
+</header>
+
+<main class="grid">
+  <section class="box">
+    <h2>1) Territorio (Nodo Regionale Piemonte)</h2>
+    <p>Baseline istituzionale precompilata. Puoi cambiare città/zona se il nodo lo consente in futuro, ma il nodo regionale resta Piemonte.</p>
+
+    <div class="row">
+      <div>
+        <label for="country">Nazione (ISO)</label>
+        <input id="country" value="IT" />
+      </div>
+      <div>
+        <label for="region">Regione (Nodo)</label>
+        <input id="region" value="Piemonte" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="city">Città</label>
+        <input id="city" value="Torino" />
+      </div>
+      <div>
+        <label for="district">Zona / Quartiere</label>
+        <input id="district" value="Barriera di Milano" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="ipr">Riferimento IPR (es. IPR-3)</label>
+        <input id="ipr" value="IPR-3" />
+      </div>
+      <div>
+        <label for="eventType">Tipo evento</label>
+        <select id="eventType">
+          <option value="IPR_REGION_NODE_JOIN" selected>IPR_REGION_NODE_JOIN</option>
+          <option value="CITIZEN_NODE_REQUEST">CITIZEN_NODE_REQUEST</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="note mono">Timestamp: inserito automaticamente (ISO-8601).</p>
+  </section>
+
+  <section class="box">
+    <h2>2) Payload off-chain (opzionale) → Hash (locale)</h2>
+    <p>
+      Il payload è una tua nota privata o un riferimento alle prove conservate da te (off-chain).
+      Il sistema calcola <strong>SHA-256</strong> localmente nel browser.
     </p>
 
-    <form id="regForm" novalidate>
-      <div class="grid two">
-        <div>
-          <label for="nation">Nazione<span class="req">*</span></label>
-          <input id="nation" name="nation" autocomplete="country-name" required placeholder="Es. Italia" />
-        </div>
-        <div>
-          <label for="region">Regione<span class="req">*</span></label>
-          <input id="region" name="region" required placeholder="Es. Piemonte" />
-        </div>
-      </div>
+    <label for="payload">Payload off-chain (testo/JSON) — NON verrà pubblicato</label>
+    <textarea id="payload" class="mono" placeholder='Esempio (off-chain):
+{
+  "type": "IPR_ACTIVATION",
+  "summary": "Attivazione IPR come nodo foglia nel Nodo Regionale Piemonte",
+  "storage": "OFF-CHAIN",
+  "privacy": "DO_NOT_PUBLISH"
+}'></textarea>
 
-      <div class="grid two" style="margin-top:12px">
-        <div>
-          <label for="city">Città<span class="req">*</span></label>
-          <input id="city" name="city" autocomplete="address-level2" required placeholder="Es. Torino" />
-        </div>
-        <div>
-          <label for="district">Quartiere / Zona<span class="req">*</span></label>
-          <input id="district" name="district" required placeholder="Es. Barriera di Milano" />
-        </div>
-      </div>
-
-      <div class="grid two" style="margin-top:12px">
-        <div>
-          <label for="name">Nome<span class="req">*</span></label>
-          <input id="name" name="name" autocomplete="given-name" required />
-        </div>
-        <div>
-          <label for="surname">Cognome<span class="req">*</span></label>
-          <input id="surname" name="surname" autocomplete="family-name" required />
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="grid two">
-          <div>
-            <label for="cie">CIE (opzionale)</label>
-            <input id="cie" name="cie" inputmode="text" placeholder="Inserisci identificativo CIE (se vuoi)" />
-            <div class="hint">Aumenta la forza probatoria dell’evento (non obbligatorio).</div>
-          </div>
-          <div>
-            <label for="taxcode">Codice Fiscale (opzionale)</label>
-            <input id="taxcode" name="taxcode" inputmode="text" placeholder="Es. RSSMRA80A01H501U" />
-            <div class="hint">Se presente, viene normalizzato (ma resta hash-only).</div>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="mini">
-            <strong>Termini minimi (hash-only)</strong><br/>
-            Proseguendo dichiari che i dati sono corretti e accetti che questa azione produca un
-            <strong>evento opponibile</strong> in modalità <strong>append-only</strong>.  
-            Nessun profilo viene creato. Nessun dato viene centralizzato su questa pagina.
-          </div>
-        </div>
-
-        <div class="actions">
-          <button type="submit">Genera evento (EVT-0012) + Hash</button>
-          <button class="secondary" type="button" id="resetBtn">Reset</button>
-        </div>
-      </div>
-    </form>
-
-    <div class="section">
-      <strong>Output (locale)</strong>
-      <div class="status" id="statusLine">Stato: <span class="warn">INATTIVO</span></div>
-
-      <div class="hint">Payload normalizzato (JSON):</div>
-      <div class="box" id="payloadBox">—</div>
-
-      <div class="hint">registration_hash (SHA-256 hex):</div>
-      <div class="box" id="hashBox">—</div>
+    <div class="btns">
+      <button id="activateBtn">ATTIVA IPR (genera evento)</button>
+      <button id="copyBtn" class="secondary">Copia JSON</button>
+      <button id="downloadBtn" class="secondary">Scarica JSON</button>
+      <button id="resetBtn" class="secondary">Reset</button>
     </div>
 
-    <div class="foot">
-      <span>Politica: UE_FIRST · GDPR_MIN · HASH_ONLY</span>
-      <span>Audit: APPEND_ONLY · FAIL_CLOSED</span>
-    </div>
-  </div>
+    <p class="ok">
+      Se l’evento è generato, hai creato la tua traccia di ingresso: <strong>sei un nodo foglia regionale</strong> (verificabile).
+    </p>
+  </section>
+
+  <section class="box" style="grid-column:1/-1">
+    <h2>3) Evento generato (hash-only)</h2>
+    <pre id="output" class="mono">{}</pre>
+    <p class="note">
+      Firma digitale: opzionale. Il campo <span class="mono">signature</span> resta <span class="mono">null</span>.
+      Puoi firmare l’evento successivamente e sostituire il valore.
+    </p>
+  </section>
 </main>
 
+<footer>
+  <p>
+    HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
+    HERMETICUM B.C.E. S.r.l. — Register (Nodo Regionale Piemonte)
+  </p>
+</footer>
+
 <script>
-  // --- Normalizzazione: semplice, deterministica, audit-friendly.
-  function normSpaces(s) {
-    return (s || "").trim().replace(/\s+/g, " ");
-  }
-  function normUpper(s) {
-    return normSpaces(s).toUpperCase();
-  }
-  function normTitle(s) {
-    // Title-case conservativo (non perfetto per tutte le lingue, ma stabile).
-    const t = normSpaces(s).toLowerCase();
-    return t.split(" ").filter(Boolean).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-  }
-  function onlyAlnumUpper(s) {
-    return normUpper(s).replace(/[^A-Z0-9]/g, "");
-  }
+  const $ = (id) => document.getElementById(id);
 
   async function sha256Hex(text) {
     const enc = new TextEncoder();
-    const buf = enc.encode(text);
-    const digest = await crypto.subtle.digest("SHA-256", buf);
-    const bytes = Array.from(new Uint8Array(digest));
-    return bytes.map(b => b.toString(16).padStart(2, "0")).join("");
+    const data = enc.encode(text);
+    const digest = await crypto.subtle.digest("SHA-256", data);
+    const bytes = new Uint8Array(digest);
+    return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
   }
 
-  function nowRFC3339() {
-    // ISO 8601 in UTC per output; coerente e confrontabile.
-    return new Date().toISOString();
+  function isoNow() { return new Date().toISOString(); }
+
+  function isValidTerritory(t) {
+    return t.country && t.region && t.city && t.district;
   }
 
-  const form = document.getElementById("regForm");
-  const resetBtn = document.getElementById("resetBtn");
-  const payloadBox = document.getElementById("payloadBox");
-  const hashBox = document.getElementById("hashBox");
-  const statusLine = document.getElementById("statusLine");
-
-  function setStatus(state, ok=false) {
-    statusLine.innerHTML = 'Stato: <span class="' + (ok ? 'ok' : 'warn') + '">' + state + '</span>';
-  }
-
-  function buildNormalizedPayload(raw) {
-    // Nota: nome/cognome in Title-case; luogo in Title-case; CF in alfanumerico uppercase.
-    const declared = {
-      nation: normTitle(raw.nation),
-      region: normTitle(raw.region),
-      city: normTitle(raw.city),
-      district: normTitle(raw.district),
-      name: normTitle(raw.name),
-      surname: normTitle(raw.surname)
+  function buildEvent(payloadHash) {
+    return {
+      event_type: $("eventType").value,
+      node_level: "USER_LEAF",
+      region_node: $("region").value.trim(),
+      territory: {
+        country: $("country").value.trim(),
+        region: $("region").value.trim(),
+        city: $("city").value.trim(),
+        district: $("district").value.trim()
+      },
+      subject_ref: $("ipr").value.trim(),
+      payload_hash: "SHA-256:" + payloadHash,
+      timestamp: isoNow(),
+      signature: null,
+      policy: ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"],
+      notes: "Attivazione IPR → nodo foglia regionale (primato biologico). Payload off-chain custodito dal soggetto."
     };
-
-    const docs = {};
-    const cie = normSpaces(raw.cie);
-    const tax = onlyAlnumUpper(raw.taxcode);
-
-    if (cie) docs.cie = cie;
-    if (tax) docs.tax_code = tax;
-
-    // Envelope EVT-0012 (hash-only): niente PII “extra”, niente indirizzi, niente civico.
-    const payload = {
-      evt: "EVT-0012",
-      name: "REGISTRATION_GATE",
-      scope: "EU_CITIZEN_REQUEST",
-      policy: ["UE_FIRST","GDPR_MIN","HASH_ONLY","FAIL_CLOSED"],
-      time: nowRFC3339(),
-      declared_identity: declared,
-      identity_documents: Object.keys(docs).length ? docs : { none: true }
-    };
-
-    return payload;
   }
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  function pretty(obj) { return JSON.stringify(obj, null, 2); }
 
-    // fail-closed: se mancano i required -> stop.
-    const requiredIds = ["nation","region","city","district","name","surname"];
-    for (const id of requiredIds) {
-      const el = document.getElementById(id);
-      if (!normSpaces(el.value)) {
-        setStatus("DENY (campi obbligatori mancanti)", false);
-        el.focus();
-        return;
-      }
+  $("activateBtn").addEventListener("click", async () => {
+    if (!window.isSecureContext) {
+      $("output").textContent = pretty({ error: "FAIL-CLOSED: contesto non sicuro. Usa HTTPS." });
+      return;
+    }
+    if (!(window.crypto && window.crypto.subtle)) {
+      $("output").textContent = pretty({ error: "FAIL-CLOSED: WebCrypto non disponibile (crypto.subtle)." });
+      return;
     }
 
-    setStatus("PROCESSING…", true);
-
-    const raw = {
-      nation: document.getElementById("nation").value,
-      region: document.getElementById("region").value,
-      city: document.getElementById("city").value,
-      district: document.getElementById("district").value,
-      name: document.getElementById("name").value,
-      surname: document.getElementById("surname").value,
-      cie: document.getElementById("cie").value,
-      taxcode: document.getElementById("taxcode").value
+    const territory = {
+      country: $("country").value.trim(),
+      region: $("region").value.trim(),
+      city: $("city").value.trim(),
+      district: $("district").value.trim()
     };
 
-    const payload = buildNormalizedPayload(raw);
-    const normalizedText = JSON.stringify(payload); // deterministico (ordine chiavi stabile in JS moderno)
-    const hash = await sha256Hex(normalizedText);
+    if (!isValidTerritory(territory)) {
+      $("output").textContent = pretty({ error: "FAIL-CLOSED: territorio incompleto." });
+      return;
+    }
+    if (!$("ipr").value.trim()) {
+      $("output").textContent = pretty({ error: "FAIL-CLOSED: subject_ref (IPR) mancante." });
+      return;
+    }
+    // Regione deve restare Piemonte per questo nodo
+    if (territory.region.toLowerCase() !== "piemonte") {
+      $("output").textContent = pretty({ error: "FAIL-CLOSED: questo varco è vincolato al Nodo Regionale Piemonte." });
+      return;
+    }
 
-    payloadBox.textContent = JSON.stringify(payload, null, 2);
-    hashBox.textContent = hash;
-
-    // Output stato locale (nessun invio da questa pagina)
-    setStatus("PENDING (hash generato localmente)", true);
+    const payload = $("payload").value || "";
+    const hash = await sha256Hex(payload);
+    const evt = buildEvent(hash);
+    $("output").textContent = pretty(evt);
   });
 
-  resetBtn.addEventListener("click", () => {
-    form.reset();
-    payloadBox.textContent = "—";
-    hashBox.textContent = "—";
-    setStatus("INATTIVO", false);
+  $("copyBtn").addEventListener("click", async () => {
+    const text = $("output").textContent || "{}";
+    await navigator.clipboard.writeText(text);
+  });
+
+  $("downloadBtn").addEventListener("click", () => {
+    const text = $("output").textContent || "{}";
+    const blob = new Blob([text], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "event-ipr-region-node-join.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  $("resetBtn").addEventListener("click", () => {
+    $("payload").value = "";
+    $("output").textContent = "{}";
   });
 </script>
+
 </body>
 </html>
