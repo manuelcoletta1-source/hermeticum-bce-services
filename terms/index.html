@@ -1,154 +1,235 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terms — HERMETICUM Services</title>
-  <meta name="description" content="Termini e principi operativi UE-first. Fail-closed, audit-by-design, hash-only." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Termini e Principi — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Termini, principi e policy UE-first di HERMETICUM B.C.E. — IPR, AI responsabile, GDPR-min, audit-by-design." />
+
   <style>
     :root{
-      --bg:#0b0c10; --panel:#0f1117; --line:#24262b; --text:#e8e8e8; --muted:#a9abb3;
-      --shadow:0 12px 36px rgba(0,0,0,.35); --r:16px; --r2:22px; --max:1100px;
+      --bg:#0b0f14; --panel:#0f1621; --text:#e7eef7; --muted:#b8c4d4;
+      --line:#243043; --accent:#7aa7ff; --ok:#6ee7b7; --warn:#fbbf24; --danger:#fb7185;
+      --r:16px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      background:radial-gradient(1200px 700px at 20% 0%, #121525 0%, rgba(18,21,37,0) 55%),
-                 radial-gradient(900px 600px at 80% 10%, #141b2a 0%, rgba(20,27,42,0) 55%),
-                 var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 10% 0%, #101a2a 0%, var(--bg) 55%) no-repeat;
       color:var(--text);
-      font:15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      letter-spacing:.2px;
+      line-height:1.65;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
-    .top{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r2);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow); position:sticky; top:14px; z-index:10; backdrop-filter: blur(10px);
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
+    .topbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r);
+      background: rgba(255,255,255,.02);
     }
-    .brand{font-weight:900; letter-spacing:.6px}
-    .nav{display:flex; gap:10px; flex-wrap:wrap}
-    .chip{
-      padding:8px 10px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(255,255,255,.03); color:var(--muted); font-weight:800; transition:.15s ease;
+    .nav a{
+      display:inline-block; padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line); margin-right:8px;
+      background: rgba(255,255,255,.02); color:var(--muted); font-size:13px;
     }
-    .chip:hover{transform:translateY(-1px); color:var(--text); background:rgba(255,255,255,.05)}
-    .hero{
-      margin-top:18px; border:1px solid var(--line); border-radius:var(--r2); padding:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
+    .nav a.active{background: rgba(122,167,255,.14); color:var(--text); border-color: rgba(122,167,255,.35)}
+    header{
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px 20px;
+      background: linear-gradient(180deg, rgba(122,167,255,.10), rgba(255,255,255,.02));
     }
-    .mark{margin:0 0 6px; font-weight:900}
-    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
-    h1{margin:0 0 8px; font-size:28px; line-height:1.15}
-    .sub{margin:0; color:var(--muted); max-width:85ch}
-    .section{margin-top:16px}
+    h1{margin:0; font-size:28px; line-height:1.25}
+    h2{margin-top:28px; font-size:20px}
+    h3{margin-top:18px; font-size:16px}
+    p{margin:10px 0; color:var(--muted)}
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    li{margin:6px 0}
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .pill{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 10px;
+      background: rgba(255,255,255,.02);
+      font-size:12px;
+      color:var(--muted);
+    }
     .card{
-      border:1px solid var(--line); border-radius:var(--r);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      padding:16px; box-shadow:var(--shadow);
-      margin-top:12px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      background: rgba(255,255,255,.02);
+      margin-top:14px;
     }
-    .card h2{margin:0 0 6px; font-size:18px}
-    .card p{margin:0; color:var(--muted)}
-    .list{margin:10px 0 0; padding-left:16px; color:var(--muted)}
-    .list li{margin:6px 0}
-    .callout{
-      margin-top:14px; border:1px dashed rgba(255,255,255,.18); border-radius:var(--r);
-      padding:14px; background:rgba(255,255,255,.02); color:var(--muted); font-weight:800;
+    .quote{
+      border-left:3px solid rgba(122,167,255,.55);
+      padding:10px 12px;
+      margin:12px 0 0;
+      background: rgba(122,167,255,.07);
+      border-radius:12px;
+      color:var(--text);
     }
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-    .footer{
-      margin-top:18px; color:var(--muted); font-size:12px; padding:14px 2px 0;
-      display:flex; gap:10px; justify-content:space-between; border-top:1px solid var(--line);
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      opacity:.95;
     }
+    .hr{height:1px; background:var(--line); margin:18px 0}
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">Terms</div>
-      <div class="nav">
-        <a class="chip" href="../">Home</a>
-        <a class="chip" href="../catalog/">Catalog</a>
-        <a class="chip" href="../onboarding/">Onboarding</a>
-        <a class="chip" href="../verify/">Verify</a>
+  <main class="wrap">
+
+    <div class="topbar">
+      <div>
+        <strong>HERMETICUM B.C.E.</strong><br/>
+        <span style="color:var(--muted); font-size:12px;">HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</span>
       </div>
+
+      <nav class="nav" aria-label="Navigazione">
+        <a href="../">Home</a>
+        <a href="../catalog/">Classi IPR</a>
+        <a href="../ai/">AI e IPR</a>
+        <a href="../create/">Rilascia IPR</a>
+        <a href="../verify/">Verifica</a>
+        <a class="active" href="./">Termini</a>
+      </nav>
     </div>
 
-    <header class="hero">
-      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
-      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
-
-      <h1>Termini e principi operativi</h1>
-      <p class="sub">
-        Questa sezione definisce i <b>principi vincolanti</b> dell’ecosistema HERMETICUM.
-        L’uso dei servizi implica accettazione di un modello <b>UE-first</b>,
-        <b>audit-by-design</b> e <b>fail-closed</b>.
+    <header>
+      <h1>Termini, Principi e Policy</h1>
+      <p>
+        Questa pagina definisce i <strong>principi operativi</strong> di HERMETICUM B.C.E.,
+        il perimetro dell’IPR e le condizioni di utilizzo della piattaforma,
+        secondo un modello <strong>UE-first</strong>.
       </p>
+
+      <div class="pillrow">
+        <div class="pill">UE-first</div>
+        <div class="pill">GDPR-min</div>
+        <div class="pill">hash-only</div>
+        <div class="pill">audit-by-design</div>
+        <div class="pill">fail-closed</div>
+      </div>
     </header>
 
-    <section class="section">
-      <div class="card">
-        <h2>Principio di verificabilità</h2>
-        <p>
-          Ogni attività reale deve essere <b>verificabile a posteriori</b>.
-          Eventi, decisioni e risultati sono validi solo se accompagnati da prove tracciate.
-        </p>
-        <ul class="list">
-          <li>assenza di prova ⇒ attività non valida</li>
-          <li>assenza di continuità ⇒ attività non opponibile</li>
-        </ul>
-      </div>
+    <section class="card">
+      <h2>1. Natura del servizio</h2>
+      <p>
+        HERMETICUM B.C.E. fornisce un servizio di <strong>rilascio di IPR (Identity Primary Record)</strong>,
+        inteso come <strong>identità digitale primaria computabile</strong>.
+      </p>
+      <ul>
+        <li>L’IPR <strong>non è</strong> un documento di identità statale.</li>
+        <li>L’IPR <strong>non sostituisce</strong> CIE, Codice Fiscale o SPID.</li>
+        <li>L’IPR <strong>integra</strong> l’identità esistente per usi digitali avanzati.</li>
+      </ul>
+    </section>
 
-      <div class="card">
-        <h2>Fail-closed</h2>
-        <p>
-          Il sistema opera in modalità <b>fail-closed</b>:
-          in mancanza di identità, firma, policy o evidenza, l’operazione è negata.
-        </p>
-        <ul class="list">
-          <li>nessuna eccezione manuale</li>
-          <li>nessuna fiducia implicita</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>UE-first / GDPR-min</h2>
-        <p>
-          HERMETICUM è progettato secondo i principi UE-first e GDPR-min.
-          I dati personali non sono mai esposti pubblicamente.
-        </p>
-        <ul class="list">
-          <li>pubblico = <b>hash-only</b></li>
-          <li>privato = dati reali (off-chain)</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>OPC e UNEBDO</h2>
-        <p>
-          Le decisioni operative sono determinate da <b>OPC</b> (policy computabili)
-          e dimostrate da <b>UNEBDO</b> (tracciatura ed evidenza).
-        </p>
-        <ul class="list">
-          <li>OPC produce esiti deterministici (ALLOW / DENY)</li>
-          <li>UNEBDO registra eventi e continuità temporale</li>
-        </ul>
-      </div>
-
-      <div class="callout">
-        Principio finale: <b>niente prova, niente operazione</b>.  
-        La fiducia non è concessa, è verificata.
+    <section class="card">
+      <h2>2. Dati e protezione (GDPR-min)</h2>
+      <p>
+        Il rilascio dell’IPR utilizza <strong>dati minimi e strutturali</strong>,
+        necessari esclusivamente all’ancoraggio identitario.
+      </p>
+      <ul>
+        <li>I dati identificativi non sono pubblicati.</li>
+        <li>I record sono gestiti in modalità <strong>hash-only</strong>.</li>
+        <li>Non è effettuata profilazione comportamentale.</li>
+      </ul>
+      <div class="quote">
+        Principio guida: <strong>verificabilità senza esposizione</strong>.
       </div>
     </section>
 
-    <div class="footer">
-      <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-      <div>HERMETICUM B.C.E. S.r.l.</div>
-    </div>
-  </div>
+    <section class="card">
+      <h2>3. Firma digitale a tre ancore</h2>
+      <p>
+        Ogni IPR è sigillato da una firma digitale composta da tre ancore crittografiche:
+        IPFS (esistenza), Bitcoin (tempo), Ethereum (tracciabilità).
+      </p>
+      <p>
+        La firma è identica per tutte le classi di IPR.  
+        Cambia esclusivamente <strong>l’oggetto firmato</strong> e quindi la responsabilità.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>4. Classi di IPR e responsabilità</h2>
+      <ul>
+        <li><strong>IPR BASE</strong> — firma dell’identità (esistenza digitale).</li>
+        <li><strong>IPR STRONG</strong> — firma di identità + ruolo + azioni rilevanti.</li>
+        <li><strong>IPR ENTERPRISE</strong> — firma di identità organizzativa + processi.</li>
+      </ul>
+      <p>
+        La sicurezza crittografica è la stessa per tutte le classi.
+        L’utente sceglie il livello di <strong>responsabilità</strong>.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>5. Intelligenza Artificiale</h2>
+      <p>
+        HERMETICUM B.C.E. <strong>non fornisce AI autonoma</strong>.
+        L’IPR rende l’uso dell’AI <strong>tracciabile, responsabile e auditabile</strong>.
+      </p>
+      <ul>
+        <li>L’AI non sostituisce il giudizio umano.</li>
+        <li>Ogni uso rilevante dell’AI resta attribuibile.</li>
+        <li>La responsabilità finale è sempre umana o organizzativa.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>6. Audit e verificabilità</h2>
+      <p>
+        Il sistema è progettato secondo principi di <strong>audit-by-design</strong> e
+        <strong>fail-closed</strong>.
+      </p>
+      <ul>
+        <li>Gli eventi rilevanti sono verificabili.</li>
+        <li>La continuità temporale è dimostrabile.</li>
+        <li>I meccanismi sono orientati a contesti professionali e istituzionali UE.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>7. Limitazioni di responsabilità</h2>
+      <p>
+        L’IPR fornisce una base tecnica di identità e tracciabilità.
+        Non garantisce automaticamente conformità normativa dell’utente
+        né sostituisce obblighi legali o professionali.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>8. Giurisdizione e principi europei</h2>
+      <p>
+        HERMETICUM B.C.E. opera secondo principi e valori dell’Unione Europea:
+        trasparenza, proporzionalità, responsabilità, tutela dei diritti fondamentali.
+      </p>
+      <div class="quote">
+        Infrastruttura europea di identità primaria,
+        progettata per il mondo digitale e dell’intelligenza artificiale.
+      </div>
+    </section>
+
+    <footer>
+      <div>© HERMETICUM B.C.E. S.r.l. — Infrastruttura europea di identità primaria (IPR)</div>
+      <div>
+        <a href="../">Home</a> ·
+        <a href="../catalog/">Catalog</a> ·
+        <a href="../ai/">AI</a> ·
+        <a href="../create/">Create</a> ·
+        <a href="../verify/">Verify</a>
+      </div>
+    </footer>
+
+  </main>
 </body>
 </html>
