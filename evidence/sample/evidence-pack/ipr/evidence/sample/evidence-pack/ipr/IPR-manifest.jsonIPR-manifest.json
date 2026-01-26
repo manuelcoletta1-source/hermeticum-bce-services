@@ -1,0 +1,17 @@
+{
+  "proto": "HERMETICUM_BCE_IPR",
+  "version": "0.1",
+  "ipr_id": "ipr-demo-20260126-0001",
+  "created_at_utc": "2026-01-26T08:00:00Z",
+  "jurisdiction": "EU",
+  "policy": ["UE-first", "GDPR-min", "HASH-only", "AUDIT", "FAIL-CLOSED"],
+  "scope": "professional",
+  "object": {
+    "title": "Evidence Pack Demo — demo.txt",
+    "description": "Manifest demo (nessun dato personale).",
+    "hash": {
+      "alg": "SHA-256",
+      "value": "fe277bea9a978912ea3b347182056e8c15de0dfad500ea9ded0924f7d95fb7f7"
+    }
+  }
+}
