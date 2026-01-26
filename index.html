@@ -4,61 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HERMETICUM B.C.E. — Digital Identity Platform</title>
-  <meta name="description" content="HERMETICUM B.C.E. è una piattaforma sperimentale UE-first per identità digitale, tracciabilità e continuità operativa tramite IPR.">
+  <meta name="description" content="Piattaforma sperimentale UE-first per identità tecnica (IPR), tracciabilità, auditabilità e continuità operativa.">
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0b0b0b;
-      color: #e6e6e6;
-      line-height: 1.6;
-    }
-    header, section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 3rem 1rem;
-    }
-    header {
-      text-align: center;
-      padding-top: 4rem;
-    }
-    h1 {
-      font-size: 2.4rem;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      margin-top: 0;
-    }
-    .tagline {
-      opacity: 0.85;
-      font-size: 1.1rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .card {
-      border: 1px solid #222;
-      padding: 1.5rem;
-      border-radius: 6px;
-      background: #111;
-    }
-    .cta {
-      display: inline-block;
-      margin: 0.5rem 0.5rem 0 0;
-      padding: 0.7rem 1.2rem;
-      border: 1px solid #444;
-      border-radius: 4px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .cta.primary {
-      border-color: #888;
-    }
-    a { color: #9ad; }
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
+    header,section{max-width:1200px;margin:auto;padding:3rem 1rem}
+    header{text-align:center;padding-top:4rem}
+    h1{font-size:2.4rem;margin:0 0 .5rem}
+    h2{margin:0 0 .75rem}
+    .tagline{opacity:.88;font-size:1.1rem}
+    .cta{display:inline-block;margin:.6rem .45rem 0 0;padding:.7rem 1.15rem;border:1px solid #444;border-radius:4px;color:#fff;text-decoration:none;font-weight:500}
+    .cta.primary{border-color:#888}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1.5rem}
+    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.5rem}
+    a{color:#9ad}
+    ul{margin:.5rem 0 0 1.2rem}
+    .sub{opacity:.85}
   </style>
 </head>
 
@@ -67,21 +27,28 @@
 <header>
   <h1>HERMETICUM B.C.E.</h1>
   <div class="tagline">
-    Blindata · Computabile · Evolutiva<br>
-    Piattaforma sperimentale UE-first per identità digitale e continuità operativa
+    HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+    <span class="sub">HERMETICUM B.C.E. S.r.l.</span><br><br>
+    Piattaforma sperimentale UE-first per identità tecnica (IPR), audit e continuità operativa
   </div>
 
   <div style="margin-top:2rem;">
     <a class="cta primary" href="create/">Rilascia IPR</a>
     <a class="cta" href="verify/">Verifica IPR</a>
+    <a class="cta" href="citizen/">Citizen</a>
+    <a class="cta" href="professional/">Professional</a>
+    <a class="cta" href="evidence/">Evidence</a>
+    <a class="cta" href="terms/">Termini</a>
+    <a class="cta" href="about/">About</a>
+    <a class="cta" href="normative/">Normative</a>
   </div>
 </header>
 
 <section>
   <h2>Cos’è</h2>
   <p>
-    HERMETICUM B.C.E. è una piattaforma sperimentale che introduce l’<strong>IPR (Identity Primary Record)</strong>:
-    una radice di identità digitale ancorata crittograficamente nel tempo, progettata per tracciabilità,
+    HERMETICUM B.C.E. introduce l’<strong>IPR (Identity Primary Record)</strong>:
+    un record tecnico di origine (manifest + evidenze/hash) progettato per tracciabilità,
     auditabilità e continuità operativa.
   </p>
 </section>
@@ -90,53 +57,57 @@
   <h2>Cosa fa l’IPR</h2>
   <div class="grid">
     <div class="card">
-      <h3>Identità verificabile</h3>
-      <p>Un punto di origine unico per l’identità digitale, verificabile nel tempo senza dipendere da un singolo fornitore.</p>
+      <h3>Identità tecnica verificabile</h3>
+      <p>Un punto di origine coerente per processi digitali verificabili nel tempo.</p>
     </div>
     <div class="card">
-      <h3>Tracciabilità</h3>
-      <p>Ogni IPR può essere ancorato tramite meccanismi crittografici (hash) opponibili nel tempo.</p>
+      <h3>Tracciabilità & integrità</h3>
+      <p>Verifica ripetibile: manifest ↔ hash ↔ file. In caso di mismatch: fail-closed.</p>
     </div>
     <div class="card">
       <h3>Continuità operativa</h3>
-      <p>L’IPR consente la persistenza dell’identità anche in presenza di cambi tecnologici o organizzativi.</p>
+      <p>Evoluzione per versioni/derivazioni senza cancellare la storia.</p>
     </div>
   </div>
 </section>
 
 <section>
   <h2>Cosa NON è</h2>
-  <ul>
-    <li>Non è SPID</li>
-    <li>Non è CIE</li>
-    <li>Non è un wallet eIDAS</li>
-    <li>Non produce effetti legali automatici</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Architettura</h2>
-  <p>
-    La piattaforma opera secondo i principi <strong>UE-first</strong>, <strong>fail-closed</strong> e
-    <strong>audit-by-design</strong>, ed è supportata da moduli cibernetici cooperanti
-    (UNEBDO, OPC, MetaExchange, IoSpace, NeuroLoop, CyberGlobal) coordinati da AI JOKER-C2.
-  </p>
-</section>
-
-<section>
-  <h2>Stato del progetto</h2>
-  <p>
-    Stato: <strong>Experimental</strong><br>
-    Destinatari: cittadini, tecnici, istituzioni (ambito di ricerca e sperimentazione)
-  </p>
+  <div class="grid">
+    <div class="card">
+      <ul>
+        <li>Non è SPID</li>
+        <li>Non è CIE</li>
+        <li>Non è un EUDI Wallet</li>
+        <li>Non è un servizio fiduciario qualificato</li>
+      </ul>
+      <p class="sub">Nessun effetto legale automatico: la verifica è tecnica.</p>
+    </div>
+    <div class="card">
+      <h3>Come usarlo correttamente</h3>
+      <p>
+        Come strato tecnico di audit e integrità sopra processi e identità già regolati,
+        quando pertinente.
+      </p>
+      <p class="sub">Vedi: <a href="normative/">Normative Mapping</a>.</p>
+    </div>
+    <div class="card">
+      <h3>Stato del progetto</h3>
+      <p>
+        Status: <strong>Experimental</strong><br>
+        Ambito: ricerca e sperimentazione<br>
+        Riferimento: <strong>Unione Europea</strong>
+      </p>
+    </div>
+  </div>
 </section>
 
 <footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
   <div style="max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
-    
     <div>
       <strong>HERMETICUM B.C.E.</strong><br>
-      Blindata · Computabile · Evolutiva
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
     </div>
 
     <div>
@@ -154,7 +125,6 @@
       Platform status: <strong>Experimental</strong><br>
       Jurisdiction: <strong>EU</strong>
     </div>
-
   </div>
 </footer>
 
