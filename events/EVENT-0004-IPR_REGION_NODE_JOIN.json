@@ -11,9 +11,9 @@
     "district": "Barriera di Milano"
   },
   "subject_ref": "IPR-3",
-  "payload_hash": "SHA-256:........................................................",
+  "payload_hash": "SHA-256:0000000000000000000000000000000000000000000000000000000000000000",
   "timestamp": "2026-01-19T15:30:00+01:00",
   "signature": null,
   "policy": ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"],
-  "notes": "Evento di ingresso: attivazione IPR → nodo foglia regionale. Payload off-chain custodito dal soggetto."
+  "notes": "Ingresso istituzionale: attivazione IPR → nodo foglia regionale. Payload off-chain custodito dal soggetto."
 }
