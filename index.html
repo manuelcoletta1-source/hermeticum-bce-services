@@ -4,107 +4,122 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HERMETICUM B.C.E. — Identity & Audit Platform (EU-first)</title>
-  <meta name="description" content="Piattaforma sperimentale UE-first per IPR (Identity Primary Record), tracciabilità, audit-by-design e continuità operativa.">
+  <meta name="description" content="Piattaforma sperimentale UE-first per IPR (Identity Primary Record): integrità, audit-by-design, continuità operativa.">
   <style>
     body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
     header,section{max-width:1200px;margin:auto;padding:3rem 1rem}
     header{text-align:center;padding-top:4rem}
     h1{font-size:2.4rem;margin:0 0 .6rem}
     h2{margin:0 0 .75rem}
-    .tag{opacity:.9}
     .sub{opacity:.85}
-    .cta{display:inline-block;margin:.6rem .45rem 0 0;padding:.75rem 1.15rem;border:1px solid #444;border-radius:4px;color:#fff;text-decoration:none;font-weight:600}
+    .cta{display:inline-block;margin:.6rem .45rem 0 0;padding:.75rem 1.15rem;border:1px solid #444;border-radius:6px;color:#fff;text-decoration:none;font-weight:700}
     .cta.primary{border-color:#888}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1.5rem}
-    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.5rem}
+    .card{border:1px solid #222;background:#111;border-radius:10px;padding:1.5rem}
     a{color:#9ad}
     ul{margin:.5rem 0 0 1.2rem}
     .pill{display:inline-block;border:1px solid #333;border-radius:999px;padding:.2rem .65rem;font-size:.85rem;opacity:.9}
+    .kicker{letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;opacity:.85}
+    .line{height:1px;background:#222;margin:1.25rem 0}
   </style>
 </head>
 
 <body>
 
 <header>
+  <div class="kicker">UE-first · GDPR-min · audit-by-design</div>
   <h1>HERMETICUM B.C.E.</h1>
-  <div class="tag">
+
+  <div class="sub">
     HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-    <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
+    <strong>HERMETICUM B.C.E. S.r.l.</strong>
   </div>
-  <p class="sub" style="margin-top:1rem;">
-    Piattaforma <strong>sperimentale UE-first</strong> per
-    <strong>IPR (Identity Primary Record)</strong>, integrità, audit e continuità operativa.
+
+  <div style="margin-top:.9rem;">
+    <span class="pill">v0.1 · Experimental</span>
+    <span class="pill">Jurisdiction: EU</span>
+  </div>
+
+  <p class="sub" style="margin-top:1.1rem;max-width:920px;margin-left:auto;margin-right:auto;">
+    Piattaforma sperimentale per rilasciare e verificare un <strong>IPR (Identity Primary Record)</strong>:
+    un record tecnico di origine verificabile (<strong>manifest + hash</strong>) per integrità, audit e continuità operativa.
   </p>
 
-  <div style="margin-top:2rem;">
+  <div style="margin-top:1.4rem;">
     <a class="cta primary" href="create/">Rilascia IPR</a>
     <a class="cta" href="verify/">Verifica IPR</a>
-    <a class="cta" href="citizen/">Citizen</a>
-    <a class="cta" href="professional/">Professional</a>
-    <a class="cta" href="evidence/">Evidence</a>
-    <a class="cta" href="about/">About</a>
+    <a class="cta" href="create/success.html">Output IPR</a>
+  </div>
+
+  <div class="line" style="max-width:920px;margin-left:auto;margin-right:auto;"></div>
+
+  <div class="grid" style="margin-top:1rem;">
+    <div class="card" style="text-align:left;">
+      <h2 style="margin:0 0 .4rem;">Start here — Citizen</h2>
+      <p class="sub">
+        Percorso semplice: crea → conserva → verifica. Per persone fisiche e casi d’uso personali.
+      </p>
+      <a class="pill" href="citizen/">Apri Citizen</a>
+    </div>
+
+    <div class="card" style="text-align:left;">
+      <h2 style="margin:0 0 .4rem;">Start here — Professional</h2>
+      <p class="sub">
+        Linguaggio audit-grade: coerenza, catena di prova, conservazione, esiti valid/invalid/inconclusive.
+      </p>
+      <a class="pill" href="professional/">Apri Professional</a>
+    </div>
+
+    <div class="card" style="text-align:left;">
+      <h2 style="margin:0 0 .4rem;">Cosa è / cosa non è</h2>
+      <ul>
+        <li><strong>È:</strong> verifica tecnica, integrità, tracciabilità (manifest + hash)</li>
+        <li><strong>Non è:</strong> SPID/CIE/EUDI Wallet</li>
+        <li><strong>Non è:</strong> firma elettronica qualificata / servizio fiduciario qualificato</li>
+      </ul>
+      <a class="pill" href="terms/">Leggi i Termini</a>
+    </div>
   </div>
 </header>
 
 <section>
-  <h2>Cos’è</h2>
-  <p>
-    HERMETICUM B.C.E. introduce l’<strong>IPR</strong> come
-    <strong>radice tecnica verificabile</strong> (manifest + hash),
-    pensata per descrivere l’origine di contenuti e dati in modo
-    auditabile e versionabile.
-  </p>
-</section>
-
-<section>
-  <h2>Il processo (chiaro)</h2>
+  <h2>Il processo (1 riga per step)</h2>
   <div class="grid">
     <div class="card">
       <h3>1) Create</h3>
-      <p>Atto guidato: comprendi il perimetro e rilasci l’IPR.</p>
+      <p class="sub">Atto guidato: perimetro esplicito + generazione manifest e hash.</p>
       <a class="pill" href="create/">Vai a Create</a>
     </div>
     <div class="card">
       <h3>2) Output</h3>
-      <p>Salva il manifest, conserva le evidenze.</p>
-      <a class="pill" href="create/success.html">Output IPR</a>
+      <p class="sub">Scarica e conserva il manifest: senza conservazione non c’è continuità.</p>
+      <a class="pill" href="create/success.html">Vai a Output</a>
     </div>
     <div class="card">
       <h3>3) Verify</h3>
-      <p>Verifica tecnica con esiti standard e fail-closed.</p>
+      <p class="sub">Verifica coerente e fail-closed: valid / invalid / inconclusive.</p>
       <a class="pill" href="verify/">Vai a Verify</a>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Cosa NON è</h2>
+  <h2>Materiale per audit e contesti forensi</h2>
   <div class="grid">
     <div class="card">
-      <ul>
-        <li>Non è SPID</li>
-        <li>Non è CIE</li>
-        <li>Non è EUDI Wallet</li>
-        <li>Non è servizio fiduciario qualificato</li>
-      </ul>
-      <p class="sub">La verifica è tecnica, non legale automatica.</p>
+      <h3>Evidence</h3>
+      <p class="sub">Checklist, definizioni operative, CLI SHA-256 e regola fail-closed.</p>
+      <a class="pill" href="evidence/">Apri Evidence</a>
     </div>
     <div class="card">
-      <h3>Principi</h3>
-      <ul>
-        <li>UE-first</li>
-        <li>Audit-by-design</li>
-        <li>Fail-closed</li>
-        <li>Continuità operativa</li>
-      </ul>
+      <h3>About</h3>
+      <p class="sub">Missione, governance minima, roadmap v0.1 → v0.3.</p>
+      <a class="pill" href="about/">Apri About</a>
     </div>
     <div class="card">
-      <h3>Stato</h3>
-      <p>
-        <strong>Experimental</strong><br>
-        Ricerca e sperimentazione<br>
-        Giurisdizione di riferimento: UE
-      </p>
+      <h3>Catalogo classi</h3>
+      <p class="sub">BASE / STRONG / ENTERPRISE: cambia la responsabilità, non la sicurezza.</p>
+      <a class="pill" href="catalog/">Apri Catalogo</a>
     </div>
   </div>
 </section>
