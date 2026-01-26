@@ -9,23 +9,23 @@
     body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
     header,main,footer{max-width:1100px;margin:auto;padding:2.4rem 1.5rem}
     a{color:#58a6ff;text-decoration:none}
-    h1{font-size:2.3rem;margin:0 0 .6rem}
+    h1{font-size:2.4rem;margin:0 0 .6rem}
     h2{margin:1.8rem 0 .6rem}
     p{color:#9da7b1}
     .box{border:1px solid #30363d;border-radius:14px;padding:1.6rem;background:#0d1117;margin-top:1.2rem}
     .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:.25rem .65rem;margin:.2rem .3rem 0 0;color:#9da7b1;font-size:.9rem}
+    .cta-main{
+      display:inline-block;margin-top:.8rem;
+      padding:1rem 1.4rem;border-radius:14px;
+      border:1px solid #2ea043;background:#238636;color:#fff;
+      font-weight:900
+    }
     .grid{display:grid;grid-template-columns:1fr;gap:1.2rem}
     @media(min-width:900px){.grid{grid-template-columns:1fr 1fr 1fr}}
-    .cta-main{
-      display:inline-block;margin-top:.6rem;
-      padding:.9rem 1.2rem;border-radius:12px;
-      border:1px solid #2ea043;background:#238636;color:#fff;
-      font-weight:800
-    }
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    footer{border-top:1px solid #30363d;color:#8b949e;font-size:.9rem;margin-top:2.5rem}
     .note{border-left:3px solid #2ea043;padding-left:1rem;color:#c9d1d9}
     .warn{border-left:3px solid #f85149;padding-left:1rem;color:#c9d1d9}
+    footer{border-top:1px solid #30363d;color:#8b949e;font-size:.9rem;margin-top:2.5rem}
   </style>
 </head>
 
@@ -35,7 +35,8 @@
   <h1>HERMETICUM — Nodo Regionale Piemonte</h1>
   <p>
     Nodo Europeo <strong>Biocibernetico</strong> a primato biologico.<br/>
-    Infrastruttura istituzionale per tracciabilità verificabile: <strong>Regione → Città → Zona → Utente (IPR)</strong>.
+    Infrastruttura istituzionale per tracciabilità verificabile:
+    <strong>Regione → Città → Zona → Utente (IPR)</strong>.
   </p>
 
   <div>
@@ -48,10 +49,11 @@
     <span class="pill">FAIL-CLOSED</span>
   </div>
 
-  <nav style="margin-top:1rem">
+  <nav style="margin-top:1.1rem">
     <a href="./register/">Register</a> ·
     <a href="./create/">Create</a> ·
     <a href="./verify/">Verify</a> ·
+    <a href="./events/">Events</a> ·
     <a href="./catalog/">Catalog</a> ·
     <a href="./node/">Nodo Piemonte</a> ·
     <a href="./governance/">Governance</a> ·
@@ -63,25 +65,25 @@
 
   <!-- VARCO UNICO -->
   <div class="box">
-    <h2>Varco unico — Nodo Regionale Piemonte</h2>
+    <h2>Varco unico istituzionale</h2>
     <p>
-      <strong>Attivando l’IPR diventi un nodo della tua regione.</strong><br/>
-      Il Nodo Regionale Piemonte coordina nodi cittadini, zonali e utenti (nodi foglia)
-      tramite eventi <strong>hash-only</strong>, verificabili e append-only.
+      <strong>Attivando l’IPR diventi un nodo della tua Regione.</strong><br/>
+      L’attivazione genera un evento <strong>hash-only</strong>, append-only e verificabile,
+      che ti collega al <strong>Nodo Regionale Piemonte</strong>.
     </p>
 
     <a class="cta-main" href="./register/">
       Register — Attiva IPR → Diventa Nodo Regionale
     </a>
 
-    <p class="mono" style="margin-top:.8rem">
-      Regola canonica: IPR attivo ⇒ Nodo foglia regionale (Piemonte)
+    <p class="mono" style="margin-top:.9rem">
+      Regola canonica: IPR attivo ⇒ nodo foglia regionale (Piemonte)
     </p>
   </div>
 
   <!-- STRUTTURA -->
   <div class="box">
-    <h2>Struttura istituzionale</h2>
+    <h2>Struttura territoriale</h2>
     <pre class="mono">
 Nodo Regionale: Piemonte
 └─ Nodo Città: Torino
@@ -94,30 +96,45 @@ Nodo Regionale: Piemonte
     </p>
   </div>
 
+  <!-- REGISTRO EVENTI -->
+  <div class="box">
+    <h2>Registro ufficiale (Events)</h2>
+    <p>
+      Il Nodo Regionale Piemonte pubblica un <strong>registro pubblico minimo</strong>:
+      eventi <strong>hash-only</strong>, <strong>append-only</strong>, <strong>fail-closed</strong>.
+    </p>
+    <p>
+      <a href="./events/"><strong>Apri Events — Registro Pubblico Minimo</strong></a>
+    </p>
+    <p class="mono">
+      Audit-ready: payload off-chain, hash SHA-256, policy UE-FIRST/GDPR-MIN.
+    </p>
+  </div>
+
   <!-- STRUMENTI -->
   <div class="grid">
     <div class="box">
       <h2>Create</h2>
-      <p>Genera eventi hash-only. Nessun dato personale in chiaro.</p>
+      <p>Genera eventi tecnici e attestazioni hash-only.</p>
       <p><a href="./create/">Vai a Create</a></p>
     </div>
 
     <div class="box">
       <h2>Verify</h2>
-      <p>Verifica tecnica fail-closed: schema, policy, hash.</p>
+      <p>Verifica formale e crittografica degli eventi.</p>
       <p><a href="./verify/">Vai a Verify</a></p>
     </div>
 
     <div class="box">
       <h2>Catalog</h2>
-      <p>Classi IPR e capacità operative del nodo.</p>
+      <p>Classi IPR e capacità operative.</p>
       <p><a href="./catalog/">Vai a Catalog</a></p>
     </div>
   </div>
 
-  <!-- FRAMEWORK -->
+  <!-- STACK -->
   <div class="box">
-    <h2>Stack operativo (framework)</h2>
+    <h2>Stack operativo</h2>
     <ul>
       <li>UNEBDO</li>
       <li>OPC</li>
@@ -127,7 +144,7 @@ Nodo Regionale: Piemonte
       <li>CyberGlobal</li>
     </ul>
     <p>
-      I framework operano all’unisono con l’utente e con AI Joker-C2
+      I framework operano all’unisono con l’utente e con AI Joker-C2,
       nel rispetto del primato biologico.
     </p>
   </div>
@@ -135,8 +152,8 @@ Nodo Regionale: Piemonte
   <!-- LIMITI -->
   <div class="box warn">
     <strong>Limiti dichiarati</strong><br/>
-    Questo nodo non sostituisce istituzioni statali, non assegna diritti automatici,
-    non pubblica dati personali e non garantisce riconoscimenti legali.
+    Questo nodo non sostituisce istituzioni statali,
+    non assegna diritti automatici e non pubblica dati personali in chiaro.
   </div>
 
   <div class="box note">
