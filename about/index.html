@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About & Governance — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Informazioni, governance, versioning e roadmap della piattaforma HERMETICUM B.C.E.">
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
+    header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
+    header{padding-top:3.5rem}
+    h1{font-size:2rem;margin:0 0 .5rem}
+    .sub{opacity:.85}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:1.5rem}
+    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
+    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
+    a{color:#9ad}
+    ul{margin-top:.5rem}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">About / Governance</div>
+  <h1>Informazioni, governance e roadmap</h1>
+  <p class="sub">
+    Questa pagina descrive come la piattaforma viene mantenuta, versionata e migliorata.
+    Obiettivo: rendere la gestione trasparente e auditabile.
+  </p>
+</header>
+
+<section>
+  <h2>Che cos’è</h2>
+  <p>
+    HERMETICUM B.C.E. è una piattaforma sperimentale UE-first focalizzata su
+    identità tecnica (IPR), tracciabilità, auditabilità e continuità operativa.
+  </p>
+  <ul>
+    <li>Principi: <strong>UE-first</strong>, <strong>audit-by-design</strong>, <strong>fail-closed</strong></li>
+    <li>Ambito: ricerca e sperimentazione (non servizio fiduciario qualificato)</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Governance minima</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Responsabilità</h3>
+      <p>
+        Il mantenimento del codice e dei contenuti avviene tramite repository e storico commit.
+        Ogni modifica rilevante deve essere tracciabile.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Policy operative</h3>
+      <ul>
+        <li>Minimizzazione dati</li>
+        <li>Documentazione pubblica</li>
+        <li>Revisioni incrementali</li>
+        <li>Verifiche coerenti (fail-closed)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Canali</h3>
+      <p>
+        Comunicazioni e segnalazioni tramite pagina <a href="../legal/contact.html">Contact</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Versioning</h2>
+  <p>
+    Versione piattaforma (indicativa): <span class="mono">v0.1</span><br>
+    Stato: <strong>Experimental</strong><br>
+    Giurisdizione di riferimento: <strong>Unione Europea</strong>
+  </p>
+  <p class="sub">
+    Nota: la versione può essere incrementata a ogni milestone e riflessa nei commit.
+  </p>
+</section>
+
+<section>
+  <h2>Roadmap (2026)</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Milestone A</h3>
+      <ul>
+        <li>Citizen Journey + Professional View</li>
+        <li>Evidence & Verification (audit-grade)</li>
+        <li>Terms & Scope (perimetro e rischio)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Milestone B</h3>
+      <ul>
+        <li>Mapping normativo (eIDAS2 / EUDI Wallet come riferimento)</li>
+        <li>Schema manifest stabilizzato</li>
+        <li>Procedure di conservazione evidenze</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Milestone C</h3>
+      <ul>
+        <li>Hardening UX (accessibilità / testing)</li>
+        <li>Changelog pubblico e release notes</li>
+        <li>Materiale “institution-ready”</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Changelog (minimo)</h2>
+  <p class="sub">Esempio di log sintetico. Aggiorna quando fai release significative.</p>
+  <ul>
+    <li><span class="mono">v0.1</span> — base UE-grade: legal pages, citizen/professional, evidence, terms</li>
+  </ul>
+</section>
+
+<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
+  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
+    <div>
+      <strong>HERMETICUM B.C.E.</strong><br>
+      Blindata · Computabile · Evolutiva
+    </div>
+    <div>
+      <a href="../legal/privacy.html">Privacy</a><br>
+      <a href="../legal/cookies.html">Cookies</a><br>
+      <a href="../legal/accessibility.html">Accessibility</a>
+    </div>
+    <div>
+      <a href="../legal/legal-notice.html">Legal notice</a><br>
+      <a href="../legal/contact.html">Contact</a>
+    </div>
+    <div>
+      Platform status: <strong>Experimental</strong><br>
+      Jurisdiction: <strong>EU</strong>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
