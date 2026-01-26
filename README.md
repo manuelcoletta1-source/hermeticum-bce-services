@@ -1,163 +1,115 @@
-# HERMETICUM B.C.E. — PLATFORM
-**BLINDATA · COMPUTABILE · EVOLUTIVA**  
+# HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA
 **HERMETICUM B.C.E. S.r.l.**
 
-Piattaforma europea per il cittadino, progettata per garantire
-**continuità digitale, tracciabilità e auditabilità**
-nell’accesso ai servizi civili fondamentali.
+Punto di ingresso pubblico europeo per **IPR — Identity Primary Record**.  
+Infrastruttura **UE-first** orientata a verificabilità, audit e continuità nel tempo.
 
 ---
 
-## Scopo
+## Cos’è questa piattaforma
+Questa non è una piattaforma di account, non è un servizio di certificazione e non è un registro centralizzato.
 
-Questo repository rappresenta la **piattaforma centrale** di HERMETICUM B.C.E.
+È un **gateway pubblico** che rende possibile:
+- creare un **IPR** (record minimo di precedenza),
+- verificarne la **traccia** nel tempo,
+- consultare **cataloghi e percorsi** per cittadini, professionisti e istituzioni.
 
-La Platform è il **punto di ingresso unico** per il cittadino europeo
-verso servizi digitali strutturati secondo i principi UE:
-
-- minimizzazione dei dati (GDPR-min)
-- tracciabilità verificabile
-- audit-by-design
-- comportamento fail-closed
-- neutralità rispetto alle identità legali nazionali
-
-La Platform **non è un servizio di identità legale**  
-e **non sostituisce** SPID, CIE, eIDAS o EUDI Wallet.
+Un **IPR** non certifica contenuti.  
+Rende **osservabile** che una traccia è esistita **prima**.
 
 ---
 
-## Cos’è (in breve)
+## Cos’è un IPR (in breve)
+**IPR — Identity Primary Record**  
+Un record minimo che lega:
+- una **traccia** (hash del contenuto),
+- un **tempo canonico**,
+- regole **append-only**,
+- riferimenti di verifica.
 
-La Platform è una **infrastruttura civile digitale** che permette al cittadino di:
+Un IPR:
+- ❌ non è un account  
+- ❌ non è un profilo  
+- ❌ non è una certificazione  
+- ✅ è una **precedenza verificabile nel tempo**
 
-- accedere ai servizi con identità UE esistenti
-- mantenere continuità nel tempo delle proprie interazioni digitali
-- verificare chi ha accesso ai propri dati
-- produrre evidenze opponibili e auditabili
-
-Il tutto senza creare identità parallele o archivi centralizzati di dati sensibili.
-
----
-
-## Cosa NON è
-
-- ❌ non è un sistema di identificazione legale
-- ❌ non è un wallet eIDAS
-- ❌ non è un sistema di sorveglianza
-- ❌ non è una piattaforma commerciale
-- ❌ non prende decisioni al posto del cittadino
+Se la traccia persiste, l’IPR resta osservabile.  
+Se decade, non viene difeso.
 
 ---
 
-## Principi Architetturali
+## Percorsi di accesso
+La piattaforma espone tre percorsi di lettura, sullo **stesso sistema**:
 
-- **UE-first**  
-  Allineamento ai principi normativi e operativi dell’Unione Europea.
+- **Cittadino**  
+  Tracce personali verificabili, continuità operativa, prova di precedenza.
 
+- **Professionista / Impresa**  
+  Attestazioni, pacchetti di evidenze, audit tecnico, gestione append-only.
+
+- **Istituzione / Audit**  
+  Verifiche riproducibili, criteri minimi, documentazione citabile.
+
+---
+
+## Funzioni pubbliche
+- **Create** — Creazione guidata di un IPR (manifest minimo)
+- **Verify** — Verifica indipendente di una traccia
+- **Catalog** — Esplorazione dei percorsi e dei livelli IPR
+- **Evidence** — Evidenze pubbliche (quando presenti)
+- **Terms** — Quadro operativo e limiti dichiarati
+
+Tutte le funzioni sono progettate per funzionare **senza fiducia**.
+
+---
+
+## Principi UE-first
 - **GDPR-min**  
-  Solo hash, metadati e attestazioni verificabili.  
-  Nessun dato superfluo.
+  Esposizione del minimo opponibile. Preferenza per hash e riferimenti.
 
-- **Audit-by-design**  
-  Ogni evento rilevante è tracciato, verificabile e opponibile.
+- **Hash-only**  
+  Il record non contiene il contenuto: ne contiene l’impronta.
+
+- **Append-only**  
+  Nessuna modifica silenziosa. Ogni evoluzione è un nuovo evento.
 
 - **Fail-closed**  
-  In assenza di identità, consenso o policy → il sistema non opera.
-
-- **Separazione dei ruoli**  
-  Identità legale ≠ continuità tecnica ≠ servizi.
+  Se una coerenza non è verificabile, la procedura si ferma.
 
 ---
 
-## Accesso del Cittadino
+## Cosa questa piattaforma NON fa
+- Non garantisce validità giuridica automatica
+- Non protegge le tracce
+- Non certifica verità o significati
+- Non sostituisce istituzioni o registri
 
-Il cittadino accede alla Platform utilizzando **identità già riconosciute**:
-- SPID
-- CIE
-- eIDAS / EUDI Wallet (quando disponibile)
-
-La Platform genera **solo un’attestazione tecnica**
-per garantire continuità e tracciabilità delle operazioni.
-
-Nessuna duplicazione di identità.
-Nessuna appropriazione dei dati.
+Opera **a monte**: sull’origine osservabile.
 
 ---
 
-## Aree Funzionali
+## Trasparenza e audit
+Ogni affermazione operativa è accompagnata da:
+- una procedura verificabile,
+- una pagina di controllo,
+- riferimenti riproducibili.
 
-La Platform espone quattro domini civili principali:
-
-- **Sanità**  
-  Metadati, consenso, registro accessi (EHDS-ready).
-
-- **Istruzione**  
-  Titoli, competenze e credenziali verificabili.
-
-- **Procedure Amministrative**  
-  Timeline procedurali e logica once-only.
-
-- **Emergenza / Soccorso**  
-  Accesso temporaneo e tracciato in situazioni critiche.
-
-Tutte le aree condividono:
-- una timeline unificata
-- evidenze verificabili
-- revoca e controllo da parte del cittadino
+L’interpretazione è libera.  
+La traccia è misurabile.
 
 ---
 
-## Struttura del Repository
-
-/index.html        → Portale pubblico /policy/           → Regole operative e limiti dichiarati /verify/           → Verifica pubblica delle evidenze /evidence/         → Esempi di manifest ed export /changelog/        → Evoluzione append-only /assets/           → Brand e risorse statiche
-
----
-
-## Governance e AI
-
-La Platform può interfacciarsi con sistemi AI (es. AI JOKER-C2),
-ma **nessuna AI opera senza**:
-- identità valida
-- policy esplicita
-- tracciamento completo
-- possibilità di verifica e spegnimento
-
----
-
-## Stato del Progetto
-
-- **Stato:** ACTIVE
-- **Ambito:** Civile / Europeo
-- **Maturità:** Infrastruttura in evoluzione controllata
-- **Adozione:** Cittadini, professionisti, istituzioni
-
----
-
-## Licenza e Responsabilità
-
-Questo progetto è pubblicato per:
-- trasparenza
-- verifica pubblica
-- valutazione tecnica e istituzionale
-
-Non costituisce promessa di servizio,
-né sostituisce sistemi pubblici esistenti.
+## Stato del progetto
+**ACTIVE**  
+Infrastruttura pubblica, evoluzione append-only.
 
 ---
 
 ## Riferimenti
-
-- Ecosistema: **HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA**
-- Società: **HERMETICUM B.C.E. S.r.l.**
-- Standard: UE-first, GDPR, audit-by-design
+- Portale: https://manuelcoletta1-source.github.io/hermeticum-bce-platform/
+- Organizzazione: https://github.com/manuelcoletta1-source/
 
 ---
 
-## Contatto
-
-Manuel Coletta  
-Fondatore – HERMETICUM B.C.E.  
-Email: manuelcoletta1@gmail.com
-
-
-
+© 2026 — HERMETICUM B.C.E. S.r.l.  
+Nessuna promessa. Nessuna protezione. Solo precedenza.
