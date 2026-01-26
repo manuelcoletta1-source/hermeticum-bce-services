@@ -1,144 +1,168 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <title>HERMETICUM B.C.E. — Governance UE</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Governance UE-first di Hermeticum B.C.E.: GDPR-min, HASH-only, Audit-by-design, Fail-closed." />
+  <title>Evidence — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Evidence Pack: come costruire un pacchetto prova (file + hash + manifest + verify report) in modo ripetibile e verificabile. Fail-closed." />
   <style>
     :root{
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#a7b0be;
-      --accent:#7aa2ff;
-      --ok:#63d2a2;
-      --warn:#ffd479;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --r:16px;
-      --max:900px;
+      --bg:#0b0f14; --card:#0f1620; --muted:#9fb0c3; --text:#e9f1fb; --line:#1b2735;
+      --accent:#7dd3fc; --good:#a7f3d0; --warn:#fde68a;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0; color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:radial-gradient(900px 600px at 20% 0%,rgba(122,162,255,.12),transparent 55%),
-                 var(--bg);
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+    a{color:inherit}
+    .wrap{max-width:1040px;margin:0 auto;padding:22px 16px}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;border:1px solid var(--line);background:rgba(255,255,255,.02);padding:12px 14px;border-radius:16px}
+    .pill{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+    h1{margin:14px 0 6px;font-size:24px}
+    h2{margin:0 0 8px;font-size:16px}
+    p{margin:0 0 10px;color:var(--muted)}
+    .grid{display:grid;gap:12px}
+    @media (min-width:980px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
+    .card{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:14px}
+    .mini{font-size:12px;color:var(--muted)}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px}
+    .tag.base{border-color:rgba(125,211,252,.35);background:rgba(125,211,252,.10);color:var(--accent)}
+    .tag.strong{border-color:rgba(167,243,208,.35);background:rgba(167,243,208,.08);color:var(--good)}
+    .tag.ent{border-color:rgba(253,230,138,.35);background:rgba(253,230,138,.08);color:var(--warn)}
+    pre{
+      margin:10px 0 0; padding:12px; border-radius:16px; border:1px solid var(--line);
+      background:rgba(0,0,0,.18); overflow:auto; color:var(--text); font-size:12px;
     }
-    a{color:inherit;text-decoration:none}
-    header{
-      border-bottom:1px solid var(--line);
-      background:rgba(11,12,16,.85);
-    }
-    .top{
-      max-width:var(--max); margin:0 auto; padding:14px 18px;
-      display:flex; justify-content:space-between; align-items:center;
-    }
-    .brand b{letter-spacing:.5px}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 56px}
-    h1{margin:0 0 8px; font-size:28px}
-    p{margin:0; color:var(--muted); line-height:1.55}
-    .hero{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(15,17,23,.85),rgba(15,17,23,.55));
-      border-radius:calc(var(--r)+6px);
-      box-shadow:var(--shadow);
-      padding:26px;
-    }
-    .grid{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-    }
-    @media (max-width:900px){.grid{grid-template-columns:1fr}}
-    .card{
-      border:1px solid var(--line);
-      background:rgba(16,19,26,.55);
-      border-radius:var(--r);
-      padding:16px;
-    }
-    .card b{letter-spacing:.3px}
-    .step{font-size:13px; color:var(--muted); margin-top:6px}
-    .note{
-      margin-top:16px;
-      font-size:13px;
-      color:var(--muted);
-    }
-    footer{
-      margin-top:22px;
-      border-top:1px solid var(--line);
-      padding-top:16px;
-      font-size:12.5px;
-      color:var(--muted);
-    }
+    .hr{height:1px;background:var(--line);margin:14px 0}
+    ul{margin:0;padding-left:18px;color:var(--muted)}
+    footer{margin-top:14px;color:var(--muted);text-align:center}
   </style>
 </head>
 
 <body>
-<header>
-  <div class="top">
-    <div class="brand">
-      <b>HERMETICUM B.C.E. — GOVERNANCE UE</b>
+  <div class="wrap">
+    <div class="nav">
+      <span class="pill"><a href="../create/">Create</a></span>
+      <span class="pill"><a href="../verify/">Verify</a></span>
+      <span class="pill"><a href="../professional/">Professional</a></span>
+      <span class="pill"><a href="../citizen/">Citizen</a></span>
+      <span class="pill"><a href="../">Home</a></span>
+      <span class="pill">fail-closed</span>
     </div>
-    <a href="./index.html" style="font-size:13px;color:var(--muted)">← Gateway</a>
-  </div>
-</header>
 
-<div class="wrap">
-  <section class="hero">
-    <h1>Governance UE-first</h1>
+    <h1>Evidence Pack (catena minima di prova)</h1>
     <p>
-      Hermeticum B.C.E. è progettato secondo principi di
-      <b>governance tecnica europea</b>, con priorità a
-      sicurezza, verificabilità e responsabilità.
+      Un Evidence Pack è un pacchetto di elementi che permette a un terzo di verificare una cosa semplice:
+      <b>questo contenuto corrisponde a questo hash</b>, e questo hash è riferito da un <b>manifest IPR</b>.
+      Nessuna promessa legale, nessuna autorità nascosta: solo verificabilità ripetibile.
     </p>
-  </section>
 
-  <section class="grid">
-    <div class="card">
-      <b>UE-first</b>
-      <div class="step">
-        L’Unione Europea è lo standard normativo di riferimento.<br/>
-        Interoperabilità e audit sono progettati per contesti UE.
+    <div class="grid cols-2">
+      <div class="card">
+        <h2>Cos’è (definizione operativa)</h2>
+        <p>
+          Evidence Pack = <b>file</b> + <b>hash locale</b> + <b>manifest IPR</b> + <b>report di verifica</b> + (opzionale) log/versioning.
+          Se manca un pezzo critico, il pacchetto non è “quasi valido”: è <b>incompleto</b>.
+        </p>
+
+        <div class="hr"></div>
+
+        <h2>Tre livelli (pratici)</h2>
+        <p class="mini">
+          Non sono “certificazioni”. Sono livelli di completezza della prova tecnica.
+        </p>
+        <ul class="mini">
+          <li><span class="tag base">BASE</span> — conservazione minima + integrità verificabile.</li>
+          <li><span class="tag strong">STRONG</span> — verifica ripetibile + report + versioning.</li>
+          <li><span class="tag ent">ENTERPRISE</span> — chain-of-custody + ruoli + policy conservazione + audit trail.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Struttura cartella standard (consigliata)</h2>
+        <p class="mini">Nome cartella suggerito: <code>evidence-YYYYMMDD-HHMM-<i>ipr_id</i></code></p>
+        <pre>
+evidence-pack/
+  artifacts/
+    original-file.ext
+  hashes/
+    sha256.txt
+  ipr/
+    IPR-manifest.json
+    IPR-verify-report.json
+  meta/
+    README.txt
+    changelog.txt
+        </pre>
+        <p class="mini">
+          Regola: ciò che sta in <code>artifacts/</code> è “materiale”. Il resto sono tracce di controllo.
+        </p>
       </div>
     </div>
 
-    <div class="card">
-      <b>GDPR-min</b>
-      <div class="step">
-        Minimizzazione dei dati personali.<br/>
-        Il sistema preferisce prove tecniche a dati sensibili.
-      </div>
+    <div class="card" style="margin-top:12px">
+      <h2>Procedura (ripetibile)</h2>
+      <p>Obiettivo: rendere possibile a un terzo di rifare i calcoli senza fidarsi di te.</p>
+
+      <div class="hr"></div>
+
+      <h2>Step 1 — Hash locale del file (audit-grade)</h2>
+      <p class="mini">Esempi:</p>
+      <pre>
+Windows (PowerShell):
+  Get-FileHash .\artifacts\original-file.ext -Algorithm SHA256
+
+Linux/macOS:
+  shasum -a 256 ./artifacts/original-file.ext
+      </pre>
+
+      <h2>Step 2 — Salva l’hash in <code>hashes/sha256.txt</code></h2>
+      <pre>
+SHA-256: &lt;hex-64&gt;
+FILE: artifacts/original-file.ext
+GENERATED_AT_UTC: &lt;YYYY-MM-DDTHH:MM:SSZ&gt;
+TOOL: &lt;PowerShell Get-FileHash | shasum&gt;
+      </pre>
+
+      <h2>Step 3 — Inserisci il manifest IPR (da Create/Output)</h2>
+      <p class="mini">
+        Salva il manifest in <code>ipr/IPR-manifest.json</code>. Se il manifest è basato su testo incollato (Create UI),
+        mantieni coerente l’oggetto verificato: per file binari, usa sempre l’hash locale come riferimento primario nel pack.
+      </p>
+
+      <h2>Step 4 — Verifica e salva il report</h2>
+      <p class="mini">
+        Esegui Verify e salva il report in <code>ipr/IPR-verify-report.json</code>. Se manca il contenuto → esito tipico: Inconclusive.
+      </p>
+
+      <h2>Step 5 — Meta (spiegazione asciutta)</h2>
+      <pre>
+README.txt (minimo):
+- Che cosa contiene artifacts/
+- Quale file è stato hashato
+- Dove sta l’hash (sha256.txt)
+- Dove sta il manifest IPR
+- Dove sta il report Verify
+- Regola fail-closed: se mismatch → Invalid
+      </pre>
+
+      <div class="hr"></div>
+
+      <h2>Regole fail-closed (semplici)</h2>
+      <ul>
+        <li>Se l’hash ricalcolato ≠ hash salvato → il pack è <b>Invalid</b>.</li>
+        <li>Se manca il file o manca l’hash → pack <b>Incompleto</b>.</li>
+        <li>Se il manifest non contiene hash leggibile → <b>Invalid</b>.</li>
+        <li>Se c’è solo struttura, senza contenuto verificabile → <b>Inconclusive</b> (non usare come prova forte).</li>
+      </ul>
     </div>
 
-    <div class="card">
-      <b>HASH-only</b>
-      <div class="step">
-        Hash crittografici al posto dei dati grezzi.<br/>
-        Riduzione dell’esposizione e aumento della verificabilità.
+    <footer>
+      <div style="margin-top:14px">
+        <b>HERMETICUM B.C.E.</b><br/>
+        HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
+        HERMETICUM B.C.E. S.r.l.
       </div>
-    </div>
-
-    <div class="card">
-      <b>Fail-closed & Audit</b>
-      <div class="step">
-        Sicurezza per default: ciò che non è verificato non passa.<br/>
-        Ogni operazione è auditabile nel tempo.
-      </div>
-    </div>
-  </section>
-
-  <div class="note">
-    Questa governance non è dichiarativa: è <b>incorporata</b>
-    nell’architettura tecnica (policy, prove, orchestrazione).
+      <div class="mini" style="margin-top:8px">Platform status: Experimental · Jurisdiction: EU</div>
+    </footer>
   </div>
-
-  <footer>
-    HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-    HERMETICUM B.C.E. S.r.l. · Governance UE
-  </footer>
-</div>
 </body>
 </html>
