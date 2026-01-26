@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI e IPR — Responsabilità, non autonomia | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Come si comporta l’AI quando è legata a un IPR: responsabilità, tracciabilità e auditabilità. HERMETICUM B.C.E. — Blindata · Computabile · Evolutiva." />
+
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1621; --text:#e7eef7; --muted:#b8c4d4;
+      --line:#243043; --accent:#7aa7ff; --ok:#6ee7b7; --warn:#fbbf24; --danger:#fb7185;
+      --r:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 10% 0%, #101a2a 0%, var(--bg) 55%) no-repeat;
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
+    .topbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r);
+      background: rgba(255,255,255,.02);
+    }
+    .nav a{
+      display:inline-block; padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line); margin-right:8px;
+      background: rgba(255,255,255,.02); color:var(--muted); font-size:13px;
+    }
+    .nav a.active{background: rgba(122,167,255,.14); color:var(--text); border-color: rgba(122,167,255,.35)}
+    header{
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px 20px;
+      background: linear-gradient(180deg, rgba(122,167,255,.10), rgba(255,255,255,.02));
+    }
+    h1{margin:0; font-size:28px; line-height:1.25}
+    .sub{margin:10px 0 0; color:var(--muted); max-width:900px}
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .pill{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 10px;
+      background: rgba(255,255,255,.02);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+    .card{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      background: rgba(255,255,255,.02);
+    }
+    h2{margin:0 0 10px; font-size:18px}
+    h3{margin:18px 0 8px; font-size:15px}
+    p{margin:10px 0; color:var(--muted)}
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    li{margin:6px 0}
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; padding:6px 10px;
+      border:1px solid var(--line); border-radius:999px;
+      background: rgba(255,255,255,.02);
+      color:var(--muted);
+    }
+    .dot{width:8px; height:8px; border-radius:999px; background:var(--ok)}
+    .dot.warn{background:var(--warn)}
+    .dot.danger{background:var(--danger)}
+    .quote{
+      border-left:3px solid rgba(122,167,255,.55);
+      padding:10px 12px;
+      margin:12px 0 0;
+      background: rgba(122,167,255,.07);
+      border-radius:12px;
+      color:var(--text);
+    }
+    .hr{height:1px; background:var(--line); margin:16px 0}
+    .cta{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(122,167,255,.14);
+      color:var(--text); font-weight:650;
+    }
+    .btn.secondary{
+      background: rgba(255,255,255,.03);
+      font-weight:600;
+      color:var(--text);
+    }
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      opacity:.95;
+    }
+    code.inline{
+      padding:2px 6px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background: rgba(0,0,0,.25);
+      color:#d7e6ff;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+
+    <div class="topbar">
+      <div>
+        <strong>HERMETICUM B.C.E.</strong><br/>
+        <span style="color:var(--muted); font-size:12px;">HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</span>
+      </div>
+
+      <nav class="nav" aria-label="Navigazione">
+        <a href="../">Home</a>
+        <a href="../catalog/">Classi IPR</a>
+        <a class="active" href="./">AI e IPR</a>
+        <a href="../create/">Rilascia IPR</a>
+        <a href="../verify/">Verifica</a>
+        <a href="../terms/">Termini</a>
+      </nav>
+    </div>
+
+    <header>
+      <h1>AI e IPR — Responsabilità, non autonomia</h1>
+      <p class="sub">
+        In HERMETICUM B.C.E. l’IPR non rende l’AI “più potente”.
+        L’IPR rende l’uso dell’AI <strong>responsabile, tracciabile e auditabile</strong>
+        in un contesto europeo.
+      </p>
+
+      <div class="pillrow">
+        <div class="pill">Sicurezza uguale per tutti (firma a tre ancore)</div>
+        <div class="pill">Ciò che cambia: cosa viene firmato</div>
+        <div class="pill">UE-first • GDPR-min • audit-by-design</div>
+      </div>
+
+      <div class="cta">
+        <a class="btn" href="../catalog/">Vedi le 3 classi IPR</a>
+        <a class="btn secondary" href="../verify/">Verifica un IPR</a>
+      </div>
+    </header>
+
+    <section class="grid">
+
+      <article class="card">
+        <h2>Senza IPR: AI anonima</h2>
+        <p>
+          Un’AI senza IPR può essere utile, ma è <strong>anonima</strong> e
+          difficilmente utilizzabile per decisioni reali dove servono responsabilità e audit.
+        </p>
+        <ul>
+          <li>Nessuna identità verificabile del soggetto che la usa</li>
+          <li>Nessuna continuità nel tempo</li>
+          <li>Nessuna attribuzione delle azioni rilevanti</li>
+          <li>Audit complesso o impossibile</li>
+        </ul>
+        <div class="quote">
+          Risultato: AI “generica” → buona per consultazione, debole per contesti critici.
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Con IPR: AI responsabile</h2>
+        <p>
+          Con un IPR, l’AI opera <strong>nel contesto di un soggetto reale</strong>.
+          Il sistema può legare l’uso dell’AI a identità, tempo e verificabilità pubblica.
+        </p>
+        <ul>
+          <li>Identità primaria verificabile</li>
+          <li>Continuità nel tempo (prima/dopo)</li>
+          <li>Azioni rilevanti attribuibili</li>
+          <li>Audit tecnico disponibile</li>
+        </ul>
+        <div class="quote">
+          Regola: l’AI non “decide al posto tuo”. L’AI opera <strong>con te</strong>.
+        </div>
+      </article>
+
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2>La firma digitale a tre ancore (sempre la stessa)</h2>
+      <p>
+        Ogni IPR, in tutte le classi, è firmato con lo stesso schema di ancoraggio:
+        <strong>IPFS</strong> (esistenza), <strong>Bitcoin</strong> (tempo), <strong>Ethereum</strong> (traccia).
+        Questo garantisce verifica pubblica e non modificabilità.
+      </p>
+      <p>
+        Quindi la domanda corretta non è “quale classe è più sicura?”, ma:
+        <strong>cosa stai scegliendo di firmare</strong>.
+      </p>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2>Come cambia l’AI nelle 3 classi di IPR</h2>
+      <p>
+        La sicurezza crittografica è identica. Cambia l’estensione della firma digitale e
+        quindi la responsabilità operativa.
+      </p>
+
+      <div class="hr"></div>
+
+      <div class="tag"><span class="dot"></span><strong>🟢 IPR BASE — Cittadino</strong></div>
+      <p><strong>Cosa viene firmato:</strong> identità digitale primaria e stato di validità.</p>
+      <ul>
+        <li>L’AI può assistere e supportare (informazioni, organizzazione, guida).</li>
+        <li>Nessuna firma di azioni/decisioni vincolanti.</li>
+        <li>Obiettivo: identità verificabile senza tracciamento delle azioni.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="tag"><span class="dot warn"></span><strong>🔵 IPR STRONG — Professionista</strong></div>
+      <p><strong>Cosa viene firmato:</strong> identità + ruolo/funzione + continuità nel tempo.</p>
+      <ul>
+        <li>L’AI opera nel contesto di un ruolo (es. consulenza, compliance, procedure).</li>
+        <li>Output e azioni rilevanti possono essere tracciabili e attribuibili.</li>
+        <li>Obiettivo: responsabilità dimostrabile e audit tecnico.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="tag"><span class="dot danger"></span><strong>🔴 IPR ENTERPRISE — Aziende e Istituzioni</strong></div>
+      <p><strong>Cosa viene firmato:</strong> identità organizzativa + ruoli/deleghe + processi.</p>
+      <ul>
+        <li>L’AI opera su processi governati (workflow, deleghe, controlli).</li>
+        <li>Ogni azione rilevante è inserita in una catena di responsabilità.</li>
+        <li>Obiettivo: governance, audit-by-design, responsabilità non ambigua.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <div class="quote">
+        In HERMETICUM B.C.E. la sicurezza è uguale per tutti.
+        <strong>Cambia solo il livello di responsabilità che scegli di assumerti.</strong>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2>Nota europea (principio di responsabilità umana)</h2>
+      <p>
+        HERMETICUM B.C.E. mantiene l’AI in un perimetro europeo:
+        l’identità è verificabile, la continuità è tracciabile, e l’audit è possibile.
+        L’AI resta uno strumento: la responsabilità finale resta umana o organizzativa.
+      </p>
+      <p>
+        Per approfondire classi e differenze, vai al <a href="../catalog/">Catalogo IPR</a>.
+        Per verificare la firma, usa <a href="../verify/">Verify</a>.
+      </p>
+      <p style="color:var(--muted); font-size:13px;">
+        Nota tecnica: questa pagina descrive il modello concettuale. I dettagli implementativi e i controlli
+        operativi sono documentati in modo separato (audit e specifiche).
+      </p>
+    </section>
+
+    <footer>
+      <div>© HERMETICUM B.C.E. S.r.l. — Infrastruttura europea di identità primaria (IPR)</div>
+      <div>
+        <a href="../">Home</a> ·
+        <a href="../catalog/">Catalog</a> ·
+        <a href="../create/">Create</a> ·
+        <a href="../verify/">Verify</a> ·
+        <a href="../terms/">Terms</a>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>
