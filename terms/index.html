@@ -1,172 +1,71 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Termini & Perimetro — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Termini d’uso e perimetro sperimentale UE-first per HERMETICUM B.C.E.: limiti, esclusioni, uso consentito/vietato." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Termini — Nodo Europeo ΦΩ</title>
+  <meta name="description" content="Termini minimi. UE-first, GDPR-min, hash-only, fail-closed.">
+  <meta name="robots" content="noindex,nofollow" />
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0b0b;color:#e6e6e6;line-height:1.6}
-    header,section{max-width:1100px;margin:auto;padding:2.5rem 1rem}
-    header{padding-top:3.5rem}
-    h1{font-size:2rem;margin:0 0 .5rem}
-    .sub{opacity:.85}
-    .badge{display:inline-block;border:1px solid #444;border-radius:999px;padding:.15rem .6rem;font-size:.85rem;opacity:.9}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:1.5rem}
-    .card{border:1px solid #222;background:#111;border-radius:6px;padding:1.25rem}
-    a{color:#9ad}
-    ul{margin-top:.5rem}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    .warn{opacity:.9}
+    :root{--bg:#0b0e11;--fg:#e6e6e6;--muted:#9aa0a6;--accent:#5eead4;--card:#0f1318;--line:#1f2937;--warn:#f87171;}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,sans-serif;line-height:1.55}
+    main{min-height:100vh;display:grid;place-items:center;padding:24px}
+    .panel{max-width:880px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+    .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.8rem;color:var(--muted);margin-bottom:14px}
+    h1{margin:0 0 6px 0;font-size:1.45rem}
+    p{margin:10px 0;color:var(--fg)}
+    .muted{color:var(--muted)}
+    ul{margin:8px 0 0 18px}
+    li{margin:6px 0}
+    code{background:#0b0e11;border:1px solid var(--line);padding:2px 6px;border-radius:8px}
+    .warn{color:var(--warn);font-weight:700}
+    a{color:var(--accent);text-decoration:none}
+    .foot{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:var(--muted);font-size:.8rem}
+    hr{border:none;border-top:1px dashed var(--line);margin:16px 0}
   </style>
 </head>
 <body>
+<main>
+  <div class="panel">
+    <span class="badge">TERMS · UE_FIRST · GDPR_MIN · HASH_ONLY · FAIL_CLOSED</span>
+    <h1>Termini minimi (Nodo Europeo ΦΩ)</h1>
+    <p class="muted">
+      Questo Nodo è una <strong>facciata di interoperabilità e coerenza</strong>. Non è un servizio di account.
+      L’uso produce eventi in modalità <code>APPEND_ONLY</code>.
+    </p>
 
-<header>
-  <div class="badge">Terms / Scope</div>
-  <h1>Termini d’uso e perimetro</h1>
-  <p class="sub">
-    HERMETICUM B.C.E. è una piattaforma <strong>sperimentale</strong> UE-first.
-    Questi termini definiscono cosa è consentito, cosa è vietato, e i limiti di responsabilità.
-  </p>
-</header>
+    <hr/>
 
-<section>
-  <h2>1) Natura del servizio</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Sperimentale</h3>
-      <p>Ricerca e sviluppo, proof-of-concept, test controllati, documentazione pubblica.</p>
-    </div>
-    <div class="card">
-      <h3>Non equivalenze</h3>
-      <ul>
-        <li>Non è SPID</li>
-        <li>Non è CIE</li>
-        <li>Non è un EUDI Wallet</li>
-        <li>Non è un servizio fiduciario qualificato</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Principi</h3>
-      <ul>
-        <li><strong>UE-first</strong> (conformità e perimetro chiaro)</li>
-        <li><strong>GDPR-min</strong> (minimizzazione dati)</li>
-        <li><strong>Audit-by-design</strong> (tracciabilità verificabile)</li>
-        <li><strong>Fail-closed</strong> (in dubbio → non valido)</li>
-      </ul>
+    <p><strong>1) Cosa viene trattato</strong></p>
+    <ul>
+      <li>Il sistema opera in modello <strong>HASH_ONLY</strong> (impronte crittografiche).</li>
+      <li>Eventuali dati inseriti dall’utente sono utilizzati per generare un payload e un hash.</li>
+    </ul>
+
+    <p><strong>2) Cosa non viene promesso</strong></p>
+    <ul>
+      <li>Nessuna garanzia di identità: l’identità è <strong>progressiva</strong> e dipende dalle evidenze.</li>
+      <li>Nessuna protezione “magica”: la validità dipende da verifiche e audit.</li>
+    </ul>
+
+    <p><strong>3) Fail-closed</strong></p>
+    <ul>
+      <li>Se mancano certificazioni o ancoraggi richiesti, lo stato è <span class="warn">DENY</span>.</li>
+      <li>Nessun aggiornamento silenzioso: ogni modifica deve essere evento dichiarato.</li>
+    </ul>
+
+    <p><strong>4) Responsabilità dell’utente</strong></p>
+    <ul>
+      <li>Dichiari che le informazioni fornite sono corrette.</li>
+      <li>Accetti che l’azione generi un evento opponibile (append-only).</li>
+    </ul>
+
+    <div class="foot">
+      <span><a href="../">← Nodo Europeo ΦΩ</a></span>
+      <span><a href="../verify/">Verify</a> · <a href="../register/">Register</a></span>
     </div>
   </div>
-</section>
-
-<section>
-  <h2>2) Cosa fa (e cosa non promette)</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>IPR (Identity Primary Record)</h3>
-      <p>
-        Un record tecnico di origine (manifest + evidenze/hash) pensato per integrità,
-        tracciabilità e continuità operativa.
-      </p>
-    </div>
-    <div class="card">
-      <h3>Non promette</h3>
-      <ul>
-        <li>Riconoscimento istituzionale automatico</li>
-        <li>Valore legale automatico</li>
-        <li>Identificazione legale della persona</li>
-      </ul>
-      <p class="warn">L’interpretazione giuridica dipende dal contesto e dalle prove complessive.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>3) Uso consentito</h2>
-  <ul>
-    <li>Generazione e verifica di IPR in ambito sperimentale</li>
-    <li>Gestione di evidenze (hash/manifest) per integrità e audit</li>
-    <li>Filiere documentali verificabili (versioning, changelog, conservazione)</li>
-    <li>Ricerca, formazione, prototipazione</li>
-  </ul>
-</section>
-
-<section>
-  <h2>4) Uso vietato (esplicito)</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Frodi e inganni</h3>
-      <ul>
-        <li>Impersonificazione o falsificazione identità</li>
-        <li>Manipolazione di evidenze o catene di verifica</li>
-        <li>Creazione di documenti ingannevoli</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Danni / intrusione</h3>
-      <ul>
-        <li>Attacchi informatici, malware, accessi non autorizzati</li>
-        <li>Uso per danneggiare persone, dati o infrastrutture</li>
-        <li>Violazioni di leggi UE o nazionali</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Contesti sensibili (dual-use)</h3>
-      <p>
-        Qualsiasi utilizzo in contesti sensibili richiede governance, autorizzazioni e conformità
-        alle normative applicabili. In assenza di tali condizioni, l’uso è <strong>non ammesso</strong>.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>5) Conservazione e catena di prova</h2>
-  <p>
-    In contesti auditabili, la conservazione di <span class="mono">manifest</span>, evidenze, versioni e log
-    è parte della prova. Senza conservazione, la continuità operativa decade.
-  </p>
-</section>
-
-<section>
-  <h2>6) Responsabilità e limitazioni</h2>
-  <ul>
-    <li>La piattaforma fornisce strumenti tecnici “as-is” (senza garanzie implicite).</li>
-    <li>L’utente è responsabile dell’uso degli output e del rispetto delle normative.</li>
-    <li>In caso di dubbio o mismatch di verifica: <strong>fail-closed → non valido</strong>.</li>
-  </ul>
-</section>
-
-<section>
-  <h2>7) Aggiornamenti</h2>
-  <p>
-    Questi termini possono essere aggiornati per evoluzioni tecniche e normative.<br />
-    Data: <strong>2026</strong>
-  </p>
-</section>
-
-<footer style="margin-top:4rem;padding:2rem 1rem;border-top:1px solid #222;font-size:0.9rem;opacity:0.85;">
-  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
-    <div>
-      <strong>HERMETICUM B.C.E.</strong><br />
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
-      <span class="sub">HERMETICUM B.C.E. S.r.l.</span>
-    </div>
-    <div>
-      <a href="../legal/privacy.html">Privacy</a><br />
-      <a href="../legal/cookies.html">Cookies</a><br />
-      <a href="../legal/accessibility.html">Accessibility</a>
-    </div>
-    <div>
-      <a href="../legal/legal-notice.html">Legal notice</a><br />
-      <a href="../legal/contact.html">Contact</a>
-    </div>
-    <div>
-      Platform status: <strong>Experimental</strong><br />
-      Jurisdiction: <strong>EU</strong>
-    </div>
-  </div>
-</footer>
-
+</main>
 </body>
 </html>
