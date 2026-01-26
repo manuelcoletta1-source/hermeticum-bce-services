@@ -1,211 +1,220 @@
-<a href="./modules.html">Modules</a>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <title>HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HERMETICUM B.C.E. — Piattaforma digitale europea per identità verificabile, governance tecnica e continuità operativa." />
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HERMETICUM B.C.E. — Piattaforma IPR</title>
+  <meta name="description" content="HERMETICUM B.C.E. — Blindata · Computabile · Evolutiva. Prima piattaforma europea per il rilascio di IPR (Identity Primary Record) con firma digitale a tre ancore." />
   <style>
     :root{
-      --bg:#0b0c10;
-      --panel:#0f1117;
-      --line:#24262b;
-      --text:#e8e8e8;
-      --muted:#9aa0a6;
-      --accent:#6ee7b7;
+      --bg:#0b0f14; --panel:#0f1621; --text:#e7eef7; --muted:#a8b4c3;
+      --line:#1f2b3a; --accent:#7aa7ff; --ok:#6ee7b7; --warn:#fbbf24;
+      --radius:18px;
     }
     *{box-sizing:border-box}
     body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif;
-      background:var(--bg);
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 800px at 10% 0%, #101a2a 0%, var(--bg) 55%) no-repeat;
       color:var(--text);
     }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
     header{
-      padding:28px;
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg,var(--panel),var(--bg));
+      border:1px solid var(--line); background:linear-gradient(180deg, rgba(122,167,255,.10), rgba(255,255,255,.02));
+      border-radius:var(--radius); padding:22px 20px;
     }
-    h1{
-      margin:0;
-      font-size:1.7rem;
-      letter-spacing:0.04em;
+    .brand{
+      display:flex; gap:14px; align-items:center; flex-wrap:wrap;
     }
-    header p{
-      margin:10px 0 0;
-      color:var(--muted);
-      max-width:820px;
-    }
-    nav{
-      margin-top:18px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-    }
-    nav a{
-      color:var(--text);
-      text-decoration:none;
-      padding:8px 14px;
+    .mark{
+      width:44px; height:44px; border-radius:14px;
       border:1px solid var(--line);
-      border-radius:6px;
-      background:var(--panel);
-      font-size:0.9rem;
+      background:linear-gradient(135deg, rgba(122,167,255,.22), rgba(255,255,255,.03));
+      display:grid; place-items:center;
+      font-weight:800; letter-spacing:.5px;
     }
-    nav a:hover{
-      color:var(--accent);
-      border-color:var(--accent);
+    h1{margin:0; font-size:22px; line-height:1.2}
+    .sub{margin:6px 0 0; color:var(--muted); font-size:14px}
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .pill{
+      border:1px solid var(--line); border-radius:999px; padding:7px 10px;
+      background:rgba(255,255,255,.02); font-size:12px; color:var(--muted)
     }
-    main{
-      max-width:1100px;
-      margin:0 auto;
-      padding:36px 24px;
-    }
-    section{
-      margin-bottom:52px;
-    }
-    h2{
-      font-size:1.25rem;
-      margin-bottom:14px;
-    }
-    section p{
-      color:var(--muted);
-      max-width:880px;
-    }
-    .grid{
-      margin-top:22px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-      gap:16px;
-    }
+    .grid{display:grid; grid-template-columns:1.2fr .8fr; gap:14px; margin-top:14px}
+    @media (max-width: 880px){ .grid{grid-template-columns:1fr} }
     .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:8px;
-      padding:16px;
+      border:1px solid var(--line); border-radius:var(--radius);
+      background:rgba(255,255,255,.02); padding:18px;
     }
-    .card h3{
-      margin:0 0 8px;
-      font-size:1rem;
+    h2{margin:0 0 10px; font-size:16px}
+    p{margin:10px 0; color:var(--muted); line-height:1.55}
+    .klist{margin:10px 0 0; padding:0 0 0 18px; color:var(--muted)}
+    .klist li{margin:6px 0}
+    .cta{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px
     }
-    .card p{
-      margin:0;
-      font-size:0.9rem;
-      color:var(--muted);
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:14px; border:1px solid var(--line);
+      background:rgba(122,167,255,.12); color:var(--text); font-weight:650;
+    }
+    .btn.secondary{background:rgba(255,255,255,.03); font-weight:600}
+    .levels{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    @media (max-width: 880px){ .levels{grid-template-columns:1fr} }
+    .lvl{
+      border:1px solid var(--line); border-radius:var(--radius); padding:14px;
+      background:rgba(255,255,255,.02)
+    }
+    .tag{
+      display:inline-flex; gap:8px; align-items:center;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--muted)
+    }
+    .dot{width:8px; height:8px; border-radius:999px; background:var(--ok)}
+    .dot.warn{background:var(--warn)}
+    .anchorbox code{
+      display:block; padding:10px 12px; border-radius:14px;
+      background:rgba(0,0,0,.30); border:1px solid var(--line);
+      color:#d7e6ff; overflow:auto;
     }
     footer{
-      border-top:1px solid var(--line);
-      padding:26px;
-      font-size:0.85rem;
-      color:var(--muted);
+      margin-top:18px; color:var(--muted); font-size:12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      opacity:.95;
     }
   </style>
 </head>
 
 <body>
-
-<header>
-  <h1>HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA</h1>
-  <p>
-    Piattaforma digitale europea per identità verificabile, governance tecnica
-    e continuità operativa. UE-first · GDPR-min · HASH-only · Audit-by-design.
-  </p>
-
-  <nav>
-    <a href="#platform">Platform</a>
-    <a href="#architecture">Architecture</a>
-    <a href="#modules">Modules</a>
-    <a href="#onboarding">Onboarding</a>
-    <a href="#verify">Verify</a>
-    <a href="#terms">Terms</a>
-  </nav>
-</header>
-
-<main>
-
-  <section id="platform">
-    <h2>Platform</h2>
-    <p>
-      HERMETICUM B.C.E. non fornisce servizi isolati.
-      Opera una piattaforma cibernetica continua progettata per
-      identità digitale, tracciabilità e opponibilità giuridica.
-    </p>
-  </section>
-
-  <section id="architecture">
-    <h2>Architecture</h2>
-    <p>
-      L’architettura è modulare, deterministica e auditabile.
-      Tutti i componenti cooperano secondo principi fail-closed
-      e governance UE-first.
-    </p>
-  </section>
-
-  <section id="modules">
-    <h2>Platform Modules</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>UNEBDO ΦΩ</h3>
-        <p>Enforcement normativo, compliance e tracciabilità.</p>
+  <main class="wrap">
+    <header>
+      <div class="brand">
+        <div class="mark">HB</div>
+        <div>
+          <h1>HERMETICUM B.C.E.</h1>
+          <div class="sub"><b>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</b><br/>HERMETICUM B.C.E. S.r.l.</div>
+        </div>
       </div>
-      <div class="card">
-        <h3>OPC</h3>
-        <p>Opposable Policy Core e policy computabili.</p>
-      </div>
-      <div class="card">
-        <h3>MetaExchange</h3>
-        <p>Scambio verificabile di dati e valore.</p>
-      </div>
-      <div class="card">
-        <h3>IoSpace</h3>
-        <p>Spazio operativo e ambienti digitali controllati.</p>
-      </div>
-      <div class="card">
-        <h3>NeuroLoop</h3>
-        <p>Continuità cognitiva e feedback adattivo.</p>
-      </div>
-      <div class="card">
-        <h3>CyberGlobal</h3>
-        <p>Governance tecnica e interoperabilità dual-use.</p>
-      </div>
-      <div class="card">
-        <h3>AI JOKER-C2</h3>
-        <p>Orchestrazione, supervisione e controllo AI.</p>
-      </div>
-    </div>
-  </section>
 
-  <section id="onboarding">
-    <h2>Onboarding</h2>
-    <p>
-      L’accesso alla piattaforma avviene tramite IPR
-      (Identity Primary Record) con verifica crittografica
-      e continuità temporale.
-    </p>
-  </section>
+      <div class="pillrow">
+        <div class="pill">UE-first • GDPR-min • hash-only</div>
+        <div class="pill">audit-by-design • fail-closed</div>
+        <div class="pill">Rilascio IPR • Firma digitale a tre ancore</div>
+      </div>
 
-  <section id="verify">
-    <h2>Verify</h2>
-    <p>
-      Ogni identità, policy o evidenza è verificabile pubblicamente
-      tramite hash, ancoraggi crittografici e audit trail.
-    </p>
-  </section>
+      <div class="grid">
+        <section class="card">
+          <h2>Prima piattaforma europea per il rilascio di IPR</h2>
+          <p>
+            HERMETICUM B.C.E. rilascia <b>IPR (Identity Primary Record)</b>:
+            una <b>chiave crittografica primaria</b> associata a un soggetto reale europeo,
+            necessaria per operare in modo verificabile e responsabile nel mondo digitale e dell’intelligenza artificiale.
+          </p>
+          <ul class="klist">
+            <li><b>Non</b> è un account.</li>
+            <li><b>Non</b> è un profilo.</li>
+            <li><b>Non</b> è un wallet.</li>
+            <li>È una <b>radice di identità computabile</b>, valida nel tempo.</li>
+          </ul>
 
-  <section id="terms">
-    <h2>Terms</h2>
-    <p>
-      La piattaforma opera secondo normative UE,
-      minimizzazione dei dati e sicurezza by design.
-    </p>
-  </section>
+          <div class="cta">
+            <a class="btn" href="./create/">Rilascia / Genera IPR</a>
+            <a class="btn secondary" href="./verify/">Verifica un IPR</a>
+            <a class="btn secondary" href="./catalog/">Catalogo livelli</a>
+            <a class="btn secondary" href="./terms/">Termini & Policy</a>
+          </div>
+        </section>
 
-</main>
+        <section class="card anchorbox">
+          <h2>Le tre ancore sono una firma digitale</h2>
+          <p>
+            Ogni IPR viene sigillato con una <b>firma digitale a tre ancore</b> per garantire
+            esistenza, integrità, non ripudio e verificabilità pubblica.
+          </p>
+          <ul class="klist">
+            <li><b>IPFS</b> — prova di esistenza del record</li>
+            <li><b>Bitcoin</b> — ancoraggio temporale immutabile</li>
+            <li><b>Ethereum</b> — tracciabilità computabile e verificabile</li>
+          </ul>
+          <p class="sub" style="margin-top:10px">Formato tipico (esempio):</p>
+          <code>
+IPFS CID: bafk...<br/>
+BTC TXID: 9eeb...<br/>
+ETH TX: 0xf65e...
+          </code>
+        </section>
+      </div>
+    </header>
 
-<footer>
-  HERMETICUM B.C.E. S.r.l. — Infrastruttura cibernetica europea
-</footer>
+    <section class="card" style="margin-top:14px">
+      <h2>Gradi di crittografia per categoria</h2>
+      <p>
+        L’IPR applica livelli di crittografia e responsabilità in base al soggetto.
+        I dati identificativi restano <b>minimi</b> e vengono trattati con logiche <b>hash-only</b> e verificabilità.
+      </p>
 
+      <div class="levels">
+        <div class="lvl">
+          <div class="tag"><span class="dot"></span><b>Cittadino UE</b> — BASE</div>
+          <p><b>Grado:</b> identità primaria hashata + contesto territoriale UE + firma digitale a tre ancore.</p>
+          <ul class="klist">
+            <li>Accesso a servizi digitali sicuri</li>
+            <li>Riduzione furto d’identità</li>
+            <li>AI personale tracciabile (non anonima)</li>
+          </ul>
+        </div>
+
+        <div class="lvl">
+          <div class="tag"><span class="dot"></span><b>Professionista</b> — STRONG</div>
+          <p><b>Grado:</b> identità primaria + ruolo/funzione + continuità temporale + audit tecnico.</p>
+          <ul class="klist">
+            <li>Decisioni professionali tracciabili</li>
+            <li>Prova di continuità e responsabilità</li>
+            <li>Operatività AI non opaca</li>
+          </ul>
+        </div>
+
+        <div class="lvl">
+          <div class="tag"><span class="dot warn"></span><b>Azienda</b> — ENTERPRISE</div>
+          <p><b>Grado:</b> identità aziendale + gerarchia ruoli + firme a tre ancore per processi + audit-by-design.</p>
+          <ul class="klist">
+            <li>Governance interna verificabile</li>
+            <li>Accessi e ruoli non ambigui</li>
+            <li>AI aziendale auditabile</li>
+          </ul>
+        </div>
+
+        <div class="lvl">
+          <div class="tag"><span class="dot warn"></span><b>Istituzioni</b> — INSTITUTIONAL</div>
+          <p><b>Grado:</b> identità istituzionale + continuità amministrativa + verificabilità tecnica e giuridica.</p>
+          <ul class="klist">
+            <li>Interoperabilità UE</li>
+            <li>Audit e prova tecnica per contesti formali</li>
+            <li>Riduzione opacità nei sistemi automatici</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2>Che dati servono per il rilascio IPR</h2>
+      <p>Dati minimi di ancoraggio (territorio + identità essenziale):</p>
+      <ul class="klist">
+        <li>Nazione • Regione • Città • Quartiere</li>
+        <li>Nome e cognome</li>
+        <li>Dati anagrafici essenziali</li>
+      </ul>
+      <p>
+        Obiettivo: rendere l’identità <b>verificabile</b> senza trasformarla in “profilazione”.
+        La piattaforma privilegia <b>minimizzazione</b> e <b>auditabilità</b>.
+      </p>
+    </section>
+
+    <footer>
+      <div>© HERMETICUM B.C.E. — Infrastruttura di identità primaria (IPR)</div>
+      <div><a href="./verify/">Verify</a> • <a href="./catalog/">Catalog</a> • <a href="./create/">Create</a> • <a href="./terms/">Terms</a></div>
+    </footer>
+  </main>
 </body>
 </html>
