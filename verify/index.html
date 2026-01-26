@@ -1,361 +1,133 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Verify — IPR | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Verifica statica UE-first di un manifest IPR: controlli fail-closed, riepilogo, warning, nessun invio dati." />
-  <meta name="color-scheme" content="dark light" />
+  <title>Verify — Hash-Only (EU Node ΦΩ)</title>
+  <meta name="description" content="Verifica locale SHA-256 di un payload normalizzato. Hash-only, UE-first, fail-closed." />
+  <meta name="robots" content="noindex,nofollow" />
   <style>
-    :root{
-      --bg:#0b0d10; --card:#12161c; --muted:#9aa4b2; --fg:#e8eef7;
-      --line:#232a34; --accent:#6ee7ff; --good:#6bff95; --warn:#ffd36e; --bad:#ff6b6b;
-      --max:1120px; --r:16px; --shadow: 0 10px 30px rgba(0,0,0,.35);
-    }
+    :root{--bg:#0b0e11;--fg:#e6e6e6;--muted:#9aa0a6;--accent:#5eead4;--card:#0f1318;--line:#1f2937;--ok:#34d399;--warn:#f87171;}
     *{box-sizing:border-box}
-    body{
-      margin:0; font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:
-        radial-gradient(1200px 700px at 15% -10%, rgba(110,231,255,.12), transparent 60%),
-        radial-gradient(900px 500px at 90% 0%, rgba(107,255,149,.10), transparent 55%),
-        var(--bg);
-      color:var(--fg); line-height:1.45;
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,sans-serif;line-height:1.45}
+    main{min-height:100vh;display:grid;place-items:center;padding:24px}
+    .panel{max-width:920px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+    .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.8rem;color:var(--muted);margin-bottom:14px}
+    h1{margin:0 0 6px 0;font-size:1.45rem}
+    .sub{margin:0 0 18px 0;color:var(--muted)}
+    label{display:block;font-size:.9rem;margin:0 0 6px 2px;color:var(--muted)}
+    textarea,input{
+      width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0b0e11;color:var(--fg);outline:none
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-      padding:18px 20px; background:rgba(18,22,28,.75); border:1px solid var(--line);
-      border-radius:var(--r); box-shadow:var(--shadow); backdrop-filter: blur(10px);
-      position:sticky; top:12px; z-index:50;
-    }
-    .brand{display:flex; flex-direction:column; gap:4px}
-    .mark{font-weight:900; letter-spacing:.35px}
-    .submark{color:var(--muted); font-size:.92rem}
-    nav{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; align-items:center}
-    .pill{
-      padding:8px 12px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(255,255,255,.03);
-    }
-    .pill:hover{border-color:rgba(110,231,255,.55)}
-    .pill.cta{border-color:rgba(110,231,255,.45); background:rgba(110,231,255,.10)}
-    .card{
-      margin-top:18px;
-      background:rgba(18,22,28,.82); border:1px solid var(--line); border-radius:var(--r);
-      padding:18px; box-shadow:var(--shadow);
-    }
-    h1{margin:0 0 10px 0; font-size:1.45rem}
-    h2{margin:0 0 10px 0; font-size:1.1rem}
-    p{margin:10px 0; color:rgba(232,238,247,.92)}
-    .muted{color:var(--muted)}
-    .small{font-size:.92rem}
-    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
-    .hr{height:1px; background:var(--line); margin:14px 0}
-    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
-    textarea, input{
-      width:100%; padding:10px 12px; border-radius:12px;
-      border:1px solid var(--line); background:rgba(0,0,0,.25); color:var(--fg);
-      outline:none;
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size:.9rem;
-      line-height:1.35;
-    }
-    textarea:focus, input:focus{border-color:rgba(110,231,255,.55)}
-    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:10px 14px; border-radius:12px;
-      border:1px solid var(--line); background:rgba(255,255,255,.03);
-      cursor:pointer;
-    }
-    .btn:hover{border-color:rgba(110,231,255,.55)}
-    .btn.primary{border-color:rgba(110,231,255,.45); background:rgba(110,231,255,.12)}
-    .btn.good{border-color:rgba(107,255,149,.35); background:rgba(107,255,149,.10)}
-    .badge{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:6px 10px; border-radius:999px; border:1px solid var(--line);
-      background:rgba(255,255,255,.02); color:var(--muted); font-size:.85rem;
-      width:max-content;
-    }
-    .badge .dot{width:8px; height:8px; border-radius:999px; background:var(--accent)}
-    .badge.good .dot{background:var(--good)}
-    .badge.warn .dot{background:var(--warn)}
-    .badge.bad  .dot{background:var(--bad)}
-    .panel{
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:rgba(255,255,255,.02);
-      padding:14px;
-    }
-    ul{margin:8px 0 0 18px; color:rgba(232,238,247,.92)}
-    li{margin:6px 0}
-    code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
-    @media (max-width: 980px){
-      header{position:relative; top:auto}
-      .grid2{grid-template-columns:1fr}
-    }
+    textarea{min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:.9rem}
+    .grid{display:grid;gap:12px}
+    @media(min-width:820px){.grid.two{grid-template-columns:1fr 1fr}}
+    .actions{display:grid;gap:10px;margin-top:14px}
+    @media(min-width:820px){.actions{grid-template-columns:1fr 1fr}}
+    button{padding:13px 16px;border-radius:10px;border:1px solid var(--line);background:var(--accent);color:#022c22;font-weight:700;cursor:pointer}
+    button.secondary{background:transparent;color:var(--fg)}
+    .box{margin-top:12px;padding:14px;border:1px solid var(--line);border-radius:10px;background:#0b0e11;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:.85rem;white-space:pre-wrap;word-break:break-word}
+    .status{margin-top:10px}
+    .ok{color:var(--ok)} .warn{color:var(--warn)}
+    .foot{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:var(--muted);font-size:.8rem}
+    a{color:var(--accent);text-decoration:none}
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header aria-label="Barra principale">
-      <div class="brand">
-        <div class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-        <div class="submark">HERMETICUM B.C.E. S.r.l. — Verify (manifest IPR, static)</div>
+<main>
+  <div class="panel">
+    <span class="badge">VERIFY · SHA-256 · HASH_ONLY · UE_FIRST · FAIL_CLOSED</span>
+    <h1>Verifica Hash (locale)</h1>
+    <p class="sub">
+      Incolla il <strong>payload normalizzato</strong> (JSON) e l’hash atteso (SHA-256 hex).  
+      La verifica avviene <strong>solo nel browser</strong>. Nessun invio.
+    </p>
+
+    <div class="grid two">
+      <div>
+        <label for="payload">Payload normalizzato (JSON)</label>
+        <textarea id="payload" placeholder='{"evt":"EVT-0012", ... }'></textarea>
       </div>
-      <nav aria-label="Navigazione">
-        <a class="pill" href="../">Home</a>
-        <a class="pill" href="../register/">Register</a>
-        <a class="pill" href="../create/">Create</a>
-        <a class="pill" href="../catalog/">Catalogo</a>
-        <a class="pill" href="../terms/">Termini</a>
-        <a class="pill cta" href="./">Verify</a>
-      </nav>
-    </header>
-
-    <section class="card">
-      <h1>Verifica manifest <span class="mono">IPR</span></h1>
-      <p class="muted small">
-        Verifica locale: nessun invio dati, nessun salvataggio.
-        Controlli <b>fail-closed</b> sui campi minimi + warning sulle evidenze mancanti.
-      </p>
-      <div class="hr"></div>
-
-      <div class="grid2">
-        <div class="panel">
-          <div class="badge"><span class="dot"></span> Input</div>
-          <p class="muted small">Incolla il JSON del manifest generato in <code>/create/</code>.</p>
-          <textarea id="manifest" rows="18" spellcheck="false" placeholder='{"proto":"IPR_MANIFEST","version":"1.0", ... }'></textarea>
-
-          <div class="btnrow">
-            <button class="btn primary" id="verifyBtn" type="button">→ Verifica</button>
-            <button class="btn" id="sampleBtn" type="button">Esempio</button>
-            <button class="btn" id="clearBtn" type="button">Pulisci</button>
-          </div>
-
-          <p class="muted small" style="margin-top:10px">
-            Tip: se vuoi verificare un file reale, calcola l’hash (es. SHA-256) e confrontalo con <code>object.hash</code>.
-          </p>
+      <div>
+        <label for="expected">Hash atteso (SHA-256 hex)</label>
+        <input id="expected" placeholder="es. 3a7c... (64 hex)" />
+        <div class="actions">
+          <button id="verifyBtn">Verifica</button>
+          <button id="resetBtn" class="secondary" type="button">Reset</button>
         </div>
 
-        <div class="panel">
-          <div class="badge good"><span class="dot"></span> Esito</div>
-          <p class="muted small" id="resultLine">Nessuna verifica eseguita.</p>
+        <div class="status" id="statusLine">Stato: <span class="warn">INATTIVO</span></div>
 
-          <div class="hr"></div>
-
-          <div class="badge"><span class="dot"></span> Riepilogo</div>
-          <ul id="summary">
-            <li class="muted">—</li>
-          </ul>
-
-          <div class="hr"></div>
-
-          <div class="badge warn"><span class="dot"></span> Warning</div>
-          <ul id="warnings">
-            <li class="muted">—</li>
-          </ul>
-
-          <div class="hr"></div>
-
-          <div class="badge bad"><span class="dot"></span> Errori (fail-closed)</div>
-          <ul id="errors">
-            <li class="muted">—</li>
-          </ul>
-        </div>
+        <div class="box" id="computedBox">computed_hash: —</div>
+        <div class="box" id="resultBox">result: —</div>
       </div>
-    </section>
+    </div>
 
-    <footer class="card" style="margin-top:18px">
-      <div class="small muted">
-        <b>HERMETICUM B.C.E. S.r.l.</b> — Verify · <span class="mono">hash-only</span> · <span class="mono">append-only</span> · <span class="mono">fail-closed</span>
-      </div>
-      <div class="small muted" style="margin-top:8px">
-        © 2026 — Nessuna promessa. Nessuna protezione. Solo precedenza.
-      </div>
-    </footer>
+    <div class="foot">
+      <span><a href="../">← Nodo Europeo ΦΩ</a></span>
+      <span><a href="../terms/">Termini</a></span>
+    </div>
   </div>
+</main>
 
-  <script>
-    (function(){
-      const $ = (id) => document.getElementById(id);
+<script>
+  async function sha256Hex(text) {
+    const enc = new TextEncoder();
+    const buf = enc.encode(text);
+    const digest = await crypto.subtle.digest("SHA-256", buf);
+    return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2,"0")).join("");
+  }
 
-      const manifestTA = $('manifest');
-      const resultLine = $('resultLine');
-      const summaryUL = $('summary');
-      const warningsUL = $('warnings');
-      const errorsUL = $('errors');
+  function setStatus(text, ok) {
+    const cls = ok ? "ok" : "warn";
+    document.getElementById("statusLine").innerHTML = 'Stato: <span class="'+cls+'">'+text+'</span>';
+  }
 
-      function setList(ul, items){
-        ul.innerHTML = '';
-        if(!items.length){
-          const li = document.createElement('li');
-          li.className = 'muted';
-          li.textContent = '—';
-          ul.appendChild(li);
-          return;
-        }
-        items.forEach(t => {
-          const li = document.createElement('li');
-          li.textContent = t;
-          ul.appendChild(li);
-        });
-      }
+  function normHex(s){ return (s||"").trim().toLowerCase(); }
 
-      function isLikelyISO(dt){
-        // ISO 8601 semplice: 2026-01-19T15:30+01:00 oppure Z
-        return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(\.\d+)?(Z|[+\-]\d{2}:\d{2})$/.test(dt);
-      }
+  const verifyBtn = document.getElementById("verifyBtn");
+  const resetBtn = document.getElementById("resetBtn");
 
-      function isHashOk(h){
-        // accetta:
-        // - "sha256:<hex64>"
-        // - "<hex64>" (SHA-256 puro)
-        // - "sha1:<hex40>" / "<hex40>" (warning)
-        const v = (h||'').trim().toLowerCase();
-        if(!v) return { ok:false, algo:null, note:'missing' };
+  verifyBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
 
-        const m = v.match(/^([a-z0-9]+):([0-9a-f]+)$/);
-        if(m){
-          const algo = m[1], hex = m[2];
-          if(algo === 'sha256' && hex.length === 64) return { ok:true, algo:'sha256', note:null };
-          if(algo === 'sha1' && hex.length === 40) return { ok:true, algo:'sha1', note:'sha1' };
-          return { ok:false, algo:algo, note:'len' };
-        }
+    const payloadTextRaw = document.getElementById("payload").value || "";
+    const expected = normHex(document.getElementById("expected").value);
 
-        if(/^[0-9a-f]{64}$/.test(v)) return { ok:true, algo:'sha256', note:null };
-        if(/^[0-9a-f]{40}$/.test(v)) return { ok:true, algo:'sha1', note:'sha1' };
-        return { ok:false, algo:null, note:'format' };
-      }
+    if (!payloadTextRaw.trim()) { setStatus("DENY (payload mancante)", false); return; }
+    if (!expected || expected.length !== 64 || !/^[0-9a-f]{64}$/.test(expected)) {
+      setStatus("DENY (hash atteso non valido)", false); return;
+    }
 
-      function safeGet(obj, path){
-        return path.split('.').reduce((a,k)=> (a && a[k] !== undefined ? a[k] : undefined), obj);
-      }
+    // fail-closed: JSON deve essere valido.
+    let normalizedText;
+    try {
+      const obj = JSON.parse(payloadTextRaw);
+      normalizedText = JSON.stringify(obj); // assume payload già normalizzato/ordinato dal generatore
+    } catch (err) {
+      setStatus("DENY (JSON non valido)", false);
+      return;
+    }
 
-      function verify(){
-        const errors = [];
-        const warnings = [];
-        const summary = [];
+    setStatus("PROCESSING…", true);
+    const computed = await sha256Hex(normalizedText);
 
-        let obj;
-        const raw = manifestTA.value.trim();
-        if(!raw){
-          errors.push("Input vuoto: incolla un manifest JSON.");
-          render(false, summary, warnings, errors);
-          return;
-        }
+    document.getElementById("computedBox").textContent = "computed_hash: " + computed;
 
-        try{
-          obj = JSON.parse(raw);
-        }catch(e){
-          errors.push("JSON non valido: parsing fallito.");
-          render(false, summary, warnings, errors);
-          return;
-        }
+    const match = (computed === expected);
+    document.getElementById("resultBox").textContent =
+      "result: " + (match ? "MATCH ✅" : "MISMATCH ❌");
 
-        // Campi minimi (fail-closed)
-        const iprId = safeGet(obj, 'ipr_id') || safeGet(obj, 'iprId') || safeGet(obj, 'id');
-        const canonical = safeGet(obj, 'time.canonical') || safeGet(obj, 'timeCanonical') || safeGet(obj, 'time');
-        const objHash = safeGet(obj, 'object.hash') || safeGet(obj, 'hash');
-        const policy = safeGet(obj, 'policy');
+    setStatus(match ? "VALID (hash combacia)" : "FAIL (hash non combacia)", match);
+  });
 
-        if(!iprId) errors.push("Campo mancante: ipr_id.");
-        if(!canonical) errors.push("Campo mancante: time.canonical.");
-        if(!objHash) errors.push("Campo mancante: object.hash.");
-        if(!policy) errors.push("Campo mancante: policy.");
-
-        // Proto/version (non obbligatori ma consigliati)
-        const proto = safeGet(obj, 'proto');
-        const version = safeGet(obj, 'version');
-        if(!proto) warnings.push("proto mancante (consigliato).");
-        if(!version) warnings.push("version mancante (consigliato).");
-
-        // ISO check
-        if(canonical && !isLikelyISO(String(canonical).trim())){
-          warnings.push("time.canonical non sembra ISO 8601 (controlla formato).");
-        }
-
-        // Hash check
-        if(objHash){
-          const h = isHashOk(String(objHash));
-          if(!h.ok){
-            errors.push("object.hash formato non valido (usa sha256:<hex64> o hex64).");
-          }else{
-            if(h.note === 'sha1') warnings.push("Hash SHA-1 rilevato: preferire SHA-256.");
-          }
-        }
-
-        // Anchors (warning se assenti)
-        const ipfs = safeGet(obj, 'anchors.ipfs');
-        const btc  = safeGet(obj, 'anchors.btc');
-        const eth  = safeGet(obj, 'anchors.eth');
-        if(!ipfs && !btc && !eth){
-          warnings.push("Nessuna anchor indicata (ok, ma riduce evidenza temporale esterna).");
-        }else{
-          summary.push("Anchors: " + [
-            ipfs ? "IPFS" : null,
-            btc ? "BTC" : null,
-            eth ? "ETH" : null
-          ].filter(Boolean).join(", "));
-        }
-
-        // Append-only expectation
-        const mut = safeGet(obj, 'audit.mutability');
-        if(mut && String(mut).toUpperCase() !== 'APPEND_ONLY'){
-          warnings.push("audit.mutability non è APPEND_ONLY (controlla coerenza con append-only).");
-        }
-
-        // Summary
-        if(iprId) summary.push("IPR-ID: " + iprId);
-        if(canonical) summary.push("Tempo canonico: " + canonical);
-        const oType = safeGet(obj, 'object.type'); if(oType) summary.push("Oggetto: " + oType);
-        const oRef  = safeGet(obj, 'object.ref');  if(oRef)  summary.push("Riferimento: " + oRef);
-        if(objHash) summary.push("Hash: " + String(objHash).slice(0, 18) + "…");
-        if(policy) summary.push("Policy: " + policy);
-
-        const ok = errors.length === 0;
-        render(ok, summary, warnings, errors);
-      }
-
-      function render(ok, summary, warnings, errors){
-        if(ok){
-          resultLine.textContent = "OK: manifest coerente (controlli minimi superati).";
-          resultLine.style.color = "rgba(107,255,149,.95)";
-        }else{
-          resultLine.textContent = "FAIL-CLOSED: manifest non valido (correggi gli errori).";
-          resultLine.style.color = "rgba(255,107,107,.95)";
-        }
-        setList(summaryUL, summary);
-        setList(warningsUL, warnings);
-        setList(errorsUL, errors);
-      }
-
-      $('verifyBtn').addEventListener('click', verify);
-
-      $('clearBtn').addEventListener('click', () => {
-        manifestTA.value = '';
-        render(false, [], [], []);
-      });
-
-      $('sampleBtn').addEventListener('click', () => {
-        const sample = {
-          proto: "IPR_MANIFEST",
-          version: "1.0",
-          ipr_id: "IPR-20260126-0001",
-          time: { canonical: "2026-01-26T16:00+01:00" },
-          scope: { path: "citizen", lang: "it" },
-          object: { type: "text", ref: "example.txt", hash: "sha256:" + "a".repeat(64), desc: "Esempio manifest" },
-          policy: "UE-FIRST/GDPR-MIN/HASH-ONLY/AUDIT/FAIL-CLOSED",
-          anchors: { ipfs: null, btc: null, eth: null },
-          audit: { mutability: "APPEND_ONLY" }
-        };
-        manifestTA.value = JSON.stringify(sample, null, 2);
-      });
-
-      // stato iniziale
-      render(false, [], [], []);
-    })();
-  </script>
+  resetBtn.addEventListener("click", () => {
+    document.getElementById("payload").value = "";
+    document.getElementById("expected").value = "";
+    document.getElementById("computedBox").textContent = "computed_hash: —";
+    document.getElementById("resultBox").textContent = "result: —";
+    setStatus("INATTIVO", false);
+  });
+</script>
 </body>
 </html>
