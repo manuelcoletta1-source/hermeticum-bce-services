@@ -1,115 +1,134 @@
-# HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA
-**HERMETICUM B.C.E. S.r.l.**
+# Nodo Europeo ΦΩ — EU Coherence Node
 
-Punto di ingresso pubblico europeo per **IPR — Identity Primary Record**.  
-Infrastruttura **UE-first** orientata a verificabilità, audit e continuità nel tempo.
+**Ingresso unico per il cittadino europeo.**  
+Questo repository espone la **facciata operativa** del Nodo Europeo ΦΩ:  
+un punto di accesso sovranazionale che **non gestisce identità**, ma **attesta coerenza**.
 
----
-
-## Cos’è questa piattaforma
-Questa non è una piattaforma di account, non è un servizio di certificazione e non è un registro centralizzato.
-
-È un **gateway pubblico** che rende possibile:
-- creare un **IPR** (record minimo di precedenza),
-- verificarne la **traccia** nel tempo,
-- consultare **cataloghi e percorsi** per cittadini, professionisti e istituzioni.
-
-Un **IPR** non certifica contenuti.  
-Rende **osservabile** che una traccia è esistita **prima**.
+Nessun account.  
+Nessun profilo.  
+Solo **eventi opponibili** in catena append-only.
 
 ---
 
-## Cos’è un IPR (in breve)
-**IPR — Identity Primary Record**  
-Un record minimo che lega:
-- una **traccia** (hash del contenuto),
-- un **tempo canonico**,
-- regole **append-only**,
-- riferimenti di verifica.
+## Cos’è questo Nodo (in breve)
+Il Nodo Europeo ΦΩ è un **livello di coerenza** della Σ-Chain:
 
-Un IPR:
-- ❌ non è un account  
-- ❌ non è un profilo  
-- ❌ non è una certificazione  
-- ✅ è una **precedenza verificabile nel tempo**
+Planet → Europa → Italia → Regione → Provincia → Zona → Persona
 
-Se la traccia persiste, l’IPR resta osservabile.  
-Se decade, non viene difeso.
+Opera in modalità:
+- **UE_FIRST**
+- **GDPR_MIN**
+- **HASH_ONLY**
+- **FAIL_CLOSED**
+
+L’Europa **non vede persone**.  
+Vede **hash, soglie, tempo, audit**.
 
 ---
 
-## Percorsi di accesso
-La piattaforma espone tre percorsi di lettura, sullo **stesso sistema**:
+## Cosa fa il repository
+Questo repo fornisce:
+- una **facciata pubblica unica** (`index.html`)
+- un **gate di registrazione** per il cittadino UE (`EVT-0012`)
+- una **verifica hash locale** (client-side)
+- **termini minimi** UE-grade
 
-- **Cittadino**  
-  Tracce personali verificabili, continuità operativa, prova di precedenza.
-
-- **Professionista / Impresa**  
-  Attestazioni, pacchetti di evidenze, audit tecnico, gestione append-only.
-
-- **Istituzione / Audit**  
-  Verifiche riproducibili, criteri minimi, documentazione citabile.
-
----
-
-## Funzioni pubbliche
-- **Create** — Creazione guidata di un IPR (manifest minimo)
-- **Verify** — Verifica indipendente di una traccia
-- **Catalog** — Esplorazione dei percorsi e dei livelli IPR
-- **Evidence** — Evidenze pubbliche (quando presenti)
-- **Terms** — Quadro operativo e limiti dichiarati
-
-Tutte le funzioni sono progettate per funzionare **senza fiducia**.
+È progettato per essere:
+- leggibile da cittadini
+- verificabile da tecnici
+- opponibile in audit
 
 ---
 
-## Principi UE-first
-- **GDPR-min**  
-  Esposizione del minimo opponibile. Preferenza per hash e riferimenti.
+## Flusso operativo (1 utente = 1 evento)
 
-- **Hash-only**  
-  Il record non contiene il contenuto: ne contiene l’impronta.
-
-- **Append-only**  
-  Nessuna modifica silenziosa. Ogni evoluzione è un nuovo evento.
-
-- **Fail-closed**  
-  Se una coerenza non è verificabile, la procedura si ferma.
+1. Il cittadino accede alla facciata del Nodo Europeo
+2. Avvia una richiesta territoriale (`REGISTRATION_GATE`)
+3. Viene generato:
+   - payload normalizzato
+   - `registration_hash` (SHA-256)
+   - stato iniziale `PENDING`
+4. L’utente può verificare localmente l’hash
+5. Nessun dato viene centralizzato da questa facciata
 
 ---
 
-## Cosa questa piattaforma NON fa
-- Non garantisce validità giuridica automatica
-- Non protegge le tracce
-- Non certifica verità o significati
-- Non sostituisce istituzioni o registri
+## Eventi chiave
 
-Opera **a monte**: sull’origine osservabile.
+### EVT-0012 — REGISTRATION_GATE
+Evento di ingresso per il cittadino UE.
 
----
+**Input (minimo):**
+- nazione
+- regione
+- città
+- quartiere
+- nome
+- cognome
 
-## Trasparenza e audit
-Ogni affermazione operativa è accompagnata da:
-- una procedura verificabile,
-- una pagina di controllo,
-- riferimenti riproducibili.
+**Opzionale (rafforza opponibilità):**
+- CIE
+- Codice Fiscale
 
-L’interpretazione è libera.  
-La traccia è misurabile.
-
----
-
-## Stato del progetto
-**ACTIVE**  
-Infrastruttura pubblica, evoluzione append-only.
+**Output:**
+- `registration_hash` (SHA-256)
+- stato: `PENDING`
 
 ---
 
-## Riferimenti
-- Portale: https://manuelcoletta1-source.github.io/hermeticum-bce-platform/
-- Organizzazione: https://github.com/manuelcoletta1-source/
+### EVT-EU-0001 — EU_COHERENCE_ATTESTATION
+Evento sovranazionale di attestazione.
+
+Valuta:
+- Merkle root
+- ancoraggi (IPFS / BTC / EVM)
+- soglie metrologiche (ε, κ, Σ, Χτ)
+
+**Output UE:**
+- `VALID`
+- `WARNING`
+- `FAIL`
 
 ---
 
-© 2026 — HERMETICUM B.C.E. S.r.l.  
-Nessuna promessa. Nessuna protezione. Solo precedenza.
+## Struttura del repository
+
+/ ├── index.html        # Facciata Nodo Europeo (single-entry) ├── register/         # EVT-0012 — REGISTRATION_GATE │   └── index.html ├── verify/           # Verifica hash SHA-256 (client-side) │   └── index.html ├── terms/            # Termini minimi UE-grade │   └── index.html └── README.md
+
+---
+
+## Principi di sicurezza
+- **APPEND_ONLY**: nessuna riscrittura
+- **NO_SILENT_UPDATES**: ogni modifica è evento
+- **FAIL_CLOSED**: se manca qualcosa → DENY
+- **HASH_ONLY**: niente dati in chiaro come requisito di sistema
+
+---
+
+## Cosa NON è questo Nodo
+- non è un servizio di login
+- non è un wallet
+- non è un’identità garantita
+- non è un archivio di dati personali
+
+È **una infrastruttura di misura e coerenza**.
+
+---
+
+## Stato del Nodo
+- livello: **SOVRANAZIONALE (UE)**
+- ruolo: **COHERENCE / AUDIT**
+- integrazione: UNEBDO · OPC · Σ-Chain
+- modalità: **operativo, append-only**
+
+---
+
+## Nota finale
+Questo Nodo non chiede fiducia.  
+Produce **verificabilità**.
+
+Ogni passo successivo (IPR_CANDIDATE, servizi, AI applicative)  
+si appoggia su una coerenza che **qui è già dichiarata**.
+
+
+
