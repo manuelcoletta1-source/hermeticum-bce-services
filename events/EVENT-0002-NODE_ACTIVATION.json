@@ -1,0 +1,43 @@
+{
+  "event_id": "EVENT-0002",
+  "event_type": "NODE_ACTIVATION",
+  "node_level": "REGIONAL",
+  "node_name": "Nodo Regionale Piemonte — Nodo Europeo Biocibernetico",
+  "declaration": {
+    "statement": "Prima attivazione operativa dichiarata e tracciata di un nodo regionale biocibernetico (primato biologico) in ambito UE-first.",
+    "scope": "Dichiarazione progettuale e operativa, non affermazione storica universale.",
+    "verifiability": "Basata su tracciabilità pubblica, protocollo aperto e audit append-only."
+  },
+  "principles": [
+    "Biological subject primacy",
+    "Cybernetic extension (non-autonomous)",
+    "UE-FIRST",
+    "GDPR-MIN",
+    "HASH-ONLY",
+    "FAIL-CLOSED"
+  ],
+  "territory": {
+    "country": "IT",
+    "region": "Piemonte",
+    "city": "Torino",
+    "district": "Barriera di Milano"
+  },
+  "subject_ref": "IPR-3",
+  "references": {
+    "index": "index.html",
+    "node": "/node/",
+    "register": "/register/",
+    "create": "/create/",
+    "verify": "/verify/",
+    "catalog": "/catalog/",
+    "manifest": "/manifest/",
+    "governance": "/governance/",
+    "privacy": "/privacy/",
+    "events": "/events/"
+  },
+  "payload_hash": "SHA-256:0000000000000000000000000000000000000000000000000000000000000000",
+  "timestamp": "2026-01-19T15:30:00+01:00",
+  "signature": null,
+  "policy": ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"],
+  "notes": "Evento di attivazione del nodo. Stato operativo dichiarato. Append-only."
+}
