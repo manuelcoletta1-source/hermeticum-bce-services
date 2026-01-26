@@ -1,0 +1,24 @@
+Goal:
+Define how a citizen enters the platform using existing
+EU-recognized identities without creating parallel identities.
+
+Scope:
+- Identity entry (SPID / CIE / eIDAS / EUDI Wallet)
+- Proof-of-link only (no identity duplication)
+- Consent model (GDPR-min)
+- Fail-closed behavior
+- Public trust diagram
+
+Non-goals:
+- Acting as identity provider
+- Storing legal identity data
+- Replacing national or EU ID systems
+
+Deliverables:
+- Architecture diagram
+- Written trust model
+- Audit events specification
+area:platform
+area:identity
+type:spec
+priority:P0
