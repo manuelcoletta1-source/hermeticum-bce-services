@@ -1,294 +1,266 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Register — IPR | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Registrazione UE-first per IPR: privacy by default, hash-only, livelli di evidenza verificabili." />
-  <meta name="color-scheme" content="dark light" />
+  <title>EVT-0012 — REGISTRATION_GATE</title>
+  <meta name="description" content="EVT-0012 — REGISTRATION_GATE. Richiesta cittadino UE. Hash-only, UE-first, fail-closed." />
+  <meta name="robots" content="noindex,nofollow" />
   <style>
     :root{
-      --bg:#0b0d10; --card:#12161c; --muted:#9aa4b2; --fg:#e8eef7;
-      --line:#232a34; --accent:#6ee7ff; --good:#6bff95; --warn:#ffd36e; --bad:#ff6b6b;
-      --max:1100px; --r:16px; --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --bg:#0b0e11; --fg:#e6e6e6; --muted:#9aa0a6; --accent:#5eead4;
+      --card:#0f1318; --line:#1f2937; --warn:#f87171; --ok:#34d399;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0; font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:
-        radial-gradient(1200px 700px at 15% -10%, rgba(110,231,255,.12), transparent 60%),
-        radial-gradient(900px 500px at 90% 0%, rgba(107,255,149,.10), transparent 55%),
-        var(--bg);
-      color:var(--fg); line-height:1.45;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-      padding:18px 20px; background:rgba(18,22,28,.75); border:1px solid var(--line);
-      border-radius:var(--r); box-shadow:var(--shadow); backdrop-filter: blur(10px);
-    }
-    .brand{display:flex; flex-direction:column; gap:4px}
-    .mark{font-weight:800; letter-spacing:.4px}
-    .submark{color:var(--muted); font-size:.92rem}
-    nav{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end}
-    .pill{
-      padding:8px 12px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(255,255,255,.03);
-    }
-    .pill:hover{border-color:rgba(110,231,255,.55)}
-    .cta{border-color:rgba(110,231,255,.45); background:rgba(110,231,255,.08)}
-    .card{
-      margin-top:18px;
-      background:rgba(18,22,28,.82); border:1px solid var(--line); border-radius:var(--r);
-      padding:18px; box-shadow:var(--shadow);
-    }
-    h1{margin:0 0 10px 0; font-size:1.45rem}
-    h2{margin:0 0 10px 0; font-size:1.1rem}
-    p{margin:10px 0; color:rgba(232,238,247,.92)}
-    .muted{color:var(--muted)}
-    .small{font-size:.92rem}
-    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
-    .hr{height:1px; background:var(--line); margin:14px 0}
-    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
-    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:12px}
-    .tile{
-      padding:16px; border-radius:var(--r); border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      display:flex; flex-direction:column; gap:10px;
-    }
-    .tag{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:5px 10px; border-radius:999px; border:1px solid var(--line);
-      color:var(--muted); font-size:.85rem; width:max-content;
-    }
-    .tag .dot{width:8px; height:8px; border-radius:999px; background:var(--accent)}
-    .tag.good .dot{background:var(--good)}
-    .tag.warn .dot{background:var(--warn)}
-    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:10px 14px; border-radius:12px;
-      border:1px solid var(--line); background:rgba(255,255,255,.03);
-      cursor:pointer;
-    }
-    .btn:hover{border-color:rgba(110,231,255,.55)}
-    .btn.primary{border-color:rgba(110,231,255,.45); background:rgba(110,231,255,.10)}
-    .btn.good{border-color:rgba(107,255,149,.35); background:rgba(107,255,149,.10)}
-    label{display:block; font-size:.92rem; color:var(--muted); margin:10px 0 6px}
-    input, select{
-      width:100%; padding:10px 12px; border-radius:12px;
-      border:1px solid var(--line); background:rgba(0,0,0,.25); color:var(--fg);
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,sans-serif;line-height:1.45}
+    main{min-height:100vh;display:grid;place-items:center;padding:24px}
+    .panel{max-width:860px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+    h1{margin:0 0 6px 0;font-size:1.45rem}
+    .sub{color:var(--muted);margin:0 0 18px 0}
+    .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.8rem;color:var(--muted);margin-bottom:14px}
+    .grid{display:grid;gap:12px}
+    @media(min-width:760px){ .grid.two{grid-template-columns:1fr 1fr} }
+    label{display:block;font-size:.9rem;margin:0 0 6px 2px;color:var(--muted)}
+    input, select, textarea{
+      width:100%; padding:12px 12px; border-radius:10px;
+      border:1px solid var(--line); background:#0b0e11; color:var(--fg);
       outline:none;
     }
-    input:focus, select:focus{border-color:rgba(110,231,255,.55)}
-    .note{
-      border:1px dashed rgba(255,211,110,.45);
-      background:rgba(255,211,110,.08);
-      padding:12px; border-radius:12px;
+    input:focus, select:focus, textarea:focus{border-color:#334155}
+    .row{display:grid;gap:12px}
+    .section{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+    .hint{font-size:.85rem;color:var(--muted);margin-top:8px}
+    .actions{display:grid;gap:10px;margin-top:14px}
+    @media(min-width:760px){ .actions{grid-template-columns:1fr 1fr} }
+    button{
+      padding:13px 16px;border-radius:10px;border:1px solid var(--line);
+      background:var(--accent); color:#022c22; font-weight:700; cursor:pointer;
     }
-    .ok{
-      border:1px dashed rgba(107,255,149,.45);
-      background:rgba(107,255,149,.08);
-      padding:12px; border-radius:12px;
+    button.secondary{background:transparent;color:var(--fg)}
+    .box{
+      margin-top:12px; padding:14px; border:1px solid var(--line); border-radius:10px;
+      background:#0b0e11;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:.85rem; white-space:pre-wrap; word-break:break-word;
     }
-    .choice{
-      display:flex; flex-direction:column; gap:10px;
-      padding:14px; border-radius:14px; border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      cursor:pointer;
-      transition: border-color .15s ease, transform .12s ease;
-      user-select:none;
-    }
-    .choice:hover{border-color:rgba(110,231,255,.55); transform: translateY(-1px)}
-    .choice.active{border-color:rgba(107,255,149,.55); background:rgba(107,255,149,.08)}
-    .choice b{font-size:1.02rem}
-    .footer{margin-top:18px}
-    @media (max-width: 980px){
-      .grid2{grid-template-columns:1fr}
-      .grid3{grid-template-columns:1fr}
-    }
+    .status{font-size:.9rem;margin-top:10px}
+    .ok{color:var(--ok)}
+    .warn{color:var(--warn)}
+    a{color:var(--accent);text-decoration:none}
+    .foot{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:var(--muted);font-size:.8rem}
+    .mini{font-size:.85rem;color:var(--muted)}
+    .req{color:var(--warn);font-weight:700;margin-left:6px}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <header aria-label="Barra principale">
-      <div class="brand">
-        <div class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-        <div class="submark">HERMETICUM B.C.E. S.r.l. — Register (ingresso UE-first)</div>
-      </div>
-      <nav aria-label="Navigazione">
-        <a class="pill" href="../">Home</a>
-        <a class="pill" href="../catalog/">Catalogo</a>
-        <a class="pill" href="../verify/">Verifica</a>
-        <a class="pill cta" href="../create/">Crea IPR</a>
-        <a class="pill" href="../terms/">Termini</a>
-      </nav>
-    </header>
+<main>
+  <div class="panel">
+    <span class="badge">EVT-0012 · REGISTRATION_GATE · UE_FIRST · HASH_ONLY · FAIL_CLOSED</span>
+    <h1>Richiesta Cittadino UE</h1>
+    <p class="sub">
+      Qui non crei un account: generi un <strong>evento territoriale</strong>.  
+      L’output è un <strong>hash</strong> (SHA-256) del payload normalizzato. Nessun invio automatico.
+    </p>
 
-    <section class="card">
-      <h1>Register (ingresso) → <span class="mono">Create</span></h1>
-      <p class="muted small">
-        Qui scegli il percorso e prepari il minimo. Poi passi a <b>Create</b> per generare il manifest IPR.
-        <b>Nessun salvataggio</b>: i dati restano sul tuo dispositivo e vengono passati solo come parametri UI.
-      </p>
-
-      <div class="note small">
-        <b>UE-first:</b> la “valenza” cresce con <b>evidenze verificabili</b> (traccia, tempo, audit, eventuale binding),
-        non con più anagrafica.
-      </div>
-
-      <div class="hr"></div>
-
-      <div class="tile">
-        <div class="tag good"><span class="dot"></span> Step 0 — Seleziona percorso</div>
-        <div class="grid3" id="pathGrid" aria-label="Scelta percorso">
-          <div class="choice" data-path="citizen" role="button" tabindex="0">
-            <b>Cittadino</b>
-            <div class="muted small">Traccia personale verificabile, prova di precedenza.</div>
-          </div>
-          <div class="choice" data-path="professional" role="button" tabindex="0">
-            <b>Professionista / Impresa</b>
-            <div class="muted small">Evidenze, audit tecnico, append-only.</div>
-          </div>
-          <div class="choice" data-path="institution" role="button" tabindex="0">
-            <b>Istituzione / Audit</b>
-            <div class="muted small">Verifica riproducibile, criteri minimi.</div>
-          </div>
+    <form id="regForm" novalidate>
+      <div class="grid two">
+        <div>
+          <label for="nation">Nazione<span class="req">*</span></label>
+          <input id="nation" name="nation" autocomplete="country-name" required placeholder="Es. Italia" />
         </div>
-        <p class="muted small" id="pathHint" style="margin-top:10px">
-          Seleziona un percorso per continuare.
-        </p>
-      </div>
-
-      <div class="grid2" style="margin-top:14px">
-        <div class="tile">
-          <div class="tag"><span class="dot"></span> Step 1 — Minimo (consigliato)</div>
-
-          <label for="preferredLang">Lingua</label>
-          <select id="preferredLang" name="preferredLang" required>
-            <option value="it" selected>Italiano</option>
-            <option value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="es">Español</option>
-          </select>
-
-          <label for="alias">Alias (facoltativo, consigliato)</label>
-          <input id="alias" name="alias" placeholder="es. EU-NODE-001 (evita nome reale)" />
-
-          <label for="country">Nazione (facoltativa, per localizzazione)</label>
-          <select id="country" name="country">
-            <option value="">— Non indicare —</option>
-            <option value="IT">Italia</option>
-            <option value="FR">Francia</option>
-            <option value="DE">Germania</option>
-            <option value="ES">Spagna</option>
-            <option value="EU">Altro (UE)</option>
-            <option value="X">Extra UE</option>
-          </select>
-
-          <div class="ok small" style="margin-top:10px">
-            <b>Privacy-by-default:</b> qui non servono nome/cognome/città. Se ti serve un “binding identità”, fallo con prova (firma / evidenza) e pubblica solo hash.
-          </div>
-        </div>
-
-        <div class="tile">
-          <div class="tag warn"><span class="dot"></span> Step 2 — Localizzazione estesa (facoltativa)</div>
-
-          <label for="region">Regione (facoltativa)</label>
-          <input id="region" name="region" placeholder="es. Piemonte" />
-
-          <label for="city">Città (facoltativa)</label>
-          <input id="city" name="city" placeholder="es. Torino" />
-
-          <label for="district">Quartiere (facoltativo)</label>
-          <input id="district" name="district" placeholder="es. San Salvario" />
-
-          <p class="muted small">
-            Nota: questi campi non aumentano l’opponibilità della traccia. Sono solo contesto UI.
-          </p>
+        <div>
+          <label for="region">Regione<span class="req">*</span></label>
+          <input id="region" name="region" required placeholder="Es. Piemonte" />
         </div>
       </div>
 
-      <div class="btnrow" aria-label="Azioni" style="margin-top:14px">
-        <button class="btn primary" id="continueBtn" type="button" disabled>
-          → Continua a Create (manifest IPR)
-        </button>
-        <a class="btn" href="../verify/">Verifica</a>
-        <a class="btn" href="../catalog/">Catalogo</a>
+      <div class="grid two" style="margin-top:12px">
+        <div>
+          <label for="city">Città<span class="req">*</span></label>
+          <input id="city" name="city" autocomplete="address-level2" required placeholder="Es. Torino" />
+        </div>
+        <div>
+          <label for="district">Quartiere / Zona<span class="req">*</span></label>
+          <input id="district" name="district" required placeholder="Es. Barriera di Milano" />
+        </div>
       </div>
 
-      <p class="muted small" style="margin-top:10px">
-        Output atteso: su <b>Create</b> generi il manifest IPR. Poi <b>Verify</b> serve per controlli riproducibili.
-      </p>
-    </section>
+      <div class="grid two" style="margin-top:12px">
+        <div>
+          <label for="name">Nome<span class="req">*</span></label>
+          <input id="name" name="name" autocomplete="given-name" required />
+        </div>
+        <div>
+          <label for="surname">Cognome<span class="req">*</span></label>
+          <input id="surname" name="surname" autocomplete="family-name" required />
+        </div>
+      </div>
 
-    <footer class="card footer" aria-label="Footer">
-      <div class="small muted">
-        <b>HERMETICUM B.C.E. S.r.l.</b> — Register · <span class="mono">GDPR-min</span> · <span class="mono">hash-only</span> · <span class="mono">fail-closed</span>
+      <div class="section">
+        <div class="grid two">
+          <div>
+            <label for="cie">CIE (opzionale)</label>
+            <input id="cie" name="cie" inputmode="text" placeholder="Inserisci identificativo CIE (se vuoi)" />
+            <div class="hint">Aumenta la forza probatoria dell’evento (non obbligatorio).</div>
+          </div>
+          <div>
+            <label for="taxcode">Codice Fiscale (opzionale)</label>
+            <input id="taxcode" name="taxcode" inputmode="text" placeholder="Es. RSSMRA80A01H501U" />
+            <div class="hint">Se presente, viene normalizzato (ma resta hash-only).</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="mini">
+            <strong>Termini minimi (hash-only)</strong><br/>
+            Proseguendo dichiari che i dati sono corretti e accetti che questa azione produca un
+            <strong>evento opponibile</strong> in modalità <strong>append-only</strong>.  
+            Nessun profilo viene creato. Nessun dato viene centralizzato su questa pagina.
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit">Genera evento (EVT-0012) + Hash</button>
+          <button class="secondary" type="button" id="resetBtn">Reset</button>
+        </div>
       </div>
-      <div class="small muted" style="margin-top:8px">
-        © 2026 — Nessuna promessa. Nessuna protezione. Solo precedenza.
-      </div>
-    </footer>
+    </form>
+
+    <div class="section">
+      <strong>Output (locale)</strong>
+      <div class="status" id="statusLine">Stato: <span class="warn">INATTIVO</span></div>
+
+      <div class="hint">Payload normalizzato (JSON):</div>
+      <div class="box" id="payloadBox">—</div>
+
+      <div class="hint">registration_hash (SHA-256 hex):</div>
+      <div class="box" id="hashBox">—</div>
+    </div>
+
+    <div class="foot">
+      <span>Politica: UE_FIRST · GDPR_MIN · HASH_ONLY</span>
+      <span>Audit: APPEND_ONLY · FAIL_CLOSED</span>
+    </div>
   </div>
+</main>
 
-  <script>
-    (function(){
-      const choices = Array.from(document.querySelectorAll('.choice'));
-      const continueBtn = document.getElementById('continueBtn');
-      const pathHint = document.getElementById('pathHint');
+<script>
+  // --- Normalizzazione: semplice, deterministica, audit-friendly.
+  function normSpaces(s) {
+    return (s || "").trim().replace(/\s+/g, " ");
+  }
+  function normUpper(s) {
+    return normSpaces(s).toUpperCase();
+  }
+  function normTitle(s) {
+    // Title-case conservativo (non perfetto per tutte le lingue, ma stabile).
+    const t = normSpaces(s).toLowerCase();
+    return t.split(" ").filter(Boolean).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  }
+  function onlyAlnumUpper(s) {
+    return normUpper(s).replace(/[^A-Z0-9]/g, "");
+  }
 
-      const fields = {
-        lang: document.getElementById('preferredLang'),
-        alias: document.getElementById('alias'),
-        country: document.getElementById('country'),
-        region: document.getElementById('region'),
-        city: document.getElementById('city'),
-        district: document.getElementById('district'),
-      };
+  async function sha256Hex(text) {
+    const enc = new TextEncoder();
+    const buf = enc.encode(text);
+    const digest = await crypto.subtle.digest("SHA-256", buf);
+    const bytes = Array.from(new Uint8Array(digest));
+    return bytes.map(b => b.toString(16).padStart(2, "0")).join("");
+  }
 
-      let selectedPath = "";
+  function nowRFC3339() {
+    // ISO 8601 in UTC per output; coerente e confrontabile.
+    return new Date().toISOString();
+  }
 
-      function setActive(path){
-        selectedPath = path;
-        choices.forEach(c => c.classList.toggle('active', c.dataset.path === path));
-        continueBtn.disabled = false;
-        pathHint.textContent = "Percorso selezionato: " + path + ". Ora puoi continuare a Create.";
+  const form = document.getElementById("regForm");
+  const resetBtn = document.getElementById("resetBtn");
+  const payloadBox = document.getElementById("payloadBox");
+  const hashBox = document.getElementById("hashBox");
+  const statusLine = document.getElementById("statusLine");
+
+  function setStatus(state, ok=false) {
+    statusLine.innerHTML = 'Stato: <span class="' + (ok ? 'ok' : 'warn') + '">' + state + '</span>';
+  }
+
+  function buildNormalizedPayload(raw) {
+    // Nota: nome/cognome in Title-case; luogo in Title-case; CF in alfanumerico uppercase.
+    const declared = {
+      nation: normTitle(raw.nation),
+      region: normTitle(raw.region),
+      city: normTitle(raw.city),
+      district: normTitle(raw.district),
+      name: normTitle(raw.name),
+      surname: normTitle(raw.surname)
+    };
+
+    const docs = {};
+    const cie = normSpaces(raw.cie);
+    const tax = onlyAlnumUpper(raw.taxcode);
+
+    if (cie) docs.cie = cie;
+    if (tax) docs.tax_code = tax;
+
+    // Envelope EVT-0012 (hash-only): niente PII “extra”, niente indirizzi, niente civico.
+    const payload = {
+      evt: "EVT-0012",
+      name: "REGISTRATION_GATE",
+      scope: "EU_CITIZEN_REQUEST",
+      policy: ["UE_FIRST","GDPR_MIN","HASH_ONLY","FAIL_CLOSED"],
+      time: nowRFC3339(),
+      declared_identity: declared,
+      identity_documents: Object.keys(docs).length ? docs : { none: true }
+    };
+
+    return payload;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // fail-closed: se mancano i required -> stop.
+    const requiredIds = ["nation","region","city","district","name","surname"];
+    for (const id of requiredIds) {
+      const el = document.getElementById(id);
+      if (!normSpaces(el.value)) {
+        setStatus("DENY (campi obbligatori mancanti)", false);
+        el.focus();
+        return;
       }
+    }
 
-      choices.forEach(c => {
-        c.addEventListener('click', () => setActive(c.dataset.path));
-        c.addEventListener('keydown', (e) => {
-          if(e.key === 'Enter' || e.key === ' ') setActive(c.dataset.path);
-        });
-      });
+    setStatus("PROCESSING…", true);
 
-      continueBtn.addEventListener('click', () => {
-        if(!selectedPath) return;
+    const raw = {
+      nation: document.getElementById("nation").value,
+      region: document.getElementById("region").value,
+      city: document.getElementById("city").value,
+      district: document.getElementById("district").value,
+      name: document.getElementById("name").value,
+      surname: document.getElementById("surname").value,
+      cie: document.getElementById("cie").value,
+      taxcode: document.getElementById("taxcode").value
+    };
 
-        // Passaggio UI-only: parametri in URL (no storage).
-        const params = new URLSearchParams();
-        params.set('path', selectedPath);
-        params.set('lang', fields.lang.value || 'it');
+    const payload = buildNormalizedPayload(raw);
+    const normalizedText = JSON.stringify(payload); // deterministico (ordine chiavi stabile in JS moderno)
+    const hash = await sha256Hex(normalizedText);
 
-        // campi opzionali: evita di inviare dati vuoti
-        const alias = (fields.alias.value || '').trim();
-        if(alias) params.set('alias', alias);
+    payloadBox.textContent = JSON.stringify(payload, null, 2);
+    hashBox.textContent = hash;
 
-        if(fields.country.value) params.set('country', fields.country.value);
+    // Output stato locale (nessun invio da questa pagina)
+    setStatus("PENDING (hash generato localmente)", true);
+  });
 
-        const region = (fields.region.value || '').trim();
-        const city = (fields.city.value || '').trim();
-        const district = (fields.district.value || '').trim();
-        if(region) params.set('region', region);
-        if(city) params.set('city', city);
-        if(district) params.set('district', district);
-
-        window.location.href = "../create/?" + params.toString();
-      });
-    })();
-  </script>
+  resetBtn.addEventListener("click", () => {
+    form.reset();
+    payloadBox.textContent = "—";
+    hashBox.textContent = "—";
+    setStatus("INATTIVO", false);
+  });
+</script>
 </body>
 </html>
