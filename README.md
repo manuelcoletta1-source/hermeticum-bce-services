@@ -1,5 +1,5 @@
 # HERMETICUM B.C.E.
-**HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA**  
+**HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA**  
 **HERMETICUM B.C.E. S.r.l.**
 
 ## Piattaforma Europea per il Rilascio di IPR  
@@ -7,101 +7,98 @@
 
 ---
 
-## Scopo del repository
+## Cos’è questo repository
 
-Questo repository rappresenta la **piattaforma ufficiale HERMETICUM B.C.E.** per il **rilascio di IPR (Identity Primary Record)**.
+Questo repository rappresenta la **piattaforma ufficiale HERMETICUM B.C.E.** per il rilascio di **IPR (Identity Primary Record)**.
 
-La piattaforma è **infrastruttura di cyber-sicurezza europea** per l’identità digitale primaria, destinata a **cittadini, professionisti, aziende e istituzioni**.
+HERMETICUM B.C.E. è una **infrastruttura europea di cyber-sicurezza** progettata per fornire **identità digitale primaria verificata**, utilizzabile nel mondo digitale e nei sistemi basati su intelligenza artificiale.
 
 Non è un servizio applicativo.  
 Non è una piattaforma AI.  
-È **strato fondativo di identità verificata**.
+È **uno strato fondativo di identità**.
 
 ---
 
 ## Cos’è l’IPR
 
-**IPR (Identity Primary Record)** è una **chiave crittografica primaria**, rilasciata a un soggetto reale europeo, che costituisce la **radice dell’identità digitale computabile**.
+**IPR (Identity Primary Record)** è una **chiave crittografica primaria** associata a un soggetto reale europeo.
 
 L’IPR:
 - non è un account
 - non è un profilo
 - non è un wallet
 
-È una **firma identitaria strutturale**, valida nel tempo e verificabile.
+È la **radice dell’identità digitale**, stabile nel tempo e verificabile.
 
-L’IPR **non sostituisce** CIE, Codice Fiscale o SPID.  
-👉 **Li precede e li rende computabili** in contesti digitali e AI-driven.
+L’IPR **non sostituisce** documenti statali (CIE, Codice Fiscale, SPID).  
+👉 **Li precede e li rende utilizzabili in contesti digitali e AI-driven**.
 
 ---
 
-## Le tre ancore come firma digitale
+## La firma digitale a tre ancore
 
-Ogni IPR rilasciato è sigillato da una **firma digitale a tre ancore**, che garantisce:
+Ogni IPR è protetto da una **firma digitale europea a tre ancore**, identica per tutte le classi di IPR.
 
-- esistenza
-- integrità
-- non ripudio
-- verificabilità pubblica
-
-### Anchor Set
-- **IPFS** — prova di esistenza del record
-- **Bitcoin** — ancoraggio temporale immutabile
-- **Ethereum** — tracciabilità computabile
+### Le tre ancore
+- **IPFS** — prova di esistenza del record  
+- **Bitcoin** — data certa e immutabile nel tempo  
+- **Ethereum** — tracciabilità computabile e verificabile  
 
 Le tre ancore **insieme costituiscono la firma digitale dell’IPR**.
 
+La sicurezza è **uguale per tutti**.  
+👉 Ciò che cambia è **cosa viene firmato**.
+
 ---
 
-## Gradi di crittografia per categoria
+## Le 3 classi di IPR
 
-La piattaforma applica **livelli di crittografia e responsabilità** in base al soggetto.
+HERMETICUM B.C.E. rilascia **tre classi distinte di IPR**, pensate per essere comprensibili e chiaramente differenziate.
 
-### Cittadino Europeo — BASE
-- Identità primaria hashata  
+### 🟢 IPR BASE — Cittadino
+**Firma:** *chi sei*
+
+- Identità digitale primaria verificata  
 - Ancoraggio territoriale UE  
-- Firma digitale a tre ancore  
+- Nessuna tracciabilità delle azioni  
 
-**Uso:** accesso a servizi sicuri, riduzione del furto d’identità, AI personali tracciabili.
+**Serve per:**  
+accesso a servizi sicuri, protezione dell’identità, utilizzo di AI personali non anonime.
 
 ---
 
-### Professionista — STRONG
+### 🔵 IPR STRONG — Professionista
+**Firma:** *cosa fai*
+
 - Identità + ruolo/funzione  
 - Continuità temporale verificabile  
-- Audit tecnico disponibile  
+- Tracciabilità delle azioni rilevanti  
 
-**Uso:** decisioni professionali tracciabili, responsabilità dimostrabile, AI operative non anonime.
+**Serve per:**  
+responsabilità professionale, decisioni tracciabili, utilizzo di AI operative.
 
 ---
 
-### Azienda — ENTERPRISE
-- Identità aziendale primaria  
-- Gerarchia dei ruoli  
-- Firma a tre ancore per processi  
+### 🔴 IPR ENTERPRISE — Aziende e Istituzioni
+**Firma:** *come governi*
+
+- Identità dell’organizzazione  
+- Ruoli, deleghe e processi  
 - Audit-by-design  
 
-**Uso:** governance interna, accessi non opachi, AI aziendali verificabili.
-
----
-
-### Istituzioni / Governo — INSTITUTIONAL
-- Identità istituzionale certificabile  
-- Continuità amministrativa  
-- Verificabilità tecnica e giuridica  
-
-**Uso:** interoperabilità UE, contesti normativi e tribunali.
+**Serve per:**  
+governance, responsabilità organizzativa, utilizzo di sistemi automatici e AI istituzionali.
 
 ---
 
 ## Relazione con l’Intelligenza Artificiale
 
-L’IPR **non è un’AI**.
+L’IPR **non è un’intelligenza artificiale**.
 
 L’IPR è:
 
-> la **prima chiave crittografica** che consente a un’AI di essere  
-> personale, evolutiva, responsabile e auditabile.
+> la **prima chiave crittografica** che consente a un’AI  
+> di essere personale, evolutiva, responsabile e auditabile.
 
 Senza IPR:
 - AI anonima
@@ -110,21 +107,21 @@ Senza IPR:
 
 Con IPR:
 - AI ancorata a un soggetto reale
-- evoluzione tracciata
+- evoluzione tracciabile
 - audit possibile
 
 ---
 
 ## Dati utilizzati per il rilascio IPR
 
-Dati **minimi e strutturali**, trattati secondo principi **UE-first**, **GDPR-min** e **hash-only**:
+Il rilascio dell’IPR utilizza **dati minimi e strutturali**, trattati secondo principi **UE-first**, **GDPR-min** e **hash-only**:
 
-- Nazione
-- Regione
-- Città
-- Quartiere
-- Nome e cognome
-- Dati anagrafici essenziali
+- Nazione  
+- Regione  
+- Città  
+- Quartiere  
+- Nome e cognome  
+- Dati anagrafici essenziali  
 
 Obiettivo: **verificabilità senza profilazione**.
 
@@ -133,29 +130,20 @@ Obiettivo: **verificabilità senza profilazione**.
 ## Principi di piattaforma
 
 - UE-first  
-- GDPR-min  
-- hash-only  
-- audit-by-design  
-- fail-closed by default  
-
----
-
-## Chi rilascia l’IPR
-
-> **L’IPR è rilasciato da HERMETICUM B.C.E. S.r.l.**  
-> come entità di **cyber-sicurezza europea**.
-
-La piattaforma opera come **autorità tecnica privata**, non come servizio commerciale.
+- Minimizzazione dei dati (GDPR)  
+- Hash-only  
+- Audit-by-design  
+- Fail-closed by default  
 
 ---
 
 ## Struttura del repository
 
-- `/` — portale piattaforma (index)
-- `/create/` — rilascio / generazione IPR
-- `/verify/` — verifica firma a tre ancore
-- `/catalog/` — livelli IPR
-- `/terms/` — policy, principi, condizioni
+- `/` — index della piattaforma  
+- `/create/` — rilascio / generazione IPR  
+- `/verify/` — verifica firma a tre ancore  
+- `/catalog/` — panoramica delle classi IPR  
+- `/terms/` — principi, policy e condizioni  
 
 ---
 
@@ -163,3 +151,7 @@ La piattaforma opera come **autorità tecnica privata**, non come servizio comme
 
 > **HERMETICUM B.C.E. rilascia identità primaria verificata.  
 > Da lì, tutto il resto diventa possibile.**
+
+---
+
+© HERMETICUM B.C.E. S.r.l. — Infrastruttura europea di identità primaria (IPR)
