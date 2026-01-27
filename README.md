@@ -1,94 +1,39 @@
-# HERMETICUM B.C.E. — PLATFORM M1
-**Blindata · Computabile · Evolutiva**  
-HERMETICUM B.C.E. S.r.l.
+# Hermeticum B.C.E. — EU Gateway
+
+Ingresso unico per **evidenze verificabili** e **audit riproducibile**.  
+Progettato per contesti **B2B** e **B2G** secondo principi **UE-first**, **GDPR-min**, **hash-only** e **fail-closed**.
+
+## Cosa fa
+- Genera **IPR** (Identity Primary Record) in modalità hash-only
+- Produce **receipt ED25519** verificabili offline
+- Organizza **Evidence Pack** con manifest opponibile
+- Consente **verifica indipendente** senza fiducia nel portale
+
+## Cosa NON fa
+- Non carica né conserva documenti personali
+- Non sostituisce eIDAS/EUDI Wallet
+- Non attribuisce valore legale automatico
+
+## Percorsi
+- **Create** — genera IPR, receipt, anchor-pack
+- **Verify** — verifica hash, firme e manifest (fail-closed)
+- **Map** — mappa ecosistema e ruoli dei repository
+- **Tech** — standards, schemas, modules, audit
+- **Catalog** — utilizzi e pacchetti B2B/B2G
+
+## Output principali
+- `ipr.json` / `ipr.canon.json`
+- `receipt.json` (ED25519)
+- `anchor-pack.json`
+- `PACK_MANIFEST.json`
+- `FREEZE.md` (append-only)
+
+## Audit
+Ogni output è verificabile **offline**.  
+Qualsiasi mismatch di hash o firma invalida il pacchetto.
+
+## Policy
+UE_FIRST · GDPR_MIN · HASH_ONLY · FAIL_CLOSED · AUDIT_FIRST
 
 ---
-
-## Sintesi
-PLATFORM M1 è un **gateway europeo a livelli** per tracciabilità verificabile e cybersecurity
-con **separazione rigorosa** tra:
-- **Normativa (read-only)**
-- **Ricerca (pre-standard)**
-- **Operatività minima**
-- **Verifica tecnica**
-
-È progettata per essere **audit-friendly**, **UE-first**, **GDPR-min**, **hash-only**, **fail-closed**.
-
----
-
-## Cosa M1 È
-- Un **entrypoint unico** per il cittadino UE (Gateway)
-- Un **percorso minimo verificabile** (Fase 1 → Create → Verify)
-- Un **insieme di standard** pubblicati in HTML (no PDF)
-- Un **verificatore tecnico locale** (nessun invio dati)
-
-## Cosa M1 NON È
-- Non è un Identity Provider
-- Non sostituisce eIDAS / CIE / SPID
-- Non custodisce dati personali
-- Non assegna diritti o status legali automatici
-
----
-
-## Architettura a livelli
-Gateway ├─ Standard (read-only) ├─ Ricerca UE (pre-standard) ├─ Fase 1 (ONLY) │    └─ Create (bundle JSON) │         └─ Verify (hash-only) └─ Supporto (Legal / Privacy / Governance)
----
-
-## Percorso minimo (cittadino / operatore)
-1. **Gateway** → orientamento
-2. **Register** → smistamento (no login)
-3. **Fase 1 (ONLY)** → HRR locale
-4. **Create** → Evidence Bundle (JSON)
-5. **Verify** → esito tecnico deterministico
-
-> Regola fail-closed: se manca un requisito minimo → **INVALID**
-
----
-
-## Standard inclusi (HTML)
-- **STANDARD UE–ΦΩ–001**  
-  Specifica normativa UE-first (read-only)
-- **STANAG–ΦΩ–001**  
-  Allegato tecnico (MUST/SHOULD, schema minimo)
-
-Entrambi sono separati dall’operatività.
-
----
-
-## Policy dichiarata
-- UE-first
-- GDPR-min
-- hash-only
-- append-only
-- fail-closed
-
----
-
-## Audit e verificabilità
-- Navigazione verificata: `LINKCHECK-M1.md`
-- Congelamento release: `FREEZE-M1.md`
-- Verifica tecnica riproducibile in `verify/`
-- Nessun dato lascia il browser
-
----
-
-## Stato release
-- Release: **PLATFORM-M1**
-- Stato: **FROZEN**
-- Mutabilità: **append-only**
-- Target: **Horizon / Cybersecurity UE / audit tecnico**
-
----
-
-## Licenza e responsabilità
-Il progetto fornisce **specifiche tecniche** e **strumenti di verifica**.
-La responsabilità degli atti resta al soggetto biologico che li produce.
-
-Vedi:
-- `privacy/`
-- `terms/`
-- `governance/`
-
----
-
-**HERMETICUM B.C.E. S.r.l.**
+© Hermeticum B.C.E. S.r.l.
