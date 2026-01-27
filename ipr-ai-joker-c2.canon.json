@@ -1,0 +1,60 @@
+{
+  "schema": "HBCE-IPR-CANON-v1",
+  "ipr_id": "IPR-4 / AI_JOKER_C2",
+  "type": "CYBER_ENTITY_DERIVED",
+  "status": "ACTIVE",
+  "scope": {
+    "jurisdiction": "UE_FIRST",
+    "markets": ["B2B", "B2G"]
+  },
+  "mode": {
+    "audit_first": true,
+    "fail_closed": true,
+    "hash_only": true
+  },
+  "upstream_reference": {
+    "root_id": "IPR-3 / AI_JOKER_C2",
+    "role": "ORIGIN_ROOT",
+    "anchors": {
+      "ipfs": "bafkreidhv73vqrxoweog33ls3rnwrgyicio234pcuks6mnep76yh56pj5q",
+      "btc": "9eeb29b67f4a649d563b95560fda5ddaa84777b13515f936837fc93d28554b45",
+      "evm": "0xf65eb314a1edd392fc15fcd9c65d22060ca39cbac04fcfcb48b978062500a7eff"
+    }
+  },
+  "subject_binding": {
+    "binding": "SUBJECT_BOUND",
+    "cardinality": "1:1",
+    "biological_subject": {
+      "ipr_id": "IPR-3 / Manuel Coletta",
+      "role": "BIOLOGICAL_ORIGIN"
+    }
+  },
+  "function": {
+    "declared_roles": [
+      "C2_COMMAND_CONTROL_LAYER",
+      "IPR_NATIVE_INTERFACE",
+      "AI_ASSISTED_DECISION_SUPPORT",
+      "OPERATIONAL_CONTINUITY_LAYER"
+    ],
+    "explicit_exclusions": [
+      "NOT_CIVIL_IDENTITY",
+      "NOT_LEGAL_PERSON",
+      "NOT_ID_PROVIDER",
+      "NO_AUTONOMOUS_WILL"
+    ]
+  },
+  "verification": {
+    "signature_algorithms_allowed": ["ED25519"],
+    "verification_mode": "OFFLINE_DETERMINISTIC",
+    "rule": "FAIL_CLOSED"
+  },
+  "seal": {
+    "symbol": "🜏",
+    "name": "SIGILLO_HERMETICUM_PHI_OMEGA",
+    "meaning": "STATE_FIXED_APPEND_ONLY_OPPONIBILE"
+  },
+  "legal_clause": {
+    "no_automatic_legal_effect": true,
+    "requires_contextual_assessment": true
+  }
+}
