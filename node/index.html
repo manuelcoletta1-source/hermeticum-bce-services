@@ -1,93 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nodo Regionale Piemonte — Nodo Europeo Biocibernetico | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Nodo Regionale Piemonte: hub istituzionale UE-first, GDPR-min, hash-only. Regione→Città→Zona→Utente(IPR)." />
-  <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
-    header,main,footer{max-width:1100px;margin:auto;padding:2.4rem 1.5rem}
-    a{color:#58a6ff;text-decoration:none}
-    .box{border:1px solid #30363d;border-radius:12px;padding:1.4rem;background:#0d1117;margin-top:1rem}
-    p{color:#9da7b1}
-    .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:.25rem .6rem;margin:.2rem .3rem 0 0;color:#9da7b1;font-size:.9rem}
-    code,pre{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:.8rem;display:block;overflow:auto}
-    footer{border-top:1px solid #30363d;color:#8b949e;font-size:.9rem}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Node (Demo istituzionale) | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Pagina dimostrativa per nodo istituzionale. Non è onboarding, non è operativa. Rimanda al gateway a livelli." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="../standards/">Standard</a>
+        <a href="../research/">Ricerca (Horizon)</a>
+        <a href="../phase-1/">Fase 1 (ONLY)</a>
+        <a href="../verify/">Verify</a>
+        <a href="../governance/">Governance</a>
+        <a href="../privacy/">Privacy</a>
+      </div>
+    </nav>
+  </header>
 
-<header>
-  <h1>Nodo Regionale Piemonte</h1>
-  <p>Nodo Europeo <strong>Biocibernetico</strong> — istituzionale, verificabile, UE-first.</p>
-  <div>
-    <span class="pill">UE-FIRST</span>
-    <span class="pill">GDPR-MIN</span>
-    <span class="pill">HASH-ONLY</span>
-    <span class="pill">APPEND-ONLY</span>
-    <span class="pill">FAIL-CLOSED</span>
-  </div>
-  <p><a href="../">Home</a> · <a href="../register/">Register</a> · <a href="../verify/">Verify</a> · <a href="../manifest/">Manifest</a></p>
-</header>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Node (Demo istituzionale)</h1>
+      <p class="lead">
+        Questa pagina è una <strong>demo</strong> per contesti istituzionali e di ricerca.
+        Non è un percorso cittadino e non abilita operazioni.
+      </p>
+      <div class="notice">
+        <strong>Non operativo:</strong> per onboarding e percorso minimo usa Register → Fase 1 → Create → Verify.
+      </div>
+      <div class="btnrow" style="margin-top:14px;">
+        <a class="btn" href="../">Vai al Gateway</a>
+        <a class="btn secondary" href="../catalog/">Catalog (mappa)</a>
+        <a class="btn secondary" href="../research/">Ricerca (Horizon)</a>
+      </div>
+    </section>
 
-<main>
-  <div class="box">
-    <h2>Missione istituzionale</h2>
-    <p>
-      Il Nodo Regionale Piemonte coordina, in modo verificabile, la struttura territoriale e operativa:
-      <strong>Regione → Città → Zona → Utente(IPR)</strong>.
-      Ogni nodo utente nasce da un soggetto biologico reale e opera tramite estensione cibernetica (IPR).
-    </p>
-  </div>
+    <section class="grid">
+      <article class="card">
+        <h2>Scopo (audit/ricerca)</h2>
+        <ul class="muted">
+          <li>Mostrare come un “nodo” può presentare contesto territoriale senza raccogliere PII.</li>
+          <li>Separare chiaramente demo istituzionale da onboarding operativo.</li>
+          <li>Rendere leggibile la differenza tra informazione e prova verificabile.</li>
+        </ul>
+      </article>
 
-  <div class="box">
-    <h2>Gerarchia territoriale attiva</h2>
-    <pre>
-Piemonte (Nodo Regionale)
-└─ Torino (Nodo Città)
-   └─ Barriera di Milano (Nodo Zona)
-      └─ Utente (Nodo foglia) = Soggetto biologico + IPR
-    </pre>
-  </div>
+      <article class="card">
+        <h2>Vincoli</h2>
+        <ul class="muted">
+          <li>Nessun account e nessuna custodia dati personali.</li>
+          <li>Nessuna sostituzione di eIDAS/CIE/SPID.</li>
+          <li>Nessuna promessa di opponibilità automatica.</li>
+        </ul>
+      </article>
 
-  <div class="box">
-    <h2>Regola di attivazione (chiave)</h2>
-    <p>
-      <strong>Attivando l’IPR diventi un nodo della tua regione.</strong><br/>
-      La piattaforma registra un evento append-only che collega il tuo IPR al territorio (Regione/Città/Zona).
-      Nessun dato personale viene pubblicato: solo hash e metadati minimi.
-    </p>
-    <p>
-      Azione: <a href="../register/"><strong>Attiva il tuo IPR (Register)</strong></a>
-    </p>
-  </div>
+      <article class="card">
+        <h2>Percorso operativo ufficiale</h2>
+        <ol class="muted">
+          <li><a href="../register/">Register</a> (LIGHT/STRONG)</li>
+          <li><a href="../phase-1/">Fase 1</a> (HRR)</li>
+          <li><a href="../create/">Create</a> (Evidence Bundle)</li>
+          <li><a href="../verify/">Verify</a> (esito tecnico)</li>
+        </ol>
+      </article>
 
-  <div class="box">
-    <h2>Moduli (stack operativo)</h2>
-    <p>Framework canonici (operano all’unisono con AI Joker-C2 e l’utente):</p>
-    <ul>
-      <li>UNEBDO</li>
-      <li>OPC</li>
-      <li>MetaExchange</li>
-      <li>NeuroLoop</li>
-      <li>IoSpace</li>
-      <li>CyberGlobal</li>
-    </ul>
-  </div>
+      <article class="card">
+        <h2>Riferimenti</h2>
+        <p class="muted">
+          Per definizioni e livelli: <a href="../standards/">Standard</a>.  
+          Per responsabilità: <a href="../governance/">Governance</a>.
+        </p>
+      </article>
+    </section>
+  </main>
 
-  <div class="box">
-    <h2>Perimetro e limiti</h2>
-    <p>
-      Questo nodo non sostituisce istituzioni statali, non assegna diritti automatici e non pubblica dati personali.
-      Fornisce tracciabilità tecnica verificabile e continuità operativa biocibernetica a primato biologico.
-    </p>
-  </div>
-</main>
-
-<footer>
-  <p>HERMETICUM B.C.E. S.r.l. — Nodo Regionale Piemonte</p>
-</footer>
-
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
 </body>
 </html>
