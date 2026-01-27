@@ -1,229 +1,147 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create — Evento cittadino (Hash-Only) | Hermeticum B.C.E.</title>
-  <meta name="description" content="Genera un evento hash-only per richiesta nodo cittadino UE: territorio + IPR ref + SHA-256 del payload. GDPR-min, fail-closed." />
-  <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
-    header,main,footer{max-width:1100px;margin:auto;padding:2.5rem 1.5rem}
-    a{color:#58a6ff;text-decoration:none}
-    .box{border:1px solid #30363d;border-radius:12px;padding:1.5rem;background:#0d1117}
-    h1{font-size:2rem;margin:0 0 .5rem}
-    p, label{color:#9da7b1}
-    .grid{display:grid;grid-template-columns:1fr;gap:1rem}
-    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
-    input, select, textarea{
-      width:100%;box-sizing:border-box;background:#161b22;color:#e6edf3;border:1px solid #30363d;border-radius:10px;
-      padding:.8rem;font-size:1rem;outline:none
-    }
-    textarea{min-height:170px;resize:vertical}
-    .row{display:grid;grid-template-columns:1fr;gap:.75rem}
-    @media(min-width:900px){.row{grid-template-columns:1fr 1fr}}
-    .btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
-    button{
-      background:#238636;border:1px solid #2ea043;color:#fff;border-radius:10px;padding:.7rem 1rem;
-      cursor:pointer;font-weight:600
-    }
-    button.secondary{background:#161b22;border:1px solid #30363d;color:#e6edf3}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    .note{font-size:.95rem;color:#8b949e}
-    .warn{border-left:3px solid #f85149;padding-left:1rem;color:#c9d1d9}
-    pre{
-      background:#161b22;border:1px solid #30363d;border-radius:12px;padding:1rem;overflow:auto
-    }
-    .badge{display:inline-block;padding:.25rem .6rem;border-radius:999px;border:1px solid #30363d;color:#9da7b1;font-size:.85rem}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Generatore locale di Evidence Bundle (minimo). Hash-only, GDPR-min. Output verificabile in Verify." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
-
 <body>
-<header>
-  <div class="badge">UE-FIRST</div>
-  <div class="badge">GDPR-MIN</div>
-  <div class="badge">HASH-ONLY</div>
-  <div class="badge">FAIL-CLOSED</div>
-
-  <h1>Create — Evento cittadino (Hash-Only)</h1>
-  <p>
-    Genera un evento minimizzato per richiesta nodo cittadino UE: <strong>territorio + riferimento IPR + hash del payload</strong>.
-    Il payload viene hashato <strong>localmente</strong> nel tuo browser (nessun invio, nessuna memorizzazione server).
-  </p>
-  <p class="warn">
-    Inserisci nel payload solo dati che intendi conservare <strong>off-chain</strong> sotto il tuo controllo.
-    Il portale pubblica/gestisce solo l’hash.
-  </p>
-</header>
-
-<main class="grid">
-  <section class="box">
-    <h2>Dati territoriali + riferimento</h2>
-
-    <div class="row">
-      <div>
-        <label for="country">Nazione (ISO)</label>
-        <input id="country" value="IT" />
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="../standards/">Standard</a>
+        <a href="../research/">Ricerca (Horizon)</a>
+        <a href="../phase-1/">Fase 1 (ONLY)</a>
+        <a href="../verify/">Verify</a>
+        <a href="../governance/">Governance</a>
+        <a href="../privacy/">Privacy</a>
       </div>
-      <div>
-        <label for="region">Regione</label>
-        <input id="region" value="Piemonte" />
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Create (Evidence Bundle)</h1>
+      <p class="lead">
+        Genera un <strong>Evidence Bundle</strong> minimo nel browser.
+        Nessun account. Nessuna custodia PII. Output: JSON verificabile in Verify.
+      </p>
+      <div class="notice">
+        <strong>Fail-closed:</strong> se mancano campi minimi (HRR, POLICY, PAYLOAD_MIN), il bundle è INVALID.
       </div>
-    </div>
+    </section>
 
-    <div class="row">
-      <div>
-        <label for="city">Città</label>
-        <input id="city" value="Torino" />
-      </div>
-      <div>
-        <label for="district">Zona / Quartiere</label>
-        <input id="district" value="Barriera di Milano" />
-      </div>
-    </div>
+    <section class="grid">
+      <article class="card">
+        <h2>Input minimi</h2>
 
-    <div class="row">
-      <div>
-        <label for="ipr">Riferimento IPR (es. IPR-3)</label>
-        <input id="ipr" value="IPR-3" />
-      </div>
-      <div>
-        <label for="eventType">Tipo evento</label>
-        <select id="eventType">
-          <option value="CITIZEN_NODE_REQUEST" selected>CITIZEN_NODE_REQUEST</option>
-          <option value="TERRITORY_NODE_REQUEST">TERRITORY_NODE_REQUEST</option>
-          <option value="INSTITUTION_NODE_REQUEST">INSTITUTION_NODE_REQUEST</option>
-        </select>
-      </div>
-    </div>
+        <label class="muted">HRR (da Onboarding LIGHT/STRONG)</label>
+        <input id="hrr" type="text" placeholder="es. HRR-L-.... oppure HRR-S-...." />
 
-    <p class="note">
-      Timestamp: viene inserito automaticamente in formato ISO-8601.
-    </p>
-  </section>
+        <label class="muted" style="margin-top:10px;">Descrizione (breve, no PII)</label>
+        <input id="desc" type="text" placeholder="es. Evidence bundle per audit tecnico (senza dati personali)" />
 
-  <section class="box">
-    <h2>Payload (off-chain) → SHA-256 (local)</h2>
-    <label for="payload">Payload off-chain (testo/JSON). Non verrà pubblicato, solo hash.</label>
-    <textarea id="payload" class="mono" placeholder='Esempio (off-chain):
-{
-  "doc_ref": "CIE/...",
-  "note": "dati custoditi privatamente",
-  "evidence": ["..."]
-}'></textarea>
+        <label class="muted" style="margin-top:10px;">Hash del contenuto (opzionale ma consigliato)</label>
+        <input id="hash" type="text" placeholder="es. SHA-256 hex (64 chars)" />
 
-    <div class="btns">
-      <button id="generateBtn">Genera evento</button>
-      <button id="copyBtn" class="secondary">Copia JSON</button>
-      <button id="downloadBtn" class="secondary">Scarica JSON</button>
-      <button id="resetBtn" class="secondary">Reset</button>
-    </div>
+        <label class="muted" style="margin-top:10px;">Timestamp (opzionale)</label>
+        <input id="ts" type="text" placeholder="es. 2026-01-27T20:00:00Z" />
 
-    <p class="note">
-      L’hash è calcolato tramite WebCrypto (SHA-256). Nessun dato lascia il dispositivo.
-    </p>
-  </section>
+        <div class="btnrow" style="margin-top:14px;">
+          <button class="btn" id="gen">Genera Bundle</button>
+          <button class="btn secondary" id="reset">Reset</button>
+          <a class="btn secondary" href="../verify/">Vai a Verify</a>
+        </div>
+      </article>
 
-  <section class="box" style="grid-column:1/-1">
-    <h2>Evento generato (hash-only)</h2>
-    <pre id="output" class="mono">{}</pre>
-    <p class="note">
-      Firma digitale: opzionale. In questa fase il campo <span class="mono">signature</span> resta <span class="mono">null</span>.
-      Puoi firmare l’evento con la tua chiave e sostituire il valore in seguito.
-    </p>
-  </section>
-</main>
+      <article class="card">
+        <h2>Output (JSON)</h2>
+        <pre id="out" class="codeblock">Pronto.</pre>
+        <div class="btnrow">
+          <button class="btn secondary" id="copyBtn" type="button">Copia</button>
+          <a class="btn secondary" href="../">Torna al Gateway</a>
+        </div>
+      </article>
 
-<footer>
-  <p class="note">
-    HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-    HERMETICUM B.C.E. S.r.l. — Create (hash-only)
-  </p>
-</footer>
+      <article class="card">
+        <h2>Policy</h2>
+        <p class="muted">Stringa policy consigliata:</p>
+        <pre class="codeblock">UE-first | GDPR-min | hash-only | append-only | fail-closed</pre>
+        <p class="muted">
+          La definizione dei livelli sta in <a href="../standards/">Standard</a>.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Nota</h2>
+        <p class="muted">
+          Questo tool non pubblica nulla. Genera un bundle locale.
+          La pubblicazione/ancoraggio (se previsto) avviene nel livello operativo e fuori da questo portale statico.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
 
 <script>
-  const $ = (id) => document.getElementById(id);
+  const out = document.getElementById("out");
+  const copyBtn = document.getElementById("copyBtn");
 
-  async function sha256Hex(text) {
-    const enc = new TextEncoder();
-    const data = enc.encode(text);
-    const digest = await crypto.subtle.digest("SHA-256", data);
-    const bytes = new Uint8Array(digest);
-    return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
+  function isHex(s){ return /^[0-9a-fA-F]+$/.test(s); }
+  function looksLikeSha256(h){ return typeof h==="string" && h.length===64 && isHex(h); }
+
+  function fail(reason, extra){
+    out.textContent = JSON.stringify({ status:"INVALID", reason, ...extra, ts_utc:new Date().toISOString() }, null, 2);
   }
 
-  function isoNow() {
-    return new Date().toISOString();
-  }
+  document.getElementById("gen").addEventListener("click", () => {
+    const HRR = (document.getElementById("hrr").value || "").trim();
+    const DESC = (document.getElementById("desc").value || "").trim();
+    const HASH = (document.getElementById("hash").value || "").trim();
+    const TS = (document.getElementById("ts").value || "").trim();
 
-  function buildEvent(payloadHash) {
-    return {
-      event_type: $("eventType").value,
-      territory: {
-        country: $("country").value.trim(),
-        region: $("region").value.trim(),
-        city: $("city").value.trim(),
-        district: $("district").value.trim()
-      },
-      subject_ref: $("ipr").value.trim(),
-      payload_hash: "SHA-256:" + payloadHash,
-      timestamp: isoNow(),
-      signature: null,
-      policy: ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"]
-    };
-  }
+    if (!HRR) return fail("Missing HRR");
+    if (!DESC) return fail("Missing description");
 
-  function pretty(obj) {
-    return JSON.stringify(obj, null, 2);
-  }
-
-  function isValidTerritory(t) {
-    return t.country && t.region && t.city && t.district;
-  }
-
-  $("generateBtn").addEventListener("click", async () => {
-    const payload = $("payload").value || "";
-    const territory = {
-      country: $("country").value.trim(),
-      region: $("region").value.trim(),
-      city: $("city").value.trim(),
-      district: $("district").value.trim()
-    };
-
-    if (!isValidTerritory(territory)) {
-      $("output").textContent = pretty({ error: "FAIL-CLOSED: territorio incompleto." });
-      return;
-    }
-    if (!$("ipr").value.trim()) {
-      $("output").textContent = pretty({ error: "FAIL-CLOSED: subject_ref (IPR) mancante." });
-      return;
+    if (HASH && !looksLikeSha256(HASH)){
+      return fail("Hash present but not SHA-256 hex", { hash_len: HASH.length });
     }
 
-    const hash = await sha256Hex(payload);
-    const evt = buildEvent(hash);
-    $("output").textContent = pretty(evt);
+    const bundle = {
+      HRR,
+      POLICY: "UE-first | GDPR-min | hash-only | append-only | fail-closed",
+      NOTE: "Generated locally in browser. Not an identity proof.",
+      PAYLOAD_MIN: {
+        desc: DESC,
+        content_hash_sha256: HASH || null,
+        timestamp: TS || null,
+        created_utc: new Date().toISOString()
+      }
+    };
+
+    out.textContent = JSON.stringify({ status:"VALID", bundle }, null, 2);
   });
 
-  $("copyBtn").addEventListener("click", async () => {
-    const text = $("output").textContent || "{}";
-    await navigator.clipboard.writeText(text);
+  document.getElementById("reset").addEventListener("click", () => {
+    document.getElementById("hrr").value = "";
+    document.getElementById("desc").value = "";
+    document.getElementById("hash").value = "";
+    document.getElementById("ts").value = "";
+    out.textContent = "Pronto.";
   });
 
-  $("downloadBtn").addEventListener("click", () => {
-    const text = $("output").textContent || "{}";
-    const blob = new Blob([text], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "event-hash-only.json";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  });
-
-  $("resetBtn").addEventListener("click", () => {
-    $("payload").value = "";
-    $("output").textContent = "{}";
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(out.textContent);
+      copyBtn.textContent = "Copiato";
+      setTimeout(() => (copyBtn.textContent = "Copia"), 900);
+    } catch {}
   });
 </script>
 </body>
