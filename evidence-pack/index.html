@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Evidence Pack — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
+  <meta name="description" content="Costruisci e scarica un evidence pack (ipr+receipt+anchor-pack+README). Client-side, no storage." />
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
+      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --bad:#fda4af; --warn:#fde68a;
+      --r:16px; --pad:18px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    body{margin:0;background:radial-gradient(900px 600px at 15% 0%, #0d1b2a 0%, var(--bg) 55%);color:var(--txt);}
+    a{color:var(--acc);text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px;}
+    header{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px}
+    .seal{font-weight:900;letter-spacing:.3px}
+    .company{color:var(--mut);font-size:12px;margin-top:4px}
+    .tag{color:var(--mut);font-size:13px;line-height:1.45;max-width:640px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .title{font-size:18px;font-weight:800;margin:0 0 8px}
+    label{display:block;font-size:12px;color:var(--mut);margin:10px 0 6px}
+    textarea{
+      width:100%;box-sizing:border-box;background:#071018;border:1px solid var(--brd);
+      color:var(--txt);border-radius:12px;padding:10px 12px;outline:none;
+      min-height:220px;resize:vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size:12px;line-height:1.35
+    }
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{
+      border:1px solid var(--brd);background:#0a1320;color:var(--txt);
+      border-radius:12px;padding:10px 12px;font-weight:750;cursor:pointer
+    }
+    button.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
+    .status{margin-top:10px;font-size:12px;line-height:1.35}
+    .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+    .hr{height:1px;background:var(--brd);margin:14px 0}
+    .out{white-space:pre;overflow:auto;background:#06101a;border:1px solid var(--brd);border-radius:12px;padding:12px;font-size:12px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        <div class="company">HERMETICUM B.C.E. S.r.l.</div>
+      </div>
+      <div class="tag">
+        Evidence Pack = artefatti verificabili <b>scaricati dall’utente</b>.
+        Nessun invio a server. Nessuno storage.
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h1 class="title">Input</h1>
+        <label for="ipr">Incolla ipr.json</label>
+        <textarea id="ipr" spellcheck="false" placeholder="{ ... }"></textarea>
+
+        <label for="rcp">Incolla receipt.json</label>
+        <textarea id="rcp" spellcheck="false" placeholder="{ ... }"></textarea>
+
+        <div class="btns">
+          <button class="primary" id="build">Costruisci pack</button>
+          <button id="clear">Pulisci</button>
+        </div>
+
+        <div class="status warn" id="status"></div>
+
+        <div class="hr"></div>
+
+        <div class="btns">
+          <button id="dlIpr" disabled>Scarica ipr.json</button>
+          <button id="dlRcp" disabled>Scarica receipt.json</button>
+          <button id="dlAnchor" disabled>Scarica anchor-pack.json</button>
+          <button id="dlReadme" disabled>Scarica README_proof.md</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="title">Preview (README)</h2>
+        <div class="out mono" id="readmeOut">—</div>
+
+        <div class="hr"></div>
+
+        <h2 class="title" style="font-size:16px">Pack metadata</h2>
+        <div class="out mono" id="metaOut">—</div>
+      </section>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+
+  let iprObj = null;
+  let rcpObj = null;
+  let anchorPackObj = null;
+  let readmeText = null;
+  let packMetaObj = null;
+
+  function setStatus(msg, kind){
+    const el = $("status");
+    el.className = "status " + (kind || "warn");
+    el.textContent = msg || "";
+  }
+
+  function nowISO(){ return new Date().toISOString(); }
+
+  async function sha256Hex(str){
+    const enc = new TextEncoder().encode(str);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  }
+
+  function stableStringify(obj){
+    const seen = new WeakSet();
+    const norm = (v) => {
+      if(v && typeof v === "object"){
+        if(seen.has(v)) throw new Error("Cyclic object not allowed");
+        seen.add(v);
+        if(Array.isArray(v)) return v.map(norm);
+        const keys = Object.keys(v).sort();
+        const out = {};
+        for(const k of keys) out[k] = norm(v[k]);
+        return out;
+      }
+      return v;
+    };
+    return JSON.stringify(norm(obj));
+  }
+
+  function downloadText(filename, text, mime){
+    const blob = new Blob([text], { type: mime || "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadJSON(filename, obj){
+    downloadText(filename, JSON.stringify(obj, null, 2), "application/json");
+  }
+
+  function mkExplorerLink(a){
+    const ref = a.ref;
+    if(a.type === "BTC_TXID") return `https://blockstream.info/tx/${ref}`;
+    if(a.type === "ETH_TX") return `https://etherscan.io/tx/${ref}`;
+    if(a.type === "IPFS_CID") return `https://ipfs.io/ipfs/${ref}`;
+    return null;
+  }
+
+  function enableDownloads(on){
+    $("dlIpr").disabled = !on;
+    $("dlRcp").disabled = !on;
+    $("dlAnchor").disabled = !on;
+    $("dlReadme").disabled = !on;
+  }
+
+  function wipe(){
+    iprObj = rcpObj = anchorPackObj = packMetaObj = null;
+    readmeText = null;
+    $("readmeOut").textContent = "—";
+    $("metaOut").textContent = "—";
+    enableDownloads(false);
+  }
+
+  $("clear").onclick = () => {
+    $("ipr").value = "";
+    $("rcp").value = "";
+    wipe();
+    setStatus("", "warn");
+  };
+
+  $("build").onclick = async () => {
+    try{
+      setStatus("Costruzione pack…", "warn");
+      wipe();
+
+      iprObj = JSON.parse($("ipr").value);
+      rcpObj = JSON.parse($("rcp").value);
+
+      if(iprObj?.type !== "IPR_PACKAGE") throw new Error("ipr.json: type non valido (atteso IPR_PACKAGE).");
+      if(rcpObj?.type !== "RECEIPT") throw new Error("receipt.json: type non valido (atteso RECEIPT).");
+
+      // minimal internal consistency checks (fail-closed)
+      const iprHash = await sha256Hex(stableStringify(iprObj));
+      if(rcpObj?.payload?.ipr_hash_sha256 !== iprHash) throw new Error("Mismatch: receipt.payload.ipr_hash_sha256 != hash(ipr).");
+
+      if(rcpObj?.signature?.scheme !== "ED25519") throw new Error("Receipt non firmata ED25519 (fail-closed).");
+
+      const anchors = Array.isArray(rcpObj.anchors) ? rcpObj.anchors : [];
+      anchorPackObj = {
+        proto: "AI_JOKER_C2",
+        type: "ANCHOR_PACK",
+        version: "v1",
+        issued_at: nowISO(),
+        target: {
+          receipt_payload_hash_sha256: rcpObj.payload_hash_sha256,
+          receipt_signature_scheme: rcpObj.signature.scheme,
+          receipt_signature_kid: rcpObj.signature.kid || null
+        },
+        anchors
+      };
+
+      const packId = await sha256Hex(
+        "EVIDENCE_PACK|" + iprHash + "|" + (rcpObj.payload_hash_sha256 || "") + "|" + (rcpObj.signature.kid || "")
+      );
+
+      packMetaObj = {
+        proto: "AI_JOKER_C2",
+        type: "EVIDENCE_PACK_META",
+        version: "v1",
+        issued_at: nowISO(),
+        pack_id_sha256: packId,
+        contains: ["ipr.json", "receipt.json", "anchor-pack.json", "README_proof.md"],
+        hashes: {
+          ipr_hash_sha256: iprHash,
+          receipt_payload_hash_sha256: rcpObj.payload_hash_sha256
+        }
+      };
+
+      // README
+      const lines = [];
+      lines.push("# Evidence Pack — HERMETICUM B.C.E.");
+      lines.push("");
+      lines.push("Questo pacchetto contiene artefatti verificabili (hash-only, UE-first/GDPR-min).");
+      lines.push("Nessun dato personale in chiaro è richiesto né previsto.");
+      lines.push("");
+      lines.push("## File");
+      lines.push("- ipr.json (IPR_PACKAGE v1)");
+      lines.push("- receipt.json (RECEIPT v1, firma ED25519)");
+      lines.push("- anchor-pack.json (lista anchors estratta dalla receipt)");
+      lines.push("- README_proof.md (questo file)");
+      lines.push("");
+      lines.push("## Hash principali");
+      lines.push(`- ipr_hash_sha256: ${iprHash}`);
+      lines.push(`- receipt_payload_hash_sha256: ${rcpObj.payload_hash_sha256}`);
+      lines.push(`- signature.scheme: ${rcpObj.signature.scheme}`);
+      lines.push(`- signature.kid: ${rcpObj.signature.kid || "null"}`);
+      lines.push("");
+      lines.push("## Come verificare (manuale)");
+      lines.push("1) Verifica schema + hash + firma su /verify/");
+      lines.push("2) Se anchors presenti, apri su explorer/gateway e controlla che esistano.");
+      lines.push("");
+      lines.push("## Anchors (se presenti)");
+      if(anchors.length === 0){
+        lines.push("- (nessuna ancora inclusa)");
+      }else{
+        for(const a of anchors){
+          const link = mkExplorerLink(a);
+          lines.push(`- ${a.type}: ${a.ref}` + (link ? `\n  explorer: ${link}` : ""));
+        }
+      }
+      lines.push("");
+      lines.push("## Data minimization");
+      lines.push("Il portale non custodisce identità e non conserva dati lato server: l’utente mantiene i file.");
+
+      readmeText = lines.join("\n");
+
+      $("readmeOut").textContent = readmeText;
+      $("metaOut").textContent = JSON.stringify(packMetaObj, null, 2);
+
+      enableDownloads(true);
+      setStatus("OK: evidence pack pronto. Scarica i 4 file.", "ok");
+    }catch(e){
+      console.error(e);
+      setStatus("Errore: " + (e?.message || String(e)), "bad");
+    }
+  };
+
+  $("dlIpr").onclick = () => downloadJSON("ipr.json", iprObj);
+  $("dlRcp").onclick = () => downloadJSON("receipt.json", rcpObj);
+  $("dlAnchor").onclick = () => downloadJSON("anchor-pack.json", anchorPackObj);
+  $("dlReadme").onclick = () => downloadText("README_proof.md", readmeText, "text/markdown");
+})();
+</script>
+</body>
+</html>
