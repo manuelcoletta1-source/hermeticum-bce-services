@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fase 1 (ONLY) — HRR → DGV → LTA | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Fase 1 operativa minima (ONLY/STANAG): catena HRR→DGV→LTA con fail-closed per cybersecurity UE." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="../standards/">Standard</a>
+        <a href="../research/">Ricerca (Horizon)</a>
+        <a class="active" href="./">Fase 1 (ONLY)</a>
+        <a href="../verify/">Verify</a>
+        <a href="../governance/">Governance</a>
+        <a href="../privacy/">Privacy</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Fase 1 (ONLY)</h1>
+      <p class="lead">
+        Livello operativo minimo per cybersecurity UE: nessuna promessa “identitaria”.
+        Qui si implementa solo la catena di <strong>attribuzione</strong>, <strong>validazione</strong> e
+        <strong>prova durevole</strong>.
+      </p>
+
+      <div class="notice">
+        <strong>Fail-closed:</strong> se manca un anello (HRR, DGV, LTA), l’atto non nasce.
+        Il blocco è una protezione, non un errore.
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Catena minima</h2>
+        <p class="muted">Struttura operativa della Fase 1:</p>
+        <pre class="codeblock">HRR  →  DGV  →  LTA Vault</pre>
+        <ul class="muted">
+          <li><strong>HRR</strong> (Human Root Reference): attribuzione umana/pseudonima dell’atto</li>
+          <li><strong>DGV</strong> (Decision Gate Validator): controllo policy e integrità (ALLOW / REVIEW / DENY / FAIL-CLOSED)</li>
+          <li><strong>LTA</strong> (Long-Term Archive): prova durevole e verificabile nel tempo</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Cosa è permesso qui</h2>
+        <ul class="muted">
+          <li>Onboarding minimo (LIGHT) per notifiche e ricevute, senza account</li>
+          <li>Onboarding STRONG solo per casi ad alto rischio (attribuzione rafforzata)</li>
+          <li>Generazione di bundle probatorio (hash + metadati minimi)</li>
+          <li>Conservazione/ancoraggio della prova (LTA)</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Onboarding</h2>
+        <p class="muted">
+          Scegli il profilo in base al rischio. Se non è necessario, resta su LIGHT.
+        </p>
+        <div class="btnrow">
+          <a class="btn" href="./onboarding/light.html">Onboarding LIGHT</a>
+          <a class="btn secondary" href="./onboarding/strong.html">Onboarding STRONG</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Documenti operativi (PDF)</h2>
+        <p class="muted">Riferimenti operativi di Fase 1 (ONLY / STANAG).</p>
+        <div class="btnrow">
+          <a class="btn" href="./downloads/ONLY-PRESENTAZIONE.pdf" target="_blank" rel="noopener">Apri ONLY (PDF)</a>
+          <a class="btn secondary" href="./downloads/STANAG-PHIOMEGA-001.pdf" target="_blank" rel="noopener">Apri STANAG–ΦΩ–001 (PDF)</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="footerhint">
+      <p class="muted">
+        Nota: questa Fase 1 non sostituisce sistemi regolamentati (CIE/SPID/eIDAS). Definisce un perimetro minimo di
+        accountability e prova verificabile.
+      </p>
+      <p><a class="btn secondary" href="../">Torna al Gateway</a></p>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
+</body>
+</html>
