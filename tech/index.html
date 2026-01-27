@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Tech — EU Gateway | Hermeticum B.C.E.</title>
+  <meta name="description" content="Zona tecnica: standards, schemas, modules, audit. UE-first, GDPR-min, hash-only, fail-closed."/>
+  <style>
+    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 16px 56px}
+    .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+    h1{font-size:22px;margin:0 0 10px}
+    h2{font-size:16px;margin:0 0 8px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:14px;padding:12px 14px;
+         text-decoration:none;border:1px solid var(--line);background:#0f1621}
+    .btn.primary{background:#142033;border-color:#2a3a55}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.45}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="box">
+      <h1>Tech (implementazione / audit)</h1>
+      <p>
+        Questa sezione è per tecnici, auditor e integrazioni B2B/B2G.
+        Il Gateway resta client-side e minimizzato: qui documentiamo <b>schemi</b>, <b>standard</b>, <b>moduli</b> e <b>verifiche</b>.
+      </p>
+      <div class="cta">
+        <a class="btn" href="../">← Torna al Gateway</a>
+        <a class="btn primary" href="../verify/">Apri Verify</a>
+        <a class="btn" href="../map/">Mappa ecosistema</a>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Sezioni tecniche">
+      <div class="box">
+        <h2>Standards</h2>
+        <p>Requisiti e criteri (UE-first) per adozione, interoperabilità, opponibilità e limiti dichiarati.</p>
+        <div class="cta">
+          <a class="btn primary" href="./standards/">Apri Standards</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <h2>Schemas</h2>
+        <p>Strutture dati: IPR, receipt ED25519, anchor-pack, PACK_MANIFEST ed evidence pack.</p>
+        <div class="cta">
+          <a class="btn primary" href="./schemas/">Apri Schemas</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <h2>Modules</h2>
+        <p>Layer dell’ecosistema Hermeticum B.C.E. (policy, governance, continuità, scambio, spazio identitario).</p>
+        <div class="cta">
+          <a class="btn primary" href="./modules/">Apri Modules</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <h2>Audit</h2>
+        <p>Verifiche riproducibili, fail-closed, test vectors, checklist e regole di validazione.</p>
+        <div class="cta">
+          <a class="btn primary" href="./audit/">Apri Audit</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="box" style="margin-top:12px">
+      <h2>Regole tecniche (minime)</h2>
+      <ul>
+        <li><b>Hash-only</b>: il portale non richiede e non conserva dati personali.</li>
+        <li><b>Client-side</b>: generazione e verifica avvengono lato utente.</li>
+        <li><b>Fail-closed</b>: in caso di dubbio o incoerenza, l’operazione si blocca.</li>
+        <li><b>Audit-first</b>: ogni output deve essere verificabile senza fiducia nel portale.</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
