@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Verify — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
-  <meta name="description" content="Verifica IPR package e receipt: schema + hash (client-side). UE-first, GDPR-min, fail-closed." />
+  <meta name="description" content="Verifica ipr.json e receipt.json: schema + hash (client-side). UE-first, GDPR-min, fail-closed." />
   <style>
     :root{
       --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
@@ -24,26 +24,23 @@
     .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
     .title{font-size:18px;font-weight:750;margin:0 0 8px}
     label{display:block;font-size:12px;color:var(--mut);margin:10px 0 6px}
-    textarea,input{
+    textarea{
       width:100%;box-sizing:border-box;background:#071018;border:1px solid var(--brd);
-      color:var(--txt);border-radius:12px;padding:10px 12px;outline:none
+      color:var(--txt);border-radius:12px;padding:10px 12px;outline:none;
+      min-height:240px;resize:vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size:12px;line-height:1.35
     }
-    textarea{min-height:220px;resize:vertical;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-size:12px;line-height:1.35}
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     button{
       border:1px solid var(--brd);background:#0a1320;color:var(--txt);
       border-radius:12px;padding:10px 12px;font-weight:650;cursor:pointer
     }
     button.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
-    button:disabled{opacity:.55;cursor:not-allowed}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
     .status{margin-top:10px;font-size:12px;line-height:1.35}
     .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
     .out{white-space:pre;overflow:auto;background:#06101a;border:1px solid var(--brd);border-radius:12px;padding:12px;font-size:12px}
-    .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-    @media (max-width:620px){.kpi{grid-template-columns:1fr}}
-    .pill{border:1px solid var(--brd);border-radius:999px;padding:7px 10px;font-size:12px;color:var(--mut)}
-    .pill strong{color:var(--txt)}
     .hr{height:1px;background:var(--brd);margin:14px 0}
   </style>
 </head>
@@ -54,30 +51,23 @@
       <div>
         <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
         <div class="company">HERMETICUM B.C.E. S.r.l.</div>
-        <div class="tag">Verify (client-side) · schema + hash · UE-first · GDPR-min · fail-closed</div>
+        <div class="tag">Verify (client-side) · schema + hash · fail-closed</div>
       </div>
       <div class="tag" style="max-width:520px">
-        Incolla i file generati da <span class="mono">/create</span>. Questa pagina scarica gli schemi da
-        <span class="mono">/schemas</span> e verifica in modo deterministico.
+        Incolla i file generati in <span class="mono">/create</span>.
+        Questa pagina carica gli schemi da <span class="mono">/schemas</span>.
       </div>
     </header>
 
     <section class="card">
       <h1 class="title">Verifica IPR + Receipt</h1>
-      <div class="kpi">
-        <div class="pill">Schema IPR: <strong id="kIprSchema">—</strong></div>
-        <div class="pill">Schema Receipt: <strong id="kRcpSchema">—</strong></div>
-        <div class="pill">Hash ipr.json: <strong id="kIprHash">—</strong></div>
-        <div class="pill">Hash payload receipt: <strong id="kPayloadHash">—</strong></div>
-      </div>
-
       <div class="btns">
         <button class="primary" id="run">Esegui verifica</button>
         <button id="clear">Pulisci</button>
-        <button id="example">Carica esempio</button>
       </div>
-
-      <div class="status" id="status"></div>
+      <div class="status warn" id="status"></div>
+      <div class="hr"></div>
+      <div class="out mono" id="finalOut">—</div>
     </section>
 
     <div class="grid" style="margin-top:16px">
@@ -86,7 +76,7 @@
         <label for="iprText">Incolla qui</label>
         <textarea id="iprText" spellcheck="false" placeholder="{ ... }"></textarea>
         <div class="hr"></div>
-        <label>Dettagli validazione IPR</label>
+        <label>Report IPR (schema)</label>
         <div class="out mono" id="iprReport">—</div>
       </section>
 
@@ -95,27 +85,21 @@
         <label for="rcpText">Incolla qui</label>
         <textarea id="rcpText" spellcheck="false" placeholder="{ ... }"></textarea>
         <div class="hr"></div>
-        <label>Dettagli validazione Receipt</label>
+        <label>Report Receipt (schema)</label>
         <div class="out mono" id="rcpReport">—</div>
       </section>
     </div>
-
-    <section class="card" style="margin-top:16px">
-      <h2 class="title">Risultato (fail-closed)</h2>
-      <div class="muted" style="line-height:1.55">
-        La verifica è <b>OK</b> solo se:
-        (1) entrambi gli schemi passano,
-        (2) <span class="mono">receipt.payload.ipr_hash_sha256</span> coincide con l’hash ricalcolato di <span class="mono">ipr.json</span>,
-        (3) <span class="mono">receipt.payload_hash_sha256</span> coincide con l’hash ricalcolato del payload.
-      </div>
-      <div class="hr"></div>
-      <div class="out mono" id="finalOut">—</div>
-    </section>
   </div>
 
 <script>
-  // ---------------- Utilities ----------------
+(() => {
   const $ = (id) => document.getElementById(id);
+
+  function setStatus(msg, kind){
+    const el = $("status");
+    el.className = "status " + (kind || "warn");
+    el.textContent = msg || "";
+  }
 
   async function sha256Hex(str){
     const enc = new TextEncoder().encode(str);
@@ -124,7 +108,6 @@
   }
 
   function stableStringify(obj){
-    // JSON deterministico: ordina chiavi ricorsivamente
     const seen = new WeakSet();
     const norm = (v) => {
       if(v && typeof v === "object"){
@@ -141,39 +124,17 @@
     return JSON.stringify(norm(obj));
   }
 
-  function setKpi(id, text, cls){
-    const el = $(id);
-    el.textContent = text;
-    el.className = cls ? cls : "";
-  }
-
-  function setStatus(msg, kind){
-    const el = $("status");
-    el.className = "status " + (kind || "warn");
-    el.textContent = msg;
-  }
-
-  function report(el, ok, lines){
-    el.textContent = (ok ? "OK ✅\n" : "FAIL ❌\n") + (lines?.length ? lines.join("\n") : "");
-  }
-
-  // ---------------- Minimal JSON Schema Validator ----------------
-  // Supporta: type, const, enum, required, additionalProperties(false), properties, pattern, minLength/maxLength,
-  // minItems, uniqueItems, items, format(date-time) base (regex), minimum/maximum
+  // Minimal validator (enough for our schemas)
   function validate(schema, data, path="$"){
     const errs = [];
-
     const isObj = (x) => x && typeof x === "object" && !Array.isArray(x);
 
-    const checkFormatDateTime = (s) => {
-      // ISO 8601 abbastanza robusto per MVP
-      return typeof s === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(s);
-    };
+    const isIsoZ = (s) =>
+      typeof s === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(s);
 
     const walk = (sch, val, p) => {
       if(!sch) return;
 
-      // type
       if(sch.type){
         const t = sch.type;
         const ok =
@@ -195,36 +156,22 @@
         if(!ok) errs.push(`${p}: type mismatch (expected ${JSON.stringify(t)})`);
       }
 
-      // const
-      if("const" in sch){
-        if(val !== sch.const) errs.push(`${p}: const mismatch (expected ${JSON.stringify(sch.const)})`);
-      }
+      if("const" in sch && val !== sch.const) errs.push(`${p}: const mismatch`);
 
-      // enum
-      if(sch.enum){
-        if(!sch.enum.includes(val)) errs.push(`${p}: enum mismatch`);
-      }
+      if(sch.enum && !sch.enum.includes(val)) errs.push(`${p}: enum mismatch`);
 
-      // string constraints
       if(typeof val === "string"){
         if("minLength" in sch && val.length < sch.minLength) errs.push(`${p}: minLength ${sch.minLength}`);
         if("maxLength" in sch && val.length > sch.maxLength) errs.push(`${p}: maxLength ${sch.maxLength}`);
-        if(sch.pattern){
-          const re = new RegExp(sch.pattern);
-          if(!re.test(val)) errs.push(`${p}: pattern mismatch`);
-        }
-        if(sch.format === "date-time"){
-          if(!checkFormatDateTime(val)) errs.push(`${p}: format date-time mismatch (must be ISO Z)`);
-        }
+        if(sch.pattern && !(new RegExp(sch.pattern)).test(val)) errs.push(`${p}: pattern mismatch`);
+        if(sch.format === "date-time" && !isIsoZ(val)) errs.push(`${p}: date-time must be ISO with Z`);
       }
 
-      // number / integer constraints
       if(typeof val === "number"){
         if("minimum" in sch && val < sch.minimum) errs.push(`${p}: minimum ${sch.minimum}`);
         if("maximum" in sch && val > sch.maximum) errs.push(`${p}: maximum ${sch.maximum}`);
       }
 
-      // object
       if(isObj(val)){
         if(Array.isArray(sch.required)){
           for(const k of sch.required){
@@ -243,7 +190,6 @@
         }
       }
 
-      // array
       if(Array.isArray(val)){
         if("minItems" in sch && val.length < sch.minItems) errs.push(`${p}: minItems ${sch.minItems}`);
         if(sch.uniqueItems){
@@ -262,153 +208,104 @@
     return errs;
   }
 
-  // ---------------- Load schemas ----------------
   async function fetchJSON(url){
-    const r = await fetch(url, {cache:"no-store"});
+    const r = await fetch(url, { cache: "no-store" });
     if(!r.ok) throw new Error(`Cannot fetch ${url} (${r.status})`);
     return await r.json();
   }
 
+  function basePath(){
+    // /hermeticum-bce-platform/verify/ -> /hermeticum-bce-platform/
+    return location.origin + location.pathname.replace(/\/verify\/.*$/, "/");
+  }
+
   async function loadSchemas(){
-    const base = location.origin + location.pathname.replace(/\/verify\/.*$/, "/");
-    // se sei su /hermeticum-bce-platform/verify/ → base diventa /hermeticum-bce-platform/
+    const base = basePath();
     const iprUrl = base + "schemas/ipr.schema.json";
     const rcpUrl = base + "schemas/receipt.schema.json";
     const [iprSchema, rcpSchema] = await Promise.all([fetchJSON(iprUrl), fetchJSON(rcpUrl)]);
-    return {iprSchema, rcpSchema, iprUrl, rcpUrl};
+    return { iprSchema, rcpSchema, iprUrl, rcpUrl };
   }
 
-  // ---------------- Verification ----------------
-  async function runVerify(){
+  function report(el, ok, errs){
+    el.textContent = (ok ? "OK ✅\n" : "FAIL ❌\n") + (errs?.length ? errs.join("\n") : "");
+  }
+
+  $("run").onclick = async () => {
     $("iprReport").textContent = "—";
     $("rcpReport").textContent = "—";
     $("finalOut").textContent = "—";
-    setKpi("kIprSchema", "—");
-    setKpi("kRcpSchema", "—");
-    setKpi("kIprHash", "—");
-    setKpi("kPayloadHash", "—");
 
     let ipr, rcp;
-    try{
-      ipr = JSON.parse($("iprText").value);
-    }catch(e){
-      setStatus("ipr.json non è JSON valido.", "bad");
-      return;
-    }
-    try{
-      rcp = JSON.parse($("rcpText").value);
-    }catch(e){
-      setStatus("receipt.json non è JSON valido.", "bad");
-      return;
-    }
+    try{ ipr = JSON.parse($("iprText").value); }
+    catch{ setStatus("ipr.json non è JSON valido.", "bad"); return; }
+
+    try{ rcp = JSON.parse($("rcpText").value); }
+    catch{ setStatus("receipt.json non è JSON valido.", "bad"); return; }
 
     let schemas;
     try{
       schemas = await loadSchemas();
-      setKpi("kIprSchema", "caricato ✅", "ok");
-      setKpi("kRcpSchema", "caricato ✅", "ok");
     }catch(e){
-      setKpi("kIprSchema", "errore ❌", "bad");
-      setKpi("kRcpSchema", "errore ❌", "bad");
-      setStatus("Impossibile caricare gli schemi da /schemas. Verifica che i file esistano e che GitHub Pages li serva.", "bad");
+      setStatus("Impossibile caricare gli schemi da /schemas.", "bad");
       $("finalOut").textContent = String(e?.message || e);
       return;
     }
 
-    // validate schemas
     const iprErrs = validate(schemas.iprSchema, ipr, "$");
     const rcpErrs = validate(schemas.rcpSchema, rcp, "$");
 
     report($("iprReport"), iprErrs.length === 0, iprErrs);
     report($("rcpReport"), rcpErrs.length === 0, rcpErrs);
 
-    // hashes (deterministic)
-    let iprHash, payloadHash;
-    try{
-      iprHash = await sha256Hex(stableStringify(ipr));
-      payloadHash = await sha256Hex(stableStringify(rcp.payload));
-      setKpi("kIprHash", iprHash.slice(0,16) + "…", "ok");
-      setKpi("kPayloadHash", payloadHash.slice(0,16) + "…", "ok");
-    }catch(e){
-      setStatus("Errore nel calcolo hash (oggetto ciclico o dati non serializzabili).", "bad");
-      $("finalOut").textContent = String(e?.message || e);
-      return;
-    }
-
-    // fail-closed checks
+    // fail-closed logic
     const checks = [];
     let ok = true;
 
-    if(iprErrs.length !== 0){
-      ok = false;
-      checks.push("FAIL: schema IPR non valido.");
-    }else{
-      checks.push("OK: schema IPR valido.");
-    }
+    if(iprErrs.length){ ok = false; checks.push("FAIL: schema IPR non valido."); }
+    else checks.push("OK: schema IPR valido.");
 
-    if(rcpErrs.length !== 0){
-      ok = false;
-      checks.push("FAIL: schema Receipt non valido.");
-    }else{
-      checks.push("OK: schema Receipt valido.");
-    }
+    if(rcpErrs.length){ ok = false; checks.push("FAIL: schema Receipt non valido."); }
+    else checks.push("OK: schema Receipt valido.");
 
-    // compare ipr_hash_sha256 inside receipt payload
+    // Deterministic hashes
+    const iprHash = await sha256Hex(stableStringify(ipr));
+    const payloadHash = await sha256Hex(stableStringify(rcp.payload));
+
     const declaredIprHash = rcp?.payload?.ipr_hash_sha256;
     if(typeof declaredIprHash !== "string"){
-      ok = false;
-      checks.push("FAIL: receipt.payload.ipr_hash_sha256 mancante.");
+      ok = false; checks.push("FAIL: receipt.payload.ipr_hash_sha256 mancante.");
     }else if(declaredIprHash !== iprHash){
       ok = false;
       checks.push("FAIL: receipt.payload.ipr_hash_sha256 mismatch.");
       checks.push(`  declared: ${declaredIprHash}`);
       checks.push(`  computed: ${iprHash}`);
-    }else{
-      checks.push("OK: ipr_hash_sha256 coincide.");
-    }
+    }else checks.push("OK: ipr_hash_sha256 coincide.");
 
-    // compare payload_hash_sha256
     const declaredPayloadHash = rcp?.payload_hash_sha256;
     if(typeof declaredPayloadHash !== "string"){
-      ok = false;
-      checks.push("FAIL: receipt.payload_hash_sha256 mancante.");
+      ok = false; checks.push("FAIL: receipt.payload_hash_sha256 mancante.");
     }else if(declaredPayloadHash !== payloadHash){
       ok = false;
       checks.push("FAIL: receipt.payload_hash_sha256 mismatch.");
       checks.push(`  declared: ${declaredPayloadHash}`);
       checks.push(`  computed: ${payloadHash}`);
-    }else{
-      checks.push("OK: payload_hash_sha256 coincide.");
-    }
+    }else checks.push("OK: payload_hash_sha256 coincide.");
 
-    // subject linking
-    const subj1 = ipr?.subject;
-    const subj2 = rcp?.payload?.ipr_subject;
-    if(subj1 && subj2 && subj1 !== subj2){
+    // subject linkage
+    if(ipr?.subject && rcp?.payload?.ipr_subject && ipr.subject !== rcp.payload.ipr_subject){
       ok = false;
       checks.push("FAIL: subject mismatch tra ipr.subject e receipt.payload.ipr_subject.");
-      checks.push(`  ipr.subject: ${subj1}`);
-      checks.push(`  rcp.ipr_subject: ${subj2}`);
-    }else if(subj1 && subj2){
-      checks.push("OK: subject coincide.");
-    }
+    }else checks.push("OK: subject coerente.");
 
-    // policy coherence (basic)
-    const pol1 = stableStringify(ipr?.policy || {});
-    const pol2 = stableStringify(rcp?.payload?.policy || {});
-    if(pol1 !== pol2){
-      ok = false;
-      checks.push("FAIL: policy mismatch tra IPR e receipt payload.");
-    }else{
-      checks.push("OK: policy coerente.");
-    }
+    // policy linkage
+    if(stableStringify(ipr?.policy || {}) !== stableStringify(rcp?.payload?.policy || {})){
+      ok = false; checks.push("FAIL: policy mismatch tra IPR e receipt payload.");
+    }else checks.push("OK: policy coerente.");
 
     $("finalOut").textContent = (ok ? "VERIFICA OK ✅\n\n" : "VERIFICA FAIL ❌ (fail-closed)\n\n") + checks.join("\n");
-    setStatus(ok ? "Verifica OK: schema e hash coerenti." : "Verifica FALLITA: vedi dettagli sotto.", ok ? "ok" : "bad");
-  }
-
-  // ---------------- UI bindings ----------------
-  $("run").onclick = () => runVerify();
+    setStatus(ok ? "Verifica OK: schema + hash coerenti." : "Verifica FALLITA: vedi dettagli.", ok ? "ok" : "bad");
+  };
 
   $("clear").onclick = () => {
     $("iprText").value = "";
@@ -417,59 +314,8 @@
     $("rcpReport").textContent = "—";
     $("finalOut").textContent = "—";
     setStatus("", "warn");
-    setKpi("kIprSchema", "—");
-    setKpi("kRcpSchema", "—");
-    setKpi("kIprHash", "—");
-    setKpi("kPayloadHash", "—");
   };
-
-  $("example").onclick = async () => {
-    // Esempio minimo coerente con gli schemi
-    const issued_at = new Date().toISOString();
-    const ipr = {
-      proto: "AI_JOKER_C2",
-      type: "IPR_PACKAGE",
-      version: "v1",
-      issuer: "HERMETICUM B.C.E. S.r.l.",
-      seal: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
-      issued_at,
-      level: "BASIC",
-      subject: "ipr-subject:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      purpose: "AI accountability personale",
-      policy: { UE_FIRST:true, GDPR_MIN:true, HASH_ONLY:true, FAIL_CLOSED:true, AUDIT_APPEND_ONLY:true },
-      consent: { scope:"AI_ACCOUNTABILITY", duration_days:365, note:null, acknowledged:true },
-      context: { kind:"COARSE_GEO", hash_sha256:"b".repeat(64), fields_present:["country","city"] },
-      notes: null,
-      audit: [{ evt:"EVT-IPR-ISSUED", at:issued_at, by:"CLIENT_SIDE_WIZARD", hash_sha256:"c".repeat(64) }]
-    };
-
-    const iprHash = await sha256Hex(stableStringify(ipr));
-    const payload = {
-      ipr_subject: ipr.subject,
-      ipr_level: ipr.level,
-      purpose: ipr.purpose,
-      policy: ipr.policy,
-      consent_scope: ipr.consent.scope,
-      issued_at,
-      ipr_hash_sha256: iprHash
-    };
-    const payloadHash = await sha256Hex(stableStringify(payload));
-
-    const rcp = {
-      proto: "AI_JOKER_C2",
-      type: "RECEIPT",
-      version: "v1",
-      kind: "IPR_ISSUANCE",
-      issued_at,
-      payload_hash_sha256: payloadHash,
-      payload,
-      signature: { scheme:"NONE", note:"Esempio demo." }
-    };
-
-    $("iprText").value = JSON.stringify(ipr, null, 2);
-    $("rcpText").value = JSON.stringify(rcp, null, 2);
-    setStatus("Esempio caricato. Premi 'Esegui verifica'.", "warn");
-  };
+})();
 </script>
 </body>
 </html>
