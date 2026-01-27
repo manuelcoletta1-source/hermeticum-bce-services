@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Schemas — Tech | EU Gateway</title>
+  <meta name="description" content="Schemas: ipr.json, receipt.json (ED25519), anchor-pack, PACK_MANIFEST. Hash-only, client-side, fail-closed."/>
+  <style>
+    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 16px 56px}
+    .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+    h1{font-size:22px;margin:0 0 10px}
+    h2{font-size:16px;margin:18px 0 8px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
+    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.45}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:14px;padding:12px 14px;
+         text-decoration:none;border:1px solid var(--line);background:#0f1621}
+    .btn.primary{background:#142033;border-color:#2a3a55}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+    .key{display:inline-block;border:1px solid var(--line);border-radius:10px;padding:2px 8px;margin-right:6px;margin-top:6px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="box">
+      <h1>Schemas</h1>
+      <p>
+        Questa sezione descrive le strutture dati minime del Gateway. Obiettivo:
+        output verificabile <b>senza fiducia</b> nel portale (audit-first).
+      </p>
+      <div class="cta">
+        <a class="btn" href="../">← Torna a Tech</a>
+        <a class="btn" href="../../">← Gateway</a>
+        <a class="btn primary" href="../../create/">Create</a>
+        <a class="btn" href="../../verify/">Verify</a>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <section class="box">
+      <h2>1) <span class="mono">ipr.json</span> (hash-only)</h2>
+      <p>
+        Record minimale di identità primaria: contiene metadati e impronte (hash) — non documenti.
+        Deve essere serializzabile e verificabile.
+      </p>
+      <p>
+        <span class="key">IPR-ID</span>
+        <span class="key">TIME</span>
+        <span class="key">POLICY</span>
+        <span class="key">HASHES</span>
+      </p>
+
+      <h2>2) <span class="mono">receipt.json</span> (firma ED25519)</h2>
+      <p>
+        Ricevuta firmata che attesta l’output generato (hash del payload + firma).
+        Serve a rendere la prova riproducibile e controllabile.
+      </p>
+      <p>
+        <span class="key">PUBKEY</span>
+        <span class="key">SIGNATURE</span>
+        <span class="key">DIGEST</span>
+      </p>
+
+      <h2>3) <span class="mono">anchor-pack</span> (opzionale)</h2>
+      <p>
+        Riferimenti di ancoraggio (BTC/ETH/IPFS) inseriti dall’utente. Il portale non promette reperibilità:
+        documenta riferimenti e li include nel pacchetto per audit esterno.
+      </p>
+      <p>
+        <span class="key">BTC_TXID</span>
+        <span class="key">ETH_TX</span>
+        <span class="key">IPFS_CID</span>
+      </p>
+
+      <h2>4) <span class="mono">PACK_MANIFEST</span> (Evidence Pack)</h2>
+      <p>
+        Manifest firmato che lega IPR + receipt + anchors + proof in un pacchetto verificabile.
+        È il formato consigliato per uso B2B/B2G.
+      </p>
+      <p>
+        <span class="key">FILES</span>
+        <span class="key">HASHES</span>
+        <span class="key">SIGNATURE</span>
+        <span class="key">POLICY</span>
+      </p>
+    </section>
+
+    <section class="box" style="margin-top:12px">
+      <h2>Note operative</h2>
+      <ul>
+        <li><b>GDPR-min</b>: niente dati personali nel Gateway, solo hash/metadata.</li>
+        <li><b>Fail-closed</b>: se manca coerenza tra hash e firma, la verifica deve fallire.</li>
+        <li><b>Riproducibilità</b>: ogni schema deve essere verificabile offline.</li>
+      </ul>
+      <div class="cta">
+        <a class="btn primary" href="../audit/">Apri Audit</a>
+        <a class="btn" href="../standards/">Apri Standards</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
