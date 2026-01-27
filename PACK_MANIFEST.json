@@ -1,42 +1,95 @@
 {
   "proto": "PACK_MANIFEST/v1",
-  "subject": "IPR-3@ManuelColetta",
-  "policy": "UE_FIRST/GDPR_MIN/HASH_ONLY/FAIL_CLOSED/AUDIT",
-  "time": "2026-01-27T00:00:00+01:00",
+  "type": "EVIDENCE_PACK",
+  "subject": {
+    "iprid": "IPR-3@ManuelColetta",
+    "entity": "PERSON",
+    "jurisdiction": "EU"
+  },
+  "time": {
+    "issued": "2026-01-27T00:00:00+01:00",
+    "mode": "LOCKED"
+  },
+  "policy": {
+    "profile": "UE_FIRST/GDPR_MIN/HASH_ONLY/FAIL_CLOSED/AUDIT",
+    "data": "NO_PII",
+    "execution": "CLIENT_SIDE_ONLY"
+  },
   "files": [
     {
       "path": "ipr.canon.json",
-      "sha512": "<SHA512_HEX_OF_ipr.canon.json>"
+      "role": "PRIMARY_RECORD",
+      "hash": {
+        "algo": "SHA-512",
+        "value": "<SHA512_HEX_ipr.canon.json>"
+      }
     },
     {
       "path": "ipr.json",
-      "sha512": "<SHA512_HEX_OF_ipr.json>"
+      "role": "DERIVED_VIEW",
+      "hash": {
+        "algo": "SHA-512",
+        "value": "<SHA512_HEX_ipr.json>"
+      }
     },
     {
       "path": "receipt.json",
-      "sha512": "<SHA512_HEX_OF_receipt.json>"
+      "role": "CRYPTO_RECEIPT",
+      "hash": {
+        "algo": "SHA-512",
+        "value": "<SHA512_HEX_receipt.json>"
+      }
     },
     {
       "path": "anchor-pack.json",
-      "sha512": "<SHA512_HEX_OF_anchor-pack.json>"
+      "role": "ANCHOR_REFERENCES",
+      "hash": {
+        "algo": "SHA-512",
+        "value": "<SHA512_HEX_anchor-pack.json>"
+      }
     },
     {
       "path": "ed25519_pub.pem",
-      "sha512": "<SHA512_HEX_OF_ed25519_pub.pem>"
+      "role": "VERIFY_KEY",
+      "hash": {
+        "algo": "SHA-512",
+        "value": "<SHA512_HEX_ed25519_pub.pem>"
+      }
     }
   ],
+  "cryptography": {
+    "digest": "SHA-512",
+    "signature": "ED25519",
+    "receipt_binding": "ipr.canon.json"
+  },
+  "anchors": {
+    "ipfs": {
+      "cid": "bafkreidhv73vqrxoweog33ls3rnwrgyicio234pcuks6mnep76yh56pj5q",
+      "role": "PUBLIC_TIMESTAMP"
+    },
+    "bitcoin": {
+      "txid": "9eeb29b67f4a649d563b95560fda5ddaa84777b13515f936837fc93d28554b45",
+      "role": "IMMUTABLE_PROOF"
+    },
+    "ethereum": {
+      "tx": "0xf65eb314a1edd392fc15fcd9c65d22060ca39cbac04fcfcb48b978062500a7eff",
+      "role": "SECONDARY_PROOF"
+    }
+  },
   "links": {
     "gateway": "https://manuelcoletta1-source.github.io/hermeticum-bce-platform/",
     "public_verify": "https://manuelcoletta1-source.github.io/manuhell/"
   },
-  "anchors": {
-    "ipfs_cid": "bafkreidhv73vqrxoweog33ls3rnwrgyicio234pcuks6mnep76yh56pj5q",
-    "btc_txid": "9eeb29b67f4a649d563b95560fda5ddaa84777b13515f936837fc93d28554b45",
-    "eth_tx": "0xf65eb314a1edd392fc15fcd9c65d22060ca39cbac04fcfcb48b978062500a7eff"
-  },
   "assertions": [
-    "No documents stored. Hash-only pack.",
-    "Receipt ED25519 must verify against ipr.canon.json digest.",
-    "Fail-closed: any mismatch invalidates the pack."
-  ]
+    "This evidence pack is hash-only and contains no personal documents.",
+    "Receipt ED25519 must verify against the SHA-512 digest of ipr.canon.json.",
+    "Any hash or signature mismatch invalidates the entire pack (fail-closed).",
+    "Anchors are external references and do not imply legal recognition.",
+    "This manifest is valid only together with the exact files and hashes listed."
+  ],
+  "status": {
+    "state": "ACTIVE",
+    "mutability": "APPEND_ONLY",
+    "freeze_recommended": true
+  }
 }
