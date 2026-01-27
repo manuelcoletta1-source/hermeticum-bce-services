@@ -71,6 +71,22 @@
         "public_key_jwk": { "type": ["object", "null"] },
         "note": { "type": ["string", "null"], "maxLength": 280 }
       }
+    },
+
+    "anchors": {
+      "type": ["array", "null"],
+      "default": [],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "ref"],
+        "properties": {
+          "type": { "type": "string", "enum": ["BTC_TXID", "ETH_TX", "IPFS_CID", "RFC3161"] },
+          "ref": { "type": "string", "minLength": 8, "maxLength": 200 },
+          "at": { "type": ["string", "null"], "format": "date-time" },
+          "note": { "type": ["string", "null"], "maxLength": 280 }
+        }
+      }
     }
   }
 }
