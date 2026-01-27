@@ -1,12 +1,141 @@
-<script>
-/* =========================
-   AI_JOKER_C2 — CREATE IPR
-   UE-first · GDPR-min · hash-only · fail-closed
-   Client-side only (GitHub Pages friendly)
-========================= */
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create IPR — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
+  <meta name="description" content="Genera ipr.json e receipt.json (client-side). UE-first, GDPR-min, hash-only, fail-closed." />
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
+      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --bad:#fda4af; --warn:#fde68a;
+      --r:16px; --pad:18px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    body{margin:0;background:radial-gradient(900px 600px at 15% 0%, #0d1b2a 0%, var(--bg) 55%);color:var(--txt);}
+    a{color:var(--acc);text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:26px 18px 60px;}
+    header{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}
+    .seal{font-weight:800;letter-spacing:.3px}
+    .company{color:var(--mut);font-size:12px}
+    .tag{color:var(--mut);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .title{font-size:18px;font-weight:750;margin:0 0 8px}
+    label{display:block;font-size:12px;color:var(--mut);margin:10px 0 6px}
+    input,select,textarea{
+      width:100%;box-sizing:border-box;background:#071018;border:1px solid var(--brd);
+      color:var(--txt);border-radius:12px;padding:10px 12px;outline:none
+    }
+    textarea{min-height:90px;resize:vertical}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{
+      border:1px solid var(--brd);background:#0a1320;color:var(--txt);
+      border-radius:12px;padding:10px 12px;font-weight:650;cursor:pointer
+    }
+    button.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
+    button:disabled{opacity:.55;cursor:not-allowed}
+    .status{margin-top:10px;font-size:12px;line-height:1.35}
+    .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
+    .out{white-space:pre;overflow:auto;background:#06101a;border:1px solid var(--brd);border-radius:12px;padding:12px;font-size:12px}
+    .hint{color:var(--mut);font-size:12px;line-height:1.45;margin-top:10px}
+    .hr{height:1px;background:var(--brd);margin:14px 0}
+  </style>
+</head>
 
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        <div class="company">HERMETICUM B.C.E. S.r.l.</div>
+        <div class="tag">Create IPR (client-side) · UE-first · GDPR-min · hash-only · fail-closed</div>
+      </div>
+      <div class="tag" style="max-width:520px">
+        Genera <span class="mono">ipr.json</span> e <span class="mono">receipt.json</span> localmente.
+        Nessun dato viene inviato a server.
+      </div>
+    </header>
+
+    <section class="card">
+      <h1 class="title">Genera IPR package</h1>
+
+      <label for="level">Livello</label>
+      <select id="level">
+        <option value="BASIC">BASIC</option>
+        <option value="STRONG">STRONG</option>
+        <option value="INSTITUTION">INSTITUTION</option>
+      </select>
+
+      <label for="purpose">Scopo (obbligatorio)</label>
+      <input id="purpose" placeholder="Esempio: AI accountability personale" />
+
+      <div class="hr"></div>
+
+      <label for="consentScope">Consenso · scope</label>
+      <select id="consentScope">
+        <option value="AI_ACCOUNTABILITY">AI_ACCOUNTABILITY</option>
+        <option value="PROOF_OF_EXISTENCE">PROOF_OF_EXISTENCE</option>
+        <option value="AUDIT_TRAIL">AUDIT_TRAIL</option>
+      </select>
+
+      <label for="consentDurationDays">Consenso · durata (giorni)</label>
+      <input id="consentDurationDays" type="number" min="1" max="3650" value="365" />
+
+      <label for="consentNote">Consenso · nota (facoltativa)</label>
+      <input id="consentNote" placeholder="Breve nota (max 280)" />
+
+      <label style="margin-top:12px">
+        <input type="checkbox" id="consentCheck" />
+        Confermo: questo portale non sostituisce SPID/CIE/eIDAS e non salva dati personali in chiaro.
+      </label>
+
+      <div class="hr"></div>
+
+      <label for="country">Nazione ISO2 (facoltativo)</label>
+      <input id="country" placeholder="IT" maxlength="2" />
+
+      <label for="region">Regione (facoltativo)</label>
+      <input id="region" placeholder="Piemonte" />
+
+      <label for="city">Città (facoltativo)</label>
+      <input id="city" placeholder="Torino" />
+
+      <label for="district">Quartiere (facoltativo)</label>
+      <input id="district" placeholder="San Salvario" />
+
+      <label for="localSecret">Segreto locale (obbligatorio, non viene esportato in chiaro)</label>
+      <input id="localSecret" type="password" placeholder="Passphrase (min 10 caratteri)" />
+
+      <label for="notes">Note operative (facoltative)</label>
+      <textarea id="notes" placeholder="Evita dati personali."></textarea>
+
+      <div class="btns">
+        <button class="primary" id="generate">Genera</button>
+        <button id="downloadIpr" disabled>Scarica ipr.json</button>
+        <button id="downloadReceipt" disabled>Scarica receipt.json</button>
+      </div>
+
+      <div class="status warn" id="status"></div>
+
+      <div class="hr"></div>
+
+      <label>Anteprima ipr.json</label>
+      <div class="out mono" id="iprOut">—</div>
+
+      <label style="margin-top:12px">Anteprima receipt.json</label>
+      <div class="out mono" id="rcpOut">—</div>
+
+      <div class="hint">
+        Questo step genera receipt con <span class="mono">signature.scheme = "NONE"</span>. Firma/timestamp arriveranno dopo.
+      </div>
+    </section>
+  </div>
+
+<script>
 (() => {
-  // ---------- helpers ----------
   const $ = (id) => document.getElementById(id);
 
   const POLICY = Object.freeze({
@@ -18,39 +147,22 @@
   });
 
   const CFG = Object.freeze({
-    SUBJECT_PREFIX: "ipr-subject:",
-    SUBJECT_HEX_LEN: 32,
     SECRET_MIN_LEN: 10,
-    PURPOSE_MIN_LEN: 3,
-    PURPOSE_MAX_LEN: 200
+    PURPOSE_MIN: 3,
+    PURPOSE_MAX: 200,
+    SUBJECT_PREFIX: "ipr-subject:",
+    SUBJECT_HEX_LEN: 32
   });
 
-  function nowISO(){
-    return new Date().toISOString();
-  }
+  let lastIPR = null;
+  let lastReceipt = null;
 
-  function setStep(n){
-    for(const k of [1,2,3,4]){
-      $("step"+k).style.display = (k===n) ? "block" : "none";
-      $("chip-"+k).classList.toggle("on", k===n);
-    }
-  }
+  function nowISO(){ return new Date().toISOString(); }
 
-  function setStatus(el, msg, kind="warn"){
-    el.className = "status " + kind;
+  function setStatus(msg, kind){
+    const el = $("status");
+    el.className = "status " + (kind || "warn");
     el.textContent = msg || "";
-  }
-
-  function downloadJSON(filename, obj){
-    const blob = new Blob([JSON.stringify(obj, null, 2)], {type:"application/json"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
   }
 
   async function sha256Hex(str){
@@ -60,7 +172,6 @@
   }
 
   function stableStringify(obj){
-    // JSON deterministico: ordina chiavi ricorsivamente
     const seen = new WeakSet();
     const norm = (v) => {
       if(v && typeof v === "object"){
@@ -77,132 +188,80 @@
     return JSON.stringify(norm(obj));
   }
 
-  function cleanISO2(country){
-    const c = (country || "").trim().toUpperCase();
-    if(!c) return null;
-    // accetta solo 2 lettere (ISO3166 alpha-2)
-    return /^[A-Z]{2}$/.test(c) ? c : null;
+  function downloadJSON(filename, obj){
+    const blob = new Blob([JSON.stringify(obj, null, 2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
   }
 
-  function requiredStr(v, min, max){
-    const s = (v || "").trim();
+  function cleanISO2(x){
+    const s = (x||"").trim().toUpperCase();
+    if(!s) return null;
+    return /^[A-Z]{2}$/.test(s) ? s : null;
+  }
+
+  function optStr(x, max){
+    const s = (x||"").trim();
+    if(!s) return null;
+    return (max && s.length>max) ? s.slice(0,max) : s;
+  }
+
+  function reqStr(x, min, max){
+    const s = (x||"").trim();
     if(s.length < min) return null;
     if(max && s.length > max) return null;
     return s;
   }
 
-  function optionalStr(v, max){
-    const s = (v || "").trim();
-    if(!s) return null;
-    if(max && s.length > max) return s.slice(0, max);
-    return s;
-  }
-
-  function contextObjFromForm(){
-    const ctx = {
-      country: cleanISO2($("country").value),
-      region: optionalStr($("region").value, 120),
-      city: optionalStr($("city").value, 120),
-      district: optionalStr($("district").value, 120)
-    };
-    return ctx;
-  }
-
-  function contextFieldsPresent(ctx){
-    return Object.entries(ctx)
-      .filter(([_,v]) => !!v)
-      .map(([k]) => k);
-  }
-
   async function buildSubject(secret, purpose, issuedAt){
-    // subject pseudonimo (hash): non è PII
-    const h = await sha256Hex(`${secret}|${purpose}|${issuedAt}`);
+    const h = await sha256Hex(secret + "|" + purpose + "|" + issuedAt);
     return CFG.SUBJECT_PREFIX + h.slice(0, CFG.SUBJECT_HEX_LEN);
   }
 
-  async function buildAuditEvent(evt, at, by, subject){
-    const h = await sha256Hex(`${evt}|${at}|${by}|${subject}`);
+  async function buildAudit(evt, at, by, subject){
+    const h = await sha256Hex(evt + "|" + at + "|" + by + "|" + subject);
     return { evt, at, by, hash_sha256: h };
   }
 
-  // ---------- state ----------
-  let lastIPR = null;
-  let lastReceipt = null;
-
-  // ---------- wizard init ----------
-  setStep(1);
-
-  $("to2").onclick = () => {
-    const purpose = requiredStr($("purpose").value, CFG.PURPOSE_MIN_LEN, CFG.PURPOSE_MAX_LEN);
-    if(!purpose){
-      setStatus($("s1"), `Serve uno scopo dichiarato (purpose: ${CFG.PURPOSE_MIN_LEN}-${CFG.PURPOSE_MAX_LEN} caratteri).`, "bad");
-      return;
-    }
-    setStatus($("s1"), "OK.", "ok");
-    setStep(2);
-  };
-
-  $("back1").onclick = () => setStep(1);
-
-  $("to3").onclick = () => {
-    const checked = $("consentCheck").checked;
-    const days = Number($("consentDurationDays").value);
-    if(!checked){
-      setStatus($("s2"), "Devi confermare la comprensione del consenso per procedere.", "bad");
-      return;
-    }
-    if(!(days>=1 && days<=3650)){
-      setStatus($("s2"), "Durata consenso non valida (1–3650 giorni).", "bad");
-      return;
-    }
-    setStatus($("s2"), "OK.", "ok");
-    setStep(3);
-  };
-
-  $("back2").onclick = () => setStep(2);
-
-  $("to4").onclick = () => {
-    const secret = ($("localSecret").value || "").trim();
-    if(secret.length < CFG.SECRET_MIN_LEN){
-      setStatus($("s3"), `Segreto locale troppo corto: usa almeno ${CFG.SECRET_MIN_LEN} caratteri.`, "bad");
-      return;
-    }
-    setStatus($("s3"), "OK.", "ok");
-    setStep(4);
-  };
-
-  $("back3").onclick = () => setStep(3);
-
-  // ---------- generate ----------
   $("generate").onclick = async () => {
     try{
-      setStatus($("s4"), "Generazione in corso…", "warn");
+      setStatus("Generazione in corso…", "warn");
 
-      // Fail-closed validations (hard gates)
       const level = $("level").value;
 
-      const purpose = requiredStr($("purpose").value, CFG.PURPOSE_MIN_LEN, CFG.PURPOSE_MAX_LEN);
+      const purpose = reqStr($("purpose").value, CFG.PURPOSE_MIN, CFG.PURPOSE_MAX);
       if(!purpose) throw new Error("purpose non valido (fail-closed).");
 
       const consentScope = $("consentScope").value;
       const consentDurationDays = Number($("consentDurationDays").value);
-      if(!(consentDurationDays>=1 && consentDurationDays<=3650)) throw new Error("consentDurationDays non valido (fail-closed).");
-      if(!$("consentCheck").checked) throw new Error("consent non acknowledged (fail-closed).");
+      if(!(consentDurationDays>=1 && consentDurationDays<=3650)) throw new Error("durata consenso non valida (fail-closed).");
 
-      const secret = ($("localSecret").value || "").trim();
-      if(secret.length < CFG.SECRET_MIN_LEN) throw new Error("localSecret troppo corto (fail-closed).");
+      const consentNote = optStr($("consentNote").value, 280);
 
-      const consentNote = optionalStr($("consentNote").value, 280);
-      const notes = optionalStr($("notes").value, 2000);
+      if(!$("consentCheck").checked) throw new Error("consenso non confermato (fail-closed).");
+
+      const secret = ($("localSecret").value||"").trim();
+      if(secret.length < CFG.SECRET_MIN_LEN) throw new Error("segreto locale troppo corto (fail-closed).");
+
+      const ctx = {
+        country: cleanISO2($("country").value),
+        region: optStr($("region").value, 120),
+        city: optStr($("city").value, 120),
+        district: optStr($("district").value, 120)
+      };
+
+      const fields_present = Object.entries(ctx).filter(([_,v])=>!!v).map(([k])=>k);
+      const context_hash = await sha256Hex(stableStringify(ctx));
 
       const issued_at = nowISO();
       const subject = await buildSubject(secret, purpose, issued_at);
 
-      const ctx = contextObjFromForm();
-      const ctxFields = contextFieldsPresent(ctx);
-      const context_hash = await sha256Hex(stableStringify(ctx));
-
-      // Build IPR (without embedding raw context)
       const ipr = {
         proto: "AI_JOKER_C2",
         type: "IPR_PACKAGE",
@@ -223,19 +282,17 @@
         context: {
           kind: "COARSE_GEO",
           hash_sha256: context_hash,
-          fields_present: ctxFields
+          fields_present
         },
-        notes,
+        notes: optStr($("notes").value, 2000),
         audit: [
-          await buildAuditEvent("EVT-IPR-ISSUED", issued_at, "CLIENT_SIDE_WIZARD", subject)
+          await buildAudit("EVT-IPR-ISSUED", issued_at, "CLIENT_SIDE_WIZARD", subject)
         ]
       };
 
-      // Deterministic IPR hash for receipt linkage
       const ipr_hash_sha256 = await sha256Hex(stableStringify(ipr));
 
-      // Receipt payload = minimal accountable linkage (no PII)
-      const receipt_payload = {
+      const payload = {
         ipr_subject: subject,
         ipr_level: level,
         purpose,
@@ -245,25 +302,22 @@
         ipr_hash_sha256
       };
 
-      const payload_hash_sha256 = await sha256Hex(stableStringify(receipt_payload));
-
       const receipt = {
         proto: "AI_JOKER_C2",
         type: "RECEIPT",
         version: "v1",
         kind: "IPR_ISSUANCE",
         issued_at,
-        payload_hash_sha256,
-        payload: receipt_payload,
+        payload_hash_sha256: await sha256Hex(stableStringify(payload)),
+        payload,
         signature: {
           scheme: "NONE",
           kid: null,
           value: null,
-          note: "Firma/timestamp non inclusi nel MVP. Step successivo: firma + anchor."
+          note: "Firma/timestamp non inclusi nel MVP."
         }
       };
 
-      // Save state + render
       lastIPR = ipr;
       lastReceipt = receipt;
 
@@ -273,43 +327,16 @@
       $("downloadIpr").disabled = false;
       $("downloadReceipt").disabled = false;
 
-      setStatus($("s4"), "OK: package generato. Scarica ipr.json e receipt.json.", "ok");
+      setStatus("OK: generati ipr.json e receipt.json.", "ok");
     }catch(e){
       console.error(e);
-      setStatus($("s4"), "Errore (fail-closed): " + (e?.message || String(e)), "bad");
+      setStatus("Errore: " + (e?.message || String(e)), "bad");
     }
   };
 
   $("downloadIpr").onclick = () => { if(lastIPR) downloadJSON("ipr.json", lastIPR); };
   $("downloadReceipt").onclick = () => { if(lastReceipt) downloadJSON("receipt.json", lastReceipt); };
-
-  $("reset").onclick = () => {
-    lastIPR = null; lastReceipt = null;
-
-    $("purpose").value = "";
-    $("consentNote").value = "";
-    $("consentCheck").checked = false;
-
-    $("country").value = "";
-    $("region").value = "";
-    $("city").value = "";
-    $("district").value = "";
-
-    $("localSecret").value = "";
-    $("notes").value = "";
-
-    $("iprOut").textContent = "—";
-    $("rcpOut").textContent = "—";
-
-    $("downloadIpr").disabled = true;
-    $("downloadReceipt").disabled = true;
-
-    setStatus($("s1"), "", "warn");
-    setStatus($("s2"), "", "warn");
-    setStatus($("s3"), "", "warn");
-    setStatus($("s4"), "Reset completato.", "warn");
-
-    setStep(1);
-  };
 })();
 </script>
+</body>
+</html>
