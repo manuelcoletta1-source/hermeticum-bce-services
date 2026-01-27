@@ -1,219 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HERMETICUM — Nodo Europeo Regionale Piemonte</title>
-  <meta name="description" content="Nodo Europeo Regionale Piemonte. Infrastruttura biocibernetica a primato biologico. UE-first, GDPR-min, hash-only, append-only." />
-  <style>
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
-      background:#0d1117;
-      color:#e6edf3;
-      line-height:1.6
-    }
-    header,main,footer{
-      max-width:1100px;
-      margin:auto;
-      padding:2.4rem 1.5rem
-    }
-    a{color:#58a6ff;text-decoration:none}
-    h1{font-size:2.4rem;margin:0 0 .6rem}
-    h2{margin:1.8rem 0 .6rem}
-    p{color:#9da7b1}
-    ul{padding-left:1.2rem}
-    .box{
-      border:1px solid #30363d;
-      border-radius:14px;
-      padding:1.6rem;
-      background:#0d1117;
-      margin-top:1.2rem
-    }
-    .pill{
-      display:inline-block;
-      border:1px solid #30363d;
-      border-radius:999px;
-      padding:.25rem .65rem;
-      margin:.2rem .3rem 0 0;
-      color:#9da7b1;
-      font-size:.9rem
-    }
-    .cta{
-      display:inline-block;
-      margin-top:1rem;
-      padding:1rem 1.4rem;
-      border-radius:14px;
-      border:1px solid #2ea043;
-      background:#238636;
-      color:#fff;
-      font-weight:900
-    }
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace
-    }
-    .note{
-      border-left:3px solid #2ea043;
-      padding-left:1rem;
-      color:#c9d1d9
-    }
-    .warn{
-      border-left:3px solid #f85149;
-      padding-left:1rem;
-      color:#c9d1d9
-    }
-    footer{
-      border-top:1px solid #30363d;
-      color:#8b949e;
-      font-size:.9rem;
-      margin-top:2.5rem
-    }
-    nav{margin-top:1.2rem}
-    nav a{margin-right:.6rem}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HERMETICUM B.C.E. — Portale UE</title>
+  <meta name="description" content="Gateway UE a livelli: standard, ricerca, fase operativa minima e verifica tecnica. UE-first, GDPR-min, hash-only." />
+  <link rel="stylesheet" href="./assets/css/main.css" />
 </head>
-
 <body>
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="./">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="./standards/">Standard</a>
+        <a href="./research/">Ricerca (Horizon)</a>
+        <a href="./phase-1/">Fase 1 (ONLY)</a>
+        <a href="./verify/">Verify</a>
+        <a href="./governance/">Governance</a>
+        <a href="./privacy/">Privacy</a>
+      </div>
+    </nav>
+  </header>
 
-<header>
-  <h1>HERMETICUM — Nodo Europeo Regionale Piemonte</h1>
-  <p>
-    Nodo <strong>biocibernetico</strong> a <strong>primato biologico</strong>.<br/>
-    Infrastruttura europea per tracciabilità verificabile:
-    <strong>Regione → Città → Zona → Utente (IPR)</strong>.
-  </p>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Gateway europeo a livelli</h1>
+      <p class="lead">
+        Questo portale separa in modo esplicito: <strong>normativo</strong>, <strong>ricerca UE</strong>,
+        <strong>operatività minima</strong> e <strong>verifica tecnica</strong>.
+      </p>
 
-  <div>
-    <span class="pill">BIOCIBERNETICO</span>
-    <span class="pill">PRIMATO BIOLOGICO</span>
-    <span class="pill">UE-FIRST</span>
-    <span class="pill">GDPR-MIN</span>
-    <span class="pill">HASH-ONLY</span>
-    <span class="pill">APPEND-ONLY</span>
-    <span class="pill">FAIL-CLOSED</span>
-  </div>
+      <div class="pillrow">
+        <span class="pill">UE-first</span>
+        <span class="pill">GDPR-min</span>
+        <span class="pill">hash-only</span>
+        <span class="pill">append-only</span>
+        <span class="pill">fail-closed</span>
+      </div>
 
-  <nav>
-    <a href="./register/">Register</a> ·
-    <a href="./events/">Events</a> ·
-    <a href="./create/">Create</a> ·
-    <a href="./verify/">Verify</a> ·
-    <a href="./catalog/">Catalog</a> ·
-    <a href="./governance/">Governance</a> ·
-    <a href="./privacy/">Privacy</a>
-  </nav>
-</header>
+      <div class="notice">
+        <strong>Limite esplicito:</strong> questo portale <em>non</em> sostituisce CIE/SPID/eIDAS, non assegna diritti,
+        non è banca, non è un social, non è un identity provider.
+      </div>
+    </section>
 
-<main>
+    <section class="grid">
+      <article class="card">
+        <h2>1) Standard (Normativo)</h2>
+        <p>Definizioni e livelli dell’evento. Testo “chiuso” e auditabile.</p>
+        <a class="btn" href="./standards/">Apri Standard</a>
+      </article>
 
-  <!-- IDENTITÀ -->
-  <div class="box">
-    <h2>Identità del nodo</h2>
-    <p>
-      Questo portale rappresenta il <strong>Nodo Europeo Regionale Piemonte</strong>.
-      Non è una piattaforma sociale, non è un’identità civile, non è un servizio di autenticazione.
-    </p>
-    <p class="note">
-      È un <strong>nodo infrastrutturale</strong> per la registrazione e verifica di eventi
-      generati da soggetti biologici reali, tramite estensione cibernetica (IPR).
-    </p>
-  </div>
+      <article class="card">
+        <h2>2) Ricerca UE (Horizon/JRC)</h2>
+        <p>Pre-standard sperimentale: quadro di validazione e trasferibilità verso ETSI/CEN.</p>
+        <a class="btn" href="./research/">Apri Ricerca</a>
+      </article>
 
-  <!-- REGOLA -->
-  <div class="box">
-    <h2>Regola canonica</h2>
-    <p class="mono">
-      Attivando l’IPR diventi un nodo della tua Regione.
-    </p>
-    <p>
-      Nel Nodo Europeo Regionale Piemonte l’attivazione:
-    </p>
-    <ul>
-      <li>crea un <strong>nodo foglia regionale</strong></li>
-      <li>genera un <strong>evento append-only</strong></li>
-      <li>pubblica solo <strong>hash</strong> e metadati minimi</li>
-    </ul>
+      <article class="card">
+        <h2>3) Fase 1 (ONLY)</h2>
+        <p>Control layer fail-closed per decisioni critiche ad alto rischio: catena minima e prova LTA.</p>
+        <a class="btn" href="./phase-1/">Apri Fase 1</a>
+      </article>
 
-    <a class="cta" href="./register/">
-      Register — Attiva IPR → Diventa Nodo Regionale
-    </a>
-  </div>
+      <article class="card">
+        <h2>4) Verify (Tecnico)</h2>
+        <p>Verifica hash, timestamp e bundle probatorio. Nessuna narrativa: solo esiti.</p>
+        <a class="btn" href="./verify/">Apri Verify</a>
+      </article>
+    </section>
 
-  <!-- STRUTTURA -->
-  <div class="box">
-    <h2>Struttura territoriale</h2>
-    <pre class="mono">
-Nodo Europeo Regionale: Piemonte
-└─ Nodo Città: Torino
-   └─ Nodo Zona: Barriera di Milano
-      └─ Nodo Utente (foglia): Soggetto biologico + IPR
-    </pre>
-    <p>
-      La struttura è descrittiva e operativa, non gerarchia di potere.
-    </p>
-  </div>
+    <section class="footerhint">
+      <p class="muted">
+        Per cybersecurity UE: l’architettura è progettata per auditabilità, minimizzazione dati e prevenzione
+        di esecuzioni non attribuibili (fail-closed).
+      </p>
+    </section>
+  </main>
 
-  <!-- EVENTS -->
-  <div class="box">
-    <h2>Registro pubblico minimo</h2>
-    <p>
-      Tutti gli eventi pubblicabili confluiscono nel registro <strong>Events</strong>.
-      Il registro è pubblico, verificabile e progettato per l’audit.
-    </p>
-    <p>
-      <a href="./events/"><strong>Apri Events — Registro append-only</strong></a>
-    </p>
-    <p class="mono">
-      hash-only · GDPR-min · fail-closed
-    </p>
-  </div>
-
-  <!-- STRUMENTI -->
-  <div class="box">
-    <h2>Strumenti</h2>
-    <ul>
-      <li><strong>Register</strong> — ingresso istituzionale (atto)</li>
-      <li><strong>Create</strong> — generazione eventi tecnici</li>
-      <li><strong>Verify</strong> — verifica formale e crittografica</li>
-      <li><strong>Catalog</strong> — classi IPR e capacità</li>
-    </ul>
-    <p class="note">
-      Register è l’ingresso. Gli altri sono strumenti.
-    </p>
-  </div>
-
-  <!-- STACK -->
-  <div class="box">
-    <h2>Stack operativo</h2>
-    <ul>
-      <li>UNEBDO</li>
-      <li>OPC</li>
-      <li>MetaExchange</li>
-      <li>NeuroLoop</li>
-      <li>IoSpace</li>
-      <li>CyberGlobal</li>
-    </ul>
-    <p>
-      AI Joker-C2 opera come strato di supporto e coerenza.
-      Non è autonomo, non è decisionale.
-    </p>
-  </div>
-
-  <!-- LIMITI -->
-  <div class="box warn">
-    <strong>Limiti dichiarati</strong><br/>
-    Il nodo non assegna diritti, non certifica identità civili,
-    non sostituisce CIE / SPID / eIDAS.
-  </div>
-
-</main>
-
-<footer>
-  <p>
-    HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-    HERMETICUM B.C.E. S.r.l. — Nodo Europeo Regionale Piemonte
-  </p>
-</footer>
-
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
 </body>
 </html>
