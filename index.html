@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
-  <meta name="description" content="Canale digitale europeo: IPR (Identity Proof Record) per accountability AI. UE-first, GDPR-min, hash-only, fail-closed." />
+  <meta name="description" content="Canale digitale europeo: IPR per accountability AI. UE-first, GDPR-min, hash-only, fail-closed." />
   <style>
     :root{
       --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
-      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --bad:#fda4af;
+      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --warn:#fde68a;
       --r:18px; --pad:18px;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
@@ -38,7 +38,7 @@
     li{margin:6px 0;color:var(--mut);line-height:1.5}
     .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
     footer{margin-top:18px;color:var(--mut);font-size:12px;line-height:1.5}
-    .warn{color:#fde68a}
+    .warn{color:var(--warn)}
   </style>
 </head>
 
@@ -51,7 +51,7 @@
       </div>
       <div class="tag">
         Canale digitale UE per <b>IPR</b> (Identity Proof Record) e <b>accountability AI</b>.
-        Prove verificabili, minimizzazione dati, log append-only. Nessuna promessa: solo verifiche.
+        Prove verificabili, minimizzazione dati, log append-only.
       </div>
     </header>
 
@@ -59,8 +59,8 @@
       <section class="card">
         <h1 class="title">Cittadino UE: cosa fai qui</h1>
         <div class="muted">
-          Questo portale ti permette di generare un <b>IPR package</b> e una <b>receipt</b> (ricevuta) per rendere
-          le azioni digitali (e in futuro le azioni AI) <b>verificabili</b> nel tempo, senza pubblicare dati personali.
+          Generi un <b>IPR package</b> e una <b>receipt</b> (ricevuta) per rendere azioni digitali <b>verificabili</b>.
+          Il modello è “hash-only”: evita dati personali in chiaro.
         </div>
 
         <div class="pillrow" aria-label="Policy">
@@ -82,8 +82,8 @@
         <h2 class="title" style="font-size:16px">Cosa NON è</h2>
         <ul>
           <li>Non è un Identity Provider: non sostituisce <b>SPID / CIE / eIDAS</b>.</li>
-          <li>Non salva i tuoi dati personali in chiaro su questo sito.</li>
-          <li>Non garantisce “sicurezza magica”: produce prove e controlli verificabili.</li>
+          <li>Non salva dati personali in chiaro su questo sito.</li>
+          <li>Non promette “sicurezza magica”: produce prove e controlli verificabili.</li>
         </ul>
       </section>
 
@@ -92,15 +92,15 @@
         <ol class="muted" style="padding-left:18px;line-height:1.55;margin:0">
           <li>Vai su <span class="mono">Create</span> e genera <span class="mono">ipr.json</span> + <span class="mono">receipt.json</span>.</li>
           <li>Salvali in locale.</li>
-          <li>Vai su <span class="mono">Verify</span> e incolla i file: schema + hash devono combaciare.</li>
+          <li>Vai su <span class="mono">Verify</span> e incolla i file: schema + hash + firma devono combaciare.</li>
         </ol>
 
         <div class="hr"></div>
 
         <h2 class="title" style="font-size:16px">Stato MVP</h2>
         <div class="muted">
-          <span class="warn">Firma e timestamp/anchor non inclusi</span> in questa fase.
-          Prima chiudiamo il ciclo “generazione → verifica”.
+          Receipt <b>firmata ED25519 (client-side)</b>.
+          <span class="warn">Timestamp/anchor non inclusi</span> in questa fase.
         </div>
 
         <footer>
