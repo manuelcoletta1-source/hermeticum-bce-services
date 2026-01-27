@@ -15,3 +15,5 @@ Any change after this point MUST:
 
 Signed: Manuel Coletta
 Proof: Git commit timestamp
+IPR-3@ManuelColetta — Evidence Pack frozen.
+Append-only from this commit forward.
