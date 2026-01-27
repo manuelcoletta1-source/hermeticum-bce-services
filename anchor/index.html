@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anchor — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
+  <meta name="description" content="Costruisci anchor-request.json e aggiorna receipt anchors (manuale). Client-side." />
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
+      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --bad:#fda4af;
+      --r:16px; --pad:18px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    body{margin:0;background:radial-gradient(900px 600px at 15% 0%, #0d1b2a 0%, var(--bg) 55%);color:var(--txt);}
+    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px;}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .seal{font-weight:900;letter-spacing:.3px}
+    .company{color:var(--mut);font-size:12px;margin-top:4px}
+    .title{font-size:18px;font-weight:800;margin:0 0 8px}
+    label{display:block;font-size:12px;color:var(--mut);margin:10px 0 6px}
+    textarea,input{
+      width:100%;box-sizing:border-box;background:#071018;border:1px solid var(--brd);
+      color:var(--txt);border-radius:12px;padding:10px 12px;outline:none;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size:12px;line-height:1.35
+    }
+    textarea{min-height:180px;resize:vertical}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{
+      border:1px solid var(--brd);background:#0a1320;color:var(--txt);
+      border-radius:12px;padding:10px 12px;font-weight:750;cursor:pointer
+    }
+    button.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
+    .status{margin-top:10px;font-size:12px;line-height:1.35}
+    .ok{color:var(--ok)} .bad{color:var(--bad)}
+    .hr{height:1px;background:var(--brd);margin:14px 0}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+    <div class="company">HERMETICUM B.C.E. S.r.l.</div>
+
+    <div class="grid" style="margin-top:16px">
+      <section class="card">
+        <h1 class="title">Receipt in ingresso</h1>
+        <label for="rcp">Incolla receipt.json</label>
+        <textarea id="rcp" spellcheck="false" placeholder="{ ... }"></textarea>
+
+        <div class="hr"></div>
+
+        <h2 class="title" style="font-size:16px">Inserisci ancore (manuale)</h2>
+        <label for="btc">BTC TXID (facoltativo)</label>
+        <input id="btc" placeholder="9eeb29b6..." />
+        <label for="eth">ETH TX (facoltativo)</label>
+        <input id="eth" placeholder="0x..." />
+        <label for="ipfs">IPFS CID (facoltativo)</label>
+        <input id="ipfs" placeholder="bafk..." />
+
+        <div class="btns">
+          <button class="primary" id="apply">Applica anchors alla receipt</button>
+          <button id="download">Scarica receipt.json aggiornata</button>
+        </div>
+
+        <div class="status" id="status"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="title">Anchor pack (da conservare)</h2>
+        <div class="status" style="color:var(--mut)">
+          Questo file è “hash-first”: descrive cosa hai ancorato e dove.
+        </div>
+        <label for="pack">anchor-request.json</label>
+        <textarea id="pack" spellcheck="false" readonly>—</textarea>
+      </section>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  let lastReceipt = null;
+
+  function nowISO(){ return new Date().toISOString(); }
+
+  function setStatus(msg, ok){
+    const el = $("status");
+    el.className = "status " + (ok ? "ok" : "bad");
+    el.textContent = msg;
+  }
+
+  function downloadJSON(filename, obj){
+    const blob = new Blob([JSON.stringify(obj, null, 2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function norm(x){ return (x||"").trim(); }
+
+  $("apply").onclick = () => {
+    try{
+      const rcp = JSON.parse($("rcp").value);
+      if(!rcp || rcp.type !== "RECEIPT") throw new Error("receipt.json non valido.");
+
+      const anchors = [];
+      const btc = norm($("btc").value);
+      const eth = norm($("eth").value);
+      const ipfs = norm($("ipfs").value);
+
+      if(btc) anchors.push({ type:"BTC_TXID", ref: btc, at: nowISO(), note: "manual anchor" });
+      if(eth) anchors.push({ type:"ETH_TX", ref: eth, at: nowISO(), note: "manual anchor" });
+      if(ipfs) anchors.push({ type:"IPFS_CID", ref: ipfs, at: nowISO(), note: "manual anchor" });
+
+      rcp.anchors = anchors;
+
+      const pack = {
+        proto: "AI_JOKER_C2",
+        type: "ANCHOR_PACK",
+        version: "v1",
+        issued_at: nowISO(),
+        target: {
+          receipt_payload_hash_sha256: rcp.payload_hash_sha256,
+          receipt_signature_scheme: rcp?.signature?.scheme || "UNKNOWN",
+          receipt_signature_kid: rcp?.signature?.kid || null
+        },
+        anchors
+      };
+
+      lastReceipt = rcp;
+      $("pack").value = JSON.stringify(pack, null, 2);
+      setStatus("OK: anchors applicati alla receipt + anchor-pack generato.", true);
+    }catch(e){
+      setStatus("Errore: " + (e?.message || String(e)), false);
+    }
+  };
+
+  $("download").onclick = () => {
+    if(!lastReceipt) { setStatus("Nessuna receipt pronta: prima 'Applica anchors'.", false); return; }
+    downloadJSON("receipt.json", lastReceipt);
+    setStatus("OK: scaricata receipt.json aggiornata.", true);
+  };
+})();
+</script>
+</body>
+</html>
