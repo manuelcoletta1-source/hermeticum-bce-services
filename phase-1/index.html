@@ -3,96 +3,136 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fase 1 (ONLY) — HRR → DGV → LTA | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Fase 1 operativa minima: catena fail-closed HRR→DGV→LTA per cybersecurity UE. Nessun PDF, tutto in-portal." />
+  <title>Fase 1 (ONLY) | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Fase 1: operatività minima fail-closed. HRR→DGV→LTA. Nessuna custodia dati, nessun IDP." />
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
-  <header class="wrap">
-    <nav class="nav">
-      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-      <div class="navlinks">
-        <a href="../standards/">Standard</a>
-        <a href="../research/">Ricerca (Horizon)</a>
-        <a class="active" href="./">Fase 1 (ONLY)</a>
-        <a href="../verify/">Verify</a>
-        <a href="../governance/">Governance</a>
-        <a href="../privacy/">Privacy</a>
-      </div>
-    </nav>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Fase 1 (ONLY)</h1>
-      <p class="lead">
-        Livello operativo minimo per cybersecurity UE.
-        Qui si implementa <strong>solo</strong> la catena di attribuzione, validazione e prova.
-        Nessun “sistema identità”, nessuna custodia dati, nessuna promessa bancaria.
-      </p>
-      <div class="notice">
-        <strong>Fail-closed:</strong> se manca un anello (HRR, DGV o LTA), l’atto non nasce.
-        Il blocco è una protezione.
-      </div>
+<header class="wrap">
+  <nav class="nav">
+    <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+    <div class="navlinks">
+      <a href="../">Gateway</a>
+      <a href="../standards/">Standard</a>
+      <a href="../research/">Ricerca UE</a>
+      <a class="active" href="./">Fase 1</a>
+      <a href="../verify/">Verify</a>
+      <a href="../legal/">Legal</a>
+    </div>
+  </nav>
+</header>
 
-      <div class="pillrow">
-        <span class="pill">append-only</span>
-        <span class="pill">hash-only</span>
-        <span class="pill">GDPR-min</span>
-        <span class="pill">risk-based</span>
-      </div>
-    </section>
+<main class="wrap">
 
-    <section class="grid">
-      <article class="card">
-        <h2>Catena minima</h2>
-        <p class="muted">Struttura operativa:</p>
-        <pre class="codeblock">HRR  →  DGV  →  LTA Vault</pre>
-        <ul class="muted">
-          <li><strong>HRR</strong> (Human Root Reference): attribuzione umana/pseudonima dell’atto.</li>
-          <li><strong>DGV</strong> (Decision Gate Validator): controlli di policy e integrità (ALLOW/REVIEW/DENY/FAIL-CLOSED).</li>
-          <li><strong>LTA</strong> (Long-Term Archive): prova durevole e verificabile nel tempo.</li>
-        </ul>
-      </article>
+  <section class="hero">
+    <h1>Fase 1 (ONLY) — Operatività minima</h1>
+    <p class="lead">
+      Qui si attiva il nucleo operativo minimo: generazione HRR locale, decisione minima (DGV),
+      e predisposizione traccia a lungo termine (LTA).
+      Nessun account. Nessuna custodia di dati personali nel portale statico.
+    </p>
 
-      <article class="card">
-        <h2>Regole operative</h2>
-        <ul class="muted">
-          <li>Se manca HRR → <strong>FAIL-CLOSED</strong>.</li>
-          <li>Se mancano integrità o requisiti minimi → <strong>FAIL-CLOSED</strong>.</li>
-          <li>Se manca prova durevole (LTA) → l’atto resta <strong>non opponibile</strong>.</li>
-          <li>La verifica tecnica espone solo esiti: VALID / INVALID / INCONCLUSIVE.</li>
-        </ul>
-      </article>
+    <div class="pillrow">
+      <span class="pill">fail-closed</span>
+      <span class="pill">hash-only</span>
+      <span class="pill">append-only</span>
+      <span class="pill">GDPR-min</span>
+    </div>
 
-      <article class="card">
-        <h2>Onboarding (risk-based)</h2>
-        <p class="muted">
-          Se non serve attribuzione rafforzata, usa LIGHT.
-          STRONG solo per casi ad alto rischio o contesti istituzionali.
-        </p>
-        <div class="btnrow">
-          <a class="btn" href="./onboarding/light.html">Onboarding LIGHT</a>
-          <a class="btn secondary" href="./onboarding/strong.html">Onboarding STRONG</a>
-        </div>
-      </article>
+    <div class="notice">
+      <strong>Fail-closed:</strong> se manca un requisito minimo, l’atto non nasce.
+      Questo serve a ridurre ambiguità e rischio in audit.
+    </div>
 
-      <article class="card">
-        <h2>Output atteso</h2>
-        <p class="muted">
-          L’output della Fase 1 è un <strong>bundle</strong> (hash + metadati minimi + esito DGV),
-          pronto per conservazione e verifica.
-          La verifica avviene in <a href="../verify/">Verify</a>.
-        </p>
-        <div class="btnrow">
-          <a class="btn" href="../verify/">Apri Verify</a>
-          <a class="btn secondary" href="../standards/">Apri Standard</a>
-        </div>
-      </article>
-    </section>
+    <div class="btnrow" style="margin-top:16px;">
+      <a class="btn secondary" href="../register/">Register</a>
+      <a class="btn secondary" href="../create/">Create</a>
+      <a class="btn secondary" href="../verify/">Verify</a>
+      <a class="btn secondary" href="../catalog/">Catalog</a>
+    </div>
+  </section>
 
-    <section class="footerhint">
+  <section class="grid">
+    <article class="card">
+      <h2>Onboarding (risk-based)</h2>
       <p class="muted">
-        Nota: Fase 1 non sostituisce CIE/SPID/eIDAS. Definisce un perimetro minimo di accountability e prova verificabile.
+        Scegli un profilo. LIGHT è il default (minimo). STRONG è per casi ad alto rischio.
+        Non sostituisce eIDAS/CIE/SPID.
       </p>
-      <p><a class="btn secondary" href="../">Torna al Gateway</a
+      <div class="btnrow">
+        <a class="btn" href="./onboarding/light.html">LIGHT</a>
+        <a class="btn secondary" href="./onboarding/strong.html">STRONG</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Catena minima</h2>
+      <pre class="codeblock">HRR → DGV → LTA</pre>
+      <ul class="muted">
+        <li><strong>HRR</strong>: riferimento umano/pseudonimo generato localmente.</li>
+        <li><strong>DGV</strong>: decisione/atto minimo (metadati ridotti, senza PII).</li>
+        <li><strong>LTA</strong>: traccia “append-only” (concetto; la verifica resta tecnica).</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h2>Dopo l’onboarding</h2>
+      <p class="muted">
+        Il passo successivo è generare un Evidence Bundle locale (JSON) e validarlo in Verify.
+      </p>
+      <div class="btnrow">
+        <a class="btn" href="../create/">Create (bundle)</a>
+        <a class="btn secondary" href="../verify/">Verify</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Limiti espliciti</h2>
+      <ul class="muted">
+        <li>Non è identity provider.</li>
+        <li>Nessuna custodia dati personali nel portale statico.</li>
+        <li>VALID ≠ “identità vera”. VALID = coerenza tecnica minima.</li>
+        <li>La responsabilità resta al soggetto biologico che produce l’atto.</li>
+      </ul>
+      <div class="btnrow">
+        <a class="btn secondary" href="../governance/">Governance</a>
+        <a class="btn secondary" href="../privacy/">Privacy</a>
+        <a class="btn secondary" href="../terms/">Termini</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Riferimenti</h2>
+      <p class="muted">
+        Definizioni e livelli: <a href="../standards/">Standard</a>.  
+        Ricerca pre-standard: <a href="../research/">Ricerca UE</a>.
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>Compatibilità</h2>
+      <p class="muted">
+        Se arrivi da link vecchi, usa Gateway o Legacy.
+      </p>
+      <div class="btnrow">
+        <a class="btn secondary" href="../legacy/">Legacy</a>
+        <a class="btn secondary" href="../">Gateway</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="footerhint">
+    <p class="muted">
+      Sintesi: Fase 1 crea un percorso minimo verificabile, ma la prova nasce solo quando è validabile in Verify.
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <small>HERMETICUM B.C.E. S.r.l. — Fase 1 (ONLY)</small>
+</footer>
+
+</body>
+</html>
