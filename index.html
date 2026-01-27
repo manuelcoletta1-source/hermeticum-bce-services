@@ -3,162 +3,112 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HERMETICUM B.C.E. — Gateway Europeo</title>
-  <meta name="description" content="Gateway europeo a livelli per cybersecurity e tracciabilità verificabile. UE-first, GDPR-min, hash-only, fail-closed." />
-  <link rel="stylesheet" href="./assets/css/main.css" />
+  <title>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
+  <meta name="description" content="Canale digitale europeo: IPR (Identity Proof Record) per accountability AI. UE-first, GDPR-min, hash-only, fail-closed." />
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
+      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --bad:#fda4af;
+      --r:18px; --pad:18px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    body{margin:0;background:radial-gradient(1100px 700px at 10% 0%, #0d1b2a 0%, var(--bg) 60%);color:var(--txt);}
+    a{color:var(--acc);text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 70px;}
+    header{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+    .seal{font-weight:900;letter-spacing:.3px}
+    .company{color:var(--mut);font-size:12px;margin-top:4px}
+    .tag{color:var(--mut);font-size:13px;max-width:560px;line-height:1.45}
+    .hero{margin-top:16px;display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+    @media (max-width:980px){.hero{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 12px 34px rgba(0,0,0,.25)}
+    .title{font-size:20px;font-weight:800;margin:0 0 8px}
+    .muted{color:var(--mut);line-height:1.55}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--brd);background:#0a1320;color:var(--txt);
+      border-radius:12px;padding:10px 12px;font-weight:750
+    }
+    .btn.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
+    .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .pill{border:1px solid var(--brd);border-radius:999px;padding:7px 10px;font-size:12px;color:var(--mut)}
+    .hr{height:1px;background:var(--brd);margin:14px 0}
+    ul{margin:8px 0 0;padding-left:18px}
+    li{margin:6px 0;color:var(--mut);line-height:1.5}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
+    footer{margin-top:18px;color:var(--mut);font-size:12px;line-height:1.5}
+    .warn{color:#fde68a}
+  </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        <div class="company">HERMETICUM B.C.E. S.r.l.</div>
+      </div>
+      <div class="tag">
+        Canale digitale UE per <b>IPR</b> (Identity Proof Record) e <b>accountability AI</b>.
+        Prove verificabili, minimizzazione dati, log append-only. Nessuna promessa: solo verifiche.
+      </div>
+    </header>
 
-<header class="wrap">
-  <nav class="nav">
-    <a class="brand" href="./">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-    <div class="navlinks">
-      <a class="active" href="./">Gateway</a>
-      <a href="./standards/">Standard</a>
-      <a href="./research/">Ricerca UE</a>
-      <a href="./phase-1/">Fase 1</a>
-      <a href="./verify/">Verify</a>
-      <a href="./legal/">Legal</a>
+    <div class="hero">
+      <section class="card">
+        <h1 class="title">Cittadino UE: cosa fai qui</h1>
+        <div class="muted">
+          Questo portale ti permette di generare un <b>IPR package</b> e una <b>receipt</b> (ricevuta) per rendere
+          le azioni digitali (e in futuro le azioni AI) <b>verificabili</b> nel tempo, senza pubblicare dati personali.
+        </div>
+
+        <div class="pillrow" aria-label="Policy">
+          <div class="pill">UE-first</div>
+          <div class="pill">GDPR-min</div>
+          <div class="pill">hash-only</div>
+          <div class="pill">fail-closed</div>
+          <div class="pill">append-only</div>
+        </div>
+
+        <div class="btns">
+          <a class="btn primary" href="./create/">➜ Create IPR</a>
+          <a class="btn" href="./verify/">✓ Verify</a>
+          <a class="btn" href="./schemas/ipr.schema.json">Schemas</a>
+        </div>
+
+        <div class="hr"></div>
+
+        <h2 class="title" style="font-size:16px">Cosa NON è</h2>
+        <ul>
+          <li>Non è un Identity Provider: non sostituisce <b>SPID / CIE / eIDAS</b>.</li>
+          <li>Non salva i tuoi dati personali in chiaro su questo sito.</li>
+          <li>Non garantisce “sicurezza magica”: produce prove e controlli verificabili.</li>
+        </ul>
+      </section>
+
+      <aside class="card">
+        <h2 class="title">Percorso rapido</h2>
+        <ol class="muted" style="padding-left:18px;line-height:1.55;margin:0">
+          <li>Vai su <span class="mono">Create</span> e genera <span class="mono">ipr.json</span> + <span class="mono">receipt.json</span>.</li>
+          <li>Salvali in locale.</li>
+          <li>Vai su <span class="mono">Verify</span> e incolla i file: schema + hash devono combaciare.</li>
+        </ol>
+
+        <div class="hr"></div>
+
+        <h2 class="title" style="font-size:16px">Stato MVP</h2>
+        <div class="muted">
+          <span class="warn">Firma e timestamp/anchor non inclusi</span> in questa fase.
+          Prima chiudiamo il ciclo “generazione → verifica”.
+        </div>
+
+        <footer>
+          Standard interno: JSON Schema v1 in <span class="mono">/schemas</span>.
+          Tutto client-side per ridurre superficie di attacco.
+        </footer>
+      </aside>
     </div>
-  </nav>
-</header>
-
-<main class="wrap">
-
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Gateway europeo a livelli</h1>
-    <p class="lead">
-      Questo portale applica una separazione rigorosa tra
-      <strong>normativa</strong>, <strong>ricerca</strong>,
-      <strong>operatività minima</strong> e <strong>verifica tecnica</strong>.
-      È progettato per essere leggibile da cittadini UE, tecnici e auditor.
-    </p>
-
-    <div class="pillrow">
-      <span class="pill">UE-first</span>
-      <span class="pill">GDPR-min</span>
-      <span class="pill">hash-only</span>
-      <span class="pill">append-only</span>
-      <span class="pill">fail-closed</span>
-    </div>
-
-    <div class="notice">
-      <strong>Limite esplicito:</strong>
-      questo portale <u>non</u> è un identity provider,
-      <u>non</u> sostituisce CIE/SPID/eIDAS,
-      <u>non</u> custodisce dati personali
-      e <u>non</u> assegna diritti o status legali.
-    </div>
-
-    <div class="btnrow" style="margin-top:16px;">
-      <a class="btn" href="./register/">Inizia (Register)</a>
-      <a class="btn secondary" href="./catalog/">Catalog (mappa)</a>
-      <a class="btn secondary" href="./about/">About</a>
-      <a class="btn secondary" href="./legal/">Legal Hub</a>
-    </div>
-  </section>
-
-  <!-- PERCORSO MINIMO -->
-  <section class="grid">
-    <article class="card">
-      <h2>Percorso minimo verificabile</h2>
-      <p class="muted">
-        Un solo percorso ufficiale, audit-friendly:
-      </p>
-      <ol class="muted">
-        <li><strong>Register</strong> → scelta profilo LIGHT / STRONG</li>
-        <li><strong>Fase 1</strong> → generazione HRR locale</li>
-        <li><strong>Create</strong> → Evidence Bundle (JSON)</li>
-        <li><strong>Verify</strong> → esito tecnico (VALID / INVALID)</li>
-      </ol>
-      <div class="btnrow">
-        <a class="btn" href="./register/">Register</a>
-        <a class="btn secondary" href="./create/">Create</a>
-        <a class="btn secondary" href="./verify/">Verify</a>
-      </div>
-    </article>
-
-    <!-- STANDARD -->
-    <article class="card">
-      <h2>1 — Standard (Normativo)</h2>
-      <p class="muted">
-        Documento stabile e sola-lettura.
-        Definisce livelli, semantica e vincoli.
-      </p>
-      <div class="btnrow">
-        <a class="btn" href="./standards/">Apri Standard</a>
-        <a class="btn secondary" href="./normative/">Mapping eIDAS/EUDI</a>
-      </div>
-    </article>
-
-    <!-- RICERCA -->
-    <article class="card">
-      <h2>2 — Ricerca UE (Horizon)</h2>
-      <p class="muted">
-        Pre-standard sperimentale.
-        Non è esecutivo, non è onboarding.
-      </p>
-      <div class="btnrow">
-        <a class="btn" href="./research/">Apri Ricerca</a>
-        <a class="btn secondary" href="./AUDIT-M1.md">Checklist Horizon</a>
-      </div>
-    </article>
-
-    <!-- FASE 1 -->
-    <article class="card">
-      <h2>3 — Fase 1 (ONLY)</h2>
-      <p class="muted">
-        Operatività minima fail-closed:
-        <strong>HRR → DGV → LTA</strong>
-      </p>
-      <div class="btnrow">
-        <a class="btn" href="./phase-1/">Apri Fase 1</a>
-        <a class="btn secondary" href="./onboarding/">Onboarding</a>
-      </div>
-    </article>
-
-    <!-- VERIFY -->
-    <article class="card">
-      <h2>4 — Verify (Tecnico)</h2>
-      <p class="muted">
-        Validazione hash e bundle.
-        Nessuna narrativa, solo esiti.
-      </p>
-      <div class="btnrow">
-        <a class="btn" href="./verify/">Apri Verify</a>
-        <a class="btn secondary" href="./verify/schema/evidence-bundle.schema.json">Schema JSON</a>
-      </div>
-    </article>
-
-    <!-- ORIENTAMENTO -->
-    <article class="card">
-      <h2>Orientamento (non operativo)</h2>
-      <p class="muted">
-        Pagine di contesto.
-        Non fanno onboarding.
-      </p>
-      <div class="btnrow">
-        <a class="btn secondary" href="./professional/">Professionisti</a>
-        <a class="btn secondary" href="./institution/">Istituzioni</a>
-        <a class="btn secondary" href="./events/">Event log</a>
-        <a class="btn secondary" href="./node/">Node demo</a>
-      </div>
-    </article>
-  </section>
-
-  <section class="footerhint">
-    <p class="muted">
-      Obiettivo: impedire atti non attribuibili e mantenere prove verificabili nel tempo,
-      senza centralizzare identità o dati personali.
-    </p>
-  </section>
-
-</main>
-
-<footer class="wrap foot">
-  <small>HERMETICUM B.C.E. S.r.l. — Gateway Europeo</small>
-</footer>
-
+  </div>
 </body>
 </html>
