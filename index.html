@@ -2,199 +2,148 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>EU Citizen Gateway — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
-  <meta name="description" content="Gateway UE: riconoscimento IPR (hash-only) + receipt firmata ED25519 + anchors + evidence pack. Client-side, no custody, fail-closed." />
-  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Gateway digitale UE: IPR minimo + receipt ED25519, anchor-pack (BTC/ETH/IPFS) e evidence pack verificabile. Client-side, hash-only, fail-closed." />
 
-  <!-- CSP (incrementale: inline ok, niente script esterni) -->
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    base-uri 'self';
-    object-src 'none';
-    frame-ancestors 'none';
-    form-action 'none';
-    img-src 'self' data:;
-    style-src 'self' 'unsafe-inline';
-    script-src 'self' 'unsafe-inline';
-    connect-src 'self';
-    font-src 'self';
-    upgrade-insecure-requests;
-  ">
-  <meta http-equiv="Referrer-Policy" content="no-referrer">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <!-- Security (GitHub Pages: best-effort via meta) -->
+  <meta http-equiv="Content-Security-Policy"
+        content="
+          default-src 'self';
+          base-uri 'none';
+          object-src 'none';
+          frame-ancestors 'none';
+          form-action 'self';
+          img-src 'self' data:;
+          style-src 'self' 'unsafe-inline';
+          script-src 'self' 'unsafe-inline';
+          connect-src 'self';
+          upgrade-insecure-requests
+        " />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Permissions-Policy"
+        content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()" />
 
-  <style>
-    :root{
-      --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
-      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --bad:#fda4af; --warn:#fde68a;
-      --r:18px; --pad:18px;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    }
-    body{margin:0;background:radial-gradient(1100px 720px at 15% 0%, #0d1b2a 0%, var(--bg) 55%);color:var(--txt);}
-    a{color:var(--acc);text-decoration:none}
-    .wrap{max-width:1180px;margin:0 auto;padding:26px 18px 70px;}
-    .top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap;margin-bottom:18px}
-    .seal{font-weight:900;letter-spacing:.3px}
-    .company{color:var(--mut);font-size:12px;margin-top:4px}
-    .pill{display:inline-block;border:1px solid var(--brd);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--mut);margin-top:8px}
-    .lead{color:var(--mut);font-size:13px;line-height:1.55;max-width:780px}
-    nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    nav a{border:1px solid var(--brd);background:#0a1320;border-radius:12px;padding:9px 11px;font-weight:750}
-    nav a.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
-    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:14px}
-    @media (max-width:980px){.grid{grid-template-columns:1fr}}
-    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .title{font-size:20px;font-weight:900;margin:0 0 10px}
-    .sub{color:var(--mut);font-size:12px;line-height:1.4;margin:0 0 10px}
-    .steps{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
-    .step{border:1px solid var(--brd);border-radius:14px;padding:12px;background:#071018}
-    .step h3{margin:0 0 4px;font-size:14px}
-    .step p{margin:0;color:var(--mut);font-size:12px;line-height:1.4}
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .btn{display:inline-block;border:1px solid var(--brd);border-radius:12px;padding:10px 12px;font-weight:850;background:#0a1320}
-    .btn.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
-    .hr{height:1px;background:var(--brd);margin:14px 0}
-    ul{margin:8px 0 0 18px;color:var(--mut);font-size:12px;line-height:1.5}
-    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;font-size:12px}
-  </style>
+  <link rel="stylesheet" href="./assets/main.css" />
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div>
-        <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-        <div class="company">HERMETICUM B.C.E. S.r.l.</div>
-        <div class="pill">EU Citizen Gateway · client-side · hash-only · ED25519 · fail-closed</div>
-
-        <nav aria-label="Primary">
-          <a class="primary" href="./create/">Create</a>
-          <a class="primary" href="./verify/">Verify</a>
-          <a class="primary" href="./anchor/">Anchor</a>
-          <a class="primary" href="./evidence-pack/">Evidence Pack</a>
-          <a href="./catalog/">Catalog</a>
-          <a href="./onboarding/">Onboarding</a>
-          <a href="./about/">About</a>
-          <a href="./legal/">Legal</a>
-        </nav>
-      </div>
-
-      <div class="lead">
-        Questo è un <b>gateway digitale UE</b> per rilasciare un pacchetto di riconoscimento minimo (<b>IPR</b>) e una <b>receipt firmata ED25519</b>,
-        con possibilità di <b>ancoraggio</b> (BTC/ETH/IPFS) e creazione di un <b>evidence pack</b> verificabile.
-        <br/><br/>
-        <b>Nessuna custodia</b>: il portale non conserva chiavi, non trattiene documenti, non fa da identity provider.
-        Modello: <b>GDPR-min</b>, <b>hash-only</b>, <b>audit-first</b>, <b>fail-closed</b>.
-      </div>
+  <header class="top">
+    <div class="brand">
+      <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+      <div class="company">HERMETICUM B.C.E. S.r.l.</div>
+      <div class="meta">EU Citizen Gateway · client-side · hash-only · ED25519 · fail-closed</div>
     </div>
 
-    <div class="grid">
-      <section class="card">
-        <h1 class="title">Percorso rapido (4 step)</h1>
-        <p class="sub">
-          Se fai solo questi quattro passaggi, ottieni un set coerente e verificabile.
-          Ogni step è client-side. Nessun upload.
+    <nav class="nav">
+      <a href="./create/">Create</a>
+      <a href="./verify/">Verify</a>
+      <a href="./anchor/">Anchor</a>
+      <a href="./evidence-pack/">Evidence Pack</a>
+      <a href="./catalog/">Catalog</a>
+      <a href="./onboarding/">Onboarding</a>
+      <a href="./about/">About</a>
+      <a href="./legal/">Legal</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <p>
+        Questo è un gateway digitale UE per rilasciare un pacchetto di riconoscimento minimo (IPR) e una receipt firmata ED25519,
+        con possibilità di ancoraggio (BTC/ETH/IPFS) e creazione di un evidence pack verificabile.
+      </p>
+      <p>
+        Nessuna custodia: il portale non conserva chiavi, non trattiene documenti, non fa da identity provider.
+        Modello: GDPR-min, hash-only, audit-first, fail-closed.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Percorso rapido (4 step)</h2>
+        <p>Se fai solo questi quattro passaggi, ottieni un set coerente e verificabile. Ogni step è client-side. Nessun upload.</p>
+
+        <ol class="steps">
+          <li>
+            <strong>1) Create — genera IPR + receipt firmata</strong><br />
+            Crea <code>ipr.json</code> (hash-only) e <code>receipt.json</code> con firma ED25519.
+            Opzionale: <code>SIGNING_KEYPACK.json</code> cifrato per continuità firma pack.<br />
+            <a class="btn" href="./create/">Apri Create</a>
+          </li>
+
+          <li>
+            <strong>2) Verify — verifica locale (fail-closed)</strong><br />
+            Verifica hash + firma ED25519. Controlla anchors (se presenti). Opzionale: verifica <code>PACK_MANIFEST.json</code>.<br />
+            <a class="btn" href="./verify/">Apri Verify</a>
+          </li>
+
+          <li>
+            <strong>3) Anchor — costruisci “anchor pack” (manuale)</strong><br />
+            Inserisci riferimenti a BTC/ETH/IPFS (se li hai) e genera un <code>anchor-pack.json</code> ordinato.
+            Nessuna promessa: è un builder, non una rete di timestamping.<br />
+            <a class="btn" href="./anchor/">Apri Anchor</a>
+          </li>
+
+          <li>
+            <strong>4) Evidence Pack — crea PACK_MANIFEST firmato</strong><br />
+            Costruisci un pack verificabile: IPR + receipt + anchor-pack + README proof + <code>PACK_MANIFEST.json</code> firmato.<br />
+            <a class="btn" href="./evidence-pack/">Apri Evidence Pack</a>
+          </li>
+        </ol>
+
+        <p class="note">
+          Nota operativa UE: questo portale non sostituisce eIDAS/EUDI Wallet.
+          È un gateway sperimentale “audit-first” per pacchetti verificabili e minimali.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Security model (GDPR-min by design)</h2>
+        <ul class="bullets">
+          <li><strong>Nessun upload</strong>: i file restano sul dispositivo.</li>
+          <li><strong>Hash-only</strong>: non serve esporre dati personali per verificare integrità.</li>
+          <li><strong>ED25519</strong>: receipt e manifest possono essere firmati localmente.</li>
+          <li><strong>Fail-closed</strong>: se qualcosa non torna, la verifica fallisce (nessuna “tolleranza”).</li>
+          <li><strong>No custody</strong>: nessuna gestione chiavi/documenti, nessun ruolo da Identity Provider.</li>
+        </ul>
+
+        <h3>Router per profilo</h3>
+        <p class="links">
+          <a href="./professional/">Professional</a> ·
+          <a href="./institution/">Institution</a> ·
+          <a href="./governance/">Governance</a> ·
+          <a href="./privacy/">Privacy</a>
         </p>
 
-        <div class="steps">
-          <div class="step">
-            <h3>1) Create — genera IPR + receipt firmata</h3>
-            <p>
-              Crea <code>ipr.json</code> (hash-only) e <code>receipt.json</code> con firma <b>ED25519</b>.
-              Opzionale: <code>SIGNING_KEYPACK.json</code> cifrato per continuità firma pack.
-            </p>
-            <div class="btnrow">
-              <a class="btn primary" href="./create/">Apri Create</a>
-            </div>
-          </div>
+        <h3>Strati tecnici</h3>
+        <p class="links">
+          <a href="./schemas/">Schemas</a> ·
+          <a href="./standards/">Standards</a> ·
+          <a href="./manifest/">Manifest</a> ·
+          <a href="./modules/">Modules</a>
+        </p>
+      </div>
+    </section>
 
-          <div class="step">
-            <h3>2) Verify — verifica locale (fail-closed)</h3>
-            <p>
-              Verifica hash + firma ED25519. Controlla anchors (se presenti). Opzionale: verifica <code>PACK_MANIFEST.json</code>.
-            </p>
-            <div class="btnrow">
-              <a class="btn primary" href="./verify/">Apri Verify</a>
-            </div>
-          </div>
-
-          <div class="step">
-            <h3>3) Anchor — costruisci “anchor pack” (manuale)</h3>
-            <p>
-              Inserisci riferimenti a BTC/ETH/IPFS (se li hai) e genera un <code>anchor-pack.json</code> ordinato.
-              Nessuna promessa: è un builder, non una rete di timestamping.
-            </p>
-            <div class="btnrow">
-              <a class="btn primary" href="./anchor/">Apri Anchor</a>
-            </div>
-          </div>
-
-          <div class="step">
-            <h3>4) Evidence Pack — crea PACK_MANIFEST firmato</h3>
-            <p>
-              Costruisci un pack verificabile: IPR + receipt + anchor-pack + README proof + <code>PACK_MANIFEST.json</code> firmato.
-            </p>
-            <div class="btnrow">
-              <a class="btn primary" href="./evidence-pack/">Apri Evidence Pack</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="hr"></div>
-
-        <p class="sub"><b>Nota operativa UE</b>: questo portale non sostituisce eIDAS/EUDI Wallet. È un gateway sperimentale “audit-first” per pacchetti verificabili e minimali.</p>
-      </section>
-
-      <aside class="card">
-        <h2 class="title">Cosa è / cosa NON è</h2>
-        <p class="sub"><b>È:</b></p>
-        <ul>
-          <li>Un generatore/verificatore client-side di pacchetti “hash-only”</li>
-          <li>Un flusso verificabile (firma ED25519 + optional anchors + pack manifest)</li>
-          <li>Un modello “fail-closed” pensato per audit e tracciabilità</li>
-        </ul>
-
-        <p class="sub" style="margin-top:12px"><b>NON è:</b></p>
-        <ul>
-          <li>Un Identity Provider (non gestisce identità ufficiali)</li>
-          <li>Un sistema di custodia chiavi o documenti</li>
-          <li>Una promessa di validità legale automatica</li>
-        </ul>
-
-        <div class="hr"></div>
-
-        <h3 class="title" style="font-size:16px">Router per profilo</h3>
-        <div class="btnrow">
-          <a class="btn" href="./professional/">Professional</a>
-          <a class="btn" href="./institution/">Institution</a>
-          <a class="btn" href="./governance/">Governance</a>
-          <a class="btn" href="./privacy/">Privacy</a>
-        </div>
-
-        <div class="hr"></div>
-
-        <h3 class="title" style="font-size:16px">Strati tecnici</h3>
-        <div class="btnrow">
-          <a class="btn" href="./schemas/">Schemas</a>
-          <a class="btn" href="./standards/">Standards</a>
-          <a class="btn" href="./manifest/">Manifest</a>
-          <a class="btn" href="./modules/">Modules</a>
-        </div>
-      </aside>
-    </div>
-
-    <div class="card" style="margin-top:16px">
-      <h2 class="title">Se stai costruendo “infrastruttura cibernetica UE”</h2>
-      <p class="sub">
-        Regola pratica: non aumentare la raccolta dati. Aumenta <b>verificabilità</b>.
-        Qui la verificabilità nasce da: <b>hash canonico</b> + <b>firma ED25519</b> + <b>pack manifest</b>.
+    <section class="card">
+      <h2>Se stai costruendo “infrastruttura cibernetica UE”</h2>
+      <p>
+        Regola pratica: non aumentare la raccolta dati. Aumenta verificabilità.
+        Qui la verificabilità nasce da: hash canonico + firma ED25519 + pack manifest.
       </p>
-      <ul>
+      <ul class="bullets">
         <li>Per onboarding: usa <code>register/</code> solo come router, non come raccolta PII.</li>
         <li>Per prova: usa <code>evidence-pack/</code> (pack firmato) e <code>verify/</code> (verifica fail-closed).</li>
         <li>Per narrativa pubblica: usa <code>about/</code> + <code>STANDARD.md</code> + <code>AUDIT-M1.md</code>.</li>
       </ul>
-    </div>
-  </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+    <div>HERMETICUM B.C.E. S.r.l.</div>
+  </footer>
 </body>
 </html>
