@@ -4,70 +4,137 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Hermeticum B.C.E. — EU Gateway</title>
-  <meta name="description" content="EU Gateway per evidenze verificabili: IPR, receipt ED25519, anchor, audit. B2B/B2G. Hash-only, fail-closed."/>
+  <meta name="description" content="Gateway UE per evidenze verificabili e audit riproducibile. IPR, receipt ED25519, Evidence Pack. B2B/B2G."/>
   <style>
-    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
+    :root{
+      --bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;
+      --card:#101723;--line:#223044;--accent:#2a3a55;
+    }
     body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 56px}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 16px 64px}
     .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
-    h1{font-size:26px;margin:0 0 10px}
+    h1{font-size:28px;margin:0 0 10px}
     h2{font-size:18px;margin:18px 0 8px}
-    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
-    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.5}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
     .btn{border-radius:14px;padding:12px 14px;border:1px solid var(--line);background:#0f1621}
-    .btn.primary{background:#142033;border-color:#2a3a55}
-    .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:12px;color:var(--muted);margin-right:6px}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .btn.primary{background:#142033;border-color:var(--accent)}
+    .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;
+         padding:2px 8px;font-size:12px;color:var(--muted);margin-right:6px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+    @media (max-width:980px){
+      .grid,.grid2{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
+
+    <!-- HERO -->
     <section class="box">
       <h1>Hermeticum B.C.E. — EU Gateway</h1>
       <p>
-        Ingresso unico per <b>evidenze verificabili</b> e <b>audit riproducibile</b>.
-        Nessun documento caricato. Nessuna fiducia nel portale. Solo hash, firme e verifiche.
+        Ingresso unico e <b>neutro</b> per la creazione e la verifica di
+        <b>evidenze digitali verificabili</b>.
+        Nessun documento caricato. Nessuna fiducia nel portale.
       </p>
       <p>
-        Posizionamento: <span class="tag">B2B</span><span class="tag">B2G</span>
-        · Policy: <span class="tag">UE-first</span><span class="tag">GDPR-min</span><span class="tag">fail-closed</span>
+        <span class="tag">UE-first</span>
+        <span class="tag">GDPR-min</span>
+        <span class="tag">Hash-only</span>
+        <span class="tag">Fail-closed</span>
+        <span class="tag">Audit-first</span>
       </p>
+
       <div class="cta">
         <a class="btn primary" href="./create/">Create</a>
         <a class="btn primary" href="./verify/">Verify</a>
+        <a class="btn" href="./evidence-pack/">Evidence Pack</a>
         <a class="btn" href="./map/">Map</a>
         <a class="btn" href="./tech/">Tech</a>
-        <a class="btn" href="./catalog/">Catalog</a>
       </div>
     </section>
 
-    <section class="grid">
+    <!-- COSA FA / COSA NON FA -->
+    <section class="grid2">
       <div class="box">
-        <h2>Create</h2>
-        <p>Genera evidenze hash-only (IPR, receipt ED25519, anchor-pack).</p>
-        <div class="cta"><a class="btn primary" href="./create/">Apri</a></div>
+        <h2>Cosa fa</h2>
+        <p>
+          • Genera IPR (Identity Primary Record) in modalità hash-only<br/>
+          • Produce receipt crittografiche ED25519<br/>
+          • Organizza Evidence Pack auditabili offline<br/>
+          • Consente verifiche indipendenti e riproducibili
+        </p>
       </div>
       <div class="box">
-        <h2>Verify</h2>
-        <p>Verifica offline e fail-closed: hash, firme, manifest.</p>
-        <div class="cta"><a class="btn primary" href="./verify/">Apri</a></div>
-      </div>
-      <div class="box">
-        <h2>Evidence Pack</h2>
-        <p>Indice opponibile per audit B2B/B2G.</p>
-        <div class="cta"><a class="btn primary" href="./evidence-pack/">Apri</a></div>
+        <h2>Cosa non fa</h2>
+        <p>
+          • Non gestisce identità civili<br/>
+          • Non conserva documenti personali<br/>
+          • Non sostituisce eIDAS / EUDI Wallet<br/>
+          • Non attribuisce valore legale automatico
+        </p>
       </div>
     </section>
 
+    <!-- CORRIDOI -->
     <section class="box" style="margin-top:12px">
-      <h2>Regole del Gateway</h2>
+      <h2>Corridoi dedicati</h2>
       <p>
-        Hash-only · Client-side · Fail-closed · Audit-first.
-        Se una verifica fallisce, l’operazione non procede.
+        Il Gateway resta neutro.  
+        Per materiali e percorsi specifici, utilizzare i gateway dedicati:
+      </p>
+
+      <div class="cta">
+        <a class="btn primary" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2b/">
+          Business (B2B)
+        </a>
+        <a class="btn primary" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2g/">
+          Government (B2G)
+        </a>
+      </div>
+
+      <p style="margin-top:10px">
+        <b>B2B</b>: adozione aziendale, AI auditabile, continuità operativa.<br/>
+        <b>B2G</b>: valutazione istituzionale, audit, limiti, sperimentazione.
       </p>
     </section>
+
+    <!-- REGOLE -->
+    <section class="grid">
+      <div class="box">
+        <h2>Hash-only</h2>
+        <p>
+          Nessun contenuto sensibile nel Gateway.
+          Solo impronte crittografiche e metadati minimi.
+        </p>
+      </div>
+      <div class="box">
+        <h2>Fail-closed</h2>
+        <p>
+          Se una verifica fallisce, l’operazione non procede.
+          Nessuna eccezione silenziosa.
+        </p>
+      </div>
+      <div class="box">
+        <h2>Audit-first</h2>
+        <p>
+          Ogni output è pensato per essere verificato
+          offline da terzi indipendenti.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOTER LOGICO -->
+    <section class="box" style="margin-top:12px">
+      <p>
+        Questo Gateway è parte dell’ecosistema
+        <b>Hermeticum B.C.E.</b> — Blindata · Computabile · Evolutiva.
+      </p>
+    </section>
+
   </div>
 </body>
 </html>
