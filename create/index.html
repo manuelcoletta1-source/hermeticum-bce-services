@@ -4,90 +4,135 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Create | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Generatore locale di Evidence Bundle (minimo). Hash-only, GDPR-min. Output verificabile in Verify." />
+  <meta name="description" content="Create: genera Evidence Bundle locale (JSON). UE-first, GDPR-min, hash-only, fail-closed. Output da verificare in Verify." />
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
-  <header class="wrap">
-    <nav class="nav">
-      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-      <div class="navlinks">
-        <a href="../standards/">Standard</a>
-        <a href="../research/">Ricerca (Horizon)</a>
-        <a href="../phase-1/">Fase 1 (ONLY)</a>
-        <a href="../verify/">Verify</a>
-        <a href="../governance/">Governance</a>
-        <a href="../privacy/">Privacy</a>
-      </div>
-    </nav>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Create (Evidence Bundle)</h1>
-      <p class="lead">
-        Genera un <strong>Evidence Bundle</strong> minimo nel browser.
-        Nessun account. Nessuna custodia PII. Output: JSON verificabile in Verify.
+<header class="wrap">
+  <nav class="nav">
+    <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+    <div class="navlinks">
+      <a href="../">Gateway</a>
+      <a href="../standards/">Standard</a>
+      <a href="../research/">Ricerca UE</a>
+      <a href="../phase-1/">Fase 1</a>
+      <a class="active" href="./">Create</a>
+      <a href="../verify/">Verify</a>
+      <a href="../legal/">Legal</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Create — Evidence Bundle (JSON)</h1>
+    <p class="lead">
+      Questo tool genera un bundle minimo nel browser. Nessun account. Nessun invio dati.
+      Il bundle è verificabile in <strong>Verify</strong>.
+    </p>
+
+    <div class="pillrow">
+      <span class="pill">local-only</span>
+      <span class="pill">hash-only</span>
+      <span class="pill">GDPR-min</span>
+      <span class="pill">fail-closed</span>
+    </div>
+
+    <div class="notice">
+      <strong>Fail-closed:</strong> se mancano HRR o descrizione minima → INVALID.  
+      <strong>VALID</strong> significa coerenza tecnica minima, non prova di identità.
+    </div>
+
+    <div class="btnrow" style="margin-top:16px;">
+      <a class="btn secondary" href="../register/">Register</a>
+      <a class="btn secondary" href="../phase-1/">Fase 1</a>
+      <a class="btn secondary" href="../verify/">Verify</a>
+      <a class="btn secondary" href="../catalog/">Catalog</a>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>Input minimi</h2>
+
+      <label class="muted">HRR (generato in Fase 1)</label>
+      <input id="hrr" type="text" placeholder="es. HRR-L-.... oppure HRR-S-...." />
+
+      <label class="muted" style="margin-top:10px;">Descrizione breve (no PII)</label>
+      <input id="desc" type="text" placeholder="es. Evidence bundle per verifica tecnica (senza dati personali)" />
+
+      <label class="muted" style="margin-top:10px;">Hash contenuto (opzionale, SHA-256)</label>
+      <input id="hash" type="text" placeholder="64 caratteri hex (SHA-256) oppure lascia vuoto" />
+
+      <label class="muted" style="margin-top:10px;">Timestamp (opzionale)</label>
+      <input id="ts" type="text" placeholder="es. 2026-01-27T20:00:00Z" />
+
+      <div class="btnrow" style="margin-top:14px;">
+        <button class="btn" id="gen" type="button">Genera Bundle</button>
+        <button class="btn secondary" id="example" type="button">Esempio</button>
+        <button class="btn secondary" id="reset" type="button">Reset</button>
+      </div>
+
+      <p class="muted" style="margin-top:10px;">
+        Suggerimento: se hai un contenuto off-chain (file/testo), calcola SHA-256 offline e incollalo qui.
       </p>
-      <div class="notice">
-        <strong>Fail-closed:</strong> se mancano campi minimi (HRR, POLICY, PAYLOAD_MIN), il bundle è INVALID.
+    </article>
+
+    <article class="card">
+      <h2>Output (JSON)</h2>
+      <pre id="out" class="codeblock">Pronto.</pre>
+      <div class="btnrow">
+        <button class="btn secondary" id="copyBtn" type="button">Copia</button>
+        <a class="btn secondary" href="../verify/">Vai a Verify</a>
       </div>
-    </section>
+    </article>
 
-    <section class="grid">
-      <article class="card">
-        <h2>Input minimi</h2>
+    <article class="card">
+      <h2>Policy consigliata</h2>
+      <pre class="codeblock">UE-first | GDPR-min | hash-only | append-only | fail-closed</pre>
+      <p class="muted">
+        Definizioni e livelli: <a href="../standards/">Standard</a>.
+      </p>
+    </article>
 
-        <label class="muted">HRR (da Onboarding LIGHT/STRONG)</label>
-        <input id="hrr" type="text" placeholder="es. HRR-L-.... oppure HRR-S-...." />
+    <article class="card">
+      <h2>Privacy</h2>
+      <p class="muted">
+        Evita dati personali. Questo strumento genera un JSON locale.
+        Minimizza e usa hash al posto di contenuti o documenti.
+      </p>
+      <div class="btnrow">
+        <a class="btn secondary" href="../privacy/">Privacy</a>
+        <a class="btn secondary" href="../governance/">Governance</a>
+        <a class="btn secondary" href="../terms/">Termini</a>
+      </div>
+    </article>
 
-        <label class="muted" style="margin-top:10px;">Descrizione (breve, no PII)</label>
-        <input id="desc" type="text" placeholder="es. Evidence bundle per audit tecnico (senza dati personali)" />
+    <article class="card">
+      <h2>Compatibilità</h2>
+      <p class="muted">
+        Se arrivi da link vecchi, usa Gateway o Legacy.
+      </p>
+      <div class="btnrow">
+        <a class="btn secondary" href="../legacy/">Legacy</a>
+        <a class="btn secondary" href="../">Gateway</a>
+      </div>
+    </article>
+  </section>
 
-        <label class="muted" style="margin-top:10px;">Hash del contenuto (opzionale ma consigliato)</label>
-        <input id="hash" type="text" placeholder="es. SHA-256 hex (64 chars)" />
+  <section class="footerhint">
+    <p class="muted">
+      Dopo Create: incolla il bundle in Verify e ottieni un esito tecnico fail-closed.
+    </p>
+  </section>
 
-        <label class="muted" style="margin-top:10px;">Timestamp (opzionale)</label>
-        <input id="ts" type="text" placeholder="es. 2026-01-27T20:00:00Z" />
+</main>
 
-        <div class="btnrow" style="margin-top:14px;">
-          <button class="btn" id="gen">Genera Bundle</button>
-          <button class="btn secondary" id="reset">Reset</button>
-          <a class="btn secondary" href="../verify/">Vai a Verify</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h2>Output (JSON)</h2>
-        <pre id="out" class="codeblock">Pronto.</pre>
-        <div class="btnrow">
-          <button class="btn secondary" id="copyBtn" type="button">Copia</button>
-          <a class="btn secondary" href="../">Torna al Gateway</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h2>Policy</h2>
-        <p class="muted">Stringa policy consigliata:</p>
-        <pre class="codeblock">UE-first | GDPR-min | hash-only | append-only | fail-closed</pre>
-        <p class="muted">
-          La definizione dei livelli sta in <a href="../standards/">Standard</a>.
-        </p>
-      </article>
-
-      <article class="card">
-        <h2>Nota</h2>
-        <p class="muted">
-          Questo tool non pubblica nulla. Genera un bundle locale.
-          La pubblicazione/ancoraggio (se previsto) avviene nel livello operativo e fuori da questo portale statico.
-        </p>
-      </article>
-    </section>
-  </main>
-
-  <footer class="wrap foot">
-    <small>HERMETICUM B.C.E. S.r.l.</small>
-  </footer>
+<footer class="wrap foot">
+  <small>HERMETICUM B.C.E. S.r.l. — Create (local-only)</small>
+</footer>
 
 <script>
   const out = document.getElementById("out");
@@ -96,9 +141,23 @@
   function isHex(s){ return /^[0-9a-fA-F]+$/.test(s); }
   function looksLikeSha256(h){ return typeof h==="string" && h.length===64 && isHex(h); }
 
+  function render(obj){ out.textContent = JSON.stringify(obj, null, 2); }
+
   function fail(reason, extra){
-    out.textContent = JSON.stringify({ status:"INVALID", reason, ...extra, ts_utc:new Date().toISOString() }, null, 2);
+    render({ status:"INVALID", reason, ...extra, ts_utc:new Date().toISOString() });
   }
+
+  const example = {
+    HRR: "HRR-L-DEMO-0001",
+    POLICY: "UE-first | GDPR-min | hash-only | append-only | fail-closed",
+    NOTE: "Generated locally in browser. Not an identity proof.",
+    PAYLOAD_MIN: {
+      desc: "Esempio bundle minimo per test Verify",
+      content_hash_sha256: null,
+      timestamp: null,
+      created_utc: new Date().toISOString()
+    }
+  };
 
   document.getElementById("gen").addEventListener("click", () => {
     const HRR = (document.getElementById("hrr").value || "").trim();
@@ -125,7 +184,15 @@
       }
     };
 
-    out.textContent = JSON.stringify({ status:"VALID", bundle }, null, 2);
+    render({ status:"VALID", bundle });
+  });
+
+  document.getElementById("example").addEventListener("click", () => {
+    document.getElementById("hrr").value = example.HRR;
+    document.getElementById("desc").value = example.PAYLOAD_MIN.desc;
+    document.getElementById("hash").value = "";
+    document.getElementById("ts").value = "";
+    render({ status:"INCONCLUSIVE", note:"Example filled. Click 'Genera Bundle'.", ts_utc:new Date().toISOString() });
   });
 
   document.getElementById("reset").addEventListener("click", () => {
@@ -144,5 +211,6 @@
     } catch {}
   });
 </script>
+
 </body>
 </html>
