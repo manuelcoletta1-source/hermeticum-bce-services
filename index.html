@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EU Citizen Gateway — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
-  <meta name="description" content="Gateway UE per rilasciare IPR + receipt ED25519, verifica fail-closed, anchor pack (BTC/ETH/IPFS) e evidence pack verificabile. Client-side, hash-only, GDPR-min." />
+  <title>EU Gateway — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
+  <meta name="description" content="EU Gateway per servizi B2B/B2G basati su IPR: Create/Verify (ED25519, hash-only, client-side), Anchor pack (BTC/ETH/IPFS) e Evidence Pack verificabile. Fail-closed, GDPR-min." />
   <style>
     :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;--pill:#142033;}
     body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg);}
@@ -36,6 +36,7 @@
     @media (max-width:900px){.hero{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}}
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <header>
@@ -45,7 +46,9 @@
       </div>
 
       <div class="pillrow">
-        <div class="pill">EU Citizen Gateway</div>
+        <div class="pill">EU Gateway</div>
+        <div class="pill">B2B</div>
+        <div class="pill">B2G</div>
         <div class="pill">client-side</div>
         <div class="pill">hash-only</div>
         <div class="pill">ED25519</div>
@@ -53,12 +56,12 @@
         <div class="pill">GDPR-min</div>
       </div>
 
-      <!-- NAV: massimo utile, niente rumore -->
       <nav aria-label="Navigazione primaria">
         <a href="./create/">Create</a>
         <a href="./verify/">Verify</a>
         <a href="./anchor/">Anchor</a>
         <a href="./evidence-pack/">Evidence Pack</a>
+        <a href="./catalog/">Catalog</a>
         <a href="./about/">About</a>
         <a href="./legal/">Legal</a>
       </nav>
@@ -66,72 +69,72 @@
 
     <section class="hero">
       <div class="box">
-        <h1>Un ingresso UE per creare una precedenza verificabile (IPR)</h1>
+        <h1>EU Gateway per servizi B2B/B2G basati su IPR</h1>
         <p>
-          Qui generi un pacchetto minimale: <span class="k">ipr.json</span> (hash-only) + <span class="k">receipt.json</span> firmata ED25519.
-          Poi lo verifichi in locale (fail-closed), e se vuoi aggiungi riferimenti di ancoraggio (BTC/ETH/IPFS) e un evidence pack verificabile.
+          Genera un pacchetto minimale: <span class="k">ipr.json</span> (hash-only) + <span class="k">receipt.json</span> firmata ED25519.
+          Verifica in locale (fail-closed). Se serve, aggiungi <span class="k">anchor-pack</span> (BTC/ETH/IPFS) e un evidence pack verificabile.
         </p>
         <p>
-          Nessuna custodia: il portale non conserva chiavi, non trattiene documenti, non fa da Identity Provider.
-          È un gateway sperimentale “audit-first”.
+          Questo portale non custodisce chiavi o documenti e non è un Identity Provider.
+          È onboarding + verifica: audit-first, GDPR-min, nessuna promessa di riconoscimento.
         </p>
 
         <div class="cta">
           <a class="btn primary" href="./create/">Inizia (Create)</a>
           <a class="btn" href="./verify/">Verifica (Verify)</a>
-          <a class="btn" href="./catalog/">Catalog</a>
+          <a class="btn" href="./map/">Mappa ecosistema</a>
         </div>
       </div>
 
       <div class="box">
-        <h2 style="margin:0 0 8px;font-size:16px;">Nota UE (chiara e breve)</h2>
+        <h2 style="margin:0 0 8px;font-size:16px;">Nota UE (chiara)</h2>
         <p style="margin:0;">
-          Questo portale non sostituisce eIDAS / EUDI Wallet.
-          Registra e rende verificabile una traccia (hash + firma + pack) in modalità minimizzata.
+          Non sostituisce eIDAS / EUDI Wallet. Registra e rende verificabile una traccia
+          (hash + firma + pack) in regime minimizzato.
         </p>
       </div>
     </section>
 
     <section class="grid3" aria-label="Corridoi principali">
       <div class="box card">
-        <h2>1) Cittadino UE</h2>
-        <p>Vuoi registrare una traccia opponibile nel tempo, senza account e senza upload.</p>
+        <h2>1) Cittadino UE (ingresso operativo)</h2>
+        <p>Per attivare una precedenza verificabile senza account e senza upload.</p>
         <ul>
-          <li>Crei IPR + receipt firmata</li>
-          <li>Verifica locale fail-closed</li>
-          <li>Evidence pack verificabile</li>
+          <li>IPR + receipt firmata</li>
+          <li>Verifica locale</li>
+          <li>Evidence pack</li>
         </ul>
         <div class="cardcta">
-          <a class="btn primary" href="./create/">Crea IPR</a>
-          <a class="btn" href="./verify/">Verifica</a>
+          <a class="btn primary" href="./corridors/citizen/">Apri corridoio</a>
+          <a class="btn" href="./create/">Crea IPR</a>
         </div>
       </div>
 
       <div class="box card">
-        <h2>2) Professionista</h2>
-        <p>Vuoi continuità operativa e paternità verificabile nei flussi di lavoro (AI-assisted inclusi).</p>
+        <h2>2) Impresa (B2B)</h2>
+        <p>Servizi per aziende: continuità, paternità, audit e processi verificabili.</p>
         <ul>
           <li>Workflow IPR-native</li>
-          <li>Audit-by-design</li>
-          <li>Pack manifest firmato</li>
+          <li>Evidence pack auditabile</li>
+          <li>Compliance fail-closed</li>
         </ul>
         <div class="cardcta">
-          <a class="btn primary" href="./professional/">Apri profilo</a>
-          <a class="btn" href="./onboarding/">Onboarding</a>
+          <a class="btn primary" href="./corridors/business/">Apri corridoio</a>
+          <a class="btn" href="./tech/">Tech</a>
         </div>
       </div>
 
       <div class="box card">
-        <h2>3) Istituzione / Governance</h2>
-        <p>Vuoi un perimetro di standard e verifiche pubbliche, senza trasformare il portale in autorità.</p>
+        <h2>3) Istituzione / Governance (B2G)</h2>
+        <p>Per enti e PA: osservabilità, registry sperimentale, standard candidato e verifiche.</p>
         <ul>
-          <li>Registro sperimentale</li>
-          <li>Standard candidato UE</li>
+          <li>Registry sperimentale</li>
+          <li>Standard candidato</li>
           <li>Verifiche riproducibili</li>
         </ul>
         <div class="cardcta">
-          <a class="btn primary" href="./institution/">Apri profilo</a>
-          <a class="btn" href="./governance/">Governance</a>
+          <a class="btn primary" href="./corridors/government/">Apri corridoio</a>
+          <a class="btn" href="./verify/">Verifiche</a>
         </div>
       </div>
     </section>
@@ -139,37 +142,37 @@
     <div class="hr"></div>
 
     <section class="box steps" aria-label="Percorso rapido 4 step">
-      <h2 style="margin:0 0 10px;font-size:16px;">Percorso rapido (4 step) — “fai solo questo”</h2>
+      <h2 style="margin:0 0 10px;font-size:16px;">Percorso rapido (4 step)</h2>
       <p style="margin:0 0 10px;">
-        Se completi questi quattro passaggi, ottieni un set coerente e verificabile. Ogni step è client-side. Nessun upload.
+        Completa questi quattro passaggi per ottenere un set coerente e verificabile. Tutto client-side. Nessun upload.
       </p>
       <ol>
-        <li><b>Create</b> — genera <span class="k">ipr.json</span> + <span class="k">receipt.json</span> (firma ED25519). Opzionale: <span class="k">SIGNING_KEYPACK.json</span>.</li>
-        <li><b>Verify</b> — verifica locale (hash + firma ED25519). Controllo anchors se presenti. Fail-closed.</li>
-        <li><b>Anchor</b> — costruisci <span class="k">anchor-pack.json</span> con riferimenti BTC/ETH/IPFS (manuale, nessuna promessa).</li>
-        <li><b>Evidence Pack</b> — crea <span class="k">PACK_MANIFEST.json</span> firmato: IPR + receipt + anchor-pack + README proof.</li>
+        <li><b>Create</b> — genera <span class="k">ipr.json</span> + <span class="k">receipt.json</span> (firma ED25519).</li>
+        <li><b>Verify</b> — verifica locale (hash + firma). Fail-closed.</li>
+        <li><b>Anchor</b> — costruisci <span class="k">anchor-pack</span> con riferimenti BTC/ETH/IPFS (manuale).</li>
+        <li><b>Evidence Pack</b> — crea <span class="k">PACK_MANIFEST</span> firmato: IPR + receipt + anchors + proof.</li>
       </ol>
     </section>
 
     <div class="hr"></div>
 
-    <section class="box" aria-label="Strati tecnici">
-      <h2 style="margin:0 0 10px;font-size:16px;">Tecnico</h2>
+    <section class="box" aria-label="Zona tecnica">
+      <h2 style="margin:0 0 10px;font-size:16px;">Zona tecnica</h2>
       <p style="margin:0 0 10px;">
-        Se stai implementando o auditando: qui trovi schemi, standard e moduli. Manteniamo questa zona fuori dal primo impatto utente.
+        Schemi, standard e moduli dell’ecosistema. Questa sezione è per implementazione e audit, non per onboarding.
       </p>
       <div class="cta">
-        <a class="btn" href="./schemas/">Schemas</a>
-        <a class="btn" href="./standards/">Standards</a>
-        <a class="btn" href="./manifest/">Manifest</a>
-        <a class="btn" href="./modules/">Modules</a>
-        <a class="btn" href="./privacy/">Privacy</a>
+        <a class="btn" href="./tech/">Tech Home</a>
+        <a class="btn" href="./tech/standards/">Standards</a>
+        <a class="btn" href="./tech/schemas/">Schemas</a>
+        <a class="btn" href="./tech/modules/">Modules</a>
+        <a class="btn" href="./legal/">Legal</a>
       </div>
     </section>
 
     <footer>
       <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA — HERMETICUM B.C.E. S.r.l.</div>
-      <div>Modello: GDPR-min · hash-only · audit-first · fail-closed. Nessuna custodia di chiavi o documenti.</div>
+      <div>Policy: UE-first · GDPR-min · hash-only · audit-first · fail-closed. Nessuna custodia di chiavi o documenti.</div>
     </footer>
   </div>
 </body>
