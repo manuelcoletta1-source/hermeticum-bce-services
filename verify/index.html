@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Verify | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Verifica tecnica: hash, timestamp e bundle. Esiti: VALID / INVALID / INCONCLUSIVE. Nessuna narrativa, solo prova." />
+  <meta name="description" content="Verify: validazione tecnica hash/bundle. Nessuna narrativa, esiti fail-closed. Nessun invio dati: tutto locale." />
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
@@ -24,155 +24,180 @@
 
   <main class="wrap">
     <section class="hero">
-      <h1>Verify (Tecnico)</h1>
+      <h1>Verify — Evento Hash-Only</h1>
       <p class="lead">
-        Questo livello verifica <strong>integrità</strong> e <strong>coerenza minima</strong>.
-        Non certifica identità. Non interpreta contenuti. Produce solo esiti verificabili.
+        Verifica locale di un evento (JSON): parsing, coerenza struttura, policy e campi minimi.
+        Se hai il payload off-chain, puoi ricalcolare lo SHA-256 localmente e confrontarlo.
       </p>
       <div class="notice">
-        <strong>Esiti:</strong> VALID / INVALID / INCONCLUSIVE.
-        Se manca un requisito minimo → FAIL-CLOSED (INVALID).
+        <strong>Fail-closed:</strong> se manca un requisito minimo → INVALID.
+        “VALID” non significa “identità vera”: la verifica identitaria resta fuori da questo portale.
       </div>
-      <div class="pillrow">
-        <span class="pill">hash-only</span>
-        <span class="pill">append-only</span>
-        <span class="pill">fail-closed</span>
-        <span class="pill">audit-ready</span>
+      <div class="btnrow" style="margin-top:14px;">
+        <a class="btn secondary" href="../create/">Create (bundle)</a>
+        <a class="btn secondary" href="../register/">Register</a>
+        <a class="btn secondary" href="../catalog/">Catalog (mappa)</a>
       </div>
     </section>
 
     <section class="grid">
       <article class="card">
-        <h2>1) Verifica hash (base)</h2>
-        <p class="muted">
-          Incolla un hash (es. SHA-256) e un riferimento (timestamp/nota). Questo tool non “controlla internet”:
-          verifica struttura, formato e coerenza interna del bundle.
-        </p>
+        <h2>1) Incolla evento JSON</h2>
+        <label class="muted">Evento (JSON)</label>
+        <textarea id="eventJson" rows="10" style="width:100%;" placeholder='{"HRR":"...","POLICY":"...","PAYLOAD_MIN":{...}}'></textarea>
 
-        <label class="muted">Hash</label>
-        <input id="hash" type="text" placeholder="es. 64 caratteri hex (SHA-256)" />
-
-        <label class="muted" style="margin-top:10px;">Timestamp (opzionale)</label>
-        <input id="ts" type="text" placeholder="es. 2026-01-27T20:00:00Z" />
-
-        <div class="btnrow" style="margin-top:14px;">
-          <button class="btn" id="checkHash">Check</button>
-          <button class="btn secondary" id="reset">Reset</button>
+        <div class="btnrow" style="margin-top:12px;">
+          <button class="btn" id="btnVerify" type="button">Verifica evento</button>
+          <button class="btn secondary" id="btnLoadExample" type="button">Carica esempio</button>
+          <button class="btn secondary" id="btnReset" type="button">Reset</button>
         </div>
+
+        <p class="muted" style="margin-top:10px;">
+          Questa pagina non invia dati a server. Tutto resta nel browser.
+        </p>
       </article>
 
       <article class="card">
-        <h2>2) Evidence Bundle (consigliato)</h2>
-        <p class="muted">
-          Incolla un bundle JSON (es. generato da Fase 1). Il portale controlla che i campi minimi esistano
-          e siano coerenti. Nessun dato sensibile richiesto.
-        </p>
+        <h2>2) Payload off-chain (opzionale)</h2>
+        <label class="muted">Payload off-chain (testo/JSON) — usato solo per ricalcolare SHA-256</label>
+        <textarea id="payload" rows="8" style="width:100%;" placeholder="Incolla qui il payload originale off-chain..."></textarea>
 
-        <label class="muted">Evidence Bundle (JSON)</label>
-        <textarea id="bundle" rows="10" placeholder='{"HRR":"...","POLICY":"...","PAYLOAD_MIN":{...}}'></textarea>
-
-        <div class="btnrow" style="margin-top:14px;">
-          <button class="btn" id="checkBundle">Validate Bundle</button>
-          <a class="btn secondary" href="./schema/evidence-bundle.schema.json" target="_blank" rel="noopener">Apri Schema JSON</a>
+        <div class="btnrow" style="margin-top:12px;">
+          <button class="btn secondary" id="btnHashPayload" type="button">Ricalcola SHA-256 payload</button>
+          <button class="btn secondary" id="btnCompare" type="button">Confronta con evento</button>
         </div>
+
+        <pre id="payloadHashOut" class="codeblock" style="margin-top:12px;">{}</pre>
       </article>
 
       <article class="card">
-        <h2>Output</h2>
-        <pre id="out" class="codeblock">Pronto. Inserisci dati e verifica.</pre>
+        <h2>Risultato verifica (fail-closed)</h2>
+        <pre id="result" class="codeblock">{}</pre>
+        <p class="muted" style="margin-top:10px;">
+          Esiti: <strong>VALID</strong> / <strong>INVALID</strong> / <strong>INCONCLUSIVE</strong>.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Note</h2>
+        <ul class="muted">
+          <li>Verify valida struttura e coerenza minima.</li>
+          <li>Non sostituisce eIDAS/CIE/SPID.</li>
+          <li>Nessuna custodia PII nel portale statico.</li>
+        </ul>
         <div class="btnrow">
-          <button class="btn secondary" id="copyBtn" type="button">Copia Output</button>
-          <a class="btn secondary" href="../">Torna al Gateway</a>
+          <a class="btn secondary" href="../governance/">Governance</a>
+          <a class="btn secondary" href="../privacy/">Privacy</a>
         </div>
-      </article>
-
-      <article class="card">
-        <h2>Regola di conformità</h2>
-        <p class="muted">
-          Verify è “tecnico”. La definizione di evento/opponibilità sta in <a href="../standards/">Standard</a>.
-          L’operatività sta in <a href="../phase-1/">Fase 1</a>. La ricerca sta in <a href="../research/">Ricerca</a>.
-        </p>
       </article>
     </section>
   </main>
 
   <footer class="wrap foot">
-    <small>HERMETICUM B.C.E. S.r.l.</small>
+    <small>HERMETICUM B.C.E. S.r.l. — Verify (hash-only)</small>
   </footer>
 
 <script>
-  const out = document.getElementById("out");
-  const copyBtn = document.getElementById("copyBtn");
+  const $ = (id) => document.getElementById(id);
 
-  function isHex(s) { return /^[0-9a-fA-F]+$/.test(s); }
-  function looksLikeSha256(h) { return typeof h === "string" && h.length === 64 && isHex(h); }
+  function out(obj){ $("result").textContent = JSON.stringify(obj, null, 2); }
+  function outHash(obj){ $("payloadHashOut").textContent = JSON.stringify(obj, null, 2); }
 
-  function emit(status, details) {
-    const payload = {
-      status,
-      ts_utc: new Date().toISOString(),
-      details
-    };
-    out.textContent = JSON.stringify(payload, null, 2);
+  function isHex(s){ return /^[0-9a-fA-F]+$/.test(s); }
+  function looksLikeSha256(h){ return typeof h==="string" && h.length===64 && isHex(h); }
+
+  async function sha256Hex(text){
+    const enc = new TextEncoder().encode(text);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,"0")).join("");
   }
 
-  document.getElementById("checkHash").addEventListener("click", () => {
-    const hash = (document.getElementById("hash").value || "").trim();
-    const ts = (document.getElementById("ts").value || "").trim();
+  function validateEvent(e){
+    // fail-closed minimal model: HRR + POLICY + PAYLOAD_MIN.desc
+    if (!e || typeof e !== "object") return {status:"INVALID", reason:"Event is not an object"};
+    if (!e.HRR || typeof e.HRR !== "string") return {status:"INVALID", reason:"Missing/invalid HRR"};
+    if (!e.POLICY || typeof e.POLICY !== "string") return {status:"INVALID", reason:"Missing/invalid POLICY"};
+    if (!e.PAYLOAD_MIN || typeof e.PAYLOAD_MIN !== "object") return {status:"INVALID", reason:"Missing PAYLOAD_MIN"};
+    if (!e.PAYLOAD_MIN.desc || typeof e.PAYLOAD_MIN.desc !== "string") return {status:"INVALID", reason:"Missing PAYLOAD_MIN.desc"};
 
-    if (!hash) return emit("INCONCLUSIVE", { reason: "Missing hash" });
-
-    if (looksLikeSha256(hash)) {
-      return emit("VALID", { type: "SHA-256", hash, timestamp: ts || null });
-    }
-    if (isHex(hash) && hash.length >= 32) {
-      return emit("INCONCLUSIVE", { reason: "Hash format not recognized as SHA-256 (still hex-like)", hash_len: hash.length, timestamp: ts || null });
-    }
-    return emit("INVALID", { reason: "Hash not hex or too short", timestamp: ts || null });
-  });
-
-  document.getElementById("checkBundle").addEventListener("click", () => {
-    const raw = (document.getElementById("bundle").value || "").trim();
-    if (!raw) return emit("INCONCLUSIVE", { reason: "Missing bundle JSON" });
-
-    let obj;
-    try { obj = JSON.parse(raw); }
-    catch { return emit("INVALID", { reason: "Invalid JSON" }); }
-
-    // Minimal fail-closed checks
-    const hasHRR = typeof obj.HRR === "string" && obj.HRR.length >= 8;
-    const hasPolicy = typeof obj.POLICY === "string" && obj.POLICY.length >= 3;
-    const hasPayload = obj.PAYLOAD_MIN && typeof obj.PAYLOAD_MIN === "object";
-
-    const checks = { hasHRR, hasPolicy, hasPayload };
-    const missing = Object.entries(checks).filter(([,v]) => !v).map(([k]) => k);
-
-    if (missing.length) {
-      return emit("INVALID", { reason: "Fail-closed: missing required fields", missing, checks });
+    const h = e.PAYLOAD_MIN.content_hash_sha256;
+    if (h !== null && h !== undefined && h !== "") {
+      if (typeof h !== "string" || !looksLikeSha256(h)) {
+        return {status:"INVALID", reason:"PAYLOAD_MIN.content_hash_sha256 present but not SHA-256 hex"};
+      }
     }
 
-    // Optional sanity: HRR prefix
-    const prefixOk = /^HRR-(L|S)-/i.test(obj.HRR) || /^HRR/i.test(obj.HRR);
-    return emit(prefixOk ? "VALID" : "INCONCLUSIVE", {
-      checks,
-      note: prefixOk ? "Bundle structure OK" : "Bundle OK but HRR prefix not recognized",
-      hrr: obj.HRR
-    });
-  });
+    return {status:"VALID", note:"Structure OK (does not prove identity)", checked_utc:new Date().toISOString()};
+  }
 
-  document.getElementById("reset").addEventListener("click", () => {
-    document.getElementById("hash").value = "";
-    document.getElementById("ts").value = "";
-    document.getElementById("bundle").value = "";
-    out.textContent = "Pronto. Inserisci dati e verifica.";
-  });
+  const example = {
+    HRR: "HRR-L-DEMO-0001",
+    POLICY: "UE-first | GDPR-min | hash-only | append-only | fail-closed",
+    NOTE: "Demo. Not an identity proof.",
+    PAYLOAD_MIN: {
+      desc: "Esempio di bundle minimo per test Verify",
+      content_hash_sha256: null,
+      timestamp: null,
+      created_utc: new Date().toISOString()
+    }
+  };
 
-  copyBtn.addEventListener("click", async () => {
+  $("btnVerify").addEventListener("click", () => {
+    const raw = ($("eventJson").value || "").trim();
+    if (!raw) return out({status:"INVALID", reason:"Empty input", ts_utc:new Date().toISOString()});
     try {
-      await navigator.clipboard.writeText(out.textContent);
-      copyBtn.textContent = "Copiato";
-      setTimeout(() => (copyBtn.textContent = "Copia Output"), 900);
-    } catch { /* no-op */ }
+      const obj = JSON.parse(raw);
+      out(validateEvent(obj));
+    } catch (e) {
+      out({status:"INVALID", reason:"Invalid JSON", detail:String(e), ts_utc:new Date().toISOString()});
+    }
+  });
+
+  $("btnLoadExample").addEventListener("click", () => {
+    $("eventJson").value = JSON.stringify(example, null, 2);
+    out({status:"INCONCLUSIVE", note:"Example loaded. Click 'Verifica evento'.", ts_utc:new Date().toISOString()});
+  });
+
+  $("btnReset").addEventListener("click", () => {
+    $("eventJson").value = "";
+    $("payload").value = "";
+    out({});
+    outHash({});
+  });
+
+  $("btnHashPayload").addEventListener("click", async () => {
+    const p = ($("payload").value || "");
+    if (!p.trim()) return outHash({status:"INVALID", reason:"Empty payload"});
+    const h = await sha256Hex(p);
+    outHash({status:"OK", sha256: h});
+  });
+
+  $("btnCompare").addEventListener("click", async () => {
+    // Compare payload hash with event PAYLOAD_MIN.content_hash_sha256
+    let evt;
+    try { evt = JSON.parse(($("eventJson").value || "").trim() || "{}"); }
+    catch { return out({status:"INVALID", reason:"Event JSON invalid; cannot compare"}); }
+
+    const expected = evt?.PAYLOAD_MIN?.content_hash_sha256;
+    if (!expected || typeof expected !== "string") {
+      return out({status:"INCONCLUSIVE", reason:"Event has no PAYLOAD_MIN.content_hash_sha256 to compare"});
+    }
+    if (!looksLikeSha256(expected)) {
+      return out({status:"INVALID", reason:"Event hash is not valid SHA-256 hex"});
+    }
+
+    const p = ($("payload").value || "");
+    if (!p.trim()) return out({status:"INVALID", reason:"Empty payload; cannot compute hash"});
+
+    const actual = await sha256Hex(p);
+    const ok = (actual.toLowerCase() === expected.toLowerCase());
+
+    out({
+      status: ok ? "VALID" : "INVALID",
+      compare: { expected_sha256: expected, actual_sha256: actual },
+      note: ok ? "Hash match." : "Hash mismatch.",
+      ts_utc: new Date().toISOString()
+    });
   });
 </script>
 </body>
