@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuelcoletta1-source.github.io/hermeticum-bce-platform/verify/schema/evidence-bundle.schema.json",
+  "title": "Hermeticum BCE Evidence Bundle (Minimal)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["HRR", "POLICY", "PAYLOAD_MIN"],
+  "properties": {
+    "HRR": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Human Root Reference (pseudonymous). Example: HRR-L-... or HRR-S-..."
+    },
+    "POLICY": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Policy string, e.g. UE-first | GDPR-min | hash-only | fail-closed"
+    },
+    "NOTE": {
+      "type": "string",
+      "description": "Optional note for human readability."
+    },
+    "CONTACT_SIGNALS": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional hashed contact signals (never raw PII)."
+    },
+    "PAYLOAD_MIN": {
+      "type": "object",
+      "description": "Minimal payload required for audit context.",
+      "additionalProperties": true
+    }
+  }
+}
