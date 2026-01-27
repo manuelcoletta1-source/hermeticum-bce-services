@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Istituzione / Governance (B2G) — Corridoio | EU Gateway</title>
+  <meta name="description" content="Corridoio B2G: osservabilità e verifiche riproducibili su IPR. Registry sperimentale e standard candidato UE. Nessuna autorità, audit-first, fail-closed."/>
+  <style>
+    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 16px 56px}
+    .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+    h1{font-size:22px;margin:0 0 10px}
+    h2{font-size:16px;margin:18px 0 8px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
+    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.45}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:14px;padding:12px 14px;
+         text-decoration:none;border:1px solid var(--line);background:#0f1621}
+    .btn.primary{background:#142033;border-color:#2a3a55}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="box">
+      <h1>Istituzione / Governance (B2G)</h1>
+      <p>
+        Corridoio per enti, PA, regioni e organismi che devono <b>auditare</b>, <b>verificare</b> o <b>sperimentare</b>
+        tracce IPR in modo riproducibile. Il portale non è un’autorità: non emette identità e non attribuisce diritti.
+      </p>
+      <p>
+        Output atteso: procedure verificabili, registry sperimentale e standard candidato — tutto <b>derivato</b> da IPR già attivati
+        (UE-first, GDPR-min, fail-closed).
+      </p>
+
+      <div class="cta">
+        <a class="btn primary" href="../../verify/">Apri verifiche (Verify)</a>
+        <a class="btn" href="../../tech/standards/">Standard (Tech)</a>
+        <a class="btn" href="../../">← Torna al Gateway</a>
+      </div>
+
+      <div class="hr"></div>
+
+      <h2>Destinazioni (esterne al Gateway)</h2>
+      <ul>
+        <li><b>Registry sperimentale</b>:
+          <a href="https://manuelcoletta1-source.github.io/ue-ipr-registry/">UE IPR Registry</a>
+        </li>
+        <li><b>Standard candidato</b>:
+          <a href="https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/">IPR-GOV-EU Standard</a>
+        </li>
+      </ul>
+
+      <h2>Set minimo per audit</h2>
+      <ul>
+        <li><b>ipr.json</b> + <b>receipt.json</b> (firma ED25519)</li>
+        <li>Verifica locale riproducibile (fail-closed)</li>
+        <li>Opzionale: <b>anchor-pack</b> (BTC/ETH/IPFS) + <b>PACK_MANIFEST</b></li>
+      </ul>
+
+      <h2>Limiti dichiarati</h2>
+      <ul>
+        <li>Non sostituisce eIDAS / EUDI Wallet</li>
+        <li>Nessuna custodia di chiavi o documenti</li>
+        <li>Nessuna promessa di riconoscimento o valore legale automatico</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
