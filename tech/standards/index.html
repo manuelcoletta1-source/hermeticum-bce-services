@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Standards — Tech | EU Gateway</title>
+  <meta name="description" content="Standards: requisiti, limiti e criteri per adozione B2B/B2G. UE-first, GDPR-min, hash-only, fail-closed."/>
+  <style>
+    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 16px 56px}
+    .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+    h1{font-size:22px;margin:0 0 10px}
+    h2{font-size:16px;margin:18px 0 8px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
+    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.45}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:14px;padding:12px 14px;
+         text-decoration:none;border:1px solid var(--line);background:#0f1621}
+    .btn.primary{background:#142033;border-color:#2a3a55}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="box">
+      <h1>Standards</h1>
+      <p>
+        Questa sezione definisce <b>requisiti</b>, <b>limiti</b> e <b>criteri</b> per uso B2B/B2G.
+        Non è un atto di autorità: è documentazione riproducibile per implementazione e audit.
+      </p>
+
+      <div class="cta">
+        <a class="btn" href="../">← Torna a Tech</a>
+        <a class="btn" href="../../">← Gateway</a>
+        <a class="btn primary" href="../../verify/">Verify</a>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <section class="box">
+      <h2>Cosa è uno “standard” qui</h2>
+      <ul>
+        <li>Un set di requisiti minimi (UE-first) per garantire verificabilità e riproducibilità.</li>
+        <li>Un perimetro di <b>limiti dichiarati</b> (cosa il sistema non fa).</li>
+        <li>Una base per audit: ciò che non passa i controlli non deve procedere (fail-closed).</li>
+      </ul>
+
+      <h2>Cosa NON è</h2>
+      <ul>
+        <li>Non è un riconoscimento legale automatico.</li>
+        <li>Non sostituisce eIDAS / EUDI Wallet.</li>
+        <li>Non è una promessa di validità “universale”.</li>
+      </ul>
+    </section>
+
+    <section class="box" style="margin-top:12px">
+      <h2>Standard candidato (B2G)</h2>
+      <p>
+        Specifica candidata per governance: adozione istituzionale, requisiti di opponibilità e criteri di conformità.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/">Apri IPR-GOV-EU</a>
+        <a class="btn" href="../../corridors/government/">Corridoio B2G</a>
+      </div>
+    </section>
+
+    <section class="box" style="margin-top:12px">
+      <h2>Standard interni (Gateway)</h2>
+      <p>
+        Nel Gateway, gli “standard” sono principalmente convenzioni riproducibili:
+        <span class="mono">ipr.json</span>, <span class="mono">receipt.json</span>, <span class="mono">anchor-pack</span>, <span class="mono">PACK_MANIFEST</span>.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="../schemas/">Apri Schemas</a>
+        <a class="btn" href="../audit/">Apri Audit</a>
+      </div>
+    </section>
+
+    <section class="box" style="margin-top:12px">
+      <h2>Nota su UE–ΦΩ–001</h2>
+      <p>
+        Se hai già una pagina o un documento “UE–ΦΩ–001” nel repo, linkalo qui come riferimento interno.
+        (Se non esiste ancora, lo creiamo nel prossimo file come <span class="mono">tech/standards/ue-fo-001.html</span>.)
+      </p>
+    </section>
+  </div>
+</body>
+</html>
