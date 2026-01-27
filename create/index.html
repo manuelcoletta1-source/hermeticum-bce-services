@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Create IPR — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
-  <meta name="description" content="Genera ipr.json e receipt.json (client-side). UE-first, GDPR-min, hash-only, fail-closed." />
+  <meta name="description" content="Genera ipr.json e receipt.json firmata (ED25519). Client-side. UE-first, GDPR-min, hash-only, fail-closed." />
   <style>
     :root{
       --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
@@ -13,16 +13,13 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
     body{margin:0;background:radial-gradient(900px 600px at 15% 0%, #0d1b2a 0%, var(--bg) 55%);color:var(--txt);}
-    a{color:var(--acc);text-decoration:none}
     .wrap{max-width:980px;margin:0 auto;padding:26px 18px 60px;}
     header{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}
-    .seal{font-weight:800;letter-spacing:.3px}
+    .seal{font-weight:900;letter-spacing:.3px}
     .company{color:var(--mut);font-size:12px}
-    .tag{color:var(--mut);font-size:13px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    .tag{color:var(--mut);font-size:13px;line-height:1.45;max-width:520px}
     .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .title{font-size:18px;font-weight:750;margin:0 0 8px}
+    .title{font-size:18px;font-weight:800;margin:0 0 8px}
     label{display:block;font-size:12px;color:var(--mut);margin:10px 0 6px}
     input,select,textarea{
       width:100%;box-sizing:border-box;background:#071018;border:1px solid var(--brd);
@@ -32,7 +29,7 @@
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     button{
       border:1px solid var(--brd);background:#0a1320;color:var(--txt);
-      border-radius:12px;padding:10px 12px;font-weight:650;cursor:pointer
+      border-radius:12px;padding:10px 12px;font-weight:750;cursor:pointer
     }
     button.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
     button:disabled{opacity:.55;cursor:not-allowed}
@@ -40,7 +37,6 @@
     .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
     .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
     .out{white-space:pre;overflow:auto;background:#06101a;border:1px solid var(--brd);border-radius:12px;padding:12px;font-size:12px}
-    .hint{color:var(--mut);font-size:12px;line-height:1.45;margin-top:10px}
     .hr{height:1px;background:var(--brd);margin:14px 0}
   </style>
 </head>
@@ -51,16 +47,14 @@
       <div>
         <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
         <div class="company">HERMETICUM B.C.E. S.r.l.</div>
-        <div class="tag">Create IPR (client-side) · UE-first · GDPR-min · hash-only · fail-closed</div>
       </div>
-      <div class="tag" style="max-width:520px">
-        Genera <span class="mono">ipr.json</span> e <span class="mono">receipt.json</span> localmente.
-        Nessun dato viene inviato a server.
+      <div class="tag">
+        Generazione client-side di <span class="mono">ipr.json</span> + <span class="mono">receipt.json</span> (firma <b>ED25519</b>). Nessun invio dati a server.
       </div>
     </header>
 
     <section class="card">
-      <h1 class="title">Genera IPR package</h1>
+      <h1 class="title">Create IPR</h1>
 
       <label for="level">Livello</label>
       <select id="level">
@@ -89,7 +83,7 @@
 
       <label style="margin-top:12px">
         <input type="checkbox" id="consentCheck" />
-        Confermo: questo portale non sostituisce SPID/CIE/eIDAS e non salva dati personali in chiaro.
+        Confermo: non è IDP (SPID/CIE/eIDAS) e non inserisco dati personali in chiaro.
       </label>
 
       <div class="hr"></div>
@@ -127,10 +121,6 @@
 
       <label style="margin-top:12px">Anteprima receipt.json</label>
       <div class="out mono" id="rcpOut">—</div>
-
-      <div class="hint">
-        Questo step genera receipt con <span class="mono">signature.scheme = "NONE"</span>. Firma/timestamp arriveranno dopo.
-      </div>
     </section>
   </div>
 
@@ -157,13 +147,13 @@
   let lastIPR = null;
   let lastReceipt = null;
 
-  function nowISO(){ return new Date().toISOString(); }
-
   function setStatus(msg, kind){
     const el = $("status");
     el.className = "status " + (kind || "warn");
     el.textContent = msg || "";
   }
+
+  function nowISO(){ return new Date().toISOString(); }
 
   async function sha256Hex(str){
     const enc = new TextEncoder().encode(str);
@@ -186,6 +176,13 @@
       return v;
     };
     return JSON.stringify(norm(obj));
+  }
+
+  function bufToB64(buf){
+    const bytes = new Uint8Array(buf);
+    let bin = "";
+    for(const b of bytes) bin += String.fromCharCode(b);
+    return btoa(bin);
   }
 
   function downloadJSON(filename, obj){
@@ -229,6 +226,80 @@
     return { evt, at, by, hash_sha256: h };
   }
 
+  async function buildIPR({ level, purpose, consentScope, consentDurationDays, consentNote, notes, ctx, secret }){
+    const issued_at = nowISO();
+    const subject = await buildSubject(secret, purpose, issued_at);
+
+    const fields_present = Object.entries(ctx).filter(([_,v])=>!!v).map(([k])=>k);
+    const context_hash = await sha256Hex(stableStringify(ctx));
+
+    const ipr = {
+      proto: "AI_JOKER_C2",
+      type: "IPR_PACKAGE",
+      version: "v1",
+      issuer: "HERMETICUM B.C.E. S.r.l.",
+      seal: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
+      issued_at,
+      level,
+      subject,
+      purpose,
+      policy: POLICY,
+      consent: {
+        scope: consentScope,
+        duration_days: consentDurationDays,
+        note: consentNote,
+        acknowledged: true
+      },
+      context: {
+        kind: "COARSE_GEO",
+        hash_sha256: context_hash,
+        fields_present
+      },
+      notes,
+      audit: [
+        await buildAudit("EVT-IPR-ISSUED", issued_at, "CLIENT_SIDE_WIZARD", subject)
+      ]
+    };
+
+    return ipr;
+  }
+
+  function buildPayload({ ipr, ipr_hash_sha256 }){
+    return {
+      ipr_subject: ipr.subject,
+      ipr_level: ipr.level,
+      purpose: ipr.purpose,
+      policy: ipr.policy,
+      consent_scope: ipr.consent.scope,
+      issued_at: ipr.issued_at,
+      ipr_hash_sha256
+    };
+  }
+
+  async function signReceiptPayloadHash(payload_hash_sha256){
+    const keyPair = await crypto.subtle.generateKey(
+      { name: "Ed25519" },
+      true,
+      ["sign","verify"]
+    );
+    const publicJwk = await crypto.subtle.exportKey("jwk", keyPair.publicKey);
+    const kid = await sha256Hex(stableStringify(publicJwk));
+
+    const sigBuf = await crypto.subtle.sign(
+      { name: "Ed25519" },
+      keyPair.privateKey,
+      new TextEncoder().encode(payload_hash_sha256)
+    );
+
+    return {
+      scheme: "ED25519",
+      kid,
+      value: bufToB64(sigBuf),
+      public_key_jwk: publicJwk,
+      note: "Firma Ed25519 client-side (MVP)."
+    };
+  }
+
   $("generate").onclick = async () => {
     try{
       setStatus("Generazione in corso…", "warn");
@@ -242,8 +313,6 @@
       const consentDurationDays = Number($("consentDurationDays").value);
       if(!(consentDurationDays>=1 && consentDurationDays<=3650)) throw new Error("durata consenso non valida (fail-closed).");
 
-      const consentNote = optStr($("consentNote").value, 280);
-
       if(!$("consentCheck").checked) throw new Error("consenso non confermato (fail-closed).");
 
       const secret = ($("localSecret").value||"").trim();
@@ -256,66 +325,31 @@
         district: optStr($("district").value, 120)
       };
 
-      const fields_present = Object.entries(ctx).filter(([_,v])=>!!v).map(([k])=>k);
-      const context_hash = await sha256Hex(stableStringify(ctx));
+      const consentNote = optStr($("consentNote").value, 280);
+      const notes = optStr($("notes").value, 2000);
 
-      const issued_at = nowISO();
-      const subject = await buildSubject(secret, purpose, issued_at);
-
-      const ipr = {
-        proto: "AI_JOKER_C2",
-        type: "IPR_PACKAGE",
-        version: "v1",
-        issuer: "HERMETICUM B.C.E. S.r.l.",
-        seal: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
-        issued_at,
-        level,
-        subject,
-        purpose,
-        policy: POLICY,
-        consent: {
-          scope: consentScope,
-          duration_days: consentDurationDays,
-          note: consentNote,
-          acknowledged: true
-        },
-        context: {
-          kind: "COARSE_GEO",
-          hash_sha256: context_hash,
-          fields_present
-        },
-        notes: optStr($("notes").value, 2000),
-        audit: [
-          await buildAudit("EVT-IPR-ISSUED", issued_at, "CLIENT_SIDE_WIZARD", subject)
-        ]
-      };
+      const ipr = await buildIPR({
+        level, purpose,
+        consentScope, consentDurationDays, consentNote,
+        notes, ctx, secret
+      });
 
       const ipr_hash_sha256 = await sha256Hex(stableStringify(ipr));
 
-      const payload = {
-        ipr_subject: subject,
-        ipr_level: level,
-        purpose,
-        policy: POLICY,
-        consent_scope: consentScope,
-        issued_at,
-        ipr_hash_sha256
-      };
+      const payload = buildPayload({ ipr, ipr_hash_sha256 });
+      const payload_hash_sha256 = await sha256Hex(stableStringify(payload));
+
+      const signature = await signReceiptPayloadHash(payload_hash_sha256);
 
       const receipt = {
         proto: "AI_JOKER_C2",
         type: "RECEIPT",
         version: "v1",
         kind: "IPR_ISSUANCE",
-        issued_at,
-        payload_hash_sha256: await sha256Hex(stableStringify(payload)),
+        issued_at: ipr.issued_at,
+        payload_hash_sha256,
         payload,
-        signature: {
-          scheme: "NONE",
-          kid: null,
-          value: null,
-          note: "Firma/timestamp non inclusi nel MVP."
-        }
+        signature
       };
 
       lastIPR = ipr;
@@ -327,7 +361,7 @@
       $("downloadIpr").disabled = false;
       $("downloadReceipt").disabled = false;
 
-      setStatus("OK: generati ipr.json e receipt.json.", "ok");
+      setStatus("OK: generati ipr.json e receipt.json (ED25519).", "ok");
     }catch(e){
       console.error(e);
       setStatus("Errore: " + (e?.message || String(e)), "bad");
