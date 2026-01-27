@@ -4,72 +4,115 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Standard | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Standard (normativo, sola-lettura): definizioni e livelli. UE-first, audit-friendly." />
+  <meta name="description" content="Standard (sola-lettura): definizioni, livelli e vincoli. Separato da Ricerca, Fase 1 e Verify." />
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
-  <header class="wrap">
-    <nav class="nav">
-      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-      <div class="navlinks">
-        <a class="active" href="./">Standard</a>
-        <a href="../research/">Ricerca (Horizon)</a>
-        <a href="../phase-1/">Fase 1 (ONLY)</a>
-        <a href="../verify/">Verify</a>
-        <a href="../governance/">Governance</a>
-        <a href="../privacy/">Privacy</a>
-      </div>
-    </nav>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Standard (Normativo)</h1>
-      <p class="lead">
-        Sezione sola-lettura: definisce livelli, vincoli e semantica minima.
-        Non è onboarding. Non è operatività. Non è verifica.
+<header class="wrap">
+  <nav class="nav">
+    <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+    <div class="navlinks">
+      <a href="../">Gateway</a>
+      <a class="active" href="./">Standard</a>
+      <a href="../research/">Ricerca UE</a>
+      <a href="../phase-1/">Fase 1</a>
+      <a href="../verify/">Verify</a>
+      <a href="../legal/">Legal</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Standard (Normativo) — sola lettura</h1>
+    <p class="lead">
+      Questa sezione definisce <strong>termini</strong>, <strong>livelli</strong> e <strong>vincoli</strong>.
+      Non è onboarding. Non è operatività. Non è verifica tecnica.
+    </p>
+
+    <div class="pillrow">
+      <span class="pill">read-only</span>
+      <span class="pill">audit-friendly</span>
+      <span class="pill">level separation</span>
+      <span class="pill">UE-first</span>
+    </div>
+
+    <div class="notice">
+      <strong>Regola:</strong> Standard descrive il modello.
+      L’operatività sta in <a href="../phase-1/">Fase 1</a>. La validazione sta in <a href="../verify/">Verify</a>.
+    </div>
+
+    <div class="btnrow" style="margin-top:16px;">
+      <a class="btn secondary" href="../catalog/">Catalog</a>
+      <a class="btn secondary" href="../normative/">Mapping eIDAS/EUDI</a>
+      <a class="btn secondary" href="../AUDIT-M1.md">Checklist Horizon</a>
+    </div>
+  </section>
+
+  <section class="grid">
+
+    <article class="card">
+      <h2>STANDARD UE–ΦΩ–001 (HTML)</h2>
+      <p class="muted">
+        Documento principale pubblicato in formato leggibile nel portale (no PDF).
+        Se il file non esiste ancora, lo creiamo al prossimo step.
       </p>
-      <div class="notice">
-        <strong>Regola:</strong> lo Standard descrive il modello. L’operatività sta in Fase 1. La verifica sta in Verify.
+      <div class="btnrow">
+        <a class="btn" href="./standard-ue-phiomega-001.html">Apri STANDARD UE–ΦΩ–001</a>
+        <a class="btn secondary" href="../STANDARD.md">Versione breve (STANDARD.md)</a>
       </div>
-      <div class="btnrow" style="margin-top:14px;">
-        <a class="btn secondary" href="../">Gateway</a>
-        <a class="btn secondary" href="../catalog/">Catalog (mappa)</a>
-        <a class="btn secondary" href="../legal/">Legal Hub</a>
+    </article>
+
+    <article class="card">
+      <h2>STANAG–ΦΩ–001 (HTML)</h2>
+      <p class="muted">
+        Allegato strutturale (formato operativo), separato dal documento principale.
+      </p>
+      <div class="btnrow">
+        <a class="btn secondary" href="./stanag-phiomega-001.html">Apri STANAG–ΦΩ–001</a>
       </div>
-    </section>
+    </article>
 
-    <!-- CONTENUTO STANDARD: mantieni qui il tuo testo esistente se già presente.
-         Se avevi già un documento lungo, incollalo sotto questa riga oppure sostituisci solo header/nav nella tua versione.
-         Per evitare conflitti, qui lasciamo una sezione placeholder minima. -->
+    <article class="card">
+      <h2>ONLY (Fase 1)</h2>
+      <p class="muted">
+        Il modello operativo minimo sta fuori dallo Standard.
+      </p>
+      <div class="btnrow">
+        <a class="btn" href="../phase-1/">Vai a Fase 1 (ONLY)</a>
+        <a class="btn secondary" href="../create/">Create</a>
+        <a class="btn secondary" href="../verify/">Verify</a>
+      </div>
+    </article>
 
-    <section class="grid">
-      <article class="card">
-        <h2>Documento</h2>
-        <p class="muted">
-          Se hai già pubblicato STANDARD UE–ΦΩ–001 in HTML in questa sezione, lascialo.
-          Questa pagina è stata rifattorizzata solo per navbar e percorsi canonici.
-        </p>
-        <div class="btnrow">
-          <a class="btn" href="../verify/">Vai a Verify</a>
-          <a class="btn secondary" href="../phase-1/">Vai a Fase 1</a>
-        </div>
-      </article>
+    <article class="card">
+      <h2>Limiti e responsabilità</h2>
+      <p class="muted">
+        Il portale non è identity provider e non sostituisce eIDAS/CIE/SPID.
+        Nessuna custodia dati personali nel portale statico.
+      </p>
+      <div class="btnrow">
+        <a class="btn secondary" href="../governance/">Governance</a>
+        <a class="btn secondary" href="../privacy/">Privacy</a>
+        <a class="btn secondary" href="../terms/">Termini</a>
+      </div>
+    </article>
 
-      <article class="card">
-        <h2>Mapping eIDAS/EUDI</h2>
-        <p class="muted">
-          Sezione dedicata al non-equivalence e all’allineamento descrittivo.
-        </p>
-        <div class="btnrow">
-          <a class="btn secondary" href="../normative/">Apri Normative Mapping</a>
-        </div>
-      </article>
-    </section>
-  </main>
+  </section>
 
-  <footer class="wrap foot">
-    <small>HERMETICUM B.C.E. S.r.l. — Standard (read-only)</small>
-  </footer>
+  <section class="footerhint">
+    <p class="muted">
+      Nota: lo Standard è intenzionalmente “no-interaction”. L’interazione parte dal Gateway.
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <small>HERMETICUM B.C.E. S.r.l. — Standard (read-only)</small>
+</footer>
+
 </body>
 </html>
