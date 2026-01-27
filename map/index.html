@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Mappa ecosistema — EU Gateway | Hermeticum B.C.E.</title>
+  <meta name="description" content="Mappa unica: repo → ruolo → target → link. Gateway UE B2B/B2G con moduli e standard correlati."/>
+  <style>
+    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:inherit}
+    .wrap{max-width:1080px;margin:0 auto;padding:28px 16px 56px}
+    .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+    h1{font-size:22px;margin:0 0 10px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:14px;padding:12px 14px;
+         text-decoration:none;border:1px solid var(--line);background:#0f1621}
+    .btn.primary{background:#142033;border-color:#2a3a55}
+    table{width:100%;border-collapse:collapse;margin-top:12px;overflow:hidden;border-radius:14px}
+    th,td{border:1px solid var(--line);padding:10px;vertical-align:top}
+    th{background:#0f1621;text-align:left}
+    td{color:var(--muted)}
+    .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:12px;color:var(--muted);margin-right:6px;margin-top:4px}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="box">
+      <h1>Mappa ecosistema (repo → ruolo → target)</h1>
+      <p>
+        Un solo ingresso canonico: <b>EU Gateway</b> (<span class="mono">hermeticum-bce-platform</span>).
+        Tutti gli altri repository sono moduli, standard, registry o opere: non competono con l’entrypoint.
+      </p>
+
+      <div class="cta">
+        <a class="btn" href="../">← Torna al Gateway</a>
+        <a class="btn primary" href="../tech/">Tech</a>
+        <a class="btn" href="../corridors/business/">B2B</a>
+        <a class="btn" href="../corridors/government/">B2G</a>
+      </div>
+    </section>
+
+    <section class="box" style="margin-top:12px">
+      <table aria-label="Ecosistema Hermeticum B.C.E.">
+        <thead>
+          <tr>
+            <th>Repo</th>
+            <th>Ruolo</th>
+            <th>Target</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>hermeticum-bce-platform</b></td>
+            <td>
+              <span class="tag">Gateway</span>
+              Entry point UE: Create/Verify/Anchor/Evidence + corridoi B2B/B2G.
+            </td>
+            <td>
+              <span class="tag">Citizen</span><span class="tag">B2B</span><span class="tag">B2G</span>
+            </td>
+            <td><a href="https://manuelcoletta1-source.github.io/hermeticum-bce-platform/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>ue-ipr-registry</b></td>
+            <td><span class="tag">Registry</span> Registro sperimentale pubblico (osservabilità).</td>
+            <td><span class="tag">B2G</span><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/ue-ipr-registry/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>ipr-gov-eu-standard</b></td>
+            <td><span class="tag">Standard</span> Specifica candidata per governance UE (adozione/limiti/opponibilità).</td>
+            <td><span class="tag">B2G</span><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>hermeticum-bce-ipr</b></td>
+            <td><span class="tag">Gateway</span> Gateway IPR (specializzato) + materiali di onboarding.</td>
+            <td><span class="tag">Citizen</span><span class="tag">B2B</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>gitjoker-c2</b></td>
+            <td><span class="tag">C2</span> Command &amp; Control per publishing, compliance e traceability.</td>
+            <td><span class="tag">B2B</span><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/gitjoker-c2/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>ai-joker-workers</b></td>
+            <td><span class="tag">Workflow</span> Bridge operativo IPR ↔ AI Joker-C2 (sessioni, I/O, policy).</td>
+            <td><span class="tag">B2B</span><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/ai-joker-workers/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>unebdo</b></td>
+            <td><span class="tag">Policy</span> Dispositivo giuridico-computabile (layer 0).</td>
+            <td><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/unebdo/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>opc</b></td>
+            <td><span class="tag">Policy</span> Opponibilità Policy Computabile.</td>
+            <td><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/opc/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>neuroloop</b></td>
+            <td><span class="tag">Module</span> Continuità cognitiva e feedback.</td>
+            <td><span class="tag">B2B</span><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/neuroloop/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>metaexchange</b></td>
+            <td><span class="tag">Module</span> Layer di scambio tracciato.</td>
+            <td><span class="tag">B2B</span><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/metaexchange/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>iospace</b></td>
+            <td><span class="tag">Module</span> Spazio identitario digitale.</td>
+            <td><span class="tag">B2B</span><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/iospace/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>cyberglobal</b></td>
+            <td><span class="tag">Module</span> Governance cyber-global (layer alto).</td>
+            <td><span class="tag">B2G</span><span class="tag">Tech</span></td>
+            <td><a href="https://manuelcoletta1-source.github.io/cyberglobal/">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>Hermeticum-B.C.E.-Technology</b></td>
+            <td><span class="tag">Tech Repo</span> Repository tecnologico ufficiale (componenti, moduli, C2).</td>
+            <td><span class="tag">Tech</span></td>
+            <td><a href="https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>corpus-esoterologia-ermetica</b></td>
+            <td><span class="tag">Editoriale</span> CORPUS ESOTEROLOGIA ERMETICA (opera chiusa/opponibile).</td>
+            <td><span class="tag">Editoriale</span></td>
+            <td><a href="https://github.com/manuelcoletta1-source/corpus-esoterologia-ermetica">Apri</a></td>
+          </tr>
+
+          <tr>
+            <td><b>esoterologia-edizioni-ipr5</b></td>
+            <td><span class="tag">Editoriale</span> Atto editoriale IPR-5 (Esoterologia Edizioni).</td>
+            <td><span class="tag">Editoriale</span></td>
+            <td><a href="https://github.com/manuelcoletta1-source/esoterologia-edizioni-ipr5">Apri</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top:10px;">
+        Nota: questa mappa è intenzionalmente “top-level”. Se vuoi, nel prossimo file aggiungo una seconda tabella
+        per <span class="mono">ipr-core / ipr-gate / ipr-comply / ipr-exchange</span> e per i repo editoriali (volumi, apocalipsis, ecc.).
+      </p>
+    </section>
+  </div>
+</body>
+</html>
