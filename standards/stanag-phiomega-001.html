@@ -1,241 +1,34 @@
-STANDARD UE–ΦΩ–001
+# STANDARD UE–ΦΩ–001  
+## Evoluzione del sistema IPR
 
-Specifica normativa UE-first per tracciabilità verificabile e cybersecurity fail-closed
+### 1. Definizione
+L’evoluzione del sistema IPR è definita come il processo attraverso il quale una traccia iniziale verificabile viene preservata, formalizzata e resa controllabile nel tempo, senza introduzione di custodia dei dati personali, centralizzazione dell’identità o delega della responsabilità decisionale.
 
-Denominazione: STANDARD UE–ΦΩ–001
-Versione: 1.0
-Stato: Pubblico – sola lettura
-Ambito: Cybersecurity · Tracciabilità · Audit tecnico
-Allineamento: UE-first (non equivalente a eIDAS)
+### 2. Principio di conseguenzialità
+Ogni fase evolutiva del sistema deriva esclusivamente dalla necessità di mantenere la coerenza, l’integrità e l’opponibilità temporale delle evidenze prodotte nella fase precedente. Non sono ammesse estensioni funzionali che non siano direttamente giustificate da requisiti di verificabilità, auditabilità o interoperabilità.
 
+### 3. Oggetto evolutivo
+L’oggetto IPR costituisce la formalizzazione strutturata della traccia iniziale. La sua evoluzione non comporta arricchimento semantico dell’identità, ma esclusivamente il rafforzamento delle condizioni tecniche di:
+- integrità,
+- riproducibilità,
+- verifica indipendente.
 
----
+### 4. Estensione computabile
+L’estensione computabile del sistema ha funzione esclusivamente operativa e conservativa. Essa non introduce autonomia decisionale, non sostituisce il soggetto umano e non modifica la natura dell’atto originario. La sua finalità è garantire la persistenza tecnica delle condizioni iniziali nel tempo.
 
-1. Scopo
+### 5. Vincoli normativi
+L’evoluzione del sistema è vincolata ai seguenti principi:
+- minimizzazione del trattamento (GDPR-min by design),
+- assenza di custodia di dati personali,
+- neutralità rispetto ai regimi di identità ufficiale,
+- auditabilità continua,
+- interoperabilità con i quadri normativi europei vigenti.
 
-Questo Standard definisce un modello minimo, verificabile e audit-friendly per:
-
-attribuibilità tecnica degli atti
-
-riduzione dell’ambiguità temporale e decisionale
-
-verifica hash e timestamp
-
-separazione rigorosa tra norma, ricerca e operatività
-
-
-Lo Standard non definisce identità giuridica, non certifica persone e non custodisce dati.
-
-
----
-
-2. Campo di applicazione
-
-Si applica a:
-
-sistemi di tracciabilità tecnica
-
-sistemi di audit ex-post
-
-infrastrutture di cybersecurity orientate alla prova
-
-ambienti UE che richiedono minimizzazione dei dati
-
-
-Non si applica a:
-
-identity provider
-
-autenticazione legale
-
-sistemi di login o account centralizzati
-
-
+### 6. Finalità
+L’evoluzione del sistema non è orientata al miglioramento incrementale delle prestazioni o all’estensione funzionale arbitraria, ma alla salvaguardia della validità temporale delle evidenze prodotte e alla loro utilizzabilità in contesti istituzionali, amministrativi e di verifica indipendente.
 
 ---
 
-3. Principi fondamentali
-
-1. UE-first
-Il riferimento normativo è il diritto e l’ecosistema europeo.
-
-
-2. Fail-closed
-Se un requisito minimo manca, l’atto è INVALID.
-
-
-3. Hash-only
-Nessun contenuto è custodito. Solo riferimenti crittografici.
-
-
-4. Append-only
-Le tracce non sono riscrivibili.
-
-
-5. Separazione dei livelli
-Norma ≠ Ricerca ≠ Operatività ≠ Verifica.
-
-
-
-
----
-
-4. Non-obiettivi dichiarati
-
-Questo Standard:
-
-non è un Identity Provider
-
-non sostituisce eIDAS, CIE, SPID
-
-non assegna diritti legali automatici
-
-non custodisce dati personali
-
-non prova l’identità di un soggetto
-
-
-
----
-
-5. Modello concettuale
-
-HRR → DGV → LTA
-
-HRR – Human Reference Record
-Riferimento umano minimo (pseudonimo o identificatore locale).
-
-DGV – Decision / Governance Vector
-Atto o decisione minima, descritta tramite metadati.
-
-LTA – Long-Term Append-only trace
-Traccia tecnica a lungo termine (concettuale).
-
-> Il modello riduce l’ambiguità tecnica, non certifica identità.
-
-
-
-
----
-
-6. Formato minimo verificabile
-
-Un evento conforme DEVE includere almeno:
-
-{
-  "HRR": "string",
-  "POLICY": "UE-first | GDPR-min | hash-only | append-only | fail-closed",
-  "PAYLOAD_MIN": {
-    "desc": "string",
-    "content_hash_sha256": null,
-    "timestamp": null,
-    "created_utc": "ISO-8601"
-  }
-}
-
-Regole:
-
-ogni campo mancante → INVALID
-
-hash SHA-256 in formato hex (64 caratteri)
-
-timestamp in formato ISO-8601 UTC
-
-
-
----
-
-7. Relazione con l’operatività (ONLY)
-
-Questo Standard non descrive l’uso operativo.
-L’implementazione minima è definita in Fase 1 (ONLY).
-
-Lo Standard:
-
-definisce il modello
-
-NON implementa il processo
-
-
-
----
-
-8. Relazione con Verify
-
-Il componente di verifica:
-
-controlla struttura e hash
-
-produce esiti deterministici
-
-NON interpreta
-
-NON giudica
-
-NON certifica
-
-
-Esiti ammessi:
-
-VALID
-
-INVALID
-
-INCONCLUSIVE
-
-
-
----
-
-9. Sicurezza e privacy
-
-Nessuna custodia di payload
-
-Nessun identificatore personale obbligatorio
-
-Minimizzazione dei dati (GDPR-min)
-
-Verifica locale preferita
-
-
-
----
-
-10. Audit e opponibilità tecnica
-
-Un audit conforme a questo Standard DEVE poter:
-
-1. riprodurre il parsing
-
-
-2. verificare lo schema minimo
-
-
-3. ricalcolare l’hash
-
-
-4. confrontare in modo deterministico
-
-
-
-Lo Standard è opponibile come specifica tecnica, non come autorità giuridica.
-
-
----
-
-11. Stato del documento
-
-Versione: 1.0
-
-Mutabilità: FORBIDDEN
-
-Evoluzione: solo tramite nuovo Standard o allegato
-
-
-
----
-
-HERMETICUM B.C.E. S.r.l.
-STANDARD UE–ΦΩ–001 — HTML-native / no-PDF
-
-
+**Status:** Normativo  
+**Applicabilità:** Sistemi IPR, infrastrutture di prova digitale, gateway UE audit-first  
+**Compatibilità:** GDPR, eIDAS2 (non sostitutivo), EUDI Wallet (non equivalente)
