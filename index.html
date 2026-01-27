@@ -3,129 +3,139 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>EU Gateway — Hermeticum B.C.E.</title>
-  <meta name="description" content="EU Gateway: Create / Verify / Evidence Pack. Output verificabile offline. UE-first, hash-only, audit-first, fail-closed."/>
+  <title>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
+  <meta name="description" content="Hermeticum B.C.E. — infrastruttura UE-first per evidenze verificabili, audit riproducibile e operatività assistita da AI. Target B2B/B2G. Fail-closed. Hash-only."/>
   <link rel="stylesheet" href="./assets/ui.css"/>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a class="btn primary" href="./">EU Gateway</a>
-    <a class="btn" href="./create/">Create</a>
-    <a class="btn" href="./verify/">Verify</a>
-    <a class="btn" href="./evidence-pack/">Evidence</a>
-    <a class="btn" href="./catalog/">Catalog</a>
-    <a class="btn" href="./terms/">Terms</a>
-    <a class="btn" href="./map/">Map</a>
+    <a class="btn primary" href="./">Hermeticum</a>
+    <a class="btn" href="#cosa">Cosa facciamo</a>
+    <a class="btn" href="#clienti">Clienti</a>
+    <a class="btn" href="#principi">Principi</a>
+    <a class="btn" href="#ecosistema">Ecosistema</a>
+    <a class="btn" href="#legal">Legal</a>
     <span class="spacer"></span>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce/">Corporate</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2b/">B2B</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2g/">B2G</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/">Technology</a>
+    <a class="btn" data-link="platform" href="#">EU Gateway</a>
+    <a class="btn" data-link="b2b" href="#">B2B</a>
+    <a class="btn" data-link="b2g" href="#">B2G</a>
+    <a class="btn" data-link="technology" href="#">Technology</a>
   </div>
 </header>
 
 <div class="wrap">
 
-  <!-- HERO -->
   <section class="box">
-    <h1>EU Gateway</h1>
+    <h1>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</h1>
+    <p><b>HERMETICUM B.C.E. S.r.l.</b></p>
     <p>
-      Piattaforma neutra per <b>Create</b> / <b>Verify</b> / <b>Evidence Pack</b>.
-      Produce output verificabili offline (hash/receipt/manifest) in regime controllato.
+      Infrastruttura UE-first per <b>evidenze verificabili</b>, <b>audit riproducibile</b> e
+      operatività assistita da AI in regime controllato.
+      Progettata per contesti <b>B2B</b> e <b>B2G</b>.
     </p>
+
     <p>
       <span class="tag">UE-first</span>
-      <span class="tag">GDPR-min</span>
-      <span class="tag">Hash-only</span>
       <span class="tag">Audit-first</span>
+      <span class="tag">Hash-only</span>
       <span class="tag">Fail-closed</span>
+      <span class="tag">B2B</span>
+      <span class="tag">B2G</span>
     </p>
 
     <div class="cta">
-      <a class="btn primary" href="./create/">Crea un IPR (Create)</a>
-      <a class="btn" href="./verify/">Verifica (Verify)</a>
-      <a class="btn" href="./evidence-pack/">Evidence Pack</a>
+      <a class="btn primary" data-link="platform" href="#">Apri EU Gateway</a>
+      <a class="btn" data-link="technology" href="#">Technology</a>
+      <a class="btn" href="#clienti">Scegli profilo</a>
     </div>
   </section>
 
-  <!-- 3 CARDS -->
-  <section class="grid3">
+  <section class="grid2" id="cosa">
     <div class="box">
-      <h2>Create</h2>
+      <h2>Cosa facciamo</h2>
       <p>
-        Genera output minimo e verificabile:
-        <br/>• `ipr.canon.json`
-        <br/>• SHA-512
-        <br/>• `receipt.json` (ED25519, se previsto)
-        <br/>• `PACK_MANIFEST.json`
+        • Evidenze tecniche verificabili (hash/receipt/manifest)<br/>
+        • Audit riproducibile offline<br/>
+        • Workflow tracciabili per processi assistiti da AI
       </p>
-      <div class="cta">
-        <a class="btn primary" href="./create/">Apri Create</a>
-      </div>
     </div>
-
     <div class="box">
-      <h2>Verify</h2>
+      <h2>Cosa NON facciamo</h2>
       <p>
-        Verifica offline indipendente:
-        <br/>• hash → firma → manifest
-        <br/>Se una verifica fallisce o è indeterminata ⇒ <b>invalid</b>.
+        • Non gestiamo identità civile<br/>
+        • Non sostituiamo eIDAS / EUDI Wallet<br/>
+        • Non carichiamo documenti nel gateway<br/>
+        • Non promettiamo effetti giuridici automatici
       </p>
-      <div class="cta">
-        <a class="btn primary" href="./verify/">Apri Verify</a>
-      </div>
     </div>
+  </section>
 
-    <div class="box">
-      <h2>Catalog</h2>
-      <p>
-        Spiega cosa abilita l’IPR nei diversi contesti (B2B/B2G),
-        in modo leggibile e non ambiguo.
-      </p>
-      <div class="cta">
-        <a class="btn primary" href="./catalog/">Apri Catalog</a>
+  <section class="box" id="clienti">
+    <h2>Clienti</h2>
+    <div class="grid3">
+      <div class="box">
+        <h2>Business (B2B)</h2>
+        <p>Evidence verificabile per imprese, processi auditabili, operatività assistita da AI in regime controllato.</p>
+        <div class="cta">
+          <a class="btn primary" data-link="b2b" href="#">Vai a B2B</a>
+        </div>
+      </div>
+      <div class="box">
+        <h2>Government (B2G)</h2>
+        <p>Audit e tracciabilità per enti pubblici e governance UE. Sperimentazione, valutazione e verifica.</p>
+        <div class="cta">
+          <a class="btn primary" data-link="b2g" href="#">Vai a B2G</a>
+        </div>
+      </div>
+      <div class="box">
+        <h2>EU Gateway (neutro)</h2>
+        <p>Create / Verify / Evidence Pack: output verificabile e minimizzato (hash-only), adatto ad audit offline.</p>
+        <div class="cta">
+          <a class="btn primary" data-link="platform" href="#">Apri Gateway</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PRINCIPI -->
-  <section class="box" style="margin-top:12px">
-    <h2>Regole globali</h2>
+  <section class="box" id="principi">
+    <h2>Principi tecnici e legali</h2>
     <p>
-      <b>FAIL-CLOSED</b>: mismatch o indeterminatezza ⇒ output invalidato e azione bloccata.
+      <b>FAIL-CLOSED</b>: se una verifica fallisce o è indeterminata, l’output è invalidato e l’azione è bloccata.
     </p>
-    <p>
-      <b>HASH-ONLY</b>: nel gateway non transitano documenti, solo impronte verificabili.
-    </p>
-    <p>
-      <b>AUDIT-FIRST</b>: ogni output deve poter essere verificato offline da terzi.
-    </p>
+    <p><b>HASH-ONLY</b>: nessun documento nel gateway, solo impronte verificabili.</p>
+    <p><b>AUDIT-FIRST</b>: ogni output deve essere verificabile offline in modo indipendente.</p>
   </section>
 
-  <!-- ROUTING -->
-  <section class="grid2" style="margin-top:12px">
-    <div class="box">
-      <h2>Routing ecosistema</h2>
-      <p>
-        • IPR Gateway: https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/<br/>
-        • UNEBDO: https://manuelcoletta1-source.github.io/unebdo/<br/>
-        • OPC: https://manuelcoletta1-source.github.io/opc/<br/>
-        • Registry: https://manuelcoletta1-source.github.io/ue-ipr-registry/<br/>
-        • GitJoker-C2: https://manuelcoletta1-source.github.io/gitjoker-c2/
-      </p>
+  <section class="box" id="ecosistema">
+    <h2>Ecosistema (mappa breve)</h2>
+    <p>
+      • IPR: record tecnico minimo verificabile nel tempo<br/>
+      • UNEBDO: validità tecnica giuridico-computabile<br/>
+      • OPC: policy computabile (valutazione e controllo)<br/>
+      • Registry: pubblicazione sperimentale hash-only<br/>
+      • GitJoker-C2: publishing & compliance control su GitHub
+    </p>
+    <div class="cta">
+      <a class="btn primary" data-link="ipr" href="#">IPR</a>
+      <a class="btn" data-link="unebdo" href="#">UNEBDO</a>
+      <a class="btn" data-link="opc" href="#">OPC</a>
+      <a class="btn" data-link="registry" href="#">Registry</a>
+      <a class="btn" data-link="gitjoker" href="#">GitJoker-C2</a>
     </div>
-    <div class="box">
-      <h2>Note (perimetro)</h2>
-      <p>
-        Questo gateway produce evidenza tecnica verificabile.
-        Non sostituisce eIDAS/EUDI, non gestisce identità civile,
-        non attribuisce effetti giuridici automatici.
-      </p>
-      <div class="cta">
-        <a class="btn primary" href="./terms/">Leggi Terms</a>
-      </div>
+  </section>
+
+  <section class="box" id="legal">
+    <h2>Legal (perimetro)</h2>
+    <p>
+      Hermeticum B.C.E. fornisce evidenza tecnica verificabile e strumenti di audit.
+      Non attribuisce automaticamente effetti giuridici: l’uso in B2B/B2G richiede valutazione interna e legale.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="./legal/LEGAL_NOTICE.md">Legal Notice</a>
+      <a class="btn" href="./legal/TERMS.md">Terms</a>
+      <a class="btn" href="./legal/PRIVACY.md">Privacy</a>
     </div>
   </section>
 
@@ -134,10 +144,11 @@
 <footer>
   <div class="wrap">
     <p class="small">
-      HERMETICUM B.C.E. S.r.l. — EU Gateway · UE-first · Hash-only · Audit-first · Fail-closed
+      HERMETICUM B.C.E. S.r.l. — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA · UE-first · Fail-closed · Hash-only
     </p>
   </div>
 </footer>
 
+<script src="./assets/links.js"></script>
 </body>
 </html>
