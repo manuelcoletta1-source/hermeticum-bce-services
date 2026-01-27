@@ -3,209 +3,473 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Verify | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Verify: validazione tecnica hash/bundle. Nessuna narrativa, esiti fail-closed. Tutto locale, nessun invio dati." />
-  <link rel="stylesheet" href="../assets/css/main.css" />
+  <title>Verify — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
+  <meta name="description" content="Verifica IPR package e receipt: schema + hash (client-side). UE-first, GDPR-min, fail-closed." />
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
+      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --bad:#fda4af; --warn:#fde68a;
+      --r:16px; --pad:18px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    body{margin:0;background:radial-gradient(900px 600px at 15% 0%, #0d1b2a 0%, var(--bg) 55%);color:var(--txt);}
+    a{color:var(--acc);text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px;}
+    header{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}
+    .seal{font-weight:800;letter-spacing:.3px}
+    .company{color:var(--mut);font-size:12px}
+    .tag{color:var(--mut);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .title{font-size:18px;font-weight:750;margin:0 0 8px}
+    label{display:block;font-size:12px;color:var(--mut);margin:10px 0 6px}
+    textarea,input{
+      width:100%;box-sizing:border-box;background:#071018;border:1px solid var(--brd);
+      color:var(--txt);border-radius:12px;padding:10px 12px;outline:none
+    }
+    textarea{min-height:220px;resize:vertical;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-size:12px;line-height:1.35}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{
+      border:1px solid var(--brd);background:#0a1320;color:var(--txt);
+      border-radius:12px;padding:10px 12px;font-weight:650;cursor:pointer
+    }
+    button.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
+    button:disabled{opacity:.55;cursor:not-allowed}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .status{margin-top:10px;font-size:12px;line-height:1.35}
+    .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+    .out{white-space:pre;overflow:auto;background:#06101a;border:1px solid var(--brd);border-radius:12px;padding:12px;font-size:12px}
+    .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+    @media (max-width:620px){.kpi{grid-template-columns:1fr}}
+    .pill{border:1px solid var(--brd);border-radius:999px;padding:7px 10px;font-size:12px;color:var(--mut)}
+    .pill strong{color:var(--txt)}
+    .hr{height:1px;background:var(--brd);margin:14px 0}
+  </style>
 </head>
+
 <body>
-  <header class="wrap">
-    <nav class="nav">
-      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-      <div class="navlinks">
-        <a href="../">Gateway</a>
-        <a href="../standards/">Standard</a>
-        <a href="../research/">Ricerca UE</a>
-        <a href="../phase-1/">Fase 1</a>
-        <a class="active" href="./">Verify</a>
-        <a href="../legal/">Legal</a>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        <div class="company">HERMETICUM B.C.E. S.r.l.</div>
+        <div class="tag">Verify (client-side) · schema + hash · UE-first · GDPR-min · fail-closed</div>
       </div>
-    </nav>
-  </header>
+      <div class="tag" style="max-width:520px">
+        Incolla i file generati da <span class="mono">/create</span>. Questa pagina scarica gli schemi da
+        <span class="mono">/schemas</span> e verifica in modo deterministico.
+      </div>
+    </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Verify — Hash-Only / Evidence Bundle</h1>
-      <p class="lead">
-        Verifica locale di un bundle (JSON): parsing, campi minimi, coerenza policy e formato hash.
-        Se hai il payload off-chain, puoi ricalcolare lo SHA-256 nel browser e confrontarlo.
-      </p>
-
-      <div class="notice">
-        <strong>Fail-closed:</strong> se manca un requisito minimo → <strong>INVALID</strong>.  
-        <strong>VALID</strong> significa “coerenza tecnica minima”, non prova di identità.
+    <section class="card">
+      <h1 class="title">Verifica IPR + Receipt</h1>
+      <div class="kpi">
+        <div class="pill">Schema IPR: <strong id="kIprSchema">—</strong></div>
+        <div class="pill">Schema Receipt: <strong id="kRcpSchema">—</strong></div>
+        <div class="pill">Hash ipr.json: <strong id="kIprHash">—</strong></div>
+        <div class="pill">Hash payload receipt: <strong id="kPayloadHash">—</strong></div>
       </div>
 
-      <div class="btnrow" style="margin-top:14px;">
-        <a class="btn secondary" href="../register/">Register</a>
-        <a class="btn secondary" href="../create/">Create (bundle)</a>
-        <a class="btn secondary" href="../catalog/">Catalog</a>
-        <a class="btn secondary" href="../privacy/">Privacy</a>
+      <div class="btns">
+        <button class="primary" id="run">Esegui verifica</button>
+        <button id="clear">Pulisci</button>
+        <button id="example">Carica esempio</button>
       </div>
+
+      <div class="status" id="status"></div>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <h2>1) Incolla Evidence Bundle (JSON)</h2>
-        <label class="muted">Bundle (JSON)</label>
-        <textarea id="eventJson" rows="12" style="width:100%;" placeholder='{"HRR":"...","POLICY":"...","PAYLOAD_MIN":{"desc":"...","content_hash_sha256":null}}'></textarea>
+    <div class="grid" style="margin-top:16px">
+      <section class="card">
+        <h2 class="title">ipr.json</h2>
+        <label for="iprText">Incolla qui</label>
+        <textarea id="iprText" spellcheck="false" placeholder="{ ... }"></textarea>
+        <div class="hr"></div>
+        <label>Dettagli validazione IPR</label>
+        <div class="out mono" id="iprReport">—</div>
+      </section>
 
-        <div class="btnrow" style="margin-top:12px;">
-          <button class="btn" id="btnVerify" type="button">Verifica</button>
-          <button class="btn secondary" id="btnLoadExample" type="button">Esempio</button>
-          <button class="btn secondary" id="btnReset" type="button">Reset</button>
-        </div>
+      <section class="card">
+        <h2 class="title">receipt.json</h2>
+        <label for="rcpText">Incolla qui</label>
+        <textarea id="rcpText" spellcheck="false" placeholder="{ ... }"></textarea>
+        <div class="hr"></div>
+        <label>Dettagli validazione Receipt</label>
+        <div class="out mono" id="rcpReport">—</div>
+      </section>
+    </div>
 
-        <p class="muted" style="margin-top:10px;">
-          Nessun invio dati: tutto resta nel browser.
-        </p>
-      </article>
-
-      <article class="card">
-        <h2>2) Payload off-chain (opzionale)</h2>
-        <label class="muted">Payload originale (testo/JSON) — usato solo per ricalcolare SHA-256</label>
-        <textarea id="payload" rows="10" style="width:100%;" placeholder="Incolla qui il payload off-chain (se ce l'hai)"></textarea>
-
-        <div class="btnrow" style="margin-top:12px;">
-          <button class="btn secondary" id="btnHashPayload" type="button">Calcola SHA-256</button>
-          <button class="btn secondary" id="btnCompare" type="button">Confronta con bundle</button>
-        </div>
-
-        <pre id="payloadHashOut" class="codeblock" style="margin-top:12px;">{}</pre>
-      </article>
-
-      <article class="card">
-        <h2>Risultato (fail-closed)</h2>
-        <pre id="result" class="codeblock">{}</pre>
-        <p class="muted" style="margin-top:10px;">
-          Esiti: <strong>VALID</strong> / <strong>INVALID</strong> / <strong>INCONCLUSIVE</strong>.
-        </p>
-      </article>
-
-      <article class="card">
-        <h2>Note operative</h2>
-        <ul class="muted">
-          <li>Verify valida struttura e coerenza minima (non identità).</li>
-          <li>Non sostituisce CIE/SPID/eIDAS.</li>
-          <li>Nessuna custodia di dati personali nel portale statico.</li>
-        </ul>
-        <div class="btnrow">
-          <a class="btn secondary" href="../governance/">Governance</a>
-          <a class="btn secondary" href="../terms/">Termini</a>
-          <a class="btn secondary" href="../about/">About</a>
-        </div>
-      </article>
+    <section class="card" style="margin-top:16px">
+      <h2 class="title">Risultato (fail-closed)</h2>
+      <div class="muted" style="line-height:1.55">
+        La verifica è <b>OK</b> solo se:
+        (1) entrambi gli schemi passano,
+        (2) <span class="mono">receipt.payload.ipr_hash_sha256</span> coincide con l’hash ricalcolato di <span class="mono">ipr.json</span>,
+        (3) <span class="mono">receipt.payload_hash_sha256</span> coincide con l’hash ricalcolato del payload.
+      </div>
+      <div class="hr"></div>
+      <div class="out mono" id="finalOut">—</div>
     </section>
-  </main>
-
-  <footer class="wrap foot">
-    <small>HERMETICUM B.C.E. S.r.l. — Verify (local, hash-only)</small>
-  </footer>
+  </div>
 
 <script>
+  // ---------------- Utilities ----------------
   const $ = (id) => document.getElementById(id);
 
-  function out(obj){ $("result").textContent = JSON.stringify(obj, null, 2); }
-  function outHash(obj){ $("payloadHashOut").textContent = JSON.stringify(obj, null, 2); }
-
-  function isHex(s){ return /^[0-9a-fA-F]+$/.test(s); }
-  function looksLikeSha256(h){ return typeof h==="string" && h.length===64 && isHex(h); }
-
-  async function sha256Hex(text){
-    const enc = new TextEncoder().encode(text);
+  async function sha256Hex(str){
+    const enc = new TextEncoder().encode(str);
     const buf = await crypto.subtle.digest("SHA-256", enc);
-    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,"0")).join("");
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
   }
 
-  function validateEvent(e){
-    // Fail-closed minimal model: HRR + POLICY + PAYLOAD_MIN.desc
-    if (!e || typeof e !== "object") return {status:"INVALID", reason:"Event is not an object"};
-    if (!e.HRR || typeof e.HRR !== "string") return {status:"INVALID", reason:"Missing/invalid HRR"};
-    if (!e.POLICY || typeof e.POLICY !== "string") return {status:"INVALID", reason:"Missing/invalid POLICY"};
-    if (!e.PAYLOAD_MIN || typeof e.PAYLOAD_MIN !== "object") return {status:"INVALID", reason:"Missing PAYLOAD_MIN"};
-    if (!e.PAYLOAD_MIN.desc || typeof e.PAYLOAD_MIN.desc !== "string") return {status:"INVALID", reason:"Missing PAYLOAD_MIN.desc"};
-
-    const h = e.PAYLOAD_MIN.content_hash_sha256;
-    if (h !== null && h !== undefined && h !== "") {
-      if (typeof h !== "string" || !looksLikeSha256(h)) {
-        return {status:"INVALID", reason:"PAYLOAD_MIN.content_hash_sha256 present but not SHA-256 hex"};
+  function stableStringify(obj){
+    // JSON deterministico: ordina chiavi ricorsivamente
+    const seen = new WeakSet();
+    const norm = (v) => {
+      if(v && typeof v === "object"){
+        if(seen.has(v)) throw new Error("Cyclic object not allowed");
+        seen.add(v);
+        if(Array.isArray(v)) return v.map(norm);
+        const keys = Object.keys(v).sort();
+        const out = {};
+        for(const k of keys) out[k] = norm(v[k]);
+        return out;
       }
-    }
-
-    return {
-      status:"VALID",
-      note:"Structure OK (does not prove identity)",
-      checked_utc:new Date().toISOString()
+      return v;
     };
+    return JSON.stringify(norm(obj));
   }
 
-  const example = {
-    HRR: "HRR-L-DEMO-0001",
-    POLICY: "UE-first | GDPR-min | hash-only | append-only | fail-closed",
-    NOTE: "Demo. Not an identity proof.",
-    PAYLOAD_MIN: {
-      desc: "Esempio di bundle minimo per test Verify",
-      content_hash_sha256: null,
-      timestamp: null,
-      created_utc: new Date().toISOString()
+  function setKpi(id, text, cls){
+    const el = $(id);
+    el.textContent = text;
+    el.className = cls ? cls : "";
+  }
+
+  function setStatus(msg, kind){
+    const el = $("status");
+    el.className = "status " + (kind || "warn");
+    el.textContent = msg;
+  }
+
+  function report(el, ok, lines){
+    el.textContent = (ok ? "OK ✅\n" : "FAIL ❌\n") + (lines?.length ? lines.join("\n") : "");
+  }
+
+  // ---------------- Minimal JSON Schema Validator ----------------
+  // Supporta: type, const, enum, required, additionalProperties(false), properties, pattern, minLength/maxLength,
+  // minItems, uniqueItems, items, format(date-time) base (regex), minimum/maximum
+  function validate(schema, data, path="$"){
+    const errs = [];
+
+    const isObj = (x) => x && typeof x === "object" && !Array.isArray(x);
+
+    const checkFormatDateTime = (s) => {
+      // ISO 8601 abbastanza robusto per MVP
+      return typeof s === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(s);
+    };
+
+    const walk = (sch, val, p) => {
+      if(!sch) return;
+
+      // type
+      if(sch.type){
+        const t = sch.type;
+        const ok =
+          (t === "object" && isObj(val)) ||
+          (t === "array" && Array.isArray(val)) ||
+          (t === "string" && typeof val === "string") ||
+          (t === "number" && typeof val === "number") ||
+          (t === "integer" && Number.isInteger(val)) ||
+          (t === "boolean" && typeof val === "boolean") ||
+          (Array.isArray(t) && t.some(tt => (
+            (tt==="null" && val===null) ||
+            (tt==="object" && isObj(val)) ||
+            (tt==="array" && Array.isArray(val)) ||
+            (tt==="string" && typeof val === "string") ||
+            (tt==="number" && typeof val === "number") ||
+            (tt==="integer" && Number.isInteger(val)) ||
+            (tt==="boolean" && typeof val === "boolean")
+          )));
+        if(!ok) errs.push(`${p}: type mismatch (expected ${JSON.stringify(t)})`);
+      }
+
+      // const
+      if("const" in sch){
+        if(val !== sch.const) errs.push(`${p}: const mismatch (expected ${JSON.stringify(sch.const)})`);
+      }
+
+      // enum
+      if(sch.enum){
+        if(!sch.enum.includes(val)) errs.push(`${p}: enum mismatch`);
+      }
+
+      // string constraints
+      if(typeof val === "string"){
+        if("minLength" in sch && val.length < sch.minLength) errs.push(`${p}: minLength ${sch.minLength}`);
+        if("maxLength" in sch && val.length > sch.maxLength) errs.push(`${p}: maxLength ${sch.maxLength}`);
+        if(sch.pattern){
+          const re = new RegExp(sch.pattern);
+          if(!re.test(val)) errs.push(`${p}: pattern mismatch`);
+        }
+        if(sch.format === "date-time"){
+          if(!checkFormatDateTime(val)) errs.push(`${p}: format date-time mismatch (must be ISO Z)`);
+        }
+      }
+
+      // number / integer constraints
+      if(typeof val === "number"){
+        if("minimum" in sch && val < sch.minimum) errs.push(`${p}: minimum ${sch.minimum}`);
+        if("maximum" in sch && val > sch.maximum) errs.push(`${p}: maximum ${sch.maximum}`);
+      }
+
+      // object
+      if(isObj(val)){
+        if(Array.isArray(sch.required)){
+          for(const k of sch.required){
+            if(!(k in val)) errs.push(`${p}: missing required '${k}'`);
+          }
+        }
+        if(sch.additionalProperties === false && sch.properties){
+          for(const k of Object.keys(val)){
+            if(!(k in sch.properties)) errs.push(`${p}: additional property not allowed '${k}'`);
+          }
+        }
+        if(sch.properties){
+          for(const [k, sub] of Object.entries(sch.properties)){
+            if(k in val) walk(sub, val[k], `${p}.${k}`);
+          }
+        }
+      }
+
+      // array
+      if(Array.isArray(val)){
+        if("minItems" in sch && val.length < sch.minItems) errs.push(`${p}: minItems ${sch.minItems}`);
+        if(sch.uniqueItems){
+          const set = new Set(val.map(v => JSON.stringify(v)));
+          if(set.size !== val.length) errs.push(`${p}: uniqueItems violated`);
+        }
+        if(sch.items){
+          for(let i=0;i<val.length;i++){
+            walk(sch.items, val[i], `${p}[${i}]`);
+          }
+        }
+      }
+    };
+
+    walk(schema, data, path);
+    return errs;
+  }
+
+  // ---------------- Load schemas ----------------
+  async function fetchJSON(url){
+    const r = await fetch(url, {cache:"no-store"});
+    if(!r.ok) throw new Error(`Cannot fetch ${url} (${r.status})`);
+    return await r.json();
+  }
+
+  async function loadSchemas(){
+    const base = location.origin + location.pathname.replace(/\/verify\/.*$/, "/");
+    // se sei su /hermeticum-bce-platform/verify/ → base diventa /hermeticum-bce-platform/
+    const iprUrl = base + "schemas/ipr.schema.json";
+    const rcpUrl = base + "schemas/receipt.schema.json";
+    const [iprSchema, rcpSchema] = await Promise.all([fetchJSON(iprUrl), fetchJSON(rcpUrl)]);
+    return {iprSchema, rcpSchema, iprUrl, rcpUrl};
+  }
+
+  // ---------------- Verification ----------------
+  async function runVerify(){
+    $("iprReport").textContent = "—";
+    $("rcpReport").textContent = "—";
+    $("finalOut").textContent = "—";
+    setKpi("kIprSchema", "—");
+    setKpi("kRcpSchema", "—");
+    setKpi("kIprHash", "—");
+    setKpi("kPayloadHash", "—");
+
+    let ipr, rcp;
+    try{
+      ipr = JSON.parse($("iprText").value);
+    }catch(e){
+      setStatus("ipr.json non è JSON valido.", "bad");
+      return;
     }
+    try{
+      rcp = JSON.parse($("rcpText").value);
+    }catch(e){
+      setStatus("receipt.json non è JSON valido.", "bad");
+      return;
+    }
+
+    let schemas;
+    try{
+      schemas = await loadSchemas();
+      setKpi("kIprSchema", "caricato ✅", "ok");
+      setKpi("kRcpSchema", "caricato ✅", "ok");
+    }catch(e){
+      setKpi("kIprSchema", "errore ❌", "bad");
+      setKpi("kRcpSchema", "errore ❌", "bad");
+      setStatus("Impossibile caricare gli schemi da /schemas. Verifica che i file esistano e che GitHub Pages li serva.", "bad");
+      $("finalOut").textContent = String(e?.message || e);
+      return;
+    }
+
+    // validate schemas
+    const iprErrs = validate(schemas.iprSchema, ipr, "$");
+    const rcpErrs = validate(schemas.rcpSchema, rcp, "$");
+
+    report($("iprReport"), iprErrs.length === 0, iprErrs);
+    report($("rcpReport"), rcpErrs.length === 0, rcpErrs);
+
+    // hashes (deterministic)
+    let iprHash, payloadHash;
+    try{
+      iprHash = await sha256Hex(stableStringify(ipr));
+      payloadHash = await sha256Hex(stableStringify(rcp.payload));
+      setKpi("kIprHash", iprHash.slice(0,16) + "…", "ok");
+      setKpi("kPayloadHash", payloadHash.slice(0,16) + "…", "ok");
+    }catch(e){
+      setStatus("Errore nel calcolo hash (oggetto ciclico o dati non serializzabili).", "bad");
+      $("finalOut").textContent = String(e?.message || e);
+      return;
+    }
+
+    // fail-closed checks
+    const checks = [];
+    let ok = true;
+
+    if(iprErrs.length !== 0){
+      ok = false;
+      checks.push("FAIL: schema IPR non valido.");
+    }else{
+      checks.push("OK: schema IPR valido.");
+    }
+
+    if(rcpErrs.length !== 0){
+      ok = false;
+      checks.push("FAIL: schema Receipt non valido.");
+    }else{
+      checks.push("OK: schema Receipt valido.");
+    }
+
+    // compare ipr_hash_sha256 inside receipt payload
+    const declaredIprHash = rcp?.payload?.ipr_hash_sha256;
+    if(typeof declaredIprHash !== "string"){
+      ok = false;
+      checks.push("FAIL: receipt.payload.ipr_hash_sha256 mancante.");
+    }else if(declaredIprHash !== iprHash){
+      ok = false;
+      checks.push("FAIL: receipt.payload.ipr_hash_sha256 mismatch.");
+      checks.push(`  declared: ${declaredIprHash}`);
+      checks.push(`  computed: ${iprHash}`);
+    }else{
+      checks.push("OK: ipr_hash_sha256 coincide.");
+    }
+
+    // compare payload_hash_sha256
+    const declaredPayloadHash = rcp?.payload_hash_sha256;
+    if(typeof declaredPayloadHash !== "string"){
+      ok = false;
+      checks.push("FAIL: receipt.payload_hash_sha256 mancante.");
+    }else if(declaredPayloadHash !== payloadHash){
+      ok = false;
+      checks.push("FAIL: receipt.payload_hash_sha256 mismatch.");
+      checks.push(`  declared: ${declaredPayloadHash}`);
+      checks.push(`  computed: ${payloadHash}`);
+    }else{
+      checks.push("OK: payload_hash_sha256 coincide.");
+    }
+
+    // subject linking
+    const subj1 = ipr?.subject;
+    const subj2 = rcp?.payload?.ipr_subject;
+    if(subj1 && subj2 && subj1 !== subj2){
+      ok = false;
+      checks.push("FAIL: subject mismatch tra ipr.subject e receipt.payload.ipr_subject.");
+      checks.push(`  ipr.subject: ${subj1}`);
+      checks.push(`  rcp.ipr_subject: ${subj2}`);
+    }else if(subj1 && subj2){
+      checks.push("OK: subject coincide.");
+    }
+
+    // policy coherence (basic)
+    const pol1 = stableStringify(ipr?.policy || {});
+    const pol2 = stableStringify(rcp?.payload?.policy || {});
+    if(pol1 !== pol2){
+      ok = false;
+      checks.push("FAIL: policy mismatch tra IPR e receipt payload.");
+    }else{
+      checks.push("OK: policy coerente.");
+    }
+
+    $("finalOut").textContent = (ok ? "VERIFICA OK ✅\n\n" : "VERIFICA FAIL ❌ (fail-closed)\n\n") + checks.join("\n");
+    setStatus(ok ? "Verifica OK: schema e hash coerenti." : "Verifica FALLITA: vedi dettagli sotto.", ok ? "ok" : "bad");
+  }
+
+  // ---------------- UI bindings ----------------
+  $("run").onclick = () => runVerify();
+
+  $("clear").onclick = () => {
+    $("iprText").value = "";
+    $("rcpText").value = "";
+    $("iprReport").textContent = "—";
+    $("rcpReport").textContent = "—";
+    $("finalOut").textContent = "—";
+    setStatus("", "warn");
+    setKpi("kIprSchema", "—");
+    setKpi("kRcpSchema", "—");
+    setKpi("kIprHash", "—");
+    setKpi("kPayloadHash", "—");
   };
 
-  $("btnVerify").addEventListener("click", () => {
-    const raw = ($("eventJson").value || "").trim();
-    if (!raw) return out({status:"INVALID", reason:"Empty input", ts_utc:new Date().toISOString()});
-    try {
-      const obj = JSON.parse(raw);
-      out(validateEvent(obj));
-    } catch (e) {
-      out({status:"INVALID", reason:"Invalid JSON", detail:String(e), ts_utc:new Date().toISOString()});
-    }
-  });
+  $("example").onclick = async () => {
+    // Esempio minimo coerente con gli schemi
+    const issued_at = new Date().toISOString();
+    const ipr = {
+      proto: "AI_JOKER_C2",
+      type: "IPR_PACKAGE",
+      version: "v1",
+      issuer: "HERMETICUM B.C.E. S.r.l.",
+      seal: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
+      issued_at,
+      level: "BASIC",
+      subject: "ipr-subject:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      purpose: "AI accountability personale",
+      policy: { UE_FIRST:true, GDPR_MIN:true, HASH_ONLY:true, FAIL_CLOSED:true, AUDIT_APPEND_ONLY:true },
+      consent: { scope:"AI_ACCOUNTABILITY", duration_days:365, note:null, acknowledged:true },
+      context: { kind:"COARSE_GEO", hash_sha256:"b".repeat(64), fields_present:["country","city"] },
+      notes: null,
+      audit: [{ evt:"EVT-IPR-ISSUED", at:issued_at, by:"CLIENT_SIDE_WIZARD", hash_sha256:"c".repeat(64) }]
+    };
 
-  $("btnLoadExample").addEventListener("click", () => {
-    $("eventJson").value = JSON.stringify(example, null, 2);
-    out({status:"INCONCLUSIVE", note:"Example loaded. Click 'Verifica'.", ts_utc:new Date().toISOString()});
-  });
+    const iprHash = await sha256Hex(stableStringify(ipr));
+    const payload = {
+      ipr_subject: ipr.subject,
+      ipr_level: ipr.level,
+      purpose: ipr.purpose,
+      policy: ipr.policy,
+      consent_scope: ipr.consent.scope,
+      issued_at,
+      ipr_hash_sha256: iprHash
+    };
+    const payloadHash = await sha256Hex(stableStringify(payload));
 
-  $("btnReset").addEventListener("click", () => {
-    $("eventJson").value = "";
-    $("payload").value = "";
-    out({});
-    outHash({});
-  });
+    const rcp = {
+      proto: "AI_JOKER_C2",
+      type: "RECEIPT",
+      version: "v1",
+      kind: "IPR_ISSUANCE",
+      issued_at,
+      payload_hash_sha256: payloadHash,
+      payload,
+      signature: { scheme:"NONE", note:"Esempio demo." }
+    };
 
-  $("btnHashPayload").addEventListener("click", async () => {
-    const p = ($("payload").value || "");
-    if (!p.trim()) return outHash({status:"INVALID", reason:"Empty payload"});
-    const h = await sha256Hex(p);
-    outHash({status:"OK", sha256: h});
-  });
-
-  $("btnCompare").addEventListener("click", async () => {
-    let evt;
-    try { evt = JSON.parse(($("eventJson").value || "").trim() || "{}"); }
-    catch { return out({status:"INVALID", reason:"Event JSON invalid; cannot compare"}); }
-
-    const expected = evt?.PAYLOAD_MIN?.content_hash_sha256;
-    if (!expected || typeof expected !== "string") {
-      return out({status:"INCONCLUSIVE", reason:"Bundle has no PAYLOAD_MIN.content_hash_sha256"});
-    }
-    if (!looksLikeSha256(expected)) {
-      return out({status:"INVALID", reason:"Bundle hash is not valid SHA-256 hex"});
-    }
-
-    const p = ($("payload").value || "");
-    if (!p.trim()) return out({status:"INVALID", reason:"Empty payload; cannot compute hash"});
-
-    const actual = await sha256Hex(p);
-    const ok = (actual.toLowerCase() === expected.toLowerCase());
-
-    out({
-      status: ok ? "VALID" : "INVALID",
-      compare: { expected_sha256: expected, actual_sha256: actual },
-      note: ok ? "Hash match." : "Hash mismatch.",
-      ts_utc: new Date().toISOString()
-    });
-  });
+    $("iprText").value = JSON.stringify(ipr, null, 2);
+    $("rcpText").value = JSON.stringify(rcp, null, 2);
+    setStatus("Esempio caricato. Premi 'Esegui verifica'.", "warn");
+  };
 </script>
 </body>
 </html>
