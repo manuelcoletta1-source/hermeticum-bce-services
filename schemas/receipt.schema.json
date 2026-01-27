@@ -18,24 +18,18 @@
     "proto": { "type": "string", "const": "AI_JOKER_C2" },
     "type": { "type": "string", "const": "RECEIPT" },
     "version": { "type": "string", "const": "v1" },
-    "kind": {
-      "type": "string",
-      "enum": ["IPR_ISSUANCE", "AI_DECISION"]
-    },
+
+    "kind": { "type": "string", "enum": ["IPR_ISSUANCE", "AI_DECISION"] },
     "issued_at": { "type": "string", "format": "date-time" },
-    "payload_hash_sha256": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{64}$"
-    },
+
+    "payload_hash_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+
     "payload": {
       "type": "object",
       "additionalProperties": true,
       "required": ["ipr_subject", "ipr_level", "purpose", "policy", "consent_scope", "issued_at", "ipr_hash_sha256"],
       "properties": {
-        "ipr_subject": {
-          "type": "string",
-          "pattern": "^ipr-subject:[a-f0-9]{32}$"
-        },
+        "ipr_subject": { "type": "string", "pattern": "^ipr-subject:[a-f0-9]{32}$" },
         "ipr_level": { "type": "string", "enum": ["BASIC", "STRONG", "INSTITUTION"] },
         "purpose": { "type": "string", "minLength": 3, "maxLength": 200 },
         "policy": {
@@ -50,26 +44,18 @@
             "AUDIT_APPEND_ONLY": { "type": "boolean", "const": true }
           }
         },
-        "consent_scope": {
-          "type": "string",
-          "enum": ["AI_ACCOUNTABILITY", "PROOF_OF_EXISTENCE", "AUDIT_TRAIL"]
-        },
+        "consent_scope": { "type": "string", "enum": ["AI_ACCOUNTABILITY", "PROOF_OF_EXISTENCE", "AUDIT_TRAIL"] },
         "issued_at": { "type": "string", "format": "date-time" },
-        "ipr_hash_sha256": {
-          "type": "string",
-          "pattern": "^[a-f0-9]{64}$"
-        }
+        "ipr_hash_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
       }
     },
+
     "signature": {
       "type": "object",
       "additionalProperties": false,
       "required": ["scheme"],
       "properties": {
-        "scheme": {
-          "type": "string",
-          "enum": ["NONE", "JWS", "COSE", "ECDSA_SECP256K1", "ED25519"]
-        },
+        "scheme": { "type": "string", "enum": ["NONE", "JWS", "COSE", "ECDSA_SECP256K1", "ED25519"] },
         "kid": { "type": ["string", "null"], "maxLength": 200 },
         "value": { "type": ["string", "null"], "maxLength": 5000 },
         "note": { "type": ["string", "null"], "maxLength": 280 }
