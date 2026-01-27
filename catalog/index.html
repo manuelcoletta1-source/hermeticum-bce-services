@@ -3,339 +3,99 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Catalogo IPR — 3 Classi | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Catalogo ufficiale delle 3 classi di IPR: BASE (Cittadino), STRONG (Professionista), ENTERPRISE (Aziende e Istituzioni). Firma digitale a tre ancore." />
-<div style="border:1px solid #30363d;border-radius:12px;padding:1rem;margin:1rem 0;background:#0d1117;color:#c9d1d9">
-  <strong>Nota biocibernetica (primato biologico):</strong>
-  ogni classe IPR è un’estensione cibernetica attribuibile a un soggetto biologico reale.
-  La sicurezza crittografica è uguale per tutti; ciò che cambia è il perimetro di responsabilità che scegli di firmare.
-</div>
-  <style>
-    :root{
-      --bg:#0b0f14; --panel:#0f1621; --text:#e7eef7; --muted:#b8c4d4;
-      --line:#243043; --accent:#7aa7ff; --ok:#6ee7b7; --warn:#fbbf24; --danger:#fb7185;
-      --r:16px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 800px at 10% 0%, #101a2a 0%, var(--bg) 55%) no-repeat;
-      color:var(--text);
-      line-height:1.6;
-    }
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
-    .topbar{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r);
-      background: rgba(255,255,255,.02);
-    }
-    .nav a{
-      display:inline-block; padding:8px 10px; border-radius:999px;
-      border:1px solid var(--line); margin-right:8px;
-      background: rgba(255,255,255,.02); color:var(--muted); font-size:13px;
-    }
-    .nav a.active{background: rgba(122,167,255,.14); color:var(--text); border-color: rgba(122,167,255,.35)}
-    header{
-      margin-top:14px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:22px 20px;
-      background: linear-gradient(180deg, rgba(122,167,255,.10), rgba(255,255,255,.02));
-    }
-    h1{margin:0; font-size:28px; line-height:1.25}
-    .sub{margin:10px 0 0; color:var(--muted); max-width:920px}
-    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    .pill{
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:7px 10px;
-      background: rgba(255,255,255,.02);
-      font-size:12px;
-      color:var(--muted);
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      margin-top:14px;
-    }
-    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
-    .card{
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:18px;
-      background: rgba(255,255,255,.02);
-    }
-    h2{margin:0 0 10px; font-size:18px}
-    h3{margin:12px 0 8px; font-size:15px}
-    p{margin:10px 0; color:var(--muted)}
-    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
-    li{margin:6px 0}
-    .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:12px; padding:6px 10px;
-      border:1px solid var(--line); border-radius:999px;
-      background: rgba(255,255,255,.02);
-      color:var(--muted);
-      margin-bottom:10px;
-    }
-    .dot{width:8px; height:8px; border-radius:999px; background:var(--ok)}
-    .dot.warn{background:var(--warn)}
-    .dot.danger{background:var(--danger)}
-    .cta{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 12px; border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(122,167,255,.14);
-      color:var(--text); font-weight:650;
-    }
-    .btn.secondary{
-      background: rgba(255,255,255,.03);
-      font-weight:600;
-      color:var(--text);
-    }
-    .tablewrap{
-      margin-top:14px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      overflow:hidden;
-      background: rgba(255,255,255,.02);
-    }
-    table{
-      width:100%;
-      border-collapse:collapse;
-      font-size:14px;
-    }
-    th, td{
-      padding:12px 12px;
-      border-bottom:1px solid var(--line);
-      vertical-align:top;
-    }
-    th{
-      text-align:left;
-      background: rgba(0,0,0,.20);
-      color: var(--text);
-      font-weight:700;
-    }
-    td{ color: var(--muted); }
-    .colhead{color:var(--text); font-weight:700}
-    .yes{color:var(--text)}
-    .note{
-      margin-top:12px;
-      font-size:13px;
-      color:var(--muted);
-    }
-    .quote{
-      border-left:3px solid rgba(122,167,255,.55);
-      padding:10px 12px;
-      margin:12px 0 0;
-      background: rgba(122,167,255,.07);
-      border-radius:12px;
-      color:var(--text);
-    }
-    footer{
-      margin-top:18px;
-      color:var(--muted);
-      font-size:12px;
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      opacity:.95;
-    }
-  </style>
+  <title>Catalog | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Catalogo: mappa dei livelli e dei percorsi (Standard, Ricerca, Fase 1, Verify). UE-first, audit-friendly." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
-
 <body>
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="../standards/">Standard</a>
+        <a href="../research/">Ricerca (Horizon)</a>
+        <a href="../phase-1/">Fase 1 (ONLY)</a>
+        <a href="../verify/">Verify</a>
+        <a href="../governance/">Governance</a>
+        <a href="../privacy/">Privacy</a>
+      </div>
+    </nav>
+  </header>
+
   <main class="wrap">
-
-    <div class="topbar">
-      <div>
-        <strong>HERMETICUM B.C.E.</strong><br/>
-        <span style="color:var(--muted); font-size:12px;">HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</span>
-      </div>
-
-      <nav class="nav" aria-label="Navigazione">
-        <a href="../">Home</a>
-        <a class="active" href="./">Classi IPR</a>
-        <a href="../ai/">AI e IPR</a>
-        <a href="../create/">Rilascia IPR</a>
-        <a href="../verify/">Verifica</a>
-        <a href="../terms/">Termini</a>
-      </nav>
-    </div>
-
-    <header>
-      <h1>Catalogo IPR — 3 Classi</h1>
-      <p class="sub">
-        HERMETICUM B.C.E. rilascia tre classi distinte di IPR. La <strong>firma digitale a tre ancore</strong>
-        (IPFS · Bitcoin · Ethereum) è sempre la stessa: cambia <strong>cosa viene firmato</strong>
-        e quindi il livello di responsabilità.
+    <section class="hero">
+      <h1>Catalog (mappa)</h1>
+      <p class="lead">
+        Catalog non è “shop”. È una mappa dei livelli e del percorso minimo per produrre prova verificabile.
       </p>
-
-      <div class="pillrow">
-        <div class="pill">Sicurezza uguale per tutti</div>
-        <div class="pill">3 classi = 3 perimetri di responsabilità</div>
-        <div class="pill">UE-first • GDPR-min • audit-by-design</div>
+      <div class="notice">
+        <strong>Percorso minimo:</strong> Register → Onboarding (LIGHT/STRONG) → Create (bundle) → Verify.
       </div>
-
-      <div class="cta">
-        <a class="btn" href="../create/">Rilascia IPR</a>
-        <a class="btn secondary" href="../verify/">Verifica un IPR</a>
-      </div>
-    </header>
+    </section>
 
     <section class="grid">
-
       <article class="card">
-        <div class="tag"><span class="dot"></span><strong>🟢 IPR BASE</strong> — Cittadino</div>
-        <h2>Firma: “chi sei”</h2>
-        <p>
-          Identità digitale primaria verificata per il cittadino europeo.
-          Nessuna tracciabilità delle azioni: l’obiettivo è <strong>esistenza digitale solida</strong>.
-        </p>
-        <h3>Cosa viene firmato</h3>
-        <ul>
-          <li>Identità primaria e stato di validità</li>
-          <li>Contesto territoriale UE</li>
-          <li>Firma digitale a tre ancore</li>
-        </ul>
-        <h3>Quando serve</h3>
-        <ul>
-          <li>Accesso a servizi digitali sicuri</li>
-          <li>Protezione contro furto d’identità</li>
-          <li>AI personale non anonima</li>
-        </ul>
+        <h2>Standard (Normativo)</h2>
+        <p class="muted">Definisce livelli, opponibilità e conformità. Sola-lettura.</p>
+        <div class="btnrow">
+          <a class="btn" href="../standards/">Apri Standard</a>
+        </div>
       </article>
 
       <article class="card">
-        <div class="tag"><span class="dot warn"></span><strong>🔵 IPR STRONG</strong> — Professionista</div>
-        <h2>Firma: “cosa fai”</h2>
-        <p>
-          Identità + ruolo/funzione + continuità: progettato per chi prende decisioni
-          che richiedono <strong>responsabilità dimostrabile</strong>.
-        </p>
-        <h3>Cosa viene firmato</h3>
-        <ul>
-          <li>Identità primaria</li>
-          <li>Ruolo/funzione</li>
-          <li>Continuità temporale</li>
-          <li>Azioni rilevanti (auditabile)</li>
-        </ul>
-        <h3>Quando serve</h3>
-        <ul>
-          <li>Decisioni professionali tracciabili</li>
-          <li>Uso di AI operative non opache</li>
-          <li>Audit tecnico disponibile</li>
-        </ul>
+        <h2>Ricerca (Horizon/JRC)</h2>
+        <p class="muted">Pre-standard sperimentale (non esecutivo). Validazione, non produzione.</p>
+        <div class="btnrow">
+          <a class="btn" href="../research/">Apri Ricerca</a>
+        </div>
       </article>
 
       <article class="card">
-        <div class="tag"><span class="dot danger"></span><strong>🔴 IPR ENTERPRISE</strong> — Organizzazioni</div>
-        <h2>Firma: “come governi”</h2>
-        <p>
-          Identità di azienda o istituzione con ruoli, deleghe e processi.
-          Progettato per <strong>governance</strong> e <strong>audit-by-design</strong>.
-        </p>
-        <h3>Cosa viene firmato</h3>
-        <ul>
-          <li>Identità organizzativa</li>
-          <li>Ruoli e deleghe</li>
-          <li>Processi e decisioni</li>
-          <li>Catena di responsabilità</li>
-        </ul>
-        <h3>Quando serve</h3>
-        <ul>
-          <li>Governance interna verificabile</li>
-          <li>Accessi non opachi</li>
-          <li>AI organizzative e istituzionali auditabili</li>
-        </ul>
+        <h2>Fase 1 (ONLY)</h2>
+        <p class="muted">Catena fail-closed HRR→DGV→LTA. Onboarding risk-based.</p>
+        <div class="btnrow">
+          <a class="btn" href="../phase-1/">Apri Fase 1</a>
+          <a class="btn secondary" href="../register/">Vai a Register</a>
+        </div>
       </article>
 
+      <article class="card">
+        <h2>Create (Bundle)</h2>
+        <p class="muted">Genera bundle locale (JSON). Nessun account.</p>
+        <div class="btnrow">
+          <a class="btn" href="../create/">Apri Create</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Verify</h2>
+        <p class="muted">Valida hash/bundle. Esiti: VALID/INVALID/INCONCLUSIVE.</p>
+        <div class="btnrow">
+          <a class="btn" href="../verify/">Apri Verify</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Governance & Privacy</h2>
+        <p class="muted">Limiti, responsabilità, minimizzazione e hash-only.</p>
+        <div class="btnrow">
+          <a class="btn secondary" href="../governance/">Governance</a>
+          <a class="btn secondary" href="../privacy/">Privacy</a>
+        </div>
+      </article>
     </section>
 
-    <section class="card" style="margin-top:14px">
-      <h2>Tabella comparativa (semplice e chiara)</h2>
-      <p>
-        Stessa firma digitale a tre ancore per tutte le classi. Quello che cambia è l’estensione della firma
-        e quindi la responsabilità operativa.
+    <section class="footerhint">
+      <p class="muted">
+        Se un livello è confuso o mischiato con un altro, il sistema diventa non auditabile.
+        Qui la regola è separazione esplicita.
       </p>
-
-      <div class="tablewrap" role="region" aria-label="Tabella comparativa classi IPR">
-        <table>
-          <thead>
-            <tr>
-              <th>Caratteristica</th>
-              <th class="colhead">IPR BASE</th>
-              <th class="colhead">IPR STRONG</th>
-              <th class="colhead">IPR ENTERPRISE</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Per chi</td>
-              <td class="yes">Cittadini</td>
-              <td class="yes">Professionisti</td>
-              <td class="yes">Aziende &amp; Istituzioni</td>
-            </tr>
-            <tr>
-              <td>Firma digitale a tre ancore</td>
-              <td class="yes">Sì</td>
-              <td class="yes">Sì</td>
-              <td class="yes">Sì</td>
-            </tr>
-            <tr>
-              <td>Cosa viene firmato</td>
-              <td class="yes">Identità (esistenza)</td>
-              <td class="yes">Identità + ruolo + continuità</td>
-              <td class="yes">Identità ente + ruoli + processi</td>
-            </tr>
-            <tr>
-              <td>Tracciabilità delle azioni</td>
-              <td>—</td>
-              <td class="yes">Azioni rilevanti</td>
-              <td class="yes">Processi e decisioni</td>
-            </tr>
-            <tr>
-              <td>Audit</td>
-              <td>Limitato (validità)</td>
-              <td class="yes">Tecnico (su richiesta)</td>
-              <td class="yes">Audit-by-design</td>
-            </tr>
-            <tr>
-              <td>Uso AI</td>
-              <td class="yes">AI personale</td>
-              <td class="yes">AI operativa</td>
-              <td class="yes">AI governata</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="quote">
-        Sicurezza uguale per tutti. <strong>Cambia solo il livello di responsabilità che scegli di assumerti.</strong>
-      </div>
-
-      <p class="note">
-        Nota: l’IPR non sostituisce documenti statali (CIE/CF/SPID). È identità primaria computabile, progettata
-        per interoperabilità e audit in contesto europeo.
-      </p>
+      <p><a class="btn secondary" href="../">Torna al Gateway</a></p>
     </section>
-
-    <footer>
-      <div>© HERMETICUM B.C.E. S.r.l. — Infrastruttura europea di identità primaria (IPR)</div>
-      <div>
-        <a href="../">Home</a> ·
-        <a href="../ai/">AI</a> ·
-        <a href="../create/">Create</a> ·
-        <a href="../verify/">Verify</a> ·
-        <a href="../terms/">Terms</a>
-      </div>
-    </footer>
-
   </main>
+
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
 </body>
 </html>
