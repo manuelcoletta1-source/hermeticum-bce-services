@@ -1,116 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Governance — Nodo Regionale Piemonte | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Governance del Nodo Regionale Piemonte: ruoli, limiti, validazione eventi, primato biologico, fail-closed." />
-  <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
-    header,main,footer{max-width:1100px;margin:auto;padding:2.4rem 1.5rem}
-    a{color:#58a6ff;text-decoration:none}
-    h1{font-size:2rem;margin:0 0 .5rem}
-    h2{margin:1.6rem 0 .5rem}
-    p{color:#9da7b1}
-    .box{border:1px solid #30363d;border-radius:14px;padding:1.5rem;background:#0d1117;margin-top:1.1rem}
-    .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:.25rem .65rem;margin:.2rem .3rem 0 0;color:#9da7b1;font-size:.9rem}
-    .note{border-left:3px solid #2ea043;padding-left:1rem;color:#c9d1d9}
-    .warn{border-left:3px solid #f85149;padding-left:1rem;color:#c9d1d9}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    pre{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:1rem;overflow:auto}
-    footer{border-top:1px solid #30363d;color:#8b949e;font-size:.9rem;margin-top:2.5rem}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Governance | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Governance e limiti: cosa è e cosa non è il portale. UE-first, GDPR-min, fail-closed." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="../standards/">Standard</a>
+        <a href="../research/">Ricerca (Horizon)</a>
+        <a href="../phase-1/">Fase 1 (ONLY)</a>
+        <a href="../verify/">Verify</a>
+        <a class="active" href="./">Governance</a>
+        <a href="../privacy/">Privacy</a>
+      </div>
+    </nav>
+  </header>
 
-<header>
-  <h1>Governance — Nodo Regionale Piemonte</h1>
-  <p>Ruoli, limiti, responsabilità. Nessuna sovranità. Solo tracciabilità verificabile.</p>
-  <div>
-    <span class="pill">BIOCIBERNETICO</span>
-    <span class="pill">PRIMATO BIOLOGICO</span>
-    <span class="pill">UE-FIRST</span>
-    <span class="pill">GDPR-MIN</span>
-    <span class="pill">HASH-ONLY</span>
-    <span class="pill">FAIL-CLOSED</span>
-  </div>
-  <p style="margin-top:1rem">
-    <a href="../">Home</a> · <a href="../node/">Nodo Piemonte</a> · <a href="../register/">Register</a> · <a href="../manifest/">Manifest</a> · <a href="../privacy/">Privacy</a>
-  </p>
-</header>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Governance</h1>
+      <p class="lead">
+        Questa pagina definisce limiti, responsabilità e perimetro operativo.
+        È scritta per essere chiara a cittadino UE, tecnico e revisore (audit).
+      </p>
+      <div class="notice">
+        <strong>Principio:</strong> se manca attribuzione/verifica/prova, l’atto non nasce (fail-closed).
+        Il sistema blocca per sicurezza, non “procede lo stesso”.
+      </div>
+    </section>
 
-<main>
-  <div class="box">
-    <h2>1) Principio base</h2>
-    <p>
-      Questo nodo è <strong>biocibernetico</strong>: ogni evento nasce da un <strong>soggetto biologico reale</strong> (responsabilità umana)
-      e viene reso verificabile tramite estensione cibernetica (IPR).
-    </p>
-    <p class="note">
-      La tecnologia non è un soggetto: non decide, non governa, non sostituisce responsabilità.
-    </p>
-  </div>
+    <section class="grid">
+      <article class="card">
+        <h2>Cosa è</h2>
+        <ul class="muted">
+          <li>Un portale a livelli: Normativo / Ricerca UE / Operatività minima / Verifica tecnica.</li>
+          <li>Un framework di tracciabilità e accountability basato su eventi (append-only).</li>
+          <li>Un approccio “GDPR-min”: riduzione del rischio tramite minimizzazione dei dati.</li>
+        </ul>
+      </article>
 
-  <div class="box">
-    <h2>2) Non-sovranità (limite istituzionale)</h2>
-    <p>
-      Il Nodo Regionale Piemonte non è un ente pubblico e non esercita potere sovrano.
-      Non assegna diritti automatici e non sostituisce procedure ufficiali.
-    </p>
-    <p class="warn">
-      Governance ≠ politica. Qui governiamo solo il protocollo tecnico e la coerenza di pubblicazione (audit-by-design).
-    </p>
-  </div>
+      <article class="card">
+        <h2>Cosa NON è</h2>
+        <ul class="muted">
+          <li>Non è un identity provider e non sostituisce CIE/SPID/eIDAS.</li>
+          <li>Non è banca, wallet custodial o servizio di custodia di dati personali.</li>
+          <li>Non assegna diritti, titoli, certificazioni civili o status legali.</li>
+          <li>Non garantisce “verità” di un contenuto: garantisce solo verificabilità di traccia e coerenza di processo.</li>
+        </ul>
+      </article>
 
-  <div class="box">
-    <h2>3) Struttura territoriale</h2>
-    <pre class="mono">
-Nodo Regionale: Piemonte
-└─ Nodo Città: Torino
-   └─ Nodo Zona: Barriera di Milano
-      └─ Nodo Utente (foglia): Soggetto biologico + IPR
-    </pre>
-    <p>
-      Regola canonica: <strong>Attivando l’IPR diventi un nodo foglia della tua Regione</strong> (evento append-only).
-    </p>
-  </div>
+      <article class="card">
+        <h2>Responsabilità e attribuzione</h2>
+        <p class="muted">
+          La responsabilità degli atti resta in capo al soggetto biologico che li produce.
+          La componente cibernetica (strumenti e AI) non è titolare di responsabilità legale.
+          Ogni uso deve rispettare le leggi UE applicabili, inclusi privacy e sicurezza.
+        </p>
+      </article>
 
-  <div class="box">
-    <h2>4) Ruoli</h2>
-    <ul>
-      <li><strong>Soggetto (Utente/Ente)</strong>: genera eventi e custodisce i contenuti off-chain.</li>
-      <li><strong>Nodo Zona</strong>: contesto territoriale operativo (non autorità).</li>
-      <li><strong>Nodo Città</strong>: coordinamento locale e interoperabilità.</li>
-      <li><strong>Nodo Regionale (Piemonte)</strong>: hub di coerenza, compatibilità, audit tecnico.</li>
-      <li><strong>AI Joker-C2</strong>: strato di supporto e coerenza (non autonomo, non decisionale).</li>
-    </ul>
-  </div>
+      <article class="card">
+        <h2>Regole operative (fail-closed)</h2>
+        <ul class="muted">
+          <li>Se manca un requisito minimo, l’operazione è bloccata.</li>
+          <li>La verifica tecnica produce esiti: VALID / INVALID / INCONCLUSIVE.</li>
+          <li>Qualsiasi uso simbolico deve restare dichiarato e non opponibile (vedi Standard).</li>
+        </ul>
+        <div class="btnrow">
+          <a class="btn" href="../standards/">Apri Standard</a>
+          <a class="btn secondary" href="../">Torna al Gateway</a>
+        </div>
+      </article>
+    </section>
+  </main>
 
-  <div class="box">
-    <h2>5) Validazione eventi (fail-closed)</h2>
-    <p>Un evento è pubblicabile solo se rispetta i vincoli minimi:</p>
-    <ul>
-      <li>JSON parsabile</li>
-      <li>territory completo (country/region/city/district)</li>
-      <li>policy include: UE-FIRST, GDPR-MIN, HASH-ONLY, FAIL-CLOSED</li>
-      <li>payload_hash formato: <span class="mono">SHA-256:&lt;64-hex&gt;</span></li>
-      <li>assenza di dati personali in chiaro</li>
-    </ul>
-    <p class="note">
-      “VALID” significa: struttura coerente. Non significa: verità civile o riconoscimento legale automatico.
-    </p>
-  </div>
-
-  <div class="box">
-    <h2>6) Documento canonico</h2>
-    <p>Testo completo e versionabile in: <strong>GOVERNANCE.md</strong> (root repository).</p>
-  </div>
-</main>
-
-<footer>
-  <p>HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA · HERMETICUM B.C.E. S.r.l.</p>
-  <p>Nodo Regionale Piemonte — Governance</p>
-</footer>
-
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
 </body>
 </html>
