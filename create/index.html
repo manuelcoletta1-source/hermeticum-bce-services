@@ -3,214 +3,475 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Create | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Create: genera Evidence Bundle locale (JSON). UE-first, GDPR-min, hash-only, fail-closed. Output da verificare in Verify." />
-  <link rel="stylesheet" href="../assets/css/main.css" />
+  <title>Create IPR — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
+  <meta name="description" content="Genera un IPR package (client-side): ipr.json + receipt.json. UE-first, GDPR-min, hash-only, fail-closed." />
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
+      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --bad:#fda4af; --warn:#fde68a;
+      --r:16px; --pad:18px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    body{margin:0;background:radial-gradient(900px 600px at 15% 0%, #0d1b2a 0%, var(--bg) 55%);color:var(--txt);}
+    a{color:var(--acc);text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:26px 18px 60px;}
+    header{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px}
+    .brand{display:flex;flex-direction:column;gap:6px}
+    .seal{font-weight:800;letter-spacing:.3px}
+    .tag{color:var(--mut);font-size:13px}
+    .company{color:var(--mut);font-size:12px}
+    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .title{font-size:18px;font-weight:750;margin:0 0 8px}
+    .muted{color:var(--mut)}
+    .steps{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+    .chip{padding:6px 10px;border:1px solid var(--brd);border-radius:999px;color:var(--mut);font-size:12px}
+    .chip.on{border-color:rgba(125,211,252,.6);color:var(--txt);background:rgba(125,211,252,.08)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width:620px){.row{grid-template-columns:1fr}}
+    label{display:block;font-size:12px;color:var(--mut);margin:10px 0 6px}
+    input,select,textarea{
+      width:100%;box-sizing:border-box;background:#071018;border:1px solid var(--brd);
+      color:var(--txt);border-radius:12px;padding:10px 12px;outline:none
+    }
+    textarea{min-height:86px;resize:vertical}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    button{
+      border:1px solid var(--brd);background:#0a1320;color:var(--txt);
+      border-radius:12px;padding:10px 12px;font-weight:650;cursor:pointer
+    }
+    button.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
+    button.danger{border-color:rgba(253,164,175,.6);background:rgba(253,164,175,.08)}
+    button:disabled{opacity:.55;cursor:not-allowed}
+    .hint{font-size:12px;color:var(--mut);margin-top:10px;line-height:1.35}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .status{margin-top:10px;font-size:12px}
+    .status.ok{color:var(--ok)} .status.bad{color:var(--bad)} .status.warn{color:var(--warn)}
+    .out{white-space:pre;overflow:auto;background:#06101a;border:1px solid var(--brd);border-radius:12px;padding:12px;font-size:12px}
+    footer{margin-top:16px;color:var(--mut);font-size:12px;line-height:1.4}
+    .hr{height:1px;background:var(--brd);margin:14px 0}
+  </style>
 </head>
+
 <body>
-
-<header class="wrap">
-  <nav class="nav">
-    <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-    <div class="navlinks">
-      <a href="../">Gateway</a>
-      <a href="../standards/">Standard</a>
-      <a href="../research/">Ricerca UE</a>
-      <a href="../phase-1/">Fase 1</a>
-      <a class="active" href="./">Create</a>
-      <a href="../verify/">Verify</a>
-      <a href="../legal/">Legal</a>
-    </div>
-  </nav>
-</header>
-
-<main class="wrap">
-
-  <section class="hero">
-    <h1>Create — Evidence Bundle (JSON)</h1>
-    <p class="lead">
-      Questo tool genera un bundle minimo nel browser. Nessun account. Nessun invio dati.
-      Il bundle è verificabile in <strong>Verify</strong>.
-    </p>
-
-    <div class="pillrow">
-      <span class="pill">local-only</span>
-      <span class="pill">hash-only</span>
-      <span class="pill">GDPR-min</span>
-      <span class="pill">fail-closed</span>
-    </div>
-
-    <div class="notice">
-      <strong>Fail-closed:</strong> se mancano HRR o descrizione minima → INVALID.  
-      <strong>VALID</strong> significa coerenza tecnica minima, non prova di identità.
-    </div>
-
-    <div class="btnrow" style="margin-top:16px;">
-      <a class="btn secondary" href="../register/">Register</a>
-      <a class="btn secondary" href="../phase-1/">Fase 1</a>
-      <a class="btn secondary" href="../verify/">Verify</a>
-      <a class="btn secondary" href="../catalog/">Catalog</a>
-    </div>
-  </section>
-
-  <section class="grid">
-    <article class="card">
-      <h2>Input minimi</h2>
-
-      <label class="muted">HRR (generato in Fase 1)</label>
-      <input id="hrr" type="text" placeholder="es. HRR-L-.... oppure HRR-S-...." />
-
-      <label class="muted" style="margin-top:10px;">Descrizione breve (no PII)</label>
-      <input id="desc" type="text" placeholder="es. Evidence bundle per verifica tecnica (senza dati personali)" />
-
-      <label class="muted" style="margin-top:10px;">Hash contenuto (opzionale, SHA-256)</label>
-      <input id="hash" type="text" placeholder="64 caratteri hex (SHA-256) oppure lascia vuoto" />
-
-      <label class="muted" style="margin-top:10px;">Timestamp (opzionale)</label>
-      <input id="ts" type="text" placeholder="es. 2026-01-27T20:00:00Z" />
-
-      <div class="btnrow" style="margin-top:14px;">
-        <button class="btn" id="gen" type="button">Genera Bundle</button>
-        <button class="btn secondary" id="example" type="button">Esempio</button>
-        <button class="btn secondary" id="reset" type="button">Reset</button>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        <div class="company">HERMETICUM B.C.E. S.r.l.</div>
+        <div class="tag">Create IPR (client-side) · UE-first · GDPR-min · hash-only · fail-closed</div>
       </div>
-
-      <p class="muted" style="margin-top:10px;">
-        Suggerimento: se hai un contenuto off-chain (file/testo), calcola SHA-256 offline e incollalo qui.
-      </p>
-    </article>
-
-    <article class="card">
-      <h2>Output (JSON)</h2>
-      <pre id="out" class="codeblock">Pronto.</pre>
-      <div class="btnrow">
-        <button class="btn secondary" id="copyBtn" type="button">Copia</button>
-        <a class="btn secondary" href="../verify/">Vai a Verify</a>
+      <div class="muted" style="max-width:420px">
+        Questo wizard genera <span class="mono">ipr.json</span> e <span class="mono">receipt.json</span> nel tuo browser.
+        Nessun dato viene inviato a server.
       </div>
-    </article>
+    </header>
 
-    <article class="card">
-      <h2>Policy consigliata</h2>
-      <pre class="codeblock">UE-first | GDPR-min | hash-only | append-only | fail-closed</pre>
-      <p class="muted">
-        Definizioni e livelli: <a href="../standards/">Standard</a>.
-      </p>
-    </article>
+    <div class="grid">
+      <!-- LEFT: Wizard -->
+      <section class="card" id="wizard">
+        <h1 class="title">1) Genera un IPR package</h1>
+        <div class="muted">Compila solo il minimo. I dati “in chiaro” restano sul device: nel package finiscono hash e metadati.</div>
 
-    <article class="card">
-      <h2>Privacy</h2>
-      <p class="muted">
-        Evita dati personali. Questo strumento genera un JSON locale.
-        Minimizza e usa hash al posto di contenuti o documenti.
-      </p>
-      <div class="btnrow">
-        <a class="btn secondary" href="../privacy/">Privacy</a>
-        <a class="btn secondary" href="../governance/">Governance</a>
-        <a class="btn secondary" href="../terms/">Termini</a>
-      </div>
-    </article>
+        <div class="steps" aria-label="Steps">
+          <div class="chip on" id="chip-1">Step 1 · Livello</div>
+          <div class="chip" id="chip-2">Step 2 · Consenso</div>
+          <div class="chip" id="chip-3">Step 3 · Contesto</div>
+          <div class="chip" id="chip-4">Step 4 · Export</div>
+        </div>
 
-    <article class="card">
-      <h2>Compatibilità</h2>
-      <p class="muted">
-        Se arrivi da link vecchi, usa Gateway o Legacy.
-      </p>
-      <div class="btnrow">
-        <a class="btn secondary" href="../legacy/">Legacy</a>
-        <a class="btn secondary" href="../">Gateway</a>
-      </div>
-    </article>
-  </section>
+        <!-- Step 1 -->
+        <div id="step1">
+          <label for="level">Livello IPR</label>
+          <select id="level">
+            <option value="BASIC">BASIC — prova di esistenza + pseudonimo (nessuna attestazione forte)</option>
+            <option value="STRONG">STRONG — pensato per attestazioni forti (EUDI Wallet / eIDAS)</option>
+            <option value="INSTITUTION">INSTITUTION — deleghe/ruoli (PA/azienda/ente)</option>
+          </select>
 
-  <section class="footerhint">
-    <p class="muted">
-      Dopo Create: incolla il bundle in Verify e ottieni un esito tecnico fail-closed.
-    </p>
-  </section>
+          <label for="purpose">Scopo dichiarato (obbligatorio)</label>
+          <input id="purpose" placeholder="Esempio: Accountability AI personale / audit lavorativo / prova di creazione" />
 
-</main>
+          <div class="btns">
+            <button class="primary" id="to2">Continua →</button>
+          </div>
+          <div class="hint">
+            <b>Fail-closed:</b> senza scopo dichiarato non puoi emettere un IPR.
+          </div>
+          <div class="status" id="s1"></div>
+        </div>
 
-<footer class="wrap foot">
-  <small>HERMETICUM B.C.E. S.r.l. — Create (local-only)</small>
-</footer>
+        <!-- Step 2 -->
+        <div id="step2" style="display:none">
+          <label>Consenso (obbligatorio)</label>
+          <div class="row">
+            <div>
+              <label for="consentScope">Ambito</label>
+              <select id="consentScope">
+                <option value="AI_ACCOUNTABILITY">AI_ACCOUNTABILITY</option>
+                <option value="PROOF_OF_EXISTENCE">PROOF_OF_EXISTENCE</option>
+                <option value="AUDIT_TRAIL">AUDIT_TRAIL</option>
+              </select>
+            </div>
+            <div>
+              <label for="consentDurationDays">Durata (giorni)</label>
+              <input id="consentDurationDays" type="number" min="1" max="3650" value="365" />
+            </div>
+          </div>
+
+          <label for="consentNote">Nota consenso (facoltativa, breve)</label>
+          <input id="consentNote" placeholder="Esempio: uso esclusivo personale; revocabile; nessun dato in chiaro su portale" />
+
+          <label style="margin-top:12px">
+            <input type="checkbox" id="consentCheck" />
+            Confermo di aver compreso: questo portale genera prove (hash/receipt), non sostituisce SPID/CIE/eIDAS.
+          </label>
+
+          <div class="btns">
+            <button id="back1">← Indietro</button>
+            <button class="primary" id="to3">Continua →</button>
+          </div>
+          <div class="hint">
+            <b>GDPR-min:</b> niente dati personali obbligatori qui. Se ti serve “forte”, si usa attestazione wallet/PA nello strato successivo.
+          </div>
+          <div class="status" id="s2"></div>
+        </div>
+
+        <!-- Step 3 -->
+        <div id="step3" style="display:none">
+          <h2 class="title" style="font-size:16px">Contesto (minimo e non identificante)</h2>
+
+          <div class="row">
+            <div>
+              <label for="country">Nazione (ISO, facoltativo)</label>
+              <input id="country" placeholder="IT" maxlength="2" />
+            </div>
+            <div>
+              <label for="region">Regione (facoltativa)</label>
+              <input id="region" placeholder="Piemonte" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="city">Città (facoltativa)</label>
+              <input id="city" placeholder="Torino" />
+            </div>
+            <div>
+              <label for="district">Quartiere (facoltativo)</label>
+              <input id="district" placeholder="San Salvario" />
+            </div>
+          </div>
+
+          <label for="localSecret">Segreto locale (obbligatorio, non verrà salvato in chiaro)</label>
+          <input id="localSecret" type="password" placeholder="Una passphrase: serve a generare un subject pseudonimo (hash)" />
+
+          <label for="notes">Note operative (facoltative)</label>
+          <textarea id="notes" placeholder="Esempio: workflow previsto, repository, policy aggiuntive... (evita dati personali)"></textarea>
+
+          <div class="btns">
+            <button id="back2">← Indietro</button>
+            <button class="primary" id="to4">Continua →</button>
+          </div>
+          <div class="hint">
+            Il <b>subject</b> dell’IPR sarà un identificatore pseudonimo derivato da hash: non è il tuo nome.
+          </div>
+          <div class="status" id="s3"></div>
+        </div>
+
+        <!-- Step 4 -->
+        <div id="step4" style="display:none">
+          <h2 class="title" style="font-size:16px">Export</h2>
+          <div class="muted">Genera i file. Salvali in locale. Puoi poi portarli su <span class="mono">/verify</span>.</div>
+
+          <div class="btns">
+            <button id="back3">← Indietro</button>
+            <button class="primary" id="generate">Genera IPR package</button>
+            <button id="downloadIpr" disabled>Scarica ipr.json</button>
+            <button id="downloadReceipt" disabled>Scarica receipt.json</button>
+            <button class="danger" id="reset">Reset</button>
+          </div>
+
+          <div class="hr"></div>
+
+          <label>Anteprima ipr.json</label>
+          <div class="out mono" id="iprOut">—</div>
+
+          <label style="margin-top:12px">Anteprima receipt.json</label>
+          <div class="out mono" id="rcpOut">—</div>
+
+          <div class="status" id="s4"></div>
+          <div class="hint">
+            Il receipt contiene hash di input/output e metadati di policy. È il “gancio” per AI responsabili.
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Policy / Safety -->
+      <aside class="card">
+        <h2 class="title">Policy operative</h2>
+        <ul class="muted" style="margin:0; padding-left:18px; line-height:1.55">
+          <li><b>UE-first</b>: progettato per integrarsi con eIDAS/EUDI Wallet (fase successiva).</li>
+          <li><b>GDPR-min</b>: niente PII (dati personali) obbligatori; evita nome/cognome/indirizzo.</li>
+          <li><b>Hash-only</b>: nel package finiscono hash e metadati, non documenti in chiaro.</li>
+          <li><b>Fail-closed</b>: se manca scopo/consenso/segretolocale → niente emissione.</li>
+          <li><b>Append-only</b>: l’audit cresce per eventi, non si riscrive.</li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <h2 class="title">Cosa manca ancora (roadmap)</h2>
+        <div class="muted" style="line-height:1.55">
+          1) Schema JSON ufficiale (<span class="mono">/schemas</span>)<br/>
+          2) Verifica (<span class="mono">/verify</span>) con validazione schema + controlli hash<br/>
+          3) Attestazione forte via EUDI Wallet / eIDAS (VC)<br/>
+          4) Timestamp/anchor (IPFS / TSA / trilaterale se vuoi)<br/>
+          5) AI Decision Receipts collegati all’IPR (accountability layer)
+        </div>
+
+        <footer>
+          Nota: questo è un portale di generazione e prova. Non è un Identity Provider e non sostituisce CIE/SPID/eIDAS.
+        </footer>
+      </aside>
+    </div>
+  </div>
 
 <script>
-  const out = document.getElementById("out");
-  const copyBtn = document.getElementById("copyBtn");
+  // ---------- utils ----------
+  const $ = (id) => document.getElementById(id);
 
-  function isHex(s){ return /^[0-9a-fA-F]+$/.test(s); }
-  function looksLikeSha256(h){ return typeof h==="string" && h.length===64 && isHex(h); }
-
-  function render(obj){ out.textContent = JSON.stringify(obj, null, 2); }
-
-  function fail(reason, extra){
-    render({ status:"INVALID", reason, ...extra, ts_utc:new Date().toISOString() });
+  function nowISO(){
+    return new Date().toISOString();
   }
 
-  const example = {
-    HRR: "HRR-L-DEMO-0001",
-    POLICY: "UE-first | GDPR-min | hash-only | append-only | fail-closed",
-    NOTE: "Generated locally in browser. Not an identity proof.",
-    PAYLOAD_MIN: {
-      desc: "Esempio bundle minimo per test Verify",
-      content_hash_sha256: null,
-      timestamp: null,
-      created_utc: new Date().toISOString()
+  async function sha256Hex(str){
+    const enc = new TextEncoder().encode(str);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  }
+
+  function downloadJSON(filename, obj){
+    const blob = new Blob([JSON.stringify(obj, null, 2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function setStep(n){
+    const steps = [1,2,3,4];
+    for(const k of steps){
+      $("step"+k).style.display = (k===n) ? "block" : "none";
+      $("chip-"+k).classList.toggle("on", k===n);
+    }
+  }
+
+  function setStatus(el, msg, kind="warn"){
+    el.className = "status " + kind;
+    el.textContent = msg || "";
+  }
+
+  // ---------- wizard flow ----------
+  setStep(1);
+
+  $("to2").onclick = () => {
+    const purpose = $("purpose").value.trim();
+    if(!purpose){
+      setStatus($("s1"), "Serve uno scopo dichiarato (purpose).", "bad");
+      return;
+    }
+    setStatus($("s1"), "OK.", "ok");
+    setStep(2);
+  };
+
+  $("back1").onclick = () => setStep(1);
+
+  $("to3").onclick = () => {
+    const checked = $("consentCheck").checked;
+    const days = Number($("consentDurationDays").value);
+    if(!checked){
+      setStatus($("s2"), "Devi confermare la comprensione del consenso per procedere.", "bad");
+      return;
+    }
+    if(!(days>=1 && days<=3650)){
+      setStatus($("s2"), "Durata consenso non valida (1–3650 giorni).", "bad");
+      return;
+    }
+    setStatus($("s2"), "OK.", "ok");
+    setStep(3);
+  };
+
+  $("back2").onclick = () => setStep(2);
+
+  $("to4").onclick = () => {
+    const secret = $("localSecret").value.trim();
+    if(secret.length < 10){
+      setStatus($("s3"), "Segreto locale troppo corto: usa almeno 10 caratteri.", "bad");
+      return;
+    }
+    setStatus($("s3"), "OK.", "ok");
+    setStep(4);
+  };
+
+  $("back3").onclick = () => setStep(3);
+
+  // ---------- generate ----------
+  let lastIPR = null;
+  let lastReceipt = null;
+
+  $("generate").onclick = async () => {
+    try{
+      setStatus($("s4"), "Generazione in corso…", "warn");
+
+      const level = $("level").value;
+      const purpose = $("purpose").value.trim();
+
+      const consentScope = $("consentScope").value;
+      const consentDurationDays = Number($("consentDurationDays").value);
+      const consentNote = $("consentNote").value.trim();
+
+      const country = $("country").value.trim().toUpperCase();
+      const region = $("region").value.trim();
+      const city = $("city").value.trim();
+      const district = $("district").value.trim();
+
+      const secret = $("localSecret").value.trim();
+      const notes = $("notes").value.trim();
+
+      // subject pseudonimo: hash(secret + purpose + timestamp)
+      const issued_at = nowISO();
+      const subject_hash = await sha256Hex(secret + "|" + purpose + "|" + issued_at);
+      const subject = "ipr-subject:" + subject_hash.slice(0, 32);
+
+      // context hash: solo se presenti campi (non identificanti)
+      const contextObj = {
+        country: country || null,
+        region: region || null,
+        city: city || null,
+        district: district || null
+      };
+      const contextStr = JSON.stringify(contextObj);
+      const context_hash = await sha256Hex(contextStr);
+
+      // base policy
+      const policy = {
+        UE_FIRST: true,
+        GDPR_MIN: true,
+        HASH_ONLY: true,
+        FAIL_CLOSED: true,
+        AUDIT_APPEND_ONLY: true
+      };
+
+      // IPR package (no PII)
+      const ipr = {
+        proto: "AI_JOKER_C2",
+        type: "IPR_PACKAGE",
+        version: "v1",
+        issuer: "HERMETICUM B.C.E. S.r.l.",
+        seal: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
+        issued_at,
+        level,
+        subject,
+        purpose,
+        policy,
+        consent: {
+          scope: consentScope,
+          duration_days: consentDurationDays,
+          note: consentNote || null,
+          acknowledged: true
+        },
+        context: {
+          kind: "COARSE_GEO",
+          hash_sha256: context_hash,
+          fields_present: Object.entries(contextObj).filter(([_,v])=>!!v).map(([k])=>k)
+        },
+        notes: notes || null,
+        audit: [{
+          evt: "EVT-IPR-ISSUED",
+          at: issued_at,
+          by: "CLIENT_SIDE_WIZARD",
+          hash_sha256: await sha256Hex("EVT-IPR-ISSUED|" + issued_at + "|" + subject)
+        }]
+      };
+
+      // Receipt: “gancio” per accountability AI
+      // (qui è una receipt di emissione; in futuro farai receipt per ogni decisione AI)
+      const receipt_payload = {
+        ipr_subject: subject,
+        ipr_level: level,
+        purpose,
+        policy,
+        consent_scope: consentScope,
+        issued_at,
+        ipr_hash_sha256: await sha256Hex(JSON.stringify(ipr))
+      };
+
+      const receipt = {
+        proto: "AI_JOKER_C2",
+        type: "RECEIPT",
+        version: "v1",
+        kind: "IPR_ISSUANCE",
+        issued_at,
+        payload_hash_sha256: await sha256Hex(JSON.stringify(receipt_payload)),
+        payload: receipt_payload,
+        signature: {
+          scheme: "NONE",
+          note: "Firma non implementata in MVP (step successivo: firma + timestamp/anchor)."
+        }
+      };
+
+      lastIPR = ipr;
+      lastReceipt = receipt;
+
+      $("iprOut").textContent = JSON.stringify(ipr, null, 2);
+      $("rcpOut").textContent = JSON.stringify(receipt, null, 2);
+
+      $("downloadIpr").disabled = false;
+      $("downloadReceipt").disabled = false;
+
+      setStatus($("s4"), "OK: package generato. Scarica ipr.json e receipt.json.", "ok");
+    }catch(e){
+      console.error(e);
+      setStatus($("s4"), "Errore: " + (e?.message || String(e)), "bad");
     }
   };
 
-  document.getElementById("gen").addEventListener("click", () => {
-    const HRR = (document.getElementById("hrr").value || "").trim();
-    const DESC = (document.getElementById("desc").value || "").trim();
-    const HASH = (document.getElementById("hash").value || "").trim();
-    const TS = (document.getElementById("ts").value || "").trim();
+  $("downloadIpr").onclick = () => {
+    if(!lastIPR) return;
+    downloadJSON("ipr.json", lastIPR);
+  };
 
-    if (!HRR) return fail("Missing HRR");
-    if (!DESC) return fail("Missing description");
+  $("downloadReceipt").onclick = () => {
+    if(!lastReceipt) return;
+    downloadJSON("receipt.json", lastReceipt);
+  };
 
-    if (HASH && !looksLikeSha256(HASH)){
-      return fail("Hash present but not SHA-256 hex", { hash_len: HASH.length });
-    }
-
-    const bundle = {
-      HRR,
-      POLICY: "UE-first | GDPR-min | hash-only | append-only | fail-closed",
-      NOTE: "Generated locally in browser. Not an identity proof.",
-      PAYLOAD_MIN: {
-        desc: DESC,
-        content_hash_sha256: HASH || null,
-        timestamp: TS || null,
-        created_utc: new Date().toISOString()
-      }
-    };
-
-    render({ status:"VALID", bundle });
-  });
-
-  document.getElementById("example").addEventListener("click", () => {
-    document.getElementById("hrr").value = example.HRR;
-    document.getElementById("desc").value = example.PAYLOAD_MIN.desc;
-    document.getElementById("hash").value = "";
-    document.getElementById("ts").value = "";
-    render({ status:"INCONCLUSIVE", note:"Example filled. Click 'Genera Bundle'.", ts_utc:new Date().toISOString() });
-  });
-
-  document.getElementById("reset").addEventListener("click", () => {
-    document.getElementById("hrr").value = "";
-    document.getElementById("desc").value = "";
-    document.getElementById("hash").value = "";
-    document.getElementById("ts").value = "";
-    out.textContent = "Pronto.";
-  });
-
-  copyBtn.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(out.textContent);
-      copyBtn.textContent = "Copiato";
-      setTimeout(() => (copyBtn.textContent = "Copia"), 900);
-    } catch {}
-  });
+  $("reset").onclick = () => {
+    lastIPR = null; lastReceipt = null;
+    $("purpose").value = "";
+    $("consentNote").value = "";
+    $("consentCheck").checked = false;
+    $("country").value = "";
+    $("region").value = "";
+    $("city").value = "";
+    $("district").value = "";
+    $("localSecret").value = "";
+    $("notes").value = "";
+    $("iprOut").textContent = "—";
+    $("rcpOut").textContent = "—";
+    $("downloadIpr").disabled = true;
+    $("downloadReceipt").disabled = true;
+    setStatus($("s1"), "", "warn");
+    setStatus($("s2"), "", "warn");
+    setStatus($("s3"), "", "warn");
+    setStatus($("s4"), "Reset completato.", "warn");
+    setStep(1);
+  };
 </script>
-
 </body>
 </html>
