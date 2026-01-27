@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuelcoletta1-source.github.io/hermeticum-bce-platform/schemas/receipt.schema.json",
+  "title": "AI_JOKER_C2 RECEIPT v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proto",
+    "type",
+    "version",
+    "kind",
+    "issued_at",
+    "payload_hash_sha256",
+    "payload",
+    "signature"
+  ],
+  "properties": {
+    "proto": { "type": "string", "const": "AI_JOKER_C2" },
+    "type": { "type": "string", "const": "RECEIPT" },
+    "version": { "type": "string", "const": "v1" },
+    "kind": {
+      "type": "string",
+      "enum": ["IPR_ISSUANCE", "AI_DECISION"]
+    },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "payload_hash_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["ipr_subject", "ipr_level", "purpose", "policy", "consent_scope", "issued_at", "ipr_hash_sha256"],
+      "properties": {
+        "ipr_subject": {
+          "type": "string",
+          "pattern": "^ipr-subject:[a-f0-9]{32}$"
+        },
+        "ipr_level": { "type": "string", "enum": ["BASIC", "STRONG", "INSTITUTION"] },
+        "purpose": { "type": "string", "minLength": 3, "maxLength": 200 },
+        "policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["UE_FIRST", "GDPR_MIN", "HASH_ONLY", "FAIL_CLOSED", "AUDIT_APPEND_ONLY"],
+          "properties": {
+            "UE_FIRST": { "type": "boolean", "const": true },
+            "GDPR_MIN": { "type": "boolean", "const": true },
+            "HASH_ONLY": { "type": "boolean", "const": true },
+            "FAIL_CLOSED": { "type": "boolean", "const": true },
+            "AUDIT_APPEND_ONLY": { "type": "boolean", "const": true }
+          }
+        },
+        "consent_scope": {
+          "type": "string",
+          "enum": ["AI_ACCOUNTABILITY", "PROOF_OF_EXISTENCE", "AUDIT_TRAIL"]
+        },
+        "issued_at": { "type": "string", "format": "date-time" },
+        "ipr_hash_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme"],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "enum": ["NONE", "JWS", "COSE", "ECDSA_SECP256K1", "ED25519"]
+        },
+        "kid": { "type": ["string", "null"], "maxLength": 200 },
+        "value": { "type": ["string", "null"], "maxLength": 5000 },
+        "note": { "type": ["string", "null"], "maxLength": 280 }
+      }
+    }
+  }
+}
