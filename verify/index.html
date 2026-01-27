@@ -1,20 +1,566 @@
-// anchors (optional)
-const anchors = rcp?.anchors;
-if (anchors == null) {
-  checks.push("OK: anchors assenti (null).");
-} else if (!Array.isArray(anchors)) {
-  ok = false; checks.push("FAIL: anchors deve essere array o null.");
-} else {
-  // sanity checks (no external verification)
-  for (let i = 0; i < anchors.length; i++) {
-    const a = anchors[i] || {};
-    if (!a.type || !a.ref) { ok = false; checks.push(`FAIL: anchors[${i}] missing type/ref.`); continue; }
-    if (!["BTC_TXID","ETH_TX","IPFS_CID","RFC3161"].includes(a.type)) {
-      ok = false; checks.push(`FAIL: anchors[${i}] type invalid: ${String(a.type)}`); continue;
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verify — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
+  <meta name="description" content="Verifica client-side: schema+hash+firma ED25519 + anchors + PACK_MANIFEST. Fail-closed, no custody." />
+  <meta name="color-scheme" content="dark light">
+
+  <!-- CSP (incrementale: inline ok, rete solo verso whitelist) -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    object-src 'none';
+    frame-ancestors 'none';
+    form-action 'none';
+    img-src 'self' data:;
+    style-src 'self' 'unsafe-inline';
+    script-src 'self' 'unsafe-inline';
+    connect-src 'self'
+      https://blockstream.info
+      https://eth.blockscout.com
+      https://ipfs.io;
+    font-src 'self';
+    upgrade-insecure-requests;
+  ">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
+      --brd:#1d2a3a; --acc:#7dd3fc; --ok:#86efac; --bad:#fda4af; --warn:#fde68a;
+      --r:16px; --pad:18px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
-    if (typeof a.ref !== "string" || a.ref.length < 8) {
-      ok = false; checks.push(`FAIL: anchors[${i}] ref too short.`); continue;
+    body{margin:0;background:radial-gradient(900px 600px at 15% 0%, #0d1b2a 0%, var(--bg) 55%);color:var(--txt);}
+    a{color:var(--acc);text-decoration:none}
+    .wrap{max-width:1200px;margin:0 auto;padding:26px 18px 60px;}
+    header{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px}
+    .seal{font-weight:900;letter-spacing:.3px}
+    .company{color:var(--mut);font-size:12px;margin-top:4px}
+    .tag{color:var(--mut);font-size:13px;line-height:1.45;max-width:760px}
+    .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+    @media (max-width:1100px){.grid{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .title{font-size:18px;font-weight:800;margin:0 0 8px}
+    .sub{color:var(--mut);font-size:12px;line-height:1.4;margin:0 0 10px}
+    label{display:block;font-size:12px;color:var(--mut);margin:10px 0 6px}
+    textarea, input{
+      width:100%;box-sizing:border-box;background:#071018;border:1px solid var(--brd);
+      color:var(--txt);border-radius:12px;padding:10px 12px;outline:none;
+      font-size:13px;line-height:1.35
     }
+    textarea{
+      min-height:210px;resize:vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size:12px
+    }
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{
+      border:1px solid var(--brd);background:#0a1320;color:var(--txt);
+      border-radius:12px;padding:10px 12px;font-weight:750;cursor:pointer
+    }
+    button.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
+    button:disabled{opacity:.45;cursor:not-allowed}
+    .hr{height:1px;background:var(--brd);margin:14px 0}
+    .out{white-space:pre;overflow:auto;background:#06101a;border:1px solid var(--brd);border-radius:12px;padding:12px;font-size:12px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
+    .status{margin-top:10px;font-size:12px;line-height:1.35}
+    .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+    .pill{display:inline-block;border:1px solid var(--brd);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--mut);margin-top:6px}
+    .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
+    .check{display:flex;gap:10px;align-items:center}
+    .small{font-size:12px;color:var(--mut)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        <div class="company">HERMETICUM B.C.E. S.r.l.</div>
+        <div class="pill">Verify (client-side) · ED25519 · hash-only · fail-closed</div>
+      </div>
+      <div class="tag">
+        Incolla <b>ipr.json</b> e <b>receipt.json</b>. Opzionale: <b>PACK_MANIFEST.json</b>.
+        Tutto avviene localmente. Live-check esterno è opzionale e può fallire per CORS/policy (non invalida la verifica locale).
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h1 class="title">IPR (ipr.json)</h1>
+        <label for="iprText">Incolla qui</label>
+        <textarea id="iprText" spellcheck="false" placeholder="{ ... }"></textarea>
+
+        <div class="hr"></div>
+        <label>Report IPR</label>
+        <div class="out mono" id="iprReport">—</div>
+      </section>
+
+      <section class="card">
+        <h2 class="title">Receipt (receipt.json)</h2>
+        <label for="rcpText">Incolla qui</label>
+        <textarea id="rcpText" spellcheck="false" placeholder="{ ... }"></textarea>
+
+        <div class="row">
+          <label class="check">
+            <input type="checkbox" id="liveCheck" />
+            Live-check anchors (best-effort)
+          </label>
+          <span class="small">Whitelisted: blockstream.info · eth.blockscout.com · ipfs.io</span>
+        </div>
+
+        <div class="hr"></div>
+        <label>Report RECEIPT</label>
+        <div class="out mono" id="rcpReport">—</div>
+
+        <div class="hr"></div>
+        <label>Anchors</label>
+        <div class="out mono" id="anchorReport">—</div>
+      </section>
+
+      <section class="card">
+        <h2 class="title">PACK_MANIFEST (opzionale)</h2>
+        <label for="pmText">Incolla PACK_MANIFEST.json</label>
+        <textarea id="pmText" spellcheck="false" placeholder="{ ... }"></textarea>
+
+        <div class="hr"></div>
+        <label>Report PACK</label>
+        <div class="out mono" id="pmReport">—</div>
+      </section>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h2 class="title">Verdetto (fail-closed)</h2>
+      <p class="sub">
+        Se IPR+Receipt non passano, il risultato è FAIL. PACK_MANIFEST, se fornito, deve passare oppure FAIL.
+      </p>
+
+      <div class="btns">
+        <button class="primary" id="run">Verifica</button>
+        <button id="wipe">Wipe session</button>
+      </div>
+
+      <div class="status" id="status"></div>
+      <div class="hr"></div>
+      <div class="out mono" id="finalOut">—</div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+
+  function setStatus(msg, kind){
+    const el = $("status");
+    el.className = "status " + (kind || "warn");
+    el.textContent = msg || "";
   }
-  checks.push(`OK: anchors parsed (${anchors.length}).`);
-}
+
+  function nowISO(){ return new Date().toISOString(); }
+
+  // --- helpers ---
+  async function sha256Hex(str){
+    const enc = new TextEncoder().encode(str);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  }
+
+  function stableStringify(obj){
+    const seen = new WeakSet();
+    const norm = (v) => {
+      if(v && typeof v === "object"){
+        if(seen.has(v)) throw new Error("Cyclic object not allowed");
+        seen.add(v);
+        if(Array.isArray(v)) return v.map(norm);
+        const keys = Object.keys(v).sort();
+        const out = {};
+        for(const k of keys) out[k] = norm(v[k]);
+        return out;
+      }
+      return v;
+    };
+    return JSON.stringify(norm(obj));
+  }
+
+  function b64ToBuf(b64){
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+    return bytes.buffer;
+  }
+
+  function isHexLen(s, n){
+    return typeof s === "string" && s.length === n && /^[a-f0-9]+$/.test(s);
+  }
+
+  function mkExplorerLink(a){
+    const ref = a.ref;
+    if(a.type === "BTC_TXID") return `https://blockstream.info/tx/${ref}`;
+    if(a.type === "ETH_TX") return `https://eth.blockscout.com/tx/${ref}`;
+    if(a.type === "IPFS_CID") return `https://ipfs.io/ipfs/${ref}`;
+    return null;
+  }
+
+  async function verifyEd25519OverText(publicJwk, b64sig, text){
+    const pubKey = await crypto.subtle.importKey(
+      "jwk",
+      publicJwk,
+      { name: "Ed25519" },
+      false,
+      ["verify"]
+    );
+    return await crypto.subtle.verify(
+      { name: "Ed25519" },
+      pubKey,
+      b64ToBuf(b64sig),
+      new TextEncoder().encode(text)
+    );
+  }
+
+  function wipe(){
+    for(const id of ["iprText","rcpText","pmText"]){
+      const el = $(id);
+      if(el) el.value = "";
+    }
+    $("iprReport").textContent = "—";
+    $("rcpReport").textContent = "—";
+    $("anchorReport").textContent = "—";
+    $("pmReport").textContent = "—";
+    $("finalOut").textContent = "—";
+    setStatus("Session wiped (RAM).", "ok");
+  }
+
+  $("wipe").onclick = wipe;
+
+  // --- Live checks (best-effort) ---
+  async function liveCheckBTC(txid){
+    // blockstream API supports CORS
+    const url = `https://blockstream.info/api/tx/${txid}`;
+    const r = await fetch(url, { method:"GET" });
+    if(!r.ok) return { ok:false, detail:`HTTP ${r.status}` };
+    const j = await r.json();
+    return { ok: !!j?.txid, detail: j?.txid ? "found" : "not found" };
+  }
+
+  async function liveCheckETH(tx){
+    // blockscout endpoint (CORS often ok)
+    const url = `https://eth.blockscout.com/api?module=transaction&action=gettxinfo&txhash=${tx}`;
+    const r = await fetch(url, { method:"GET" });
+    if(!r.ok) return { ok:false, detail:`HTTP ${r.status}` };
+    const j = await r.json();
+    // some blockscout returns {status:"1", result:{hash:...}}
+    const ok = (j?.status === "1" && j?.result) || (j?.result?.hash) || (j?.result?.transactionHash);
+    return { ok: !!ok, detail: ok ? "found" : "not found/unknown" };
+  }
+
+  async function liveCheckIPFS(cid){
+    // gateway HEAD may be blocked; GET with range is sometimes okay
+    const url = `https://ipfs.io/ipfs/${cid}`;
+    const r = await fetch(url, { method:"HEAD" });
+    if(!r.ok) return { ok:false, detail:`HTTP ${r.status}` };
+    return { ok:true, detail:"reachable" };
+  }
+
+  async function run(){
+    setStatus("Verifica in corso…", "warn");
+    $("iprReport").textContent = "—";
+    $("rcpReport").textContent = "—";
+    $("anchorReport").textContent = "—";
+    $("pmReport").textContent = "—";
+    $("finalOut").textContent = "—";
+
+    const checks = [];
+    let ok = true;
+
+    // Parse inputs
+    let ipr = null, rcp = null, pm = null;
+
+    try{ ipr = JSON.parse(($("iprText").value || "").trim()); }
+    catch{ setStatus("IPR non è JSON valido.", "bad"); return; }
+
+    try{ rcp = JSON.parse(($("rcpText").value || "").trim()); }
+    catch{ setStatus("Receipt non è JSON valido.", "bad"); return; }
+
+    const pmRaw = ($("pmText").value || "").trim();
+    if(pmRaw){
+      try{ pm = JSON.parse(pmRaw); }
+      catch{ setStatus("PACK_MANIFEST non è JSON valido.", "bad"); return; }
+    }
+
+    // ---- IPR checks ----
+    const iprLines = [];
+    if(ipr?.proto !== "AI_JOKER_C2" || ipr?.type !== "IPR_PACKAGE" || ipr?.version !== "v1"){
+      ok = false; iprLines.push("FAIL: header (proto/type/version) non valido.");
+    } else iprLines.push("OK: header valido.");
+
+    if(typeof ipr?.subject !== "string" || ipr.subject.length < 16){
+      ok = false; iprLines.push("FAIL: subject mancante/non valido.");
+    } else iprLines.push("OK: subject presente.");
+
+    let iprHash = null;
+    try{
+      iprHash = await sha256Hex(stableStringify(ipr));
+      iprLines.push("OK: ipr_hash_sha256 calcolato.");
+      iprLines.push("  ipr_hash_sha256: " + iprHash);
+    }catch(e){
+      ok = false; iprLines.push("FAIL: errore canonicalize/hash ipr: " + (e?.message || String(e)));
+    }
+    $("iprReport").textContent = iprLines.join("\n");
+
+    // ---- Receipt checks ----
+    const rcpLines = [];
+    if(rcp?.proto !== "AI_JOKER_C2" || rcp?.type !== "RECEIPT" || rcp?.version !== "v1"){
+      ok = false; rcpLines.push("FAIL: header (proto/type/version) non valido.");
+    } else rcpLines.push("OK: header valido.");
+
+    if(typeof rcp?.payload_hash_sha256 !== "string" || !isHexLen(rcp.payload_hash_sha256, 64)){
+      ok = false; rcpLines.push("FAIL: payload_hash_sha256 mancante/non valido.");
+    } else rcpLines.push("OK: payload_hash_sha256 presente.");
+
+    // Payload canonicalization + hash check
+    let computedPayloadHash = null;
+    try{
+      computedPayloadHash = await sha256Hex(stableStringify(rcp.payload));
+      if(computedPayloadHash !== rcp.payload_hash_sha256){
+        ok = false;
+        rcpLines.push("FAIL: payload_hash_sha256 mismatch.");
+        rcpLines.push("  declared: " + rcp.payload_hash_sha256);
+        rcpLines.push("  computed: " + computedPayloadHash);
+      } else {
+        rcpLines.push("OK: payload_hash_sha256 coerente.");
+      }
+    }catch(e){
+      ok = false; rcpLines.push("FAIL: errore canonicalize/hash payload: " + (e?.message || String(e)));
+    }
+
+    // Bind receipt to ipr
+    if(typeof rcp?.payload?.ipr_hash_sha256 !== "string" || !isHexLen(rcp.payload.ipr_hash_sha256, 64)){
+      ok = false; rcpLines.push("FAIL: payload.ipr_hash_sha256 mancante/non valido.");
+    } else {
+      if(iprHash && rcp.payload.ipr_hash_sha256 !== iprHash){
+        ok = false;
+        rcpLines.push("FAIL: receipt.payload.ipr_hash_sha256 != hash(ipr).");
+        rcpLines.push("  receipt: " + rcp.payload.ipr_hash_sha256);
+        rcpLines.push("  ipr:     " + iprHash);
+      } else rcpLines.push("OK: receipt legata a ipr (ipr_hash match).");
+    }
+
+    // Signature checks (ED25519)
+    const sig = rcp.signature || {};
+    if(sig.scheme !== "ED25519"){
+      ok = false; rcpLines.push("FAIL: signature.scheme != ED25519 (fail-closed).");
+    } else {
+      if(!sig.public_key_jwk || !sig.value){
+        ok = false; rcpLines.push("FAIL: firma incompleta (public_key_jwk/value).");
+      } else if(!computedPayloadHash){
+        ok = false; rcpLines.push("FAIL: impossibile verificare firma (payload hash mancante).");
+      } else {
+        try{
+          const okSig = await verifyEd25519OverText(sig.public_key_jwk, sig.value, rcp.payload_hash_sha256);
+          if(!okSig){
+            ok = false; rcpLines.push("FAIL: firma ED25519 non valida.");
+          } else {
+            rcpLines.push("OK: firma ED25519 verificata (su payload_hash_sha256).");
+          }
+        }catch(e){
+          ok = false;
+          rcpLines.push("FAIL: errore verifica firma ED25519: " + (e?.message || String(e)));
+        }
+      }
+    }
+
+    // receipt full hash (useful for pack linkage)
+    let receiptFullHash = null;
+    try{
+      receiptFullHash = await sha256Hex(stableStringify(rcp));
+      rcpLines.push("OK: receipt_full_hash_sha256 calcolato.");
+      rcpLines.push("  receipt_full_hash_sha256: " + receiptFullHash);
+    }catch(e){
+      ok = false; rcpLines.push("FAIL: errore hash receipt completo: " + (e?.message || String(e)));
+    }
+
+    $("rcpReport").textContent = rcpLines.join("\n");
+
+    // ---- Anchors sanity + optional live-check ----
+    const aLines = [];
+    const anchors = Array.isArray(rcp.anchors) ? rcp.anchors : [];
+    if(!Array.isArray(rcp.anchors)) aLines.push("WARN: receipt.anchors non è array (trattato come vuoto).");
+
+    // format checks
+    let anchorsOK = true;
+    for(const [i,a] of anchors.entries()){
+      if(!a || typeof a !== "object"){ anchorsOK = false; aLines.push(`FAIL: anchors[${i}] non è oggetto.`); continue; }
+      if(!["BTC_TXID","ETH_TX","IPFS_CID"].includes(a.type)){ anchorsOK = false; aLines.push(`FAIL: anchors[${i}].type non valido.`); }
+      if(typeof a.ref !== "string" || a.ref.length < 8){ anchorsOK = false; aLines.push(`FAIL: anchors[${i}].ref non valido.`); }
+      else aLines.push(`OK: anchors[${i}] ${a.type} ${a.ref}`);
+      const link = mkExplorerLink(a);
+      if(link) aLines.push(`  link: ${link}`);
+    }
+    if(!anchorsOK){ ok = false; aLines.unshift("FAIL: anchors sanity (fail-closed)."); }
+    else aLines.unshift("OK: anchors sanity.");
+
+    // live-check (best-effort; does not flip global ok if it fails)
+    if($("liveCheck").checked && anchors.length){
+      aLines.push("");
+      aLines.push("LIVE-CHECK (best-effort):");
+      for(const a of anchors){
+        try{
+          if(a.type === "BTC_TXID" && isHexLen(a.ref, 64)){
+            const r = await liveCheckBTC(a.ref);
+            aLines.push(`- BTC ${a.ref}: ${r.ok ? "FOUND" : "N/A"} (${r.detail})`);
+          } else if(a.type === "ETH_TX" && /^0x[a-fA-F0-9]{64}$/.test(a.ref)){
+            const r = await liveCheckETH(a.ref);
+            aLines.push(`- ETH ${a.ref}: ${r.ok ? "FOUND" : "N/A"} (${r.detail})`);
+          } else if(a.type === "IPFS_CID"){
+            const r = await liveCheckIPFS(a.ref);
+            aLines.push(`- IPFS ${a.ref}: ${r.ok ? "REACHABLE" : "N/A"} (${r.detail})`);
+          } else {
+            aLines.push(`- ${a.type} ${a.ref}: skip (format non standard)`);
+          }
+        }catch(e){
+          aLines.push(`- ${a.type} ${a.ref}: N/A (${e?.message || String(e)})`);
+        }
+      }
+    }
+
+    $("anchorReport").textContent = aLines.join("\n");
+
+    // ---- PACK_MANIFEST verification (optional but fail-closed if provided) ----
+    let packOK = true;
+    const pLines = [];
+    if(!pm){
+      pLines.push("PACK_MANIFEST non fornito (skip).");
+    } else {
+      // header
+      if(pm?.proto !== "AI_JOKER_C2" || pm?.type !== "PACK_MANIFEST" || pm?.version !== "v1"){
+        packOK = false; pLines.push("FAIL: header (proto/type/version) non valido.");
+      } else pLines.push("OK: header valido.");
+
+      if(typeof pm?.pack_hash_sha256 !== "string" || !isHexLen(pm.pack_hash_sha256, 64)){
+        packOK = false; pLines.push("FAIL: pack_hash_sha256 mancante/non valido.");
+      }
+
+      // recompute pack hash excluding pack_signature
+      try{
+        const pmNoSig = JSON.parse(JSON.stringify(pm));
+        delete pmNoSig.pack_signature;
+        const recomputedPackHash = await sha256Hex(stableStringify(pmNoSig));
+
+        if(pm.pack_hash_sha256 !== recomputedPackHash){
+          packOK = false;
+          pLines.push("FAIL: pack_hash_sha256 mismatch.");
+          pLines.push("  declared: " + pm.pack_hash_sha256);
+          pLines.push("  computed: " + recomputedPackHash);
+        } else pLines.push("OK: pack_hash_sha256 coerente.");
+      }catch(e){
+        packOK = false;
+        pLines.push("FAIL: errore canonicalize/hash PACK_MANIFEST: " + (e?.message || String(e)));
+      }
+
+      // verify signature over pack_hash_sha256
+      const ps = pm.pack_signature || {};
+      if(ps.scheme !== "ED25519" || !ps.public_key_jwk || !ps.value){
+        packOK = false; pLines.push("FAIL: pack_signature ED25519 mancante/incompleta.");
+      } else {
+        try{
+          const okSig = await verifyEd25519OverText(ps.public_key_jwk, ps.value, pm.pack_hash_sha256);
+          if(!okSig){
+            packOK = false; pLines.push("FAIL: firma ED25519 PACK_MANIFEST non valida.");
+          } else pLines.push("OK: firma ED25519 PACK_MANIFEST verificata.");
+        }catch(e){
+          packOK = false;
+          pLines.push("FAIL: errore verifica firma PACK_MANIFEST: " + (e?.message || String(e)));
+        }
+      }
+
+      // kid continuity (if present on both)
+      if(ps.kid && rcp?.signature?.kid){
+        if(ps.kid === rcp.signature.kid) pLines.push("OK: kid continuity (pack kid == receipt kid).");
+        else { packOK = false; pLines.push("FAIL: kid mismatch (pack kid != receipt kid)."); }
+      } else {
+        pLines.push("WARN: kid continuity non valutabile (kid mancante).");
+      }
+
+      // files linkage checks
+      const f = pm.files || {};
+      if(!f || typeof f !== "object"){ packOK = false; pLines.push("FAIL: files map mancante/non valido."); }
+
+      // ipr hash binding
+      if(typeof f["ipr.json"] === "string"){
+        if(!iprHash || f["ipr.json"] !== iprHash){
+          packOK = false;
+          pLines.push("FAIL: files['ipr.json'] != hash(ipr).");
+          pLines.push("  declared: " + f["ipr.json"]);
+          pLines.push("  computed: " + (iprHash || "null"));
+        } else pLines.push("OK: files['ipr.json'] match.");
+      } else {
+        packOK = false; pLines.push("FAIL: files['ipr.json'] missing.");
+      }
+
+      // payload hash binding
+      if(typeof f["receipt.payload_hash_sha256"] === "string"){
+        if(f["receipt.payload_hash_sha256"] !== rcp.payload_hash_sha256){
+          packOK = false;
+          pLines.push("FAIL: files['receipt.payload_hash_sha256'] mismatch.");
+          pLines.push("  declared: " + f["receipt.payload_hash_sha256"]);
+          pLines.push("  computed: " + rcp.payload_hash_sha256);
+        } else pLines.push("OK: files['receipt.payload_hash_sha256'] match.");
+      } else {
+        packOK = false; pLines.push("FAIL: files['receipt.payload_hash_sha256'] missing.");
+      }
+
+      // full receipt hash binding (hardening)
+      if(typeof f["receipt.full_hash_sha256"] === "string"){
+        if(!receiptFullHash || f["receipt.full_hash_sha256"] !== receiptFullHash){
+          packOK = false;
+          pLines.push("FAIL: files['receipt.full_hash_sha256'] != hash(receipt).");
+          pLines.push("  declared: " + f["receipt.full_hash_sha256"]);
+          pLines.push("  computed: " + (receiptFullHash || "null"));
+        } else pLines.push("OK: files['receipt.full_hash_sha256'] match.");
+      } else {
+        packOK = false; pLines.push("FAIL: files['receipt.full_hash_sha256'] missing.");
+      }
+
+      // (anchor-pack/readme hashes cannot be verified without those files)
+      if(typeof f["anchor-pack.json"] === "string") pLines.push("INFO: anchor-pack.json hash present (not verifiable here without file).");
+      if(typeof f["README_proof.md"] === "string") pLines.push("INFO: README_proof.md hash present (not verifiable here without file).");
+    }
+
+    $("pmReport").textContent = pLines.join("\n");
+
+    // If PACK_MANIFEST provided and fails => global fail-closed
+    if(pm && !packOK){
+      ok = false;
+      checks.push("FAIL: PACK_MANIFEST non valido (fail-closed).");
+    } else if(pm && packOK){
+      checks.push("OK: PACK_MANIFEST valido.");
+    }
+
+    // Final
+    checks.push(ok ? "OK: verifica locale completata." : "FAIL: verifica locale fallita.");
+
+    const finalLines = [];
+    finalLines.push(ok ? "VERDETTO: OK ✅" : "VERDETTO: FAIL ❌");
+    finalLines.push("TIME: " + nowISO());
+    finalLines.push("");
+    finalLines.push(...checks);
+
+    $("finalOut").textContent = finalLines.join("\n");
+    setStatus(ok ? "OK ✅" : "FAIL ❌", ok ? "ok" : "bad");
+  }
+
+  $("run").onclick = () => run().catch(e => {
+    console.error(e);
+    setStatus("Errore: " + (e?.message || String(e)), "bad");
+  });
+
+  // init
+  wipe();
+})();
+</script>
+</body>
+</html>
