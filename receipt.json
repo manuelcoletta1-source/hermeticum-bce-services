@@ -1,0 +1,13 @@
+{
+  "proto": "RECEIPT/v1",
+  "subject": "IPR-3@ManuelColetta",
+  "digest": {
+    "algo": "SHA-512",
+    "value": "<SHA512_HEX_DI_ipr.canon.json>"
+  },
+  "signature": {
+    "algo": "ED25519",
+    "pubkey": "",
+    "value": ""
+  }
+}
