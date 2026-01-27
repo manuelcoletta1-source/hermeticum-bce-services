@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuelcoletta1-source.github.io/hermeticum-bce-platform/schemas/ipr.schema.json",
+  "title": "AI_JOKER_C2 IPR_PACKAGE v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proto",
+    "type",
+    "version",
+    "issuer",
+    "seal",
+    "issued_at",
+    "level",
+    "subject",
+    "purpose",
+    "policy",
+    "consent",
+    "context",
+    "audit"
+  ],
+  "properties": {
+    "proto": {
+      "type": "string",
+      "const": "AI_JOKER_C2"
+    },
+    "type": {
+      "type": "string",
+      "const": "IPR_PACKAGE"
+    },
+    "version": {
+      "type": "string",
+      "const": "v1"
+    },
+    "issuer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seal": {
+      "type": "string",
+      "const": "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA"
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "level": {
+      "type": "string",
+      "enum": ["BASIC", "STRONG", "INSTITUTION"]
+    },
+    "subject": {
+      "type": "string",
+      "pattern": "^ipr-subject:[a-f0-9]{32}$"
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["UE_FIRST", "GDPR_MIN", "HASH_ONLY", "FAIL_CLOSED", "AUDIT_APPEND_ONLY"],
+      "properties": {
+        "UE_FIRST": { "type": "boolean", "const": true },
+        "GDPR_MIN": { "type": "boolean", "const": true },
+        "HASH_ONLY": { "type": "boolean", "const": true },
+        "FAIL_CLOSED": { "type": "boolean", "const": true },
+        "AUDIT_APPEND_ONLY": { "type": "boolean", "const": true }
+      }
+    },
+    "consent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "duration_days", "acknowledged"],
+      "properties": {
+        "scope": {
+          "type": "string",
+          "enum": ["AI_ACCOUNTABILITY", "PROOF_OF_EXISTENCE", "AUDIT_TRAIL"]
+        },
+        "duration_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3650
+        },
+        "note": {
+          "type": ["string", "null"],
+          "maxLength": 280
+        },
+        "acknowledged": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "hash_sha256", "fields_present"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "COARSE_GEO"
+        },
+        "hash_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "fields_present": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["country", "region", "city", "district"]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "maxLength": 2000
+    },
+    "audit": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evt", "at", "by", "hash_sha256"],
+        "properties": {
+          "evt": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "by": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          "hash_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    }
+  }
+}
