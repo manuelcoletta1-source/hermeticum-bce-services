@@ -1,0 +1,48 @@
+{
+  "schema": "HBCE-RECEIPT-v1",
+  "type": "SIGNATURE_RECEIPT",
+  "status": "PENDING_SIGNATURE",
+  "policy": {
+    "ue_first": true,
+    "audit_first": true,
+    "fail_closed": true,
+    "hash_only": true
+  },
+  "subject": {
+    "ipr_id": "IPR-4 / AI_JOKER_C2",
+    "artifact": "ipr-ai-joker-c2.canon.json"
+  },
+  "hash": {
+    "algorithm": "SHA-512",
+    "digest_hex": "cbd17830997d2da5478619471ce2d24438008ce269cee1c1a6d8933cf4d46dca83874173018f1e8f5fa7eacebb9007ad5a083310f04576198860687799aca9a4"
+  },
+  "signature": {
+    "algorithm": "ED25519",
+    "public_key_ref": "ed25519_pub.pem",
+    "signature_b64": "REPLACE_WITH_REAL_ED25519_SIGNATURE_BASE64",
+    "signed_payload": "SHA512_DIGEST_HEX"
+  },
+  "verification": {
+    "mode": "OFFLINE_DETERMINISTIC",
+    "rule": "FAIL_CLOSED",
+    "on_mismatch": "INVALID"
+  },
+  "upstream_reference": {
+    "root_id": "IPR-3 / AI_JOKER_C2",
+    "role": "ORIGIN_ROOT",
+    "anchors": {
+      "ipfs": "bafkreidhv73vqrxoweog33ls3rnwrgyicio234pcuks6mnep76yh56pj5q",
+      "btc": "9eeb29b67f4a649d563b95560fda5ddaa84777b13515f936837fc93d28554b45",
+      "evm": "0xf65eb314a1edd392fc15fcd9c65d22060ca39cbac04fcfcb48b978062500a7eff"
+    }
+  },
+  "seal": {
+    "symbol": "🜏",
+    "name": "SIGILLO_HERMETICUM_PHI_OMEGA",
+    "state": "APPEND_ONLY"
+  },
+  "timestamp": {
+    "created_at": "2026-01-27T00:00:00Z",
+    "note": "Replace with real generation time. Prefer RFC3339 UTC."
+  }
+}
