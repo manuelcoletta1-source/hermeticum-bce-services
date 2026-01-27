@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Cittadino UE — Corridoio | EU Gateway</title>
+  <meta name="description" content="Corridoio Cittadino UE: attivazione IPR e verifica locale. Nessun account, nessun upload, hash-only, receipt ED25519, fail-closed."/>
+  <style>
+    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 16px 56px}
+    .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+    h1{font-size:22px;margin:0 0 10px}
+    h2{font-size:16px;margin:18px 0 8px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
+    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.45}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:14px;padding:12px 14px;
+         text-decoration:none;border:1px solid var(--line);background:#0f1621}
+    .btn.primary{background:#142033;border-color:#2a3a55}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="box">
+      <h1>Cittadino UE (ingresso operativo)</h1>
+      <p>
+        Qui attivi una precedenza verificabile: generi <b>IPR</b> + <b>receipt</b> firmata (ED25519) e verifichi tutto in locale.
+        Nessun account. Nessun upload. Solo <b>hash-only</b>, <b>client-side</b> e <b>fail-closed</b>.
+      </p>
+      <p>
+        Nota: questo gateway è orientato a <b>servizi B2B/B2G</b>. Il cittadino è l’ingresso operativo che rende possibile
+        una traccia utilizzabile in contesti professionali e istituzionali.
+      </p>
+
+      <div class="cta">
+        <a class="btn primary" href="../../create/">Avvia (Create)</a>
+        <a class="btn" href="../../verify/">Verifica (Verify)</a>
+        <a class="btn" href="../../">← Torna al Gateway</a>
+      </div>
+
+      <div class="hr"></div>
+
+      <h2>Cosa ottieni</h2>
+      <ul>
+        <li><b>ipr.json</b> (hash-only) + <b>receipt.json</b> firmata ED25519</li>
+        <li>Verifica locale riproducibile (fail-closed)</li>
+        <li>Opzionale: <b>anchor-pack</b> (BTC/ETH/IPFS) + <b>Evidence Pack</b></li>
+      </ul>
+
+      <h2>Cosa NON è</h2>
+      <ul>
+        <li>Non è un profilo utente</li>
+        <li>Non è un documento emesso da autorità</li>
+        <li>Non assegna diritti automatici e non promette riconoscimento</li>
+      </ul>
+
+      <h2>Passo successivo (rapido)</h2>
+      <p>
+        Dopo Create/Verify, se hai bisogno di massima persistenza e audit,
+        passa a <a href="../../anchor/">Anchor</a> e poi a <a href="../../evidence-pack/">Evidence Pack</a>.
+      </p>
+    </section>
+  </div>
+</body>
+</html>
