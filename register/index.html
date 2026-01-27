@@ -1,251 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register — Attiva IPR → Diventa Nodo Regionale | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Varco unico: attiva IPR e diventa nodo foglia del Nodo Regionale Piemonte. UE-first, GDPR-min, hash-only, fail-closed." />
-  <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
-    header,main,footer{max-width:1100px;margin:auto;padding:2.4rem 1.5rem}
-    a{color:#58a6ff;text-decoration:none}
-    h1{font-size:2rem;margin:0 0 .5rem}
-    p,label{color:#9da7b1}
-    .box{border:1px solid #30363d;border-radius:12px;padding:1.4rem;background:#0d1117;margin-top:1rem}
-    .grid{display:grid;grid-template-columns:1fr;gap:1rem}
-    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
-    input,select,textarea{
-      width:100%;box-sizing:border-box;background:#161b22;color:#e6edf3;border:1px solid #30363d;border-radius:10px;
-      padding:.8rem;font-size:1rem;outline:none
-    }
-    textarea{min-height:170px;resize:vertical}
-    .row{display:grid;grid-template-columns:1fr;gap:.75rem}
-    @media(min-width:900px){.row{grid-template-columns:1fr 1fr}}
-    .btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
-    button{
-      background:#238636;border:1px solid #2ea043;color:#fff;border-radius:10px;padding:.7rem 1rem;
-      cursor:pointer;font-weight:800
-    }
-    button.secondary{background:#161b22;border:1px solid #30363d;color:#e6edf3}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    pre{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:1rem;overflow:auto}
-    .pill{display:inline-block;border:1px solid #30363d;border-radius:999px;padding:.25rem .6rem;margin:.2rem .3rem 0 0;color:#9da7b1;font-size:.9rem}
-    .warn{border-left:3px solid #f85149;padding-left:1rem;color:#c9d1d9}
-    .ok{border-left:3px solid #2ea043;padding-left:1rem;color:#c9d1d9}
-    footer{border-top:1px solid #30363d;color:#8b949e;font-size:.9rem}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Entrypoint onboarding: profili LIGHT/STRONG (risk-based) in Fase 1. Nessun account, GDPR-min." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
-
-<header>
-  <h1>Register — Attiva IPR → Diventa Nodo Regionale</h1>
-  <p>
-    Varco unico del <strong>Nodo Regionale Piemonte</strong>.
-    Attivare un IPR significa creare un legame verificabile tra <strong>soggetto biologico</strong> e territorio (Regione→Città→Zona),
-    tramite evento <strong>hash-only</strong>.
-  </p>
-  <div>
-    <span class="pill">BIOCIBERNETICO</span>
-    <span class="pill">PRIMATO BIOLOGICO</span>
-    <span class="pill">UE-FIRST</span>
-    <span class="pill">GDPR-MIN</span>
-    <span class="pill">HASH-ONLY</span>
-    <span class="pill">FAIL-CLOSED</span>
-  </div>
-  <p class="warn">
-    Non inserire documenti o dati personali sensibili in chiaro. Il portale genera e pubblica solo l’hash del payload off-chain.
-  </p>
-  <p><a href="../">Home</a> · <a href="../node/">Nodo Piemonte</a> · <a href="../verify/">Verify</a> · <a href="../privacy/">Privacy</a></p>
-</header>
-
-<main class="grid">
-  <section class="box">
-    <h2>1) Territorio (Nodo Regionale Piemonte)</h2>
-    <p>Baseline istituzionale precompilata. Puoi cambiare città/zona se il nodo lo consente in futuro, ma il nodo regionale resta Piemonte.</p>
-
-    <div class="row">
-      <div>
-        <label for="country">Nazione (ISO)</label>
-        <input id="country" value="IT" />
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="../standards/">Standard</a>
+        <a href="../research/">Ricerca (Horizon)</a>
+        <a href="../phase-1/">Fase 1 (ONLY)</a>
+        <a href="../verify/">Verify</a>
+        <a href="../governance/">Governance</a>
+        <a href="../privacy/">Privacy</a>
       </div>
-      <div>
-        <label for="region">Regione (Nodo)</label>
-        <input id="region" value="Piemonte" />
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Register</h1>
+      <p class="lead">
+        Questo portale non crea account e non custodisce dati personali.
+        “Register” qui significa: <strong>scegliere un profilo di onboarding</strong> per iniziare la catena fail-closed.
+      </p>
+      <div class="notice">
+        <strong>Regola:</strong> se non serve attribuzione rafforzata, resta su LIGHT.
+        STRONG solo per casi ad alto rischio o contesti istituzionali.
       </div>
-    </div>
+    </section>
 
-    <div class="row">
-      <div>
-        <label for="city">Città</label>
-        <input id="city" value="Torino" />
-      </div>
-      <div>
-        <label for="district">Zona / Quartiere</label>
-        <input id="district" value="Barriera di Milano" />
-      </div>
-    </div>
+    <section class="grid">
+      <article class="card">
+        <h2>LIGHT (consigliato)</h2>
+        <p class="muted">
+          Profilo minimo. Nessun account. Email opzionale. HRR pseudonimo generato localmente.
+        </p>
+        <div class="btnrow">
+          <a class="btn" href="../phase-1/onboarding/light.html">Vai a LIGHT</a>
+          <a class="btn secondary" href="../phase-1/">Leggi Fase 1</a>
+        </div>
+      </article>
 
-    <div class="row">
-      <div>
-        <label for="ipr">Riferimento IPR (es. IPR-3)</label>
-        <input id="ipr" value="IPR-3" />
-      </div>
-      <div>
-        <label for="eventType">Tipo evento</label>
-        <select id="eventType">
-          <option value="IPR_REGION_NODE_JOIN" selected>IPR_REGION_NODE_JOIN</option>
-          <option value="CITIZEN_NODE_REQUEST">CITIZEN_NODE_REQUEST</option>
-        </select>
-      </div>
-    </div>
+      <article class="card">
+        <h2>STRONG (alto rischio)</h2>
+        <p class="muted">
+          Profilo per casi ad alto rischio. Email + telefono (segnali hashati), motivo d’uso.
+          Non è eIDAS/CIE/SPID.
+        </p>
+        <div class="btnrow">
+          <a class="btn" href="../phase-1/onboarding/strong.html">Vai a STRONG</a>
+          <a class="btn secondary" href="../governance/">Leggi Governance</a>
+        </div>
+      </article>
 
-    <p class="note mono">Timestamp: inserito automaticamente (ISO-8601).</p>
-  </section>
+      <article class="card">
+        <h2>Dopo l’onboarding</h2>
+        <p class="muted">
+          Una volta generato HRR, produci un bundle minimo (Fase 1) e poi verifichi in Verify.
+        </p>
+        <div class="btnrow">
+          <a class="btn" href="../verify/">Apri Verify</a>
+          <a class="btn secondary" href="../">Torna al Gateway</a>
+        </div>
+      </article>
 
-  <section class="box">
-    <h2>2) Payload off-chain (opzionale) → Hash (locale)</h2>
-    <p>
-      Il payload è una tua nota privata o un riferimento alle prove conservate da te (off-chain).
-      Il sistema calcola <strong>SHA-256</strong> localmente nel browser.
-    </p>
+      <article class="card">
+        <h2>Nota privacy</h2>
+        <p class="muted">
+          Il portale è progettato per minimizzare dati. Non inserire PII non necessarie.
+        </p>
+        <div class="btnrow">
+          <a class="btn secondary" href="../privacy/">Leggi Privacy</a>
+        </div>
+      </article>
+    </section>
+  </main>
 
-    <label for="payload">Payload off-chain (testo/JSON) — NON verrà pubblicato</label>
-    <textarea id="payload" class="mono" placeholder='Esempio (off-chain):
-{
-  "type": "IPR_ACTIVATION",
-  "summary": "Attivazione IPR come nodo foglia nel Nodo Regionale Piemonte",
-  "storage": "OFF-CHAIN",
-  "privacy": "DO_NOT_PUBLISH"
-}'></textarea>
-
-    <div class="btns">
-      <button id="activateBtn">ATTIVA IPR (genera evento)</button>
-      <button id="copyBtn" class="secondary">Copia JSON</button>
-      <button id="downloadBtn" class="secondary">Scarica JSON</button>
-      <button id="resetBtn" class="secondary">Reset</button>
-    </div>
-
-    <p class="ok">
-      Se l’evento è generato, hai creato la tua traccia di ingresso: <strong>sei un nodo foglia regionale</strong> (verificabile).
-    </p>
-  </section>
-
-  <section class="box" style="grid-column:1/-1">
-    <h2>3) Evento generato (hash-only)</h2>
-    <pre id="output" class="mono">{}</pre>
-    <p class="note">
-      Firma digitale: opzionale. Il campo <span class="mono">signature</span> resta <span class="mono">null</span>.
-      Puoi firmare l’evento successivamente e sostituire il valore.
-    </p>
-  </section>
-</main>
-
-<footer>
-  <p>
-    HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-    HERMETICUM B.C.E. S.r.l. — Register (Nodo Regionale Piemonte)
-  </p>
-</footer>
-
-<script>
-  const $ = (id) => document.getElementById(id);
-
-  async function sha256Hex(text) {
-    const enc = new TextEncoder();
-    const data = enc.encode(text);
-    const digest = await crypto.subtle.digest("SHA-256", data);
-    const bytes = new Uint8Array(digest);
-    return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
-  }
-
-  function isoNow() { return new Date().toISOString(); }
-
-  function isValidTerritory(t) {
-    return t.country && t.region && t.city && t.district;
-  }
-
-  function buildEvent(payloadHash) {
-    return {
-      event_type: $("eventType").value,
-      node_level: "USER_LEAF",
-      region_node: $("region").value.trim(),
-      territory: {
-        country: $("country").value.trim(),
-        region: $("region").value.trim(),
-        city: $("city").value.trim(),
-        district: $("district").value.trim()
-      },
-      subject_ref: $("ipr").value.trim(),
-      payload_hash: "SHA-256:" + payloadHash,
-      timestamp: isoNow(),
-      signature: null,
-      policy: ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"],
-      notes: "Attivazione IPR → nodo foglia regionale (primato biologico). Payload off-chain custodito dal soggetto."
-    };
-  }
-
-  function pretty(obj) { return JSON.stringify(obj, null, 2); }
-
-  $("activateBtn").addEventListener("click", async () => {
-    if (!window.isSecureContext) {
-      $("output").textContent = pretty({ error: "FAIL-CLOSED: contesto non sicuro. Usa HTTPS." });
-      return;
-    }
-    if (!(window.crypto && window.crypto.subtle)) {
-      $("output").textContent = pretty({ error: "FAIL-CLOSED: WebCrypto non disponibile (crypto.subtle)." });
-      return;
-    }
-
-    const territory = {
-      country: $("country").value.trim(),
-      region: $("region").value.trim(),
-      city: $("city").value.trim(),
-      district: $("district").value.trim()
-    };
-
-    if (!isValidTerritory(territory)) {
-      $("output").textContent = pretty({ error: "FAIL-CLOSED: territorio incompleto." });
-      return;
-    }
-    if (!$("ipr").value.trim()) {
-      $("output").textContent = pretty({ error: "FAIL-CLOSED: subject_ref (IPR) mancante." });
-      return;
-    }
-    // Regione deve restare Piemonte per questo nodo
-    if (territory.region.toLowerCase() !== "piemonte") {
-      $("output").textContent = pretty({ error: "FAIL-CLOSED: questo varco è vincolato al Nodo Regionale Piemonte." });
-      return;
-    }
-
-    const payload = $("payload").value || "";
-    const hash = await sha256Hex(payload);
-    const evt = buildEvent(hash);
-    $("output").textContent = pretty(evt);
-  });
-
-  $("copyBtn").addEventListener("click", async () => {
-    const text = $("output").textContent || "{}";
-    await navigator.clipboard.writeText(text);
-  });
-
-  $("downloadBtn").addEventListener("click", () => {
-    const text = $("output").textContent || "{}";
-    const blob = new Blob([text], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "event-ipr-region-node-join.json";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  });
-
-  $("resetBtn").addEventListener("click", () => {
-    $("payload").value = "";
-    $("output").textContent = "{}";
-  });
-</script>
-
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
 </body>
 </html>
