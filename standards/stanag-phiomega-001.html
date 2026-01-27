@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>STANAG–ΦΩ–001 | HERMETICUM B.C.E.</title>
+  <meta name="description" content="STANAG–ΦΩ–001 — allegato strutturale per implementazione tecnica e audit. Hash-only, fail-closed, append-only." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+
+<header class="wrap">
+  <nav class="nav">
+    <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+    <div class="navlinks">
+      <a href="../">Gateway</a>
+      <a href="./">Standard</a>
+      <a href="../research/">Ricerca UE</a>
+      <a href="../phase-1/">Fase 1</a>
+      <a href="../verify/">Verify</a>
+      <a href="../legal/">Legal</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>STANAG–ΦΩ–001</h1>
+    <p class="lead">
+      Allegato strutturale a <strong>STANDARD UE–ΦΩ–001</strong>.
+      Definisce requisiti tecnici minimi per implementazione e audit.
+    </p>
+
+    <div class="pillrow">
+      <span class="pill">structural</span>
+      <span class="pill">implementation</span>
+      <span class="pill">audit</span>
+      <span class="pill">hash-only</span>
+      <span class="pill">fail-closed</span>
+    </div>
+
+    <div class="notice">
+      Documento tecnico. Non normativo primario. Non onboarding.
+    </div>
+  </section>
+
+  <!-- METADATI -->
+  <section class="grid">
+    <article class="card">
+      <h2>Metadati</h2>
+      <pre class="codeblock">
+ID: STANAG-PHIOMEGA-001
+Versione: 1.0
+Relazione: Allegato a STANDARD UE–ΦΩ–001
+Stato: Pubblico (read-only)
+Ambito: Implementazione / Audit
+      </pre>
+    </article>
+
+    <article class="card">
+      <h2>Scopo</h2>
+      <ul class="muted">
+        <li>definire requisiti minimi verificabili</li>
+        <li>ridurre discrezionalità implementativa</li>
+        <li>abilitare audit tecnico riproducibile</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- REQUISITI -->
+  <section class="grid">
+    <article class="card">
+      <h2>Requisiti obbligatori (MUST)</h2>
+      <ul class="muted">
+        <li>Parsing JSON deterministico</li>
+        <li>Validazione schema minima</li>
+        <li>Fail-closed su campo mancante</li>
+        <li>Hash SHA-256 (hex, 64 char)</li>
+        <li>Timestamp ISO-8601 (UTC)</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h2>Requisiti consigliati (SHOULD)</h2>
+      <ul class="muted">
+        <li>Verifica locale (no server)</li>
+        <li>Separazione UI / logica</li>
+        <li>Output machine-readable</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- STRUTTURA -->
+  <section class="grid">
+    <article class="card">
+      <h2>Schema minimo (estratto)</h2>
+      <pre class="codeblock">
+{
+  "HRR": "string",
+  "POLICY": "string",
+  "PAYLOAD_MIN": {
+    "desc": "string",
+    "content_hash_sha256": "string|null",
+    "timestamp": "string|null",
+    "created_utc": "string"
+  }
+}
+      </pre>
+      <p class="muted">
+        Ogni campo mancante rende l’evento <strong>INVALID</strong>.
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>Esiti di verifica</h2>
+      <ul class="muted">
+        <li><strong>VALID</strong>: struttura coerente</li>
+        <li><strong>INVALID</strong>: violazione requisito</li>
+        <li><strong>INCONCLUSIVE</strong>: dati insufficienti per confronto hash</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- SICUREZZA -->
+  <section class="grid">
+    <article class="card">
+      <h2>Sicurezza</h2>
+      <ul class="muted">
+        <li>Nessuna custodia di payload</li>
+        <li>Nessun identificatore personale obbligatorio</li>
+        <li>Hash come unico legame al contenuto</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h2>Error handling</h2>
+      <p class="muted">
+        Gli errori devono essere espliciti, deterministici e riproducibili.
+        Nessun fallback “best effort”.
+      </p>
+    </article>
+  </section>
+
+  <!-- RELAZIONI -->
+  <section class="grid">
+    <article class="card">
+      <h2>Relazioni</h2>
+      <ul class="muted">
+        <li><a href="./standard-ue-phiomega-001.html">STANDARD UE–ΦΩ–001</a></li>
+        <li><a href="../phase-1/">Fase 1 (ONLY)</a></li>
+        <li><a href="../verify/">Verify</a></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h2>Audit</h2>
+      <p class="muted">
+        Un audit tecnico deve poter riprodurre:
+      </p>
+      <ol class="muted">
+        <li>parsing</li>
+        <li>validazione schema</li>
+        <li>calcolo hash</li>
+        <li>confronto deterministico</li>
+      </ol>
+    </article>
+  </section>
+
+  <section class="footerhint">
+    <p class="muted">
+      STANAG–ΦΩ–001 è un allegato tecnico: riduce ambiguità e aumenta verificabilità.
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <small>HERMETICUM B.C.E. S.r.l. — STANAG–ΦΩ–001</small>
+</footer>
+
+</body>
+</html>
