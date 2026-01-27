@@ -52,7 +52,7 @@
         <div class="company">HERMETICUM B.C.E. S.r.l.</div>
       </div>
       <div class="tag">
-        Verifica client-side: <b>schema</b> + <b>hash</b> + <b>firma ED25519</b>. Fail-closed: se una cosa stona, FAIL.
+        Verifica client-side: <b>schema</b> + <b>hash</b> + <b>firma ED25519</b>. Fail-closed.
       </div>
     </header>
 
@@ -128,7 +128,7 @@
     return bytes.buffer;
   }
 
-  // Minimal validator (enough for our schemas)
+  // Minimal schema validator (enough for our v1 schemas)
   function validate(schema, data, path="$"){
     const errs = [];
     const isObj = (x) => x && typeof x === "object" && !Array.isArray(x);
@@ -251,7 +251,6 @@
 
     const iprErrs = validate(schemas.iprSchema, ipr, "$");
     const rcpErrs = validate(schemas.rcpSchema, rcp, "$");
-
     report($("iprReport"), iprErrs.length === 0, iprErrs);
     report($("rcpReport"), rcpErrs.length === 0, rcpErrs);
 
@@ -264,10 +263,11 @@
     if(rcpErrs.length){ ok = false; checks.push("FAIL: schema Receipt non valido."); }
     else checks.push("OK: schema Receipt valido.");
 
-    // hashes
+    // deterministic hashes
     const iprHash = await sha256Hex(stableStringify(ipr));
-    const payloadHash = await sha256Hex(stableStringify(rcp.payload));
+    const computedPayloadHash = await sha256Hex(stableStringify(rcp.payload));
 
+    // 1) receipt.payload.ipr_hash_sha256 must match ipr hash
     const declaredIprHash = rcp?.payload?.ipr_hash_sha256;
     if(typeof declaredIprHash !== "string"){
       ok = false; checks.push("FAIL: receipt.payload.ipr_hash_sha256 mancante.");
@@ -278,14 +278,15 @@
       checks.push(`  computed: ${iprHash}`);
     }else checks.push("OK: ipr_hash_sha256 coincide.");
 
+    // 2) receipt.payload_hash_sha256 must match computed payload hash
     const declaredPayloadHash = rcp?.payload_hash_sha256;
     if(typeof declaredPayloadHash !== "string"){
       ok = false; checks.push("FAIL: receipt.payload_hash_sha256 mancante.");
-    }else if(declaredPayloadHash !== payloadHash){
+    }else if(declaredPayloadHash !== computedPayloadHash){
       ok = false;
       checks.push("FAIL: receipt.payload_hash_sha256 mismatch.");
       checks.push(`  declared: ${declaredPayloadHash}`);
-      checks.push(`  computed: ${payloadHash}`);
+      checks.push(`  computed: ${computedPayloadHash}`);
     }else checks.push("OK: payload_hash_sha256 coincide.");
 
     // linkage
@@ -297,7 +298,7 @@
       ok = false; checks.push("FAIL: policy mismatch tra IPR e receipt payload.");
     } else checks.push("OK: policy coerente.");
 
-    // signature ED25519 (fail-closed if scheme is ED25519)
+    // signature verification (fail-closed)
     const sig = rcp?.signature || {};
     if(sig.scheme === "ED25519"){
       try{
@@ -313,11 +314,12 @@
             ["verify"]
           );
 
+          // CRITICAL: verify over declared payload_hash_sha256 (same bytes create signed)
           const verified = await crypto.subtle.verify(
             { name: "Ed25519" },
             pubKey,
             b64ToBuf(sig.value),
-            new TextEncoder().encode(payloadHash)
+            new TextEncoder().encode(rcp.payload_hash_sha256)
           );
 
           if(!verified){
@@ -332,7 +334,8 @@
         checks.push("FAIL: errore verifica firma ED25519: " + (e?.message || String(e)));
       }
     }else if(sig.scheme === "NONE"){
-      checks.push("WARN: receipt non firmata (scheme NONE).");
+      ok = false;
+      checks.push("FAIL: receipt non firmata (scheme NONE) — fail-closed per questo verifier.");
     }else{
       ok = false;
       checks.push("FAIL: scheme firma sconosciuto (fail-closed).");
