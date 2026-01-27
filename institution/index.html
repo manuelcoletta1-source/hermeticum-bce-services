@@ -1,81 +1,109 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Istituzioni | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Entrypoint istituzionale: orientamento e percorsi (Standard/Ricerca/Fase 1/Verify). Nessun onboarding qui." />
-  <link rel="stylesheet" href="../assets/css/main.css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Istituzione / Governance — EU IPR Gateway</title>
+  <meta name="description" content="Corridoio istituzionale UE: registry sperimentale IPR, standard candidato, verifiche riproducibili. Nessuna autorità, solo osservabilità."/>
+  <style>
+    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 16px 56px}
+    .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+    h1{font-size:22px;margin:0 0 10px}
+    h2{font-size:16px;margin:0 0 8px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:14px;padding:12px 14px;
+         text-decoration:none;border:1px solid var(--line);background:#0f1621}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.45}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
-  <header class="wrap">
-    <nav class="nav">
-      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-      <div class="navlinks">
-        <a href="../standards/">Standard</a>
-        <a href="../research/">Ricerca (Horizon)</a>
-        <a href="../phase-1/">Fase 1 (ONLY)</a>
-        <a href="../verify/">Verify</a>
-        <a href="../governance/">Governance</a>
-        <a href="../privacy/">Privacy</a>
-      </div>
-    </nav>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <h1>Per Istituzioni</h1>
-      <p class="lead">
-        Punto di orientamento per PA/enti/commissioni.  
-        Qui non si fa onboarding: si consultano livelli e percorsi auditabili.
+  <div class="wrap">
+    <section class="box">
+      <h1>Istituzione / Governance (UE)</h1>
+      <p>
+        Questo corridoio è dedicato a enti, amministrazioni e organismi che
+        **osservano, verificano o sperimentano** IPR come infrastruttura di precedenza.
+        Il portale **non emette** identità, **non valida** diritti e **non decide**.
       </p>
-      <div class="notice">
-        <strong>Uso corretto:</strong> Standard per definizioni, Ricerca per pre-standard, Fase 1 per operatività minima, Verify per validazione tecnica.
-      </div>
-      <div class="btnrow" style="margin-top:14px;">
-        <a class="btn" href="../catalog/">Catalog (mappa)</a>
-        <a class="btn secondary" href="../">Gateway</a>
-      </div>
+      <p>
+        Qui trovi registry sperimentale, standard candidato e procedure
+        **riproducibili**. Ogni effetto è derivato da IPR già attivati.
+      </p>
     </section>
+
+    <div class="hr"></div>
 
     <section class="grid">
-      <article class="card">
-        <h2>Normativo (sola-lettura)</h2>
-        <p class="muted">Definizioni, livelli e conformità.</p>
-        <div class="btnrow">
-          <a class="btn" href="../standards/">Standard</a>
+      <div class="box">
+        <h2>Registro sperimentale</h2>
+        <p>
+          Elenco pubblico di riferimenti IPR osservabili.
+          Nessuna custodia di dati personali, solo metadati verificabili.
+        </p>
+        <ul>
+          <li>append-only</li>
+          <li>verifica senza fiducia</li>
+          <li>accesso pubblico</li>
+        </ul>
+        <div style="margin-top:10px">
+          <a class="btn" href="../ue-ipr-registry/">Apri registry</a>
         </div>
-      </article>
+      </div>
 
-      <article class="card">
-        <h2>Ricerca UE (Horizon/JRC)</h2>
-        <p class="muted">Pre-standard sperimentale (non esecutivo).</p>
-        <div class="btnrow">
-          <a class="btn" href="../research/">Ricerca</a>
-          <a class="btn secondary" href="../normative/">Mapping eIDAS/EUDI</a>
+      <div class="box">
+        <h2>Standard candidato UE</h2>
+        <p>
+          Specifica tecnica e normativa per adozione istituzionale.
+          Definisce requisiti, limiti e condizioni di opponibilità.
+        </p>
+        <ul>
+          <li>UE-first</li>
+          <li>hash-only</li>
+          <li>fail-closed</li>
+        </ul>
+        <div style="margin-top:10px">
+          <a class="btn" href="../ipr-gov-eu-standard/">Apri standard</a>
         </div>
-      </article>
+      </div>
 
-      <article class="card">
-        <h2>Operatività minima (ONLY)</h2>
-        <p class="muted">Catena fail-closed HRR→DGV→LTA.</p>
-        <div class="btnrow">
-          <a class="btn" href="../phase-1/">Fase 1</a>
+      <div class="box">
+        <h2>Verifiche riproducibili</h2>
+        <p>
+          Procedure per controlli tecnici e audit.
+          Nessuna dipendenza dal portale, solo strumenti replicabili.
+        </p>
+        <ul>
+          <li>receipt ED25519</li>
+          <li>anchor-pack (BTC/ETH/IPFS)</li>
+          <li>evidence pack</li>
+        </ul>
+        <div style="margin-top:10px">
+          <a class="btn" href="../verify/">Apri verifiche</a>
         </div>
-      </article>
-
-      <article class="card">
-        <h2>Verifica tecnica</h2>
-        <p class="muted">Hash e Evidence Bundle. Esiti: VALID/INVALID/INCONCLUSIVE.</p>
-        <div class="btnrow">
-          <a class="btn" href="../verify/">Verify</a>
-        </div>
-      </article>
+      </div>
     </section>
-  </main>
 
-  <footer class="wrap foot">
-    <small>HERMETICUM B.C.E. S.r.l.</small>
-  </footer>
+    <div class="hr"></div>
+
+    <section class="box">
+      <h2>Principi operativi</h2>
+      <ul>
+        <li>Nessuna autorità centrale</li>
+        <li>Nessuna promessa di riconoscimento</li>
+        <li>Derivazione dall’IPR, non sostituzione</li>
+        <li>Auditabilità prima del consenso</li>
+      </ul>
+      <div style="margin-top:12px">
+        <a class="btn" href="../about/">Contesto</a>
+        <a class="btn" href="../legal/">Limiti legali</a>
+      </div>
+    </section>
+  </div>
 </body>
 </html>
