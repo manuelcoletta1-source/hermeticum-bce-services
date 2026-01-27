@@ -1,183 +1,258 @@
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>STANAG–ΦΩ–001 | HERMETICUM B.C.E.</title>
-  <meta name="description" content="STANAG–ΦΩ–001 — allegato strutturale per implementazione tecnica e audit. Hash-only, fail-closed, append-only." />
-  <link rel="stylesheet" href="../assets/css/main.css" />
-</head>
-<body>
+Chiaro. Il PDF non serve più: lo ricostruiamo integralmente in testo così puoi incollare dove vuoi (portale, repo, editor).
+Qui sotto trovi il contenuto completo, già pulito, normativo, UE-first, equivalente funzionale del PDF STANDARD UE–ΦΩ–001.
 
-<header class="wrap">
-  <nav class="nav">
-    <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-    <div class="navlinks">
-      <a href="../">Gateway</a>
-      <a href="./">Standard</a>
-      <a href="../research/">Ricerca UE</a>
-      <a href="../phase-1/">Fase 1</a>
-      <a href="../verify/">Verify</a>
-      <a href="../legal/">Legal</a>
-    </div>
-  </nav>
-</header>
+👉 Copia e incolla TUTTO.
 
-<main class="wrap">
 
-  <section class="hero">
-    <h1>STANAG–ΦΩ–001</h1>
-    <p class="lead">
-      Allegato strutturale a <strong>STANDARD UE–ΦΩ–001</strong>.
-      Definisce requisiti tecnici minimi per implementazione e audit.
-    </p>
+---
 
-    <div class="pillrow">
-      <span class="pill">structural</span>
-      <span class="pill">implementation</span>
-      <span class="pill">audit</span>
-      <span class="pill">hash-only</span>
-      <span class="pill">fail-closed</span>
-    </div>
+STANDARD UE–ΦΩ–001
 
-    <div class="notice">
-      Documento tecnico. Non normativo primario. Non onboarding.
-    </div>
-  </section>
+Specifica normativa UE-first per tracciabilità verificabile e cybersecurity fail-closed
 
-  <!-- METADATI -->
-  <section class="grid">
-    <article class="card">
-      <h2>Metadati</h2>
-      <pre class="codeblock">
-ID: STANAG-PHIOMEGA-001
+Denominazione: STANDARD UE–ΦΩ–001
 Versione: 1.0
-Relazione: Allegato a STANDARD UE–ΦΩ–001
-Stato: Pubblico (read-only)
-Ambito: Implementazione / Audit
-      </pre>
-    </article>
+Stato: Pubblico – sola lettura
+Ambito: Cybersecurity · Tracciabilità · Audit tecnico
+Allineamento: UE-first (non equivalente a eIDAS)
 
-    <article class="card">
-      <h2>Scopo</h2>
-      <ul class="muted">
-        <li>definire requisiti minimi verificabili</li>
-        <li>ridurre discrezionalità implementativa</li>
-        <li>abilitare audit tecnico riproducibile</li>
-      </ul>
-    </article>
-  </section>
 
-  <!-- REQUISITI -->
-  <section class="grid">
-    <article class="card">
-      <h2>Requisiti obbligatori (MUST)</h2>
-      <ul class="muted">
-        <li>Parsing JSON deterministico</li>
-        <li>Validazione schema minima</li>
-        <li>Fail-closed su campo mancante</li>
-        <li>Hash SHA-256 (hex, 64 char)</li>
-        <li>Timestamp ISO-8601 (UTC)</li>
-      </ul>
-    </article>
+---
 
-    <article class="card">
-      <h2>Requisiti consigliati (SHOULD)</h2>
-      <ul class="muted">
-        <li>Verifica locale (no server)</li>
-        <li>Separazione UI / logica</li>
-        <li>Output machine-readable</li>
-      </ul>
-    </article>
-  </section>
+1. Scopo
 
-  <!-- STRUTTURA -->
-  <section class="grid">
-    <article class="card">
-      <h2>Schema minimo (estratto)</h2>
-      <pre class="codeblock">
+Questo Standard definisce un modello minimo, verificabile e audit-friendly per:
+
+attribuibilità tecnica degli atti
+
+riduzione dell’ambiguità temporale e decisionale
+
+verifica hash e timestamp
+
+separazione rigorosa tra norma, ricerca e operatività
+
+
+Lo Standard non definisce identità giuridica, non certifica persone e non custodisce dati.
+
+
+---
+
+2. Campo di applicazione
+
+Si applica a:
+
+sistemi di tracciabilità tecnica
+
+sistemi di audit ex-post
+
+infrastrutture di cybersecurity orientate alla prova
+
+ambienti UE che richiedono minimizzazione dei dati
+
+
+Non si applica a:
+
+identity provider
+
+autenticazione legale
+
+sistemi di login o account centralizzati
+
+
+
+---
+
+3. Principi fondamentali
+
+1. UE-first
+Il riferimento normativo è il diritto e l’ecosistema europeo.
+
+
+2. Fail-closed
+Se un requisito minimo manca, l’atto è INVALID.
+
+
+3. Hash-only
+Nessun contenuto è custodito. Solo riferimenti crittografici.
+
+
+4. Append-only
+Le tracce non sono riscrivibili.
+
+
+5. Separazione dei livelli
+Norma ≠ Ricerca ≠ Operatività ≠ Verifica.
+
+
+
+
+---
+
+4. Non-obiettivi dichiarati
+
+Questo Standard:
+
+non è un Identity Provider
+
+non sostituisce eIDAS, CIE, SPID
+
+non assegna diritti legali automatici
+
+non custodisce dati personali
+
+non prova l’identità di un soggetto
+
+
+
+---
+
+5. Modello concettuale
+
+HRR → DGV → LTA
+
+HRR – Human Reference Record
+Riferimento umano minimo (pseudonimo o identificatore locale).
+
+DGV – Decision / Governance Vector
+Atto o decisione minima, descritta tramite metadati.
+
+LTA – Long-Term Append-only trace
+Traccia tecnica a lungo termine (concettuale).
+
+> Il modello riduce l’ambiguità tecnica, non certifica identità.
+
+
+
+
+---
+
+6. Formato minimo verificabile
+
+Un evento conforme DEVE includere almeno:
+
 {
   "HRR": "string",
-  "POLICY": "string",
+  "POLICY": "UE-first | GDPR-min | hash-only | append-only | fail-closed",
   "PAYLOAD_MIN": {
     "desc": "string",
-    "content_hash_sha256": "string|null",
-    "timestamp": "string|null",
-    "created_utc": "string"
+    "content_hash_sha256": null,
+    "timestamp": null,
+    "created_utc": "ISO-8601"
   }
 }
-      </pre>
-      <p class="muted">
-        Ogni campo mancante rende l’evento <strong>INVALID</strong>.
-      </p>
-    </article>
 
-    <article class="card">
-      <h2>Esiti di verifica</h2>
-      <ul class="muted">
-        <li><strong>VALID</strong>: struttura coerente</li>
-        <li><strong>INVALID</strong>: violazione requisito</li>
-        <li><strong>INCONCLUSIVE</strong>: dati insufficienti per confronto hash</li>
-      </ul>
-    </article>
-  </section>
+Regole:
 
-  <!-- SICUREZZA -->
-  <section class="grid">
-    <article class="card">
-      <h2>Sicurezza</h2>
-      <ul class="muted">
-        <li>Nessuna custodia di payload</li>
-        <li>Nessun identificatore personale obbligatorio</li>
-        <li>Hash come unico legame al contenuto</li>
-      </ul>
-    </article>
+ogni campo mancante → INVALID
 
-    <article class="card">
-      <h2>Error handling</h2>
-      <p class="muted">
-        Gli errori devono essere espliciti, deterministici e riproducibili.
-        Nessun fallback “best effort”.
-      </p>
-    </article>
-  </section>
+hash SHA-256 in formato hex (64 caratteri)
 
-  <!-- RELAZIONI -->
-  <section class="grid">
-    <article class="card">
-      <h2>Relazioni</h2>
-      <ul class="muted">
-        <li><a href="./standard-ue-phiomega-001.html">STANDARD UE–ΦΩ–001</a></li>
-        <li><a href="../phase-1/">Fase 1 (ONLY)</a></li>
-        <li><a href="../verify/">Verify</a></li>
-      </ul>
-    </article>
+timestamp in formato ISO-8601 UTC
 
-    <article class="card">
-      <h2>Audit</h2>
-      <p class="muted">
-        Un audit tecnico deve poter riprodurre:
-      </p>
-      <ol class="muted">
-        <li>parsing</li>
-        <li>validazione schema</li>
-        <li>calcolo hash</li>
-        <li>confronto deterministico</li>
-      </ol>
-    </article>
-  </section>
 
-  <section class="footerhint">
-    <p class="muted">
-      STANAG–ΦΩ–001 è un allegato tecnico: riduce ambiguità e aumenta verificabilità.
-    </p>
-  </section>
 
-</main>
+---
 
-<footer class="wrap foot">
-  <small>HERMETICUM B.C.E. S.r.l. — STANAG–ΦΩ–001</small>
-</footer>
+7. Relazione con l’operatività (ONLY)
 
-</body>
-</html>
+Questo Standard non descrive l’uso operativo.
+L’implementazione minima è definita in Fase 1 (ONLY).
+
+Lo Standard:
+
+definisce il modello
+
+NON implementa il processo
+
+
+
+---
+
+8. Relazione con Verify
+
+Il componente di verifica:
+
+controlla struttura e hash
+
+produce esiti deterministici
+
+NON interpreta
+
+NON giudica
+
+NON certifica
+
+
+Esiti ammessi:
+
+VALID
+
+INVALID
+
+INCONCLUSIVE
+
+
+
+---
+
+9. Sicurezza e privacy
+
+Nessuna custodia di payload
+
+Nessun identificatore personale obbligatorio
+
+Minimizzazione dei dati (GDPR-min)
+
+Verifica locale preferita
+
+
+
+---
+
+10. Audit e opponibilità tecnica
+
+Un audit conforme a questo Standard DEVE poter:
+
+1. riprodurre il parsing
+
+
+2. verificare lo schema minimo
+
+
+3. ricalcolare l’hash
+
+
+4. confrontare in modo deterministico
+
+
+
+Lo Standard è opponibile come specifica tecnica, non come autorità giuridica.
+
+
+---
+
+11. Stato del documento
+
+Versione: 1.0
+
+Mutabilità: FORBIDDEN
+
+Evoluzione: solo tramite nuovo Standard o allegato
+
+
+
+---
+
+HERMETICUM B.C.E. S.r.l.
+STANDARD UE–ΦΩ–001 — HTML-native / no-PDF
+
+
+---
+
+Se vuoi, nel prossimo messaggio posso:
+
+rifarti la versione STANAG in testo puro
+
+oppure adattare questo testo 1:1 per Horizon proposal
+
+oppure ridurlo a Executive Summary (1 pagina)
