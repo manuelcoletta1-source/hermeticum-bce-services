@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Create IPR — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
-  <meta name="description" content="Genera ipr.json e receipt.json firmata (ED25519). Client-side. UE-first, GDPR-min, hash-only, fail-closed." />
+  <meta name="description" content="Genera ipr.json + receipt.json firmata (ED25519). Client-side. UE-first, GDPR-min, hash-only, fail-closed." />
   <style>
     :root{
       --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
@@ -49,7 +49,8 @@
         <div class="company">HERMETICUM B.C.E. S.r.l.</div>
       </div>
       <div class="tag">
-        Generazione client-side di <span class="mono">ipr.json</span> + <span class="mono">receipt.json</span> (firma <b>ED25519</b>). Nessun invio dati a server.
+        Generazione client-side di <span class="mono">ipr.json</span> + <span class="mono">receipt.json</span> (firma <b>ED25519</b>).
+        Nessun invio a server. Fail-closed.
       </div>
     </header>
 
@@ -233,7 +234,7 @@
     const fields_present = Object.entries(ctx).filter(([_,v])=>!!v).map(([k])=>k);
     const context_hash = await sha256Hex(stableStringify(ctx));
 
-    const ipr = {
+    return {
       proto: "AI_JOKER_C2",
       type: "IPR_PACKAGE",
       version: "v1",
@@ -260,8 +261,6 @@
         await buildAudit("EVT-IPR-ISSUED", issued_at, "CLIENT_SIDE_WIZARD", subject)
       ]
     };
-
-    return ipr;
   }
 
   function buildPayload({ ipr, ipr_hash_sha256 }){
@@ -276,19 +275,20 @@
     };
   }
 
-  async function signReceiptPayloadHash(payload_hash_sha256){
+  async function signEd25519OverText(text){
     const keyPair = await crypto.subtle.generateKey(
       { name: "Ed25519" },
       true,
       ["sign","verify"]
     );
+
     const publicJwk = await crypto.subtle.exportKey("jwk", keyPair.publicKey);
     const kid = await sha256Hex(stableStringify(publicJwk));
 
     const sigBuf = await crypto.subtle.sign(
       { name: "Ed25519" },
       keyPair.privateKey,
-      new TextEncoder().encode(payload_hash_sha256)
+      new TextEncoder().encode(text)
     );
 
     return {
@@ -339,7 +339,8 @@
       const payload = buildPayload({ ipr, ipr_hash_sha256 });
       const payload_hash_sha256 = await sha256Hex(stableStringify(payload));
 
-      const signature = await signReceiptPayloadHash(payload_hash_sha256);
+      // CRITICAL: we sign the declared payload_hash_sha256 text (hex string)
+      const signature = await signEd25519OverText(payload_hash_sha256);
 
       const receipt = {
         proto: "AI_JOKER_C2",
@@ -361,7 +362,7 @@
       $("downloadIpr").disabled = false;
       $("downloadReceipt").disabled = false;
 
-      setStatus("OK: generati ipr.json e receipt.json (ED25519).", "ok");
+      setStatus("OK: generati ipr.json + receipt.json (ED25519).", "ok");
     }catch(e){
       console.error(e);
       setStatus("Errore: " + (e?.message || String(e)), "bad");
