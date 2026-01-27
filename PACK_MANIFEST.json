@@ -1,0 +1,10 @@
+{
+  "proto": "PACK_MANIFEST/v1",
+  "subject": "IPR-3@ManuelColetta",
+  "files": [
+    "ipr.json",
+    "receipt.json",
+    "anchor-pack.json"
+  ],
+  "policy": "AUDIT_FIRST/FAIL_CLOSED"
+}
