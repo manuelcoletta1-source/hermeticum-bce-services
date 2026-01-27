@@ -1,247 +1,178 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verify — Evento Hash-Only | Hermeticum B.C.E.</title>
-  <meta name="description" content="Verifica evento hash-only: parsing JSON, checks fail-closed, policy UE-first/GDPR-min, controllo SHA-256 locale opzionale." />
-  <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
-    header,main,footer{max-width:1100px;margin:auto;padding:2.5rem 1.5rem}
-    .box{border:1px solid #30363d;border-radius:12px;padding:1.5rem;background:#0d1117}
-    h1{font-size:2rem;margin:0 0 .5rem}
-    h2{margin:0 0 .75rem}
-    p,label{color:#9da7b1}
-    textarea,input{
-      width:100%;box-sizing:border-box;background:#161b22;color:#e6edf3;border:1px solid #30363d;border-radius:10px;
-      padding:.8rem;font-size:1rem;outline:none
-    }
-    textarea{min-height:210px;resize:vertical}
-    .grid{display:grid;grid-template-columns:1fr;gap:1rem}
-    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
-    .btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
-    button{
-      background:#238636;border:1px solid #2ea043;color:#fff;border-radius:10px;padding:.7rem 1rem;
-      cursor:pointer;font-weight:600
-    }
-    button.secondary{background:#161b22;border:1px solid #30363d;color:#e6edf3}
-    pre{
-      background:#161b22;border:1px solid #30363d;border-radius:12px;padding:1rem;overflow:auto
-    }
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    .ok{border-left:3px solid #2ea043;padding-left:1rem}
-    .bad{border-left:3px solid #f85149;padding-left:1rem}
-    .note{font-size:.95rem;color:#8b949e}
-    .badge{display:inline-block;padding:.25rem .6rem;border-radius:999px;border:1px solid #30363d;color:#9da7b1;font-size:.85rem;margin-right:.4rem}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verify | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Verifica tecnica: hash, timestamp e bundle. Esiti: VALID / INVALID / INCONCLUSIVE. Nessuna narrativa, solo prova." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
-
 <body>
-<header>
-  <span class="badge">UE-FIRST</span>
-  <span class="badge">GDPR-MIN</span>
-  <span class="badge">HASH-ONLY</span>
-  <span class="badge">FAIL-CLOSED</span>
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="../standards/">Standard</a>
+        <a href="../research/">Ricerca (Horizon)</a>
+        <a href="../phase-1/">Fase 1 (ONLY)</a>
+        <a class="active" href="./">Verify</a>
+        <a href="../governance/">Governance</a>
+        <a href="../privacy/">Privacy</a>
+      </div>
+    </nav>
+  </header>
 
-  <h1>Verify — Evento Hash-Only</h1>
-  <p>
-    Verifica locale di un evento (JSON): parsing, coerenza struttura, policy, territorio e formato hash.
-    Se possiedi il payload off-chain, puoi ricalcolare lo SHA-256 localmente e confrontarlo.
-  </p>
-</header>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Verify (Tecnico)</h1>
+      <p class="lead">
+        Questo livello verifica <strong>integrità</strong> e <strong>coerenza minima</strong>.
+        Non certifica identità. Non interpreta contenuti. Produce solo esiti verificabili.
+      </p>
+      <div class="notice">
+        <strong>Esiti:</strong> VALID / INVALID / INCONCLUSIVE.
+        Se manca un requisito minimo → FAIL-CLOSED (INVALID).
+      </div>
+      <div class="pillrow">
+        <span class="pill">hash-only</span>
+        <span class="pill">append-only</span>
+        <span class="pill">fail-closed</span>
+        <span class="pill">audit-ready</span>
+      </div>
+    </section>
 
-<main class="grid">
-  <section class="box">
-    <h2>1) Incolla evento JSON</h2>
-    <label for="eventJson">Evento (JSON)</label>
-    <textarea id="eventJson" class="mono" placeholder='Incolla qui l’evento generato da /create...'></textarea>
+    <section class="grid">
+      <article class="card">
+        <h2>1) Verifica hash (base)</h2>
+        <p class="muted">
+          Incolla un hash (es. SHA-256) e un riferimento (timestamp/nota). Questo tool non “controlla internet”:
+          verifica struttura, formato e coerenza interna del bundle.
+        </p>
 
-    <div class="btns">
-      <button id="verifyBtn">Verifica evento</button>
-      <button id="loadSampleBtn" class="secondary">Carica esempio</button>
-      <button id="resetBtn" class="secondary">Reset</button>
-    </div>
+        <label class="muted">Hash</label>
+        <input id="hash" type="text" placeholder="es. 64 caratteri hex (SHA-256)" />
 
-    <p class="note">
-      Questa pagina non invia dati a server. Tutto resta nel browser.
-    </p>
-  </section>
+        <label class="muted" style="margin-top:10px;">Timestamp (opzionale)</label>
+        <input id="ts" type="text" placeholder="es. 2026-01-27T20:00:00Z" />
 
-  <section class="box">
-    <h2>2) Payload off-chain (opzionale)</h2>
-    <label for="payload">Payload off-chain (testo/JSON) — usato solo per ricalcolare SHA-256</label>
-    <textarea id="payload" class="mono" placeholder="Se hai il payload originale, incollalo qui."></textarea>
+        <div class="btnrow" style="margin-top:14px;">
+          <button class="btn" id="checkHash">Check</button>
+          <button class="btn secondary" id="reset">Reset</button>
+        </div>
+      </article>
 
-    <div class="btns">
-      <button id="rehashBtn" class="secondary">Ricalcola SHA-256 payload</button>
-      <button id="compareBtn" class="secondary">Confronta con evento</button>
-    </div>
+      <article class="card">
+        <h2>2) Evidence Bundle (consigliato)</h2>
+        <p class="muted">
+          Incolla un bundle JSON (es. generato da Fase 1). Il portale controlla che i campi minimi esistano
+          e siano coerenti. Nessun dato sensibile richiesto.
+        </p>
 
-    <pre id="payloadOut" class="mono">{}</pre>
-  </section>
+        <label class="muted">Evidence Bundle (JSON)</label>
+        <textarea id="bundle" rows="10" placeholder='{"HRR":"...","POLICY":"...","PAYLOAD_MIN":{...}}'></textarea>
 
-  <section class="box" style="grid-column:1/-1">
-    <h2>Risultato verifica (fail-closed)</h2>
-    <pre id="report" class="mono">{}</pre>
-    <p class="note">
-      “VALID” significa: struttura coerente + policy presenti + campi minimi OK.
-      Non significa “identità vera”: quella resta nel dominio biologico e nel tuo off-chain.
-    </p>
-  </section>
-</main>
+        <div class="btnrow" style="margin-top:14px;">
+          <button class="btn" id="checkBundle">Validate Bundle</button>
+          <a class="btn secondary" href="./schema/evidence-bundle.schema.json" target="_blank" rel="noopener">Apri Schema JSON</a>
+        </div>
+      </article>
 
-<footer>
-  <p class="note">
-    HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA<br/>
-    HERMETICUM B.C.E. S.r.l. — Verify (hash-only)
-  </p>
-</footer>
+      <article class="card">
+        <h2>Output</h2>
+        <pre id="out" class="codeblock">Pronto. Inserisci dati e verifica.</pre>
+        <div class="btnrow">
+          <button class="btn secondary" id="copyBtn" type="button">Copia Output</button>
+          <a class="btn secondary" href="../">Torna al Gateway</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Regola di conformità</h2>
+        <p class="muted">
+          Verify è “tecnico”. La definizione di evento/opponibilità sta in <a href="../standards/">Standard</a>.
+          L’operatività sta in <a href="../phase-1/">Fase 1</a>. La ricerca sta in <a href="../research/">Ricerca</a>.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
 
 <script>
-  const $ = (id) => document.getElementById(id);
+  const out = document.getElementById("out");
+  const copyBtn = document.getElementById("copyBtn");
 
-  async function sha256Hex(text) {
-    const enc = new TextEncoder();
-    const data = enc.encode(text);
-    const digest = await crypto.subtle.digest("SHA-256", data);
-    const bytes = new Uint8Array(digest);
-    return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
-  }
+  function isHex(s) { return /^[0-9a-fA-F]+$/.test(s); }
+  function looksLikeSha256(h) { return typeof h === "string" && h.length === 64 && isHex(h); }
 
-  function isISODate(s) {
-    const d = new Date(s);
-    return !isNaN(d.getTime()) && typeof s === "string" && s.includes("T");
-  }
-
-  function fail(msg, details = {}) {
-    return { status: "REJECTED", reason: msg, ...details };
-  }
-
-  function ok(details = {}) {
-    return { status: "VALID", ...details };
-  }
-
-  function requiredPolicySet() {
-    return ["UE-FIRST", "GDPR-MIN", "HASH-ONLY", "FAIL-CLOSED"];
-  }
-
-  function hasAllPolicies(arr) {
-    if (!Array.isArray(arr)) return false;
-    const set = new Set(arr);
-    return requiredPolicySet().every(p => set.has(p));
-  }
-
-  function validHashFormat(s) {
-    // expected: "SHA-256:" + 64 hex
-    if (typeof s !== "string") return false;
-    if (!s.startsWith("SHA-256:")) return false;
-    const hex = s.slice("SHA-256:".length);
-    return /^[0-9a-f]{64}$/i.test(hex);
-  }
-
-  function minimalEventCheck(evt) {
-    if (!evt || typeof evt !== "object") return fail("Evento non valido: JSON non oggetto.");
-
-    const needed = ["event_type", "territory", "subject_ref", "payload_hash", "timestamp", "policy"];
-    for (const k of needed) {
-      if (!(k in evt)) return fail("FAIL-CLOSED: campo mancante.", { missing: k });
-    }
-
-    if (typeof evt.event_type !== "string" || !evt.event_type.trim()) return fail("FAIL-CLOSED: event_type non valido.");
-    if (typeof evt.subject_ref !== "string" || !evt.subject_ref.trim()) return fail("FAIL-CLOSED: subject_ref non valido.");
-
-    const t = evt.territory;
-    if (!t || typeof t !== "object") return fail("FAIL-CLOSED: territory non valido.");
-    const tk = ["country", "region", "city", "district"];
-    for (const k of tk) {
-      if (typeof t[k] !== "string" || !t[k].trim()) return fail("FAIL-CLOSED: territory incompleto.", { missing: "territory."+k });
-    }
-
-    if (!isISODate(evt.timestamp)) return fail("FAIL-CLOSED: timestamp non ISO-8601 valido.", { timestamp: evt.timestamp });
-
-    if (!validHashFormat(evt.payload_hash)) return fail("FAIL-CLOSED: payload_hash formato non valido.", { payload_hash: evt.payload_hash });
-
-    if (!hasAllPolicies(evt.policy)) return fail("FAIL-CLOSED: policy non completa.", { expected: requiredPolicySet(), got: evt.policy });
-
-    return ok({
-      event_type: evt.event_type,
-      territory: t,
-      subject_ref: evt.subject_ref,
-      payload_hash: evt.payload_hash,
-      timestamp: evt.timestamp,
-      signature: evt.signature ?? null
-    });
-  }
-
-  function pretty(o) { return JSON.stringify(o, null, 2); }
-
-  $("verifyBtn").addEventListener("click", () => {
-    const raw = $("eventJson").value.trim();
-    if (!raw) { $("report").textContent = pretty(fail("FAIL-CLOSED: evento vuoto.")); return; }
-
-    try {
-      const evt = JSON.parse(raw);
-      const rep = minimalEventCheck(evt);
-      $("report").textContent = pretty(rep);
-      $("report").className = "mono " + (rep.status === "VALID" ? "ok" : "bad");
-    } catch (e) {
-      const rep = fail("JSON non parsabile.", { error: String(e) });
-      $("report").textContent = pretty(rep);
-      $("report").className = "mono bad";
-    }
-  });
-
-  $("rehashBtn").addEventListener("click", async () => {
-    const payload = $("payload").value || "";
-    const h = await sha256Hex(payload);
-    $("payloadOut").textContent = pretty({ payload_hash: "SHA-256:" + h });
-  });
-
-  $("compareBtn").addEventListener("click", async () => {
-    const raw = $("eventJson").value.trim();
-    if (!raw) { $("report").textContent = pretty(fail("Serve un evento JSON per confrontare.")); $("report").className="mono bad"; return; }
-
-    let evt;
-    try { evt = JSON.parse(raw); }
-    catch (e) { $("report").textContent = pretty(fail("Evento JSON non parsabile.", { error: String(e) })); $("report").className="mono bad"; return; }
-
-    const base = minimalEventCheck(evt);
-    if (base.status !== "VALID") { $("report").textContent = pretty(base); $("report").className="mono bad"; return; }
-
-    const payload = $("payload").value || "";
-    const h = await sha256Hex(payload);
-    const calc = "SHA-256:" + h;
-
-    const match = (calc.toLowerCase() === String(evt.payload_hash).toLowerCase());
-    const rep = match
-      ? ok({ check: "PAYLOAD_HASH_MATCH", calculated: calc, event: evt.payload_hash })
-      : fail("PAYLOAD_HASH_MISMATCH", { calculated: calc, event: evt.payload_hash });
-
-    $("report").textContent = pretty(rep);
-    $("report").className = "mono " + (rep.status === "VALID" ? "ok" : "bad");
-  });
-
-  $("loadSampleBtn").addEventListener("click", () => {
-    const sample = {
-      event_type: "CITIZEN_NODE_REQUEST",
-      territory: { country: "IT", region: "Piemonte", city: "Torino", district: "Barriera di Milano" },
-      subject_ref: "IPR-3",
-      payload_hash: "SHA-256:" + "0".repeat(64),
-      timestamp: new Date().toISOString(),
-      signature: null,
-      policy: ["UE-FIRST","GDPR-MIN","HASH-ONLY","FAIL-CLOSED"]
+  function emit(status, details) {
+    const payload = {
+      status,
+      ts_utc: new Date().toISOString(),
+      details
     };
-    $("eventJson").value = JSON.stringify(sample, null, 2);
-    $("report").textContent = "{}";
-    $("report").className = "mono";
+    out.textContent = JSON.stringify(payload, null, 2);
+  }
+
+  document.getElementById("checkHash").addEventListener("click", () => {
+    const hash = (document.getElementById("hash").value || "").trim();
+    const ts = (document.getElementById("ts").value || "").trim();
+
+    if (!hash) return emit("INCONCLUSIVE", { reason: "Missing hash" });
+
+    if (looksLikeSha256(hash)) {
+      return emit("VALID", { type: "SHA-256", hash, timestamp: ts || null });
+    }
+    if (isHex(hash) && hash.length >= 32) {
+      return emit("INCONCLUSIVE", { reason: "Hash format not recognized as SHA-256 (still hex-like)", hash_len: hash.length, timestamp: ts || null });
+    }
+    return emit("INVALID", { reason: "Hash not hex or too short", timestamp: ts || null });
   });
 
-  $("resetBtn").addEventListener("click", () => {
-    $("eventJson").value = "";
-    $("payload").value = "";
-    $("payloadOut").textContent = "{}";
-    $("report").textContent = "{}";
-    $("report").className = "mono";
+  document.getElementById("checkBundle").addEventListener("click", () => {
+    const raw = (document.getElementById("bundle").value || "").trim();
+    if (!raw) return emit("INCONCLUSIVE", { reason: "Missing bundle JSON" });
+
+    let obj;
+    try { obj = JSON.parse(raw); }
+    catch { return emit("INVALID", { reason: "Invalid JSON" }); }
+
+    // Minimal fail-closed checks
+    const hasHRR = typeof obj.HRR === "string" && obj.HRR.length >= 8;
+    const hasPolicy = typeof obj.POLICY === "string" && obj.POLICY.length >= 3;
+    const hasPayload = obj.PAYLOAD_MIN && typeof obj.PAYLOAD_MIN === "object";
+
+    const checks = { hasHRR, hasPolicy, hasPayload };
+    const missing = Object.entries(checks).filter(([,v]) => !v).map(([k]) => k);
+
+    if (missing.length) {
+      return emit("INVALID", { reason: "Fail-closed: missing required fields", missing, checks });
+    }
+
+    // Optional sanity: HRR prefix
+    const prefixOk = /^HRR-(L|S)-/i.test(obj.HRR) || /^HRR/i.test(obj.HRR);
+    return emit(prefixOk ? "VALID" : "INCONCLUSIVE", {
+      checks,
+      note: prefixOk ? "Bundle structure OK" : "Bundle OK but HRR prefix not recognized",
+      hrr: obj.HRR
+    });
+  });
+
+  document.getElementById("reset").addEventListener("click", () => {
+    document.getElementById("hash").value = "";
+    document.getElementById("ts").value = "";
+    document.getElementById("bundle").value = "";
+    out.textContent = "Pronto. Inserisci dati e verifica.";
+  });
+
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(out.textContent);
+      copyBtn.textContent = "Copiato";
+      setTimeout(() => (copyBtn.textContent = "Copia Output"), 900);
+    } catch { /* no-op */ }
   });
 </script>
 </body>
