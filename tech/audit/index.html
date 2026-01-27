@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Audit — Tech | EU Gateway</title>
+  <meta name="description" content="Audit: checklist e verifiche riproducibili. Fail-closed, hash-only, receipt ED25519, anchor-pack, evidence pack."/>
+  <style>
+    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
+    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 16px 56px}
+    .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+    h1{font-size:22px;margin:0 0 10px}
+    h2{font-size:16px;margin:18px 0 8px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
+    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.45}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:14px;padding:12px 14px;
+         text-decoration:none;border:1px solid var(--line);background:#0f1621}
+    .btn.primary{background:#142033;border-color:#2a3a55}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="box">
+      <h1>Audit (fail-closed)</h1>
+      <p>
+        Questa pagina definisce controlli minimi riproducibili. Obiettivo:
+        chiunque possa verificare un pacchetto <b>offline</b>, senza fiducia nel portale.
+      </p>
+
+      <div class="cta">
+        <a class="btn" href="../">← Torna a Tech</a>
+        <a class="btn" href="../../">← Gateway</a>
+        <a class="btn primary" href="../../verify/">Apri Verify</a>
+        <a class="btn" href="../schemas/">Schemas</a>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <section class="box">
+      <h2>Checklist minima (IPR + receipt)</h2>
+      <ul>
+        <li>Il file <span class="mono">ipr.json</span> è presente e ben formato (JSON valido).</li>
+        <li>Il file <span class="mono">receipt.json</span> è presente e ben formato.</li>
+        <li>La receipt contiene <span class="mono">PUBKEY</span>, <span class="mono">SIGNATURE</span>, <span class="mono">DIGEST</span> (o campi equivalenti).</li>
+        <li>Il digest dichiarato in receipt corrisponde all’hash calcolato del payload atteso.</li>
+        <li>La firma ED25519 verifica correttamente con la pubkey dichiarata.</li>
+        <li><b>Fail-closed:</b> se una sola condizione fallisce, la verifica deve terminare in errore.</li>
+      </ul>
+
+      <h2>Checklist (anchor-pack) — opzionale</h2>
+      <ul>
+        <li>Se presente, <span class="mono">anchor-pack</span> deve essere consistente e completo.</li>
+        <li>Le stringhe <span class="mono">BTC_TXID</span> / <span class="mono">ETH_TX</span> / <span class="mono">IPFS_CID</span> devono rispettare il formato previsto.</li>
+        <li>Il portale non garantisce reperibilità: l’auditor verifica su strumenti indipendenti.</li>
+      </ul>
+
+      <h2>Checklist (Evidence Pack)</h2>
+      <ul>
+        <li>Presenza di <span class="mono">PACK_MANIFEST</span> (o <span class="mono">PACK_MANIFEST.json</span>).</li>
+        <li>Il manifest elenca i file inclusi e i relativi hash (integrità del pacchetto).</li>
+        <li>Il manifest è firmato e la firma è verificabile.</li>
+        <li>Il manifest lega: IPR + receipt + anchor-pack (se presente) + proof.</li>
+      </ul>
+    </section>
+
+    <section class="box" style="margin-top:12px">
+      <h2>Regole di esito</h2>
+      <ul>
+        <li><b>PASS</b>: tutti i controlli minimi soddisfatti.</li>
+        <li><b>FAIL</b>: incoerenza su hash/firma/manifest → nessuna accettazione.</li>
+        <li><b>UNKNOWN</b>: anchor non verificabile o irreperibile → il pacchetto resta valido solo per la parte verificata (da dichiarare).</li>
+      </ul>
+    </section>
+
+    <section class="box" style="margin-top:12px">
+      <h2>Nota B2B/B2G</h2>
+      <p>
+        In contesti B2B/B2G l’evidence pack è l’output consigliato: riduce ambiguità, aumenta riproducibilità,
+        e rende l’audit trasferibile tra organizzazioni.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="../../evidence-pack/">Evidence Pack</a>
+        <a class="btn" href="../../corridors/business/">B2B</a>
+        <a class="btn" href="../../corridors/government/">B2G</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
