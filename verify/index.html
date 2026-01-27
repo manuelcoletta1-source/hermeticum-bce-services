@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Verify — HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</title>
-  <meta name="description" content="Verifica ipr.json e receipt.json: schema + hash (client-side). UE-first, GDPR-min, fail-closed." />
+  <meta name="description" content="Verifica ipr.json e receipt.json: schema + hash + firma ED25519. Client-side. Fail-closed." />
   <style>
     :root{
       --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131c; --txt:#e8eef6; --mut:#a7b3c2;
@@ -13,16 +13,15 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
     body{margin:0;background:radial-gradient(900px 600px at 15% 0%, #0d1b2a 0%, var(--bg) 55%);color:var(--txt);}
-    a{color:var(--acc);text-decoration:none}
     .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px;}
     header{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}
-    .seal{font-weight:800;letter-spacing:.3px}
+    .seal{font-weight:900;letter-spacing:.3px}
     .company{color:var(--mut);font-size:12px}
-    .tag{color:var(--mut);font-size:13px}
+    .tag{color:var(--mut);font-size:13px;line-height:1.45;max-width:560px}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media (max-width:980px){.grid{grid-template-columns:1fr}}
     .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--brd);border-radius:var(--r);padding:var(--pad);box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .title{font-size:18px;font-weight:750;margin:0 0 8px}
+    .title{font-size:18px;font-weight:800;margin:0 0 8px}
     label{display:block;font-size:12px;color:var(--mut);margin:10px 0 6px}
     textarea{
       width:100%;box-sizing:border-box;background:#071018;border:1px solid var(--brd);
@@ -34,7 +33,7 @@
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     button{
       border:1px solid var(--brd);background:#0a1320;color:var(--txt);
-      border-radius:12px;padding:10px 12px;font-weight:650;cursor:pointer
+      border-radius:12px;padding:10px 12px;font-weight:750;cursor:pointer
     }
     button.primary{border-color:rgba(125,211,252,.6);background:rgba(125,211,252,.1)}
     .status{margin-top:10px;font-size:12px;line-height:1.35}
@@ -51,11 +50,9 @@
       <div>
         <div class="seal">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
         <div class="company">HERMETICUM B.C.E. S.r.l.</div>
-        <div class="tag">Verify (client-side) · schema + hash · fail-closed</div>
       </div>
-      <div class="tag" style="max-width:520px">
-        Incolla i file generati in <span class="mono">/create</span>.
-        Questa pagina carica gli schemi da <span class="mono">/schemas</span>.
+      <div class="tag">
+        Verifica client-side: <b>schema</b> + <b>hash</b> + <b>firma ED25519</b>. Fail-closed: se una cosa stona, FAIL.
       </div>
     </header>
 
@@ -76,7 +73,7 @@
         <label for="iprText">Incolla qui</label>
         <textarea id="iprText" spellcheck="false" placeholder="{ ... }"></textarea>
         <div class="hr"></div>
-        <label>Report IPR (schema)</label>
+        <label>Report schema IPR</label>
         <div class="out mono" id="iprReport">—</div>
       </section>
 
@@ -85,7 +82,7 @@
         <label for="rcpText">Incolla qui</label>
         <textarea id="rcpText" spellcheck="false" placeholder="{ ... }"></textarea>
         <div class="hr"></div>
-        <label>Report Receipt (schema)</label>
+        <label>Report schema Receipt</label>
         <div class="out mono" id="rcpReport">—</div>
       </section>
     </div>
@@ -124,13 +121,18 @@
     return JSON.stringify(norm(obj));
   }
 
+  function b64ToBuf(b64){
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+    return bytes.buffer;
+  }
+
   // Minimal validator (enough for our schemas)
   function validate(schema, data, path="$"){
     const errs = [];
     const isObj = (x) => x && typeof x === "object" && !Array.isArray(x);
-
-    const isIsoZ = (s) =>
-      typeof s === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(s);
+    const isIsoZ = (s) => typeof s === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(s);
 
     const walk = (sch, val, p) => {
       if(!sch) return;
@@ -157,7 +159,6 @@
       }
 
       if("const" in sch && val !== sch.const) errs.push(`${p}: const mismatch`);
-
       if(sch.enum && !sch.enum.includes(val)) errs.push(`${p}: enum mismatch`);
 
       if(typeof val === "string"){
@@ -197,9 +198,7 @@
           if(set.size !== val.length) errs.push(`${p}: uniqueItems violated`);
         }
         if(sch.items){
-          for(let i=0;i<val.length;i++){
-            walk(sch.items, val[i], `${p}[${i}]`);
-          }
+          for(let i=0;i<val.length;i++) walk(sch.items, val[i], `${p}[${i}]`);
         }
       }
     };
@@ -215,7 +214,6 @@
   }
 
   function basePath(){
-    // /hermeticum-bce-platform/verify/ -> /hermeticum-bce-platform/
     return location.origin + location.pathname.replace(/\/verify\/.*$/, "/");
   }
 
@@ -244,9 +242,8 @@
     catch{ setStatus("receipt.json non è JSON valido.", "bad"); return; }
 
     let schemas;
-    try{
-      schemas = await loadSchemas();
-    }catch(e){
+    try{ schemas = await loadSchemas(); }
+    catch(e){
       setStatus("Impossibile caricare gli schemi da /schemas.", "bad");
       $("finalOut").textContent = String(e?.message || e);
       return;
@@ -258,7 +255,6 @@
     report($("iprReport"), iprErrs.length === 0, iprErrs);
     report($("rcpReport"), rcpErrs.length === 0, rcpErrs);
 
-    // fail-closed logic
     const checks = [];
     let ok = true;
 
@@ -268,7 +264,7 @@
     if(rcpErrs.length){ ok = false; checks.push("FAIL: schema Receipt non valido."); }
     else checks.push("OK: schema Receipt valido.");
 
-    // Deterministic hashes
+    // hashes
     const iprHash = await sha256Hex(stableStringify(ipr));
     const payloadHash = await sha256Hex(stableStringify(rcp.payload));
 
@@ -292,19 +288,60 @@
       checks.push(`  computed: ${payloadHash}`);
     }else checks.push("OK: payload_hash_sha256 coincide.");
 
-    // subject linkage
+    // linkage
     if(ipr?.subject && rcp?.payload?.ipr_subject && ipr.subject !== rcp.payload.ipr_subject){
-      ok = false;
-      checks.push("FAIL: subject mismatch tra ipr.subject e receipt.payload.ipr_subject.");
-    }else checks.push("OK: subject coerente.");
+      ok = false; checks.push("FAIL: subject mismatch tra ipr.subject e receipt.payload.ipr_subject.");
+    } else checks.push("OK: subject coerente.");
 
-    // policy linkage
     if(stableStringify(ipr?.policy || {}) !== stableStringify(rcp?.payload?.policy || {})){
       ok = false; checks.push("FAIL: policy mismatch tra IPR e receipt payload.");
-    }else checks.push("OK: policy coerente.");
+    } else checks.push("OK: policy coerente.");
 
-    $("finalOut").textContent = (ok ? "VERIFICA OK ✅\n\n" : "VERIFICA FAIL ❌ (fail-closed)\n\n") + checks.join("\n");
-    setStatus(ok ? "Verifica OK: schema + hash coerenti." : "Verifica FALLITA: vedi dettagli.", ok ? "ok" : "bad");
+    // signature ED25519 (fail-closed if scheme is ED25519)
+    const sig = rcp?.signature || {};
+    if(sig.scheme === "ED25519"){
+      try{
+        if(!sig.public_key_jwk || !sig.value){
+          ok = false;
+          checks.push("FAIL: signature ED25519 incompleta (public_key_jwk/value).");
+        }else{
+          const pubKey = await crypto.subtle.importKey(
+            "jwk",
+            sig.public_key_jwk,
+            { name: "Ed25519" },
+            false,
+            ["verify"]
+          );
+
+          const verified = await crypto.subtle.verify(
+            { name: "Ed25519" },
+            pubKey,
+            b64ToBuf(sig.value),
+            new TextEncoder().encode(payloadHash)
+          );
+
+          if(!verified){
+            ok = false;
+            checks.push("FAIL: firma ED25519 non valida.");
+          }else{
+            checks.push("OK: firma ED25519 verificata.");
+          }
+        }
+      }catch(e){
+        ok = false;
+        checks.push("FAIL: errore verifica firma ED25519: " + (e?.message || String(e)));
+      }
+    }else if(sig.scheme === "NONE"){
+      checks.push("WARN: receipt non firmata (scheme NONE).");
+    }else{
+      ok = false;
+      checks.push("FAIL: scheme firma sconosciuto (fail-closed).");
+    }
+
+    $("finalOut").textContent =
+      (ok ? "VERIFICA OK ✅\n\n" : "VERIFICA FAIL ❌ (fail-closed)\n\n") + checks.join("\n");
+
+    setStatus(ok ? "Verifica OK: schema + hash + firma coerenti." : "Verifica FALLITA: vedi dettagli.", ok ? "ok" : "bad");
   };
 
   $("clear").onclick = () => {
