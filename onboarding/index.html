@@ -1,173 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Onboarding — HERMETICUM Services</title>
-  <meta name="description" content="Onboarding IPR: attivazione guidata, fail-closed, UE-first. Senza IPR nessuna operatività reale." />
-  <style>
-    :root{
-      --bg:#0b0c10; --panel:#0f1117; --line:#24262b; --text:#e8e8e8; --muted:#a9abb3;
-      --shadow:0 12px 36px rgba(0,0,0,.35); --r:16px; --r2:22px; --max:1100px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:radial-gradient(1200px 700px at 20% 0%, #121525 0%, rgba(18,21,37,0) 55%),
-                 radial-gradient(900px 600px at 80% 10%, #141b2a 0%, rgba(20,27,42,0) 55%),
-                 var(--bg);
-      color:var(--text);
-      font:15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      letter-spacing:.2px;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
-    .top{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 16px; border:1px solid var(--line); border-radius:var(--r2);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow); position:sticky; top:14px; z-index:10; backdrop-filter: blur(10px);
-    }
-    .brand{font-weight:900; letter-spacing:.6px}
-    .nav{display:flex; gap:10px; flex-wrap:wrap}
-    .chip{
-      padding:8px 10px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(255,255,255,.03); color:var(--muted); font-weight:800; transition:.15s ease;
-    }
-    .chip:hover{transform:translateY(-1px); color:var(--text); background:rgba(255,255,255,.05)}
-    .hero{
-      margin-top:18px; border:1px solid var(--line); border-radius:var(--r2); padding:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-    }
-    .mark{margin:0 0 6px; font-weight:900}
-    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
-    h1{margin:0 0 8px; font-size:28px; line-height:1.15}
-    .sub{margin:0; color:var(--muted); max-width:80ch}
-    .grid{display:grid; gap:12px; margin-top:14px}
-    @media (min-width:900px){ .grid{grid-template-columns:1.2fr .8fr} }
-    .card{
-      border:1px solid var(--line); border-radius:var(--r);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      padding:16px; box-shadow:var(--shadow);
-    }
-    .card h2{margin:0 0 6px; font-size:18px}
-    .card p{margin:0; color:var(--muted)}
-    .steps{margin:10px 0 0; padding:0; list-style:none}
-    .steps li{
-      padding:10px; border:1px solid var(--line); border-radius:12px;
-      background:rgba(0,0,0,.15); margin-top:8px; font-weight:800;
-    }
-    .steps li small{display:block; color:var(--muted); font-weight:700; margin-top:2px}
-    .callout{
-      margin-top:14px; border:1px dashed rgba(255,255,255,.18); border-radius:var(--r);
-      padding:14px; background:rgba(255,255,255,.02); color:var(--muted); font-weight:800;
-    }
-    .tiers{display:grid; gap:12px; margin-top:12px}
-    @media (min-width:860px){ .tiers{grid-template-columns:repeat(3,1fr)} }
-    .tier{
-      border:1px solid var(--line); border-radius:var(--r);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      padding:14px; box-shadow:var(--shadow); min-height:200px;
-    }
-    .tier b{display:block; font-size:16px; margin-bottom:6px}
-    .tier .meta{color:var(--muted); font-weight:900; font-size:12px; text-transform:uppercase; letter-spacing:1px}
-    .tier ul{margin:10px 0 0; padding-left:16px; color:var(--muted)}
-    .tier li{margin:6px 0}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-    .footer{
-      margin-top:18px; color:var(--muted); font-size:12px; padding:14px 2px 0;
-      display:flex; gap:10px; justify-content:space-between; border-top:1px solid var(--line);
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Onboarding | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Onboarding ufficiale: router verso Register e Fase 1 (LIGHT/STRONG). Evita duplicazioni e mantiene auditability." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">Onboarding</div>
-      <div class="nav">
-        <a class="chip" href="../">Home</a>
-        <a class="chip" href="../catalog/">Catalog</a>
-        <a class="chip" href="../verify/">Verify</a>
-        <a class="chip" href="../terms/">Terms</a>
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="../standards/">Standard</a>
+        <a href="../research/">Ricerca (Horizon)</a>
+        <a href="../phase-1/">Fase 1 (ONLY)</a>
+        <a href="../verify/">Verify</a>
+        <a href="../governance/">Governance</a>
+        <a href="../privacy/">Privacy</a>
       </div>
-    </div>
+    </nav>
+  </header>
 
-    <header class="hero">
-      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
-      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
-
-      <h1>Attiva l’IPR. Entra nel perimetro operativo.</h1>
-      <p class="sub">
-        L’Onboarding abilita l’<b>IPR personale</b> che vincola <b>AI JOKER-C2</b> a policy,
-        prove e continuità nel tempo. Modalità nativa: <b>fail-closed</b>.
+  <main class="wrap">
+    <section class="hero">
+      <h1>Onboarding (router)</h1>
+      <p class="lead">
+        Questa pagina esiste solo per evitare percorsi duplicati.
+        L’onboarding ufficiale è <strong>risk-based</strong>: LIGHT o STRONG dentro Fase 1.
       </p>
-
-      <div class="grid">
-        <div class="card">
-          <h2>Flusso di attivazione</h2>
-          <ul class="steps">
-            <li>1) Creazione IPR <small>Generazione record e chiavi operative.</small></li>
-            <li>2) Firma digitale <small>Immutabilità dello stato iniziale.</small></li>
-            <li>3) Evidenza minima <small>Hash pubblico (<span class="mono">hash-only</span>).</small></li>
-            <li>4) Policy OPC <small>Valutazione ALLOW/DENY.</small></li>
-            <li>5) Tracciatura UNEBDO <small>Evento registrato nel tempo.</small></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h2>Regola fondamentale</h2>
-          <p>
-            Manca identità, firma, policy o prova → <b>operazione negata</b>.
-            L’IPR non è un account: è una <b>condizione di possibilità</b>.
-          </p>
-          <div class="callout">
-            Pubblico = prove (<span class="mono">hash-only</span>). Privato = dati reali (mai esposti).
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <section>
-      <div class="tiers">
-        <div class="tier">
-          <div class="meta">Livello 1</div>
-          <b>START</b>
-          <ul>
-            <li>IPR creato e firmato</li>
-            <li>prima evidenza verificabile</li>
-            <li>accesso limitato</li>
-          </ul>
-        </div>
-        <div class="tier">
-          <div class="meta">Livello 2</div>
-          <b>STRONG</b>
-          <ul>
-            <li>policy OPC applicate</li>
-            <li>eventi UNEBDO tracciati</li>
-            <li>operatività estesa</li>
-          </ul>
-        </div>
-        <div class="tier">
-          <div class="meta">Livello 3</div>
-          <b>ANCHOR</b>
-          <ul>
-            <li>ancoraggio multi-ledger</li>
-            <li>continuità temporale</li>
-            <li>verifica indipendente</li>
-          </ul>
-        </div>
+      <div class="notice">
+        <strong>Regola audit:</strong> un solo percorso ufficiale. Il resto è compatibilità.
       </div>
 
-      <div class="callout">
-        Principio: <b>niente prova, niente operazione</b>. Tutto è auditabile a posteriori.
+      <div class="btnrow" style="margin-top:14px;">
+        <a class="btn" href="../register/">Vai a Register</a>
+        <a class="btn secondary" href="../phase-1/">Apri Fase 1 (ONLY)</a>
+        <a class="btn secondary" href="../catalog/">Apri Catalog (mappa)</a>
       </div>
     </section>
 
-    <div class="footer">
-      <div>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-      <div>HERMETICUM B.C.E. S.r.l.</div>
-    </div>
-  </div>
+    <section class="grid">
+      <article class="card">
+        <h2>LIGHT (consigliato)</h2>
+        <p class="muted">
+          Profilo minimo. Nessun account. Email opzionale. HRR locale.
+        </p>
+        <div class="btnrow">
+          <a class="btn" href="../phase-1/onboarding/light.html">Apri LIGHT</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>STRONG (alto rischio)</h2>
+        <p class="muted">
+          Email + telefono (segnali hashati) e motivo d’uso. Non sostituisce eIDAS/CIE/SPID.
+        </p>
+        <div class="btnrow">
+          <a class="btn" href="../phase-1/onboarding/strong.html">Apri STRONG</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Dopo l’onboarding</h2>
+        <p class="muted">
+          1) genera HRR → 2) crea Evidence Bundle → 3) verifica in Verify.
+        </p>
+        <div class="btnrow">
+          <a class="btn" href="../create/">Apri Create</a>
+          <a class="btn secondary" href="../verify/">Apri Verify</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Nota</h2>
+        <p class="muted">
+          Se sei arrivato qui da un link vecchio, usa i pulsanti sopra.
+          Questo mantiene il portale coerente e “auditabile”.
+        </p>
+        <div class="btnrow">
+          <a class="btn secondary" href="../legacy/">Vai a Legacy</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
 </body>
 </html>
