@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Verify | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Verify: validazione tecnica hash/bundle. Nessuna narrativa, esiti fail-closed. Nessun invio dati: tutto locale." />
+  <meta name="description" content="Verify: validazione tecnica hash/bundle. Nessuna narrativa, esiti fail-closed. Tutto locale, nessun invio dati." />
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
@@ -12,66 +12,69 @@
     <nav class="nav">
       <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
       <div class="navlinks">
+        <a href="../">Gateway</a>
         <a href="../standards/">Standard</a>
-        <a href="../research/">Ricerca (Horizon)</a>
-        <a href="../phase-1/">Fase 1 (ONLY)</a>
+        <a href="../research/">Ricerca UE</a>
+        <a href="../phase-1/">Fase 1</a>
         <a class="active" href="./">Verify</a>
-        <a href="../governance/">Governance</a>
-        <a href="../privacy/">Privacy</a>
+        <a href="../legal/">Legal</a>
       </div>
     </nav>
   </header>
 
   <main class="wrap">
     <section class="hero">
-      <h1>Verify — Evento Hash-Only</h1>
+      <h1>Verify — Hash-Only / Evidence Bundle</h1>
       <p class="lead">
-        Verifica locale di un evento (JSON): parsing, coerenza struttura, policy e campi minimi.
-        Se hai il payload off-chain, puoi ricalcolare lo SHA-256 localmente e confrontarlo.
+        Verifica locale di un bundle (JSON): parsing, campi minimi, coerenza policy e formato hash.
+        Se hai il payload off-chain, puoi ricalcolare lo SHA-256 nel browser e confrontarlo.
       </p>
+
       <div class="notice">
-        <strong>Fail-closed:</strong> se manca un requisito minimo → INVALID.
-        “VALID” non significa “identità vera”: la verifica identitaria resta fuori da questo portale.
+        <strong>Fail-closed:</strong> se manca un requisito minimo → <strong>INVALID</strong>.  
+        <strong>VALID</strong> significa “coerenza tecnica minima”, non prova di identità.
       </div>
+
       <div class="btnrow" style="margin-top:14px;">
-        <a class="btn secondary" href="../create/">Create (bundle)</a>
         <a class="btn secondary" href="../register/">Register</a>
-        <a class="btn secondary" href="../catalog/">Catalog (mappa)</a>
+        <a class="btn secondary" href="../create/">Create (bundle)</a>
+        <a class="btn secondary" href="../catalog/">Catalog</a>
+        <a class="btn secondary" href="../privacy/">Privacy</a>
       </div>
     </section>
 
     <section class="grid">
       <article class="card">
-        <h2>1) Incolla evento JSON</h2>
-        <label class="muted">Evento (JSON)</label>
-        <textarea id="eventJson" rows="10" style="width:100%;" placeholder='{"HRR":"...","POLICY":"...","PAYLOAD_MIN":{...}}'></textarea>
+        <h2>1) Incolla Evidence Bundle (JSON)</h2>
+        <label class="muted">Bundle (JSON)</label>
+        <textarea id="eventJson" rows="12" style="width:100%;" placeholder='{"HRR":"...","POLICY":"...","PAYLOAD_MIN":{"desc":"...","content_hash_sha256":null}}'></textarea>
 
         <div class="btnrow" style="margin-top:12px;">
-          <button class="btn" id="btnVerify" type="button">Verifica evento</button>
-          <button class="btn secondary" id="btnLoadExample" type="button">Carica esempio</button>
+          <button class="btn" id="btnVerify" type="button">Verifica</button>
+          <button class="btn secondary" id="btnLoadExample" type="button">Esempio</button>
           <button class="btn secondary" id="btnReset" type="button">Reset</button>
         </div>
 
         <p class="muted" style="margin-top:10px;">
-          Questa pagina non invia dati a server. Tutto resta nel browser.
+          Nessun invio dati: tutto resta nel browser.
         </p>
       </article>
 
       <article class="card">
         <h2>2) Payload off-chain (opzionale)</h2>
-        <label class="muted">Payload off-chain (testo/JSON) — usato solo per ricalcolare SHA-256</label>
-        <textarea id="payload" rows="8" style="width:100%;" placeholder="Incolla qui il payload originale off-chain..."></textarea>
+        <label class="muted">Payload originale (testo/JSON) — usato solo per ricalcolare SHA-256</label>
+        <textarea id="payload" rows="10" style="width:100%;" placeholder="Incolla qui il payload off-chain (se ce l'hai)"></textarea>
 
         <div class="btnrow" style="margin-top:12px;">
-          <button class="btn secondary" id="btnHashPayload" type="button">Ricalcola SHA-256 payload</button>
-          <button class="btn secondary" id="btnCompare" type="button">Confronta con evento</button>
+          <button class="btn secondary" id="btnHashPayload" type="button">Calcola SHA-256</button>
+          <button class="btn secondary" id="btnCompare" type="button">Confronta con bundle</button>
         </div>
 
         <pre id="payloadHashOut" class="codeblock" style="margin-top:12px;">{}</pre>
       </article>
 
       <article class="card">
-        <h2>Risultato verifica (fail-closed)</h2>
+        <h2>Risultato (fail-closed)</h2>
         <pre id="result" class="codeblock">{}</pre>
         <p class="muted" style="margin-top:10px;">
           Esiti: <strong>VALID</strong> / <strong>INVALID</strong> / <strong>INCONCLUSIVE</strong>.
@@ -79,22 +82,23 @@
       </article>
 
       <article class="card">
-        <h2>Note</h2>
+        <h2>Note operative</h2>
         <ul class="muted">
-          <li>Verify valida struttura e coerenza minima.</li>
-          <li>Non sostituisce eIDAS/CIE/SPID.</li>
-          <li>Nessuna custodia PII nel portale statico.</li>
+          <li>Verify valida struttura e coerenza minima (non identità).</li>
+          <li>Non sostituisce CIE/SPID/eIDAS.</li>
+          <li>Nessuna custodia di dati personali nel portale statico.</li>
         </ul>
         <div class="btnrow">
           <a class="btn secondary" href="../governance/">Governance</a>
-          <a class="btn secondary" href="../privacy/">Privacy</a>
+          <a class="btn secondary" href="../terms/">Termini</a>
+          <a class="btn secondary" href="../about/">About</a>
         </div>
       </article>
     </section>
   </main>
 
   <footer class="wrap foot">
-    <small>HERMETICUM B.C.E. S.r.l. — Verify (hash-only)</small>
+    <small>HERMETICUM B.C.E. S.r.l. — Verify (local, hash-only)</small>
   </footer>
 
 <script>
@@ -113,7 +117,7 @@
   }
 
   function validateEvent(e){
-    // fail-closed minimal model: HRR + POLICY + PAYLOAD_MIN.desc
+    // Fail-closed minimal model: HRR + POLICY + PAYLOAD_MIN.desc
     if (!e || typeof e !== "object") return {status:"INVALID", reason:"Event is not an object"};
     if (!e.HRR || typeof e.HRR !== "string") return {status:"INVALID", reason:"Missing/invalid HRR"};
     if (!e.POLICY || typeof e.POLICY !== "string") return {status:"INVALID", reason:"Missing/invalid POLICY"};
@@ -127,7 +131,11 @@
       }
     }
 
-    return {status:"VALID", note:"Structure OK (does not prove identity)", checked_utc:new Date().toISOString()};
+    return {
+      status:"VALID",
+      note:"Structure OK (does not prove identity)",
+      checked_utc:new Date().toISOString()
+    };
   }
 
   const example = {
@@ -155,7 +163,7 @@
 
   $("btnLoadExample").addEventListener("click", () => {
     $("eventJson").value = JSON.stringify(example, null, 2);
-    out({status:"INCONCLUSIVE", note:"Example loaded. Click 'Verifica evento'.", ts_utc:new Date().toISOString()});
+    out({status:"INCONCLUSIVE", note:"Example loaded. Click 'Verifica'.", ts_utc:new Date().toISOString()});
   });
 
   $("btnReset").addEventListener("click", () => {
@@ -173,17 +181,16 @@
   });
 
   $("btnCompare").addEventListener("click", async () => {
-    // Compare payload hash with event PAYLOAD_MIN.content_hash_sha256
     let evt;
     try { evt = JSON.parse(($("eventJson").value || "").trim() || "{}"); }
     catch { return out({status:"INVALID", reason:"Event JSON invalid; cannot compare"}); }
 
     const expected = evt?.PAYLOAD_MIN?.content_hash_sha256;
     if (!expected || typeof expected !== "string") {
-      return out({status:"INCONCLUSIVE", reason:"Event has no PAYLOAD_MIN.content_hash_sha256 to compare"});
+      return out({status:"INCONCLUSIVE", reason:"Bundle has no PAYLOAD_MIN.content_hash_sha256"});
     }
     if (!looksLikeSha256(expected)) {
-      return out({status:"INVALID", reason:"Event hash is not valid SHA-256 hex"});
+      return out({status:"INVALID", reason:"Bundle hash is not valid SHA-256 hex"});
     }
 
     const p = ($("payload").value || "");
