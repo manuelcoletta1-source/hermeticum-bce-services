@@ -3,17 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HERMETICUM B.C.E. — Gateway Europeo</title>
-  <meta name="description" content="Gateway europeo a livelli per cybersecurity UE: Standard, Ricerca, Fase 1 operativa e Verify tecnico. UE-first, GDPR-min, fail-closed." />
+  <title>HERMETICUM B.C.E. — Gateway UE</title>
+  <meta name="description" content="Gateway europeo a livelli: Standard, Ricerca (Horizon), Fase 1 (ONLY), Verify. UE-first, GDPR-min, hash-only, fail-closed." />
   <link rel="stylesheet" href="./assets/css/main.css" />
 </head>
 <body>
   <header class="wrap">
     <nav class="nav">
-      <a class="brand" href="./">
-        HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA
-      </a>
+      <a class="brand" href="./">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
       <div class="navlinks">
+        <a class="active" href="./">Gateway</a>
         <a href="./standards/">Standard</a>
         <a href="./research/">Ricerca (Horizon)</a>
         <a href="./phase-1/">Fase 1 (ONLY)</a>
@@ -25,14 +24,12 @@
   </header>
 
   <main class="wrap">
-
     <section class="hero">
-      <h1>Gateway Europeo a Livelli</h1>
+      <h1>Gateway europeo a livelli</h1>
       <p class="lead">
-        Questo portale separa in modo esplicito <strong>normativo</strong>,
-        <strong>ricerca UE</strong>, <strong>operatività minima</strong> e
-        <strong>verifica tecnica</strong>.
-        Nessun livello sostituisce un altro.
+        Separazione esplicita tra <strong>normativo</strong>, <strong>ricerca UE</strong>,
+        <strong>operatività minima</strong> e <strong>verifica tecnica</strong>.
+        Questo mantiene il sistema leggibile per cittadino UE, tecnico e revisore (audit).
       </p>
 
       <div class="pillrow">
@@ -44,62 +41,101 @@
       </div>
 
       <div class="notice">
-        <strong>Chiarezza formale:</strong>
-        questo portale <em>non</em> è un identity provider,
-        <em>non</em> sostituisce CIE/SPID/eIDAS,
-        <em>non</em> è banca, social o piattaforma di custodia dati personali.
+        <strong>Limite esplicito:</strong> non sostituisce CIE/SPID/eIDAS, non è identity provider,
+        non è banca, non custodisce dati personali nel portale statico, non assegna diritti.
+      </div>
+
+      <div class="btnrow" style="margin-top:14px;">
+        <a class="btn" href="./register/">Inizia (Register)</a>
+        <a class="btn secondary" href="./catalog/">Catalog (mappa)</a>
+        <a class="btn secondary" href="./about/">About</a>
+        <a class="btn secondary" href="./legal/">Legal Hub</a>
       </div>
     </section>
 
     <section class="grid">
       <article class="card">
-        <h2>1) Standard (Normativo)</h2>
-        <p>
-          Livello normativo sola-lettura.
-          Definisce i confini: esistenza dell’evento, opponibilità,
-          distinzione dei livelli e regole di conformità.
+        <h2>Percorso minimo (operativo)</h2>
+        <p class="muted">
+          Un solo percorso ufficiale, auditabile:
         </p>
-        <a class="btn" href="./standards/">Accedi agli Standard</a>
+        <ol class="muted">
+          <li><strong>Register</strong> → profilo LIGHT/STRONG (risk-based)</li>
+          <li><strong>Fase 1 (ONLY)</strong> → genera HRR locale</li>
+          <li><strong>Create</strong> → genera Evidence Bundle (JSON) locale</li>
+          <li><strong>Verify</strong> → valida bundle/hash (VALID/INVALID/INCONCLUSIVE)</li>
+        </ol>
+        <div class="btnrow">
+          <a class="btn" href="./register/">Register</a>
+          <a class="btn secondary" href="./create/">Create</a>
+          <a class="btn secondary" href="./verify/">Verify</a>
+        </div>
       </article>
 
       <article class="card">
-        <h2>2) Ricerca UE (Horizon / JRC)</h2>
-        <p>
-          Livello di sperimentazione e pre-standard.
-          I contenuti qui presenti non sono esecutivi
-          e non producono effetti giuridici diretti.
+        <h2>1) Standard (Normativo)</h2>
+        <p class="muted">
+          Documento chiuso e stabile. Sola-lettura. Confini e livelli dell’evento.
         </p>
-        <a class="btn" href="./research/">Accedi alla Ricerca</a>
+        <div class="btnrow">
+          <a class="btn" href="./standards/">Apri Standard</a>
+          <a class="btn secondary" href="./normative/">Mapping eIDAS/EUDI</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>2) Ricerca UE (Horizon/JRC)</h2>
+        <p class="muted">
+          Pre-standard sperimentale: usage rules esplicite, nessuna adozione diretta.
+        </p>
+        <div class="btnrow">
+          <a class="btn" href="./research/">Apri Ricerca</a>
+          <a class="btn secondary" href="./AUDIT-M1.md">AUDIT-M1 (checklist)</a>
+        </div>
       </article>
 
       <article class="card">
         <h2>3) Fase 1 (ONLY)</h2>
-        <p>
-          Livello operativo minimo per cybersecurity UE.
-          Catena fail-closed di attribuzione, validazione
-          e prova durevole (HRR → DGV → LTA).
+        <p class="muted">
+          Catena minima di accountability: <strong>HRR → DGV → LTA</strong>. Fail-closed come protezione.
         </p>
-        <a class="btn" href="./phase-1/">Accedi alla Fase 1</a>
+        <div class="btnrow">
+          <a class="btn" href="./phase-1/">Apri Fase 1</a>
+          <a class="btn secondary" href="./onboarding/">Onboarding (router)</a>
+        </div>
       </article>
 
       <article class="card">
         <h2>4) Verify (Tecnico)</h2>
-        <p>
-          Verifica tecnica di hash, timestamp e bundle.
-          Nessuna narrativa: solo esiti verificabili.
+        <p class="muted">
+          Verifica hash/timestamp/bundle. Solo esiti, zero narrazione.
         </p>
-        <a class="btn" href="./verify/">Accedi a Verify</a>
+        <div class="btnrow">
+          <a class="btn" href="./verify/">Apri Verify</a>
+          <a class="btn secondary" href="./verify/schema/evidence-bundle.schema.json">Schema JSON</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Orientamento (non onboarding)</h2>
+        <p class="muted">
+          Pagine di contesto per professionisti e istituzioni. Non sono percorsi cittadini.
+        </p>
+        <div class="btnrow">
+          <a class="btn secondary" href="./professional/">Professionisti</a>
+          <a class="btn secondary" href="./institution/">Istituzioni</a>
+          <a class="btn secondary" href="./events/">Events (log)</a>
+          <a class="btn secondary" href="./node/">Node (demo)</a>
+        </div>
       </article>
     </section>
 
     <section class="footerhint">
       <p class="muted">
-        Obiettivo di sicurezza digitale europea:
-        impedire atti non attribuibili, rendere la prova verificabile nel tempo,
-        bloccare l’esecuzione quando manca anche un solo requisito.
+        Obiettivo cybersecurity UE: impedire atti non attribuibili e rendere la prova verificabile nel tempo,
+        mantenendo minimizzazione e separazione dei livelli.
       </p>
     </section>
-
   </main>
 
   <footer class="wrap foot">
