@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Verify — EU Gateway (IPR)</title>
-  <meta name="description" content="Verify: verifica offline indipendente di IPR. Hash → firma ED25519 → manifest. Fail-closed. UE-first."/>
+  <meta name="description" content="Verify: verifica offline indipendente di IPR/Evidence Pack. Hash → firma ED25519 → manifest. Fail-closed. UE-first."/>
   <link rel="stylesheet" href="../assets/ui.css"/>
 </head>
 <body>
@@ -19,10 +19,10 @@
     <a class="btn" href="../terms/">Terms</a>
     <a class="btn" href="../map/">Map</a>
     <span class="spacer"></span>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce/">Corporate</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2b/">B2B</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2g/">B2G</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/">Technology</a>
+    <a class="btn" data-link="corporate" href="#">Corporate</a>
+    <a class="btn" data-link="b2b" href="#">B2B</a>
+    <a class="btn" data-link="b2g" href="#">B2G</a>
+    <a class="btn" data-link="technology" href="#">Technology</a>
   </div>
 </header>
 
@@ -32,7 +32,7 @@
     <h1>Verify</h1>
     <p>
       Verifica <b>offline e indipendente</b> di un IPR e del suo Evidence Pack.
-      Se una verifica fallisce o è indeterminata, l’esito è <b>INVALID</b>.
+      Regola globale: <b>FAIL-CLOSED</b>. Se un controllo fallisce o è indeterminato ⇒ <b>INVALID</b>.
     </p>
     <p>
       <span class="tag">UE-first</span>
@@ -46,31 +46,37 @@
     <div class="box">
       <h2>1) Hash</h2>
       <p>
-        Calcola SHA-512 su <b>ipr.canon.json</b>.
-        L’hash deve coincidere con quello dichiarato nel manifest/receipt.
+        Calcola <b>SHA-512</b> su <code>ipr.canon.json</code>.
+        L’hash deve coincidere con quello dichiarato in manifest/receipt.
       </p>
     </div>
+
     <div class="box">
       <h2>2) Firma</h2>
       <p>
         Verifica la firma <b>ED25519</b> sul digest.
-        Chiave pubblica e algoritmo devono essere espliciti.
+        Chiave pubblica, algoritmo e payload devono essere espliciti.
+      </p>
+      <p class="small">
+        Suggerimento operativo: conserva la chiave pubblica in repo (es. <code>ed25519_pub.pem</code>) e verifica sempre offline.
       </p>
     </div>
+
     <div class="box">
       <h2>3) Manifest</h2>
       <p>
-        Verifica <b>PACK_MANIFEST.json</b>:
-        coerenza degli hash, ordine, append-only.
+        Verifica <code>PACK_MANIFEST.json</code>:
+        coerenza degli hash, file previsti, ordine e regola <b>append-only</b>.
       </p>
     </div>
   </section>
 
   <section class="box" style="margin-top:12px">
-    <h2>Regola FAIL-CLOSED</h2>
+    <h2>FAIL-CLOSED (regole di esito)</h2>
     <p>
-      • Un solo mismatch ⇒ <b>INVALID</b><br/>
-      • Campo mancante ⇒ <b>INVALID</b><br/>
+      • Hash mismatch ⇒ <b>INVALID</b><br/>
+      • Firma non verificabile ⇒ <b>INVALID</b><br/>
+      • Manifest mancante/incompleto ⇒ <b>INVALID</b><br/>
       • Indeterminatezza ⇒ <b>INVALID</b><br/>
       Nessuna interpretazione permissiva è consentita.
     </p>
@@ -80,54 +86,37 @@
     <div class="box">
       <h2>Checklist minima</h2>
       <p>
-        □ `ipr.canon.json` disponibile<br/>
-        □ Hash SHA-512 calcolabile<br/>
-        □ `receipt.json` (se presente) verificabile<br/>
-        □ `PACK_MANIFEST.json` coerente
+        □ <code>ipr.canon.json</code> disponibile<br/>
+        □ SHA-512 calcolabile<br/>
+        □ <code>receipt.json</code> verificabile (se presente)<br/>
+        □ <code>PACK_MANIFEST.json</code> coerente
       </p>
     </div>
     <div class="box">
-      <h2>Esito</h2>
+      <h2>Router rapido</h2>
       <p>
-        • <b>VALID</b>: tutte le verifiche passano<br/>
-        • <b>INVALID</b>: almeno una verifica fallisce
+        Se devi generare o ricostruire il pack, passa da Create.
+        Se devi capire la struttura, apri Map.
       </p>
       <div class="cta">
-        <a class="btn primary" href="../evidence-pack/">Vai a Evidence Pack</a>
+        <a class="btn primary" href="../create/">Vai a Create</a>
+        <a class="btn" href="../map/">Apri Map</a>
+        <a class="btn" href="../evidence-pack/">Evidence Pack</a>
       </div>
-    </div>
-  </section>
-
-  <section class="box">
-    <h2>Note</h2>
-    <p>
-      La verifica non attribuisce effetti giuridici automatici.
-      Produce un esito tecnico riproducibile.
-      L’uso in B2B/B2G richiede valutazione contestuale.
-    </p>
-    <div class="cta">
-      <a class="btn" href="../terms/">Leggi Terms</a>
-      <a class="btn" href="../map/">Mappa ecosistema</a>
     </div>
   </section>
 
   <section class="box">
     <h2>Accesso per profilo</h2>
     <p>
-      L’uso dell’evidenza varia per contesto.
-      Seleziona il gateway appropriato.
+      L’uso dell’evidenza varia per contesto. Seleziona il gateway appropriato.
     </p>
     <div class="cta">
-      <a class="btn primary" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2b/">
-        B2B · Imprese
-      </a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2g/">
-        B2G · Enti pubblici
-      </a>
+      <a class="btn primary" data-link="b2b" href="#">B2B · Imprese</a>
+      <a class="btn" data-link="b2g" href="#">B2G · Enti pubblici</a>
     </div>
     <p class="small" style="margin-top:8px">
-      Nota: l’evidenza è tecnica e verificabile. L’adozione richiede valutazione
-      contrattuale (B2B) o istituzionale (B2G).
+      Nota: l’esito è tecnico e riproducibile. L’adozione richiede valutazione contrattuale (B2B) o istituzionale (B2G).
     </p>
   </section>
 
@@ -141,5 +130,6 @@
   </div>
 </footer>
 
+<script src="../assets/links.js"></script>
 </body>
 </html>
