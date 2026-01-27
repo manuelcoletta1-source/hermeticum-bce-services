@@ -1,87 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Termini — Nodo Europeo ΦΩ</title>
-  <meta name="description" content="Termini minimi. UE-first, GDPR-min, hash-only, fail-closed.">
-  <meta name="robots" content="noindex,nofollow" />
-  <style>
-    :root{--bg:#0b0e11;--fg:#e6e6e6;--muted:#9aa0a6;--accent:#5eead4;--card:#0f1318;--line:#1f2937;--warn:#f87171;}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,sans-serif;line-height:1.55}
-    main{min-height:100vh;display:grid;place-items:center;padding:24px}
-    .panel{max-width:880px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
-    .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.8rem;color:var(--muted);margin-bottom:14px}
-    h1{margin:0 0 6px 0;font-size:1.45rem}
-    p{margin:10px 0;color:var(--fg)}
-    .muted{color:var(--muted)}
-    ul{margin:8px 0 0 18px}
-    li{margin:6px 0}
-    code{background:#0b0e11;border:1px solid var(--line);padding:2px 6px;border-radius:8px}
-    .warn{color:var(--warn);font-weight:700}
-    a{color:var(--accent);text-decoration:none}
-    .foot{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:var(--muted);font-size:.8rem}
-    hr{border:none;border-top:1px dashed var(--line);margin:16px 0}
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Termini | HERMETICUM B.C.E.</title>
+  <meta name="description" content="Termini di utilizzo: limiti, responsabilità, separazione livelli, fail-closed. UE-first, GDPR-min." />
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
-<main>
-  <div class="panel">
-    <span class="badge">TERMS · UE_FIRST · GDPR_MIN · HASH_ONLY · FAIL_CLOSED</span>
-    <h1>Termini minimi (Nodo Europeo ΦΩ)</h1>
-    <p class="muted">
-      Questo Nodo è una <strong>facciata di interoperabilità e coerenza</strong>. Non è un servizio di account.
-      L’uso produce eventi in modalità <code>APPEND_ONLY</code>.
-    </p>
+  <header class="wrap">
+    <nav class="nav">
+      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
+      <div class="navlinks">
+        <a href="../standards/">Standard</a>
+        <a href="../research/">Ricerca (Horizon)</a>
+        <a href="../phase-1/">Fase 1 (ONLY)</a>
+        <a href="../verify/">Verify</a>
+        <a href="../governance/">Governance</a>
+        <a href="../privacy/">Privacy</a>
+      </div>
+    </nav>
+  </header>
 
-    <hr/>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Termini di utilizzo</h1>
+      <p class="lead">
+        Questi termini definiscono limiti e responsabilità del portale.
+        Il portale è progettato per minimizzazione dati e verificabilità tecnica.
+      </p>
+      <div class="notice">
+        <strong>Regola base:</strong> se manca un requisito minimo, il sistema va in <em>fail-closed</em>.
+        Il blocco è una protezione, non un errore.
+      </div>
+      <div class="btnrow" style="margin-top:14px;">
+        <a class="btn secondary" href="../legal/">Legal Hub</a>
+        <a class="btn secondary" href="../governance/">Governance</a>
+        <a class="btn secondary" href="../privacy/">Privacy</a>
+      </div>
+    </section>
 
-    <p><strong>1) Cosa viene trattato</strong></p>
-    <ul>
-      <li>Il sistema opera in modello <strong>HASH_ONLY</strong> (impronte crittografiche).</li>
-      <li>Eventuali dati inseriti dall’utente sono utilizzati per generare un payload e un hash.</li>
-    </ul>
-<h2>1-bis) Principio biocibernetico (primato biologico)</h2>
-<p>
-  “Biocibernetico” significa che ogni tracciatura nasce da un soggetto biologico reale.
-  La componente cibernetica (IPR e strumenti di verifica) è un’estensione tecnica non autonoma:
-  non decide, non governa, non sostituisce responsabilità umane.
-</p>
-<ul>
-  <li>Nessuna identità “solo cibernetica” viene riconosciuta come soggetto.</li>
-  <li>Ogni uso deve rispettare UE-first, GDPR-min, hash-only, fail-closed.</li>
-</ul>
+    <section class="grid">
+      <article class="card">
+        <h2>1) Scopo</h2>
+        <p class="muted">
+          Il portale fornisce un gateway a livelli (Standard/Ricerca/Fase 1/Verify) per supportare
+          processi di tracciabilità verificabile e minimizzazione del rischio.
+        </p>
+      </article>
 
-<h2>Pack di riferimento</h2>
-<ul>
-  <li><a href="../manifest/">MANIFEST (protocollo)</a></li>
-  <li><a href="../governance/">GOVERNANCE (ruoli e limiti)</a></li>
-  <li><a href="../privacy/">PRIVACY (GDPR-min)</a></li>
-</ul>
-    <p><strong>2) Cosa non viene promesso</strong></p>
-    <ul>
-      <li>Nessuna garanzia di identità: l’identità è <strong>progressiva</strong> e dipende dalle evidenze.</li>
-      <li>Nessuna protezione “magica”: la validità dipende da verifiche e audit.</li>
-    </ul>
+      <article class="card">
+        <h2>2) Cosa non è</h2>
+        <ul class="muted">
+          <li>Non è un identity provider e non sostituisce eIDAS/CIE/SPID.</li>
+          <li>Non è banca, wallet custodial o servizio di custodia di dati personali.</li>
+          <li>Non garantisce effetti legali automatici o “certificazioni” di verità.</li>
+        </ul>
+      </article>
 
-    <p><strong>3) Fail-closed</strong></p>
-    <ul>
-      <li>Se mancano certificazioni o ancoraggi richiesti, lo stato è <span class="warn">DENY</span>.</li>
-      <li>Nessun aggiornamento silenzioso: ogni modifica deve essere evento dichiarato.</li>
-    </ul>
+      <article class="card">
+        <h2>3) Separazione dei livelli (anti-confusione)</h2>
+        <ul class="muted">
+          <li><strong>Standard</strong>: definizioni e conformità (sola-lettura).</li>
+          <li><strong>Ricerca</strong>: pre-standard, sperimentale (non esecutivo).</li>
+          <li><strong>Fase 1</strong>: operatività minima (HRR→DGV→LTA, fail-closed).</li>
+          <li><strong>Verify</strong>: validazione tecnica (hash/bundle), senza narrativa.</li>
+        </ul>
+        <div class="btnrow">
+          <a class="btn secondary" href="../catalog/">Catalog (mappa)</a>
+          <a class="btn secondary" href="../">Gateway</a>
+        </div>
+      </article>
 
-    <p><strong>4) Responsabilità dell’utente</strong></p>
-    <ul>
-      <li>Dichiari che le informazioni fornite sono corrette.</li>
-      <li>Accetti che l’azione generi un evento opponibile (append-only).</li>
-    </ul>
+      <article class="card">
+        <h2>4) Responsabilità</h2>
+        <p class="muted">
+          La responsabilità degli atti e dei contenuti resta in capo al soggetto biologico che li produce
+          o pubblica. Strumenti software (incluse componenti AI) sono supporti operativi e non assumono
+          responsabilità legale.
+        </p>
+      </article>
 
-    <div class="foot">
-      <span><a href="../">← Nodo Europeo ΦΩ</a></span>
-      <span><a href="../verify/">Verify</a> · <a href="../register/">Register</a></span>
-    </div>
-  </div>
-</main>
+      <article class="card">
+        <h2>5) Dati e minimizzazione</h2>
+        <p class="muted">
+          Il portale privilegia “hash-only” e metadati minimi. Evitare l’inserimento di PII non necessarie.
+          Dettagli in <a href="../privacy/">Privacy</a>.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>6) Limitazione</h2>
+        <p class="muted">
+          Il portale è fornito “as is”. Non è garantita idoneità a uno scopo specifico.
+          In caso di conflitto tra contenuti, prevalgono Governance/Privacy e la separazione dei livelli.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <small>HERMETICUM B.C.E. S.r.l.</small>
+  </footer>
 </body>
 </html>
