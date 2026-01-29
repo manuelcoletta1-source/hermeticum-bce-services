@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA</title>
 
-  <meta name="description" content="Interfaccia biocibernetica UE-first per evidenze verificabili. Hash-only, audit-first, fail-closed.">
+  <meta name="description" content="Piattaforma UE-first per evidenze tecniche verificabili. Audit-first, hash-only, fail-closed.">
   <meta name="robots" content="index,follow" />
 
   <style>
@@ -16,8 +16,6 @@
       --text:#e9ecf1;
       --muted:#aab3c2;
       --accent:#7aa7ff;
-      --ok:#9ef0c1;
-      --warn:#ffd27a;
       --radius:16px;
     }
     *{box-sizing:border-box}
@@ -33,7 +31,7 @@
 
     header{
       position:sticky;top:0;z-index:10;
-      background:rgba(11,13,18,.85);
+      background:rgba(11,13,18,.9);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
     }
@@ -47,7 +45,7 @@
     .brand small{display:block;color:var(--muted);font-weight:600}
 
     .links{display:flex;gap:14px;flex-wrap:wrap}
-    .wrap{max-width:1080px;margin:0 auto;padding:28px 16px 56px}
+    .wrap{max-width:1080px;margin:0 auto;padding:32px 16px 64px}
 
     .card{
       background:linear-gradient(180deg,rgba(17,21,34,.95),rgba(15,19,32,.95));
@@ -60,7 +58,9 @@
     p{margin:8px 0;color:var(--muted)}
 
     .hero{
-      display:grid;grid-template-columns:1.2fr .8fr;gap:16px;
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:16px;
     }
     @media(max-width:900px){.hero{grid-template-columns:1fr}}
 
@@ -87,7 +87,12 @@
       background:rgba(17,21,34,.35);
     }
 
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:20px;
+    }
     @media(max-width:900px){.grid{grid-template-columns:1fr}}
 
     footer{
@@ -124,21 +129,29 @@
   <section class="hero">
     <div class="card">
       <h1>Interfaccia biocibernetica europea</h1>
+
       <p>
-        Questo non è un servizio, né un’identità civile.
-        È un <strong>campo operativo</strong> dove un cittadino UE
-        può produrre <strong>evidenze verificabili nel tempo</strong>.
+        Hermeticum B.C.E. è una piattaforma tecnica per la
+        <strong>produzione e verifica di evidenze nel tempo</strong>.
       </p>
 
       <p>
-        Nessuna fiducia richiesta.  
-        Solo <strong>verifica ripetibile</strong>.
+        Non gestisce identità civili.
+        Non attribuisce diritti.
+        Non produce effetti giuridici automatici.
+      </p>
+
+      <p>
+        Ogni output è:
+        <strong>minimale</strong>,
+        <strong>verificabile offline</strong>,
+        <strong>riproducibile</strong>.
       </p>
 
       <div class="btns">
-        <a class="btn primary" href="citizen/">Entra come Cittadino UE</a>
-        <a class="btn" href="verify/">Verifica un caso reale</a>
-        <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-3-origin/">IPR-3 Origin</a>
+        <a class="btn primary" href="citizen/">Ingresso Cittadino UE</a>
+        <a class="btn" href="verify/">Verifica come funziona</a>
+        <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-3-origin/">Caso reale: IPR-3</a>
       </div>
 
       <div class="tags">
@@ -151,34 +164,34 @@
     </div>
 
     <div class="card">
-      <h2>Prima di proseguire</h2>
+      <h2>Perimetro operativo</h2>
       <p>
-        Qui non si promettono diritti, status o effetti automatici.
-        Ogni output è tecnico, minimale e verificabile offline.
+        Hermeticum B.C.E. registra e rende verificabile.
+        Non interpreta e non giudica.
       </p>
       <p>
-        Se una verifica non può essere ripetuta,
+        Se una verifica non è possibile,
         l’output è considerato <strong>invalido</strong>.
       </p>
     </div>
   </section>
 
   <!-- PERCORSI -->
-  <section class="grid" style="margin-top:18px">
+  <section class="grid">
     <div class="card">
       <h2>Cittadino UE</h2>
-      <p>Orientamento umano. Nessuna competenza tecnica richiesta.</p>
-      <a class="btn" href="citizen/">Apri percorso</a>
+      <p>Percorso introduttivo. Nessuna competenza tecnica richiesta.</p>
+      <a class="btn" href="citizen/">Apri</a>
     </div>
     <div class="card">
       <h2>Verify</h2>
-      <p>Impara a verificare senza fidarti di nessuno.</p>
-      <a class="btn" href="verify/">Vai a Verify</a>
+      <p>Metodo di verifica indipendente, ripetibile, offline.</p>
+      <a class="btn" href="verify/">Apri</a>
     </div>
     <div class="card">
       <h2>Create</h2>
-      <p>Crea una traccia solo se sei pronto ad assumerne la continuità.</p>
-      <a class="btn" href="create/">Vai a Create</a>
+      <p>Creazione di tracce con guardrail e continuità temporale.</p>
+      <a class="btn" href="create/">Apri</a>
     </div>
   </section>
 
