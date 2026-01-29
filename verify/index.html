@@ -1,135 +1,111 @@
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Verify — EU Gateway (IPR)</title>
-  <meta name="description" content="Verify: verifica offline indipendente di IPR/Evidence Pack. Hash → firma ED25519 → manifest. Fail-closed. UE-first."/>
-  <link rel="stylesheet" href="../assets/ui.css"/>
-</head>
-<body>
+# Verify — Verifica indipendente
 
-<header>
-  <div class="wrap nav">
-    <a class="btn primary" href="../">EU Gateway</a>
-    <a class="btn" href="../create/">Create</a>
-    <a class="btn primary" href="./">Verify</a>
-    <a class="btn" href="../evidence-pack/">Evidence</a>
-    <a class="btn" href="../catalog/">Catalog</a>
-    <a class="btn" href="../terms/">Terms</a>
-    <a class="btn" href="../map/">Map</a>
-    <span class="spacer"></span>
-    <a class="btn" data-link="corporate" href="#">Corporate</a>
-    <a class="btn" data-link="b2b" href="#">B2B</a>
-    <a class="btn" data-link="b2g" href="#">B2G</a>
-    <a class="btn" data-link="technology" href="#">Technology</a>
-  </div>
-</header>
+Questa pagina spiega **come verificare** una traccia prodotta
+nel campo biocibernetico Hermeticum B.C.E.
 
-<div class="wrap">
+Non serve fiducia.
+Serve **ripetibilità**.
 
-  <section class="box">
-    <h1>Verify</h1>
-    <p>
-      Verifica <b>offline e indipendente</b> di un IPR e del suo Evidence Pack.
-      Regola globale: <b>FAIL-CLOSED</b>. Se un controllo fallisce o è indeterminato ⇒ <b>INVALID</b>.
-    </p>
-    <p>
-      <span class="tag">UE-first</span>
-      <span class="tag">Hash-only</span>
-      <span class="tag">Audit-first</span>
-      <span class="tag">Fail-closed</span>
-    </p>
-  </section>
+---
 
-  <section class="grid3">
-    <div class="box">
-      <h2>1) Hash</h2>
-      <p>
-        Calcola <b>SHA-512</b> su <code>ipr.canon.json</code>.
-        L’hash deve coincidere con quello dichiarato in manifest/receipt.
-      </p>
-    </div>
+## Cosa significa “verificare”
 
-    <div class="box">
-      <h2>2) Firma</h2>
-      <p>
-        Verifica la firma <b>ED25519</b> sul digest.
-        Chiave pubblica, algoritmo e payload devono essere espliciti.
-      </p>
-      <p class="small">
-        Suggerimento operativo: conserva la chiave pubblica in repo (es. <code>ed25519_pub.pem</code>) e verifica sempre offline.
-      </p>
-    </div>
+Verificare non è:
+- credere a una piattaforma
+- accettare un documento
+- fidarsi di un’autorità
 
-    <div class="box">
-      <h2>3) Manifest</h2>
-      <p>
-        Verifica <code>PACK_MANIFEST.json</code>:
-        coerenza degli hash, file previsti, ordine e regola <b>append-only</b>.
-      </p>
-    </div>
-  </section>
+Verificare significa:
+- ripetere un controllo
+- ottenere lo stesso risultato
+- in modo indipendente
 
-  <section class="box" style="margin-top:12px">
-    <h2>FAIL-CLOSED (regole di esito)</h2>
-    <p>
-      • Hash mismatch ⇒ <b>INVALID</b><br/>
-      • Firma non verificabile ⇒ <b>INVALID</b><br/>
-      • Manifest mancante/incompleto ⇒ <b>INVALID</b><br/>
-      • Indeterminatezza ⇒ <b>INVALID</b><br/>
-      Nessuna interpretazione permissiva è consentita.
-    </p>
-  </section>
+Se non puoi ripetere, **non vale**.
 
-  <section class="grid2" style="margin-top:12px">
-    <div class="box">
-      <h2>Checklist minima</h2>
-      <p>
-        □ <code>ipr.canon.json</code> disponibile<br/>
-        □ SHA-512 calcolabile<br/>
-        □ <code>receipt.json</code> verificabile (se presente)<br/>
-        □ <code>PACK_MANIFEST.json</code> coerente
-      </p>
-    </div>
-    <div class="box">
-      <h2>Router rapido</h2>
-      <p>
-        Se devi generare o ricostruire il pack, passa da Create.
-        Se devi capire la struttura, apri Map.
-      </p>
-      <div class="cta">
-        <a class="btn primary" href="../create/">Vai a Create</a>
-        <a class="btn" href="../map/">Apri Map</a>
-        <a class="btn" href="../evidence-pack/">Evidence Pack</a>
-      </div>
-    </div>
-  </section>
+---
 
-  <section class="box">
-    <h2>Accesso per profilo</h2>
-    <p>
-      L’uso dell’evidenza varia per contesto. Seleziona il gateway appropriato.
-    </p>
-    <div class="cta">
-      <a class="btn primary" data-link="b2b" href="#">B2B · Imprese</a>
-      <a class="btn" data-link="b2g" href="#">B2G · Enti pubblici</a>
-    </div>
-    <p class="small" style="margin-top:8px">
-      Nota: l’esito è tecnico e riproducibile. L’adozione richiede valutazione contrattuale (B2B) o istituzionale (B2G).
-    </p>
-  </section>
+## Cosa viene verificato
 
-</div>
+In questo sistema non si verificano documenti.
+Si verificano **impronte** (hash).
 
-<footer>
-  <div class="wrap">
-    <p class="small">
-      HERMETICUM B.C.E. S.r.l. — Verify · Hash-only · Audit-first · Fail-closed · UE-first
-    </p>
-  </div>
-</footer>
+Un hash è:
+- una stringa
+- generata da un contenuto
+- sempre uguale se il contenuto è uguale
 
-<script src="../assets/links.js"></script>
-</body>
-</html>
+Se il contenuto cambia, **l’hash cambia**.
+
+---
+
+## Metodo minimo di verifica (offline)
+
+1. Prendi l’hash dichiarato (es. SHA-512)
+2. Prendi il contenuto originale
+3. Ricalcola l’hash localmente
+4. Confronta i valori
+
+Se coincidono → la traccia è integra  
+Se non coincidono → la traccia è invalida
+
+---
+
+## Esempio reale pubblico
+
+Esempio completo e verificabile:
+
+→ **IPR-3 Origin**  
+https://manuelcoletta1-source.github.io/ipr-3-origin/
+
+In quel repository puoi:
+- leggere le ancore
+- leggere gli hash
+- verificare la continuità
+- controllare gli eventi append-only
+
+---
+
+## Firma degli eventi
+
+Gli eventi successivi possono essere firmati con una
+**chiave crittografica pubblica (ED25519)**.
+
+La firma serve a dimostrare:
+- chi ha prodotto l’evento
+- che l’evento non è stato modificato
+
+La firma **non dà potere**.
+Dà **responsabilità verificabile**.
+
+---
+
+## Cosa succede se qualcosa manca
+
+Questo sistema è **fail-closed**.
+
+- se manca un hash → invalido
+- se manca una firma → invalido
+- se una verifica fallisce → invalido
+
+Non esistono “mezze verità operative”.
+
+---
+
+## Cosa NON viene chiesto
+
+- nessun account
+- nessun dato personale
+- nessun consenso implicito
+
+Solo **attenzione**.
+
+---
+
+## Passo successivo
+
+Se hai capito come verificare, puoi:
+- osservare altri casi
+- creare una tua traccia
+- oppure uscire senza lasciare nulla
+
+La verifica resta possibile.
