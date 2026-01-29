@@ -1,0 +1,22 @@
+BASELINE: 1.0
+SYSTEM: Hermeticum B.C.E. Platform
+MODE: UE-FIRST | AUDIT-FIRST | HASH-ONLY | FAIL-CLOSED
+
+STATUS:
+- SEMANTIC FREEZE: ACTIVE
+- APPEND-ONLY: ENABLED
+
+SCOPE:
+- index (EU citizen biocibernetic entrypoint)
+- /citizen
+- /verify
+- /create
+- /terms
+
+ANCHORS:
+- IPR-3 Origin (external, immutable)
+  https://manuelcoletta1-source.github.io/ipr-3-origin/
+
+NOTE:
+This baseline fixes meaning, not history.
+Future changes must be additive and declared as events.
