@@ -1,41 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Privacy Policy — HERMETICUM B.C.E.</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy &amp; GDPR — HERMETICUM</title>
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial;
+      background: #0b0d10;
+      color: #e8e8e8;
+    }
+    main {
+      max-width: 980px;
+      margin: auto;
+      padding: 40px 18px;
+    }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    h2 { font-size: 18px; margin-top: 26px; }
+    p, li { color: #cfd6df; }
+    a { color: #9bd3ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .card {
+      background: #10141a;
+      border: 1px solid #1e2633;
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+    .pill {
+      display: inline-block;
+      border: 1px solid #2a3a52;
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin: 4px 6px 8px 0;
+      font-size: 12px;
+      background: #0e1621;
+      color: #cfe6ff;
+    }
+    footer {
+      margin-top: 32px;
+      font-size: 13px;
+      color: #9aa4b2;
+    }
+    code {
+      background: #0b0d10;
+      border: 1px solid #1e2633;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+  </style>
 </head>
+
 <body>
-<h1>Privacy Policy</h1>
+<main>
 
-<p>
-HERMETICUM B.C.E. è una piattaforma sperimentale UE-first progettata secondo
-i principi di <strong>privacy by design</strong> e <strong>minimizzazione dei dati</strong>.
-</p>
+  <h1>Informativa Privacy (GDPR-min)</h1>
+  <p>
+    Portale <strong>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</strong><br>
+    Titolare del trattamento: <strong>HERMETICUM B.C.E. S.r.l.</strong>
+  </p>
 
-<h2>Dati trattati</h2>
-<ul>
-  <li>Dati tecnici di navigazione strettamente necessari</li>
-  <li>Dati forniti volontariamente dall’utente</li>
-</ul>
+  <div class="card">
+    <span class="pill">UE-first</span>
+    <span class="pill">GDPR-min</span>
+    <span class="pill">Hash-only</span>
+    <span class="pill">Fail-closed</span>
 
-<h2>Cosa NON facciamo</h2>
-<ul>
-  <li>Nessuna profilazione</li>
-  <li>Nessun tracciamento pubblicitario</li>
-  <li>Nessuna cessione a terzi</li>
-</ul>
+    <h2>1. Principio di minimizzazione</h2>
+    <p>
+      Il portale è progettato per ridurre al minimo il trattamento di dati personali.
+      La finalità primaria è la gestione di <strong>evidenze tecniche</strong>
+      (hash crittografici, manifest, firme, timestamp) evitando l’esposizione di dati identificativi.
+    </p>
 
-<h2>IPR e blockchain</h2>
-<p>
-Eventuali ancoraggi crittografici (hash) non contengono dati personali leggibili
-e non consentono identificazione diretta dell’utente.
-</p>
+    <h2>2. Tipologia di dati trattati</h2>
+    <ul>
+      <li><strong>Dati tecnici</strong>: richieste HTTP, data/ora, user-agent, log minimi di sicurezza.</li>
+      <li><strong>Dati forniti volontariamente</strong>: contenuti inseriti dall’utente durante l’uso degli strumenti.</li>
+    </ul>
+    <p>
+      Il sito è ospitato su infrastruttura statica (es. GitHub Pages).  
+      Eventuali log sono gestiti secondo le politiche del provider.
+    </p>
 
-<h2>Base giuridica</h2>
-<p>
-Regolamento (UE) 2016/679 (GDPR).
-</p>
+    <h2>3. Finalità del trattamento</h2>
+    <ul>
+      <li>Accesso e funzionamento del portale.</li>
+      <li>Sicurezza, prevenzione abusi e integrità del servizio.</li>
+      <li>Verifica e consultazione delle evidenze pubblicate.</li>
+    </ul>
 
-<p>Ultimo aggiornamento: 2026</p>
+    <h2>4. Base giuridica</h2>
+    <ul>
+      <li>Legittimo interesse del titolare (sicurezza e integrità).</li>
+      <li>Esecuzione di un servizio richiesto dall’utente.</li>
+    </ul>
+
+    <h2>5. Conservazione dei dati</h2>
+    <p>
+      I dati tecnici sono conservati per il tempo strettamente necessario.
+      Le evidenze pubblicate restano disponibili finché mantenute nei repository o nei canali associati.
+    </p>
+
+    <h2>6. Diritti dell’interessato</h2>
+    <p>
+      L’interessato può esercitare i diritti previsti dal GDPR
+      (accesso, rettifica, cancellazione, limitazione, opposizione).
+      In caso di pubblicazione di dati non necessari, è possibile richiederne la rimozione.
+    </p>
+
+    <h2>7. Contatti</h2>
+    <p>
+      Email: <a href="mailto:manuelcoletta1@gmail.com">manuelcoletta1@gmail.com</a><br>
+      Tel: <a href="tel:+393515724982">+39 351 572 4982</a>
+    </p>
+  </div>
+
+  <footer>
+    Ultimo aggiornamento: <code>2026-01-29</code><br><br>
+    <a href="../index.html">← Torna alla Home</a>
+  </footer>
+
+</main>
 </body>
 </html>
