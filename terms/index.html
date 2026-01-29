@@ -1,115 +1,107 @@
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Terms — EU Gateway</title>
-  <meta name="description" content="Terms: perimetro, limiti, hash-only, GDPR-min, fail-closed. Nessuna identità civile, nessun effetto legale automatico."/>
-  <link rel="stylesheet" href="../assets/ui.css"/>
-</head>
-<body>
+# Termini di utilizzo — Hermeticum B.C.E.
 
-<header>
-  <div class="wrap nav">
-    <a class="btn primary" href="../">EU Gateway</a>
-    <a class="btn" href="../create/">Create</a>
-    <a class="btn" href="../verify/">Verify</a>
-    <a class="btn" href="../evidence-pack/">Evidence</a>
-    <a class="btn" href="../catalog/">Catalog</a>
-    <a class="btn primary" href="./">Terms</a>
-    <a class="btn" href="../map/">Map</a>
-    <span class="spacer"></span>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce/">Corporate</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2b/">B2B</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2g/">B2G</a>
-    <a class="btn" href="https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/">Technology</a>
-  </div>
-</header>
+Questa pagina definisce **il perimetro operativo**
+del sistema Hermeticum B.C.E.
 
-<div class="wrap">
+Entrare o usare il sistema **non crea automaticamente diritti**.
+Crea solo **tracce tecniche verificabili**, se e quando l’utente lo decide.
 
-  <section class="box">
-    <h1>Terms (perimetro e limiti)</h1>
-    <p>
-      Questo EU Gateway produce evidenza tecnica verificabile (hash/receipt/manifest)
-      per supportare audit riproducibile in contesti UE-first.
-    </p>
-    <p>
-      <span class="tag">UE-first</span>
-      <span class="tag">GDPR-min</span>
-      <span class="tag">Hash-only</span>
-      <span class="tag">Audit-first</span>
-      <span class="tag">Fail-closed</span>
-    </p>
-  </section>
+---
 
-  <section class="grid2">
-    <div class="box">
-      <h2>Cosa offre</h2>
-      <p>
-        • Output verificabili offline (hash/receipt/manifest)<br/>
-        • Procedura Create/Verify riproducibile<br/>
-        • Evidence Pack minimizzato (hash-only)<br/>
-        • Chiarezza operativa: se non verifica ⇒ non vale
-      </p>
-    </div>
+## Natura del sistema
 
-    <div class="box">
-      <h2>Cosa non offre</h2>
-      <p>
-        • Non è identità civile<br/>
-        • Non sostituisce eIDAS / EUDI Wallet<br/>
-        • Non è un registro pubblico con valore legale automatico<br/>
-        • Non fornisce consulenza legale
-      </p>
-    </div>
-  </section>
+Hermeticum B.C.E. è:
+- un’interfaccia biocibernetica
+- un sistema tecnico di evidenza
+- un ambiente audit-first
 
-  <section class="box">
-    <h2>FAIL-CLOSED</h2>
-    <p>
-      Regola globale: se una verifica fallisce o è indeterminata,
-      l’output è <b>INVALID</b> e l’azione è bloccata.
-      Nessuna interpretazione permissiva è consentita.
-    </p>
-  </section>
+Hermeticum B.C.E. **non è**:
+- un’autorità pubblica
+- un sistema di identità civile
+- un sostituto di eIDAS, EUDI Wallet o registri ufficiali
+- un servizio di custodia documentale
 
-  <section class="box">
-    <h2>Hash-only e minimizzazione (GDPR-min)</h2>
-    <p>
-      Il sistema è progettato per evitare il trattamento di documenti.
-      Nel gateway devono transitare solo impronte verificabili (hash) e ricevute tecniche,
-      non dati personali identificativi o documenti.
-    </p>
-  </section>
+---
 
-  <section class="box">
-    <h2>Responsabilità dell’utente</h2>
-    <p>
-      L’utente è responsabile di:
-      <br/>• conservazione di chiavi e materiali crittografici
-      <br/>• verifica indipendente offline
-      <br/>• uso conforme a normative applicabili e policy interne
-    </p>
-  </section>
+## Nessuna promessa giuridica automatica
 
-  <section class="box">
-    <h2>Nota finale</h2>
-    <p>
-      Gli esiti prodotti sono tecnici. L’adozione in B2B/B2G richiede valutazione
-      contrattuale, legale e istituzionale.
-    </p>
-  </section>
+Il sistema:
+- non conferisce diritti
+- non attribuisce status legali
+- non produce effetti giuridici automatici
+- non sostituisce procedure amministrative o giudiziarie
 
-</div>
+Ogni eventuale utilizzo giuridico delle evidenze
+è responsabilità esclusiva dell’utilizzatore
+e del contesto normativo in cui vengono presentate.
 
-<footer>
-  <div class="wrap">
-    <p class="small">
-      HERMETICUM B.C.E. S.r.l. — Terms · UE-first · Hash-only · Audit-first · Fail-closed
-    </p>
-  </div>
-</footer>
+---
 
-</body>
-</html>
+## Responsabilità dell’utente
+
+Chi utilizza il sistema:
+- decide se creare o meno una traccia
+- resta responsabile del contenuto originale
+- resta responsabile del contesto d’uso
+- accetta l’irreversibilità temporale (append-only)
+
+Il sistema non cancella, non riscrive, non interpreta.
+
+---
+
+## Trattamento dei dati
+
+Hermeticum B.C.E. opera secondo il principio **hash-only**.
+
+Il sistema:
+- non conserva documenti originali
+- non richiede dati personali obbligatori
+- non effettua profilazione
+- non vende dati
+
+Gli output sono **impronte tecniche** (hash, receipt, manifest),
+verificabili ma non informativi di per sé.
+
+---
+
+## Principio fail-closed
+
+Se:
+- un dato manca
+- una verifica fallisce
+- una firma non è valida
+
+l’output è **invalido**.
+
+Non esistono stati intermedi accettati.
+
+---
+
+## Limitazione di responsabilità
+
+Hermeticum B.C.E. non è responsabile:
+- dell’uso improprio delle evidenze
+- dell’interpretazione di terzi
+- di conseguenze giuridiche, economiche o personali
+derivanti dall’uso del sistema.
+
+---
+
+## Accettazione
+
+L’uso del sistema implica la comprensione di:
+- assenza di promesse
+- centralità della verifica
+- responsabilità individuale
+- continuità temporale delle tracce
+
+Se questi principi non sono accettabili,
+**non utilizzare il sistema**.
+
+---
+
+## Legge applicabile
+
+Il sistema è progettato secondo principi **UE-first**.
+Ogni valutazione giuridica resta soggetta
+alle normative applicabili del contesto d’uso.
