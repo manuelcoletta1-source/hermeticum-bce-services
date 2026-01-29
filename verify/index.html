@@ -1,111 +1,39 @@
-# Verify — Verifica indipendente
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>IPR Verify — Hermeticum B.C.E.</title>
 
-Questa pagina spiega **come verificare** una traccia prodotta
-nel campo biocibernetico Hermeticum B.C.E.
+  <!-- Canonical styles -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/alien-motion.css" />
 
-Non serve fiducia.
-Serve **ripetibilità**.
+</head>
+<body>
 
----
+  <!-- IPR STATE BLOCK -->
+  <!-- Stato iniziale: IDLE -->
+  <section class="ipr-state ipr-idle reveal-locked" id="ipr-status">
+    <h1>IPR Verification</h1>
+    <p>Status: IDLE</p>
+  </section>
 
-## Cosa significa “verificare”
+  <!--
+    NOTE OPERATIVE (non JS):
+    - ipr-idle        → stato iniziale
+    - ipr-verifying   → sostituire classe lato server / build
+    - ipr-verified    → stato stabile finale
+    - ipr-fail-closed → errore o mismatch
+    - reveal-unlocked → accesso concesso
+  -->
 
-Verificare non è:
-- credere a una piattaforma
-- accettare un documento
-- fidarsi di un’autorità
+  <!-- Esempio stato verificato (commentato) -->
+  <!--
+  <section class="ipr-state ipr-verified reveal-unlocked">
+    <h1>IPR Verification</h1>
+    <p>Status: VERIFIED</p>
+  </section>
+  -->
 
-Verificare significa:
-- ripetere un controllo
-- ottenere lo stesso risultato
-- in modo indipendente
-
-Se non puoi ripetere, **non vale**.
-
----
-
-## Cosa viene verificato
-
-In questo sistema non si verificano documenti.
-Si verificano **impronte** (hash).
-
-Un hash è:
-- una stringa
-- generata da un contenuto
-- sempre uguale se il contenuto è uguale
-
-Se il contenuto cambia, **l’hash cambia**.
-
----
-
-## Metodo minimo di verifica (offline)
-
-1. Prendi l’hash dichiarato (es. SHA-512)
-2. Prendi il contenuto originale
-3. Ricalcola l’hash localmente
-4. Confronta i valori
-
-Se coincidono → la traccia è integra  
-Se non coincidono → la traccia è invalida
-
----
-
-## Esempio reale pubblico
-
-Esempio completo e verificabile:
-
-→ **IPR-3 Origin**  
-https://manuelcoletta1-source.github.io/ipr-3-origin/
-
-In quel repository puoi:
-- leggere le ancore
-- leggere gli hash
-- verificare la continuità
-- controllare gli eventi append-only
-
----
-
-## Firma degli eventi
-
-Gli eventi successivi possono essere firmati con una
-**chiave crittografica pubblica (ED25519)**.
-
-La firma serve a dimostrare:
-- chi ha prodotto l’evento
-- che l’evento non è stato modificato
-
-La firma **non dà potere**.
-Dà **responsabilità verificabile**.
-
----
-
-## Cosa succede se qualcosa manca
-
-Questo sistema è **fail-closed**.
-
-- se manca un hash → invalido
-- se manca una firma → invalido
-- se una verifica fallisce → invalido
-
-Non esistono “mezze verità operative”.
-
----
-
-## Cosa NON viene chiesto
-
-- nessun account
-- nessun dato personale
-- nessun consenso implicito
-
-Solo **attenzione**.
-
----
-
-## Passo successivo
-
-Se hai capito come verificare, puoi:
-- osservare altri casi
-- creare una tua traccia
-- oppure uscire senza lasciare nulla
-
-La verifica resta possibile.
+</body>
+</html>
