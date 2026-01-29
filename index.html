@@ -1,93 +1,218 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <title>HERMETICUM B.C.E. — Nodo Biocibernetico UE</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portale biocibernetico per il Cittadino dell’Unione Europea. Identità, tempo e responsabilità computabili." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HERMETICUM — Blindata · Computabile · Evolutiva</title>
+
+  <meta name="description" content="Gateway europeo per tracciabilità, verifica e audit di evidenze digitali. UE-first, Audit-first, Hash-only, Fail-closed." />
+  <meta name="robots" content="index,follow" />
+
   <style>
+    :root { color-scheme: dark; }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0b0e11;
-      color: #e5e7eb;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial;
+      background: #0b0d10;
+      color: #e8e8e8;
     }
-    main {
-      max-width: 920px;
+    header, main, footer {
+      max-width: 1100px;
       margin: auto;
-      padding: 4rem 1.5rem;
+      padding: 32px 18px;
     }
-    h1 {
-      font-size: 2.2rem;
-      letter-spacing: 0.04em;
+    h1 { font-size: 34px; margin: 0 0 8px; }
+    h2 { font-size: 22px; margin-top: 40px; }
+    h3 { font-size: 18px; margin-top: 24px; }
+    p { color: #cfd6df; }
+    a { color: #9bd3ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .hero {
+      padding-top: 48px;
+      padding-bottom: 48px;
     }
-    h2 {
-      margin-top: 3rem;
-      font-size: 1.2rem;
-      color: #9ca3af;
-      text-transform: uppercase;
+
+    .tagline {
+      font-size: 18px;
+      color: #b7c0cc;
+      max-width: 780px;
     }
-    p {
-      line-height: 1.6;
-      color: #d1d5db;
+
+    .pill {
+      display: inline-block;
+      border: 1px solid #2a3a52;
+      border-radius: 999px;
+      padding: 6px 12px;
+      margin: 6px 8px 0 0;
+      font-size: 13px;
+      background: #0e1621;
+      color: #cfe6ff;
     }
-    .sigil {
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #6b7280;
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
     }
-    .seal {
-      margin-top: 2rem;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #9ca3af;
+
+    .card {
+      background: #10141a;
+      border: 1px solid #1e2633;
+      border-radius: 16px;
+      padding: 20px;
     }
+
+    .cta {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1px solid #3a4d6a;
+      background: #0f1a2a;
+      color: #cfe6ff;
+      font-weight: 600;
+    }
+
+    footer {
+      border-top: 1px solid #1e2633;
+      margin-top: 48px;
+      font-size: 14px;
+      color: #9aa4b2;
+    }
+
+    footer a { margin-right: 14px; }
   </style>
 </head>
+
 <body>
-  <main>
 
-    <h1>HERMETICUM B.C.E.</h1>
+<header class="hero">
+  <h1>HERMETICUM</h1>
+  <p class="tagline">
+    Infrastruttura digitale europea per <strong>tracciabilità, verifica e audit</strong>  
+    di evidenze digitali.  
+    Non certifica verità. Rende confrontabile l’ordine degli atti.
+  </p>
+
+  <div>
+    <span class="pill">UE-first</span>
+    <span class="pill">Audit-first</span>
+    <span class="pill">Hash-only</span>
+    <span class="pill">Fail-closed</span>
+  </div>
+</header>
+
+<main>
+
+  <section>
+    <h2>Cosa è</h2>
     <p>
-      Questo portale è un <strong>nodo biocibernetico</strong>.
-      Non raccoglie dati. Non promette protezione.
-      Registra continuità.
+      HERMETICUM è un <strong>gateway tecnico europeo</strong> che permette di generare,
+      pubblicare e verificare <strong>evidenze digitali</strong>
+      (hash, manifest, firme, timestamp, evidence pack)
+      in modo riproducibile e auditabile.
     </p>
-
-    <h2>Cittadino dell’Unione Europea</h2>
     <p>
-      Stai entrando per la prima volta in un sistema dove
-      identità, tempo e responsabilità sono trattati
-      come entità computabili e verificabili.
+      È pensato per cittadini, professionisti, imprese e istituzioni
+      che necessitano di <strong>continuità temporale verificabile</strong>,
+      senza dipendere da promesse o fiducia cieca.
     </p>
+  </section>
 
-    <p>
-      Qui il soggetto biologico rimane primario.
-      Ogni estensione cibernetica è subordinata
-      alla tracciabilità e all’audit pubblico.
-    </p>
-
-    <h2>Condizioni di ingresso</h2>
-    <p>
-      Nessuna iscrizione.<br/>
-      Nessuna delega automatica.<br/>
-      Nessuna riscrittura del passato.
-    </p>
-
-    <p>
-      Ogni evoluzione avviene per eventi dichiarati,
-      append-only, verificabili.
-    </p>
-
-    <div class="seal">
-      Blindata · Computabile · Evolutiva
+  <section>
+    <h2>Cosa NON è</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Non è identità civile</h3>
+        <p>
+          Non rilascia SPID, CIE, eIDAS, EUDI Wallet
+          né documenti governativi.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Non è un’autorità</h3>
+        <p>
+          Non certifica diritti, persone o verità.
+          Fornisce solo evidenze tecniche verificabili.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Non è una promessa</h3>
+        <p>
+          Nessuna garanzia implicita.
+          Se una verifica fallisce, l’esito corretto è il fallimento.
+        </p>
+      </div>
     </div>
+  </section>
 
-    <div class="sigil">
-      🜏 HERMETICUM B.C.E. — Nodo Biocibernetico UE
+  <section>
+    <h2>Gateway operativo</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Create</h3>
+        <p>
+          Generazione di manifest ed evidenze
+          in modalità <strong>hash-only</strong>.
+        </p>
+        <a class="cta" href="create/">Apri Create</a>
+      </div>
+
+      <div class="card">
+        <h3>Verify</h3>
+        <p>
+          Verifica riproducibile offline o online,
+          con logica <strong>fail-closed</strong>.
+        </p>
+        <a class="cta" href="verify/">Apri Verify</a>
+      </div>
+
+      <div class="card">
+        <h3>Evidence Pack</h3>
+        <p>
+          Raccolta strutturata di prove tecniche
+          per audit e confronto temporale.
+        </p>
+        <a class="cta" href="evidence/">Apri Evidence</a>
+      </div>
     </div>
+  </section>
 
-  </main>
+  <section>
+    <h2>Destinatari</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Cittadino UE</h3>
+        <p>Dimostrare nel tempo l’esistenza di un atto o contenuto.</p>
+      </div>
+      <div class="card">
+        <h3>Professionista</h3>
+        <p>Proteggere lavori, versioni, responsabilità operative.</p>
+      </div>
+      <div class="card">
+        <h3>Impresa / Istituzione</h3>
+        <p>Auditabilità, compliance, continuità documentale.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA  
+    <br>
+    Gestione: <strong>HERMETICUM B.C.E. S.r.l.</strong>
+  </p>
+
+  <p>
+    <a href="legal/legal-notice.html">Legal Notice</a>
+    <a href="legal/terms.html">Terms</a>
+    <a href="legal/privacy.html">Privacy</a>
+  </p>
+</footer>
+
 </body>
 </html>
