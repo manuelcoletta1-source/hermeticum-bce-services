@@ -1,58 +1,49 @@
 /* =========================================================
-   HERMETICUM B.C.E. — ALIEN MOTION GRAMMAR
-   Motion type: alinica · tecnologica · deterministica
-   Scope: IPR state signaling (no UX decoration)
-   Policy: UE-first | audit-by-design | fail-closed
+   HERMETICUM B.C.E. — ALIEN MOTION (RESET CANONICO)
+   Tipo: alinico · tecnologico · deterministico
+   Funzione: segnalazione di STATO, non animazione UX
+   Compatibilità: totale (desktop, mobile, WebView, Pages)
    ========================================================= */
 
-/* -------- Base state -------- */
+/* -------- Stato base -------- */
 .ipr-state {
+  display: none;
   opacity: 1;
-  transform: none;
-  transition: none;
 }
 
 /* -------- IDLE -------- */
 .ipr-idle {
+  display: block;
   opacity: 0.85;
 }
 
 /* -------- VERIFYING -------- */
-/* clock-like deterministic blink: finite, non-emotive */
-@keyframes ipr-clock-blink {
+/* commutazione secca, breve, finita */
+@keyframes ipr-blink {
   0%   { opacity: 1; }
-  49%  { opacity: 1; }
   50%  { opacity: 0.3; }
-  100% { opacity: 0.3; }
-}
-
-.ipr-verifying {
-  animation: ipr-clock-blink 0.4s linear 3;
-}
-
-/* -------- VERIFIED -------- */
-/* single stabilization flicker, then stop */
-@keyframes ipr-stabilize {
-  0%   { opacity: 0.6; }
   100% { opacity: 1; }
 }
 
+.ipr-verifying {
+  display: block;
+  animation: ipr-blink 0.3s linear 2;
+}
+
+/* -------- VERIFIED -------- */
+/* stabilizzazione secca */
+@keyframes ipr-stabilize {
+  from { opacity: 0.6; }
+  to   { opacity: 1; }
+}
+
 .ipr-verified {
+  display: block;
   animation: ipr-stabilize 0.12s linear 1;
 }
 
 /* -------- FAIL / CLOSED -------- */
 .ipr-fail-closed {
+  display: block;
   opacity: 0.25;
-}
-
-/* -------- Reveal (mask-based, hard edge) -------- */
-.reveal-locked {
-  overflow: hidden;
-  clip-path: inset(0 0 100% 0);
-}
-
-.reveal-unlocked {
-  clip-path: inset(0 0 0 0);
-  transition: clip-path 0.15s linear;
 }
