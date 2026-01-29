@@ -1,37 +1,245 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HERMETICUM B.C.E. — Blindata · Computabile · Evolutiva</title>
 
-  <!-- Canonical styles -->
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="assets/css/alien-motion.css" />
+  <meta name="description" content="Nodo europeo biocibernetico: accesso per stato (IPR), audit-by-design, fail-closed." />
+
+  <style>
+    /* =========================================================
+       HERMETICUM B.C.E. — INDEX (ALINIC / TECHNO / FAIL-SAFE)
+       - nessuna dipendenza esterna
+       - niente clip-path / trick fragili
+       - motion deterministico, finito, lineare
+       ========================================================= */
+
+    :root{
+      --bg0:#07090d; --bg1:#0a1020;
+      --panel:#0b0f16; --panel2:rgba(11,15,22,.74);
+      --line:#182233;
+      --txt:#e9eef7; --muted:#a7b3c6;
+      --acc:#c7d2fe;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --r:16px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--txt);
+      font-family:var(--sans);
+      line-height:1.35;
+      background:
+        radial-gradient(1200px 600px at 18% 0%, var(--bg1) 0%, var(--bg0) 55%) fixed;
+    }
+
+    /* ---------- Layout ---------- */
+    .wrap{ max-width:980px; margin:0 auto; padding:28px 16px 40px; }
+    .row{ display:flex; gap:10px; align-items:center; justify-content:space-between; }
+    .grid{ margin-top:16px; display:grid; grid-template-columns:1fr; gap:12px; }
+
+    /* ---------- Surfaces ---------- */
+    .surface{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      padding:14px;
+    }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      background:var(--panel2);
+      backdrop-filter: blur(6px);
+      padding:16px;
+    }
+
+    .hr{ height:1px; background:var(--line); margin:12px 0; opacity:.9; }
+
+    /* ---------- Typography ---------- */
+    .brand h1{
+      margin:0;
+      font-family:var(--mono);
+      font-size:18px;
+      letter-spacing:.08em;
+      font-weight:700;
+    }
+    .brand .sub{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.04em;
+    }
+
+    .k{ font-family:var(--mono); font-size:12px; color:var(--muted); letter-spacing:.02em; }
+    .title{
+      margin:0 0 10px;
+      font-family:var(--mono);
+      font-size:14px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:var(--acc);
+    }
+    p{ margin:0; font-size:14px; }
+    ul{ margin:10px 0 0; padding-left:18px; }
+    li{ margin:6px 0; color:var(--txt); }
+    .muted{ color:var(--muted); }
+
+    /* ---------- Badges ---------- */
+    .badge{
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--line);
+      padding:8px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+
+    /* =========================================================
+       ALIEN MOTION GRAMMAR (RESET)
+       - stato -> visibilità
+       - animazione finita, lineare
+       ========================================================= */
+    .ipr-state{ display:none; opacity:1; }
+
+    .ipr-idle{
+      display:block;
+      opacity:.88;
+    }
+
+    @keyframes ipr-blink{
+      0%{opacity:1;} 50%{opacity:.28;} 100%{opacity:1;}
+    }
+    .ipr-verifying{
+      display:block;
+      animation: ipr-blink .30s linear 2;
+    }
+
+    @keyframes ipr-stabilize{
+      from{opacity:.62;} to{opacity:1;}
+    }
+    .ipr-verified{
+      display:block;
+      animation: ipr-stabilize .12s linear 1;
+    }
+
+    .ipr-fail-closed{
+      display:block;
+      opacity:.25;
+      filter: grayscale(1);
+    }
+
+    /* ---------- State router (1 sola verità visibile) ---------- */
+    .state{ display:none; }
+    body[data-ipr="IDLE"]      .state-idle{display:block;}
+    body[data-ipr="VERIFYING"] .state-verifying{display:block;}
+    body[data-ipr="VERIFIED"]  .state-verified{display:block;}
+    body[data-ipr="FAIL"]      .state-fail{display:block;}
+
+    /* ---------- Footer ---------- */
+    footer{ margin-top:16px; }
+    .foot{ display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; }
+  </style>
 </head>
-<body>
 
-  <!-- HERO / SYSTEM GATE -->
-  <!-- Stato iniziale: IDLE (sistema chiuso) -->
-  <section class="ipr-state ipr-idle reveal-locked" id="system-gate">
-    <h1>HERMETICUM B.C.E.</h1>
-    <p>European BioCyber Infrastructure</p>
-    <p>Status: IDLE</p>
-  </section>
+<!-- SCEGLI QUI LO STATO HOME: IDLE | VERIFYING | VERIFIED | FAIL -->
+<body data-ipr="IDLE">
 
-  <!-- CORE MESSAGE -->
-  <!-- Stato: VERIFIED (accesso concesso) -->
-  <section class="ipr-state ipr-verified reveal-unlocked">
-    <h2>Accesso a infrastruttura verificata</h2>
-    <p>
-      Questo portale opera esclusivamente con identità verificata (IPR).
-      Ogni azione è tracciabile, auditabile, fail-closed.
-    </p>
-  </section>
+  <main class="wrap">
 
-  <!-- SYSTEM FOOTER -->
-  <section class="ipr-state ipr-idle">
-    <p>Policy: UE-first · GDPR-min · HASH-only · AUDIT</p>
-  </section>
+    <!-- HEADER / GATE -->
+    <header class="surface">
+      <div class="row">
+        <div class="brand">
+          <h1>HERMETICUM B.C.E.</h1>
+          <p class="sub">Blindata · Computabile · Evolutiva</p>
+        </div>
+        <div class="badge">Policy: UE-first · GDPR-min · HASH-only · AUDIT</div>
+      </div>
+    </header>
 
+    <section class="grid">
+
+      <!-- =====================================================
+           STATE PANEL (solo uno visibile)
+           ===================================================== -->
+      <section class="card state state-idle ipr-state ipr-idle" aria-live="polite">
+        <h2 class="title">Status</h2>
+        <p><span class="k">STATUS:</span> IDLE</p>
+        <div class="hr"></div>
+        <p class="k">Entry condition: identità verificata (IPR). Sistema fail-closed.</p>
+      </section>
+
+      <section class="card state state-verifying ipr-state ipr-verifying" aria-live="polite">
+        <h2 class="title">Status</h2>
+        <p><span class="k">STATUS:</span> VERIFYING</p>
+        <div class="hr"></div>
+        <p class="k">Handshake in corso. Nessuna degradazione “graceful”.</p>
+      </section>
+
+      <section class="card state state-verified ipr-state ipr-verified" aria-live="polite">
+        <h2 class="title">Accesso a infrastruttura verificata</h2>
+        <p>
+          Questo portale opera esclusivamente con identità verificata (IPR).
+          Ogni azione è tracciabile, auditabile, fail-closed.
+        </p>
+        <div class="hr"></div>
+        <p class="k"><span class="k">STATUS:</span> VERIFIED</p>
+      </section>
+
+      <section class="card state state-fail ipr-state ipr-fail-closed" aria-live="polite">
+        <h2 class="title">Status</h2>
+        <p><span class="k">STATUS:</span> FAIL-CLOSED</p>
+        <div class="hr"></div>
+        <p class="k">Mismatch o condizioni non soddisfatte. Accesso negato.</p>
+      </section>
+
+      <!-- =====================================================
+           SYSTEM SUMMARY (sempre visibile)
+           ===================================================== -->
+      <section class="card">
+        <h2 class="title">Nodo UE — BioCyber Infrastructure</h2>
+        <p class="muted">
+          Accesso per stato, non per “profilo”. L’IPR è la chiave operativa che rende le azioni opponibili e auditabili.
+        </p>
+        <div class="hr"></div>
+        <ul class="k">
+          <li><span class="k">MODELLO:</span> audit-by-design</li>
+          <li><span class="k">LOGICA:</span> fail-closed</li>
+          <li><span class="k">DATI:</span> GDPR-min / hash-only</li>
+        </ul>
+      </section>
+
+      <!-- =====================================================
+           ROUTES (link logici: aggiungi i tuoi path reali)
+           ===================================================== -->
+      <section class="card">
+        <h2 class="title">Routes</h2>
+        <p class="muted">Collegamenti operativi (statici, auditabili).</p>
+        <div class="hr"></div>
+        <ul class="k">
+          <li><a href="verify/" class="k" style="color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line);">/verify</a> — verifica IPR</li>
+          <li><a href="create/" class="k" style="color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line);">/create</a> — generazione manifest</li>
+          <li><a href="catalog/" class="k" style="color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line);">/catalog</a> — classi/servizi</li>
+          <li><a href="terms/" class="k" style="color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line);">/terms</a> — termini e policy</li>
+        </ul>
+      </section>
+
+    </section>
+
+    <footer class="surface">
+      <div class="foot">
+        <span class="k">HERMETICUM B.C.E. S.r.l.</span>
+        <span class="k">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</span>
+      </div>
+    </footer>
+
+  </main>
 </body>
 </html>
