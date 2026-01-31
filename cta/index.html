@@ -1,91 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <title>CTA — Activate IPR — HERMETICUM B.C.E.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CTA — HERMETICUM Services</title>
-  <meta name="description" content="Call To Action: attiva l’IPR personale. Senza IPR non esiste operatività reale." />
-  <style>
-    :root{
-      --bg:#0b0c10; --panel:#0f1117; --line:#24262b; --text:#e8e8e8; --muted:#a9abb3;
-      --shadow:0 12px 36px rgba(0,0,0,.35); --r:16px; --r2:22px; --max:900px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:radial-gradient(1200px 700px at 20% 0%, #121525 0%, rgba(18,21,37,0) 55%),
-                 radial-gradient(900px 600px at 80% 10%, #141b2a 0%, rgba(20,27,42,0) 55%),
-                 var(--bg);
-      color:var(--text);
-      font:15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      letter-spacing:.2px;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
-    .card{
-      border:1px solid var(--line); border-radius:var(--r2); padding:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-    }
-    .mark{margin:0 0 6px; font-weight:900}
-    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
-    h1{margin:0 0 8px; font-size:28px; line-height:1.15}
-    p{margin:0; color:var(--muted)}
-    .grid{display:grid; gap:12px; margin-top:14px}
-    @media (min-width:860px){ .grid{grid-template-columns:1fr 1fr} }
-    .box{
-      border:1px solid var(--line); border-radius:var(--r);
-      background:rgba(0,0,0,.18); padding:14px;
-    }
-    .box b{display:block; margin-bottom:6px}
-    .btn{
-      display:inline-block; margin-top:12px; padding:12px 14px;
-      border-radius:12px; border:1px solid rgba(255,255,255,.18);
-      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
-      font-weight:900; letter-spacing:.4px;
-      transition:.15s ease;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .callout{
-      margin-top:14px; border:1px dashed rgba(255,255,255,.18); border-radius:var(--r);
-      padding:14px; background:rgba(255,255,255,.02); color:var(--muted); font-weight:800;
-    }
-  </style>
+  <meta name="description" content="Call-to-action controllata: ingresso canonico onboarding + verifica riproducibile (fail-closed)." />
+  <link rel="stylesheet" href="/hermeticum-bce-platform/assets/style.css" />
 </head>
-<body>
-  <div class="wrap">
-    <div class="card">
-      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
-      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
 
-      <h1>Attiva l’IPR. Entra nella realtà operativa.</h1>
-      <p>
-        Senza <b>IPR personale</b> non puoi certificare studio, lavoro o esperimenti.
-        Con l’IPR abiliti <b>AI JOKER-C2</b> in modalità verificabile, UE-first e fail-closed.
+<body>
+
+  <div data-include="header"></div>
+
+  <main class="hbce-main" role="main">
+    <section class="hbce-hero">
+      <h1>Attiva IPR</h1>
+      <p class="hbce-hero__subtitle">
+        Questa è una call-to-action controllata.
+        Se non puoi verificare, non procedere: il sistema fallisce chiuso.
       </p>
 
-      <div class="grid">
-        <div class="box">
-          <b>Con IPR</b>
-          <p>
-            Operi con identità opponibile, policy computabili e prove tracciate.
-          </p>
-          <a class="btn" href="../onboarding/">Attiva IPR</a>
-        </div>
-
-        <div class="box">
-          <b>Senza IPR</b>
-          <p>
-            Rimani fuori dal perimetro operativo: nessuna prova, nessuna continuità.
-          </p>
-          <a class="btn" href="../catalog/">Scopri perché</a>
-        </div>
+      <div class="hbce-hero__cta">
+        <a class="hbce-btn hbce-btn--primary" href="/hermeticum-bce-platform/onboarding/">
+          Avvia Onboarding (canonico)
+        </a>
+        <a class="hbce-btn" href="/hermeticum-bce-platform/verify/">
+          Verifica prima
+        </a>
+        <a class="hbce-btn" href="/hermeticum-bce-platform/tech/">
+          Audit Hub
+        </a>
       </div>
+    </section>
 
-      <div class="callout">
-        Principio finale: <b>se non è verificabile, non è reale</b>.
+    <section class="hbce-section">
+      <h2>Perché onboarding</h2>
+      <p>
+        L’onboarding è l’unico ingresso operativo: allinea profilo, territorio e livello,
+        poi abilita la creazione IPR in modo controllato.
+      </p>
+      <ol class="hbce-flow">
+        <li><strong>Profilo</strong> — citizen / professional / institution</li>
+        <li><strong>Territorio</strong> — Paese → Regione → Città → Quartiere</li>
+        <li><strong>Creazione</strong> — IPR + receipt (hash-only)</li>
+        <li><strong>Verifica</strong> — riproducibile, fail-closed</li>
+      </ol>
+    </section>
+
+    <section class="hbce-section hbce-section--grid">
+      <div>
+        <h3>Se arrivi per valutare</h3>
+        <p>
+          Parti da <strong>Verify</strong>. È la porta per chi non concede fiducia preventiva.
+        </p>
+        <p><a href="/hermeticum-bce-platform/verify/">Apri verify →</a></p>
       </div>
-    </div>
-  </div>
+      <div>
+        <h3>Se arrivi per adottare</h3>
+        <p>
+          Parti da <strong>Evidence Pack</strong> e <strong>Governance</strong> (contesto B2B/B2G).
+        </p>
+        <p>
+          <a href="/hermeticum-bce-platform/evidence-pack/">Apri evidence pack →</a>
+          ·
+          <a href="/hermeticum-bce-platform/governance/">Apri governance →</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="/hermeticum-bce-platform/assets/include.js"></script>
+
 </body>
 </html>
