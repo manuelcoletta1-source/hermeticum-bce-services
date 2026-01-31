@@ -1,138 +1,85 @@
+
 <!doctype html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fase 1 (ONLY) | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Fase 1: operatività minima fail-closed. HRR→DGV→LTA. Nessuna custodia dati, nessun IDP." />
-  <link rel="stylesheet" href="../assets/css/main.css" />
+  <title>Phase-1 — Minimal Ops — HERMETICUM B.C.E.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Phase-1: operatività minima in regime audit-first e fail-closed. Ingresso canonico: onboarding." />
+  <link rel="stylesheet" href="/hermeticum-bce-platform/assets/style.css" />
 </head>
+
 <body>
 
-<header class="wrap">
-  <nav class="nav">
-    <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-    <div class="navlinks">
-      <a href="../">Gateway</a>
-      <a href="../standards/">Standard</a>
-      <a href="../research/">Ricerca UE</a>
-      <a class="active" href="./">Fase 1</a>
-      <a href="../verify/">Verify</a>
-      <a href="../legal/">Legal</a>
-    </div>
-  </nav>
-</header>
+  <div data-include="header"></div>
 
-<main class="wrap">
-
-  <section class="hero">
-    <h1>Fase 1 (ONLY) — Operatività minima</h1>
-    <p class="lead">
-      Qui si attiva il nucleo operativo minimo: generazione HRR locale, decisione minima (DGV),
-      e predisposizione traccia a lungo termine (LTA).
-      Nessun account. Nessuna custodia di dati personali nel portale statico.
-    </p>
-
-    <div class="pillrow">
-      <span class="pill">fail-closed</span>
-      <span class="pill">hash-only</span>
-      <span class="pill">append-only</span>
-      <span class="pill">GDPR-min</span>
-    </div>
-
-    <div class="notice">
-      <strong>Fail-closed:</strong> se manca un requisito minimo, l’atto non nasce.
-      Questo serve a ridurre ambiguità e rischio in audit.
-    </div>
-
-    <div class="btnrow" style="margin-top:16px;">
-      <a class="btn secondary" href="../register/">Register</a>
-      <a class="btn secondary" href="../create/">Create</a>
-      <a class="btn secondary" href="../verify/">Verify</a>
-      <a class="btn secondary" href="../catalog/">Catalog</a>
-    </div>
-  </section>
-
-  <section class="grid">
-    <article class="card">
-      <h2>Onboarding (risk-based)</h2>
-      <p class="muted">
-        Scegli un profilo. LIGHT è il default (minimo). STRONG è per casi ad alto rischio.
-        Non sostituisce eIDAS/CIE/SPID.
+  <main class="hbce-main" role="main">
+    <section class="hbce-hero">
+      <h1>Phase-1 (Minimal Ops)</h1>
+      <p class="hbce-hero__subtitle">
+        Questa pagina descrive l’operatività minima consentita.
+        Non è un flusso alternativo: il percorso canonico resta onboarding.
       </p>
-      <div class="btnrow">
-        <a class="btn" href="./onboarding/light.html">LIGHT</a>
-        <a class="btn secondary" href="./onboarding/strong.html">STRONG</a>
-      </div>
-    </article>
 
-    <article class="card">
-      <h2>Catena minima</h2>
-      <pre class="codeblock">HRR → DGV → LTA</pre>
-      <ul class="muted">
-        <li><strong>HRR</strong>: riferimento umano/pseudonimo generato localmente.</li>
-        <li><strong>DGV</strong>: decisione/atto minimo (metadati ridotti, senza PII).</li>
-        <li><strong>LTA</strong>: traccia “append-only” (concetto; la verifica resta tecnica).</li>
+      <div class="hbce-hero__cta">
+        <a class="hbce-btn hbce-btn--primary" href="/hermeticum-bce-platform/onboarding/">
+          Avvia Onboarding (canonico)
+        </a>
+        <a class="hbce-btn" href="/hermeticum-bce-platform/verify/">
+          Verifica IPR
+        </a>
+        <a class="hbce-btn" href="/hermeticum-bce-platform/tech/">
+          Audit Hub
+        </a>
+      </div>
+    </section>
+
+    <section class="hbce-section">
+      <h2>Cosa è consentito in Phase-1</h2>
+      <ul>
+        <li>Orientamento e comprensione del modello di fiducia</li>
+        <li>Creazione IPR <strong>solo</strong> tramite flusso controllato</li>
+        <li>Verifica pubblica (fail-closed) e consultazione evidence pack demo</li>
+        <li>Consultazione normative mapping e governance</li>
       </ul>
-    </article>
-
-    <article class="card">
-      <h2>Dopo l’onboarding</h2>
-      <p class="muted">
-        Il passo successivo è generare un Evidence Bundle locale (JSON) e validarlo in Verify.
+      <p class="hbce-note">
+        Tutto ciò che non è verificabile in modo riproducibile è considerato non valido.
       </p>
-      <div class="btnrow">
-        <a class="btn" href="../create/">Create (bundle)</a>
-        <a class="btn secondary" href="../verify/">Verify</a>
+    </section>
+
+    <section class="hbce-section hbce-section--grid">
+      <div>
+        <h3>Operazioni (canoniche)</h3>
+        <p>
+          Operazioni reali = onboarding → register → create → verify.
+        </p>
+        <p>
+          <a href="/hermeticum-bce-platform/onboarding/">Onboarding →</a>
+          ·
+          <a href="/hermeticum-bce-platform/create/">Create →</a>
+          ·
+          <a href="/hermeticum-bce-platform/verify/">Verify →</a>
+        </p>
       </div>
-    </article>
 
-    <article class="card">
-      <h2>Limiti espliciti</h2>
-      <ul class="muted">
-        <li>Non è identity provider.</li>
-        <li>Nessuna custodia dati personali nel portale statico.</li>
-        <li>VALID ≠ “identità vera”. VALID = coerenza tecnica minima.</li>
-        <li>La responsabilità resta al soggetto biologico che produce l’atto.</li>
-      </ul>
-      <div class="btnrow">
-        <a class="btn secondary" href="../governance/">Governance</a>
-        <a class="btn secondary" href="../privacy/">Privacy</a>
-        <a class="btn secondary" href="../terms/">Termini</a>
+      <div>
+        <h3>Contesto (B2B/B2G)</h3>
+        <p>
+          Per adozione e valutazione istituzionale: evidence, governance, catalog.
+        </p>
+        <p>
+          <a href="/hermeticum-bce-platform/evidence-pack/">Evidence Pack →</a>
+          ·
+          <a href="/hermeticum-bce-platform/governance/">Governance →</a>
+          ·
+          <a href="/hermeticum-bce-platform/catalog/">Catalog →</a>
+        </p>
       </div>
-    </article>
+    </section>
+  </main>
 
-    <article class="card">
-      <h2>Riferimenti</h2>
-      <p class="muted">
-        Definizioni e livelli: <a href="../standards/">Standard</a>.  
-        Ricerca pre-standard: <a href="../research/">Ricerca UE</a>.
-      </p>
-    </article>
-
-    <article class="card">
-      <h2>Compatibilità</h2>
-      <p class="muted">
-        Se arrivi da link vecchi, usa Gateway o Legacy.
-      </p>
-      <div class="btnrow">
-        <a class="btn secondary" href="../legacy/">Legacy</a>
-        <a class="btn secondary" href="../">Gateway</a>
-      </div>
-    </article>
-  </section>
-
-  <section class="footerhint">
-    <p class="muted">
-      Sintesi: Fase 1 crea un percorso minimo verificabile, ma la prova nasce solo quando è validabile in Verify.
-    </p>
-  </section>
-
-</main>
-
-<footer class="wrap foot">
-  <small>HERMETICUM B.C.E. S.r.l. — Fase 1 (ONLY)</small>
-</footer>
+  <div data-include="footer"></div>
+  <script src="/hermeticum-bce-platform/assets/include.js"></script>
 
 </body>
 </html>
