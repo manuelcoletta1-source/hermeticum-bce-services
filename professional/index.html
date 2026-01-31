@@ -1,89 +1,83 @@
+
 <!doctype html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Professionisti | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Entrypoint professionisti: mappa livelli e percorso minimo. Nessun claim di identità o custodia dati." />
-  <link rel="stylesheet" href="../assets/css/main.css" />
+  <title>Professional Corridor — HERMETICUM B.C.E.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Corridoio informativo per professionisti. Ingresso canonico: onboarding. Verify-first per valutazione." />
+  <link rel="stylesheet" href="/hermeticum-bce-platform/assets/style.css" />
 </head>
-<body>
-  <header class="wrap">
-    <nav class="nav">
-      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-      <div class="navlinks">
-        <a href="../standards/">Standard</a>
-        <a href="../research/">Ricerca (Horizon)</a>
-        <a href="../phase-1/">Fase 1 (ONLY)</a>
-        <a href="../verify/">Verify</a>
-        <a href="../governance/">Governance</a>
-        <a href="../privacy/">Privacy</a>
-      </div>
-    </nav>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Per Professionisti</h1>
-      <p class="lead">
-        Punto di orientamento per consulenti, auditor, security, legale-tecnico.  
-        L’obiettivo è un percorso minimo verificabile, non una piattaforma account-based.
+<body>
+
+  <div data-include="header"></div>
+
+  <main class="hbce-main" role="main">
+    <section class="hbce-hero">
+      <h1>Professionista</h1>
+      <p class="hbce-hero__subtitle">
+        Corridoio di orientamento. Per operazioni reali: onboarding canonico.
+        Per valutare subito: verifica.
       </p>
-      <div class="notice">
-        <strong>Regola:</strong> se non hai bundle verificabile, hai solo testo. Verify separa prova da narrativa.
-      </div>
-      <div class="btnrow" style="margin-top:14px;">
-        <a class="btn" href="../catalog/">Catalog (mappa)</a>
-        <a class="btn secondary" href="../">Gateway</a>
+
+      <div class="hbce-hero__cta">
+        <a class="hbce-btn hbce-btn--primary" href="/hermeticum-bce-platform/verify/">
+          Verifica (verify-first)
+        </a>
+        <a class="hbce-btn" href="/hermeticum-bce-platform/onboarding/">
+          Avvia Onboarding
+        </a>
+        <a class="hbce-btn" href="/hermeticum-bce-platform/evidence-pack/">
+          Evidence Pack
+        </a>
       </div>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <h2>Percorso minimo</h2>
-        <ol class="muted">
-          <li><a href="../register/">Register</a> (LIGHT/STRONG)</li>
-          <li><a href="../create/">Create</a> (Evidence Bundle)</li>
-          <li><a href="../verify/">Verify</a> (esito tecnico)</li>
-        </ol>
-      </article>
+    <section class="hbce-section">
+      <h2>Uso tipico (professionisti)</h2>
+      <ul>
+        <li><strong>Verifica IPR</strong> prima di accettare workflow, firme o responsabilità.</li>
+        <li><strong>Evidence Pack</strong> per contesti B2B/B2G e audit esterni.</li>
+        <li><strong>Catalogo</strong> per capire i servizi attivabili con IPR valido.</li>
+      </ul>
+      <p class="hbce-note">
+        Regola operativa: se non posso verificare → non valido (fail-closed).
+      </p>
+    </section>
 
-      <article class="card">
-        <h2>Livelli</h2>
-        <ul class="muted">
-          <li><a href="../standards/">Standard</a>: definizioni e conformità</li>
-          <li><a href="../research/">Ricerca</a>: pre-standard (Horizon/JRC)</li>
-          <li><a href="../phase-1/">Fase 1</a>: operatività minima</li>
-          <li><a href="../verify/">Verify</a>: validazione tecnica</li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h2>Limiti e responsabilità</h2>
-        <p class="muted">
-          Nessun IDP, nessuna custodia PII, nessuna promessa legale automatica.
-          Vedi <a href="../governance/">Governance</a> e <a href="../privacy/">Privacy</a>.
+    <section class="hbce-section hbce-section--grid">
+      <div>
+        <h3>Onboarding (canonico)</h3>
+        <p>
+          L’onboarding allinea profilo, territorio e livello (light/strong),
+          poi abilita la creazione IPR in modo controllato.
         </p>
-        <div class="btnrow">
-          <a class="btn secondary" href="../governance/">Governance</a>
-          <a class="btn secondary" href="../privacy/">Privacy</a>
-        </div>
-      </article>
+        <p><a href="/hermeticum-bce-platform/onboarding/">Apri onboarding →</a></p>
+      </div>
 
-      <article class="card">
-        <h2>Mapping normativo</h2>
-        <p class="muted">
-          Per allineamento eIDAS/EUDI (non-equivalence): vedi mapping dedicato.
+      <div>
+        <h3>Controlli e audit</h3>
+        <p>
+          Checklist e verifiche riproducibili per ipr/receipt/anchors:
+          niente custodia, niente delega.
         </p>
-        <div class="btnrow">
-          <a class="btn secondary" href="../normative/">Normative Mapping</a>
-        </div>
-      </article>
+        <p><a href="/hermeticum-bce-platform/tech/">Apri tech hub →</a></p>
+      </div>
+    </section>
+
+    <section class="hbce-section">
+      <h2>Accesso servizi</h2>
+      <p>
+        I servizi B2B/B2G sono disponibili solo con IPR valido e verificato.
+        Il catalogo è descrittivo: l’abilitazione è sempre condizionata a verifica.
+      </p>
+      <p><a href="/hermeticum-bce-platform/catalog/">Apri catalogo →</a></p>
     </section>
   </main>
 
-  <footer class="wrap foot">
-    <small>HERMETICUM B.C.E. S.r.l.</small>
-  </footer>
+  <div data-include="footer"></div>
+  <script src="/hermeticum-bce-platform/assets/include.js"></script>
+
 </body>
 </html>
