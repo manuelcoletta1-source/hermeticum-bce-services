@@ -1,123 +1,197 @@
-# LINKCHECK — PLATFORM M1
-HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA  
-HERMETICUM B.C.E. S.r.l.
+# LINKCHECK-M1 — Navigation Checklist (click-by-click)
+Status: ACTIVE_CHECK
+Policy: UE-first · GDPR-min · HASH-only · AUDIT · FAIL-CLOSED
+Baseline: PLATFORM-M1 (append-only)
 
-## Scopo
-Verificare coerenza di navigazione, separazione dei livelli e assenza di loop ambigui
-nel pacchetto **PLATFORM-M1**.
-
-Metodo: controllo manuale click-by-click (browser, cache pulita).
+This checklist is deterministic: each step must be reachable in ≤2 clicks from the canonical entrypoints.
+If a step is not reachable, the system is considered INVALID for M1 navigation (fail-closed).
 
 ---
 
-## Percorso canonico (cittadino UE)
-
-### 1) Gateway
-- URL: `/index.html`
-- Atteso:
-  - CTA verso Register / Catalog / About / Legal
-  - Link diretti a: Standard, Ricerca UE, Fase 1, Verify
-- Esito atteso: **OK**
-
-### 2) Register
-- URL: `/register/`
-- Atteso:
-  - Smistamento verso Fase 1
-  - Nessun claim IDP / login
-- Esito atteso: **OK**
-
-### 3) Fase 1 (ONLY)
-- URL: `/phase-1/index.html`
-- Atteso:
-  - Link a LIGHT / STRONG
-  - Link chiari a Create e Verify
-  - Avvertenze fail-closed
-- Esito atteso: **OK**
-
-### 4) Create (Bundle)
-- URL: `/create/index.html`
-- Atteso:
-  - Generazione bundle locale (JSON)
-  - Nessun invio dati
-  - Link a Verify
-- Esito atteso: **OK**
-
-### 5) Verify
-- URL: `/verify/index.html`
-- Atteso:
-  - Validazione tecnica deterministica
-  - Esiti VALID / INVALID / INCONCLUSIVE
-  - Nessuna narrativa identitaria
-- Esito atteso: **OK**
+## 0) Canonical Rules (M1)
+- Canonical operational entrypoint: `/onboarding/`
+- Public verification entrypoint: `/verify/`
+- Information corridors must not create alternate operational flows.
+- If a page provides a “Create” action, it must still point to canonical onboarding unless explicitly guarded and documented.
+- Fail-closed: broken or ambiguous links invalidate the navigation check.
 
 ---
 
-## Percorso normativo (audit / UE)
+## 1) Home (root) — `/`
+### Expected
+- Header and footer render (partials injected).
+- Primary CTA: `Onboarding`
+- Secondary CTA: `Verify`
+- Optional CTA: `Catalog`
+- “Status: IDLE” is explained as prudential state (not “offline”).
 
-### Standard hub
-- URL: `/standards/index.html`
-- Atteso:
-  - Sola lettura
-  - Link a STANDARD UE–ΦΩ–001 (HTML)
-  - Link a STANAG–ΦΩ–001 (HTML)
-- Esito atteso: **OK**
+### Clicks
+1. From Home click `Onboarding` → must open `/onboarding/`
+2. From Home click `Verify` → must open `/verify/`
+3. From Home click `Catalog` → must open `/catalog/`
+4. From Home footer click `Privacy` → must open `/privacy/`
+5. From Home footer click `Terms` → must open `/terms/`
+6. From Home footer click `Status` → must open `/status/`
+7. From Home footer click `Manifest` → must open `/manifest/`
+8. From Home header click `Governance` → must open `/governance/`
+9. From Home header click `Tech` → must open `/tech/`
+10. From Home header click `Map` → must open `/map/`
 
-### STANDARD UE–ΦΩ–001
-- URL: `/standards/standard-ue-phiomega-001.html`
-- Atteso:
-  - Documento leggibile
-  - Nessun onboarding / form
-- Esito atteso: **OK**
-
-### STANAG–ΦΩ–001
-- URL: `/standards/stanag-phiomega-001.html`
-- Atteso:
-  - Allegato tecnico
-  - Requisiti MUST/SHOULD
-- Esito atteso: **OK**
+Pass criteria: all links above resolve to an existing page with coherent UX.
 
 ---
 
-## Percorso ricerca (pre-standard)
+## 2) Canonical Onboarding — `/onboarding/`
+### Expected
+- Clearly marked as official router (no duplicate flows).
+- Provides route to:
+  - `/register/` (territory + light/strong)
+  - `/create/` (guarded creation)
+  - `/verify/` (verification)
+- No alternative “hidden” entrypoints.
 
-### Ricerca UE
-- URL: `/research/`
-- Atteso:
-  - Etichetta pre-standard
-  - Nessun percorso cittadino
-- Esito atteso: **OK**
+### Clicks
+1. From `/onboarding/` click `Register` (or equivalent) → `/register/`
+2. From `/onboarding/` click `Create` (guarded) → `/create/`
+3. From `/onboarding/` click `Verify` → `/verify/`
 
----
-
-## Pagine di supporto (no onboarding)
-
-- `/about/` → contesto
-- `/catalog/` → mappa
-- `/legal/` → hub legale
-- `/privacy/`, `/terms/`, `/governance/`
-- `/events/`, `/node/`, `/professional/`, `/institution/`
-- Atteso: nessun claim operativo diretto
-- Esito atteso: **OK**
+Pass criteria: all three exist and are reachable without dead ends.
 
 ---
 
-## Controlli tecnici rapidi
+## 3) Register — `/register/`
+### Expected
+- Territory path: Country → Region → City → District (Quartiere)
+- Light/Strong selection is explained.
+- No personal data custody claims (GDPR-min, hash-only).
+- Provides forward CTA:
+  - to `/create/` (after selection)
+  - to `/onboarding/` (back)
+  - to `/verify/` (for validation concept)
 
-- Tutti i link principali rispondono **200**
-- Nessun loop infinito
-- Navbar coerente su:
-  - Gateway
-  - Fase 1
-  - Create
-  - Verify
-  - Standards
-- Nessun riferimento a PDF come fonte primaria normativa
+### Clicks
+1. From `/register/` click `Create` → `/create/`
+2. From `/register/` click `Back to Onboarding` → `/onboarding/`
+3. From `/register/` click `Verify` → `/verify/`
+
+Pass criteria: navigation works and the page does not present itself as an ID provider.
 
 ---
 
-## Esito complessivo
-- Stato: **PASS**
-- Release: **PLATFORM-M1**
-- Note: navigazione coerente, livelli separati, audit-ready
+## 4) Create — `/create/`
+### Expected
+- Guarded creation: explicit fail-closed conditions.
+- Outputs are hash-only (no hidden custody).
+- Links to:
+  - `/schemas/` (receipt/IPR schema references)
+  - `/anchor/` (optional manual anchor pack builder)
+  - `/verify/` (verify after create)
+  - `/tech/` (audit checklists)
 
-**LINKCHECK M1: COMPLETATO**
+### Clicks
+1. From `/create/` click `Verify` → `/verify/`
+2. From `/create/` click `Schemas` → `/schemas/`
+3. From `/create/` click `Anchor` → `/anchor/`
+4. From `/create/` click `Tech` → `/tech/`
+
+Pass criteria: all links resolve and the page states fail-closed behavior.
+
+---
+
+## 5) Verify — `/verify/`
+### Expected
+- Deterministic verification messaging (state-only).
+- Explains fail-closed: “if cannot verify → invalid”.
+- Links to:
+  - `ed25519_pub.pem` (public key reference)
+  - `/tech/` (checklist)
+  - `/evidence-pack/` (adoption context) or `/evidence/` demo
+
+### Clicks
+1. From `/verify/` click public key reference → `/ed25519_pub.pem`
+2. From `/verify/` click `Tech` → `/tech/`
+3. From `/verify/` click `Evidence Pack` → `/evidence-pack/` (or `/evidence/`)
+
+Pass criteria: all targets open; verification page stays coherent if inputs are missing.
+
+---
+
+## 6) Corridors must route to Onboarding (no alternate flows)
+Corridors:
+- `/citizen/`
+- `/professional/`
+- `/institution/`
+- `/cta/`
+- `/phase-1/`
+
+### Expected
+- Each corridor must include:
+  - Primary CTA: `/onboarding/`
+  - Secondary CTA: `/verify/`
+  - Optional: `/catalog/`, `/tech/`, `/evidence-pack/`
+
+### Clicks (repeat for each corridor)
+1. Click primary CTA → `/onboarding/`
+2. Click verify CTA → `/verify/`
+
+Pass criteria: corridors never create a parallel “register/create” flow that bypasses onboarding.
+
+---
+
+## 7) Information / Governance / Compliance pages
+Pages:
+- `/about/`
+- `/ai/`
+- `/governance/`
+- `/privacy/`
+- `/terms/`
+- `/manifest/`
+- `/normative/`
+- `/research/`
+- `/catalog/`
+- `/evidence-pack/`
+- `/map/`
+- `/modules/`
+- `/tech/`
+
+### Expected
+- Header/footer present.
+- Links do not break.
+- Any “operate now” CTA routes to `/onboarding/` and/or `/verify/` first.
+
+### Clicks (minimum)
+1. From each page click `Onboarding` in header → `/onboarding/`
+2. From each page click `Verify` in header → `/verify/`
+
+Pass criteria: consistent navigation and no dead ends.
+
+---
+
+## 8) 404 behavior
+Page:
+- `/404.html`
+
+### Expected
+- Fail-closed messaging: unknown routes are not trusted.
+- Provides safe recovery:
+  - `/` home
+  - `/verify/`
+  - `/onboarding/`
+
+### Clicks
+1. From `/404.html` click `Onboarding` → `/onboarding/`
+2. From `/404.html` click `Verify` → `/verify/`
+3. From `/404.html` click `Home` → `/`
+
+Pass criteria: recovery links always work.
+
+---
+
+## Result Recording (M1)
+When running LINKCHECK-M1:
+- Record date/time (local)
+- Record any broken link
+- If any broken link exists → FAIL (fail-closed)
+- Fix requires new commit(s) + rerun checklist
+
+End.
