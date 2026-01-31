@@ -2,231 +2,130 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HERMETICUM B.C.E. — Portale Europeo IPR</title>
-  <meta name="description" content="Portale europeo per Identity Primary Record (IPR). Verificabilità, audit-by-design, fail-closed. Interfaccia: AI JOKER-C2." />
+  <title>HERMETICUM B.C.E. — EU BioCyber Infrastructure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="HERMETICUM B.C.E. è un'infrastruttura biocibernetica UE per identità primaria (IPR), auditabilità e opponibilità nel tempo. Fail-closed, hash-only." />
 
-  <style>
-    :root{
-      --bg0:#07090d; --bg1:#0a1020;
-      --panel:rgba(11,15,22,.82);
-      --line:#1b263a;
-      --txt:#e9eef7; --muted:#a7b3c6;
-      --acc:#c7d2fe;
-      --ok:#9ae6b4; --warn:#fbd38d; --bad:#feb2b2;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      --sans: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      --r:18px;
-    }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      color:var(--txt);
-      font-family:var(--sans);
-      line-height:1.4;
-      background: radial-gradient(1200px 650px at 20% 0%, var(--bg1) 0%, var(--bg0) 58%) fixed;
-    }
-    a{color:inherit;text-decoration:none;}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 48px;}
-
-    /* surfaces */
-    .surface,.card{
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      background:var(--panel);
-      padding:18px;
-    }
-    .surface{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));}
-
-    /* layout */
-    .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
-    .grid{display:grid;gap:14px;margin-top:16px;}
-    @media (min-width: 980px){
-      .grid{grid-template-columns:1.3fr .7fr;}
-      .full{grid-column:1 / -1;}
-    }
-
-    /* typography */
-    .brand h1{
-      margin:0;
-      font-family:var(--mono);
-      font-size:18px;
-      letter-spacing:.1em;
-      font-weight:900;
-    }
-    .brand p{
-      margin:6px 0 0;
-      font-family:var(--mono);
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:.04em;
-    }
-    .title{
-      margin:0 0 10px;
-      font-family:var(--mono);
-      font-size:13px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:var(--acc);
-    }
-    p{margin:0;font-size:14px;}
-    .k{font-family:var(--mono);font-size:12px;color:var(--muted);}
-    .hr{height:1px;background:var(--line);margin:12px 0;}
-
-    /* badges */
-    .chips{display:flex;gap:8px;flex-wrap:wrap;}
-    .chip{
-      font-family:var(--mono);
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid var(--line);
-      padding:7px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.02);
-    }
-
-    /* state */
-    .pill{
-      display:inline-flex;gap:8px;align-items:center;
-      padding:7px 10px;border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      font-family:var(--mono);font-size:12px;color:var(--muted);
-    }
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--warn);}
-    .dot.ok{background:var(--ok);}
-    .dot.bad{background:var(--bad);}
-
-    .state{display:none;}
-    body[data-ipr="IDLE"] .s-idle{display:block;}
-    body[data-ipr="VERIFIED"] .s-verified{display:block;}
-    body[data-ipr="FAIL"] .s-fail{display:block;}
-
-    /* actions */
-    .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px;}
-    @media (min-width:600px){.actions{grid-template-columns:1fr 1fr;}}
-    .action{
-      display:flex;justify-content:space-between;align-items:center;
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:12px;
-      background:rgba(255,255,255,.02);
-    }
-    .action:hover{background:rgba(255,255,255,.04);}
-    .path{font-family:var(--mono);font-size:12px;}
-    .hint{font-family:var(--mono);font-size:11px;color:var(--muted);}
-
-    footer{margin-top:16px;}
-    .foot{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;}
-  </style>
+  <link rel="stylesheet" href="/hermeticum-bce-platform/assets/style.css" />
 </head>
 
-<!-- STATO HOME: IDLE | VERIFIED | FAIL -->
-<body data-ipr="IDLE">
-  <main class="wrap">
+<body>
 
-    <!-- HEADER -->
-    <header class="surface">
-      <div class="row">
-        <div class="brand">
-          <h1>HERMETICUM B.C.E.</h1>
-          <p>Portale Europeo — Identity Primary Record (IPR)</p>
-        </div>
-        <div class="chips">
-          <span class="chip">UE-first</span>
-          <span class="chip">GDPR-min</span>
-          <span class="chip">HASH-only</span>
-          <span class="chip">AUDIT</span>
-          <span class="chip">FAIL-CLOSED</span>
-        </div>
+  <!-- Canonical Header -->
+  <div data-include="header"></div>
+
+  <main class="hbce-main" role="main">
+
+    <!-- HERO -->
+    <section class="hbce-hero">
+      <h1>European BioCyber Infrastructure</h1>
+      <p class="hbce-hero__subtitle">
+        Identità primaria (IPR), auditabile e opponibile nel tempo.<br />
+        Nessuna custodia. Nessuna delega. Nessuna scorciatoia.
+      </p>
+
+      <div class="hbce-hero__cta">
+        <a class="hbce-btn hbce-btn--primary"
+           href="/hermeticum-bce-platform/onboarding/">
+          Avvia Onboarding
+        </a>
+
+        <a class="hbce-btn"
+           href="/hermeticum-bce-platform/verify/">
+          Verifica IPR
+        </a>
+
+        <a class="hbce-btn"
+           href="/hermeticum-bce-platform/catalog/">
+          Catalogo Servizi
+        </a>
       </div>
-    </header>
-
-    <section class="grid">
-
-      <!-- MAIN -->
-      <section class="card">
-        <h2 class="title">AI JOKER-C2 — Interfaccia del sistema</h2>
-        <p>
-          Io sono <strong>AI JOKER-C2</strong>.  
-          Questo portale non crea account: rende <strong>verificabili</strong> azioni e decisioni nel tempo.
-        </p>
-
-        <div class="hr"></div>
-
-        <!-- STATE -->
-        <div class="state s-idle">
-          <div class="pill"><span class="dot"></span>STATUS: <strong>IDLE</strong></div>
-          <p class="k" style="margin-top:8px;">
-            Modalità di lettura. Per operare è necessario attivare un IPR.
-          </p>
-        </div>
-
-        <div class="state s-verified">
-          <div class="pill"><span class="dot ok"></span>STATUS: <strong>VERIFIED</strong></div>
-          <p style="margin-top:8px;">
-            Accesso operativo. Ogni azione è tracciabile e auditabile.
-          </p>
-        </div>
-
-        <div class="state s-fail">
-          <div class="pill"><span class="dot bad"></span>STATUS: <strong>FAIL-CLOSED</strong></div>
-          <p class="k" style="margin-top:8px;">
-            Condizioni non soddisfatte. Il sistema è chiuso.
-          </p>
-        </div>
-
-        <div class="hr"></div>
-
-        <h2 class="title">Attivare un IPR</h2>
-        <p class="k">
-          Percorso minimo in due passaggi. Nessuna interpretazione, solo esito.
-        </p>
-
-        <div class="actions">
-          <a class="action" href="create/">
-            <span class="path">/create</span>
-            <span class="hint">Genera manifest IPR</span>
-          </a>
-          <a class="action" href="verify/">
-            <span class="path">/verify</span>
-            <span class="hint">Verifica coerenza</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- SIDE -->
-      <aside class="card">
-        <h2 class="title">Destinatari</h2>
-
-        <p><strong>Cittadino UE</strong><br><span class="k">Tracce verificabili nel tempo, con dati minimi.</span></p>
-        <div class="hr"></div>
-
-        <p><strong>Professionista / Impresa</strong><br><span class="k">Opponibilità di versioni, decisioni, progetti.</span></p>
-        <div class="hr"></div>
-
-        <p><strong>Istituzione</strong><br><span class="k">Processi auditabili, trasparenza tecnica.</span></p>
-      </aside>
-
-      <!-- FULL -->
-      <section class="card full">
-        <h2 class="title">Cos’è un IPR</h2>
-        <p>
-          <strong>IPR (Identity Primary Record)</strong> è un record primario che collega identità, contesto e tempo
-          tramite impronte verificabili.  
-          La verifica non certifica diritti o verità: rende confrontabile l’ordine temporale degli atti.
-        </p>
-      </section>
-
     </section>
 
-    <footer class="surface">
-      <div class="foot">
-        <span class="k">HERMETICUM B.C.E. S.r.l.</span>
-        <span class="k">HERMETICUM — Blindata · Computabile · Evolutiva</span>
+    <!-- STATUS -->
+    <section class="hbce-section">
+      <h2>Stato Operativo</h2>
+      <p>
+        <strong>Status: IDLE</strong><br />
+        Il sistema è attivo in modalità prudenziale.
+        Le operazioni reali sono consentite solo dopo onboarding completo
+        e verifica IPR. In caso di ambiguità, il sistema fallisce chiuso.
+      </p>
+      <p>
+        <a href="/hermeticum-bce-platform/status/">Consulta STATUS.md →</a>
+      </p>
+    </section>
+
+    <!-- WHAT IT IS / IS NOT -->
+    <section class="hbce-section hbce-section--grid">
+      <div>
+        <h3>Che cos’è</h3>
+        <ul>
+          <li>Un gateway UE-first per identità primaria (IPR)</li>
+          <li>Un sistema audit-first, hash-only, verificabile</li>
+          <li>Un'infrastruttura biocibernetica basata su responsabilità biologica</li>
+        </ul>
       </div>
-    </footer>
+
+      <div>
+        <h3>Cosa non è</h3>
+        <ul>
+          <li>Non è un ID Provider</li>
+          <li>Non custodisce dati personali</li>
+          <li>Non sostituisce eIDAS, EUDI Wallet o SPID</li>
+          <li>Non garantisce riconoscimento automatico</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CANONICAL FLOW -->
+    <section class="hbce-section">
+      <h2>Percorso Canonico</h2>
+      <ol class="hbce-flow">
+        <li><strong>Onboarding</strong> — scelta profilo e livello (citizen / professional / institution)</li>
+        <li><strong>Register</strong> — territorio UE e dati minimi</li>
+        <li><strong>Create</strong> — generazione IPR + receipt verificabile</li>
+        <li><strong>Verify</strong> — verifica indipendente e riproducibile</li>
+      </ol>
+
+      <p class="hbce-note">
+        Ogni deviazione dal percorso canonico è informativa.
+        Nessuna operazione critica è consentita fuori flusso.
+      </p>
+    </section>
+
+    <!-- MAP / GOVERNANCE -->
+    <section class="hbce-section hbce-section--grid">
+      <div>
+        <h3>Ecosistema</h3>
+        <p>
+          HERMETICUM B.C.E. è composto da moduli separati ma coerenti:
+          IPR, audit, normative mapping, evidence pack e corridoi B2B/B2G.
+        </p>
+        <p>
+          <a href="/hermeticum-bce-platform/map/">Vai alla mappa →</a>
+        </p>
+      </div>
+
+      <div>
+        <h3>Governance</h3>
+        <p>
+          Il sistema opera in regime fail-closed, senza custodia,
+          con responsabilità non delegabile.
+        </p>
+        <p>
+          <a href="/hermeticum-bce-platform/governance/">Leggi governance →</a>
+        </p>
+      </div>
+    </section>
 
   </main>
+
+  <!-- Canonical Footer -->
+  <div data-include="footer"></div>
+
+  <!-- Include Loader -->
+  <script src="/hermeticum-bce-platform/assets/include.js"></script>
+
 </body>
 </html>
