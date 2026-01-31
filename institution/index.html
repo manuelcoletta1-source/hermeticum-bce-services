@@ -1,100 +1,95 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Istituzione / Governance — EU IPR Gateway</title>
-  <meta name="description" content="Corridoio istituzionale UE: registry sperimentale IPR, standard candidato, verifiche riproducibili. Nessuna autorità, solo osservabilità."/>
-  <style>
-    :root{--bg:#0b0f14;--fg:#e7eef7;--muted:#a9b6c6;--card:#101723;--line:#223044;}
-    body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
-    a{color:inherit}
-    .wrap{max-width:980px;margin:0 auto;padding:28px 16px 56px}
-    .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
-    h1{font-size:22px;margin:0 0 10px}
-    h2{font-size:16px;margin:0 0 8px}
-    p{margin:0 0 10px;color:var(--muted);line-height:1.45}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:14px;padding:12px 14px;
-         text-decoration:none;border:1px solid var(--line);background:#0f1621}
-    .hr{height:1px;background:var(--line);margin:18px 0}
-    ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.45}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}}
-  </style>
+  <meta charset="utf-8" />
+  <title>Institution Corridor — HERMETICUM B.C.E.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Corridoio informativo per istituzioni pubbliche UE. Verify-first, onboarding canonico, audit-by-design." />
+  <link rel="stylesheet" href="/hermeticum-bce-platform/assets/style.css" />
 </head>
+
 <body>
-  <div class="wrap">
-    <section class="box">
-      <h1>Istituzione / Governance (UE)</h1>
-      <p>
-        Corridoio per enti e amministrazioni che **osservano e verificano** tracce IPR.
-        Il portale **non emette** identità, **non valida** diritti, **non sostituisce** eIDAS/EUDI.
+
+  <div data-include="header"></div>
+
+  <main class="hbce-main" role="main">
+    <section class="hbce-hero">
+      <h1>Istituzioni Pubbliche</h1>
+      <p class="hbce-hero__subtitle">
+        Corridoio di valutazione istituzionale (B2G).
+        Nessuna adesione implicita. Nessuna custodia. Solo verifica.
       </p>
-      <p>
-        Obiettivo: accesso a registry sperimentale, standard candidato e verifiche riproducibili.
-        Tutto è **derivato** da IPR già attivati (audit-first, no autorità).
-      </p>
-      <div style="margin-top:12px">
-        <a class="btn" href="../">← Torna al Gateway</a>
-        <a class="btn" href="../verify/">Apri Verify</a>
-        <a class="btn" href="../legal/">Limiti legali</a>
+
+      <div class="hbce-hero__cta">
+        <a class="hbce-btn hbce-btn--primary"
+           href="/hermeticum-bce-platform/verify/">
+          Verifica (verify-first)
+        </a>
+
+        <a class="hbce-btn"
+           href="/hermeticum-bce-platform/evidence-pack/">
+          Evidence Pack
+        </a>
+
+        <a class="hbce-btn"
+           href="/hermeticum-bce-platform/onboarding/">
+          Avvia Onboarding
+        </a>
       </div>
     </section>
 
-    <div class="hr"></div>
-
-    <section class="grid">
-      <div class="box">
-        <h2>Registro sperimentale</h2>
-        <p>Registro pubblico di riferimenti IPR (metadati verificabili, niente custodia dati personali).</p>
-        <ul>
-          <li>append-only</li>
-          <li>verifica senza fiducia</li>
-          <li>accesso pubblico</li>
-        </ul>
-        <div style="margin-top:10px">
-          <a class="btn" href="https://manuelcoletta1-source.github.io/ue-ipr-registry/">Apri UE IPR Registry</a>
-        </div>
-      </div>
-
-      <div class="box">
-        <h2>Standard candidato UE</h2>
-        <p>Specifiche e requisiti per adozione istituzionale (condizioni, limiti, criteri di opponibilità).</p>
-        <ul>
-          <li>UE-first</li>
-          <li>hash-only</li>
-          <li>fail-closed</li>
-        </ul>
-        <div style="margin-top:10px">
-          <a class="btn" href="https://manuelcoletta1-source.github.io/ipr-gov-eu-standard/">Apri IPR-GOV-EU</a>
-        </div>
-      </div>
-
-      <div class="box">
-        <h2>Verifiche riproducibili</h2>
-        <p>Procedure tecniche: receipt ED25519, anchor-pack (BTC/ETH/IPFS), evidence pack verificabile.</p>
-        <ul>
-          <li>receipt ED25519</li>
-          <li>anchor-pack</li>
-          <li>PACK_MANIFEST</li>
-        </ul>
-        <div style="margin-top:10px">
-          <a class="btn" href="../verify/">Apri verifiche</a>
-        </div>
-      </div>
-    </section>
-
-    <div class="hr"></div>
-
-    <section class="box">
-      <h2>Principi operativi</h2>
+    <section class="hbce-section">
+      <h2>Ambito di utilizzo</h2>
       <ul>
-        <li>Nessuna autorità centrale</li>
-        <li>Nessuna promessa di riconoscimento</li>
-        <li>Derivazione dall’IPR, non sostituzione</li>
-        <li>Auditabilità prima del consenso</li>
+        <li>Valutazione preliminare di identità primaria (IPR)</li>
+        <li>Sperimentazione controllata (sandbox, pilota, PoC)</li>
+        <li>Audit di processi ad alto rischio decisionale</li>
+        <li>Allineamento normativo UE (eIDAS2 / EUDI / non-equivalence)</li>
       </ul>
+      <p class="hbce-note">
+        Ogni utilizzo è subordinato a verifica indipendente e riproducibile.
+        In caso di ambiguità, il sistema fallisce chiuso.
+      </p>
     </section>
-  </div>
+
+    <section class="hbce-section hbce-section--grid">
+      <div>
+        <h3>Verify-first</h3>
+        <p>
+          La verifica è sempre il primo atto.
+          Nessuna integrazione, nessun flusso, nessuna adozione
+          senza receipt verificabile e tracciabile.
+        </p>
+        <p><a href="/hermeticum-bce-platform/verify/">Apri verify →</a></p>
+      </div>
+
+      <div>
+        <h3>Evidence & Audit</h3>
+        <p>
+          Evidence pack, manifest, anchor e checklist
+          sono progettati per ispezione esterna e controllo pubblico.
+        </p>
+        <p><a href="/hermeticum-bce-platform/tech/">Apri audit hub →</a></p>
+      </div>
+    </section>
+
+    <section class="hbce-section">
+      <h2>Governance e limiti</h2>
+      <p>
+        HERMETICUM B.C.E. non è un registro pubblico,
+        non è un’identità statale e non sostituisce sistemi normativi esistenti.
+        È un’infrastruttura sperimentale audit-first.
+      </p>
+      <p>
+        <a href="/hermeticum-bce-platform/governance/">Leggi governance →</a>
+        ·
+        <a href="/hermeticum-bce-platform/normative/">Mapping normativo →</a>
+      </p>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="/hermeticum-bce-platform/assets/include.js"></script>
+
 </body>
 </html>
