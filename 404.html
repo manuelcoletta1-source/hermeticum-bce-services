@@ -1,73 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <title>404 — Fail-Closed — HERMETICUM B.C.E.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>404 — HERMETICUM Services</title>
-  <meta name="description" content="Pagina non trovata. Fail-closed by design." />
-  <style>
-    :root{
-      --bg:#0b0c10; --panel:#0f1117; --line:#24262b; --text:#e8e8e8; --muted:#a9abb3;
-      --shadow:0 12px 36px rgba(0,0,0,.35); --r:16px; --r2:22px; --max:900px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:radial-gradient(1200px 700px at 20% 0%, #121525 0%, rgba(18,21,37,0) 55%),
-                 radial-gradient(900px 600px at 80% 10%, #141b2a 0%, rgba(20,27,42,0) 55%),
-                 var(--bg);
-      color:var(--text);
-      font:15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      letter-spacing:.2px;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 56px}
-    .card{
-      border:1px solid var(--line); border-radius:var(--r2); padding:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-      text-align:center;
-    }
-    .mark{margin:0 0 6px; font-weight:900}
-    .co{margin:0 0 14px; color:var(--muted); font-weight:800}
-    h1{margin:10px 0 8px; font-size:28px; line-height:1.15}
-    p{margin:0; color:var(--muted)}
-    .btns{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px}
-    .btn{
-      padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
-      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
-      font-weight:900; letter-spacing:.3px; transition:.15s ease;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .callout{
-      margin-top:14px; border:1px dashed rgba(255,255,255,.18); border-radius:var(--r);
-      padding:14px; background:rgba(255,255,255,.02); color:var(--muted); font-weight:800;
-    }
-  </style>
+  <meta name="description" content="Pagina non trovata. Recovery fail-closed verso onboarding e verify." />
+  <link rel="stylesheet" href="/hermeticum-bce-platform/assets/style.css" />
 </head>
-<body>
-  <div class="wrap">
-    <div class="card">
-      <p class="mark">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</p>
-      <p class="co">HERMETICUM B.C.E. S.r.l.</p>
 
-      <h1>404 — Risorsa non disponibile</h1>
-      <p>
-        La pagina richiesta non esiste o non è accessibile.
-        In HERMETICUM l’accesso è <b>fail-closed</b> per design.
+<body>
+
+  <div data-include="header"></div>
+
+  <main class="hbce-main" role="main">
+    <section class="hbce-hero">
+      <h1>404 — Percorso non valido</h1>
+      <p class="hbce-hero__subtitle">
+        Questa rotta non è verificabile. In regime <strong>fail-closed</strong>,
+        ciò che non posso confermare viene trattato come non valido.
       </p>
 
-      <div class="btns">
-        <a class="btn" href="/">Home</a>
-        <a class="btn" href="/catalog/">Catalog</a>
-        <a class="btn" href="/onboarding/">Onboarding</a>
-        <a class="btn" href="/verify/">Verify</a>
+      <div class="hbce-hero__cta">
+        <a class="hbce-btn hbce-btn--primary" href="/hermeticum-bce-platform/onboarding/">
+          Vai a Onboarding (canonico)
+        </a>
+        <a class="hbce-btn" href="/hermeticum-bce-platform/verify/">
+          Vai a Verify
+        </a>
+        <a class="hbce-btn" href="/hermeticum-bce-platform/">
+          Torna alla Home
+        </a>
+      </div>
+    </section>
+
+    <section class="hbce-section">
+      <h2>Perché succede</h2>
+      <ul>
+        <li>Link incompleto o non aggiornato</li>
+        <li>Pagina rimossa o spostata nel regime append-only</li>
+        <li>Errore di digitazione o percorso non previsto</li>
+      </ul>
+
+      <p class="hbce-note">
+        Suggerimento operativo: se il tuo obiettivo è “capire”, usa <strong>Verify</strong>.
+        Se il tuo obiettivo è “operare”, usa <strong>Onboarding</strong>.
+      </p>
+    </section>
+
+    <section class="hbce-section hbce-section--grid">
+      <div>
+        <h3>Verifica</h3>
+        <p>
+          La verifica è riproducibile e indipendente: nessuna fiducia preventiva.
+        </p>
+        <p><a href="/hermeticum-bce-platform/verify/">Apri verify →</a></p>
       </div>
 
-      <div class="callout">
-        Principio: <b>se non è verificabile, non è reale</b>.
+      <div>
+        <h3>Audit</h3>
+        <p>
+          Checklist e controlli tecnici per ipr/receipt/anchors in regime fail-closed.
+        </p>
+        <p><a href="/hermeticum-bce-platform/tech/">Apri tech hub →</a></p>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="/hermeticum-bce-platform/assets/include.js"></script>
+
 </body>
 </html>
