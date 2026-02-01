@@ -1,0 +1,67 @@
+{
+  "schema": "UNEBDO-TIMEMAP-v1",
+  "type": "TIME_MAP",
+
+  "policy": {
+    "ue_first": true,
+    "audit_first": true,
+    "fail_closed": true,
+    "hash_only": true,
+    "append_only": true
+  },
+
+  "timebase": {
+    "timezone": "Europe/Rome",
+    "retroactive": false,
+    "mutability": "LOCKED"
+  },
+
+  "timeline": {
+    "t0_declared": {
+      "ts": "2026-01-19T15:30:00+01:00",
+      "meaning": "sealed declared time"
+    },
+    "t1_artifact": {
+      "path": "ipr/ipr.manuelcoletta.canon.json",
+      "meaning": "canonical IPR artifact"
+    },
+    "t2_stamp": {
+      "path": "unebdo/stamp.ipr.manuelcoletta.json",
+      "meaning": "UNEBDO stamp binding"
+    }
+  },
+
+  "binding": {
+    "subject": "IPR-3 — Manuel Coletta",
+    "artifact_hash": {
+      "algorithm": "SHA-512",
+      "digest_hex": "REPLACE_WITH_SHA512_OF_IPR"
+    },
+    "stamp_hash": {
+      "algorithm": "SHA-512",
+      "digest_hex": "REPLACE_WITH_SHA512_OF_STAMP"
+    }
+  },
+
+  "ordering_rule": {
+    "definition": "precedence = declared_time + stamp_binding",
+    "conflict_resolution": "FAIL_CLOSED"
+  },
+
+  "opponibility_effect": {
+    "certifies_truth": false,
+    "grants_rights": false,
+    "effect": "existence is comparable in time"
+  },
+
+  "verification": {
+    "mode": "OFFLINE_DETERMINISTIC",
+    "rule": "FAIL_CLOSED",
+    "on_mismatch": "INVALID"
+  },
+
+  "audit": {
+    "mutability": "FORBIDDEN",
+    "note": "TIMEMAP orders existence in time; it does not validate content."
+  }
+}
