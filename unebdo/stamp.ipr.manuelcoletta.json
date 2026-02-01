@@ -1,0 +1,56 @@
+{
+  "schema": "UNEBDO-STAMP-v1",
+  "type": "BIOCYBER_NOTARIZATION",
+
+  "policy": {
+    "ue_first": true,
+    "audit_first": true,
+    "fail_closed": true,
+    "hash_only": true,
+    "append_only": true
+  },
+
+  "time": {
+    "sealed": "2026-01-19T15:30:00+01:00",
+    "timezone": "Europe/Rome",
+    "retroactive": false,
+    "mutability": "LOCKED"
+  },
+
+  "subject": {
+    "ipr_ref": "IPR-3 — Manuel Coletta",
+    "kind": "BIOLOGICAL",
+    "jurisdiction": "IT/EU"
+  },
+
+  "object": {
+    "artifact_path": "ipr/ipr.manuelcoletta.canon.json",
+    "artifact_hash": {
+      "algorithm": "SHA-512",
+      "digest_hex": "HASH_IPR_SHA512"
+    }
+  },
+
+  "opponibility": {
+    "definition": "UNEBDO_CANONICAL",
+    "conditions": {
+      "trace_hash_only": true,
+      "time_locked": true,
+      "non_retroactive": true,
+      "audit_public": true,
+      "append_only": true
+    },
+    "status": "OPPONIBLE_IF_ALL_TRUE"
+  },
+
+  "verification": {
+    "mode": "OFFLINE_DETERMINISTIC",
+    "rule": "FAIL_CLOSED",
+    "on_mismatch": "INVALID"
+  },
+
+  "audit": {
+    "mutability": "FORBIDDEN",
+    "note": "Stamp asserts temporal precedence and trace; it does not certify truth or rights."
+  }
+}
