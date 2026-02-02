@@ -3,66 +3,143 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cittadino UE — Portale</title>
-  <meta name="description" content="Portale Cittadino UE: gesto minimo, limiti chiari, piano operativo Bruxelles integrato." />
-  <link rel="stylesheet" href="../assets/hbce.css" />
+  <title>Cittadini UE — Difesa e protezione con IPR</title>
+
+  <!-- GitHub Pages project site base -->
+  <base href="/hermeticum-bce-platform/">
+
+  <link rel="stylesheet" href="assets/hbce.css" />
 </head>
 <body>
-
-  <header class="hbce-header">
-    <div class="hbce-brand">
-      <h1 class="hbce-title">Portale Cittadino UE</h1>
-      <p class="hbce-sub">Gesto minimo · evidenza ripetibile · nessuna custodia · fail-closed</p>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="sig" aria-hidden="true"></div>
+        <div>
+          <h1>Cittadini UE</h1>
+          <span class="sub">Difesa e protezione · senza sorveglianza · fail-closed</span>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Navigazione principale">
+        <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill active" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
+        <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
+        <a class="pill" data-nav href="institution/">Istituzioni UE</a>
+        <a class="pill" data-nav href="member-states/">Stati Membri</a>
+        <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="security/">Sicurezza</a>
+        <a class="pill" data-nav href="governance/">Governance</a>
+        <a class="pill" data-nav href="manual/">Manuale</a>
+      </nav>
     </div>
-    <nav class="hbce-nav">
-      <a class="hbce-pill" href="../">Home</a>
-      <a class="hbce-pill" href="../onboarding/">Onboarding</a>
-      <a class="hbce-pill" href="../create/">Create</a>
-      <a class="hbce-pill" href="../verify/">Verify</a>
-      <a class="hbce-pill" href="../brussels-model/">Bruxelles</a>
-      <a class="hbce-pill" href="../governance/">Governance</a>
-    </nav>
   </header>
 
-  <main class="hbce-wrap">
-    <div class="hbce-grid">
+  <main class="wrap">
+    <section class="hero">
+      <div class="kicker">CITIZEN-FIRST · NO CUSTODY · NO SURVEILLANCE</div>
+      <h2 class="title">IPR: proteggere il cittadino vincolando l’atto, non osservando la persona</h2>
+      <p class="lead">
+        Oggi molte decisioni digitali avvengono prima che tu possa capirle, contestarle o impedirle.
+        L’IPR introduce una regola semplice: <strong>se un sistema (anche AI) non può dimostrare la precedenza, non agisce</strong>.
+        Non è “fiducia”. È un blocco tecnico verificabile.
+      </p>
 
-      <section class="hbce-card hbce-span-2 hbce-glow">
-        <h2>Gesto minimo (90 secondi)</h2>
-        <ul>
-          <li>Entra da <a href="../onboarding/">Onboarding</a> (corridoio “Cittadino UE”).</li>
-          <li>Genera evidenza con <a href="../create/">Create</a>.</li>
-          <li>Verifica subito con <a href="../verify/">Verify</a>.</li>
+      <div class="btnrow">
+        <a class="btn" href="manual/">Leggi il Manuale</a>
+        <a class="btn secondary" href="technology/">Come funziona (PASS/FAIL)</a>
+        <a class="btn ghost" href="governance/">Limiti e garanzie</a>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Perché serve">
+      <article class="card cols-6">
+        <h3>Il problema reale</h3>
+        <ul class="list">
+          <li>azioni automatiche non trasparenti</li>
+          <li>attribuzione fragile (“non è colpa mia, è il sistema”)</li>
+          <li>audit dopo il danno</li>
+          <li>interoperabilità che spesso diventa esposizione</li>
         </ul>
-        <a class="hbce-btn" href="../onboarding/">Entra ora</a>
-        <p class="hbce-note">Se non è ripetibile ⇒ FAIL. Nessun “trust me”.</p>
-      </section>
+      </article>
 
-      <section class="hbce-card">
-        <h2>Cosa NON è</h2>
-        <ul>
-          <li>Non è un IDP</li>
-          <li>Non sostituisce eIDAS/EUDI</li>
-          <li>Non custodisce dati personali</li>
-          <li>Non attribuisce diritti automatici</li>
+      <article class="card cols-6">
+        <h3>La soluzione tecnica</h3>
+        <ul class="list">
+          <li><strong>ex-ante:</strong> controllo prima dell’azione</li>
+          <li><strong>fail-closed:</strong> in dubbio, blocca</li>
+          <li><strong>GDPR-min:</strong> niente custodia centrale</li>
+          <li><strong>federazione:</strong> UE interoperabile senza trust implicito</li>
         </ul>
-      </section>
+        <div class="meta">
+          <span class="tag ok">protezione</span>
+          <span class="tag">difesa</span>
+          <span class="tag">audit-first</span>
+        </div>
+      </article>
 
-      <section class="hbce-card">
-        <h2>Piano Bruxelles integrato</h2>
+      <article class="card cols-12">
+        <h3>Cosa cambia per te (in pratica)</h3>
         <p>
-          Obiettivo: ridurre decadimento sistemico con evidenza tecnica ex-ante.
+          Con IPR attivo, un sistema AI non può “auto-abilitarsi” a fare cose al posto tuo.
+          Deve superare un controllo: policy, contesto, limiti. Se manca coerenza, l’azione è negata.
         </p>
-        <p><strong>Decadimento stimato</strong>: ≈ € 1.000.000.000.000 (10–15 anni).</p>
-        <a class="hbce-btn" href="../brussels-model/">Apri Brussels Model</a>
-      </section>
+        <ul class="list">
+          <li><strong>Casa:</strong> AI domestica che non esegue azioni sensibili senza pre-check</li>
+          <li><strong>Lavoro:</strong> strumenti AI che non escono dal perimetro approvato</li>
+          <li><strong>PA:</strong> automazioni contestabili perché vincolate ex-ante</li>
+          <li><strong>Sanità:</strong> riduzione rischio di uso improprio e deriva del contesto</li>
+        </ul>
+      </article>
 
-    </div>
+      <article class="card cols-6">
+        <h3>È una “carta d’identità digitale”?</h3>
+        <p>
+          No. Non sostituisce documenti, non è un’identità di Stato, non chiede fede.
+          È un <strong>meccanismo di vincolo tecnico</strong>: decide se un’azione può avvenire.
+        </p>
+        <div class="meta">
+          <span class="tag">non eIDAS</span>
+          <span class="tag ok">atto vincolato</span>
+        </div>
+      </article>
+
+      <article class="card cols-6">
+        <h3>È sorveglianza?</h3>
+        <p>
+          No. La protezione deriva dal fatto che l’azione non passa senza precedenza verificabile.
+          Non serve osservare la tua vita: serve bloccare atti non autorizzati.
+        </p>
+        <div class="meta">
+          <span class="tag ok">no surveillance</span>
+          <span class="tag">no profiling</span>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Ponte istituzionale (Bruxelles)</h3>
+        <p>
+          Questo modello è pensato per essere adottato a livello continentale perché lo stesso meccanismo
+          (PASS/FAIL) è applicabile in qualunque Stato Membro senza centralizzare i dati.
+        </p>
+        <div class="btnrow">
+          <a class="btn secondary" href="institution/">Vista Istituzioni UE</a>
+          <a class="btn ghost" href="member-states/">Adozione Stati Membri</a>
+          <a class="btn" href="security/">Threat model</a>
+        </div>
+      </article>
+    </section>
   </main>
 
-  <footer class="hbce-footer">
-    Cittadino UE: scegli come entri. La responsabilità resta tua, la verifica resta deterministica.
+  <footer class="footer">
+    <div class="wrap">
+      <div class="notice">
+        <strong>Garanzia dichiarata</strong><br/>
+        Nessuna custodia centrale, nessuna profilazione, nessuna sorveglianza.
+        Il controllo è tecnico ed ex-ante: se non c’è evidenza verificabile, l’azione non avviene.
+      </div>
+    </div>
   </footer>
 
+  <script src="assets/hbce.js"></script>
 </body>
 </html>
