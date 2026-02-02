@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tecnologia — Come funziona IPR (PASS/FAIL, virgola=FAIL)</title>
+  <link rel="stylesheet" href="/assets/hbce.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="sig" aria-hidden="true"></div>
+        <div>
+          <h1>Tecnologia</h1>
+          <span class="sub">IPR · PASS/FAIL · determinismo · evidenza ex-ante</span>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Navigazione principale">
+        <a class="pill" data-nav href="/"><strong>Home</strong></a>
+        <a class="pill" data-nav href="/ai-joker-c2/">AI JOKER-C2</a>
+        <a class="pill" data-nav href="/institutions/">Istituzioni UE</a>
+        <a class="pill" data-nav href="/member-states/">Stati Membri</a>
+        <a class="pill active" data-nav href="/technology/"><strong>Tecnologia</strong></a>
+        <a class="pill" data-nav href="/security/">Sicurezza</a>
+        <a class="pill" data-nav href="/governance/">Governance</a>
+        <a class="pill" data-nav href="/manual/">Manuale</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="kicker">TECHNICAL VIEW · DETERMINISTIC · AUDITABLE</div>
+      <h2 class="title">Come funziona davvero: IPR come gate ex-ante</h2>
+      <p class="lead">
+        L’IPR (Identity / Integrity Primary Record) è un record di precedenza che vincola l’azione
+        prima dell’esecuzione. La regola è semplice e misurabile:
+        <strong>se il contesto non coincide con l’IPR, l’azione non passa</strong>.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="card cols-6">
+        <h3>Che cos’è un IPR</h3>
+        <p>
+          Un IPR è un record deterministico che descrive, prima dell’azione, gli elementi minimi
+          che rendono un atto eseguibile: contesto, policy, limiti, responsabilità.
+          Il record è verificabile tramite hash e regole di coerenza.
+        </p>
+        <div class="meta">
+          <span class="tag">append-only</span>
+          <span class="tag ok">ex-ante</span>
+          <span class="tag">hash-only</span>
+        </div>
+      </article>
+
+      <article class="card cols-6">
+        <h3>PASS / FAIL (gate tecnico)</h3>
+        <p>
+          AI JOKER-C2 esegue un pre-check: confronta contesto reale e contesto attestato nell’IPR.
+          L’esito è binario:
+        </p>
+        <ul class="list">
+          <li><strong>PASS</strong> → l’azione può essere eseguita</li>
+          <li><strong>FAIL</strong> → l’azione è bloccata (<span class="mono">fail-closed</span>)</li>
+        </ul>
+        <div class="meta">
+          <span class="tag ok">PASS</span>
+          <span class="tag danger">FAIL</span>
+          <span class="tag">no implicit trust</span>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Perché “una virgola diversa” = FAIL</h3>
+        <p>
+          La governance ex-ante funziona solo se la verifica è deterministica.
+          Questo significa che una modifica anche minima nel contesto (configurazione, policy, vincoli, scope)
+          produce un hash differente e quindi un mismatch.
+        </p>
+        <ul class="list">
+          <li><strong>IPR A</strong> → hash A</li>
+          <li><strong>Contesto modificato</strong> (anche minimo) → hash B</li>
+          <li><strong>A ≠ B</strong> → <span class="mono">FAIL</span> → blocco</li>
+        </ul>
+        <div class="meta">
+          <span class="tag">determinismo</span>
+          <span class="tag ok">verifica replicabile</span>
+          <span class="tag warn">no “aggiustamenti” ex-post</span>
+        </div>
+      </article>
+
+      <article class="card cols-7">
+        <h3>Sequence flow (semplificato)</h3>
+        <pre style="margin:0; white-space:pre-wrap; color:rgba(232,236,255,.92)">
+Soggetto responsabile
+  → Create IPR
+IPR-CORE
+  → Validate / Hash
+AI JOKER-C2
+  → Pre-check (contesto/policy/config)
+  → PASS: Allow → AI Target Execute
+  → FAIL: Block (no output)
+UNEBDO (opzionale)
+  → Evidence Pack (audit)
+        </pre>
+      </article>
+
+      <article class="card cols-5">
+        <h3>Proprietà misurabili</h3>
+        <ul class="list">
+          <li><strong>Copertura pre-check:</strong> % azioni verificate ex-ante</li>
+          <li><strong>Tempo di pre-check:</strong> ms/s</li>
+          <li><strong>Blocchi ex-ante:</strong> azioni impedite</li>
+          <li><strong>Ripetibilità:</strong> verifica identica su re-run</li>
+        </ul>
+        <div class="btnrow">
+          <a class="btn secondary" href="/security/">Vai a “Sicurezza”</a>
+          <a class="btn ghost" href="/manual/">Apri il Manuale</a>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Cosa NON è questa tecnologia</h3>
+        <ul class="list">
+          <li><strong>Non è sorveglianza:</strong> nessun controllo sulla persona, solo sull’atto.</li>
+          <li><strong>Non è fiducia:</strong> non si “crede” al sistema, lo si verifica.</li>
+          <li><strong>Non è correzione dopo:</strong> se manca precedenza, l’atto non avviene.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="notice">
+        <strong>Nota tecnica</strong><br/>
+        Questa pagina descrive il funzionamento logico del gate ex-ante.  
+        Implementazioni e profili di rischio devono essere definiti dalle autorità competenti e dai domini operativi.
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/hbce.js"></script>
+</body>
+</html>
