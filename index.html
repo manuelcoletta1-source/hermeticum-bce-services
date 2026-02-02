@@ -2,146 +2,167 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portale Europeo Biocybernetico — IPR / AI Governance (ex-ante)</title>
+  <title>HERMETICUM B.C.E. — Framework tecnico ex-ante (ΦΩ · Fase 1)</title>
 
-  <!-- GitHub Pages project site base -->
-  <base href="/hermeticum-bce-platform/">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Framework tecnico ex-ante per responsabilità e prova delle decisioni digitali e AI ad alto rischio. UE-first. Fail-closed. Audit-first." />
 
-  <link rel="stylesheet" href="assets/hbce.css" />
-  <meta name="description" content="Portale EU-ready: governance ex-ante per dati e AI tramite IPR (PASS/FAIL), audit-first, fail-closed, hash-only." />
+  <link rel="stylesheet" href="/assets/hbce.css" />
 </head>
-<body>
-  <header class="topbar">
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="sig" aria-hidden="true"></div>
-        <div>
-          <h1>Portale Europeo Biocybernetico</h1>
-          <span class="sub">IPR / AI Governance (ex-ante) · audit-first · fail-closed · hash-only</span>
-        </div>
-      </div>
 
-      <nav class="menu" aria-label="Navigazione principale">
-        <a class="pill active" data-nav href="./"><strong>Home</strong></a>
-        <a class="pill" data-nav href="onboarding/"><strong>Onboarding</strong></a>
-        <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
-        <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
-        <a class="pill" data-nav href="institution/">Istituzioni UE</a>
-        <a class="pill" data-nav href="member-states/">Stati Membri</a>
-        <a class="pill" data-nav href="technology/">Tecnologia</a>
-        <a class="pill" data-nav href="verify/">Verify</a>
-        <a class="pill" data-nav href="security/">Sicurezza</a>
-        <a class="pill" data-nav href="governance/">Governance</a>
-        <a class="pill" data-nav href="manual/">Manuale</a>
-      </nav>
+<body class="hbce-shell">
+
+<header class="hbce-header">
+  <div class="hbce-brand">
+    <strong>HERMETICUM B.C.E.</strong>
+    <span>Blindata · Computabile · Evolutiva</span>
+  </div>
+
+  <nav class="hbce-nav">
+    <a href="/onboarding/">Onboarding</a>
+    <a href="/verify/">Verify</a>
+    <a href="/governance/">Governance</a>
+    <a href="/manual/">Manuale</a>
+    <a href="/institution/">Istituzioni UE</a>
+  </nav>
+</header>
+
+<main class="hbce-main">
+
+<section class="hbce-hero">
+  <h1>Framework tecnico ex-ante<br/>per la responsabilità e la prova delle decisioni digitali</h1>
+  <p class="hbce-subtitle">
+    ΦΩ — ONLY · Fase 1 · Fail-Closed · Audit-First
+  </p>
+</section>
+
+<section class="hbce-section">
+  <h2>Contesto europeo</h2>
+  <p>
+    L’Unione Europea dispone di un quadro normativo avanzato in materia di intelligenza artificiale,
+    cybersicurezza e servizi fiduciari. Tuttavia, permane una criticità strutturale:
+  </p>
+  <blockquote>
+    le decisioni digitali e automatizzate vengono eseguite prima che sia possibile verificarne
+    attribuzione, legittimità e opponibilità nel tempo.
+  </blockquote>
+  <p>
+    Il controllo resta prevalentemente <strong>ex-post</strong>.
+  </p>
+</section>
+
+<section class="hbce-section">
+  <h2>Problema operativo</h2>
+  <p>
+    Nei sistemi digitali e di intelligenza artificiale ad alto rischio, l’azione può avvenire:
+  </p>
+  <ul>
+    <li>senza attribuzione umana opponibile;</li>
+    <li>senza verifica tecnica preventiva;</li>
+    <li>senza una prova che regga un audit nel tempo.</li>
+  </ul>
+  <p>
+    Questo espone enti, decisori e cittadini a rischio giuridico e operativo.
+  </p>
+</section>
+
+<section class="hbce-section">
+  <h2>Soluzione proposta (ambito limitato)</h2>
+  <p>
+    HERMETICUM B.C.E. introduce un <strong>vincolo tecnico ex-ante all’azione</strong>, fondato su tre
+    elementi minimi e non derogabili:
+  </p>
+  <ol>
+    <li>Attribuzione umana verificabile;</li>
+    <li>Validazione tecnica preventiva (fail-closed);</li>
+    <li>Prova opponibile a lungo termine.</li>
+  </ol>
+  <p>
+    Se anche uno solo di questi elementi manca, <strong>l’azione non viene eseguita</strong>.
+  </p>
+</section>
+
+<section class="hbce-section">
+  <h2>Cosa fa / Cosa non fa</h2>
+
+  <div class="hbce-grid">
+    <div>
+      <h3>FA</h3>
+      <ul>
+        <li>blocca l’esecuzione tecnica in assenza di evidenza verificabile;</li>
+        <li>produce prova auditabile e riproducibile;</li>
+        <li>opera prima dell’azione, non dopo.</li>
+      </ul>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="kicker">EU-READY · CONTINENTAL SECURITY BY DESIGN</div>
-      <h2 class="title">Il punto critico UE: il runtime è ancora “fail-open”</h2>
-      <p class="lead">
-        Norme e policy esistono. Il problema è operativo: troppi sistemi (digitali e AI) eseguono anche quando
-        l’evidenza non è verificabile o il contesto è cambiato.  
-        Qui imponiamo un criterio semplice: <strong>eseguibilità ex-ante</strong> = prova minima replicabile (PASS/FAIL).
-      </p>
-
-      <div class="btnrow">
-        <a class="btn" href="onboarding/">Entrata ufficiale (Onboarding)</a>
-        <a class="btn secondary" href="verify/">Prova minima (Verify)</a>
-        <a class="btn ghost" href="technology/">Specifica tecnica</a>
-      </div>
-
-      <div class="meta" style="margin-top:14px">
-        <span class="tag ok">fail-closed</span>
-        <span class="tag">audit-first</span>
-        <span class="tag">hash-only</span>
-        <span class="tag">GDPR-min</span>
-        <span class="tag">federation</span>
-      </div>
-    </section>
-
-    <section class="grid">
-      <article class="card cols-12">
-        <h3>Tre ingressi, un’unica regola</h3>
-        <p style="margin-top:0; color:rgba(232,236,255,.82)">
-          Tutto converge su una regola: se manca evidenza verificabile → <strong>FAIL</strong>.
-        </p>
-
-        <div class="grid" style="gap:12px">
-          <div class="card cols-4" style="padding:14px">
-            <h4 style="margin:0 0 6px">Cittadini UE</h4>
-            <p style="margin:0 0 10px">Difesa e protezione senza sorveglianza: bloccare azioni ambigue.</p>
-            <div class="btnrow">
-              <a class="btn" href="citizen/">Apri</a>
-              <a class="btn secondary" href="onboarding/">Onboarding</a>
-            </div>
-          </div>
-
-          <div class="card cols-4" style="padding:14px">
-            <h4 style="margin:0 0 6px">AI Governance</h4>
-            <p style="margin:0 0 10px">AI JOKER-C2 come layer ex-ante: eseguibile/non eseguibile.</p>
-            <div class="btnrow">
-              <a class="btn" href="ai-joker-c2/">Apri</a>
-              <a class="btn secondary" href="technology/">Tecnologia</a>
-            </div>
-          </div>
-
-          <div class="card cols-4" style="padding:14px">
-            <h4 style="margin:0 0 6px">Bruxelles / Stati Membri</h4>
-            <p style="margin:0 0 10px">Pacchetto DG CONNECT/ENISA + adozione federata GO/NO-GO.</p>
-            <div class="btnrow">
-              <a class="btn" href="institution/">Istituzioni UE</a>
-              <a class="btn secondary" href="member-states/">Stati Membri</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Se vuoi capire “in 60 secondi”</h3>
-        <ol class="list">
-          <li>Vai su <strong>Verify</strong> e guarda PASS/FAIL su file reali.</li>
-          <li>Apri <strong>Tecnologia</strong> per capire gate, fingerprint e “virgola=FAIL”.</li>
-          <li>Apri <strong>Sicurezza</strong> per threat model ENISA-style.</li>
-          <li>Leggi <strong>Governance</strong> per i limiti: no custody / no surveillance.</li>
-        </ol>
-        <div class="btnrow">
-          <a class="btn" href="verify/">1) Verify</a>
-          <a class="btn secondary" href="technology/">2) Tecnologia</a>
-          <a class="btn ghost" href="security/">3) Sicurezza</a>
-          <a class="btn ghost" href="governance/">4) Governance</a>
-        </div>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Demo operativa (oggi, senza infrastruttura)</h3>
-        <p>
-          Questo repo è una demo “audit-first”: Create genera un canonico e un digest (SHA-512),
-          Verify controlla coerenza deterministica.  
-          È minimalista di proposito: se non regge qui, non regge nel mondo reale.
-        </p>
-        <div class="btnrow">
-          <a class="btn" href="create/">Create</a>
-          <a class="btn secondary" href="verify/">Verify</a>
-          <a class="btn ghost" href="manual/">Manuale</a>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">
-      <div class="notice">
-        <strong>Chiusura</strong><br/>
-        Portale UE: governance ex-ante, prova minima replicabile, federazione senza custodia centrale.  
-        Se manca evidenza verificabile: FAIL.
-      </div>
+    <div>
+      <h3>NON FA</h3>
+      <ul>
+        <li>non decide nel merito;</li>
+        <li>non sostituisce l’autorità umana;</li>
+        <li>non custodisce dati personali;</li>
+        <li>non è un sistema di sorveglianza;</li>
+        <li>non è un Identity Provider.</li>
+      </ul>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="assets/hbce.js"></script>
+<section class="hbce-section">
+  <h2>Architettura funzionale — ΦΩ · Fase 1</h2>
+
+  <pre class="hbce-diagram">
+Responsabilità Umana (HRR)
+        ↓
+Decision Gate Validator (DGV)
+        ↓
+Long-Term Accountability Vault (LTA)
+  </pre>
+
+  <p>
+    Il sistema opera in regime <strong>FAIL-CLOSED</strong>: in assenza di prova, nessuna esecuzione è consentita.
+  </p>
+</section>
+
+<section class="hbce-section">
+  <h2>Conformità UE</h2>
+  <ul>
+    <li>UE-first</li>
+    <li>GDPR-min (hash-only)</li>
+    <li>Audit-first</li>
+    <li>No custody</li>
+    <li>No trust by default</li>
+    <li>Federabile tra Stati Membri</li>
+  </ul>
+</section>
+
+<section class="hbce-section">
+  <h2>Posizionamento finale</h2>
+  <blockquote>
+    HERMETICUM B.C.E. non propone una nuova governance.
+    Propone un meccanismo tecnico che impedisce l’azione
+    quando la governance non è dimostrabile.
+  </blockquote>
+</section>
+
+<section class="hbce-cta">
+  <a class="hbce-button" href="/verify/">Avvia verifica tecnica</a>
+  <a class="hbce-button secondary" href="/onboarding/">Onboarding operativo</a>
+</section>
+
+</main>
+
+<footer class="hbce-footer">
+  <p>
+    HERMETICUM B.C.E. S.r.l. — UE-first · GDPR-min · HASH-only · AUDIT · FAIL-CLOSED
+  </p>
+  <nav>
+    <a href="/privacy/">Privacy</a>
+    <a href="/terms/">Terms</a>
+    <a href="/status/">Status</a>
+    <a href="/manifest/">Manifest</a>
+  </nav>
+</footer>
+
 </body>
 </html>
