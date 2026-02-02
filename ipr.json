@@ -1,12 +1,48 @@
 {
-  "schema": "HBCE-IPR-DIGEST-v1",
-  "type": "IPR_DIGEST",
+  "schema": "HBCE-IPR-v1",
+  "type": "PRIMARY_RECORD_DIGEST",
+  "status": "ACTIVE",
+
   "mode": "fail-closed",
+  "policy": {
+    "ue_first": true,
+    "audit_first": true,
+    "fail_closed": true,
+    "hash_only": true,
+    "data_custody": "none",
+    "variants_allowed": false
+  },
+
+  "subject": {
+    "ipr_id": "IPR-3 / AI_JOKER_C2",
+    "holder": "Manuel Coletta",
+    "jurisdiction": "EU",
+    "scope": "public demo (deterministic verify)"
+  },
+
+  "canonical": {
+    "path": "ipr.canon.json",
+    "content_role": "canonical input",
+    "determinism": "byte-identical required"
+  },
+
+  "algorithm": "SHA-512",
 
   "digest": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454",
 
-  "algorithm": "SHA-512",
-  "source": "ipr.canon.json",
+  "hash": {
+    "sha512": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454",
+    "digest_hex": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454"
+  },
 
-  "rule": "If ipr.canon.json changes by one byte, verification must FAIL."
+  "verification": {
+    "expected_from": "digest (top-level) OR hash.sha512 OR hash.digest_hex",
+    "rule": "PASS only if SHA-512(ipr.canon.json) equals expected digest",
+    "on_missing": "FAIL",
+    "on_mismatch": "FAIL"
+  },
+
+  "generated_at": "2026-02-02T19:39:06.157Z",
+
+  "notice": "If ipr.canon.json changes by even one byte (a comma), this digest must change; otherwise verification must FAIL."
 }
