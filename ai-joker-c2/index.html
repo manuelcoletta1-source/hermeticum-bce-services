@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI JOKER-C2 — AI per la governance dell’AI</title>
+
+  <!-- GitHub Pages project site base -->
+  <base href="/hermeticum-bce-platform/">
+
+  <link rel="stylesheet" href="assets/hbce.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="sig" aria-hidden="true"></div>
+        <div>
+          <h1>AI JOKER-C2</h1>
+          <span class="sub">AI governance layer · gate ex-ante · PASS/FAIL</span>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Navigazione principale">
+        <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
+        <a class="pill active" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
+        <a class="pill" data-nav href="institution/">Istituzioni UE</a>
+        <a class="pill" data-nav href="member-states/">Stati Membri</a>
+        <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="security/">Sicurezza</a>
+        <a class="pill" data-nav href="governance/">Governance</a>
+        <a class="pill" data-nav href="manual/">Manuale</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="kicker">AI GOVERNANCE · EX-ANTE · AUDITABLE</div>
+      <h2 class="title">AI per governare l’AI: un gate che vincola l’azione prima dell’esecuzione</h2>
+      <p class="lead">
+        <strong>AI JOKER-C2</strong> è un layer di governance che opera come <strong>pre-check ex-ante</strong>.
+        Non “decide al posto delle istituzioni”. Applica controlli tecnici deterministici su contesto, policy e configurazione.
+        Se manca coerenza con l’IPR, l’azione è bloccata (<span class="mono">fail-closed</span>).
+      </p>
+
+      <div class="btnrow">
+        <a class="btn" href="technology/">Specifiche tecnologiche</a>
+        <a class="btn secondary" href="security/">Threat model</a>
+        <a class="btn ghost" href="institution/">Vista Istituzioni UE</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card cols-6">
+        <h3>Definizione operativa</h3>
+        <p>
+          AI JOKER-C2 è un <strong>controllore di eseguibilità</strong>:
+          riceve una richiesta di azione, verifica l’esistenza di un IPR coerente,
+          e restituisce un esito binario.
+        </p>
+        <ul class="list">
+          <li><strong>PASS</strong> → l’azione può essere eseguita</li>
+          <li><strong>FAIL</strong> → l’azione è negata (no output)</li>
+        </ul>
+        <div class="meta">
+          <span class="tag ok">PASS/FAIL</span>
+          <span class="tag">deterministic</span>
+          <span class="tag">audit-first</span>
+        </div>
+      </article>
+
+      <article class="card cols-6">
+        <h3>Perché è il punto di rottura</h3>
+        <p>
+          Oggi l’AI è spesso <strong>fail-open</strong>: se qualcosa non è verificabile, il sistema tenta comunque.
+          Qui è l’opposto: <strong>non verificabile = non eseguibile</strong>.
+          Questo trasforma la governance da “linee guida” a <strong>vincolo tecnico</strong>.
+        </p>
+        <div class="meta">
+          <span class="tag danger">fail-open</span>
+          <span class="tag ok">fail-closed</span>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Presentazione formale (DG CONNECT / ENISA)</h3>
+        <p>
+          Questo componente è progettato per essere valutato come meccanismo di enforcement ex-ante
+          in ambienti ad alto rischio e domini critici, con particolare attenzione a:
+        </p>
+        <ul class="list">
+          <li>tracciabilità tecnica e audit replicabile</li>
+          <li>riduzione rischio (prevenzione) invece di sola risposta post-incidente</li>
+          <li>federazione tra domini senza custodia centrale (sovranità preservata)</li>
+          <li>mappabilità su controlli di sicurezza e compliance (AI Act, NIS2, GDPR)</li>
+        </ul>
+      </article>
+
+      <article class="card cols-7">
+        <h3>Interfaccia minima (concept)</h3>
+        <p>Un gate semplice, misurabile, testabile.</p>
+        <pre style="margin:0; white-space:pre-wrap; color:rgba(232,236,255,.92)">
+INPUT:
+  action_request
+  context_fingerprint
+  policy_fingerprint
+  ipr_reference
+
+CHECK:
+  if verify(ipr_reference) == false → FAIL
+  if context_fingerprint != ipr.context → FAIL
+  if policy_fingerprint   != ipr.policy  → FAIL
+
+OUTPUT:
+  PASS | FAIL  (fail-closed)
+        </pre>
+        <div class="meta">
+          <span class="tag">simple interface</span>
+          <span class="tag ok">verifiable</span>
+        </div>
+      </article>
+
+      <article class="card cols-5">
+        <h3>Ambiti di impiego</h3>
+        <ul class="list">
+          <li><strong>AI domestica</strong> — azioni sensibili vincolate</li>
+          <li><strong>PA</strong> — automazioni controllabili ex-ante</li>
+          <li><strong>industria</strong> — contesto e release verificabili</li>
+          <li><strong>swarm / flotte</strong> — comandi consentiti solo con precedenza</li>
+          <li><strong>spazio</strong> — comandi evidence-locked</li>
+        </ul>
+        <div class="btnrow">
+          <a class="btn" href="manual/">Manuale UE del dopo</a>
+          <a class="btn ghost" href="member-states/">Adozione UE</a>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Nota “biocibernetica” (formulazione compatibile)</h3>
+        <p>
+          “Biocibernetico” qui significa: <strong>responsabilità biologica</strong> (umana) + <strong>vincolo cibernetico</strong> (feedback verificabile).
+          L’umano resta responsabile; la macchina rende verificabile se un atto è eseguibile.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="notice">
+        <strong>Perimetro</strong><br/>
+        AI JOKER-C2 non sostituisce autorità pubbliche e non produce effetti giuridici automatici.
+        È un componente tecnico di enforcement ex-ante (PASS/FAIL) progettato per audit e prevenzione.
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/hbce.js"></script>
+</body>
+</html>
