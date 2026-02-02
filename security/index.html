@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sicurezza — Threat Model (ENISA-style) · prevenzione ex-ante</title>
+  <title>Sicurezza — threat model ENISA-style · controlli ex-ante</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
@@ -17,7 +17,7 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Sicurezza</h1>
-          <span class="sub">Threat model · controlli preventivi · rischio residuo</span>
+          <span class="sub">Threat model · controlli preventivi · riduzione fail-open</span>
         </div>
       </div>
 
@@ -39,157 +39,160 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">THREAT MODEL · PREVENTION · FAIL-CLOSED</div>
-      <h2 class="title">Sicurezza: ridurre il rischio prima dell’evento</h2>
+      <div class="kicker">THREAT MODEL · PREVENZIONE</div>
+      <h2 class="title">Sicurezza ex-ante: ridurre superficie d’attacco prima dell’azione</h2>
       <p class="lead">
-        Questo threat model descrive minacce tipiche di sistemi digitali e AI e mostra dove il modello
-        <strong>IPR + gate ex-ante</strong> riduce l’area d’attacco trasformando l’ambiguità in <strong>FAIL</strong>.
-        Non promette invulnerabilità: promette <strong>controlli verificabili</strong>.
+        Questo modello non promette invulnerabilità. Promette un criterio operativo:
+        l’azione sensibile passa solo se evidenza minima verificabile coincide (PASS).
+        Altrimenti: FAIL.
       </p>
 
       <div class="btnrow">
-        <a class="btn" href="technology/">Controlli (PASS/FAIL)</a>
-        <a class="btn secondary" href="verify/">Dimostrazione (Verify)</a>
+        <a class="btn" href="technology/">Specifica gate (PASS/FAIL)</a>
+        <a class="btn secondary" href="verify/">Prova minima (Verify)</a>
         <a class="btn ghost" href="governance/">Limiti dichiarati</a>
       </div>
     </section>
 
     <section class="grid">
       <article class="card cols-12">
-        <h3>Superficie d’attacco (semplificata)</h3>
+        <h3>Asset protetti (cosa vale davvero)</h3>
         <ul class="list">
-          <li><strong>Identity & Authority</strong>: chi può far fare cosa a un sistema.</li>
-          <li><strong>Context</strong>: ambiente reale di esecuzione (tool, modello, runtime, rete).</li>
-          <li><strong>Policy</strong>: regole che cambiano nel tempo (drift).</li>
-          <li><strong>Supply chain</strong>: componenti, dipendenze, update.</li>
-          <li><strong>Human interface</strong>: social engineering, prompt injection, coercizione.</li>
+          <li>azioni sensibili su tool e sistemi (deploy, comandi, scrittura, invio)</li>
+          <li>dati ad alta criticità (credenziali, PII, segreti industriali, policy)</li>
+          <li>integrità della supply chain (config, versioni, dipendenze)</li>
+          <li>auditabilità: capacità di replicare “perché è successo”</li>
         </ul>
       </article>
 
       <article class="card cols-12">
-        <h3>Catalogo minacce (core)</h3>
+        <h3>Attaccanti (modello minimo)</h3>
         <div class="grid" style="gap:12px">
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">T1 — Esecuzione senza evidenza (fail-open)</h4>
-            <p style="margin:0 0 10px">
-              Il sistema compie azioni sensibili anche quando manca una precedenza verificabile.
-            </p>
-            <div class="meta">
-              <span class="tag danger">alta</span>
-              <span class="tag">prevenibile ex-ante</span>
-            </div>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Opportunista</h4>
+            <p style="margin:0">sfrutta default permissivi, errori, confusione operativa</p>
           </div>
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">T2 — Policy drift</h4>
-            <p style="margin:0 0 10px">
-              La policy cambia (o viene sostituita) e l’esecuzione continua come se nulla fosse.
-            </p>
-            <div class="meta">
-              <span class="tag warn">media</span>
-              <span class="tag">detectable</span>
-            </div>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Supply-chain</h4>
+            <p style="margin:0">inserisce drift: versioni, dipendenze, config, pipeline</p>
           </div>
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">T3 — Context spoofing</h4>
-            <p style="margin:0 0 10px">
-              Un attaccante simula un ambiente “legittimo” per far passare un’azione non autorizzata.
-            </p>
-            <div class="meta">
-              <span class="tag danger">alta</span>
-              <span class="tag">mitigabile</span>
-            </div>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Insider / coercizione</h4>
+            <p style="margin:0">usa accessi legittimi per far passare azioni non autorizzate</p>
           </div>
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">T4 — Prompt injection / tool abuse</h4>
-            <p style="margin:0 0 10px">
-              L’AI viene indotta a usare tool o dati fuori perimetro tramite input avversario.
-            </p>
-            <div class="meta">
-              <span class="tag danger">alta</span>
-              <span class="tag">mitigabile ex-ante</span>
-            </div>
-          </div>
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">T5 — Replay / reuse di autorizzazioni</h4>
-            <p style="margin:0 0 10px">
-              Un’autorizzazione viene riutilizzata in un contesto diverso da quello previsto.
-            </p>
-            <div class="meta">
-              <span class="tag warn">media</span>
-              <span class="tag">mitigabile</span>
-            </div>
-          </div>
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">T6 — Supply-chain substitution</h4>
-            <p style="margin:0 0 10px">
-              Componenti vengono sostituiti (dipendenze, modelli, tool) senza blocco automatico.
-            </p>
-            <div class="meta">
-              <span class="tag warn">media</span>
-              <span class="tag">mitigabile</span>
-            </div>
-          </div>
-
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Controlli preventivi (come il modello riduce rischio)</h3>
-        <ul class="list">
-          <li><strong>C1 — Verify deterministico</strong>: se canon/digest non coincide → FAIL.</li>
-          <li><strong>C2 — Context fingerprint</strong>: ambiente diverso da quello atteso → FAIL.</li>
-          <li><strong>C3 — Policy fingerprint</strong>: drift della policy → FAIL.</li>
-          <li><strong>C4 — Limits enforcement</strong>: limiti dichiarati nell’IPR → FAIL se violati.</li>
-          <li><strong>C5 — Append-only change</strong>: ogni modifica produce nuovo atto (no riscrittura).</li>
-        </ul>
-        <div class="btnrow">
-          <a class="btn" href="technology/">Specifica controlli</a>
-          <a class="btn secondary" href="verify/">Esegui Verify</a>
-        </div>
-      </article>
+        <h3>Vettori tipici (AI/automation)</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Tool abuse</h4>
+            <ul class="list" style="margin-top:8px">
+              <li>azioni su file/db senza vincoli</li>
+              <li>comandi e deploy “in automatico”</li>
+              <li>privilege creep (permessi che crescono)</li>
+            </ul>
+          </div>
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Prompt / instruction injection</h4>
+            <ul class="list" style="margin-top:8px">
+              <li>istruzioni malevole camuffate</li>
+              <li>trucchi per bypassare policy</li>
+              <li>confusione tra dati e comandi</li>
+            </ul>
+          </div>
 
-      <article class="card cols-7">
-        <h3>Rischio residuo (onesto)</h3>
-        <ul class="list">
-          <li>errori di design della policy (policy sbagliata ma “coerente”)</li>
-          <li>compromissione dell’endpoint prima del gate (root/firmware)</li>
-          <li>coercizione umana e insider threat (responsabilità biologica)</li>
-          <li>dipendenze non misurate nel fingerprint (lacune di inventario)</li>
-        </ul>
-      </article>
-
-      <article class="card cols-5">
-        <h3>KPI di sicurezza</h3>
-        <ul class="list">
-          <li><strong>Block rate</strong> e cause</li>
-          <li><strong>Policy drift incidents</strong></li>
-          <li><strong>Context mismatch</strong></li>
-          <li><strong>Audit reproducibility</strong></li>
-          <li><strong>MTTR</strong> (ripristino dopo FAIL)</li>
-        </ul>
-        <div class="meta">
-          <span class="tag ok">measurable</span>
-          <span class="tag">audit-first</span>
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Data exfiltration</h4>
+            <ul class="list" style="margin-top:8px">
+              <li>estrazione indiretta (log, output, strumenti)</li>
+              <li>leak di segreti (token/chiavi)</li>
+              <li>ricostruzione di contesto sensibile</li>
+            </ul>
+          </div>
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Drift & mismatch</h4>
+            <ul class="list" style="margin-top:8px">
+              <li>policy aggiornata ma runtime no</li>
+              <li>config cambiata senza tracciamento</li>
+              <li>dipendenze mutate (supply-chain)</li>
+            </ul>
+          </div>
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Conclusione (ENISA-style)</h3>
+        <h3>Controlli preventivi (ex-ante)</h3>
+        <p style="margin-top:0; color:rgba(232,236,255,.82)">
+          Il gate riduce rischio imponendo “eseguibilità” come condizione tecnica. Non sostituisce security engineering:
+          lo rende verificabile e bloccante quando manca evidenza.
+        </p>
+
+        <div class="grid" style="gap:12px">
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Evidence check</h4>
+            <p style="margin:0 0 10px">
+              IPR canonico + digest: se non combacia → FAIL
+            </p>
+            <div class="meta"><span class="tag ok">deterministico</span></div>
+          </div>
+
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Context fingerprint</h4>
+            <p style="margin:0 0 10px">
+              se runtime/pipeline/config non coincide con atteso → FAIL
+            </p>
+            <div class="meta"><span class="tag">anti-drift</span></div>
+          </div>
+
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Policy fingerprint</h4>
+            <p style="margin:0 0 10px">
+              se policy dichiarata ≠ policy applicata → FAIL
+            </p>
+            <div class="meta"><span class="tag">anti-bypass</span></div>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Limits (scope)</h4>
+            <p style="margin:0 0 10px">
+              limiti espliciti: “no surveillance”, “no custody”, “no auto-rights”.
+              Se l’azione viola i limiti → FAIL.
+            </p>
+            <div class="meta"><span class="tag">scope control</span></div>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Fail-closed default</h4>
+            <p style="margin:0 0 10px">
+              niente fallback silenziosi. Se il check non è possibile, non si esegue.
+            </p>
+            <div class="meta"><span class="tag ok">default: block</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Misure (KPI) collegate alla sicurezza</h3>
+        <ul class="list">
+          <li><strong>Block rate</strong>: quante azioni pericolose vengono bloccate prima dell’evento</li>
+          <li><strong>Mismatch rate</strong>: drift policy/runtime rilevato ex-ante</li>
+          <li><strong>Reproducibility</strong>: audit replicabili su richiesta di terzi</li>
+          <li><strong>MTTR</strong>: tempo per riallineare canonico/policy e tornare in PASS</li>
+        </ul>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Prova immediata</h3>
         <p>
-          Il contributo chiave non è “più sicurezza” in astratto:
-          è una trasformazione operativa della regola di esecuzione.
-          Dove oggi l’ambiguità può diventare azione, qui diventa blocco verificabile.
+          La prova minima non è un PDF: è Verify.  
+          Se il sistema non riesce a provare coerenza su file pubblici, non è pronto a governare azioni reali.
         </p>
         <div class="btnrow">
-          <a class="btn" href="institution/">Vista istituzionale UE</a>
-          <a class="btn secondary" href="member-states/">Adozione Stati Membri</a>
-          <a class="btn ghost" href="governance/">Limiti e responsabilità</a>
+          <a class="btn" href="verify/">Esegui Verify</a>
+          <a class="btn secondary" href="technology/">Rivedi la specifica</a>
+          <a class="btn ghost" href="member-states/">Adozione Stati Membri</a>
         </div>
       </article>
     </section>
@@ -198,9 +201,9 @@
   <footer class="footer">
     <div class="wrap">
       <div class="notice">
-        <strong>Fail-closed</strong><br/>
-        Il sistema non promette assenza di attacchi: promette che senza evidenza verificabile
-        l’azione non passa.
+        <strong>Chiusura</strong><br/>
+        Sicurezza ex-ante = ridurre fail-open: evidenza minima + fingerprint + limiti + default block.  
+        Se manca evidenza verificabile: FAIL.
       </div>
     </div>
   </footer>
