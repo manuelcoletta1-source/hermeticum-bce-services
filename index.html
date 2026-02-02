@@ -4,95 +4,87 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HERMETICUM B.C.E. — EU Gateway</title>
-  <meta name="description" content="Gateway UE-first per evidenze verificabili: onboarding, create, verify. Nessuna custodia. Fail-closed. Audit-first." />
-  <style>
-    :root{--bg:#0b0f14;--card:#101826;--border:#223043;--text:#e6edf3;--muted:#9fb0c0;--link:#7dd3fc}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 72px}
-    header{border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:18px}
-    h1{margin:0;font-size:20px;letter-spacing:.2px}
-    .sub{margin-top:6px;color:var(--muted);font-size:14px}
-    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
-    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
-    .card{border:1px solid var(--border);background:var(--card);border-radius:14px;padding:18px}
-    .btn{display:block;margin-top:10px;padding:12px 12px;border-radius:12px;border:1px solid var(--border);background:#0f2234;color:var(--text);text-decoration:none;font-weight:700}
-    .btn:hover{background:#132a41}
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .note{color:var(--muted);font-size:13px;margin-top:10px}
-    ul{margin:8px 0 0 18px;color:#c4cfda}
-    footer{margin-top:26px;border-top:1px solid var(--border);padding-top:14px;color:var(--muted);font-size:13px}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-  </style>
+  <meta name="description" content="Gateway UE-first: onboarding canonico, create, verify, citizen portal, Brussels Model. Audit-first, hash-only, fail-closed." />
+  <link rel="stylesheet" href="./assets/hbce.css" />
 </head>
 <body>
-  <div class="wrap">
 
-    <header>
-      <h1>European BioCyber Infrastructure — HERMETICUM B.C.E.</h1>
-      <div class="sub">
-        Identità primaria (IPR) come evidenza tecnica verificabile nel tempo. <strong>Nessuna custodia</strong>. <strong>Fail-closed</strong>. <strong>Audit-first</strong>.
-      </div>
-    </header>
+  <header class="hbce-header">
+    <div class="hbce-brand">
+      <h1 class="hbce-title">HERMETICUM B.C.E. — EU Gateway</h1>
+      <p class="hbce-sub">UE-first · Audit-first · Hash-only · Fail-closed · Append-only</p>
+    </div>
+    <nav class="hbce-nav">
+      <a class="hbce-pill" href="./onboarding/">Onboarding</a>
+      <a class="hbce-pill" href="./citizen/">Cittadino UE</a>
+      <a class="hbce-pill" href="./create/">Create</a>
+      <a class="hbce-pill" href="./verify/">Verify</a>
+      <a class="hbce-pill" href="./brussels-model/">Bruxelles</a>
+      <a class="hbce-pill" href="./governance/">Governance</a>
+    </nav>
+  </header>
 
-    <div class="grid">
+  <main class="hbce-wrap">
+    <div class="hbce-grid">
 
-      <section class="card">
-        <h2 style="margin:0 0 8px;font-size:17px;">Ingresso canonico</h2>
-        <p style="margin:8px 0;color:#d1d9e0;">
-          Un solo percorso ufficiale: onboarding → create → verify. Ogni deviazione è informativa.
+      <section class="hbce-card hbce-span-2 hbce-glow">
+        <h2>Ingresso canonico</h2>
+        <p>
+          Un solo percorso ufficiale: <strong>onboarding → create → verify</strong>.
+          Ogni deviazione è informativa. Se l’evidenza non è ripetibile, il sistema <strong>fallisce chiuso</strong>.
         </p>
-        <a class="btn" href="./onboarding/">Avvia Onboarding</a>
-        <a class="btn" href="./verify/">Verifica IPR (Verify)</a>
-        <p class="note">
-          Regola: mismatch o indeterminatezza ⇒ <span class="mono">STOP</span> (fail-closed).
+        <a class="hbce-btn" href="./onboarding/">Avvia Onboarding</a>
+        <a class="hbce-btn secondary" href="./verify/">Verifica IPR</a>
+        <p class="hbce-note hbce-mono">Regola: mismatch o indeterminatezza ⇒ STOP (fail-closed)</p>
+      </section>
+
+      <section class="hbce-card">
+        <h2>Cittadino UE</h2>
+        <p>
+          Versione leggibile + gesto minimo in 90 secondi + ponte operativo per Bruxelles.
+        </p>
+        <a class="hbce-btn" href="./citizen/">Apri Portale Cittadino UE</a>
+        <p class="hbce-note">
+          Nessuna custodia dati. Nessun effetto giuridico automatico.
         </p>
       </section>
 
-      <section class="card">
-        <h2 style="margin:0 0 8px;font-size:17px;">Cittadino UE</h2>
-        <p style="margin:8px 0;color:#d1d9e0;">
-          Versione leggibile + gesto minimo (90 secondi) + ponte operativo per Bruxelles.
-        </p>
-        <a class="btn" href="./citizen/">Apri Portale Cittadino UE</a>
-        <ul>
-          <li><a href="./create/">Create</a> (guarded)</li>
-          <li><a href="./evidence-pack/">Evidence Pack</a></li>
-          <li><a href="./normative/">Normative Mapping</a></li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2 style="margin:0 0 8px;font-size:17px;">Bruxelles</h2>
-        <p style="margin:8px 0;color:#d1d9e0;">
+      <section class="hbce-card">
+        <h2>Bruxelles</h2>
+        <p>
           Pacchetto istituzionale: modello di decadimento sistemico e roadmap (Horizon-ready).
         </p>
-        <a class="btn" href="./brussels-model/">Apri Brussels Model</a>
-        <p class="note">
-          Riferimento economico: decadimento cumulativo stimato ≈ <strong>€ 1.000.000.000.000</strong>.
-        </p>
+        <a class="hbce-btn" href="./brussels-model/">Apri Brussels Model</a>
+        <p class="hbce-note"><strong>Riferimento</strong>: decadimento cumulativo stimato ≈ € 1.000.000.000.000</p>
       </section>
 
-      <section class="card">
-        <h2 style="margin:0 0 8px;font-size:17px;">Stato e governance</h2>
+      <section class="hbce-card">
+        <h2>Stato e regole</h2>
         <ul>
-          <li><a href="./STATUS.md">Stato operativo (STATUS.md)</a></li>
-          <li><a href="./governance/">Governance</a></li>
+          <li><a href="./STATUS.md">STATUS.md (stato operativo)</a></li>
           <li><a href="./privacy/">Privacy</a></li>
+          <li><a href="./terms/">Termini</a></li>
           <li><a href="./catalog/">Catalogo</a> · <a href="./map/">Mappa</a></li>
         </ul>
-        <p class="note">
-          Nessun riconoscimento automatico. Nessuna delega. Solo evidenza ripetibile.
-        </p>
+        <p class="hbce-note">Audit-first: la fiducia è una conseguenza, non un prerequisito.</p>
+      </section>
+
+      <section class="hbce-card">
+        <h2>Corridoi</h2>
+        <ul>
+          <li><a href="./citizen/">Cittadino UE</a></li>
+          <li><a href="./professional/">Professionista</a></li>
+          <li><a href="./institution/">Istituzione</a></li>
+        </ul>
+        <p class="hbce-note">Ogni corridoio mantiene limiti e responsabilità esplicite.</p>
       </section>
 
     </div>
+  </main>
 
-    <footer>
-      HERMETICUM B.C.E. S.r.l. — UE-first · Audit-first · Hash-only · Fail-closed · Append-only
-    </footer>
+  <footer class="hbce-footer">
+    HERMETICUM B.C.E. S.r.l. — Nessuna custodia dati · Verifica ripetibile · Fail-closed
+  </footer>
 
-  </div>
 </body>
 </html>
