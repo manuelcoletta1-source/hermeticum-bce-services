@@ -1,6 +1,9 @@
-"hashes": [
-  {
-    "algo": "SHA-512",
-    "value": "<SHA512_HEX_DI_ipr.canon.json>"
-  }
-]
+{
+  "schema": "IPR-v1",
+  "type": "PRIMARY_RECORD",
+  "status": "ACTIVE",
+  "digest": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454",
+  "algorithm": "SHA-512",
+  "source": "ipr.canon.json",
+  "mode": "fail-closed"
+}
