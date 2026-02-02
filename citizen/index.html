@@ -2,183 +2,67 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portale Cittadino UE — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Portale Cittadino UE per evidenze tecniche verificabili (hash/receipt/manifest) + Piano Operativo Bruxelles (Horizon-ready)." />
-  <style>
-    :root{
-      --bg:#0b0f14;
-      --card:#101826;
-      --border:#223043;
-      --text:#e6edf3;
-      --muted:#9fb0c0;
-      --link:#7dd3fc;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
-    }
-    .container{max-width:980px;margin:0 auto;padding:28px 18px 72px}
-    header{padding:6px 0 18px;border-bottom:1px solid var(--border);margin-bottom:22px}
-    h1{margin:0;font-size:20px;letter-spacing:.2px}
-    .sub{margin-top:6px;color:var(--muted);font-size:14px}
-    .grid{display:grid;grid-template-columns:1fr;gap:14px}
-    @media (min-width:900px){.grid{grid-template-columns:1fr 1fr}}
-    .card{
-      border:1px solid var(--border);
-      background:var(--card);
-      border-radius:14px;
-      padding:18px;
-    }
-    h2{margin:0 0 10px;font-size:17px}
-    h3{margin:14px 0 6px;font-size:14px;color:var(--text)}
-    p{margin:8px 0;color:#d1d9e0}
-    ul{margin:8px 0 0 18px;color:#c4cfda}
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .cta{
-      display:inline-block;
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:#0f2234;
-      color:var(--text);
-      text-decoration:none;
-      font-weight:700;
-    }
-    .cta:hover{background:#132a41}
-    .note{color:var(--muted);font-size:13px}
-    footer{
-      margin-top:28px;
-      border-top:1px solid var(--border);
-      padding-top:14px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .kpi{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
-    @media (min-width:900px){.kpi{grid-template-columns:1fr 1fr 1fr}}
-    .kpi .pill{
-      border:1px dashed var(--border);
-      border-radius:12px;
-      padding:10px 12px;
-      background:#0d1522;
-    }
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cittadino UE — Portale</title>
+  <meta name="description" content="Portale Cittadino UE: gesto minimo, limiti chiari, piano operativo Bruxelles integrato." />
+  <link rel="stylesheet" href="../assets/hbce.css" />
 </head>
-
 <body>
-  <div class="container">
 
-    <header>
-      <h1>Portale Cittadino UE — HERMETICUM B.C.E.</h1>
-      <div class="sub">
-        Evidenze tecniche verificabili (hash / receipt / manifest) in modalità <strong>audit-first</strong>.
-        Nessuna custodia dati. Nessun effetto giuridico automatico. Fail-closed.
-      </div>
-    </header>
+  <header class="hbce-header">
+    <div class="hbce-brand">
+      <h1 class="hbce-title">Portale Cittadino UE</h1>
+      <p class="hbce-sub">Gesto minimo · evidenza ripetibile · nessuna custodia · fail-closed</p>
+    </div>
+    <nav class="hbce-nav">
+      <a class="hbce-pill" href="../">Home</a>
+      <a class="hbce-pill" href="../onboarding/">Onboarding</a>
+      <a class="hbce-pill" href="../create/">Create</a>
+      <a class="hbce-pill" href="../verify/">Verify</a>
+      <a class="hbce-pill" href="../brussels-model/">Bruxelles</a>
+      <a class="hbce-pill" href="../governance/">Governance</a>
+    </nav>
+  </header>
 
-    <div class="grid">
+  <main class="hbce-wrap">
+    <div class="hbce-grid">
 
-      <section class="card">
-        <h2>1) Cosa fa un cittadino UE (subito)</h2>
-        <p>
-          Qui non “ti registri” a un servizio. Qui <strong>osservi e produci evidenza</strong> localmente:
-          un atto diventa verificabile nel tempo perché lascia una traccia ripetibile.
-        </p>
-
-        <h3>Il gesto minimo (90 secondi)</h3>
+      <section class="hbce-card hbce-span-2 hbce-glow">
+        <h2>Gesto minimo (90 secondi)</h2>
         <ul>
-          <li>Vai su <a href="../onboarding/">Onboarding</a> e scegli il corridoio “Cittadino UE”.</li>
-          <li>Genera evidenza con <a href="../create/">Create</a> (guardrail attivi).</li>
-          <li>Verifica in autonomia con <a href="../verify/">Verify</a> (ripetibile, fail-closed).</li>
+          <li>Entra da <a href="../onboarding/">Onboarding</a> (corridoio “Cittadino UE”).</li>
+          <li>Genera evidenza con <a href="../create/">Create</a>.</li>
+          <li>Verifica subito con <a href="../verify/">Verify</a>.</li>
         </ul>
-
-        <a class="cta" href="../onboarding/">Entra (Onboarding canonico)</a>
-
-        <p class="note">
-          Se una verifica non è ripetibile, l’output è invalido. Nessun “trust me”.
-        </p>
+        <a class="hbce-btn" href="../onboarding/">Entra ora</a>
+        <p class="hbce-note">Se non è ripetibile ⇒ FAIL. Nessun “trust me”.</p>
       </section>
 
-      <section class="card">
-        <h2>2) Cosa NON è</h2>
+      <section class="hbce-card">
+        <h2>Cosa NON è</h2>
         <ul>
-          <li>Non è un Identity Provider.</li>
-          <li>Non sostituisce eIDAS / EUDI Wallet / CIE / SPID.</li>
-          <li>Non custodisce dati personali (GDPR-min / hash-only).</li>
-          <li>Non assegna diritti o status legali automatici.</li>
-        </ul>
-
-        <h3>Dove leggere le regole</h3>
-        <ul>
-          <li><a href="../terms/">Termini</a></li>
-          <li><a href="../privacy/">Privacy</a></li>
-          <li><a href="../governance/">Governance</a></li>
+          <li>Non è un IDP</li>
+          <li>Non sostituisce eIDAS/EUDI</li>
+          <li>Non custodisce dati personali</li>
+          <li>Non attribuisce diritti automatici</li>
         </ul>
       </section>
 
-      <section class="card">
-        <h2>3) Piano operativo Bruxelles (schema Horizon)</h2>
+      <section class="hbce-card">
+        <h2>Piano Bruxelles integrato</h2>
         <p>
-          Questo è il ponte tra cittadino e Commissione: una roadmap pilotabile.
-          L’obiettivo istituzionale è ridurre il <strong>decadimento sistemico</strong> introducendo evidenza tecnica ex-ante.
+          Obiettivo: ridurre decadimento sistemico con evidenza tecnica ex-ante.
         </p>
-
-        <h3>Obiettivo economico</h3>
-        <p>
-          Stima conservativa di decadimento cumulativo: <strong>≈ € 1.000.000.000.000</strong>
-          (orizzonte 10–15 anni, UE-27).
-        </p>
-
-        <h3>Work Packages (36 mesi)</h3>
-        <ul>
-          <li><strong>WP1 — Governance & Compliance</strong>: perimetro, audit, fail-closed, hash-only.</li>
-          <li><strong>WP2 — Gateway tecnico</strong>: create/verify, receipt, manifest, ripetibilità.</li>
-          <li><strong>WP3 — Pilota Data Spaces</strong>: integrazione non invasiva (dimostrativa).</li>
-          <li><strong>WP4 — Valutazione & KPI</strong>: metriche, readiness e scaling.</li>
-        </ul>
-
-        <div class="kpi">
-          <div class="pill"><strong>KPI-1</strong><br><span class="note">% verifiche ripetibili (target ≥ 99%)</span></div>
-          <div class="pill"><strong>KPI-2</strong><br><span class="note">tempo medio verifica <span class="mono">&lt; 2s</span></span></div>
-          <div class="pill"><strong>KPI-3</strong><br><span class="note">riduzione manual review nei pilot (target -30%)</span></div>
-        </div>
-
-        <h3>Deliverable</h3>
-        <ul>
-          <li>D1.1 — Baseline freeze + policy pack (append-only)</li>
-          <li>D2.1 — Gateway MVP + test vectors</li>
-          <li>D3.1 — Pilot pack (Data Space)</li>
-          <li>D4.1 — Report KPI + raccomandazioni scaling</li>
-        </ul>
-
-        <a class="cta" href="../brussels-model/">Apri Brussels Model</a>
-      </section>
-
-      <section class="card">
-        <h2>4) Link operativi</h2>
-        <ul>
-          <li><a href="../onboarding/">Onboarding</a></li>
-          <li><a href="../create/">Create</a></li>
-          <li><a href="../verify/">Verify</a></li>
-          <li><a href="../evidence-pack/">Evidence Pack</a></li>
-          <li><a href="../normative/">Normative Mapping</a></li>
-          <li><a href="../tech/">Audit Hub</a></li>
-        </ul>
+        <p><strong>Decadimento stimato</strong>: ≈ € 1.000.000.000.000 (10–15 anni).</p>
+        <a class="hbce-btn" href="../brussels-model/">Apri Brussels Model</a>
       </section>
 
     </div>
+  </main>
 
-    <footer>
-      HERMETICUM B.C.E. S.r.l. — UE-first · Audit-first · Hash-only · Fail-closed · Append-only
-    </footer>
+  <footer class="hbce-footer">
+    Cittadino UE: scegli come entri. La responsabilità resta tua, la verifica resta deterministica.
+  </footer>
 
-  </div>
 </body>
 </html>
