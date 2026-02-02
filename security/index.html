@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sicurezza — Threat model & prevenzione (ENISA-style)</title>
+  <link rel="stylesheet" href="/assets/hbce.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="sig" aria-hidden="true"></div>
+        <div>
+          <h1>Sicurezza</h1>
+          <span class="sub">Threat model · prevenzione ex-ante · ENISA-style</span>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Navigazione principale">
+        <a class="pill" data-nav href="/"><strong>Home</strong></a>
+        <a class="pill" data-nav href="/technology/">Tecnologia</a>
+        <a class="pill active" data-nav href="/security/"><strong>Sicurezza</strong></a>
+        <a class="pill" data-nav href="/institutions/">Istituzioni UE</a>
+        <a class="pill" data-nav href="/member-states/">Stati Membri</a>
+        <a class="pill" data-nav href="/governance/">Governance</a>
+        <a class="pill" data-nav href="/manual/">Manuale</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="kicker">RISK-FIRST · PREVENTION · FAIL-CLOSED</div>
+      <h2 class="title">Cybersicurezza preventiva: bloccare l’atto prima che avvenga</h2>
+      <p class="lead">
+        La maggior parte dei rischi AI oggi viene gestita <strong>ex-post</strong> (dopo l’azione).
+        Questo modello sposta il controllo <strong>ex-ante</strong>:
+        l’azione è consentita solo se esiste una precedenza verificabile (IPR) coerente con contesto e policy.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="card cols-6">
+        <h3>Superfici di attacco (considerate)</h3>
+        <ul class="list">
+          <li>input / prompt</li>
+          <li>iniezione di contesto</li>
+          <li>deriva del contesto (context drift)</li>
+          <li>switch non autorizzato di modello/dataset</li>
+          <li>bypass di policy</li>
+          <li>tampering di log e audit</li>
+          <li>movimento laterale cross-domain</li>
+        </ul>
+      </article>
+
+      <article class="card cols-6">
+        <h3>Controlli chiave</h3>
+        <ul class="list">
+          <li><strong>Pre-check ex-ante</strong> obbligatorio</li>
+          <li><strong>FAIL = blocco</strong> (nessuna esecuzione, nessun output)</li>
+          <li><strong>Hash contesto/config</strong> deterministico</li>
+          <li><strong>Nessuna auto-abilitazione</strong> del sistema AI</li>
+          <li><strong>Evidence append-only</strong> (audit replicabile)</li>
+        </ul>
+        <div class="meta">
+          <span class="tag ok">prevenzione</span>
+          <span class="tag">audit-first</span>
+          <span class="tag">no implicit trust</span>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Threat catalog (ENISA-style, sintetico)</h3>
+        <ul class="list">
+          <li><strong>T1 Prompt / Context injection:</strong> mitigata vincolando contesto attestato → mismatch → FAIL.</li>
+          <li><strong>T2 Context drift:</strong> mitigata richiedendo nuovo IPR per variazioni → drift → FAIL.</li>
+          <li><strong>T3 Model/Dataset switch:</strong> mitigata via hash configurazione → mismatch → FAIL.</li>
+          <li><strong>T4 Policy bypass:</strong> mitigata da OPC + pre-check → policy non soddisfatta → FAIL.</li>
+          <li><strong>T5 Rogue automation:</strong> mitigata impedendo auto-abilitazione → no IPR → FAIL.</li>
+          <li><strong>T6 Insider misuse:</strong> ridotta con attribuibilità ex-ante e audit opponibile.</li>
+          <li><strong>T7 Supply chain compromise:</strong> ridotta su mismatch config; residuo su hardware fuori perimetro.</li>
+          <li><strong>T8 Log tampering:</strong> ridotta con append-only ed evidence pack verificabile.</li>
+          <li><strong>T9 Lateral movement:</strong> ridotta con federazione senza trust implicito (dominio-per-dominio).</li>
+        </ul>
+      </article>
+
+      <article class="card cols-6">
+        <h3>Rischio prima / dopo</h3>
+        <ul class="list">
+          <li><strong>Prima:</strong> AI fail-open, audit ex-post, attribuzione fragile.</li>
+          <li><strong>Dopo:</strong> pre-check ex-ante, blocco tecnico, audit replicabile.</li>
+        </ul>
+        <div class="meta">
+          <span class="tag danger">fail-open</span>
+          <span class="tag ok">fail-closed</span>
+        </div>
+      </article>
+
+      <article class="card cols-6">
+        <h3>Indicatori (KPI suggeriti)</h3>
+        <ul class="list">
+          <li><strong>Pre-check coverage</strong> ≥ 99,9%</li>
+          <li><strong>Unauthorized blocks</strong> (trend e volume)</li>
+          <li><strong>Mean pre-check time</strong> (edge/cloud)</li>
+          <li><strong>Audit reproducibility</strong> ≥ 95%</li>
+        </ul>
+        <div class="btnrow">
+          <a class="btn secondary" href="/technology/">Rivedi “Tecnologia”</a>
+          <a class="btn ghost" href="/manual/">Apri il Manuale</a>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Limiti residui (dichiarati)</h3>
+        <ul class="list">
+          <li>non sostituisce secure hardware (TEE/HSM) quando richiesto</li>
+          <li>dipende dalla qualità del perimetro e delle policy definite</li>
+          <li>non elimina rischi fuori perimetro (hardware compromesso profondo)</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="notice">
+        <strong>Nota ENISA-style</strong><br/>
+        Questa pagina descrive un modello di prevenzione tecnica ex-ante.  
+        L’adozione in domini critici richiede valutazione del rischio, test red-team e controlli di supply chain.
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/hbce.js"></script>
+</body>
+</html>
