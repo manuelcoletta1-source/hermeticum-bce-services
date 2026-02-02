@@ -1,33 +1,9 @@
 {
-  "schema": "HBCE-IPR-DIGEST-v1",
-  "type": "IPR_DIGEST",
-  "mode": "fail-closed",
-  "policy": {
-    "ue_first": true,
-    "audit_first": true,
-    "fail_closed": true,
-    "hash_only": true,
-    "gdpr_min": true
-  },
-  "inputs": {
-    "canonical_path": "ipr.canon.json",
-    "site_base": "https://manuelcoletta1-source.github.io/hermeticum-bce-platform/"
-  },
-  "hash": {
+  "schema": "IPR-DIGEST-UE-PHIOMEGA-001",
+  "source": "ipr.canon.json",
+  "digest": {
     "algorithm": "SHA-512",
-    "digest_hex": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454"
+    "value": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454"
   },
-
-  "digest": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454",
-  "digest_hex": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454",
-  "sha512": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454",
-  "sha512_hex": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454",
-  "expected_digest": "8b076868f1e7af88161250db5df5c3057189637190b6ea00dcc30dff6fdd63c71748f9b9266ff0fed956f7867113c70b1d75d65b95bb79ace6eed2716ab3c454",
-
-  "signature": {
-    "algorithm": "ED25519",
-    "public_key_ref": "ed25519_pub.pem",
-    "status": "OPTIONAL",
-    "note": "La firma ED25519 non e' necessaria per la prova minima PASS/FAIL su SHA-512. Se presente, deve firmare ESATTAMENTE il digest_hex (ASCII)."
-  }
+  "status": "DECLARED"
 }
