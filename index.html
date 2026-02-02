@@ -2,130 +2,97 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <title>HERMETICUM B.C.E. — EU BioCyber Infrastructure</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HERMETICUM B.C.E. è un'infrastruttura biocibernetica UE per identità primaria (IPR), auditabilità e opponibilità nel tempo. Fail-closed, hash-only." />
-
-  <link rel="stylesheet" href="/hermeticum-bce-platform/assets/style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HERMETICUM B.C.E. — EU Gateway</title>
+  <meta name="description" content="Gateway UE-first per evidenze verificabili: onboarding, create, verify. Nessuna custodia. Fail-closed. Audit-first." />
+  <style>
+    :root{--bg:#0b0f14;--card:#101826;--border:#223043;--text:#e6edf3;--muted:#9fb0c0;--link:#7dd3fc}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 72px}
+    header{border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:18px}
+    h1{margin:0;font-size:20px;letter-spacing:.2px}
+    .sub{margin-top:6px;color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+    .card{border:1px solid var(--border);background:var(--card);border-radius:14px;padding:18px}
+    .btn{display:block;margin-top:10px;padding:12px 12px;border-radius:12px;border:1px solid var(--border);background:#0f2234;color:var(--text);text-decoration:none;font-weight:700}
+    .btn:hover{background:#132a41}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .note{color:var(--muted);font-size:13px;margin-top:10px}
+    ul{margin:8px 0 0 18px;color:#c4cfda}
+    footer{margin-top:26px;border-top:1px solid var(--border);padding-top:14px;color:var(--muted);font-size:13px}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
 
-  <!-- Canonical Header -->
-  <div data-include="header"></div>
-
-  <main class="hbce-main" role="main">
-
-    <!-- HERO -->
-    <section class="hbce-hero">
-      <h1>European BioCyber Infrastructure</h1>
-      <p class="hbce-hero__subtitle">
-        Identità primaria (IPR), auditabile e opponibile nel tempo.<br />
-        Nessuna custodia. Nessuna delega. Nessuna scorciatoia.
-      </p>
-
-      <div class="hbce-hero__cta">
-        <a class="hbce-btn hbce-btn--primary"
-           href="/hermeticum-bce-platform/onboarding/">
-          Avvia Onboarding
-        </a>
-
-        <a class="hbce-btn"
-           href="/hermeticum-bce-platform/verify/">
-          Verifica IPR
-        </a>
-
-        <a class="hbce-btn"
-           href="/hermeticum-bce-platform/catalog/">
-          Catalogo Servizi
-        </a>
+    <header>
+      <h1>European BioCyber Infrastructure — HERMETICUM B.C.E.</h1>
+      <div class="sub">
+        Identità primaria (IPR) come evidenza tecnica verificabile nel tempo. <strong>Nessuna custodia</strong>. <strong>Fail-closed</strong>. <strong>Audit-first</strong>.
       </div>
-    </section>
+    </header>
 
-    <!-- STATUS -->
-    <section class="hbce-section">
-      <h2>Stato Operativo</h2>
-      <p>
-        <strong>Status: IDLE</strong><br />
-        Il sistema è attivo in modalità prudenziale.
-        Le operazioni reali sono consentite solo dopo onboarding completo
-        e verifica IPR. In caso di ambiguità, il sistema fallisce chiuso.
-      </p>
-      <p>
-        <a href="/hermeticum-bce-platform/status/">Consulta STATUS.md →</a>
-      </p>
-    </section>
+    <div class="grid">
 
-    <!-- WHAT IT IS / IS NOT -->
-    <section class="hbce-section hbce-section--grid">
-      <div>
-        <h3>Che cos’è</h3>
+      <section class="card">
+        <h2 style="margin:0 0 8px;font-size:17px;">Ingresso canonico</h2>
+        <p style="margin:8px 0;color:#d1d9e0;">
+          Un solo percorso ufficiale: onboarding → create → verify. Ogni deviazione è informativa.
+        </p>
+        <a class="btn" href="./onboarding/">Avvia Onboarding</a>
+        <a class="btn" href="./verify/">Verifica (Verify)</a>
+        <p class="note">
+          Regola: mismatch o indeterminatezza ⇒ <span class="mono">STOP</span> (fail-closed).
+        </p>
+      </section>
+
+      <section class="card">
+        <h2 style="margin:0 0 8px;font-size:17px;">Cittadino UE</h2>
+        <p style="margin:8px 0;color:#d1d9e0;">
+          Versione leggibile + gesto minimo (90 secondi) + ponte operativo per Bruxelles.
+        </p>
+        <a class="btn" href="./citizen/">Apri Portale Cittadino UE</a>
         <ul>
-          <li>Un gateway UE-first per identità primaria (IPR)</li>
-          <li>Un sistema audit-first, hash-only, verificabile</li>
-          <li>Un'infrastruttura biocibernetica basata su responsabilità biologica</li>
+          <li><a href="./create/">Create</a> (guarded)</li>
+          <li><a href="./evidence-pack/">Evidence Pack</a></li>
+          <li><a href="./normative/">Normative Mapping</a></li>
         </ul>
-      </div>
+      </section>
 
-      <div>
-        <h3>Cosa non è</h3>
+      <section class="card">
+        <h2 style="margin:0 0 8px;font-size:17px;">Bruxelles</h2>
+        <p style="margin:8px 0;color:#d1d9e0;">
+          Pacchetto istituzionale: modello di decadimento sistemico e roadmap (Horizon-ready).
+        </p>
+        <a class="btn" href="./brussels-model/">Apri Brussels Model</a>
+        <p class="note">
+          Riferimento economico: decadimento cumulativo stimato ≈ <strong>€ 1.000.000.000.000</strong>.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2 style="margin:0 0 8px;font-size:17px;">Stato e governance</h2>
         <ul>
-          <li>Non è un ID Provider</li>
-          <li>Non custodisce dati personali</li>
-          <li>Non sostituisce eIDAS, EUDI Wallet o SPID</li>
-          <li>Non garantisce riconoscimento automatico</li>
+          <li><a href="./STATUS.md">Stato operativo (STATUS.md)</a> <!-- FIX: niente /status/ --></li>
+          <li><a href="./governance/">Governance</a></li>
+          <li><a href="./privacy/">Privacy</a></li>
+          <li><a href="./catalog/">Catalogo</a> · <a href="./map/">Mappa</a></li>
         </ul>
-      </div>
-    </section>
-
-    <!-- CANONICAL FLOW -->
-    <section class="hbce-section">
-      <h2>Percorso Canonico</h2>
-      <ol class="hbce-flow">
-        <li><strong>Onboarding</strong> — scelta profilo e livello (citizen / professional / institution)</li>
-        <li><strong>Register</strong> — territorio UE e dati minimi</li>
-        <li><strong>Create</strong> — generazione IPR + receipt verificabile</li>
-        <li><strong>Verify</strong> — verifica indipendente e riproducibile</li>
-      </ol>
-
-      <p class="hbce-note">
-        Ogni deviazione dal percorso canonico è informativa.
-        Nessuna operazione critica è consentita fuori flusso.
-      </p>
-    </section>
-
-    <!-- MAP / GOVERNANCE -->
-    <section class="hbce-section hbce-section--grid">
-      <div>
-        <h3>Ecosistema</h3>
-        <p>
-          HERMETICUM B.C.E. è composto da moduli separati ma coerenti:
-          IPR, audit, normative mapping, evidence pack e corridoi B2B/B2G.
+        <p class="note">
+          Nessun riconoscimento automatico. Nessuna delega. Solo evidenza ripetibile.
         </p>
-        <p>
-          <a href="/hermeticum-bce-platform/map/">Vai alla mappa →</a>
-        </p>
-      </div>
+      </section>
 
-      <div>
-        <h3>Governance</h3>
-        <p>
-          Il sistema opera in regime fail-closed, senza custodia,
-          con responsabilità non delegabile.
-        </p>
-        <p>
-          <a href="/hermeticum-bce-platform/governance/">Leggi governance →</a>
-        </p>
-      </div>
-    </section>
+    </div>
 
-  </main>
+    <footer>
+      HERMETICUM B.C.E. S.r.l. — UE-first · Audit-first · Hash-only · Fail-closed · Append-only
+    </footer>
 
-  <!-- Canonical Footer -->
-  <div data-include="footer"></div>
-
-  <!-- Include Loader -->
-  <script src="/hermeticum-bce-platform/assets/include.js"></script>
-
+  </div>
 </body>
 </html>
