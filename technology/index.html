@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tecnologia — IPR gate ex-ante (PASS/FAIL)</title>
+  <title>Tecnologia — PASS/FAIL, determinismo, integrazione IPR in AI</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
@@ -17,16 +17,20 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Tecnologia</h1>
-          <span class="sub">IPR · PASS/FAIL · determinismo · evidenza ex-ante</span>
+          <span class="sub">PASS/FAIL · determinismo · “virgola=FAIL”</span>
         </div>
       </div>
+
       <nav class="menu" aria-label="Navigazione principale">
         <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="onboarding/"><strong>Onboarding</strong></a>
         <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
         <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
         <a class="pill" data-nav href="institution/">Istituzioni UE</a>
         <a class="pill" data-nav href="member-states/">Stati Membri</a>
         <a class="pill active" data-nav href="technology/"><strong>Tecnologia</strong></a>
+        <a class="pill" data-nav href="verify/">Verify</a>
+        <a class="pill" data-nav href="create/">Create</a>
         <a class="pill" data-nav href="security/">Sicurezza</a>
         <a class="pill" data-nav href="governance/">Governance</a>
         <a class="pill" data-nav href="manual/">Manuale</a>
@@ -36,103 +40,130 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">TECHNICAL VIEW · DETERMINISTIC · AUDITABLE</div>
-      <h2 class="title">Come funziona: IPR come gate ex-ante</h2>
+      <div class="kicker">TECH SPEC · AUDIT-FIRST · FAIL-CLOSED</div>
+      <h2 class="title">Il sistema è binario: o è verificabile, o non è eseguibile</h2>
       <p class="lead">
-        L’IPR (Identity / Integrity Primary Record) è un record di precedenza che vincola l’azione
-        prima dell’esecuzione. La regola è binaria e misurabile:
-        <strong>se il contesto non coincide con l’IPR, l’azione non passa</strong>.
+        Questa pagina definisce il modello tecnico minimo: <strong>IPR</strong> (precedenza),
+        un gate (<strong>AI JOKER-C2</strong>) che fa pre-check, e un criterio di uscita:
+        <strong>PASS/FAIL</strong>. In questo mondo non esiste “quasi”: una differenza minima
+        cambia l’hash e quindi cambia l’atto.
       </p>
+
+      <div class="btnrow">
+        <a class="btn" href="verify/">Esegui Verify</a>
+        <a class="btn secondary" href="create/">Creazione guidata IPR</a>
+        <a class="btn ghost" href="security/">Threat model</a>
+      </div>
     </section>
 
     <section class="grid">
+      <article class="card cols-12">
+        <h3>Definizioni minime</h3>
+        <ul class="list">
+          <li><strong>IPR</strong>: record primario che definisce precedenza, scope, policy e contesto.</li>
+          <li><strong>Canon</strong>: serializzazione stabile del record (stesso input → stesso hash).</li>
+          <li><strong>Digest</strong>: hash SHA-512 del canonico (identità tecnica del contenuto).</li>
+          <li><strong>Gate ex-ante</strong>: componente che verifica prima dell’esecuzione.</li>
+          <li><strong>Fail-closed</strong>: in dubbio, blocca. Mai “fallback silenzioso”.</li>
+        </ul>
+      </article>
+
       <article class="card cols-6">
-        <h3>Che cos’è un IPR</h3>
+        <h3>Regola “virgola = FAIL”</h3>
         <p>
-          Un IPR descrive, prima dell’azione, gli elementi minimi che rendono un atto eseguibile:
-          contesto, policy, limiti, attribuibilità. Il record è verificabile tramite hash e regole
-          di coerenza.
+          Un hash è sensibile a ogni variazione. Questo è il punto: se cambia anche un carattere,
+          <strong>cambia l’atto</strong>. Non è un bug, è la sicurezza.
         </p>
         <div class="meta">
+          <span class="tag warn">virgola=FAIL</span>
           <span class="tag">append-only</span>
-          <span class="tag ok">ex-ante</span>
-          <span class="tag">hash-only</span>
         </div>
       </article>
 
       <article class="card cols-6">
-        <h3>PASS / FAIL (gate tecnico)</h3>
+        <h3>Perché serve in AI (punto di rottura)</h3>
         <p>
-          AI JOKER-C2 esegue un pre-check: confronta contesto reale e contesto attestato nell’IPR.
-          L’esito è binario:
+          Senza un gate, molte AI operano in modalità <strong>fail-open</strong>:
+          se il contesto è ambiguo, provano comunque.
+          Con IPR + gate, l’ambiguità diventa <strong>blocco</strong>.
         </p>
-        <ul class="list">
-          <li><strong>PASS</strong> → l’azione può essere eseguita</li>
-          <li><strong>FAIL</strong> → l’azione è bloccata (<span class="mono">fail-closed</span>)</li>
-        </ul>
         <div class="meta">
-          <span class="tag ok">PASS</span>
-          <span class="tag danger">FAIL</span>
-          <span class="tag">no implicit trust</span>
+          <span class="tag danger">fail-open</span>
+          <span class="tag ok">fail-closed</span>
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Perché “una virgola diversa” = FAIL</h3>
-        <p>
-          La governance ex-ante funziona solo se la verifica è deterministica.  
-          Una variazione minima nel contesto (configurazione, policy, limiti, scope) produce un hash differente.
-          Se l’hash non coincide, non esiste equivalenza: l’azione fallisce.
-        </p>
-        <ul class="list">
-          <li><strong>IPR A</strong> → hash A</li>
-          <li><strong>Contesto modificato</strong> (anche minimo) → hash B</li>
-          <li><strong>A ≠ B</strong> → <span class="mono">FAIL</span> → blocco</li>
-        </ul>
-        <div class="meta">
-          <span class="tag">determinismo</span>
-          <span class="tag ok">verifica replicabile</span>
-          <span class="tag warn">no correzioni ex-post</span>
-        </div>
-      </article>
-
-      <article class="card cols-7">
-        <h3>Sequence flow (semplificato)</h3>
+        <h3>Interfaccia del gate (minima, implementabile)</h3>
         <pre style="margin:0; white-space:pre-wrap; color:rgba(232,236,255,.92)">
-Soggetto responsabile
-  → Create IPR
-IPR-CORE
-  → Validate / Hash
-AI JOKER-C2
-  → Pre-check (contesto/policy/config)
-  → PASS: Allow → AI Target Execute
-  → FAIL: Block (no output)
-UNEBDO (opzionale)
-  → Evidence Pack (audit)
+INPUT:
+  action_request            // cosa si vuole fare
+  ipr_reference             // puntatore a canon+digest (e receipt se presente)
+  context_fingerprint       // fingerprint del runtime (modello, tool, ambiente)
+  policy_fingerprint        // fingerprint policy attiva
+
+CHECK (fail-closed):
+  if !verify(ipr_reference)             -> FAIL
+  if context_fingerprint != ipr.context -> FAIL
+  if policy_fingerprint  != ipr.policy  -> FAIL
+  if violates(ipr.limits)               -> FAIL
+
+OUTPUT:
+  PASS | FAIL  // nessun output esecutivo se FAIL
         </pre>
       </article>
 
-      <article class="card cols-5">
-        <h3>Proprietà misurabili</h3>
-        <ul class="list">
-          <li><strong>Copertura pre-check:</strong> % azioni verificate ex-ante</li>
-          <li><strong>Tempo di pre-check:</strong> ms/s</li>
-          <li><strong>Blocchi ex-ante:</strong> azioni impedite</li>
-          <li><strong>Ripetibilità:</strong> verifica identica su re-run</li>
-        </ul>
+      <article class="card cols-12">
+        <h3>Verify deterministico (questa demo)</h3>
+        <p>
+          In questo repository la prova minima è già operativa: la pagina <a href="verify/">/verify/</a>
+          scarica <span class="mono">ipr.canon.json</span> e <span class="mono">ipr.json</span>,
+          calcola SHA-512 e confronta il digest. Se coincide: PASS. Altrimenti: FAIL con motivo.
+        </p>
         <div class="btnrow">
-          <a class="btn secondary" href="security/">Vai a “Sicurezza”</a>
-          <a class="btn ghost" href="manual/">Apri il Manuale</a>
+          <a class="btn" href="verify/">Esegui Verify ora</a>
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Cosa NON è questa tecnologia</h3>
+        <h3>IPR dentro la tua AI: cosa cambia</h3>
+        <p>
+          Senza IPR, la tua AI è “una macchina di output”: riceve input, produce risposta, e spesso
+          tenta di completare anche quando manca evidenza.
+          Con IPR, la tua AI diventa <strong>una estensione tecnica e legale del tuo perimetro</strong>:
+          prima di agire deve dimostrare coerenza con policy e contesto.
+        </p>
         <ul class="list">
-          <li><strong>Non è sorveglianza:</strong> nessun controllo sulla persona, solo sull’atto.</li>
-          <li><strong>Non è fiducia:</strong> non si “crede” al sistema, lo si verifica.</li>
-          <li><strong>Non è correzione dopo:</strong> se manca precedenza, l’atto non avviene.</li>
+          <li><strong>AI domestica</strong>: comandi sensibili (pagamenti, accessi, domotica) solo con PASS.</li>
+          <li><strong>AI professionale</strong>: strumenti e dati solo nel perimetro definito (no leak).</li>
+          <li><strong>AI in flotte/swarm</strong>: comandi solo se precedenza verificata.</li>
+          <li><strong>AI spazio/satelliti</strong>: control-plane evidence-locked (errore = FAIL).</li>
         </ul>
+      </article>
+
+      <article class="card cols-6">
+        <h3>Compatibilità UE (principio)</h3>
+        <p>
+          Questo modello è “UE-first” nel senso tecnico: minimizza dati (hash-only),
+          rende verificabile l’atto (audit-first) e impedisce esecuzione senza evidenza (fail-closed).
+        </p>
+        <div class="meta">
+          <span class="tag">GDPR-min</span>
+          <span class="tag">audit-first</span>
+          <span class="tag ok">fail-closed</span>
+        </div>
+      </article>
+
+      <article class="card cols-6">
+        <h3>Limite fondamentale</h3>
+        <p>
+          Un gate non “rende buone” le decisioni: rende <strong>misurabile</strong> se erano eseguibili.
+          La responsabilità resta umana. Il sistema impedisce solo la fuga nel non verificabile.
+        </p>
+        <div class="meta">
+          <span class="tag">human responsibility</span>
+          <span class="tag ok">measurable</span>
+        </div>
       </article>
     </section>
   </main>
@@ -140,9 +171,9 @@ UNEBDO (opzionale)
   <footer class="footer">
     <div class="wrap">
       <div class="notice">
-        <strong>Nota tecnica</strong><br/>
-        Questa pagina descrive il funzionamento logico del gate ex-ante.  
-        Implementazioni e profili di rischio devono essere definiti dalle autorità competenti e dai domini operativi.
+        <strong>Chiusura tecnica</strong><br/>
+        IPR = precedenza. Gate = eseguibilità. Verify = prova.  
+        Senza prova replicabile, niente esecuzione.
       </div>
     </div>
   </footer>
