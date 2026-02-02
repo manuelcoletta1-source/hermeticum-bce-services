@@ -3,90 +3,69 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Onboarding | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Onboarding ufficiale: router verso Register e Fase 1 (LIGHT/STRONG). Evita duplicazioni e mantiene auditability." />
-  <link rel="stylesheet" href="../assets/css/main.css" />
+  <title>Onboarding — Ingresso canonico</title>
+  <meta name="description" content="Router canonico: scegli corridoio (cittadino / professionista / istituzione) e livello di intensità (light/strong)." />
+  <link rel="stylesheet" href="../assets/hbce.css" />
 </head>
 <body>
-  <header class="wrap">
-    <nav class="nav">
-      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-      <div class="navlinks">
-        <a href="../standards/">Standard</a>
-        <a href="../research/">Ricerca (Horizon)</a>
-        <a href="../phase-1/">Fase 1 (ONLY)</a>
-        <a href="../verify/">Verify</a>
-        <a href="../governance/">Governance</a>
-        <a href="../privacy/">Privacy</a>
-      </div>
+
+  <header class="hbce-header">
+    <div class="hbce-brand">
+      <h1 class="hbce-title">Onboarding — Ingresso canonico</h1>
+      <p class="hbce-sub">Scegli come entri, non chi sei. UE-first · Fail-closed</p>
+    </div>
+    <nav class="hbce-nav">
+      <a class="hbce-pill" href="../">Home</a>
+      <a class="hbce-pill" href="../citizen/">Cittadino UE</a>
+      <a class="hbce-pill" href="../create/">Create</a>
+      <a class="hbce-pill" href="../verify/">Verify</a>
+      <a class="hbce-pill" href="../brussels-model/">Bruxelles</a>
+      <a class="hbce-pill" href="../governance/">Governance</a>
     </nav>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Onboarding (router)</h1>
-      <p class="lead">
-        Questa pagina esiste solo per evitare percorsi duplicati.
-        L’onboarding ufficiale è <strong>risk-based</strong>: LIGHT o STRONG dentro Fase 1.
-      </p>
-      <div class="notice">
-        <strong>Regola audit:</strong> un solo percorso ufficiale. Il resto è compatibilità.
-      </div>
+  <main class="hbce-wrap">
+    <div class="hbce-grid">
 
-      <div class="btnrow" style="margin-top:14px;">
-        <a class="btn" href="../register/">Vai a Register</a>
-        <a class="btn secondary" href="../phase-1/">Apri Fase 1 (ONLY)</a>
-        <a class="btn secondary" href="../catalog/">Apri Catalog (mappa)</a>
-      </div>
-    </section>
-
-    <section class="grid">
-      <article class="card">
-        <h2>LIGHT (consigliato)</h2>
-        <p class="muted">
-          Profilo minimo. Nessun account. Email opzionale. HRR locale.
+      <section class="hbce-card hbce-span-2 hbce-glow">
+        <h2>Scopo</h2>
+        <p>
+          Onboarding definisce il <strong>perimetro dell’azione prima che l’azione avvenga</strong>.
+          Non identifica la persona: identifica la <strong>posizione operativa</strong>.
         </p>
-        <div class="btnrow">
-          <a class="btn" href="../phase-1/onboarding/light.html">Apri LIGHT</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <h2>STRONG (alto rischio)</h2>
-        <p class="muted">
-          Email + telefono (segnali hashati) e motivo d’uso. Non sostituisce eIDAS/CIE/SPID.
+        <p class="hbce-note hbce-mono">
+          Regola: se manca il contesto ⇒ FAIL (fail-closed)
         </p>
-        <div class="btnrow">
-          <a class="btn" href="../phase-1/onboarding/strong.html">Apri STRONG</a>
-        </div>
-      </article>
+      </section>
 
-      <article class="card">
-        <h2>Dopo l’onboarding</h2>
-        <p class="muted">
-          1) genera HRR → 2) crea Evidence Bundle → 3) verifica in Verify.
-        </p>
-        <div class="btnrow">
-          <a class="btn" href="../create/">Apri Create</a>
-          <a class="btn secondary" href="../verify/">Apri Verify</a>
-        </div>
-      </article>
+      <section class="hbce-card">
+        <h2>Corridoio</h2>
+        <p>Scegli il tuo ingresso:</p>
+        <a class="hbce-btn" href="../citizen/">Cittadino UE</a>
+        <div style="height:10px"></div>
+        <a class="hbce-btn secondary" href="../professional/">Professionista</a>
+        <div style="height:10px"></div>
+        <a class="hbce-btn secondary" href="../institution/">Istituzione</a>
+        <p class="hbce-note">Ogni corridoio ha limiti diversi e responsabilità diverse.</p>
+      </section>
 
-      <article class="card">
-        <h2>Nota</h2>
-        <p class="muted">
-          Se sei arrivato qui da un link vecchio, usa i pulsanti sopra.
-          Questo mantiene il portale coerente e “auditabile”.
-        </p>
-        <div class="btnrow">
-          <a class="btn secondary" href="../legacy/">Vai a Legacy</a>
-        </div>
-      </article>
-    </section>
+      <section class="hbce-card">
+        <h2>Intensità</h2>
+        <p>Due modalità di uso (stessa regola: fail-closed):</p>
+        <ul>
+          <li><strong>LIGHT</strong>: demo / apprendimento / evidenza minima</li>
+          <li><strong>STRONG</strong>: evidenza completa (receipt + verifiche più rigide)</li>
+        </ul>
+        <a class="hbce-btn" href="../create/">Continua → Create</a>
+        <p class="hbce-note">Create è il punto in cui l’atto diventa hashabile e verificabile.</p>
+      </section>
+
+    </div>
   </main>
 
-  <footer class="wrap foot">
-    <small>HERMETICUM B.C.E. S.r.l.</small>
+  <footer class="hbce-footer">
+    Onboarding non crea account né custodia dati. Serve a rendere l’atto contestualizzato e auditabile.
   </footer>
+
 </body>
 </html>
