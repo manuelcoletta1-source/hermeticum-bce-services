@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Onboarding — Entrare nel sistema (cosa significa)</title>
+  <title>Onboarding — ingresso canonico (EU-first, fail-closed)</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
@@ -17,16 +17,19 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Onboarding</h1>
-          <span class="sub">Ingresso controllato · percorso guidato · fail-closed</span>
+          <span class="sub">Ingresso canonico · scelta profilo · intensità</span>
         </div>
       </div>
+
       <nav class="menu" aria-label="Navigazione principale">
         <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill active" data-nav href="onboarding/"><strong>Onboarding</strong></a>
         <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
         <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
         <a class="pill" data-nav href="institution/">Istituzioni UE</a>
         <a class="pill" data-nav href="member-states/">Stati Membri</a>
         <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="verify/">Verify</a>
         <a class="pill" data-nav href="security/">Sicurezza</a>
         <a class="pill" data-nav href="governance/">Governance</a>
         <a class="pill" data-nav href="manual/">Manuale</a>
@@ -36,93 +39,131 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">ONBOARDING ROUTER · SIMPLE · ACTIONABLE</div>
-      <h2 class="title">Onboarding: cosa significa</h2>
+      <div class="kicker">ROUTER · ZERO CONFUSIONE</div>
+      <h2 class="title">Scegli chi sei, scegli quanto vuoi essere “blindato”</h2>
       <p class="lead">
-        “Onboarding” significa <strong>entrare nel sistema in modo guidato</strong>:
-        capire il perimetro, scegliere il tuo percorso, e attivare i passaggi minimi
-        senza errori. Qui non esistono scorciatoie: se manca evidenza verificabile,
-        il sistema si ferma (<span class="mono">fail-closed</span>).
+        Questo è l’ingresso canonico del portale.  
+        Regola unica: <strong>fail-closed</strong>. Se manca evidenza verificabile, l’azione non passa.
+        Qui non c’è “marketing”: c’è percorso operativo.
       </p>
 
       <div class="btnrow">
-        <a class="btn" href="citizen/">Percorso cittadino</a>
-        <a class="btn secondary" href="institution/">Percorso istituzioni UE</a>
-        <a class="btn ghost" href="member-states/">Percorso Stati Membri</a>
+        <a class="btn" href="verify/">Fai subito la prova (Verify)</a>
+        <a class="btn secondary" href="technology/">Capire PASS/FAIL</a>
+        <a class="btn ghost" href="governance/">Limiti dichiarati</a>
       </div>
     </section>
 
     <section class="grid">
       <article class="card cols-12">
-        <h3>Scelta rapida del percorso</h3>
-        <p>Scegli una sola porta. Ogni porta ha un obiettivo diverso.</p>
-      </article>
+        <h3>Step 1 — Scegli profilo</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Cittadino UE</h4>
+            <p style="margin:0 0 10px">
+              Protezione ex-ante per azioni sensibili quotidiane senza sorveglianza.
+            </p>
+            <div class="btnrow">
+              <a class="btn" href="citizen/">Vai a Cittadini UE</a>
+              <a class="btn ghost" href="manual/">Manuale</a>
+            </div>
+          </div>
 
-      <article class="card cols-4">
-        <h3>Cittadino UE</h3>
-        <p>
-          Vuoi capire come l’IPR protegge senza sorveglianza e cosa cambia nella tua AI quotidiana.
-        </p>
-        <div class="btnrow">
-          <a class="btn" href="citizen/">Entra (Cittadino)</a>
-        </div>
-        <div class="meta">
-          <span class="tag ok">protezione</span>
-          <span class="tag">no surveillance</span>
-        </div>
-      </article>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Istituzioni UE</h4>
+            <p style="margin:0 0 10px">
+              Pacchetto valutativo DG CONNECT / ENISA: threat model, KPI, roadmap.
+            </p>
+            <div class="btnrow">
+              <a class="btn secondary" href="institution/">Vai a Istituzioni UE</a>
+              <a class="btn ghost" href="security/">Threat model</a>
+            </div>
+          </div>
 
-      <article class="card cols-4">
-        <h3>Istituzioni UE</h3>
-        <p>
-          Vuoi valutare il modello come enforcement ex-ante (AI governance) per policy UE.
-        </p>
-        <div class="btnrow">
-          <a class="btn secondary" href="institution/">Entra (Istituzioni)</a>
-        </div>
-        <div class="meta">
-          <span class="tag">DG CONNECT</span>
-          <span class="tag">ENISA-style</span>
-        </div>
-      </article>
-
-      <article class="card cols-4">
-        <h3>Stato Membro</h3>
-        <p>
-          Vuoi una roadmap operativa per adottare il gate ex-ante senza centralizzare i dati.
-        </p>
-        <div class="btnrow">
-          <a class="btn ghost" href="member-states/">Entra (Stati Membri)</a>
-        </div>
-        <div class="meta">
-          <span class="tag">federation</span>
-          <span class="tag ok">sovereignty</span>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Stato Membro / Operatore</h4>
+            <p style="margin:0 0 10px">
+              Adozione operativa federata: timeline, GO/NO-GO, scaling.
+            </p>
+            <div class="btnrow">
+              <a class="btn ghost" href="member-states/">Vai a Stati Membri</a>
+              <a class="btn ghost" href="technology/">Specifica</a>
+            </div>
+          </div>
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Passi minimi (1–2 minuti)</h3>
-        <ul class="list">
-          <li><strong>1) Leggi i limiti:</strong> cosa è / cosa non è → <a href="governance/">/governance/</a></li>
-          <li><strong>2) Capisci il PASS/FAIL:</strong> come si blocca l’atto → <a href="technology/">/technology/</a></li>
-          <li><strong>3) Vedi il threat model:</strong> quali minacce copri → <a href="security/">/security/</a></li>
-          <li><strong>4) Apri il manuale:</strong> struttura completa → <a href="manual/">/manual/</a></li>
-        </ul>
+        <h3>Step 2 — Scegli intensità (Light / Strong)</h3>
+        <p>
+          “Intensità” significa quanto stretto è il perimetro e quanto duro è il blocco.
+          Entrambe le modalità restano fail-closed: cambia solo il livello di vincolo.
+        </p>
+
+        <div class="grid" style="gap:12px">
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Light</h4>
+            <ul class="list" style="margin-top:8px">
+              <li>per uso personale e adozione rapida</li>
+              <li>scope chiaro, pochi tool, poche eccezioni</li>
+              <li>verifica base + audit replicabile</li>
+            </ul>
+            <div class="meta">
+              <span class="tag">fast start</span>
+              <span class="tag ok">fail-closed</span>
+            </div>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Strong</h4>
+            <ul class="list" style="margin-top:8px">
+              <li>per domini critici e alta esposizione</li>
+              <li>fingerprint più rigido (contesto/policy)</li>
+              <li>limiti espliciti, GO/NO-GO più severi</li>
+            </ul>
+            <div class="meta">
+              <span class="tag">high assurance</span>
+              <span class="tag ok">fail-closed</span>
+            </div>
+          </div>
+        </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Nota: “verifica IPR non va”</h3>
-        <p>
-          Il 90% dei problemi di verifica su GitHub Pages nasce da percorsi sbagliati (link assoluti)
-          o da file non raggiungibili.  
-          In questo portale tutte le pagine sono state impostate per project-site (<span class="mono">/hermeticum-bce-platform/</span>)
-          usando <span class="mono">&lt;base href&gt;</span>.  
-          Se qualcosa fallisce, è un FAIL utile: ti dice esattamente che manca coerenza o che manca il file.
-        </p>
-        <div class="btnrow">
-          <a class="btn secondary" href="verify/">Vai a Verify</a>
-          <a class="btn ghost" href="technology/">Regola “virgola=FAIL”</a>
+        <h3>Step 3 — Azione immediata (3 scelte)</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">1) Verifica</h4>
+            <p style="margin:0 0 10px">
+              Prova che il sistema è deterministico: PASS/FAIL su file reali del repo.
+            </p>
+            <a class="btn" href="verify/">Apri Verify</a>
+          </div>
+
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">2) Comprendi la tecnologia</h4>
+            <p style="margin:0 0 10px">
+              Capisci il gate, i fingerprint, e perché “virgola=FAIL”.
+            </p>
+            <a class="btn secondary" href="technology/">Apri Tecnologia</a>
+          </div>
+
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">3) Crea un IPR</h4>
+            <p style="margin:0 0 10px">
+              Creazione guidata (dimostrativa): da create → verify.
+            </p>
+            <a class="btn ghost" href="create/">Apri Create</a>
+          </div>
         </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Nota di chiarezza</h3>
+        <p>
+          “Onboarding” significa semplicemente: <strong>percorso di ingresso</strong>.
+          Qui è usato come router per evitare pagine duplicate e flussi incoerenti.
+        </p>
       </article>
     </section>
   </main>
@@ -130,9 +171,9 @@
   <footer class="footer">
     <div class="wrap">
       <div class="notice">
-        <strong>Ingresso controllato</strong><br/>
-        Onboarding significa: percorso guidato, perimetro chiaro, e regole verificabili.
-        Se manca evidenza, il sistema si ferma.
+        <strong>Ingresso canonico</strong><br/>
+        Profilo → intensità → prova (Verify) → specifica (Tecnologia) → creazione (Create).  
+        Se manca evidenza verificabile: FAIL.
       </div>
     </div>
   </footer>
