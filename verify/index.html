@@ -4,73 +4,64 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Verify — Verifica IPR</title>
-  <meta name="description" content="Hub di verifica IPR: verifica ripetibile, fail-closed, hash-only. Nessuna custodia." />
-  <style>
-    :root{--bg:#0b0f14;--card:#101826;--border:#223043;--text:#e6edf3;--muted:#9fb0c0;--link:#7dd3fc}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-    .wrap{max-width:960px;margin:0 auto;padding:28px 18px 72px}
-    header{border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:18px}
-    h1{margin:0;font-size:20px;letter-spacing:.2px}
-    .sub{margin-top:6px;color:var(--muted);font-size:14px}
-    .card{border:1px solid var(--border);background:var(--card);border-radius:14px;padding:18px;margin-top:14px}
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .btn{display:inline-block;margin-top:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#0f2234;color:var(--text);text-decoration:none;font-weight:700}
-    .btn:hover{background:#132a41}
-    ul{margin:8px 0 0 18px;color:#c4cfda}
-    .note{color:var(--muted);font-size:13px;margin-top:10px}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    footer{margin-top:26px;border-top:1px solid var(--border);padding-top:14px;color:var(--muted);font-size:13px}
-  </style>
+  <meta name="description" content="Hub di verifica: PASS/FAIL deterministico, fail-closed, hash-only." />
+  <link rel="stylesheet" href="../assets/hbce.css" />
 </head>
 <body>
-  <div class="wrap">
 
-    <header>
-      <h1>Verify — Verifica IPR</h1>
-      <div class="sub">
-        Verifica indipendente e ripetibile. <strong>Fail-closed</strong>. <strong>Hash-only</strong>. Nessuna custodia.
-      </div>
-    </header>
+  <header class="hbce-header">
+    <div class="hbce-brand">
+      <h1 class="hbce-title">Verify — Verifica IPR</h1>
+      <p class="hbce-sub">Verifica ripetibile · deterministica · fail-closed</p>
+    </div>
+    <nav class="hbce-nav">
+      <a class="hbce-pill" href="../">Home</a>
+      <a class="hbce-pill" href="../onboarding/">Onboarding</a>
+      <a class="hbce-pill" href="../create/">Create</a>
+      <a class="hbce-pill" href="../citizen/">Cittadino UE</a>
+      <a class="hbce-pill" href="../brussels-model/">Bruxelles</a>
+      <a class="hbce-pill" href="../governance/">Governance</a>
+    </nav>
+  </header>
 
-    <section class="card">
-      <h2 style="margin:0 0 8px;font-size:17px;">Cosa fa questa pagina</h2>
-      <p style="margin:8px 0;color:#d1d9e0;">
-        Ti porta alla verifica corretta e ti dice cosa significa “PASS” e cosa significa “FAIL”.
-        Se manca un elemento o c’è ambiguità, la verifica <span class="mono">fallisce chiusa</span>.
-      </p>
+  <main class="hbce-wrap">
+    <div class="hbce-grid">
 
-      <h3 style="margin:14px 0 6px;font-size:14px;">Verifiche disponibili</h3>
-      <ul>
-        <li><a href="./ipr-manuel-coletta.html">Verifica IPR — Manuel Coletta (pagina dedicata)</a></li>
-      </ul>
+      <section class="hbce-card hbce-span-2 hbce-glow">
+        <h2>Regola</h2>
+        <ul>
+          <li>Input incompleto ⇒ <strong>FAIL</strong></li>
+          <li>Digest non coincide ⇒ <strong>FAIL</strong></li>
+          <li>Firma non verifica ⇒ <strong>FAIL</strong></li>
+          <li>Non ripetibile ⇒ <strong>FAIL</strong></li>
+        </ul>
+        <p class="hbce-note hbce-mono">Verifica = determinismo. Non “fiducia”.</p>
+      </section>
 
-      <a class="btn" href="../onboarding/">Torna a Onboarding</a>
-      <a class="btn" href="../create/">Vai a Create</a>
+      <section class="hbce-card">
+        <h2>Verifiche disponibili</h2>
+        <ul>
+          <li><a href="./ipr-manuel-coletta.html">IPR — Manuel Coletta</a></li>
+        </ul>
+        <a class="hbce-btn" href="../create/">Torna a Create</a>
+      </section>
 
-      <p class="note">
-        Se “non va”, di solito è uno di questi casi: file mancante, hash non coerente, receipt non coerente, oppure percorso non canonico.
-      </p>
-    </section>
+      <section class="hbce-card">
+        <h2>Se “non va”</h2>
+        <ul>
+          <li>file mancante</li>
+          <li>percorso non canonico</li>
+          <li>hash/receipt non coerenti</li>
+        </ul>
+        <p class="hbce-note">Usa l’onboarding come router: <a href="../onboarding/">Onboarding</a></p>
+      </section>
 
-    <section class="card">
-      <h2 style="margin:0 0 8px;font-size:17px;">Regola fail-closed (in chiaro)</h2>
-      <ul>
-        <li>Se l’input non è completo ⇒ <strong>FAIL</strong></li>
-        <li>Se il digest non coincide ⇒ <strong>FAIL</strong></li>
-        <li>Se la firma non verifica ⇒ <strong>FAIL</strong></li>
-        <li>Se non è ripetibile ⇒ <strong>FAIL</strong></li>
-      </ul>
-      <p class="note">
-        Verifica = determinismo. Non “fiducia”.
-      </p>
-    </section>
+    </div>
+  </main>
 
-    <footer>
-      HERMETICUM B.C.E. S.r.l. — UE-first · Audit-first · Hash-only · Fail-closed · Append-only
-    </footer>
+  <footer class="hbce-footer">
+    Verify non interpreta: calcola e confronta. Output: PASS o FAIL.
+  </footer>
 
-  </div>
 </body>
 </html>
