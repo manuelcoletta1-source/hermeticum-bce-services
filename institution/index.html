@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Istituzioni UE — IPR & AI Governance ex-ante</title>
+  <title>Istituzioni UE — DG CONNECT / ENISA · modello ex-ante per AI & dati</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
@@ -17,16 +17,19 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Istituzioni UE</h1>
-          <span class="sub">DG CONNECT · ENISA · valutazione tecnica</span>
+          <span class="sub">DG CONNECT · ENISA · modello ex-ante per AI & dati (audit-first)</span>
         </div>
       </div>
+
       <nav class="menu" aria-label="Navigazione principale">
         <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="onboarding/"><strong>Onboarding</strong></a>
         <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
         <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
         <a class="pill active" data-nav href="institution/"><strong>Istituzioni UE</strong></a>
         <a class="pill" data-nav href="member-states/">Stati Membri</a>
         <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="verify/">Verify</a>
         <a class="pill" data-nav href="security/">Sicurezza</a>
         <a class="pill" data-nav href="governance/">Governance</a>
         <a class="pill" data-nav href="manual/">Manuale</a>
@@ -36,80 +39,179 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">EVALUATION MODE · NO MARKETING · AUDIT-FIRST</div>
-      <h2 class="title">Pacchetto istituzionale per la governance ex-ante dell’AI</h2>
+      <div class="kicker">EU-READY · EX-ANTE GOVERNANCE · FAIL-CLOSED</div>
+      <h2 class="title">Pacchetto istituzionale: prevenzione operativa prima dell’evento</h2>
       <p class="lead">
-        Questa sezione fornisce accesso diretto alla documentazione tecnica del modello
-        <strong>IPR / AI JOKER-C2</strong>, progettato per rendere applicabile tecnicamente
-        la governance dell’Intelligenza Artificiale <strong>prima dell’esecuzione</strong>.
+        Questo portale descrive un modello tecnico per vincolare l’azione digitale e AI
+        <strong>prima</strong> dell’esecuzione: se manca evidenza verificabile → <strong>FAIL</strong>.
+        Obiettivo: ridurre la fragilità sistemica (fail-open) senza sorveglianza e senza custodia centrale.
       </p>
+
+      <div class="btnrow">
+        <a class="btn" href="security/">Threat model (ENISA-style)</a>
+        <a class="btn secondary" href="technology/">Specifica tecnica (PASS/FAIL)</a>
+        <a class="btn ghost" href="verify/">Prova minima (Verify)</a>
+      </div>
     </section>
 
     <section class="grid">
-      <article class="card cols-7">
-        <h3>Executive technical summary</h3>
-        <p>
-          Il modello introduce un <strong>gate ex-ante</strong> che verifica l’esistenza di una
-          precedenza tecnica (IPR) prima che un sistema AI possa eseguire un’azione.
-          In assenza di evidenza verificabile, l’azione è bloccata (<span class="mono">fail-closed</span>).
-        </p>
-        <p>
-          Il sistema non prende decisioni giuridiche, non centralizza dati personali e non
-          sostituisce l’autorità pubblica.
-        </p>
+      <article class="card cols-12">
+        <h3>Executive summary (1 pagina)</h3>
+        <ul class="list">
+          <li><strong>Problema</strong>: molti sistemi digitali/AI operano in fail-open (ambiguità → azione/output).</li>
+          <li><strong>Effetto</strong>: aumento di rischio operativo (dati, tool, comandi) e costo post-evento (incident response).</li>
+          <li><strong>Soluzione</strong>: gate ex-ante basato su evidenza minima verificabile: IPR + fingerprint contesto/policy → PASS/FAIL.</li>
+          <li><strong>Garanzie</strong>: hash-only, GDPR-min, no custody, no surveillance, audit replicabile.</li>
+          <li><strong>Risultato atteso</strong>: riduzione della superficie d’attacco e standardizzazione della “eseguibilità” come requisito.</li>
+        </ul>
         <div class="meta">
-          <span class="tag ok">ex-ante</span>
-          <span class="tag">audit-first</span>
+          <span class="tag ok">audit-first</span>
+          <span class="tag ok">fail-closed</span>
           <span class="tag">hash-only</span>
+          <span class="tag">federation</span>
         </div>
       </article>
 
-      <article class="card cols-5">
-        <h3>Allineamento normativo</h3>
+      <article class="card cols-12">
+        <h3>Punto critico UE (il collo di bottiglia)</h3>
+        <p>
+          Il punto critico non è “mancanza di norme”. È il gap operativo tra regole e runtime:
+          l’Europa può definire requisiti, ma molti sistemi in produzione eseguono comunque quando
+          la prova non c’è, è incompleta o non è riproducibile.
+        </p>
         <ul class="list">
-          <li><strong>AI Act</strong> — enforcement tecnico ex-ante</li>
-          <li><strong>NIS2</strong> — prevenzione e riduzione del rischio</li>
-          <li><strong>GDPR</strong> — minimizzazione e assenza di custodia</li>
-          <li><strong>Data Act</strong> — interoperabilità federata</li>
+          <li><strong>Governance ex-post</strong>: si interviene dopo l’incidente (costosa, lenta, politicamente fragile).</li>
+          <li><strong>Audit non deterministico</strong>: documentazione che non si replica (disallineamenti, versioni, drift).</li>
+          <li><strong>Interoperabilità fragile</strong>: supply chain e federazione senza criterio comune di “eseguibilità”.</li>
+        </ul>
+        <p style="color:rgba(232,236,255,.82)">
+          Qui proponiamo un criterio semplice: <strong>eseguibilità</strong> = evidenza minima verificabile prima dell’azione.
+        </p>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Proposta (cosa cambia davvero)</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">1) IPR</h4>
+            <p style="margin:0 0 10px">
+              Record primario di integrità: definisce scope, limiti, policy e contesto atteso.
+              Minimale, hash-only, contestabile.
+            </p>
+            <div class="meta"><span class="tag">precedenza</span><span class="tag">limits</span></div>
+          </div>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">2) Gate ex-ante</h4>
+            <p style="margin:0 0 10px">
+              Modulo PASS/FAIL prima dell’esecuzione: se manca prova, blocca.
+              Riduce fail-open sistemico.
+            </p>
+            <div class="meta"><span class="tag ok">fail-closed</span><span class="tag">PASS/FAIL</span></div>
+          </div>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">3) Federazione</h4>
+            <p style="margin:0 0 10px">
+              Stati Membri e operatori interoperano condividendo solo evidenze minime (hash/fingerprint),
+              non dati personali.
+            </p>
+            <div class="meta"><span class="tag">federation</span><span class="tag">GDPR-min</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Non-equivalenze (per evitare equivoci)</h3>
+        <ul class="list">
+          <li>Non è un IDP, non è un registro di Stato: <strong>no custody</strong>.</li>
+          <li>Non è sorveglianza, non è profilazione: <strong>no surveillance</strong>.</li>
+          <li>Non è “AI che decide diritti”: è <strong>AI che vincola eseguibilità</strong>.</li>
+          <li>Non sostituisce framework UE: si integra come requisito tecnico (gate) e prova minima replicabile.</li>
         </ul>
       </article>
 
       <article class="card cols-12">
-        <h3>Documentazione disponibile</h3>
-        <ul class="list">
-          <li><strong>Manuale IPR UE</strong> — descrizione completa del modello</li>
-          <li><strong>Annex A</strong> — Architettura tecnica</li>
-          <li><strong>Annex B</strong> — Diagrammi e sequence flow</li>
-          <li><strong>Annex C</strong> — Mapping normativo (AI Act, NIS2, GDPR)</li>
-          <li><strong>Annex D</strong> — Threat model & risk assessment (ENISA-style)</li>
-          <li><strong>Annex E</strong> — KPI e criteri di certificazione</li>
-          <li><strong>Annex F</strong> — Linee guida operative per Stati Membri</li>
-        </ul>
-        <div class="btnrow">
-          <a class="btn" href="manual/">Accedi alla documentazione</a>
-          <a class="btn secondary" href="security/">Threat model (ENISA-style)</a>
-          <a class="btn ghost" href="member-states/">Adozione Stati Membri</a>
+        <h3>KPI (misurabili e auditabili)</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-3" style="padding:14px">
+            <h4 style="margin:0 0 6px">Block rate</h4>
+            <p style="margin:0">quante azioni vengono bloccate e perché</p>
+          </div>
+          <div class="card cols-3" style="padding:14px">
+            <h4 style="margin:0 0 6px">Mismatch rate</h4>
+            <p style="margin:0">drift policy/contesto rilevati ex-ante</p>
+          </div>
+          <div class="card cols-3" style="padding:14px">
+            <h4 style="margin:0 0 6px">Reproducibility</h4>
+            <p style="margin:0">percentuale audit replicabili (PASS/FAIL)</p>
+          </div>
+          <div class="card cols-3" style="padding:14px">
+            <h4 style="margin:0 0 6px">MTTR</h4>
+            <p style="margin:0">tempo di ripristino dopo FAIL (go/no-go)</p>
+          </div>
         </div>
       </article>
 
-      <article class="card cols-6">
-        <h3>Stato del sistema</h3>
+      <article class="card cols-12">
+        <h3>Roadmap (Bruxelles → Stati Membri → ecosistema)</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Fase 0 — Proof</h4>
+            <ul class="list" style="margin-top:8px">
+              <li>prove deterministic (Verify)</li>
+              <li>threat model e KPI</li>
+              <li>governance: limiti dichiarati</li>
+            </ul>
+            <div class="meta"><span class="tag">0–3 mesi</span></div>
+          </div>
+
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Fase 1 — Pilot</h4>
+            <ul class="list" style="margin-top:8px">
+              <li>pilota con 1–2 domini (PA/industry)</li>
+              <li>integrazione gate su workflow reali</li>
+              <li>misura KPI e incident reduction</li>
+            </ul>
+            <div class="meta"><span class="tag">3–9 mesi</span></div>
+          </div>
+
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Fase 2 — Federazione</h4>
+            <ul class="list" style="margin-top:8px">
+              <li>estensione multi-ente / multi-paese</li>
+              <li>standardizzazione fingerprint</li>
+              <li>procurement-ready (GO/NO-GO)</li>
+            </ul>
+            <div class="meta"><span class="tag">9–18 mesi</span></div>
+          </div>
+        </div>
+        <div class="btnrow" style="margin-top:12px">
+          <a class="btn" href="member-states/">Vista adozione Stati Membri</a>
+          <a class="btn secondary" href="security/">Controlli ENISA-style</a>
+          <a class="btn ghost" href="technology/">Specifica gate</a>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Richiesta istituzionale (chiara)</h3>
         <ul class="list">
-          <li><strong>Livello:</strong> dimostrativo operativo</li>
-          <li><strong>Approccio:</strong> federato, non centralizzato</li>
-          <li><strong>Effetti giuridici:</strong> nessuno automatico</li>
-          <li><strong>Uso previsto:</strong> pilot, sandbox, valutazione</li>
+          <li><strong>Definire</strong> “eseguibilità ex-ante” come requisito tecnico per azioni sensibili in sistemi AI/automation.</li>
+          <li><strong>Finanziare</strong> un pilot europeo con KPI e audit replicabile (non slide-only).</li>
+          <li><strong>Standardizzare</strong> fingerprint di contesto/policy e formato evidenze minime (hash-only).</li>
+          <li><strong>Abilitare</strong> procurement e adozione: GO/NO-GO su prove replicabili.</li>
         </ul>
       </article>
 
-      <article class="card cols-6">
-        <h3>Ambiti di valutazione suggeriti</h3>
-        <ul class="list">
-          <li>servizi pubblici digitali</li>
-          <li>governance AI ad alto rischio</li>
-          <li>cybersicurezza preventiva</li>
-          <li>cooperazione transfrontaliera</li>
-        </ul>
+      <article class="card cols-12">
+        <h3>Prova minima (subito)</h3>
+        <p>
+          Per evitare discussioni astratte: la prova minima è una pagina che verifica file reali del repo e restituisce PASS/FAIL.
+          È replicabile da chiunque, oggi.
+        </p>
+        <div class="btnrow">
+          <a class="btn" href="verify/">Esegui Verify</a>
+          <a class="btn secondary" href="governance/">Leggi limiti</a>
+          <a class="btn ghost" href="ai-joker-c2/">Cos’è AI JOKER-C2</a>
+        </div>
       </article>
     </section>
   </main>
@@ -117,10 +219,9 @@
   <footer class="footer">
     <div class="wrap">
       <div class="notice">
-        <strong>Nota istituzionale</strong><br/>
-        Questa pagina ha finalità esclusivamente informative e valutative.
-        Il sistema descritto non produce effetti giuridici automatici
-        e non sostituisce le competenze delle autorità dell’Unione o degli Stati Membri.
+        <strong>Chiusura</strong><br/>
+        Modello UE-ready: prevenzione ex-ante, audit replicabile, hash-only, federazione.
+        Se manca evidenza verificabile: FAIL.
       </div>
     </div>
   </footer>
