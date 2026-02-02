@@ -3,84 +3,146 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Governance | HERMETICUM B.C.E.</title>
-  <meta name="description" content="Governance e limiti: cosa è e cosa non è il portale. UE-first, GDPR-min, fail-closed." />
-  <link rel="stylesheet" href="../assets/css/main.css" />
+  <title>Governance — Limiti, responsabilità, no custody, no surveillance</title>
+  <link rel="stylesheet" href="/assets/hbce.css" />
 </head>
 <body>
-  <header class="wrap">
-    <nav class="nav">
-      <a class="brand" href="../">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</a>
-      <div class="navlinks">
-        <a href="../standards/">Standard</a>
-        <a href="../research/">Ricerca (Horizon)</a>
-        <a href="../phase-1/">Fase 1 (ONLY)</a>
-        <a href="../verify/">Verify</a>
-        <a class="active" href="./">Governance</a>
-        <a href="../privacy/">Privacy</a>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="sig" aria-hidden="true"></div>
+        <div>
+          <h1>Governance</h1>
+          <span class="sub">Limiti dichiarati · responsabilità umana · fail-closed</span>
+        </div>
       </div>
-    </nav>
+      <nav class="menu" aria-label="Navigazione principale">
+        <a class="pill" data-nav href="/"><strong>Home</strong></a>
+        <a class="pill" data-nav href="/institutions/">Istituzioni UE</a>
+        <a class="pill" data-nav href="/member-states/">Stati Membri</a>
+        <a class="pill" data-nav href="/technology/">Tecnologia</a>
+        <a class="pill" data-nav href="/security/">Sicurezza</a>
+        <a class="pill active" data-nav href="/governance/"><strong>Governance</strong></a>
+        <a class="pill" data-nav href="/manual/">Manuale</a>
+      </nav>
+    </div>
   </header>
 
   <main class="wrap">
     <section class="hero">
-      <h1>Governance</h1>
+      <div class="kicker">LIMITS · RESPONSIBILITY · NO CENTRAL CUSTODY</div>
+      <h2 class="title">Cosa è e cosa non è questo modello</h2>
       <p class="lead">
-        Questa pagina definisce limiti, responsabilità e perimetro operativo.
-        È scritta per essere chiara a cittadino UE, tecnico e revisore (audit).
+        Questa pagina definisce i limiti del sistema in modo esplicito.
+        Nessuna ambiguità: la governance tecnica deve essere verificabile, ma anche
+        chiaramente separata da poteri e responsabilità istituzionali.
       </p>
-      <div class="notice">
-        <strong>Principio:</strong> se manca attribuzione/verifica/prova, l’atto non nasce (fail-closed).
-        Il sistema blocca per sicurezza, non “procede lo stesso”.
-      </div>
     </section>
 
     <section class="grid">
-      <article class="card">
-        <h2>Cosa è</h2>
-        <ul class="muted">
-          <li>Un portale a livelli: Normativo / Ricerca UE / Operatività minima / Verifica tecnica.</li>
-          <li>Un framework di tracciabilità e accountability basato su eventi (append-only).</li>
-          <li>Un approccio “GDPR-min”: riduzione del rischio tramite minimizzazione dei dati.</li>
+      <article class="card cols-6">
+        <h3>È</h3>
+        <ul class="list">
+          <li><strong>Un gate tecnico ex-ante:</strong> verifica e vincola l’azione prima dell’esecuzione.</li>
+          <li><strong>Un modello federato:</strong> domini separati, interoperabilità senza centralizzazione.</li>
+          <li><strong>Un sistema auditabile:</strong> verifica deterministica, evidenze append-only.</li>
+          <li><strong>Un supporto alla compliance:</strong> enforcement tecnico, non interpretativo.</li>
         </ul>
+        <div class="meta">
+          <span class="tag ok">ex-ante</span>
+          <span class="tag">audit-first</span>
+          <span class="tag">federated</span>
+        </div>
       </article>
 
-      <article class="card">
-        <h2>Cosa NON è</h2>
-        <ul class="muted">
-          <li>Non è un identity provider e non sostituisce CIE/SPID/eIDAS.</li>
-          <li>Non è banca, wallet custodial o servizio di custodia di dati personali.</li>
-          <li>Non assegna diritti, titoli, certificazioni civili o status legali.</li>
-          <li>Non garantisce “verità” di un contenuto: garantisce solo verificabilità di traccia e coerenza di processo.</li>
+      <article class="card cols-6">
+        <h3>Non è</h3>
+        <ul class="list">
+          <li><strong>Non è sorveglianza:</strong> non osserva la persona, vincola l’atto.</li>
+          <li><strong>Non è un’identità digitale di Stato:</strong> non sostituisce eIDAS/EUDI.</li>
+          <li><strong>Non è un’autorità:</strong> non prende decisioni giuridiche automatiche.</li>
+          <li><strong>Non è una piattaforma di custodia:</strong> non centralizza dati personali.</li>
         </ul>
+        <div class="meta">
+          <span class="tag warn">no surveillance</span>
+          <span class="tag ok">no custody</span>
+        </div>
       </article>
 
-      <article class="card">
-        <h2>Responsabilità e attribuzione</h2>
-        <p class="muted">
-          La responsabilità degli atti resta in capo al soggetto biologico che li produce.
-          La componente cibernetica (strumenti e AI) non è titolare di responsabilità legale.
-          Ogni uso deve rispettare le leggi UE applicabili, inclusi privacy e sicurezza.
+      <article class="card cols-12">
+        <h3>Responsabilità (principio operativo)</h3>
+        <p>
+          La responsabilità resta sempre <strong>umana e istituzionale</strong>.
+          Il sistema non “decide” finalità o legittimità politica: applica controlli tecnici
+          definiti da policy e contesto attestati ex-ante.
         </p>
+        <ul class="list">
+          <li><strong>Chi definisce policy e perimetri:</strong> autorità competenti / domini operativi.</li>
+          <li><strong>Chi crea l’IPR:</strong> soggetto responsabile (umano/ente) nel dominio.</li>
+          <li><strong>Chi esegue il controllo:</strong> gate tecnico (PASS/FAIL).</li>
+        </ul>
       </article>
 
-      <article class="card">
-        <h2>Regole operative (fail-closed)</h2>
-        <ul class="muted">
-          <li>Se manca un requisito minimo, l’operazione è bloccata.</li>
-          <li>La verifica tecnica produce esiti: VALID / INVALID / INCONCLUSIVE.</li>
-          <li>Qualsiasi uso simbolico deve restare dichiarato e non opponibile (vedi Standard).</li>
+      <article class="card cols-7">
+        <h3>Fail-closed (regola di sicurezza)</h3>
+        <p>
+          In assenza di evidenza ex-ante o in caso di mismatch, l’azione è bloccata.
+          Non esistono “eccezioni silenziose”, non esistono “aggiustamenti dopo”.
+        </p>
+        <ul class="list">
+          <li><strong>PASS</strong> → azione consentita</li>
+          <li><strong>FAIL</strong> → azione negata</li>
         </ul>
+        <div class="meta">
+          <span class="tag ok">PASS</span>
+          <span class="tag danger">FAIL</span>
+          <span class="tag">deterministic</span>
+        </div>
+      </article>
+
+      <article class="card cols-5">
+        <h3>Data governance (GDPR-min)</h3>
+        <ul class="list">
+          <li><strong>Minimizzazione:</strong> hash e riferimenti, no dati in chiaro.</li>
+          <li><strong>Nessuna profilazione:</strong> nessun tracciamento utente.</li>
+          <li><strong>Nessuna custodia centrale:</strong> federazione tra domini.</li>
+        </ul>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Limitazioni dichiarate</h3>
+        <ul class="list">
+          <li>non fornisce protezione assoluta: riduce rischio spostando il controllo ex-ante</li>
+          <li>non copre compromissioni hardware profonde fuori perimetro</li>
+          <li>richiede policy e perimetri definiti da soggetti competenti</li>
+          <li>non produce effetti giuridici automatici</li>
+        </ul>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Trasparenza operativa</h3>
+        <p>
+          Il modello è progettato per essere valutabile: ciò che conta è ciò che si può verificare.
+          Per i dettagli tecnici e gli allegati (A–F), consultare la sezione Manuale.
+        </p>
         <div class="btnrow">
-          <a class="btn" href="../standards/">Apri Standard</a>
-          <a class="btn secondary" href="../">Torna al Gateway</a>
+          <a class="btn" href="/manual/">Vai al Manuale</a>
+          <a class="btn secondary" href="/institutions/">Pacchetto Istituzioni UE</a>
         </div>
       </article>
     </section>
   </main>
 
-  <footer class="wrap foot">
-    <small>HERMETICUM B.C.E. S.r.l.</small>
+  <footer class="footer">
+    <div class="wrap">
+      <div class="notice">
+        <strong>Dichiarazione di limiti</strong><br/>
+        Questo portale non abilita decisioni automatiche, non centralizza dati personali e non effettua sorveglianza.
+        Descrive un modello di governance tecnica verificabile e federata, adottabile solo sotto competenza delle autorità e dei domini operativi.
+      </div>
+    </div>
   </footer>
+
+  <script src="/assets/hbce.js"></script>
 </body>
 </html>
