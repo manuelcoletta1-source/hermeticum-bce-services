@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cittadini UE — Difesa e protezione con IPR</title>
+  <title>Cittadini UE — difesa e protezione ex-ante (senza sorveglianza)</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
@@ -17,16 +17,19 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Cittadini UE</h1>
-          <span class="sub">Difesa e protezione · senza sorveglianza · fail-closed</span>
+          <span class="sub">Difesa e protezione · ex-ante · no surveillance</span>
         </div>
       </div>
+
       <nav class="menu" aria-label="Navigazione principale">
         <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="onboarding/"><strong>Onboarding</strong></a>
         <a class="pill active" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
         <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
         <a class="pill" data-nav href="institution/">Istituzioni UE</a>
         <a class="pill" data-nav href="member-states/">Stati Membri</a>
         <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="verify/">Verify</a>
         <a class="pill" data-nav href="security/">Sicurezza</a>
         <a class="pill" data-nav href="governance/">Governance</a>
         <a class="pill" data-nav href="manual/">Manuale</a>
@@ -36,95 +39,136 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">CITIZEN-FIRST · NO CUSTODY · NO SURVEILLANCE</div>
-      <h2 class="title">IPR: proteggere il cittadino vincolando l’atto, non osservando la persona</h2>
+      <div class="kicker">CITIZEN-FIRST · PROTECTION · FAIL-CLOSED</div>
+      <h2 class="title">Protezione: non “ti guardo”, ti blocco prima del danno</h2>
       <p class="lead">
-        Oggi molte decisioni digitali avvengono prima che tu possa capirle, contestarle o impedirle.
-        L’IPR introduce una regola semplice: <strong>se un sistema (anche AI) non può dimostrare la precedenza, non agisce</strong>.
-        Non è “fiducia”. È un blocco tecnico verificabile.
+        La protezione digitale vera non nasce dal controllo continuo delle persone.
+        Nasce dal fatto che le azioni sensibili <strong>non possono avvenire</strong>
+        senza una precedenza verificabile.  
+        Qui entra l’IPR: un record che definisce prima cosa è permesso e cosa no.
+        Se manca evidenza: <strong>FAIL</strong> (nessuna esecuzione).
       </p>
 
       <div class="btnrow">
-        <a class="btn" href="manual/">Leggi il Manuale</a>
-        <a class="btn secondary" href="technology/">Come funziona (PASS/FAIL)</a>
-        <a class="btn ghost" href="governance/">Limiti e garanzie</a>
+        <a class="btn" href="onboarding/">Inizia da Onboarding</a>
+        <a class="btn secondary" href="verify/">Prova (Verify)</a>
+        <a class="btn ghost" href="governance/">Garanzie (no surveillance)</a>
       </div>
     </section>
 
-    <section class="grid" aria-label="Perché serve">
+    <section class="grid">
+      <article class="card cols-12">
+        <h3>Il problema reale (quotidiano)</h3>
+        <p>
+          Molti sistemi “provano comunque”: se non capiscono bene, tentano lo stesso.
+          Questo è <strong>fail-open</strong>. E nel mondo digitale fail-open significa:
+          pagamenti sbagliati, accessi concessi, dati esposti, azioni non revocabili.
+        </p>
+        <div class="meta">
+          <span class="tag danger">fail-open</span>
+          <span class="tag ok">fail-closed</span>
+        </div>
+      </article>
+
       <article class="card cols-6">
-        <h3>Il problema reale</h3>
+        <h3>Cosa ti dà l’IPR (in parole semplici)</h3>
         <ul class="list">
-          <li>azioni automatiche non trasparenti</li>
-          <li>attribuzione fragile (“non è colpa mia, è il sistema”)</li>
-          <li>audit dopo il danno</li>
-          <li>interoperabilità che spesso diventa esposizione</li>
+          <li><strong>un confine</strong>: cosa la tua AI/servizio può fare</li>
+          <li><strong>un freno automatico</strong>: se manca prova → stop</li>
+          <li><strong>una prova contestabile</strong>: PASS/FAIL riproducibile</li>
+          <li><strong>minimizzazione</strong>: hash-only, niente banca dati centrale</li>
         </ul>
       </article>
 
       <article class="card cols-6">
-        <h3>La soluzione tecnica</h3>
+        <h3>Cosa NON ti dà</h3>
         <ul class="list">
-          <li><strong>ex-ante:</strong> controllo prima dell’azione</li>
-          <li><strong>fail-closed:</strong> in dubbio, blocca</li>
-          <li><strong>GDPR-min:</strong> niente custodia centrale</li>
-          <li><strong>federazione:</strong> UE interoperabile senza trust implicito</li>
+          <li>non ti rende invulnerabile</li>
+          <li>non sostituisce tribunali o istituzioni</li>
+          <li>non “legge la mente”</li>
+          <li>non crea diritti automatici</li>
         </ul>
         <div class="meta">
-          <span class="tag ok">protezione</span>
-          <span class="tag">difesa</span>
-          <span class="tag">audit-first</span>
+          <span class="tag ok">no magic</span>
+          <span class="tag">human responsibility</span>
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Cosa cambia per te (in pratica)</h3>
-        <p>
-          Con IPR attivo, un sistema AI non può “auto-abilitarsi” a fare cose al posto tuo.
-          Deve superare un controllo: policy, contesto, limiti. Se manca coerenza, l’azione è negata.
-        </p>
-        <ul class="list">
-          <li><strong>Casa:</strong> AI domestica che non esegue azioni sensibili senza pre-check</li>
-          <li><strong>Lavoro:</strong> strumenti AI che non escono dal perimetro approvato</li>
-          <li><strong>PA:</strong> automazioni contestabili perché vincolate ex-ante</li>
-          <li><strong>Sanità:</strong> riduzione rischio di uso improprio e deriva del contesto</li>
-        </ul>
-      </article>
+        <h3>Esempi concreti (dal domestico al critico)</h3>
+        <div class="grid" style="gap:12px">
 
-      <article class="card cols-6">
-        <h3>È una “carta d’identità digitale”?</h3>
-        <p>
-          No. Non sostituisce documenti, non è un’identità di Stato, non chiede fede.
-          È un <strong>meccanismo di vincolo tecnico</strong>: decide se un’azione può avvenire.
-        </p>
-        <div class="meta">
-          <span class="tag">non eIDAS</span>
-          <span class="tag ok">atto vincolato</span>
-        </div>
-      </article>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Casa / Famiglia</h4>
+            <p style="margin:0 0 10px">
+              Domotica, accessi, pagamenti: azioni sensibili solo se IPR e contesto coincidono.
+              Se l’assistente “non è sicuro”, non esegue.
+            </p>
+            <div class="meta"><span class="tag">domestico</span></div>
+          </div>
 
-      <article class="card cols-6">
-        <h3>È sorveglianza?</h3>
-        <p>
-          No. La protezione deriva dal fatto che l’azione non passa senza precedenza verificabile.
-          Non serve osservare la tua vita: serve bloccare atti non autorizzati.
-        </p>
-        <div class="meta">
-          <span class="tag ok">no surveillance</span>
-          <span class="tag">no profiling</span>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Lavoro / Professione</h4>
+            <p style="margin:0 0 10px">
+              Dati e strumenti solo nel perimetro: niente tool fuori scope,
+              niente leak di documenti, niente esecuzioni “creative”.
+            </p>
+            <div class="meta"><span class="tag">professional</span></div>
+          </div>
+
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">PA / Servizi critici</h4>
+            <p style="margin:0 0 10px">
+              Automazioni con vincoli ex-ante: se manca evidenza verificabile
+              l’azione non passa. Audit replicabile.
+            </p>
+            <div class="meta"><span class="tag">public sector</span></div>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Flotte, droni, swarm</h4>
+            <p style="margin:0 0 10px">
+              Il comando è un atto: deve avere precedenza verificabile.
+              Se il contesto non coincide (software/firmware/policy), comando bloccato.
+            </p>
+            <div class="meta"><span class="tag">high assurance</span></div>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Spazio / satelliti</h4>
+            <p style="margin:0 0 10px">
+              Control-plane “evidence-locked”: la sicurezza non è “fiducia”,
+              è coerenza dimostrata. In dubbio: FAIL.
+            </p>
+            <div class="meta"><span class="tag">space</span></div>
+          </div>
+
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Ponte istituzionale (Bruxelles)</h3>
+        <h3>Come capisci che funziona (in 30 secondi)</h3>
         <p>
-          Questo modello è pensato per essere adottato a livello continentale perché lo stesso meccanismo
-          (PASS/FAIL) è applicabile in qualunque Stato Membro senza centralizzare i dati.
+          La prova minima non è un video: è una verifica replicabile.
+          Vai su <a href="verify/">Verify</a> e ottieni PASS/FAIL su file reali del repository.
+          Se cambia il contenuto, cambia l’hash. Se non coincide: FAIL.
         </p>
         <div class="btnrow">
-          <a class="btn secondary" href="institution/">Vista Istituzioni UE</a>
-          <a class="btn ghost" href="member-states/">Adozione Stati Membri</a>
-          <a class="btn" href="security/">Threat model</a>
+          <a class="btn" href="verify/">Esegui Verify</a>
+          <a class="btn secondary" href="technology/">Capire il PASS/FAIL</a>
+          <a class="btn ghost" href="create/">Creare un IPR</a>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Chiusura (difesa e protezione)</h3>
+        <p>
+          Protezione, qui, significa: impedire che l’azione passi quando manca prova.
+          Non serve “vedere tutto”. Serve <strong>bloccare</strong> quando non c’è evidenza.
+        </p>
+        <div class="meta">
+          <span class="tag ok">protection ex-ante</span>
+          <span class="tag">no surveillance</span>
         </div>
       </article>
     </section>
@@ -133,9 +177,9 @@
   <footer class="footer">
     <div class="wrap">
       <div class="notice">
-        <strong>Garanzia dichiarata</strong><br/>
-        Nessuna custodia centrale, nessuna profilazione, nessuna sorveglianza.
-        Il controllo è tecnico ed ex-ante: se non c’è evidenza verificabile, l’azione non avviene.
+        <strong>Nota</strong><br/>
+        Difesa e protezione ex-ante: vincolare l’atto, non osservare la persona.
+        Se manca evidenza verificabile: FAIL.
       </div>
     </div>
   </footer>
