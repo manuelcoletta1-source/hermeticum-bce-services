@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Create — Creazione guidata IPR (audit-first)</title>
+  <title>Create — IPR guidato (demo) · canon + SHA-512</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
 
   <link rel="stylesheet" href="assets/hbce.css" />
+  <meta name="color-scheme" content="dark" />
 </head>
 <body>
   <header class="topbar">
@@ -17,20 +18,22 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Create</h1>
-          <span class="sub">Creazione guidata IPR · hash-only · audit-first</span>
+          <span class="sub">Creazione guidata IPR (demo) · hash-only · fail-closed</span>
         </div>
       </div>
+
       <nav class="menu" aria-label="Navigazione principale">
         <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="onboarding/"><strong>Onboarding</strong></a>
         <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
         <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
         <a class="pill" data-nav href="institution/">Istituzioni UE</a>
         <a class="pill" data-nav href="member-states/">Stati Membri</a>
         <a class="pill" data-nav href="technology/">Tecnologia</a>
         <a class="pill" data-nav href="verify/">Verify</a>
-        <a class="pill active" data-nav href="create/"><strong>Create</strong></a>
         <a class="pill" data-nav href="security/">Sicurezza</a>
         <a class="pill" data-nav href="governance/">Governance</a>
+        <a class="pill active" data-nav href="create/"><strong>Create</strong></a>
         <a class="pill" data-nav href="manual/">Manuale</a>
       </nav>
     </div>
@@ -38,94 +41,103 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">CREATE · NO CUSTODY · FAIL-CLOSED</div>
-      <h2 class="title">Creare un IPR: definire la precedenza prima dell’azione</h2>
+      <div class="kicker">DEMO · OFFLINE · NO CUSTODY</div>
+      <h2 class="title">Crea un IPR “minimo” e ottieni il suo SHA-512</h2>
       <p class="lead">
-        “Create” non significa registrarti a un servizio. Significa definire <strong>prima</strong>
-        dell’azione i confini minimi (contesto, policy, limiti, attribuzione) che rendono un atto eseguibile.
-        Se non puoi definire questi elementi, il sistema non deve eseguire: <span class="mono">fail-closed</span>.
+        Questa pagina genera un <strong>draft IPR</strong> nel tuo browser e calcola il digest SHA-512 del canonico.
+        Non invia dati a server: è <strong>hash-only</strong>.  
+        Poi ti guida ad allineare <span class="mono">ipr.canon.json</span> e <span class="mono">ipr.json</span>
+        e verificare con <strong>Verify</strong>.
       </p>
 
       <div class="btnrow">
-        <a class="btn" href="verify/">Vai a Verify (controllo)</a>
-        <a class="btn secondary" href="technology/">Come funziona (PASS/FAIL)</a>
-        <a class="btn ghost" href="governance/">Limiti e garanzie</a>
+        <button id="buildBtn" class="btn" type="button">Genera canon + digest</button>
+        <a class="btn secondary" href="verify/">Vai a Verify</a>
+        <a class="btn ghost" href="technology/">Specifica PASS/FAIL</a>
       </div>
     </section>
 
     <section class="grid">
-      <article class="card cols-6">
-        <h3>Cosa stai creando</h3>
-        <ul class="list">
-          <li><strong>un record</strong> che descrive un atto prima che accada</li>
-          <li><strong>una policy verificabile</strong> (non una dichiarazione morale)</li>
-          <li><strong>una fingerprint</strong> del contesto/configurazione</li>
-          <li><strong>una condizione binaria</strong>: PASS/FAIL</li>
-        </ul>
-        <div class="meta">
-          <span class="tag ok">ex-ante</span>
-          <span class="tag">deterministic</span>
-          <span class="tag">audit-first</span>
-        </div>
-      </article>
-
-      <article class="card cols-6">
-        <h3>Cosa NON stai creando</h3>
-        <ul class="list">
-          <li><strong>non</strong> una “identità digitale di Stato”</li>
-          <li><strong>non</strong> una banca dati centrale</li>
-          <li><strong>non</strong> un diritto automatico</li>
-          <li><strong>non</strong> un sistema di sorveglianza</li>
-        </ul>
-        <div class="meta">
-          <span class="tag ok">no custody</span>
-          <span class="tag">no surveillance</span>
-        </div>
-      </article>
-
       <article class="card cols-12">
-        <h3>Schema minimo di un IPR (concettuale)</h3>
-        <p>Il tuo IPR deve contenere solo ciò che serve per rendere l’atto verificabile.</p>
-        <pre style="margin:0; white-space:pre-wrap; color:rgba(232,236,255,.92)">
-ipr_id
-subject (chi risponde)
-scope (dove vale)
-policy_fingerprint
-context_fingerprint
-limits (cosa NON può fare)
-created_at (tempo)
-hash (sha-512 del canonico)
-        </pre>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Procedura pratica (senza strumenti speciali)</h3>
-        <ul class="list">
-          <li><strong>1) Definisci lo scope:</strong> cosa vuoi vincolare (dominio, dispositivo, servizio).</li>
-          <li><strong>2) Definisci i limiti:</strong> cosa è proibito o fuori perimetro.</li>
-          <li><strong>3) Definisci la policy:</strong> condizioni minime di eseguibilità.</li>
-          <li><strong>4) Crea il record canonico:</strong> formato stabile, append-only.</li>
-          <li><strong>5) Calcola SHA-512:</strong> ottieni il digest del canonico.</li>
-          <li><strong>6) Pubblica:</strong> canon + digest (e receipt se presente).</li>
-          <li><strong>7) Verifica:</strong> vai su <a href="verify/">/verify/</a> e ottieni PASS/FAIL.</li>
-        </ul>
-        <div class="btnrow">
-          <a class="btn" href="verify/">Esegui Verify</a>
-          <a class="btn secondary" href="manual/">Apri Manuale completo</a>
-        </div>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Regola d’oro (che salva la pelle)</h3>
-        <p>
-          Non esiste “quasi uguale” in governance ex-ante.
-          Se un parametro cambia, anche minimo, devi emettere un nuovo IPR.
-          <strong>Una virgola diversa = nuovo hash = nuovo atto.</strong>
+        <h3>Input (minimo)</h3>
+        <p style="margin-top:0; color:rgba(232,236,255,.82)">
+          Consiglio: non inserire dati personali. Il modello è dimostrativo e “hash-only”.
         </p>
-        <div class="meta">
-          <span class="tag warn">virgola=FAIL</span>
-          <span class="tag">append-only</span>
+
+        <div class="grid" style="gap:12px">
+          <div class="card cols-6" style="padding:14px">
+            <label class="mono" for="subject">subject (nome tecnico)</label>
+            <input id="subject" class="inp" type="text" value="EU_CITIZEN_DEMO" />
+            <div style="height:10px"></div>
+
+            <label class="mono" for="scope">scope (cosa copre)</label>
+            <input id="scope" class="inp" type="text" value="ai_governance_ex_ante" />
+            <div style="height:10px"></div>
+
+            <label class="mono" for="policy">policy (stringa)</label>
+            <input id="policy" class="inp" type="text" value="UE-FIRST|AUDIT-FIRST|FAIL-CLOSED|HASH-ONLY" />
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <label class="mono" for="context">context fingerprint (demo)</label>
+            <input id="context" class="inp" type="text" value="context:demo-runtime-v1" />
+            <div style="height:10px"></div>
+
+            <label class="mono" for="limits">limits (una per riga)</label>
+            <textarea id="limits" class="inp" rows="6">no_surveillance
+no_custody
+no_auto_rights
+fail_closed_only</textarea>
+          </div>
         </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Output</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-12" style="padding:14px">
+            <h4 style="margin:0 0 6px">Digest (SHA-512 del canonico)</h4>
+            <div class="mono" id="digestOut" style="word-break:break-all; opacity:.95">—</div>
+            <div style="margin-top:10px" class="meta">
+              <span class="tag" id="timeTag">time: —</span>
+              <span class="tag">mode: fail-closed</span>
+              <span class="tag">hash-only</span>
+            </div>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">ipr.canon.json (da copiare nel repo)</h4>
+            <pre id="canonOut" style="margin:0; white-space:pre-wrap; color:rgba(232,236,255,.92)">—</pre>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">ipr.json (digest atteso)</h4>
+            <pre id="iprOut" style="margin:0; white-space:pre-wrap; color:rgba(232,236,255,.92)">—</pre>
+          </div>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Istruzioni operative (pratiche)</h3>
+        <ol class="list">
+          <li>Clicca <strong>Genera canon + digest</strong>.</li>
+          <li>Copia l’output <span class="mono">ipr.canon.json</span> e incollalo nel file omonimo in root del repo.</li>
+          <li>Copia l’output <span class="mono">ipr.json</span> e incollalo nel file omonimo in root del repo.</li>
+          <li>Commit e deploy (GitHub Pages).</li>
+          <li>Vai su <a href="verify/">Verify</a>: deve dare <strong>PASS</strong>.</li>
+        </ol>
+        <div class="btnrow">
+          <a class="btn" href="verify/">Apri Verify</a>
+          <a class="btn secondary" href="technology/">Capire “virgola=FAIL”</a>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Nota di sicurezza</h3>
+        <p>
+          Se inserisci dati personali nel canonico, il digest diventa una “firma tecnica” di quel contenuto.
+          Questo portale è progettato per <strong>minimizzazione</strong>: usa identificatori tecnici e scope, non dati sensibili.
+        </p>
       </article>
     </section>
   </main>
@@ -133,13 +145,118 @@ hash (sha-512 del canonico)
   <footer class="footer">
     <div class="wrap">
       <div class="notice">
-        <strong>Nota</strong><br/>
-        Create definisce la precedenza. Verify dimostra la coerenza.
-        Senza verifica replicabile, non esiste eseguibilità.
+        <strong>Chiusura</strong><br/>
+        Create produce un draft locale. Verify dimostra la coerenza.  
+        Se canonico e digest non sono allineati: FAIL.
       </div>
     </div>
   </footer>
 
   <script src="assets/hbce.js"></script>
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+
+      const buildBtn = $("buildBtn");
+      const digestOut = $("digestOut");
+      const canonOut = $("canonOut");
+      const iprOut = $("iprOut");
+      const timeTag = $("timeTag");
+
+      function nowISO() {
+        return new Date().toISOString();
+      }
+
+      function hexFromArrayBuffer(buf) {
+        const bytes = new Uint8Array(buf);
+        let hex = "";
+        for (let i = 0; i < bytes.length; i++) {
+          hex += bytes[i].toString(16).padStart(2, "0");
+        }
+        return hex;
+      }
+
+      async function sha512Hex(text) {
+        if (!crypto || !crypto.subtle) {
+          throw new Error("WebCrypto non disponibile: impossibile calcolare SHA-512 in questo browser.");
+        }
+        const data = new TextEncoder().encode(text);
+        const digest = await crypto.subtle.digest("SHA-512", data);
+        return hexFromArrayBuffer(digest);
+      }
+
+      function canonicalize(obj) {
+        // Canonical JSON: stable key ordering + 2-space indent, newline at end
+        // (Minimal, deterministic for this demo)
+        const order = (v) => {
+          if (Array.isArray(v)) return v.map(order);
+          if (v && typeof v === "object") {
+            const out = {};
+            Object.keys(v).sort().forEach(k => out[k] = order(v[k]));
+            return out;
+          }
+          return v;
+        };
+        return JSON.stringify(order(obj), null, 2) + "\n";
+      }
+
+      async function build() {
+        const t = nowISO();
+        timeTag.textContent = "time: " + t;
+
+        const subject = $("subject").value.trim() || "EU_CITIZEN_DEMO";
+        const scope = $("scope").value.trim() || "ai_governance_ex_ante";
+        const policy = $("policy").value.trim() || "UE-FIRST|AUDIT-FIRST|FAIL-CLOSED|HASH-ONLY";
+        const context = $("context").value.trim() || "context:demo-runtime-v1";
+
+        const limitsRaw = $("limits").value.split("\n").map(s => s.trim()).filter(Boolean);
+        const limits = Array.from(new Set(limitsRaw));
+
+        const canonObj = {
+          schema: "HBCE-IPR-CANON-v1",
+          type: "IPR_CANONICAL",
+          created_at: t,
+          subject: subject,
+          scope: scope,
+          policy: policy,
+          context_fingerprint: context,
+          limits: limits
+        };
+
+        const canonText = canonicalize(canonObj);
+        const digest = await sha512Hex(canonText);
+
+        const iprObj = {
+          schema: "HBCE-IPR-DIGEST-v1",
+          type: "IPR_DIGEST",
+          hash: {
+            algorithm: "SHA-512",
+            digest_hex: digest
+          },
+          source: "ipr.canon.json"
+        };
+
+        digestOut.textContent = digest;
+        canonOut.textContent = canonText;
+        iprOut.textContent = canonicalize(iprObj);
+      }
+
+      buildBtn.addEventListener("click", () => {
+        digestOut.textContent = "…";
+        canonOut.textContent = "…";
+        iprOut.textContent = "…";
+        build().catch(err => {
+          digestOut.textContent = "ERRORE: " + (err && err.message ? err.message : String(err));
+          canonOut.textContent = "—";
+          iprOut.textContent = "—";
+        });
+      });
+
+      // build once on load to reduce friction
+      window.addEventListener("load", () => {
+        buildBtn.click();
+      });
+    })();
+  </script>
 </body>
 </html>
