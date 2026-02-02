@@ -1,83 +1,43 @@
-# HERMETICUM B.C.E. Platform
+# Portale Europeo Biocybernetico — IPR / AI Governance (ex-ante)
 
-**Blindata · Computabile · Evolutiva**  
-Nodo biocibernetico UE per evidenze tecniche verificabili nel tempo.
+Questo repository pubblica un portale **EU-ready** che descrive e dimostra un modello di governance tecnica **ex-ante** per sistemi digitali e Intelligenza Artificiale tramite **IPR (Identity / Integrity Primary Record)**.
 
----
+## Idee chiave (senza marketing)
+- **Ex-ante**: l’azione è vincolata *prima* dell’esecuzione.
+- **Fail-closed**: in assenza di evidenza verificabile → **blocco** (nessuna esecuzione, nessun output).
+- **Audit-first**: verifiche replicabili, deterministiche.
+- **Hash-only / GDPR-min**: minimizzazione dei dati, nessuna custodia centrale.
+- **Federazione**: interoperabilità tra domini senza trust implicito.
 
-## Cos’è
-Hermeticum B.C.E. Platform è una **interfaccia tecnica** che consente a un
-**Cittadino dell’Unione Europea** di produrre, verificare e osservare
-**evidenze tecniche** (hash, receipt, manifest) in modalità **audit-first**.
+## Struttura del portale (GitHub Pages)
+- `/index.html` — Home (porta d’ingresso istituzionale)
+- `/citizen/` — Sezione Cittadini UE (difesa e protezione senza sorveglianza)
+- `/ai-joker-c2/` — AI governance layer (gate ex-ante)
+- `/institutions/` — Pacchetto valutativo per istituzioni UE (documentazione, accesso rapido)
+- `/member-states/` — Adozione operativa per Stati Membri (federazione, timeline, GO/NO-GO)
+- `/technology/` — Spiegazione tecnica (PASS/FAIL, determinismo, “virgola = FAIL”)
+- `/security/` — Threat model e controlli preventivi (ENISA-style)
+- `/governance/` — Limiti dichiarati (no surveillance, no custody, responsabilità umana)
+- `/manual/` — Biblioteca (manuale e allegati)
 
-Non è un servizio di identità civile.
-Non attribuisce diritti.
-Non produce effetti giuridici automatici.
+## Asset comuni
+- `/assets/hbce.css` — stile unificato “tech alien futuristico”
+- `/assets/hbce.js` — attivazione nav (pill active)
 
----
+## Regole di qualità (repo)
+- Stesso stile e header/footer su ogni pagina.
+- Linguaggio chiaro, verificabile, senza promesse.
+- Se un contenuto cambia, deve essere tracciabile (approccio audit-first).
 
-## Principi
-- **UE-first**
-- **Audit-first**
-- **Hash-only**
-- **Fail-closed**
-- **Append-only**
+## Deploy (GitHub Pages)
+1. Settings → Pages
+2. Source: Deploy from a branch
+3. Branch: `main` / folder: `/ (root)`
+4. Salvare e attendere la pubblicazione
 
-Se una verifica non è ripetibile, l’output è **invalido**.
+## Note di governance
+- Il portale è **informativo e valutativo**: non produce effetti giuridici automatici.
+- Non sostituisce framework istituzionali (es. eIDAS/EUDI). Descrive un modello tecnico di vincolo dell’azione ex-ante.
 
----
-
-## Struttura del portale
-- `index.html` — Ingresso biocibernetico UE (Baseline 1.0, sigillata)
-- `/citizen/` — Orientamento per il cittadino UE
-- `/verify/` — Verifica indipendente (offline, ripetibile)
-- `/create/` — Creazione con guardrail (irreversibile)
-- `/terms/` — Perimetro giuridico e operativo
-- `/events/` — Eventi dichiarati (append-only)
-- `/verify/baseline.md` — Dichiarazione di freeze semantico
-
----
-
-## Baseline
-- **Baseline:** 1.0
-- **Stato:** SIGILLATA
-- **Politica di modifica:** solo **eventi dichiarati**
-- **Freeze:** semantico (il significato non cambia; la storia cresce)
-
----
-
-## Eventi dichiarati
-- **EVT-0001** — Rifondazione Portale Biocibernetico UE
-- **EVT-0002** — Dichiarazione di Origine Biologica (IPR)
-- **EVT-0003** — Attivazione Estensione Biocibernetica (AI/JOKER, subordinata)
-- **EVT-0004** — Regole di Interoperabilità UE
-- **EVT-0005** — Evidence Pack iniziale
-- **EVT-0006** — Osservazione passiva / cessazione controllata
-
----
-
-## Evidence
-L’Evidence Pack rende **leggibile e auditabile** la storia del sistema.
-Non è certificazione. Non è identità civile.
-
-**Caso pubblico verificabile (ancora):**
-- IPR-3 Origin  
-  https://manuelcoletta1-source.github.io/ipr-3-origin/
-
----
-
-## Sicurezza e accesso
-- Autenticazione SSH con **ED25519**
-- Verifica offline supportata
-- Nessuna custodia di dati personali
-
----
-
-## Licenza e responsabilità
-Uso consentito per verifica, audit e analisi tecnica.
-Ogni interpretazione giuridica è responsabilità del contesto d’uso.
-
----
-
-🜏 **HERMETICUM B.C.E. S.r.l.**  
-UE-first · Audit-first · Hash-only · Fail-closed
+## Autore / Soggetto proponente
+- **HERMETICUM B.C.E. S.r.l.**
