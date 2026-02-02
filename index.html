@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Portale Europeo Biocybernetico — IPR / AI Governance</title>
   <meta name="description" content="Portale europeo biocybernetico: governance ex-ante dell'AI tramite IPR (fail-closed, audit-first, federazione senza custodia centrale)." />
-  <link rel="stylesheet" href="/assets/hbce.css" />
+
+  <!-- CRITICO: GitHub Pages project site base -->
+  <base href="/hermeticum-bce-platform/">
+
+  <!-- CRITICO: niente /assets/... -->
+  <link rel="stylesheet" href="assets/hbce.css" />
 </head>
 <body>
   <header class="topbar">
@@ -18,15 +23,18 @@
         </div>
       </div>
       <nav class="menu" aria-label="Navigazione principale">
-        <a class="pill active" data-nav href="/"><strong>Home</strong></a>
-        <a class="pill" data-nav href="/citizen/"><strong>Cittadini UE</strong></a>
-        <a class="pill" data-nav href="/ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
-        <a class="pill" data-nav href="/institutions/">Istituzioni UE</a>
-        <a class="pill" data-nav href="/member-states/">Stati Membri</a>
-        <a class="pill" data-nav href="/technology/">Tecnologia</a>
-        <a class="pill" data-nav href="/security/">Sicurezza</a>
-        <a class="pill" data-nav href="/governance/">Governance</a>
-        <a class="pill" data-nav href="/manual/">Manuale</a>
+        <a class="pill active" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
+        <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
+
+        <!-- Nota: nel repo la cartella è "institution" (non "institutions") -->
+        <a class="pill" data-nav href="institution/">Istituzioni UE</a>
+
+        <a class="pill" data-nav href="member-states/">Stati Membri</a>
+        <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="security/">Sicurezza</a>
+        <a class="pill" data-nav href="governance/">Governance</a>
+        <a class="pill" data-nav href="manual/">Manuale</a>
       </nav>
     </div>
   </header>
@@ -43,9 +51,9 @@
       </p>
 
       <div class="btnrow">
-        <a class="btn" href="/citizen/">Per il cittadino</a>
-        <a class="btn secondary" href="/ai-joker-c2/">AI per la governance dell’AI</a>
-        <a class="btn ghost" href="/institutions/">Pacchetto istituzionale UE</a>
+        <a class="btn" href="citizen/">Per il cittadino</a>
+        <a class="btn secondary" href="ai-joker-c2/">AI per la governance dell’AI</a>
+        <a class="btn ghost" href="institution/">Pacchetto istituzionale UE</a>
       </div>
     </section>
 
@@ -107,8 +115,8 @@
         <h3>Cittadini UE</h3>
         <p>Come la tutela funziona senza sorveglianza: l’atto è vincolato prima, non spiegato dopo.</p>
         <div class="btnrow">
-          <a class="btn" href="/citizen/">Apri sezione cittadini</a>
-          <a class="btn ghost" href="/governance/">Leggi i limiti</a>
+          <a class="btn" href="citizen/">Apri sezione cittadini</a>
+          <a class="btn ghost" href="governance/">Leggi i limiti</a>
         </div>
       </article>
 
@@ -116,8 +124,8 @@
         <h3>Istituzioni / Stati Membri</h3>
         <p>Documentazione valutativa, percorso di adozione federato, threat model e KPI misurabili.</p>
         <div class="btnrow">
-          <a class="btn secondary" href="/institutions/">Sezione Istituzioni UE</a>
-          <a class="btn ghost" href="/member-states/">Adozione Stati Membri</a>
+          <a class="btn secondary" href="institution/">Sezione Istituzioni UE</a>
+          <a class="btn ghost" href="member-states/">Adozione Stati Membri</a>
         </div>
       </article>
     </section>
@@ -132,11 +140,12 @@
       </div>
       <div class="notice" style="flex:1; min-width:280px">
         <strong>Produzione</strong><br/>
-        Proposta e implementazione: 0.
+        Proposta e implementazione: HERMETICUM B.C.E. S.r.l.
       </div>
     </div>
   </footer>
 
-  <script src="/assets/hbce.js"></script>
+  <!-- CRITICO: niente /assets/... -->
+  <script src="assets/hbce.js"></script>
 </body>
 </html>
