@@ -1,9 +1,10 @@
+
 <!doctype html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Governance — Limiti, responsabilità, fail-closed</title>
+  <title>Governance — limiti dichiarati, responsabilità, fail-closed</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
@@ -17,16 +18,19 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Governance</h1>
-          <span class="sub">Limiti dichiarati · responsabilità umana · no custody</span>
+          <span class="sub">Limiti dichiarati · responsabilità umana · no surveillance</span>
         </div>
       </div>
+
       <nav class="menu" aria-label="Navigazione principale">
         <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="onboarding/"><strong>Onboarding</strong></a>
         <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
         <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
         <a class="pill" data-nav href="institution/">Istituzioni UE</a>
         <a class="pill" data-nav href="member-states/">Stati Membri</a>
         <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="verify/">Verify</a>
         <a class="pill" data-nav href="security/">Sicurezza</a>
         <a class="pill active" data-nav href="governance/"><strong>Governance</strong></a>
         <a class="pill" data-nav href="manual/">Manuale</a>
@@ -36,104 +40,128 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">LIMITS · RESPONSIBILITY · NO CENTRAL CUSTODY</div>
-      <h2 class="title">Cosa è e cosa non è questo modello</h2>
+      <div class="kicker">LIMITS · RESPONSIBILITY · AUDITABILITY</div>
+      <h2 class="title">Governance: cosa è permesso, cosa è vietato</h2>
       <p class="lead">
-        La governance qui è definita come <strong>controllo tecnico verificabile</strong>.
-        Non è un potere politico e non sostituisce autorità pubbliche.
-        Questa pagina impedisce l’ambiguità: dichiara limiti, responsabilità e condizioni d’uso.
+        Questa pagina definisce i limiti dichiarati del portale e del modello tecnico:
+        <strong>IPR</strong> e <strong>AI JOKER-C2</strong> servono a vincolare l’azione prima dell’esecuzione
+        (PASS/FAIL). Non servono a osservare le persone.
       </p>
+
+      <div class="btnrow">
+        <a class="btn" href="technology/">Specifica tecnica</a>
+        <a class="btn secondary" href="security/">Threat model</a>
+        <a class="btn ghost" href="verify/">Prova (Verify)</a>
+      </div>
     </section>
 
     <section class="grid">
       <article class="card cols-6">
-        <h3>È</h3>
+        <h3>Principi non negoziabili</h3>
         <ul class="list">
-          <li><strong>Gate ex-ante:</strong> verifica e vincola l’azione prima dell’esecuzione.</li>
-          <li><strong>Modello federato:</strong> domini separati, interoperabilità senza centralizzazione.</li>
-          <li><strong>Auditabile:</strong> verifica deterministica ed evidenze replicabili.</li>
-          <li><strong>Supporto alla compliance:</strong> enforcement tecnico, non interpretazione giuridica.</li>
+          <li><strong>Fail-closed</strong>: assenza di evidenza → blocco</li>
+          <li><strong>Audit-first</strong>: verifiche replicabili e deterministiche</li>
+          <li><strong>Hash-only / GDPR-min</strong>: minimizzazione dei dati</li>
+          <li><strong>Append-only</strong>: modifiche come nuovi atti, non riscritture</li>
+          <li><strong>Federazione</strong>: interoperabilità senza trust implicito</li>
         </ul>
-        <div class="meta">
-          <span class="tag ok">ex-ante</span>
-          <span class="tag">audit-first</span>
-          <span class="tag">federated</span>
-        </div>
       </article>
 
       <article class="card cols-6">
-        <h3>Non è</h3>
+        <h3>Divieti espliciti</h3>
         <ul class="list">
-          <li><strong>Non è sorveglianza:</strong> non osserva la persona, vincola l’atto.</li>
-          <li><strong>Non è un’identità digitale di Stato:</strong> non sostituisce eIDAS/EUDI.</li>
-          <li><strong>Non è un’autorità:</strong> non decide legittimità politica o giuridica.</li>
-          <li><strong>Non è custodia centrale:</strong> non centralizza dati personali.</li>
+          <li><strong>No surveillance</strong>: niente osservazione continua della persona</li>
+          <li><strong>No custody</strong>: niente banca dati centrale di dati personali</li>
+          <li><strong>No social scoring</strong>: nessuna profilazione o punteggio comportamentale</li>
+          <li><strong>No auto-rights</strong>: nessun effetto giuridico automatico</li>
+          <li><strong>No hidden fallback</strong>: nessuna esecuzione “in silenzio” se FAIL</li>
         </ul>
         <div class="meta">
-          <span class="tag warn">no surveillance</span>
           <span class="tag ok">no custody</span>
+          <span class="tag ok">no surveillance</span>
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Responsabilità (principio operativo)</h3>
+        <h3>Responsabilità (punto chiave)</h3>
         <p>
-          La responsabilità resta sempre <strong>umana e istituzionale</strong>.
-          Il sistema non “decide” finalità o legittimità: applica controlli tecnici ex-ante.
+          Il sistema non “decide al posto dell’umano”. Decide solo se un’azione è <strong>eseguibile</strong>
+          rispetto a precedenza, contesto e policy.  
+          <strong>La responsabilità resta biologica</strong>: chi definisce policy e limiti risponde delle conseguenze.
         </p>
-        <ul class="list">
-          <li><strong>Policy e perimetri:</strong> autorità competenti / domini operativi</li>
-          <li><strong>Creazione IPR:</strong> soggetto responsabile (umano/ente)</li>
-          <li><strong>Controllo:</strong> gate tecnico (PASS/FAIL)</li>
-        </ul>
-      </article>
-
-      <article class="card cols-7">
-        <h3>Fail-closed (regola di sicurezza)</h3>
-        <p>
-          In assenza di evidenza ex-ante o in caso di mismatch, l’azione è bloccata.
-          Non esistono eccezioni silenziose né correzioni “dopo”.
-        </p>
-        <ul class="list">
-          <li><strong>PASS</strong> → azione consentita</li>
-          <li><strong>FAIL</strong> → azione negata</li>
-        </ul>
         <div class="meta">
-          <span class="tag ok">PASS</span>
-          <span class="tag danger">FAIL</span>
-          <span class="tag">deterministic</span>
+          <span class="tag">human responsibility</span>
+          <span class="tag ok">measurable</span>
+          <span class="tag">contestable</span>
         </div>
       </article>
 
-      <article class="card cols-5">
-        <h3>Data governance (GDPR-min)</h3>
-        <ul class="list">
-          <li><strong>Minimizzazione:</strong> hash e riferimenti, no dati in chiaro</li>
-          <li><strong>Nessuna profilazione:</strong> nessun tracciamento utente</li>
-          <li><strong>Nessuna custodia centrale:</strong> federazione tra domini</li>
-        </ul>
-      </article>
-
       <article class="card cols-12">
-        <h3>Limitazioni dichiarate</h3>
-        <ul class="list">
-          <li>non fornisce protezione assoluta: riduce rischio spostando il controllo ex-ante</li>
-          <li>non copre compromissioni hardware profonde fuori perimetro</li>
-          <li>richiede policy e perimetri definiti da soggetti competenti</li>
-          <li>non produce effetti giuridici automatici</li>
-        </ul>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Trasparenza operativa</h3>
+        <h3>Perché non è sorveglianza</h3>
         <p>
-          Il modello è progettato per essere valutabile: ciò che conta è ciò che si può verificare.
-          Per dettagli tecnici, criteri e allegati, consultare il Manuale.
+          Sorveglianza = osservare continuamente il comportamento per dedurre, prevedere o controllare.
+          Qui il focus è diverso: <strong>vincolare l’azione</strong> tramite prove tecniche minime.
+          Non si guarda “chi sei”: si guarda se l’atto è coerente con una precedenza verificabile.
+        </p>
+        <ul class="list">
+          <li>si misura coerenza (hash/fingerprint), non vita privata</li>
+          <li>si blocca l’azione se manca evidenza, non si accumulano profili</li>
+          <li>si pubblica il minimo (hash-only), non dati personali</li>
+        </ul>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Regola di trasparenza (audit)</h3>
+        <p>
+          Se una policy cambia, deve produrre un nuovo atto append-only.
+          Se un contesto cambia, deve produrre una nuova fingerprint.
+          Se un contenuto cambia, cambia l’hash.  
+          <strong>Una virgola diversa = nuovo atto</strong>.
+        </p>
+        <div class="meta">
+          <span class="tag warn">virgola=FAIL</span>
+          <span class="tag">append-only</span>
+          <span class="tag">auditability</span>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Uso previsto (3 livelli)</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Livello 1 — Citizen</h4>
+            <p style="margin:0 0 10px">
+              Protezione ex-ante per azioni sensibili quotidiane (domestico/servizi).
+            </p>
+            <div class="meta"><span class="tag">citizen-first</span></div>
+          </div>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Livello 2 — PA/Industry</h4>
+            <p style="margin:0 0 10px">
+              Gate per automazioni e workflow ad alta esposizione.
+            </p>
+            <div class="meta"><span class="tag">operational</span></div>
+          </div>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Livello 3 — High Assurance</h4>
+            <p style="margin:0 0 10px">
+              Sistemi critici, flotte, swarm, spazio: control-plane evidence-locked.
+            </p>
+            <div class="meta"><span class="tag">high assurance</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Chiusura</h3>
+        <p>
+          Governance qui significa una cosa sola: rendere impossibile l’esecuzione senza evidenza.
+          Non è una promessa etica. È un vincolo tecnico misurabile.
         </p>
         <div class="btnrow">
-          <a class="btn" href="manual/">Vai al Manuale</a>
+          <a class="btn" href="citizen/">Vista Cittadini UE</a>
           <a class="btn secondary" href="institution/">Vista Istituzioni UE</a>
-          <a class="btn ghost" href="security/">Threat model</a>
+          <a class="btn ghost" href="member-states/">Vista Stati Membri</a>
         </div>
       </article>
     </section>
@@ -142,9 +170,9 @@
   <footer class="footer">
     <div class="wrap">
       <div class="notice">
-        <strong>Dichiarazione di limiti</strong><br/>
-        Questo portale non abilita decisioni automatiche, non centralizza dati personali e non effettua sorveglianza.
-        Descrive un modello di governance tecnica verificabile e federata, adottabile solo sotto competenza delle autorità e dei domini operativi.
+        <strong>Fail-closed + limiti dichiarati</strong><br/>
+        Se manca evidenza verificabile: blocco.  
+        Nessuna custodia centrale. Nessuna sorveglianza. Responsabilità umana.
       </div>
     </div>
   </footer>
