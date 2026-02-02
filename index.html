@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portale Europeo Biocybernetico — IPR / AI Governance</title>
-  <meta name="description" content="Portale europeo biocybernetico: governance ex-ante dell'AI tramite IPR (fail-closed, audit-first, federazione senza custodia centrale)." />
+  <title>Portale Europeo Biocybernetico — IPR / AI Governance (ex-ante)</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
@@ -18,16 +17,19 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Portale Europeo Biocybernetico</h1>
-          <span class="sub">IPR · AI Governance · Difesa ex-ante (fail-closed)</span>
+          <span class="sub">IPR · AI governance ex-ante · fail-closed · audit-first</span>
         </div>
       </div>
+
       <nav class="menu" aria-label="Navigazione principale">
         <a class="pill active" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="onboarding/"><strong>Onboarding</strong></a>
         <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
         <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
         <a class="pill" data-nav href="institution/">Istituzioni UE</a>
         <a class="pill" data-nav href="member-states/">Stati Membri</a>
         <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="verify/">Verify</a>
         <a class="pill" data-nav href="security/">Sicurezza</a>
         <a class="pill" data-nav href="governance/">Governance</a>
         <a class="pill" data-nav href="manual/">Manuale</a>
@@ -37,106 +39,119 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">EU-READY · AUDIT-FIRST · HASH-ONLY · FAIL-CLOSED</div>
-      <h2 class="title">Governare l’AI prima che agisca.</h2>
+      <div class="kicker">EU-READY · PREVENTION · GOVERNANCE EX-ANTE</div>
+      <h2 class="title">Governare i dati e l’AI prima del danno</h2>
       <p class="lead">
-        Questo portale descrive un modello europeo di difesa e protezione digitale basato su <span class="mono">IPR</span>
-        (Identity / Integrity Primary Record): una precedenza verificabile che vincola tecnicamente l’azione
-        di sistemi digitali e AI <strong>prima</strong> dell’esecuzione.
-        Non controlla le persone. Vincola gli atti.
+        Questo portale descrive e dimostra un modello di governance tecnica <strong>ex-ante</strong>
+        per sistemi digitali e Intelligenza Artificiale tramite <strong>IPR</strong>
+        (Identity / Integrity Primary Record) e un gate di controllo (<strong>AI JOKER-C2</strong>).
+        Regola unica: <strong>se non è verificabile, non è eseguibile</strong> (fail-closed).
       </p>
 
       <div class="btnrow">
-        <a class="btn" href="citizen/">Per il cittadino</a>
-        <a class="btn secondary" href="ai-joker-c2/">AI per la governance dell’AI</a>
-        <a class="btn ghost" href="institution/">Pacchetto istituzionale UE</a>
+        <a class="btn" href="onboarding/">Inizia da Onboarding</a>
+        <a class="btn secondary" href="verify/">Esegui Verify adesso</a>
+        <a class="btn ghost" href="technology/">Come funziona (PASS/FAIL)</a>
       </div>
     </section>
 
-    <section class="grid" aria-label="Pilastro del sistema">
-      <article class="card cols-4">
-        <h3>Protezione</h3>
-        <p>Dati minimizzati, uso vincolato, nessuna custodia centrale. Il sistema riduce l’esposizione.</p>
-        <div class="meta">
-          <span class="tag ok">GDPR-min</span>
-          <span class="tag">hash-only</span>
-        </div>
-      </article>
-
-      <article class="card cols-4">
-        <h3>Difesa</h3>
-        <p>Se manca la precedenza verificabile, l’atto è bloccato: <span class="mono">FAIL → no execution</span>.</p>
-        <div class="meta">
-          <span class="tag ok">fail-closed</span>
-          <span class="tag">PASS/FAIL</span>
-        </div>
-      </article>
-
-      <article class="card cols-4">
-        <h3>Governabilità</h3>
-        <p>Verifica deterministica e audit replicabile: si misura, non si “crede”.</p>
-        <div class="meta">
-          <span class="tag">audit-first</span>
-          <span class="tag">append-only</span>
-        </div>
-      </article>
-
-      <article class="card cols-7">
-        <h3>Il punto di rottura</h3>
+    <section class="grid">
+      <article class="card cols-12">
+        <h3>Il punto critico europeo (che questo modello colpisce)</h3>
         <p>
-          <strong>AI JOKER-C2</strong> è un gate di governance: verifica contesto/policy/config ex-ante e decide solo se un atto è eseguibile.
-          Non “governa le persone”. Governa la possibilità tecnica dell’azione.
+          La fragilità non è “mancanza di regole”: è che molte azioni automatiche sono ancora
+          <strong>fail-open</strong>, quindi l’assenza di evidenza diventa esecuzione.
+          Qui si capovolge: <strong>assenza di evidenza = blocco</strong>.
         </p>
         <div class="meta">
-          <span class="tag ok">ex-ante</span>
-          <span class="tag">no implicit trust</span>
+          <span class="tag danger">fail-open</span>
+          <span class="tag ok">fail-closed</span>
+          <span class="tag">ex-ante</span>
         </div>
       </article>
 
-      <article class="card cols-5">
-        <h3>Scala UE</h3>
-        <p>Dal domestico allo spaziale, la regola è identica: se il contesto cambia, la verifica fallisce.</p>
-        <ul class="list">
-          <li><strong>Casa</strong> → AI assistiva vincolata</li>
-          <li><strong>PA</strong> → decisioni automatiche contestabili</li>
-          <li><strong>Industria</strong> → supply chain auditabile</li>
-          <li><strong>Spazio</strong> → comandi evidence-locked</li>
-        </ul>
-      </article>
-    </section>
-
-    <h3 class="section-title">Ingressi rapidi</h3>
-    <section class="grid">
-      <article class="card cols-6">
+      <article class="card cols-4">
         <h3>Cittadini UE</h3>
-        <p>Come la tutela funziona senza sorveglianza: l’atto è vincolato prima, non spiegato dopo.</p>
+        <p>
+          Difesa e protezione senza sorveglianza: si vincola l’atto, non si osserva la persona.
+        </p>
         <div class="btnrow">
-          <a class="btn" href="citizen/">Apri sezione cittadini</a>
-          <a class="btn ghost" href="governance/">Leggi i limiti</a>
+          <a class="btn" href="citizen/">Entra (Cittadini)</a>
+          <a class="btn ghost" href="governance/">Garanzie</a>
+        </div>
+      </article>
+
+      <article class="card cols-4">
+        <h3>Istituzioni UE</h3>
+        <p>
+          Pacchetto valutativo: enforcement ex-ante, audit replicabile, prevenzione (ENISA-style).
+        </p>
+        <div class="btnrow">
+          <a class="btn secondary" href="institution/">Entra (Istituzioni)</a>
+          <a class="btn ghost" href="security/">Threat model</a>
+        </div>
+      </article>
+
+      <article class="card cols-4">
+        <h3>Stati Membri</h3>
+        <p>
+          Adozione operativa federata: interoperabilità senza custodia centrale, sovranità preservata.
+        </p>
+        <div class="btnrow">
+          <a class="btn ghost" href="member-states/">Entra (Stati Membri)</a>
+          <a class="btn ghost" href="manual/">Manuale</a>
         </div>
       </article>
 
       <article class="card cols-6">
-        <h3>Istituzioni / Stati Membri</h3>
-        <p>Documentazione valutativa, percorso di adozione federato, threat model e KPI misurabili.</p>
+        <h3>AI JOKER-C2</h3>
+        <p>
+          AI per governare l’AI: un gate che decide solo “eseguibile / non eseguibile”
+          in base a IPR + policy + contesto (PASS/FAIL).
+        </p>
         <div class="btnrow">
-          <a class="btn secondary" href="institution/">Sezione Istituzioni UE</a>
-          <a class="btn ghost" href="member-states/">Adozione Stati Membri</a>
+          <a class="btn" href="ai-joker-c2/">Apri AI governance</a>
+          <a class="btn secondary" href="technology/">Specifica tecnica</a>
+        </div>
+      </article>
+
+      <article class="card cols-6">
+        <h3>Verify (la prova)</h3>
+        <p>
+          Verifica deterministica SHA-512 lato browser: scarica i file canonici dal repo,
+          calcola l’hash e confronta col digest pubblicato.
+          Se qualcosa manca o non coincide: FAIL con motivazione.
+        </p>
+        <div class="btnrow">
+          <a class="btn secondary" href="verify/">Esegui Verify</a>
+          <a class="btn ghost" href="create/">Come si crea un IPR</a>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Regole dichiarate</h3>
+        <ul class="list">
+          <li><strong>Audit-first:</strong> verifiche replicabili, deterministiche</li>
+          <li><strong>Fail-closed:</strong> in dubbio, blocca (no output)</li>
+          <li><strong>Hash-only / GDPR-min:</strong> minimizzazione, nessuna custodia centrale</li>
+          <li><strong>Federazione:</strong> interoperabilità senza trust implicito</li>
+          <li><strong>Limiti:</strong> nessuna sorveglianza, nessun effetto giuridico automatico</li>
+        </ul>
+        <div class="btnrow">
+          <a class="btn ghost" href="governance/">Leggi governance</a>
+          <a class="btn ghost" href="security/">Leggi sicurezza</a>
+          <a class="btn ghost" href="manual/">Apri manuale</a>
         </div>
       </article>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="wrap split">
-      <div class="notice" style="flex:1; min-width:280px">
-        <strong>Fail-closed / No custody</strong><br/>
-        Questo portale non raccoglie dati personali, non profila utenti e non abilita decisioni automatiche.
-        Descrive un modello verificabile: se manca evidenza ex-ante, l’azione è bloccata.
-      </div>
-      <div class="notice" style="flex:1; min-width:280px">
-        <strong>Produzione</strong><br/>
-        Proposta e implementazione: HERMETICUM B.C.E. S.r.l.
+    <div class="wrap">
+      <div class="notice">
+        <strong>Nota</strong><br/>
+        Questo portale è informativo e valutativo: descrive un modello tecnico di enforcement ex-ante
+        e non sostituisce strumenti istituzionali. Nessuna custodia centrale. Nessuna sorveglianza.
       </div>
     </div>
   </footer>
