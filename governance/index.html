@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Governance — Limiti, responsabilità, no custody, no surveillance</title>
-  <link rel="stylesheet" href="/assets/hbce.css" />
+  <title>Governance — Limiti, responsabilità, fail-closed</title>
+
+  <!-- GitHub Pages project site base -->
+  <base href="/hermeticum-bce-platform/">
+
+  <link rel="stylesheet" href="assets/hbce.css" />
 </head>
 <body>
   <header class="topbar">
@@ -13,17 +17,19 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Governance</h1>
-          <span class="sub">Limiti dichiarati · responsabilità umana · fail-closed</span>
+          <span class="sub">Limiti dichiarati · responsabilità umana · no custody</span>
         </div>
       </div>
       <nav class="menu" aria-label="Navigazione principale">
-        <a class="pill" data-nav href="/"><strong>Home</strong></a>
-        <a class="pill" data-nav href="/institutions/">Istituzioni UE</a>
-        <a class="pill" data-nav href="/member-states/">Stati Membri</a>
-        <a class="pill" data-nav href="/technology/">Tecnologia</a>
-        <a class="pill" data-nav href="/security/">Sicurezza</a>
-        <a class="pill active" data-nav href="/governance/"><strong>Governance</strong></a>
-        <a class="pill" data-nav href="/manual/">Manuale</a>
+        <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
+        <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
+        <a class="pill" data-nav href="institution/">Istituzioni UE</a>
+        <a class="pill" data-nav href="member-states/">Stati Membri</a>
+        <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="security/">Sicurezza</a>
+        <a class="pill active" data-nav href="governance/"><strong>Governance</strong></a>
+        <a class="pill" data-nav href="manual/">Manuale</a>
       </nav>
     </div>
   </header>
@@ -33,9 +39,9 @@
       <div class="kicker">LIMITS · RESPONSIBILITY · NO CENTRAL CUSTODY</div>
       <h2 class="title">Cosa è e cosa non è questo modello</h2>
       <p class="lead">
-        Questa pagina definisce i limiti del sistema in modo esplicito.
-        Nessuna ambiguità: la governance tecnica deve essere verificabile, ma anche
-        chiaramente separata da poteri e responsabilità istituzionali.
+        La governance qui è definita come <strong>controllo tecnico verificabile</strong>.
+        Non è un potere politico e non sostituisce autorità pubbliche.
+        Questa pagina impedisce l’ambiguità: dichiara limiti, responsabilità e condizioni d’uso.
       </p>
     </section>
 
@@ -43,10 +49,10 @@
       <article class="card cols-6">
         <h3>È</h3>
         <ul class="list">
-          <li><strong>Un gate tecnico ex-ante:</strong> verifica e vincola l’azione prima dell’esecuzione.</li>
-          <li><strong>Un modello federato:</strong> domini separati, interoperabilità senza centralizzazione.</li>
-          <li><strong>Un sistema auditabile:</strong> verifica deterministica, evidenze append-only.</li>
-          <li><strong>Un supporto alla compliance:</strong> enforcement tecnico, non interpretativo.</li>
+          <li><strong>Gate ex-ante:</strong> verifica e vincola l’azione prima dell’esecuzione.</li>
+          <li><strong>Modello federato:</strong> domini separati, interoperabilità senza centralizzazione.</li>
+          <li><strong>Auditabile:</strong> verifica deterministica ed evidenze replicabili.</li>
+          <li><strong>Supporto alla compliance:</strong> enforcement tecnico, non interpretazione giuridica.</li>
         </ul>
         <div class="meta">
           <span class="tag ok">ex-ante</span>
@@ -60,8 +66,8 @@
         <ul class="list">
           <li><strong>Non è sorveglianza:</strong> non osserva la persona, vincola l’atto.</li>
           <li><strong>Non è un’identità digitale di Stato:</strong> non sostituisce eIDAS/EUDI.</li>
-          <li><strong>Non è un’autorità:</strong> non prende decisioni giuridiche automatiche.</li>
-          <li><strong>Non è una piattaforma di custodia:</strong> non centralizza dati personali.</li>
+          <li><strong>Non è un’autorità:</strong> non decide legittimità politica o giuridica.</li>
+          <li><strong>Non è custodia centrale:</strong> non centralizza dati personali.</li>
         </ul>
         <div class="meta">
           <span class="tag warn">no surveillance</span>
@@ -73,13 +79,12 @@
         <h3>Responsabilità (principio operativo)</h3>
         <p>
           La responsabilità resta sempre <strong>umana e istituzionale</strong>.
-          Il sistema non “decide” finalità o legittimità politica: applica controlli tecnici
-          definiti da policy e contesto attestati ex-ante.
+          Il sistema non “decide” finalità o legittimità: applica controlli tecnici ex-ante.
         </p>
         <ul class="list">
-          <li><strong>Chi definisce policy e perimetri:</strong> autorità competenti / domini operativi.</li>
-          <li><strong>Chi crea l’IPR:</strong> soggetto responsabile (umano/ente) nel dominio.</li>
-          <li><strong>Chi esegue il controllo:</strong> gate tecnico (PASS/FAIL).</li>
+          <li><strong>Policy e perimetri:</strong> autorità competenti / domini operativi</li>
+          <li><strong>Creazione IPR:</strong> soggetto responsabile (umano/ente)</li>
+          <li><strong>Controllo:</strong> gate tecnico (PASS/FAIL)</li>
         </ul>
       </article>
 
@@ -87,7 +92,7 @@
         <h3>Fail-closed (regola di sicurezza)</h3>
         <p>
           In assenza di evidenza ex-ante o in caso di mismatch, l’azione è bloccata.
-          Non esistono “eccezioni silenziose”, non esistono “aggiustamenti dopo”.
+          Non esistono eccezioni silenziose né correzioni “dopo”.
         </p>
         <ul class="list">
           <li><strong>PASS</strong> → azione consentita</li>
@@ -103,9 +108,9 @@
       <article class="card cols-5">
         <h3>Data governance (GDPR-min)</h3>
         <ul class="list">
-          <li><strong>Minimizzazione:</strong> hash e riferimenti, no dati in chiaro.</li>
-          <li><strong>Nessuna profilazione:</strong> nessun tracciamento utente.</li>
-          <li><strong>Nessuna custodia centrale:</strong> federazione tra domini.</li>
+          <li><strong>Minimizzazione:</strong> hash e riferimenti, no dati in chiaro</li>
+          <li><strong>Nessuna profilazione:</strong> nessun tracciamento utente</li>
+          <li><strong>Nessuna custodia centrale:</strong> federazione tra domini</li>
         </ul>
       </article>
 
@@ -123,11 +128,12 @@
         <h3>Trasparenza operativa</h3>
         <p>
           Il modello è progettato per essere valutabile: ciò che conta è ciò che si può verificare.
-          Per i dettagli tecnici e gli allegati (A–F), consultare la sezione Manuale.
+          Per dettagli tecnici, criteri e allegati, consultare il Manuale.
         </p>
         <div class="btnrow">
-          <a class="btn" href="/manual/">Vai al Manuale</a>
-          <a class="btn secondary" href="/institutions/">Pacchetto Istituzioni UE</a>
+          <a class="btn" href="manual/">Vai al Manuale</a>
+          <a class="btn secondary" href="institution/">Vista Istituzioni UE</a>
+          <a class="btn ghost" href="security/">Threat model</a>
         </div>
       </article>
     </section>
@@ -143,6 +149,6 @@
     </div>
   </footer>
 
-  <script src="/assets/hbce.js"></script>
+  <script src="assets/hbce.js"></script>
 </body>
 </html>
