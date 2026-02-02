@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Verify — Hermeticum B.C.E.</title>
+
+  <base href="/hermeticum-bce-platform/" />
+  <link rel="stylesheet" href="assets/hbce.css" />
+  <meta name="color-scheme" content="dark" />
+</head>
+
+<body>
+  <header class="hbce-header">
+    <div class="hbce-wrap hbce-header__inner">
+      <div class="hbce-brand">
+        <div class="hbce-brand__mark">🜏</div>
+        <div class="hbce-brand__text">
+          <div class="hbce-brand__title">HERMETICUM</div>
+          <div class="hbce-brand__sub">BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+        </div>
+      </div>
+
+      <nav class="hbce-nav" aria-label="Navigazione principale">
+        <a class="hbce-nav__a" href="./">Home</a>
+        <a class="hbce-nav__a" href="onboarding/">Onboarding</a>
+        <a class="hbce-nav__a" href="citizen/">Cittadini UE</a>
+        <a class="hbce-nav__a" href="ai-joker-c2/">AI JOKER-C2</a>
+        <a class="hbce-nav__a" href="institution/">Istituzioni</a>
+        <a class="hbce-nav__a" href="member-states/">Stati Membri</a>
+        <a class="hbce-nav__a" href="technology/">Tecnologia</a>
+        <a class="hbce-nav__a hbce-nav__a--active" href="verify/verify.html">Verify</a>
+        <a class="hbce-nav__a" href="security/">Sicurezza</a>
+        <a class="hbce-nav__a" href="governance/">Governance</a>
+        <a class="hbce-nav__a" href="manual/">Manuale</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hbce-main">
+    <section class="hbce-hero">
+      <div class="hbce-wrap">
+        <h1 class="hbce-h1">Verify</h1>
+        <p class="hbce-lead">Deterministico · SHA-512 · fail-closed</p>
+        <p class="hbce-kicker">PROVA MINIMA · NIENTE “FORSE”</p>
+
+        <div class="hbce-card">
+          <h2 class="hbce-h2">Verifica IPR: se i file combaciano → <span class="hbce-pass">PASS</span>. Altrimenti → <span class="hbce-fail">FAIL</span>.</h2>
+          <p class="hbce-p">
+            Questa pagina scarica i file dal repository, calcola SHA-512 del canonico e confronta con il digest dichiarato.
+            Se manca evidenza verificabile: <b>FAIL</b>. “virgola = FAIL”.
+          </p>
+
+          <div class="hbce-actions">
+            <button id="run" class="hbce-btn">Esegui verifica</button>
+            <a class="hbce-link" href="technology/">Capire “virgola=FAIL”</a>
+            <a class="hbce-link" href="governance/">Limiti & responsabilità</a>
+          </div>
+        </div>
+
+        <div class="hbce-card">
+          <h3 class="hbce-h3">Esito</h3>
+          <div id="result" class="hbce-result hbce-result--idle">
+            <div class="hbce-result__title">Stato: <span id="status">IDLE</span></div>
+            <div class="hbce-result__meta">
+              <div>mode: <b>fail-closed</b></div>
+              <div>base: <code id="base"></code></div>
+              <div>time: <code id="time"></code></div>
+            </div>
+
+            <hr class="hbce-hr" />
+
+            <div class="hbce-grid">
+              <div>
+                <h4 class="hbce-h4">Digest calcolato (SHA-512)</h4>
+                <pre id="calc" class="hbce-pre">—</pre>
+              </div>
+              <div>
+                <h4 class="hbce-h4">Digest atteso (da ipr.json)</h4>
+                <pre id="exp" class="hbce-pre">—</pre>
+              </div>
+            </div>
+
+            <h4 class="hbce-h4">Log</h4>
+            <pre id="log" class="hbce-pre">—</pre>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="hbce-footer">
+    <div class="hbce-wrap">
+      <div class="hbce-footer__row">
+        <div>
+          <div class="hbce-footer__title">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
+          <div class="hbce-footer__sub">HERMETICUM B.C.E. S.r.l.</div>
+        </div>
+        <div class="hbce-footer__links">
+          <a href="privacy/">Privacy</a>
+          <a href="terms/">Termini</a>
+          <a href="governance/">Governance</a>
+        </div>
+      </div>
+      <div class="hbce-footer__note">Verifica deterministica, fail-closed. Portale informativo e valutativo: nessun effetto giuridico automatico.</div>
+    </div>
+  </footer>
+
+  <script>
+    function nowIso(){ return new Date().toISOString(); }
+    function norm(s){ return (s||"").toString().trim().toLowerCase(); }
+    function isSha512(s){ return /^[a-f0-9]{128}$/.test(norm(s)); }
+
+    async function sha512Hex(text){
+      const data = new TextEncoder().encode(text);
+      const buf = await crypto.subtle.digest("SHA-512", data);
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+    }
+
+    async function fetchTextNoCache(path){
+      const url = new URL(path, document.baseURI);
+      url.searchParams.set("v", Date.now().toString());
+      const res = await fetch(url.toString(), { cache: "no-store" });
+      const text = await res.text();
+      if(!res.ok) throw new Error("HTTP "+res.status+" "+url.toString());
+      return { url: url.toString(), text };
+    }
+
+    function extractDigest(iprText){
+      // 1) prova JSON parse
+      try{
+        const obj = JSON.parse(iprText);
+        const candidates = [
+          obj.digest,
+          obj.digest_hex,
+          obj.sha512,
+          obj.sha512_hex,
+          obj.expected_digest,
+          obj.hash && obj.hash.digest_hex,
+          obj.hash && obj.hash.sha512,
+          obj.hash && obj.hash.sha512_hex,
+          obj.expected && obj.expected.sha512,
+          obj.expected && obj.expected.digest,
+          obj.digests && obj.digests.sha512
+        ].map(norm).filter(Boolean);
+        for(const c of candidates) if(isSha512(c)) return c;
+      }catch(e){
+        // se parse fallisce, andiamo di regex
+      }
+      // 2) fallback regex (128 hex ovunque nel testo)
+      const m = (iprText||"").match(/[A-Fa-f0-9]{128}/);
+      if(m && isSha512(m[0])) return norm(m[0]);
+      return null;
+    }
+
+    function setState(kind, label){
+      const box = document.getElementById("result");
+      box.classList.remove("hbce-result--idle","hbce-result--pass","hbce-result--fail");
+      box.classList.add(kind==="PASS" ? "hbce-result--pass" : kind==="FAIL" ? "hbce-result--fail" : "hbce-result--idle");
+      document.getElementById("status").textContent = label;
+    }
+
+    async function run(){
+      const base = document.baseURI;
+      document.getElementById("base").textContent = base;
+      document.getElementById("time").textContent = nowIso();
+
+      const log = [];
+      const logEl = document.getElementById("log");
+      const calcEl = document.getElementById("calc");
+      const expEl = document.getElementById("exp");
+
+      setState("IDLE","RUNNING");
+      calcEl.textContent = "…";
+      expEl.textContent = "…";
+      logEl.textContent = "…";
+
+      try{
+        log.push("START "+nowIso());
+        log.push("BASE "+base);
+
+        const canon = await fetchTextNoCache("ipr.canon.json");
+        log.push("FETCH "+canon.url);
+        const calc = await sha512Hex(canon.text);
+        log.push("SHA-512(canon) = "+calc);
+
+        const ipr = await fetchTextNoCache("ipr.json");
+        log.push("FETCH "+ipr.url);
+
+        const expected = extractDigest(ipr.text);
+
+        calcEl.textContent = calc;
+        expEl.textContent = expected ? expected : "—";
+
+        // DEBUG: se non trova, scrive primi 200 caratteri per capire cos'è davvero
+        if(!expected){
+          setState("FAIL","FAIL (digest missing)");
+          log.push("FAIL: digest atteso non trovato in ipr.json");
+          log.push("IPR.SNIPPET(200) = "+ipr.text.slice(0,200).replace(/\s+/g," "));
+          logEl.textContent = log.join("\n");
+          return;
+        }
+
+        if(norm(expected)!==norm(calc)){
+          setState("FAIL","FAIL (mismatch)");
+          log.push("FAIL: MISMATCH (canon != expected)");
+          logEl.textContent = log.join("\n");
+          return;
+        }
+
+        setState("PASS","PASS");
+        log.push("PASS: canon matches expected digest");
+        logEl.textContent = log.join("\n");
+
+      }catch(e){
+        setState("FAIL","FAIL (error)");
+        log.push("ERROR: "+(e && e.message ? e.message : String(e)));
+        logEl.textContent = log.join("\n");
+      }
+    }
+
+    document.getElementById("run").addEventListener("click", run);
+  </script>
+</body>
+</html>
