@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Stati Membri UE — Adozione operativa IPR</title>
+  <title>Stati Membri — Adozione operativa federata (IPR / AI Governance)</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
@@ -16,17 +16,20 @@
       <div class="brand">
         <div class="sig" aria-hidden="true"></div>
         <div>
-          <h1>Stati Membri UE</h1>
-          <span class="sub">Adozione operativa · federazione · sovranità preservata</span>
+          <h1>Stati Membri</h1>
+          <span class="sub">Adozione operativa · federazione UE · GO/NO-GO</span>
         </div>
       </div>
+
       <nav class="menu" aria-label="Navigazione principale">
         <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="onboarding/"><strong>Onboarding</strong></a>
         <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
         <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
         <a class="pill" data-nav href="institution/">Istituzioni UE</a>
         <a class="pill active" data-nav href="member-states/"><strong>Stati Membri</strong></a>
         <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="verify/">Verify</a>
         <a class="pill" data-nav href="security/">Sicurezza</a>
         <a class="pill" data-nav href="governance/">Governance</a>
         <a class="pill" data-nav href="manual/">Manuale</a>
@@ -36,84 +39,129 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">IMPLEMENTATION GUIDANCE · FEDERATED MODEL · FAIL-CLOSED</div>
-      <h2 class="title">Adozione nazionale dell’IPR: implementare senza centralizzare</h2>
+      <div class="kicker">FEDERATED ADOPTION · SOVEREIGNTY PRESERVED</div>
+      <h2 class="title">Adozione UE: federazione senza custodia centrale</h2>
       <p class="lead">
-        Questa sezione descrive un percorso operativo per adottare la governance ex-ante dell’AI,
-        mantenendo sovranità nazionale e interoperabilità europea. Il modello è federato:
-        ogni Stato Membro gestisce i propri nodi, senza custodia centrale dei dati.
+        Il modello è progettato per scalare in UE perché non richiede un registro unico di dati personali.
+        Ogni Stato Membro mantiene sovranità sul proprio dominio, ma condivide un meccanismo comune:
+        <strong>gate ex-ante PASS/FAIL</strong> basato su IPR e verifiche deterministiche.
       </p>
+
+      <div class="btnrow">
+        <a class="btn" href="technology/">Specifiche tecniche</a>
+        <a class="btn secondary" href="security/">Threat model</a>
+        <a class="btn ghost" href="institution/">Vista istituzionale UE</a>
+      </div>
     </section>
 
     <section class="grid">
+      <article class="card cols-12">
+        <h3>Obiettivo operativo (misurabile)</h3>
+        <p>
+          Portare i sistemi digitali (e AI) da audit ex-post a prevenzione ex-ante:
+          <strong>nessuna azione sensibile</strong> deve avvenire senza precedenza verificabile.
+        </p>
+        <div class="meta">
+          <span class="tag ok">prevention</span>
+          <span class="tag">audit-first</span>
+          <span class="tag">fail-closed</span>
+        </div>
+      </article>
+
       <article class="card cols-6">
-        <h3>Principi non negoziabili</h3>
+        <h3>Modello di federazione</h3>
         <ul class="list">
-          <li><strong>Precedenza prima dell’azione:</strong> nessuna esecuzione AI senza IPR valido.</li>
-          <li><strong>Fail-closed:</strong> incertezza operativa → blocco tecnico.</li>
-          <li><strong>Federazione:</strong> interoperabilità senza trust implicito.</li>
-          <li><strong>Responsabilità umana:</strong> l’AI non si auto-abilita.</li>
-          <li><strong>Audit replicabile:</strong> verifica deterministica, non narrativa.</li>
+          <li><strong>Domini separati</strong> (PA, sanità, industria, difesa, ecc.)</li>
+          <li><strong>Policy locali</strong> (autorità competenti)</li>
+          <li><strong>IPR come precedenza</strong> (hash-only, append-only)</li>
+          <li><strong>Gate comune</strong> (PASS/FAIL) interoperabile</li>
         </ul>
       </article>
 
       <article class="card cols-6">
-        <h3>Architettura minima nazionale</h3>
-        <p>Baseline modulare, separabile, verificabile.</p>
+        <h3>Ruoli minimi</h3>
         <ul class="list">
-          <li><strong>IPR-CORE</strong> — creazione e verifica della precedenza</li>
-          <li><strong>AI JOKER-C2</strong> — gate ex-ante (PASS / FAIL)</li>
-          <li><strong>OPC</strong> — policy operative vincolanti</li>
-          <li><strong>UNEBDO</strong> — evidence pack (raccomandato)</li>
-          <li><strong>IPR-EXCHANGE</strong> — federazione con altri Stati UE</li>
+          <li><strong>Authority Owner</strong>: definisce policy e perimetro</li>
+          <li><strong>Domain Operator</strong>: integra gate e gestisce deployment</li>
+          <li><strong>Audit Function</strong>: replica verifiche e KPI</li>
+          <li><strong>Incident Response</strong>: gestisce eventi e aggiornamenti append-only</li>
+        </ul>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Timeline (pratica, “adesso”)</h3>
+        <ul class="list">
+          <li><strong>Settimana 1–2</strong>: baseline tecnica (verify deterministico + specifica gate)</li>
+          <li><strong>Mese 1</strong>: pilot #1 (scope stretto: una classe di azioni sensibili)</li>
+          <li><strong>Mese 2–3</strong>: pilot #2/#3 (PA + industria) con KPI comparabili</li>
+          <li><strong>Mese 4–6</strong>: federazione tra 2–3 domini, test interoperabilità</li>
+          <li><strong>6–12 mesi</strong>: scaling + procurement-ready + certificabilità</li>
+        </ul>
+      </article>
+
+      <article class="card cols-7">
+        <h3>KPI minimi per l’adozione</h3>
+        <ul class="list">
+          <li><strong>Coverage pre-check</strong> ≥ 99,9% (azioni sensibili)</li>
+          <li><strong>Block rate motivato</strong> (FAIL con cause tracciate)</li>
+          <li><strong>Drift detection</strong> (mismatch policy/contesto)</li>
+          <li><strong>Audit reproducibility</strong> ≥ 95%</li>
+          <li><strong>Time-to-decision</strong> (latenza gate)</li>
+        </ul>
+      </article>
+
+      <article class="card cols-5">
+        <h3>GO/NO-GO (non negoziabili)</h3>
+        <ul class="list">
+          <li>fail-closed senza fallback silenziosi</li>
+          <li>hash deterministico riproducibile</li>
+          <li>append-only per modifiche</li>
+          <li>no custodia centrale dati personali</li>
         </ul>
         <div class="meta">
-          <span class="tag ok">no central custody</span>
-          <span class="tag">federated</span>
+          <span class="tag ok">GO/NO-GO</span>
+          <span class="tag">sovereignty</span>
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>Timeline di adozione (0–36 mesi)</h3>
-        <ul class="list">
-          <li><strong>0–3 mesi:</strong> selezione use-case + policy baseline + integrazione pre-check</li>
-          <li><strong>3–6 mesi:</strong> pilot controllato + KPI baseline + audit snapshot</li>
-          <li><strong>6–12 mesi:</strong> estensione a domini critici + prima federazione UE</li>
-          <li><strong>12–36 mesi:</strong> scaling multi-settore + standardizzazione</li>
-        </ul>
+        <h3>Percorsi di adozione (3 corsie)</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Corsia A — Citizen & Services</h4>
+            <p style="margin:0 0 10px">
+              Protezione ex-ante per servizi digitali ad alta esposizione.
+            </p>
+            <div class="meta"><span class="tag">citizen-first</span></div>
+          </div>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Corsia B — PA & Critical</h4>
+            <p style="margin:0 0 10px">
+              Automazioni controllate e contestabili perché vincolate prima dell’esecuzione.
+            </p>
+            <div class="meta"><span class="tag">public sector</span></div>
+          </div>
+          <div class="card cols-4" style="padding:14px">
+            <h4 style="margin:0 0 6px">Corsia C — Industry & Defense</h4>
+            <p style="margin:0 0 10px">
+              Control-plane vincolato per sistemi complessi, flotte, swarm, supply-chain.
+            </p>
+            <div class="meta"><span class="tag">high assurance</span></div>
+          </div>
+        </div>
       </article>
 
-      <article class="card cols-6">
-        <h3>Ruoli istituzionali</h3>
-        <ul class="list">
-          <li><strong>Autorità competente:</strong> definizione policy e perimetri</li>
-          <li><strong>CSIRT / CERT:</strong> monitoraggio eventi FAIL e prevenzione</li>
-          <li><strong>Operatori:</strong> creazione IPR e responsabilità degli atti</li>
-        </ul>
-      </article>
-
-      <article class="card cols-6">
-        <h3>Criteri GO / NO-GO</h3>
-        <ul class="list">
-          <li><strong>GO:</strong> 100% azioni critiche con pre-check attivo</li>
-          <li><strong>GO:</strong> audit replicabile ≥ 95%</li>
-          <li><strong>NO-GO:</strong> esecuzione senza IPR</li>
-          <li><strong>NO-GO:</strong> policy implicite o non verificabili</li>
-        </ul>
+      <article class="card cols-12">
+        <h3>Dimostrazione immediata (minimo comune UE)</h3>
+        <p>
+          La parte più importante è dimostrabile subito: <strong>Verify</strong>.
+          È la prova che un dominio può pubblicare canon + digest e ottenere PASS/FAIL replicabile.
+        </p>
         <div class="btnrow">
-          <a class="btn secondary" href="technology/">Vai a “Tecnologia”</a>
-          <a class="btn ghost" href="manual/">Apri il Manuale</a>
+          <a class="btn" href="verify/">Esegui Verify</a>
+          <a class="btn secondary" href="create/">Come si crea un IPR</a>
+          <a class="btn ghost" href="manual/">Manuale</a>
         </div>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Use-case consigliati (ordine)</h3>
-        <ul class="list">
-          <li><strong>1. Servizi pubblici digitali:</strong> enforcement ex-ante su azioni critiche.</li>
-          <li><strong>2. AI ad alto rischio:</strong> blocco tecnico su mismatch di policy/config.</li>
-          <li><strong>3. Supply chain:</strong> verificabilità del contesto operativo e del rilascio.</li>
-          <li><strong>4. Infrastrutture critiche:</strong> riduzione rischio con gate e audit replicabile.</li>
-        </ul>
       </article>
     </section>
   </main>
@@ -121,9 +169,9 @@
   <footer class="footer">
     <div class="wrap">
       <div class="notice">
-        <strong>Nota operativa</strong><br/>
-        Questa pagina fornisce linee guida tecniche.  
-        L’adozione resta di competenza esclusiva degli Stati Membri e delle autorità nazionali.
+        <strong>Nota</strong><br/>
+        Adozione federata significa: standard comune di eseguibilità (PASS/FAIL) + sovranità dei domini.
+        Nessuna custodia centrale. Nessuna sorveglianza.
       </div>
     </div>
   </footer>
