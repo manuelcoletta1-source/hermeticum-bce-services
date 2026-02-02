@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tecnologia — PASS/FAIL, determinismo, integrazione IPR in AI</title>
+  <title>Tecnologia — gate ex-ante (PASS/FAIL) · definizioni · fingerprint</title>
 
   <!-- GitHub Pages project site base -->
   <base href="/hermeticum-bce-platform/">
@@ -17,7 +17,7 @@
         <div class="sig" aria-hidden="true"></div>
         <div>
           <h1>Tecnologia</h1>
-          <span class="sub">PASS/FAIL · determinismo · “virgola=FAIL”</span>
+          <span class="sub">Specifica PASS/FAIL · fingerprint · “virgola=FAIL”</span>
         </div>
       </div>
 
@@ -30,7 +30,6 @@
         <a class="pill" data-nav href="member-states/">Stati Membri</a>
         <a class="pill active" data-nav href="technology/"><strong>Tecnologia</strong></a>
         <a class="pill" data-nav href="verify/">Verify</a>
-        <a class="pill" data-nav href="create/">Create</a>
         <a class="pill" data-nav href="security/">Sicurezza</a>
         <a class="pill" data-nav href="governance/">Governance</a>
         <a class="pill" data-nav href="manual/">Manuale</a>
@@ -40,129 +39,141 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">TECH SPEC · AUDIT-FIRST · FAIL-CLOSED</div>
-      <h2 class="title">Il sistema è binario: o è verificabile, o non è eseguibile</h2>
+      <div class="kicker">SPECIFICA · NIENTE AMBIGUITÀ</div>
+      <h2 class="title">Gate ex-ante: una decisione binaria prima dell’esecuzione</h2>
       <p class="lead">
-        Questa pagina definisce il modello tecnico minimo: <strong>IPR</strong> (precedenza),
-        un gate (<strong>AI JOKER-C2</strong>) che fa pre-check, e un criterio di uscita:
-        <strong>PASS/FAIL</strong>. In questo mondo non esiste “quasi”: una differenza minima
-        cambia l’hash e quindi cambia l’atto.
+        L’intero modello si riduce a una regola: un’azione sensibile è eseguibile solo se
+        le evidenze minime coincidono in modo deterministico.  
+        Se qualcosa manca o non coincide: <strong>FAIL</strong>.
       </p>
 
       <div class="btnrow">
-        <a class="btn" href="verify/">Esegui Verify</a>
-        <a class="btn secondary" href="create/">Creazione guidata IPR</a>
-        <a class="btn ghost" href="security/">Threat model</a>
+        <a class="btn" href="verify/">Prova (Verify)</a>
+        <a class="btn secondary" href="security/">Threat model</a>
+        <a class="btn ghost" href="governance/">Limiti dichiarati</a>
       </div>
     </section>
 
     <section class="grid">
       <article class="card cols-12">
-        <h3>Definizioni minime</h3>
-        <ul class="list">
-          <li><strong>IPR</strong>: record primario che definisce precedenza, scope, policy e contesto.</li>
-          <li><strong>Canon</strong>: serializzazione stabile del record (stesso input → stesso hash).</li>
-          <li><strong>Digest</strong>: hash SHA-512 del canonico (identità tecnica del contenuto).</li>
-          <li><strong>Gate ex-ante</strong>: componente che verifica prima dell’esecuzione.</li>
-          <li><strong>Fail-closed</strong>: in dubbio, blocca. Mai “fallback silenzioso”.</li>
-        </ul>
-      </article>
-
-      <article class="card cols-6">
-        <h3>Regola “virgola = FAIL”</h3>
-        <p>
-          Un hash è sensibile a ogni variazione. Questo è il punto: se cambia anche un carattere,
-          <strong>cambia l’atto</strong>. Non è un bug, è la sicurezza.
-        </p>
-        <div class="meta">
-          <span class="tag warn">virgola=FAIL</span>
-          <span class="tag">append-only</span>
-        </div>
-      </article>
-
-      <article class="card cols-6">
-        <h3>Perché serve in AI (punto di rottura)</h3>
-        <p>
-          Senza un gate, molte AI operano in modalità <strong>fail-open</strong>:
-          se il contesto è ambiguo, provano comunque.
-          Con IPR + gate, l’ambiguità diventa <strong>blocco</strong>.
-        </p>
-        <div class="meta">
-          <span class="tag danger">fail-open</span>
-          <span class="tag ok">fail-closed</span>
-        </div>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Interfaccia del gate (minima, implementabile)</h3>
+        <h3>Schema del gate (PASS/FAIL)</h3>
         <pre style="margin:0; white-space:pre-wrap; color:rgba(232,236,255,.92)">
 INPUT:
-  action_request            // cosa si vuole fare
-  ipr_reference             // puntatore a canon+digest (e receipt se presente)
-  context_fingerprint       // fingerprint del runtime (modello, tool, ambiente)
-  policy_fingerprint        // fingerprint policy attiva
+  action_request
+  ipr_reference (canon + digest)
+  context_fingerprint
+  policy_fingerprint
 
 CHECK (fail-closed):
-  if !verify(ipr_reference)             -> FAIL
-  if context_fingerprint != ipr.context -> FAIL
-  if policy_fingerprint  != ipr.policy  -> FAIL
-  if violates(ipr.limits)               -> FAIL
+  1) verify(ipr_reference)              else FAIL
+  2) context_fingerprint == ipr.context else FAIL
+  3) policy_fingerprint  == ipr.policy  else FAIL
+  4) violates(ipr.limits)               ? FAIL : continue
 
 OUTPUT:
-  PASS | FAIL  // nessun output esecutivo se FAIL
+  PASS | FAIL
         </pre>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Verify deterministico (questa demo)</h3>
-        <p>
-          In questo repository la prova minima è già operativa: la pagina <a href="verify/">/verify/</a>
-          scarica <span class="mono">ipr.canon.json</span> e <span class="mono">ipr.json</span>,
-          calcola SHA-512 e confronta il digest. Se coincide: PASS. Altrimenti: FAIL con motivo.
-        </p>
-        <div class="btnrow">
-          <a class="btn" href="verify/">Esegui Verify ora</a>
+        <div class="meta" style="margin-top:10px">
+          <span class="tag ok">ex-ante</span>
+          <span class="tag ok">deterministico</span>
+          <span class="tag">audit replicabile</span>
         </div>
       </article>
 
       <article class="card cols-12">
-        <h3>IPR dentro la tua AI: cosa cambia</h3>
+        <h3>Definizioni (precise)</h3>
+        <div class="grid" style="gap:12px">
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Onboarding</h4>
+            <p style="margin:0">
+              Percorso di ingresso: scegliere profilo e livello di vincolo, poi eseguire Verify e attivare il gate.
+              È un router per evitare flussi duplicati e incoerenti.
+            </p>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Fail-closed</h4>
+            <p style="margin:0">
+              In assenza di evidenza verificabile l’azione non passa.  
+              Non esiste “fallback silenzioso”. Il default è blocco.
+            </p>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Audit-first</h4>
+            <p style="margin:0">
+              Le verifiche sono progettate prima della funzionalità.  
+              L’audit non è un allegato: è la forma stessa del sistema.
+            </p>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Hash-only / GDPR-min</h4>
+            <p style="margin:0">
+              Si usano impronte (hash/fingerprint) al posto di dati personali.
+              Il portale non è un deposito di identità: no custody.
+            </p>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Fingerprint</h4>
+            <p style="margin:0">
+              Un identificatore tecnico del contesto o della policy (versioni, runtime, configurazioni).
+              Serve a rilevare drift prima che diventi incidente.
+            </p>
+          </div>
+
+          <div class="card cols-6" style="padding:14px">
+            <h4 style="margin:0 0 6px">Append-only</h4>
+            <p style="margin:0">
+              Le modifiche non “sovrascrivono” in silenzio: sono tracciate e versionate.
+              Questo permette contestazione nel tempo.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>“Virgola = FAIL” (spiegazione tecnica)</h3>
         <p>
-          Senza IPR, la tua AI è “una macchina di output”: riceve input, produce risposta, e spesso
-          tenta di completare anche quando manca evidenza.
-          Con IPR, la tua AI diventa <strong>una estensione tecnica e legale del tuo perimetro</strong>:
-          prima di agire deve dimostrare coerenza con policy e contesto.
+          Il digest SHA-512 cambia per ogni variazione del canonico: un carattere, uno spazio, una virgola.
+          Questo è un comportamento desiderato: elimina ambiguità e rende la verifica replicabile.
         </p>
         <ul class="list">
-          <li><strong>AI domestica</strong>: comandi sensibili (pagamenti, accessi, domotica) solo con PASS.</li>
-          <li><strong>AI professionale</strong>: strumenti e dati solo nel perimetro definito (no leak).</li>
-          <li><strong>AI in flotte/swarm</strong>: comandi solo se precedenza verificata.</li>
-          <li><strong>AI spazio/satelliti</strong>: control-plane evidence-locked (errore = FAIL).</li>
+          <li>se il canonico cambia → il digest cambia</li>
+          <li>se il digest dichiarato non cambia → mismatch → FAIL</li>
+          <li>se entrambi cambiano in modo coerente → PASS</li>
+        </ul>
+        <div class="btnrow">
+          <a class="btn" href="create/">Genera canon + digest (Create)</a>
+          <a class="btn secondary" href="verify/">Verifica (Verify)</a>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Confini: cosa è “azione sensibile”</h3>
+        <p style="margin-top:0; color:rgba(232,236,255,.82)">
+          In pratica: tutto ciò che può cambiare stato del mondo o esporre dati.
+        </p>
+        <ul class="list">
+          <li>accesso a file, database, credenziali, tool esterni</li>
+          <li>pagamenti, firme, transazioni</li>
+          <li>comandi su flotte, droni, macchine, infrastrutture</li>
+          <li>pubblicazione automatica, invio, deploy, configurazioni</li>
         </ul>
       </article>
 
-      <article class="card cols-6">
-        <h3>Compatibilità UE (principio)</h3>
+      <article class="card cols-12">
+        <h3>Prova minima (ripetibile)</h3>
         <p>
-          Questo modello è “UE-first” nel senso tecnico: minimizza dati (hash-only),
-          rende verificabile l’atto (audit-first) e impedisce esecuzione senza evidenza (fail-closed).
+          La pagina Verify è la prova minima: prende <span class="mono">ipr.canon.json</span>,
+          calcola SHA-512 e confronta con <span class="mono">ipr.json</span>.  
+          Se combacia: PASS. Se non combacia: FAIL. Fine.
         </p>
-        <div class="meta">
-          <span class="tag">GDPR-min</span>
-          <span class="tag">audit-first</span>
-          <span class="tag ok">fail-closed</span>
-        </div>
-      </article>
-
-      <article class="card cols-6">
-        <h3>Limite fondamentale</h3>
-        <p>
-          Un gate non “rende buone” le decisioni: rende <strong>misurabile</strong> se erano eseguibili.
-          La responsabilità resta umana. Il sistema impedisce solo la fuga nel non verificabile.
-        </p>
-        <div class="meta">
-          <span class="tag">human responsibility</span>
-          <span class="tag ok">measurable</span>
+        <div class="btnrow">
+          <a class="btn" href="verify/">Esegui Verify</a>
+          <a class="btn secondary" href="onboarding/">Torna a Onboarding</a>
+          <a class="btn ghost" href="ai-joker-c2/">Gate AI JOKER-C2</a>
         </div>
       </article>
     </section>
@@ -171,9 +182,9 @@ OUTPUT:
   <footer class="footer">
     <div class="wrap">
       <div class="notice">
-        <strong>Chiusura tecnica</strong><br/>
-        IPR = precedenza. Gate = eseguibilità. Verify = prova.  
-        Senza prova replicabile, niente esecuzione.
+        <strong>Chiusura</strong><br/>
+        Tecnologia = criterio di eseguibilità ex-ante.  
+        Se manca evidenza verificabile: FAIL.
       </div>
     </div>
   </footer>
