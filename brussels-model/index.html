@@ -1,113 +1,68 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HERMETICUM — Brussels Model</title>
-  <meta name="description" content="Modello UE di decadimento sistemico dei dati digitali. Impatto economico stimato ~1 trilione di euro e roadmap infrastrutturale di recupero.">
-  <style>
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0b0f14;color:#e6edf3;line-height:1.6}
-    .container{max-width:960px;margin:0 auto;padding:32px 20px 64px}
-    header{border-bottom:1px solid #223043;padding-bottom:16px;margin-bottom:28px}
-    h1{font-size:22px;margin:0;letter-spacing:.3px}
-    .subtitle{color:#9fb0c0;font-size:14px;margin-top:6px}
-    section{margin-bottom:36px;padding:20px;border:1px solid #223043;border-radius:14px;background:#101826}
-    h2{font-size:18px;margin-top:0}
-    p{margin:8px 0;color:#d1d9e0}
-    ul{margin:8px 0 0 18px;color:#c4cfda}
-    .highlight{font-size:32px;font-weight:700;margin:12px 0 6px}
-    .muted{color:#9fb0c0;font-size:14px}
-    .links a{display:block;margin:6px 0;color:#7dd3fc;text-decoration:none}
-    .links a:hover{text-decoration:underline}
-    footer{border-top:1px solid #223043;margin-top:40px;padding-top:16px;font-size:13px;color:#9fb0c0}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brussels Model — HERMETICUM</title>
+  <meta name="description" content="Modello UE: decadimento sistemico dei dati digitali, impatto ~€1T, roadmap 36 mesi." />
+  <link rel="stylesheet" href="../assets/hbce.css" />
 </head>
 <body>
-  <div class="container">
 
-    <header>
-      <h1>HERMETICUM — Brussels Model</h1>
-      <div class="subtitle">Modello europeo di decadimento sistemico dei dati digitali e proposta infrastrutturale di recupero</div>
-    </header>
+  <header class="hbce-header">
+    <div class="hbce-brand">
+      <h1 class="hbce-title">Brussels Model</h1>
+      <p class="hbce-sub">Decadimento sistemico UE · ~€1T · Roadmap Horizon-ready</p>
+    </div>
+    <nav class="hbce-nav">
+      <a class="hbce-pill" href="../">Home</a>
+      <a class="hbce-pill" href="../onboarding/">Onboarding</a>
+      <a class="hbce-pill" href="../citizen/">Cittadino UE</a>
+      <a class="hbce-pill" href="../create/">Create</a>
+      <a class="hbce-pill" href="../verify/">Verify</a>
+      <a class="hbce-pill" href="../governance/">Governance</a>
+    </nav>
+  </header>
 
-    <section>
-      <h2>1. Sintesi per le Istituzioni UE</h2>
-      <p>
-        L’Unione Europea non dispone di uno strato tecnico comune in grado di verificare in modo unitario
-        <strong>l’origine temporale e l’integrità degli atti e dei dati</strong> prima del loro riconoscimento istituzionale.
-      </p>
-      <p>
-        Questa lacuna genera inefficienze sistemiche, enforcement ex-post, duplicazioni amministrative,
-        contenzioso e vulnerabilità nei contesti digitali e transfrontalieri.
-      </p>
-      <p>
-        Il presente pacchetto quantifica tale decadimento e propone una soluzione infrastrutturale minima, neutra e federabile.
-      </p>
-    </section>
+  <main class="hbce-wrap">
+    <div class="hbce-grid">
 
-    <section>
-      <h2>2. Quantificazione del Decadimento</h2>
-      <div class="highlight">≈ € 1.000.000.000.000</div>
-      <p class="muted">
-        Stima conservativa del decadimento cumulativo (UE-27, settore pubblico e privato, orizzonte 10–15 anni).
-      </p>
-      <ul>
-        <li>inefficienze regolatorie ed enforcement (DMA, DSA, AI Act)</li>
-        <li>contenzioso e duplicazioni amministrative</li>
-        <li>frizione nei mercati e nella governance dei dati (Data Act)</li>
-        <li>risposta ex-post a incidenti cyber e minacce ibride</li>
-      </ul>
-    </section>
+      <section class="hbce-card hbce-span-2 hbce-glow">
+        <h2>Sintesi istituzionale</h2>
+        <p>
+          L’UE non ha uno strato tecnico comune per verificare l’origine temporale e l’integrità di atti e dati
+          prima del loro riconoscimento procedurale. Questo genera enforcement ex-post, duplicazioni, contenzioso e frizione.
+        </p>
+        <p class="hbce-note"><strong>Stima decadimento cumulativo</strong>: ≈ € 1.000.000.000.000 (10–15 anni, UE-27).</p>
+      </section>
 
-    <section>
-      <h2>3. Natura del Problema</h2>
-      <p>Il problema non è normativo né politico.</p>
-      <p>
-        È <strong>architetturale</strong>: l’UE può decidere e regolamentare, ma non dispone di un’infrastruttura comune
-        per fissare e verificare l’origine degli atti <em>prima</em> che entrino nelle procedure.
-      </p>
-      <p>L’audit è prevalentemente ex-post; l’origine resta negoziabile.</p>
-    </section>
+      <section class="hbce-card">
+        <h2>Roadmap 36 mesi</h2>
+        <ul>
+          <li>Fase 1: gateway pilota ex-ante</li>
+          <li>Fase 2: integrazione Data Spaces / sandbox AI</li>
+          <li>Fase 3: adozione opzionale + resilienza</li>
+        </ul>
+      </section>
 
-    <section>
-      <h2>4. Proposta Infrastrutturale</h2>
-      <p>HERMETICUM introduce un gateway tecnico europeo che:</p>
-      <ul>
-        <li>produce evidenza tecnica, non decisione</li>
-        <li>non attribuisce effetti legali automatici</li>
-        <li>non tratta dati personali</li>
-        <li>opera secondo principi UE-first, audit-first e fail-closed</li>
-      </ul>
-      <p>L’obiettivo è preservare l’origine temporale degli atti senza alterare sovranità o competenze.</p>
-    </section>
+      <section class="hbce-card">
+        <h2>Documenti</h2>
+        <ul>
+          <li><a href="./EXECUTIVE_BRIEF.md">Executive Brief</a></li>
+          <li><a href="./SYSTEMIC_DECAY_MODEL.md">Systemic Decay Model</a></li>
+          <li><a href="./ECONOMIC_IMPACT_1T.md">Economic Impact €1T</a></li>
+          <li><a href="./ROADMAP_IMPLEMENTATION.md">Roadmap</a></li>
+          <li><a href="./TRACE_OF_WORK.md">Trace of Work</a></li>
+          <li><a href="./DISCLAIMER.md">Disclaimer</a></li>
+        </ul>
+      </section>
 
-    <section>
-      <h2>5. Roadmap di Recupero</h2>
-      <ul>
-        <li><strong>Fase 1 (0–12 mesi)</strong> — gateway pilota, evidenza tecnica ex-ante</li>
-        <li><strong>Fase 2 (12–24 mesi)</strong> — integrazione con Data Spaces e sandbox AI</li>
-        <li><strong>Fase 3 (24–36 mesi)</strong> — adozione opzionale e supporto resilienza UE</li>
-      </ul>
-    </section>
+    </div>
+  </main>
 
-    <section>
-      <h2>6. Documentazione del Pacchetto</h2>
-      <div class="links">
-        <a href="./README.md">README — panoramica generale</a>
-        <a href="./EXECUTIVE_BRIEF.md">Executive Brief — nota per la Commissione</a>
-        <a href="./SYSTEMIC_DECAY_MODEL.md">Systemic Decay Model — base tecnica</a>
-        <a href="./ECONOMIC_IMPACT_1T.md">Economic Impact — quantificazione €1T</a>
-        <a href="./ROADMAP_IMPLEMENTATION.md">Roadmap Implementation</a>
-        <a href="./TRACE_OF_WORK.md">Trace of Work — precedenza temporale</a>
-        <a href="./DISCLAIMER.md">Disclaimer</a>
-      </div>
-    </section>
+  <footer class="hbce-footer">
+    Brussels Model: evidenza tecnica ex-ante, nessuna custodia, nessun effetto legale automatico.
+  </footer>
 
-    <footer>
-      Questo pacchetto non crea obblighi giuridici, non sostituisce il diritto UE e non introduce nuove autorità.
-      Costituisce una valutazione tecnica ed economica a supporto delle decisioni infrastrutturali europee.
-    </footer>
-
-  </div>
 </body>
 </html>
