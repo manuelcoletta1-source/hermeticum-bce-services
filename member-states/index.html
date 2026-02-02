@@ -4,7 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Stati Membri UE — Adozione operativa IPR</title>
-  <link rel="stylesheet" href="/assets/hbce.css" />
+
+  <!-- GitHub Pages project site base -->
+  <base href="/hermeticum-bce-platform/">
+
+  <link rel="stylesheet" href="assets/hbce.css" />
 </head>
 <body>
   <header class="topbar">
@@ -17,13 +21,15 @@
         </div>
       </div>
       <nav class="menu" aria-label="Navigazione principale">
-        <a class="pill" data-nav href="/"><strong>Home</strong></a>
-        <a class="pill" data-nav href="/institutions/">Istituzioni UE</a>
-        <a class="pill active" data-nav href="/member-states/"><strong>Stati Membri</strong></a>
-        <a class="pill" data-nav href="/technology/">Tecnologia</a>
-        <a class="pill" data-nav href="/security/">Sicurezza</a>
-        <a class="pill" data-nav href="/governance/">Governance</a>
-        <a class="pill" data-nav href="/manual/">Manuale</a>
+        <a class="pill" data-nav href="./"><strong>Home</strong></a>
+        <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
+        <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
+        <a class="pill" data-nav href="institution/">Istituzioni UE</a>
+        <a class="pill active" data-nav href="member-states/"><strong>Stati Membri</strong></a>
+        <a class="pill" data-nav href="technology/">Tecnologia</a>
+        <a class="pill" data-nav href="security/">Sicurezza</a>
+        <a class="pill" data-nav href="governance/">Governance</a>
+        <a class="pill" data-nav href="manual/">Manuale</a>
       </nav>
     </div>
   </header>
@@ -31,11 +37,11 @@
   <main class="wrap">
     <section class="hero">
       <div class="kicker">IMPLEMENTATION GUIDANCE · FEDERATED MODEL · FAIL-CLOSED</div>
-      <h2 class="title">Come adottare l’IPR a livello nazionale</h2>
+      <h2 class="title">Adozione nazionale dell’IPR: implementare senza centralizzare</h2>
       <p class="lead">
-        Questa sezione descrive un percorso operativo per gli Stati Membri che intendono
-        adottare la governance ex-ante dell’Intelligenza Artificiale senza centralizzare dati,
-        senza delegare sovranità e mantenendo interoperabilità europea.
+        Questa sezione descrive un percorso operativo per adottare la governance ex-ante dell’AI,
+        mantenendo sovranità nazionale e interoperabilità europea. Il modello è federato:
+        ogni Stato Membro gestisce i propri nodi, senza custodia centrale dei dati.
       </p>
     </section>
 
@@ -43,20 +49,20 @@
       <article class="card cols-6">
         <h3>Principi non negoziabili</h3>
         <ul class="list">
-          <li><strong>Precedenza prima dell’azione:</strong> nessuna esecuzione senza IPR valido.</li>
+          <li><strong>Precedenza prima dell’azione:</strong> nessuna esecuzione AI senza IPR valido.</li>
           <li><strong>Fail-closed:</strong> incertezza operativa → blocco tecnico.</li>
-          <li><strong>Federazione:</strong> cooperazione UE senza trust implicito.</li>
+          <li><strong>Federazione:</strong> interoperabilità senza trust implicito.</li>
           <li><strong>Responsabilità umana:</strong> l’AI non si auto-abilita.</li>
-          <li><strong>Audit replicabile:</strong> verifica deterministica.</li>
+          <li><strong>Audit replicabile:</strong> verifica deterministica, non narrativa.</li>
         </ul>
       </article>
 
       <article class="card cols-6">
         <h3>Architettura minima nazionale</h3>
-        <p>Ogni Stato Membro mantiene i propri nodi e controlli.</p>
+        <p>Baseline modulare, separabile, verificabile.</p>
         <ul class="list">
           <li><strong>IPR-CORE</strong> — creazione e verifica della precedenza</li>
-          <li><strong>AI JOKER-C2</strong> — gate di governance (PASS / FAIL)</li>
+          <li><strong>AI JOKER-C2</strong> — gate ex-ante (PASS / FAIL)</li>
           <li><strong>OPC</strong> — policy operative vincolanti</li>
           <li><strong>UNEBDO</strong> — evidence pack (raccomandato)</li>
           <li><strong>IPR-EXCHANGE</strong> — federazione con altri Stati UE</li>
@@ -94,6 +100,20 @@
           <li><strong>NO-GO:</strong> esecuzione senza IPR</li>
           <li><strong>NO-GO:</strong> policy implicite o non verificabili</li>
         </ul>
+        <div class="btnrow">
+          <a class="btn secondary" href="technology/">Vai a “Tecnologia”</a>
+          <a class="btn ghost" href="manual/">Apri il Manuale</a>
+        </div>
+      </article>
+
+      <article class="card cols-12">
+        <h3>Use-case consigliati (ordine)</h3>
+        <ul class="list">
+          <li><strong>1. Servizi pubblici digitali:</strong> enforcement ex-ante su azioni critiche.</li>
+          <li><strong>2. AI ad alto rischio:</strong> blocco tecnico su mismatch di policy/config.</li>
+          <li><strong>3. Supply chain:</strong> verificabilità del contesto operativo e del rilascio.</li>
+          <li><strong>4. Infrastrutture critiche:</strong> riduzione rischio con gate e audit replicabile.</li>
+        </ul>
       </article>
     </section>
   </main>
@@ -108,6 +128,6 @@
     </div>
   </footer>
 
-  <script src="/assets/hbce.js"></script>
+  <script src="assets/hbce.js"></script>
 </body>
 </html>
