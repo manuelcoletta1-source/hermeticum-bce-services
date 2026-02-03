@@ -51,19 +51,17 @@
       <a class="pill" href="../ipr/">IPR</a>
       <a class="pill" href="../verify/">Validatore</a>
       <a class="pill" href="../specs/">Specifiche</a>
+      <a class="pill" href="../openapi/">OpenAPI</a>
       <a class="pill" href="../audit/">Audit</a>
       <a class="pill" href="../status/">Status</a>
     </nav>
   </header>
 
   <h1>Status</h1>
-  <p>
-    Questa pagina descrive lo stato effettivo delle componenti: cosa è <b>operativo</b>,
-    cosa è <b>dimostrativo</b>, cosa è <b>non disponibile</b>. È un controllo anti-ambiguità.
-  </p>
+  <p>Stato effettivo: cosa è live, cosa è in rollout, cosa non è previsto. Anti-ambiguità.</p>
 
   <div class="card">
-    <h2>Stato componenti</h2>
+    <h2>Componenti</h2>
     <table>
       <thead>
         <tr>
@@ -75,39 +73,39 @@
       </thead>
       <tbody>
         <tr>
-          <td>Standard IPR (pagina canonica)</td>
+          <td>Standard IPR</td>
           <td><span class="tag ok">LIVE</span></td>
-          <td>Definizione operativa dello standard tecnologico ex-ante.</td>
+          <td>Pagina canonica dello standard tecnologico ex-ante.</td>
           <td><a href="../ipr/">/ipr/</a></td>
         </tr>
         <tr>
-          <td>Validatore ex-ante IPR</td>
+          <td>Validatore ex-ante</td>
           <td><span class="tag ok">LIVE</span></td>
           <td>Demo offline deterministica. Fail-closed. Evidence hash-only.</td>
           <td><a href="../verify/">/verify/</a></td>
         </tr>
         <tr>
-          <td>Specifiche (Norma / Implementazione)</td>
+          <td>Specifiche</td>
           <td><span class="tag warn">ROLLOUT</span></td>
-          <td>Documenti tecnici e normativa. Può essere incompleto.</td>
+          <td>Norma e specifica di implementazione.</td>
           <td><a href="../specs/">/specs/</a></td>
         </tr>
         <tr>
-          <td>OpenAPI (interfaccia standard)</td>
+          <td>OpenAPI</td>
           <td><span class="tag warn">ROLLOUT</span></td>
-          <td>OpenAPI 3.1 presente come artefatto. Explorer opzionale.</td>
+          <td>Artefatti OpenAPI 3.1; explorer opzionale.</td>
           <td><a href="../openapi/">/openapi/</a></td>
         </tr>
         <tr>
           <td>Audit Pack</td>
           <td><span class="tag warn">ROLLOUT</span></td>
-          <td>Indice artefatti verificabili. Completa la tracciabilità.</td>
+          <td>Indice artefatti verificabili e riferimenti.</td>
           <td><a href="../audit/">/audit/</a></td>
         </tr>
         <tr>
           <td>Enforcement runtime (server-side)</td>
           <td><span class="tag no">NON DISPONIBILE</span></td>
-          <td>Non implementato sul portale pubblico. Solo demo/offline.</td>
+          <td>Non implementato sul portale pubblico.</td>
           <td>-</td>
         </tr>
         <tr>
@@ -121,26 +119,13 @@
   </div>
 
   <div class="card">
-    <h2>Modalità di prova (auditabile)</h2>
-    <p>
-      Per verificare l’operatività ex-ante:
-    </p>
+    <h2>Prova operativa</h2>
     <ol>
-      <li>Aprire <a href="../verify/">/verify/</a></li>
-      <li>Eseguire <code>Validate ex-ante</code></li>
-      <li>Verificare output <b>AUTHORIZED</b> o <b>DENIED</b></li>
-      <li>Conservare l’evidenza (<code>digest_hex</code>) come prova hash-only</li>
+      <li>Apri <a href="../verify/">/verify/</a></li>
+      <li>Premi <code>Validate ex-ante</code></li>
+      <li>Leggi <b>AUTHORIZED</b> o <b>DENIED</b></li>
+      <li>Conserva <code>digest_hex</code> come prova hash-only</li>
     </ol>
-  </div>
-
-  <div class="card">
-    <h2>Note di conformità (principi)</h2>
-    <ul>
-      <li><b>FAIL-CLOSED</b>: in assenza di prova, nessuna esecuzione.</li>
-      <li><b>HASH-ONLY</b>: nessuna custodia dati personali sul portale.</li>
-      <li><b>AUDIT-FIRST</b>: artefatti e output verificabili.</li>
-      <li><b>UE-FIRST</b>: posizionamento su accountability e human responsibility.</li>
-    </ul>
   </div>
 
   <footer>
