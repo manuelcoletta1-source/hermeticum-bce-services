@@ -7,137 +7,45 @@
   <meta name="description" content="IPR Europeo: standard tecnologico ex-ante per l’ammissibilità delle azioni digitali. Implementazione di riferimento a cura di HERMETICUM B.C.E. S.r.l." />
   <style>
     :root { color-scheme: dark; }
-    body {
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:#0b0f14;
-      color:#e6edf3;
-    }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
     a { color:#9cd1ff; text-decoration:none; }
     a:hover { text-decoration:underline; }
 
     .wrap { max-width: 1080px; margin: 0 auto; padding: 26px 16px; }
 
-    header {
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:14px;
-      padding-bottom:12px;
-      border-bottom:1px solid rgba(255,255,255,.12);
-      flex-wrap:wrap;
-    }
+    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
+    .brand { font-size:14px; line-height:1.4; }
+    nav { display:flex; gap:10px; flex-wrap:wrap; }
+    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
 
-    .brand {
-      font-size:14px;
-      line-height:1.4;
-    }
+    .hero { margin-top:22px; }
+    .hero h1 { margin:0 0 8px; font-size:30px; }
+    .hero p { margin:6px 0; line-height:1.55; opacity:.9; }
 
-    nav {
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+    .badges { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+    .badge { border:1px solid rgba(255,255,255,.14); padding:3px 8px; border-radius:999px; font-size:11px; background:rgba(255,255,255,.03); }
 
-    .pill {
-      border:1px solid rgba(255,255,255,.14);
-      padding:8px 10px;
-      border-radius:999px;
-      font-size:12px;
-      background:rgba(255,255,255,.03);
-    }
+    .cta { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+    .btn { border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); padding:10px 14px; border-radius:12px; font-size:13px; color:#e6edf3; }
+    .btn:hover { background:rgba(255,255,255,.09); text-decoration:none; }
 
-    .hero {
-      margin-top:22px;
-    }
+    .section { margin-top:26px; padding:16px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); }
+    .section h2 { margin:0 0 8px; font-size:18px; }
+    .section p, .section li { font-size:13px; line-height:1.55; opacity:.9; }
+    ul, ol { margin: 8px 0 0 18px; }
 
-    .hero h1 {
-      margin:0 0 8px;
-      font-size:30px;
-    }
-
-    .hero p {
-      margin:6px 0;
-      line-height:1.55;
-      opacity:.9;
-    }
-
-    .badges {
-      margin-top:10px;
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .badge {
-      border:1px solid rgba(255,255,255,.14);
-      padding:3px 8px;
-      border-radius:999px;
-      font-size:11px;
-      background:rgba(255,255,255,.03);
-    }
-
-    .cta {
-      margin-top:14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .btn {
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      padding:10px 14px;
-      border-radius:12px;
-      font-size:13px;
-      color:#e6edf3;
-    }
-
-    .btn:hover { background:rgba(255,255,255,.09); }
-
-    .section {
-      margin-top:26px;
-      padding:16px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.02);
-    }
-
-    .section h2 {
-      margin:0 0 8px;
-      font-size:18px;
-    }
-
-    .section p, .section li {
-      font-size:13px;
-      line-height:1.55;
-      opacity:.9;
-    }
-
-    footer {
-      margin-top:28px;
-      padding-top:14px;
-      border-top:1px solid rgba(255,255,255,.12);
-      font-size:12px;
-      opacity:.75;
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      gap:10px;
-    }
+    footer { margin-top:28px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
   </style>
 </head>
 
 <body>
   <div class="wrap">
 
-    <!-- NAVBAR -->
     <header>
       <div class="brand">
         <b>IPR Europeo</b><br/>
         Standard tecnologico ex-ante
       </div>
-
       <nav>
         <a class="pill" href="./">Home</a>
         <a class="pill" href="ipr/">IPR</a>
@@ -145,18 +53,16 @@
         <a class="pill" href="specs/">Specifiche</a>
         <a class="pill" href="openapi/">OpenAPI</a>
         <a class="pill" href="audit/">Audit</a>
-        <a class="pill" href="governance/">Governance</a>
         <a class="pill" href="status/">Status</a>
       </nav>
     </header>
 
-    <!-- HERO -->
     <section class="hero">
       <h1>IPR Europeo</h1>
       <p>
         Standard tecnologico <b>ex-ante</b> che rende un’azione digitale
-        <b>tecnicamente inammissibile</b> se la responsabilità non è
-        verificabile prima dell’esecuzione.
+        <b>tecnicamente inammissibile</b> se la responsabilità non è verificabile
+        prima dell’esecuzione.
       </p>
 
       <div class="badges">
@@ -179,27 +85,21 @@
       </p>
     </section>
 
-    <!-- SEZIONE OPERATIVA -->
     <section class="section">
       <h2>Funzione</h2>
       <p>
-        L’IPR Europeo non decide nel merito.  
-        Verifica <b>se un’azione può essere eseguita</b>.
+        L’IPR Europeo non decide nel merito. Verifica <b>se un’azione può essere eseguita</b>.
       </p>
-      <ul>
+      <ol>
         <li>Attribuzione umana verificabile</li>
         <li>Decisione esplicita</li>
         <li>Traccia tecnica opponibile</li>
         <li>Responsabilità non neutralizzabile</li>
         <li>Esposizione temporale auditabile</li>
-      </ul>
-      <p>
-        In assenza di anche uno solo di questi elementi, l’azione è
-        <b>DENIED</b>.
-      </p>
+      </ol>
+      <p><b>In assenza di anche uno solo di questi requisiti, l’azione è DENIED.</b></p>
     </section>
 
-    <!-- FOOTER -->
     <footer>
       <div>
         IPR Europeo — standard tecnologico ex-ante<br/>
