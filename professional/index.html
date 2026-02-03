@@ -1,83 +1,110 @@
-
 <!doctype html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <title>Professional Corridor — HERMETICUM B.C.E.</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Corridoio informativo per professionisti. Ingresso canonico: onboarding. Verify-first per valutazione." />
-  <link rel="stylesheet" href="/hermeticum-bce-platform/assets/style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy — IPR Europeo</title>
+  <meta name="description" content="Informativa Privacy del portale IPR Europeo: principio hash-only, no-custody, minimizzazione dei dati." />
+  <style>
+    :root { color-scheme: dark; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
+    a { color:#9cd1ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 26px 16px; }
+
+    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
+    .brand { font-size:14px; line-height:1.4; }
+    nav { display:flex; gap:10px; flex-wrap:wrap; }
+    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
+
+    h1 { margin:18px 0 6px; font-size:24px; }
+    p, li { line-height:1.55; opacity:.9; font-size:14px; }
+    ul { margin: 8px 0 0 18px; }
+
+    .card { margin-top:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); border-radius:14px; padding:14px; }
+    .card h2 { margin:0 0 10px; font-size:16px; }
+
+    code { background: rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.12); padding:2px 6px; border-radius:8px; font-family: ui-monospace, monospace; font-size:12px; }
+
+    footer { margin-top:22px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  </style>
 </head>
 
 <body>
+<div class="wrap">
 
-  <div data-include="header"></div>
+  <header>
+    <div class="brand">
+      <b>IPR Europeo</b><br/>
+      Privacy
+    </div>
+    <nav>
+      <a class="pill" href="../">Home</a>
+      <a class="pill" href="../ipr/">IPR</a>
+      <a class="pill" href="../verify/">Validatore</a>
+      <a class="pill" href="../specs/">Specifiche</a>
+      <a class="pill" href="../openapi/">OpenAPI</a>
+      <a class="pill" href="../audit/">Audit</a>
+      <a class="pill" href="../status/">Status</a>
+    </nav>
+  </header>
 
-  <main class="hbce-main" role="main">
-    <section class="hbce-hero">
-      <h1>Professionista</h1>
-      <p class="hbce-hero__subtitle">
-        Corridoio di orientamento. Per operazioni reali: onboarding canonico.
-        Per valutare subito: verifica.
-      </p>
+  <h1>Privacy</h1>
+  <p>
+    Questo portale applica un principio operativo: <b>hash-only</b> e <b>no-custody</b>.
+    L’obiettivo è minimizzare i dati trattati e rendere verificabili gli output senza
+    conservare dati personali sul portale pubblico.
+  </p>
 
-      <div class="hbce-hero__cta">
-        <a class="hbce-btn hbce-btn--primary" href="/hermeticum-bce-platform/verify/">
-          Verifica (verify-first)
-        </a>
-        <a class="hbce-btn" href="/hermeticum-bce-platform/onboarding/">
-          Avvia Onboarding
-        </a>
-        <a class="hbce-btn" href="/hermeticum-bce-platform/evidence-pack/">
-          Evidence Pack
-        </a>
-      </div>
-    </section>
+  <div class="card">
+    <h2>Principi</h2>
+    <ul>
+      <li><b>Minimizzazione</b>: nessuna raccolta sistematica di dati personali.</li>
+      <li><b>No-custody</b>: il portale non custodisce identità o profili utente.</li>
+      <li><b>Hash-only</b>: gli artefatti di prova sono basati su digest crittografici.</li>
+      <li><b>Auditabilità</b>: gli output sono verificabili indipendentemente.</li>
+    </ul>
+  </div>
 
-    <section class="hbce-section">
-      <h2>Uso tipico (professionisti)</h2>
-      <ul>
-        <li><strong>Verifica IPR</strong> prima di accettare workflow, firme o responsabilità.</li>
-        <li><strong>Evidence Pack</strong> per contesti B2B/B2G e audit esterni.</li>
-        <li><strong>Catalogo</strong> per capire i servizi attivabili con IPR valido.</li>
-      </ul>
-      <p class="hbce-note">
-        Regola operativa: se non posso verificare → non valido (fail-closed).
-      </p>
-    </section>
+  <div class="card">
+    <h2>Validatore ex-ante (demo)</h2>
+    <p>
+      La pagina <a href="../verify/">/verify/</a> funziona nel browser in modalità dimostrativa.
+      I JSON inseriti restano lato client (browser). L’evidenza prodotta contiene:
+    </p>
+    <ul>
+      <li><code>digest_hex</code> (hash SHA-512)</li>
+      <li>metadati tecnici di generazione</li>
+      <li>nessun dato personale obbligatorio</li>
+    </ul>
+  </div>
 
-    <section class="hbce-section hbce-section--grid">
-      <div>
-        <h3>Onboarding (canonico)</h3>
-        <p>
-          L’onboarding allinea profilo, territorio e livello (light/strong),
-          poi abilita la creazione IPR in modo controllato.
-        </p>
-        <p><a href="/hermeticum-bce-platform/onboarding/">Apri onboarding →</a></p>
-      </div>
+  <div class="card">
+    <h2>Cookie e tracciamento</h2>
+    <p>
+      Questo portale non prevede, per impostazione predefinita, meccanismi di profilazione.
+      Se in futuro verranno integrati strumenti di analytics, saranno indicati esplicitamente
+      in questa pagina.
+    </p>
+  </div>
 
-      <div>
-        <h3>Controlli e audit</h3>
-        <p>
-          Checklist e verifiche riproducibili per ipr/receipt/anchors:
-          niente custodia, niente delega.
-        </p>
-        <p><a href="/hermeticum-bce-platform/tech/">Apri tech hub →</a></p>
-      </div>
-    </section>
+  <div class="card">
+    <h2>Titolare / implementazione di riferimento</h2>
+    <p>
+      Implementazione di riferimento a cura di <b>HERMETICUM B.C.E. S.r.l.</b>
+    </p>
+  </div>
 
-    <section class="hbce-section">
-      <h2>Accesso servizi</h2>
-      <p>
-        I servizi B2B/B2G sono disponibili solo con IPR valido e verificato.
-        Il catalogo è descrittivo: l’abilitazione è sempre condizionata a verifica.
-      </p>
-      <p><a href="/hermeticum-bce-platform/catalog/">Apri catalogo →</a></p>
-    </section>
-  </main>
+  <footer>
+    <div>
+      Privacy — IPR Europeo<br/>
+      Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
+    </div>
+    <div>
+      <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a>
+    </div>
+  </footer>
 
-  <div data-include="footer"></div>
-  <script src="/hermeticum-bce-platform/assets/include.js"></script>
-
+</div>
 </body>
 </html>
