@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Audit Pack — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Indice operativo degli artefatti auditabili: norma, implementazione, OpenAPI, diagrammi, evidence demo." />
+  <style>
+    :root { color-scheme: dark; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
+    a { color:#9cd1ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px; }
+    header { display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+    .brand h1 { margin:0; font-size: 18px; letter-spacing: .4px; }
+    .brand .tag { opacity:.85; margin-top:6px; font-size: 13px; }
+    nav { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius: 999px; font-size: 13px; background: rgba(255,255,255,.03); }
+    .card { margin-top: 14px; padding: 16px; border-radius: 14px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.02); }
+    h2 { margin: 0 0 8px; font-size: 18px; }
+    h3 { margin: 14px 0 8px; font-size: 14px; }
+    p, li { opacity:.9; line-height:1.55; }
+    ul, ol { margin: 8px 0 0 18px; }
+    code { background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 8px; }
+    .badge { display:inline-block; padding: 3px 8px; border-radius: 999px; border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.03); font-size: 11px; }
+    footer { margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+    .legal { opacity:.75; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1><a href="../">HERMETICUM B.C.E.</a></h1>
+        <div class="tag">Audit Pack — Evidence & Verifiability</div>
+      </div>
+      <nav>
+        <a class="pill" href="../onboarding/">Onboarding</a>
+        <a class="pill" href="../verify/">Verify</a>
+        <a class="pill" href="../specs/">Specs</a>
+        <a class="pill" href="../openapi/exa-dgc-openapi.yaml">OpenAPI</a>
+      </nav>
+    </header>
+
+    <div class="card">
+      <h2>Audit Pack (minimo)</h2>
+      <p>Questa sezione raccoglie gli artefatti necessari per verificare in modo indipendente che il sistema opera in regime <span class="badge">FAIL-CLOSED</span> e <span class="badge">HASH-ONLY</span>.</p>
+
+      <h3>Artefatti normativi e tecnici</h3>
+      <ul>
+        <li><a href="../specs/NT-EXA-01.md">NT-EXA-01 — Norma tecnica (ex-ante, fail-closed)</a></li>
+        <li><a href="../specs/EXA-DGC-IMP-01.md">EXA-DGC-IMP-01 — Specifica di implementazione</a></li>
+        <li><a href="../openapi/exa-dgc-openapi.yaml">OpenAPI 3.1 — EXA-DGC</a></li>
+      </ul>
+
+      <h3>Diagrammi (Mermaid)</h3>
+      <ul>
+        <li><a href="../docs/uml/components.mmd">Components</a></li>
+        <li><a href="../docs/uml/states.mmd">State machine</a></li>
+        <li><a href="../docs/uml/sequence-authorized.mmd">Sequence — AUTHORIZED</a></li>
+        <li><a href="../docs/uml/sequence-denied.mmd">Sequence — DENIED</a></li>
+      </ul>
+
+      <h3>Evidence demo (hash-only)</h3>
+      <ul>
+        <li><a href="../verify/">Verify — validator offline deterministico</a></li>
+        <li><a href="../verify/demo-evidence.json">demo-evidence.json</a></li>
+      </ul>
+
+      <h3>Procedura di verifica (operativa)</h3>
+      <ol>
+        <li>Aprire <a href="../verify/">Verify</a> e caricare l’esempio.</li>
+        <li>Eseguire <code>Validate (ex-ante)</code> e verificare:
+          <ul>
+            <li><b>DENIED</b> se manca un requisito (fail-closed)</li>
+            <li><b>AUTHORIZED</b> solo se REQ-1..REQ-5 sono PASS</li>
+          </ul>
+        </li>
+        <li>Esportare l’<code>EvidencePackage</code> e confrontarlo con la specifica:
+          <ul>
+            <li>hash algorithm</li>
+            <li>digest_hex</li>
+            <li>preimage_spec</li>
+            <li>verifiable_independently = true</li>
+          </ul>
+        </li>
+        <li>Verificare che l’esecuzione (in ambiente reale) sia possibile solo dopo AUTHORIZED token (vedi OpenAPI).</li>
+      </ol>
+
+      <h3>Condizione di conformità minima</h3>
+      <p>Un sistema è conforme, in senso minimo, se:</p>
+      <ul>
+        <li>non esegue azioni senza requisiti ex-ante (REQ-0);</li>
+        <li>nega l’esecuzione se manca anche un solo requisito (REQ-6.2);</li>
+        <li>non implementa bypass o fallback permissivi (REQ-6.3);</li>
+        <li>produce evidenza verificabile indipendentemente (REQ-3.2, REQ-8.2).</li>
+      </ul>
+    </div>
+
+    <footer>
+      <div class="legal">HERMETICUM B.C.E. S.r.l. — UE-first · audit-first · fail-closed · hash-only</div>
+      <div class="legal">
+        <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../status/">Status</a> · <a href="../manifest/">Manifest</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
