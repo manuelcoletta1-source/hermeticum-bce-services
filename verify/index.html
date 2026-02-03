@@ -27,15 +27,18 @@
 
     .card { border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); border-radius:14px; padding:14px; }
     .card h2 { margin:0 0 8px; font-size:16px; }
-    textarea { width:100%; min-height:180px; background:#0a0e13; color:#e6edf3; border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:10px; font-family: ui-monospace, monospace; font-size:12px; }
+
+    textarea { width:100%; min-height:180px; background:#0a0e13; color:#e6edf3; border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:12px; }
+
     button { border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.08); color:#e6edf3; padding:10px 14px; border-radius:12px; font-size:13px; cursor:pointer; }
     button:hover { background:rgba(255,255,255,.12); }
 
     .result { margin-top:14px; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,.18); }
-    .ok { border-color:#3fb950; background:rgba(63,185,80,.08); }
-    .ko { border-color:#f85149; background:rgba(248,81,73,.08); }
+    .ok { border-color: rgba(63,185,80,.55); background: rgba(63,185,80,.08); }
+    .ko { border-color: rgba(248,81,73,.60); background: rgba(248,81,73,.10); }
 
     pre { background:#0a0e13; padding:10px; border-radius:12px; overflow:auto; font-size:12px; }
+
     footer { margin-top:26px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
   </style>
 </head>
@@ -43,7 +46,6 @@
 <body>
 <div class="wrap">
 
-  <!-- NAV -->
   <header>
     <div class="brand">
       <b>IPR Europeo</b><br/>
@@ -54,17 +56,14 @@
       <a class="pill" href="../ipr/">IPR</a>
       <a class="pill" href="../verify/">Validatore</a>
       <a class="pill" href="../specs/">Specifiche</a>
+      <a class="pill" href="../openapi/">OpenAPI</a>
       <a class="pill" href="../audit/">Audit</a>
       <a class="pill" href="../status/">Status</a>
     </nav>
   </header>
 
-  <!-- HERO -->
   <h1>Validatore ex-ante IPR</h1>
-  <p>
-    Questo strumento determina se un’azione digitale è <b>ammissibile prima
-    dell’esecuzione</b>, secondo lo standard IPR Europeo.
-  </p>
+  <p>Determina se un’azione è <b>ammissibile prima dell’esecuzione</b>, in regime fail-closed. Output: Evidence hash-only.</p>
 
   <div class="badges">
     <span class="badge">FAIL-CLOSED</span>
@@ -73,106 +72,149 @@
     <span class="badge">AUDITABLE</span>
   </div>
 
-  <!-- INPUT -->
   <div class="grid">
     <div class="card">
       <h2>Action Request</h2>
       <p>Descrive l’azione proposta.</p>
-      <textarea id="action">
-{
+      <textarea id="action">{
+  "schema": "IPR-ACTION-v1",
   "action_id": "ACT-001",
   "action_type": "APPLY_MEASURE",
   "context": "high_criticality_control",
   "timestamp": "2026-02-03T15:20:00Z"
-}
-      </textarea>
+}</textarea>
     </div>
 
     <div class="card">
       <h2>Responsibility Declaration</h2>
-      <p>Dichiara l’attribuzione e la decisione umana.</p>
-      <textarea id="resp">
-{
+      <p>Dichiara attribuzione e decisione umana.</p>
+      <textarea id="resp">{
+  "schema": "IPR-RESP-v1",
   "subject_id": "HUM-001",
   "role": "AUTHORIZED_OFFICER",
   "decision": "Approve measure",
   "decision_timestamp": "2026-02-03T15:19:00Z"
-}
-      </textarea>
+}</textarea>
     </div>
   </div>
 
   <div style="margin-top:14px;">
-    <button onclick="validate()">Validate ex-ante</button>
+    <button onclick="validateExAnte()">Validate ex-ante</button>
   </div>
 
-  <!-- RESULT -->
   <div id="output"></div>
 
-  <!-- FOOTER -->
   <footer>
     <div>
       Validatore ex-ante IPR — standard tecnologico europeo<br/>
       Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
     </div>
     <div>
-      <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a>
+      <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a>
     </div>
   </footer>
 
 </div>
 
 <script>
-async function sha512(str){
-  const buf = new TextEncoder().encode(str);
-  const hash = await crypto.subtle.digest('SHA-512', buf);
-  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+function stableStringify(obj){
+  const allKeys = [];
+  JSON.stringify(obj, (k,v)=> (allKeys.push(k), v));
+  allKeys.sort();
+  return JSON.stringify(obj, allKeys);
 }
 
-async function validate(){
-  const out = document.getElementById('output');
-  out.innerHTML = '';
+async function sha512(str){
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest("SHA-512", buf);
+  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+function deny(reason_code, details){
+  return {
+    schema: "IPR-DECISION-v1",
+    status: "DENIED",
+    reason_code,
+    details: details || null
+  };
+}
+
+function authorize(evidence){
+  return {
+    schema: "IPR-DECISION-v1",
+    status: "AUTHORIZED",
+    evidence
+  };
+}
+
+async function validateExAnte(){
+  const out = document.getElementById("output");
+  out.innerHTML = "";
 
   let action, resp;
   try {
-    action = JSON.parse(document.getElementById('action').value);
-    resp = JSON.parse(document.getElementById('resp').value);
+    action = JSON.parse(document.getElementById("action").value);
+    resp = JSON.parse(document.getElementById("resp").value);
   } catch(e){
-    out.innerHTML = `<div class="result ko"><b>DENIED</b><p>Invalid JSON</p></div>`;
+    render(deny("INVALID_JSON", String(e)));
     return;
   }
 
-  const missing = [];
-  if(!action.action_id) missing.push("action_id");
-  if(!action.action_type) missing.push("action_type");
-  if(!resp.subject_id) missing.push("subject_id");
-  if(!resp.decision) missing.push("decision");
-  if(!resp.decision_timestamp) missing.push("decision_timestamp");
+  // REQ-1..REQ-5 (minimo)
+  if(!action.schema || action.schema !== "IPR-ACTION-v1") { render(deny("REQ_SCHEMA_ACTION", "schema must be IPR-ACTION-v1")); return; }
+  if(!resp.schema || resp.schema !== "IPR-RESP-v1") { render(deny("REQ_SCHEMA_RESP", "schema must be IPR-RESP-v1")); return; }
 
-  if(missing.length){
-    out.innerHTML = `<div class="result ko"><b>DENIED</b><p>Missing fields: ${missing.join(', ')}</p></div>`;
+  if(!action.action_id) { render(deny("REQ_ACTION_ID")); return; }
+  if(!action.action_type) { render(deny("REQ_ACTION_TYPE")); return; }
+  if(!action.timestamp) { render(deny("REQ_ACTION_TIMESTAMP")); return; }
+
+  if(!resp.subject_id) { render(deny("REQ_SUBJECT_ID")); return; }
+  if(!resp.role) { render(deny("REQ_ROLE")); return; }
+  if(!resp.decision) { render(deny("REQ_DECISION")); return; }
+  if(!resp.decision_timestamp) { render(deny("REQ_DECISION_TIMESTAMP")); return; }
+
+  // REQ-5: decision_timestamp must be <= action.timestamp (string ISO comparison works if ISO format)
+  if(resp.decision_timestamp > action.timestamp){
+    render(deny("REQ_TIME_ORDER", "decision_timestamp must be <= action.timestamp"));
     return;
   }
 
-  const preimage = JSON.stringify({action, resp});
+  // HASH-ONLY evidence (preimage stable)
+  const preimage = stableStringify({action, resp});
   const digest = await sha512(preimage);
 
   const evidence = {
     schema: "IPR-EVIDENCE-v1",
-    status: "AUTHORIZED",
     hash_algorithm: "SHA-512",
     digest_hex: digest,
-    timestamp: new Date().toISOString(),
-    verifiable_independently: true
+    preimage_spec: "stable-json(sorted-keys) of {action, resp}",
+    verifiable_independently: true,
+    generated_at: new Date().toISOString()
   };
 
+  render(authorize(evidence));
+}
+
+function render(decision){
+  const out = document.getElementById("output");
+  const isOk = decision.status === "AUTHORIZED";
+  const cls = isOk ? "result ok" : "result ko";
+  const title = isOk ? "AUTHORIZED" : "DENIED";
+  const msg = isOk
+    ? "L’azione è tecnicamente ammissibile ex-ante. Evidence hash-only prodotta."
+    : "L’azione è tecnicamente non eseguibile (fail-closed).";
+
   out.innerHTML = `
-    <div class="result ok">
-      <b>AUTHORIZED</b>
-      <p>L’azione è tecnicamente ammissibile ex-ante.</p>
-      <pre>${JSON.stringify(evidence, null, 2)}</pre>
+    <div class="${cls}">
+      <b>${title}</b>
+      <p>${msg}</p>
+      <pre>${escapeHtml(JSON.stringify(decision, null, 2))}</pre>
     </div>
   `;
+}
+
+function escapeHtml(s){
+  return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
 }
 </script>
 
