@@ -3,270 +3,459 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Verify — Hermeticum B.C.E.</title>
-
-  <!-- Base per GitHub Pages (root del progetto) -->
-  <base href="/hermeticum-bce-platform/" />
-
-  <link rel="stylesheet" href="assets/hbce.css" />
-  <meta name="color-scheme" content="dark" />
+  <title>Verify — EXA-DGC (Fail-Closed)</title>
+  <meta name="description" content="Demo offline deterministica: ex-ante validation (fail-closed) + evidence hash-only." />
+  <style>
+    :root { color-scheme: dark; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
+    a { color:#9cd1ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 24px 16px; }
+    header { display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+    .brand { display:flex; flex-direction:column; gap:6px; }
+    .brand h1 { margin:0; font-size: 16px; letter-spacing:.4px; }
+    .brand .sub { opacity:.8; font-size:12px; }
+    nav { display:flex; gap:10px; flex-wrap:wrap; }
+    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background: rgba(255,255,255,.03); }
+    .grid { display:grid; grid-template-columns: 1fr; gap:12px; margin-top: 14px; }
+    @media (min-width: 980px){ .grid { grid-template-columns: 1.2fr .8fr; } }
+    .card { border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.02); border-radius: 14px; padding: 14px; }
+    h2 { margin: 0 0 8px; font-size: 18px; }
+    p { margin: 8px 0; opacity:.9; line-height:1.5; font-size: 13px; }
+    label { display:block; font-size:12px; opacity:.85; margin: 10px 0 6px; }
+    textarea, input, select {
+      width:100%; box-sizing:border-box; border-radius: 12px; border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03); color:#e6edf3; padding:10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px; line-height: 1.4;
+    }
+    textarea { min-height: 220px; resize: vertical; }
+    .row { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .btnbar { display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
+    button {
+      border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.06); color:#e6edf3;
+      padding:10px 12px; border-radius: 12px; cursor:pointer; font-size: 12px;
+    }
+    button:hover { background: rgba(255,255,255,.09); }
+    pre { margin: 0; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,.12); background: rgba(0,0,0,.28); overflow:auto; font-size: 12px; line-height: 1.45; }
+    .k { opacity:.85; font-size: 12px; }
+    .ok { color: #9fffb8; }
+    .no { color: #ffb3b3; }
+    .muted { opacity:.75; }
+    footer { margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.12); display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; }
+    .tiny { font-size: 11px; opacity:.75; }
+    .badge { display:inline-block; padding: 3px 8px; border-radius: 999px; border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.03); font-size: 11px; }
+  </style>
 </head>
-
 <body>
-  <header class="hbce-header">
-    <div class="hbce-wrap hbce-header__inner">
-      <div class="hbce-brand">
-        <div class="hbce-brand__mark">🜏</div>
-        <div class="hbce-brand__text">
-          <div class="hbce-brand__title">HERMETICUM</div>
-          <div class="hbce-brand__sub">BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-        </div>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1><a href="../">HERMETICUM B.C.E. — Verify</a></h1>
+        <div class="sub">Demo offline deterministica: EXA-DGC · Fail-Closed · Hash-only</div>
       </div>
-
-      <nav class="hbce-nav" aria-label="Navigazione principale">
-        <a class="hbce-nav__a" href="./">Home</a>
-        <a class="hbce-nav__a" href="onboarding/">Onboarding</a>
-        <a class="hbce-nav__a" href="citizen/">Cittadini UE</a>
-        <a class="hbce-nav__a" href="ai-joker-c2/">AI JOKER-C2</a>
-        <a class="hbce-nav__a" href="institution/">Istituzioni</a>
-        <a class="hbce-nav__a" href="member-states/">UE Stati Membri</a>
-        <a class="hbce-nav__a" href="technology/">Tecnologia</a>
-        <a class="hbce-nav__a hbce-nav__a--active" href="verify/">Verify</a>
-        <a class="hbce-nav__a" href="security/">Sicurezza</a>
-        <a class="hbce-nav__a" href="governance/">Governance</a>
-        <a class="hbce-nav__a" href="manual/">Manuale</a>
+      <nav>
+        <a class="pill" href="../onboarding/">Onboarding</a>
+        <a class="pill" href="../verify/">Verify</a>
+        <a class="pill" href="../manuale/">Manuale</a>
+        <a class="pill" href="../specs/">Specs</a>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <main class="hbce-main">
-    <section class="hbce-hero">
-      <div class="hbce-wrap">
-        <h1 class="hbce-h1">Verify</h1>
-        <p class="hbce-lead">Deterministico · SHA-512 · fail-closed</p>
-        <p class="hbce-kicker">PROVA MINIMA · NIENTE “FORSE”</p>
+    <div class="grid">
+      <section class="card">
+        <h2>Input</h2>
+        <p class="muted">Incolla JSON. Il gate valida REQ-1..REQ-5. Se manca un requisito → <b>DENIED</b> (fail-closed).</p>
 
-        <div class="hbce-card">
-          <h2 class="hbce-h2">Verifica IPR: se i file combaciano → <span class="hbce-pass">PASS</span>. Altrimenti → <span class="hbce-fail">FAIL</span>.</h2>
-          <p class="hbce-p">
-            Questa pagina scarica i file dal repository, calcola SHA-512 del canonico e confronta con il digest dichiarato.
-            Se manca evidenza verificabile: <b>FAIL</b>. Una differenza minima cambia l’hash: <b>“virgola = FAIL”</b>.
-          </p>
-
-          <div class="hbce-actions">
-            <button id="run" class="hbce-btn">Esegui verifica</button>
-            <a class="hbce-link" href="technology/">Capire “virgola=FAIL”</a>
-            <a class="hbce-link" href="governance/">Limiti & responsabilità</a>
+        <div class="row">
+          <div>
+            <label for="algo">Hash algorithm</label>
+            <select id="algo">
+              <option value="SHA-256">SHA-256</option>
+              <option value="SHA-512" selected>SHA-512</option>
+            </select>
+          </div>
+          <div>
+            <label for="now">Timestamp (auto)</label>
+            <input id="now" type="text" readonly />
           </div>
         </div>
 
-        <div class="hbce-card">
-          <h3 class="hbce-h3">File verificati</h3>
-          <ul class="hbce-ul">
-            <li><code>ipr.canon.json</code> — contenuto canonico (input)</li>
-            <li><code>ipr.json</code> — digest atteso (output dichiarato)</li>
-          </ul>
-          <p class="hbce-note">Nota: questa demo esegue la verifica SHA-512. (Firma ED25519 opzionale: non necessaria per la prova minima.)</p>
+        <label for="action">ActionRequest JSON</label>
+        <textarea id="action"></textarea>
+
+        <label for="resp">ResponsibilityDeclaration JSON</label>
+        <textarea id="resp"></textarea>
+
+        <div class="btnbar">
+          <button id="btnFill">Carica esempio</button>
+          <button id="btnValidate">Validate (ex-ante)</button>
+          <button id="btnExport" disabled>Export EvidencePackage</button>
+          <button id="btnCopy" disabled>Copia output</button>
+          <button id="btnClear">Pulisci</button>
         </div>
 
-        <div class="hbce-card">
-          <h3 class="hbce-h3">Esito</h3>
-          <div id="result" class="hbce-result hbce-result--idle">
-            <div class="hbce-result__title">Stato: <span id="status">IDLE</span></div>
-            <div class="hbce-result__meta">
-              <div>mode: <b>fail-closed</b></div>
-              <div>base: <code id="base"></code></div>
-              <div>time: <code id="time"></code></div>
-            </div>
+        <p class="k">
+          Requisiti: <span class="badge">REQ-1 Responsabilità</span>
+          <span class="badge">REQ-2 Decisione esplicita</span>
+          <span class="badge">REQ-3 Traccia opponibile</span>
+          <span class="badge">REQ-4 Costo non neutralizzabile</span>
+          <span class="badge">REQ-5 Esposizione temporale</span>
+        </p>
+      </section>
 
-            <hr class="hbce-hr" />
+      <aside class="card">
+        <h2>Output</h2>
+        <p class="muted">Risultato deterministico + evidence hash-only (verificabile senza stato interno).</p>
+        <pre id="out">{}</pre>
 
-            <div class="hbce-grid">
-              <div>
-                <h4 class="hbce-h4">Digest calcolato (SHA-512)</h4>
-                <pre id="calc" class="hbce-pre">—</pre>
-              </div>
-              <div>
-                <h4 class="hbce-h4">Digest atteso (da ipr.json)</h4>
-                <pre id="exp" class="hbce-pre">—</pre>
-              </div>
-            </div>
-
-            <h4 class="hbce-h4">Log (motivi di FAIL)</h4>
-            <pre id="log" class="hbce-pre">—</pre>
-
-            <h4 class="hbce-h4">Diagnosi rapida</h4>
-            <ul class="hbce-ul">
-              <li>Se vedi <b>404</b>: file non esiste nel branch pubblicato (o Pages punta alla cartella sbagliata).</li>
-              <li>Se vedi <b>CORS</b> o fetch bloccato: il browser non riesce a leggere (raro su GitHub Pages).</li>
-              <li>Se vedi <b>Digest missing</b>: ipr.json non contiene il digest in un campo riconosciuto.</li>
-              <li>Se vedi <b>MISMATCH</b>: canonico cambiato oppure digest dichiarato vecchio.</li>
-            </ul>
-
-            <p class="hbce-note"><b>Regola:</b> se manca evidenza verificabile: FAIL. “virgola = FAIL”.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="hbce-footer">
-    <div class="hbce-wrap">
-      <div class="hbce-footer__row">
-        <div>
-          <div class="hbce-footer__title">HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</div>
-          <div class="hbce-footer__sub">HERMETICUM B.C.E. S.r.l.</div>
-        </div>
-        <div class="hbce-footer__links">
-          <a href="privacy/">Privacy</a>
-          <a href="terms/">Termini</a>
-          <a href="governance/">Governance</a>
-        </div>
-      </div>
-      <div class="hbce-footer__note">Questo portale è informativo e valutativo: nessun effetto giuridico automatico. Verifica deterministica, fail-closed.</div>
+        <footer>
+          <div class="tiny">Mode: <b>FAIL-CLOSED</b></div>
+          <div class="tiny">No custody: <b>HASH-ONLY</b></div>
+        </footer>
+      </aside>
     </div>
-  </footer>
 
-  <script>
-    // --- Helpers ---
-    function nowIso() { return new Date().toISOString(); }
-    function normHex(s) { return (s || "").toString().trim().toLowerCase(); }
-    function isSha512Hex(s) { return /^[a-f0-9]{128}$/.test(normHex(s)); }
+    <footer>
+      <div class="tiny">HERMETICUM B.C.E. S.r.l. — UE-first · audit-first · fail-closed · hash-only</div>
+      <div class="tiny"><a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a></div>
+    </footer>
+  </div>
 
-    function deepGet(obj, path) {
-      try {
-        return path.split(".").reduce((acc, k) => (acc && acc[k] !== undefined ? acc[k] : undefined), obj);
-      } catch { return undefined; }
-    }
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
 
-    function findAnyDigest(iprObj, rawText) {
-      // 1) Campi “classici” (compatibilità massima)
-      const candidates = [
-        deepGet(iprObj, "digest"),
-        deepGet(iprObj, "digest_hex"),
-        deepGet(iprObj, "sha512"),
-        deepGet(iprObj, "sha512_hex"),
-        deepGet(iprObj, "expected_digest"),
-        deepGet(iprObj, "hash.sha512"),
-        deepGet(iprObj, "hash.digest_hex"),
-        deepGet(iprObj, "hash.sha512_hex"),
-        deepGet(iprObj, "hash.sha512Digest"),
-      ].map(normHex).filter(Boolean);
+  const out = $("out");
+  const actionTA = $("action");
+  const respTA = $("resp");
+  const algoSel = $("algo");
+  const nowInput = $("now");
+  const btnExport = $("btnExport");
+  const btnCopy = $("btnCopy");
 
-      for (const c of candidates) {
-        if (isSha512Hex(c)) return c;
+  let lastEvidencePackage = null;
+  let lastOutput = null;
+
+  function isoNow() {
+    return new Date().toISOString();
+  }
+
+  function setNow() {
+    nowInput.value = isoNow();
+  }
+
+  function safeJsonParse(text) {
+    try {
+      const obj = JSON.parse(text);
+      if (obj === null || typeof obj !== "object" || Array.isArray(obj)) {
+        return { ok:false, error:"JSON must be an object" };
       }
-
-      // 2) Fallback: regex su JSON testuale (128 hex)
-      const m = (rawText || "").match(/[A-Fa-f0-9]{128}/);
-      if (m && isSha512Hex(m[0])) return normHex(m[0]);
-
-      return null;
+      return { ok:true, value: obj };
+    } catch (e) {
+      return { ok:false, error: String(e.message || e) };
     }
+  }
 
-    async function sha512HexFromText(text) {
-      const enc = new TextEncoder();
-      const data = enc.encode(text);
-      const hash = await crypto.subtle.digest("SHA-512", data);
-      const bytes = Array.from(new Uint8Array(hash));
-      return bytes.map(b => b.toString(16).padStart(2, "0")).join("");
-    }
+  function stableStringify(obj) {
+    // Deterministic JSON stringify (sorted keys, recursive)
+    const seen = new WeakSet();
+    const sorter = (x) => {
+      if (x === null) return null;
+      if (typeof x !== "object") return x;
+      if (seen.has(x)) throw new Error("Circular reference not allowed");
+      seen.add(x);
+      if (Array.isArray(x)) return x.map(sorter);
+      const keys = Object.keys(x).sort();
+      const out = {};
+      for (const k of keys) out[k] = sorter(x[k]);
+      return out;
+    };
+    return JSON.stringify(sorter(obj));
+  }
 
-    async function fetchJsonNoStore(path) {
-      // Cache-buster forte + no-store
-      const url = new URL(path, document.baseURI);
-      url.searchParams.set("v", Date.now().toString());
-      const res = await fetch(url.toString(), { cache: "no-store" });
-      const text = await res.text();
-      if (!res.ok) {
-        const err = new Error("HTTP " + res.status);
-        err.status = res.status;
-        err.text = text;
-        throw err;
+  async function hashHex(algorithm, text) {
+    const enc = new TextEncoder();
+    const data = enc.encode(text);
+    const digest = await crypto.subtle.digest(algorithm, data);
+    const bytes = new Uint8Array(digest);
+    let hex = "";
+    for (const b of bytes) hex += b.toString(16).padStart(2, "0");
+    return hex;
+  }
+
+  function uuidv4() {
+    // RFC4122 v4 using crypto
+    const a = new Uint8Array(16);
+    crypto.getRandomValues(a);
+    a[6] = (a[6] & 0x0f) | 0x40;
+    a[8] = (a[8] & 0x3f) | 0x80;
+    const hex = [...a].map(b => b.toString(16).padStart(2, "0")).join("");
+    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+  }
+
+  function checksTemplate(v) {
+    return {
+      responsibility: v,
+      explicit_decision: v,
+      opposable_trace: v,
+      non_neutralizable_cost: v,
+      temporal_exposure: v
+    };
+  }
+
+  function deny(action_id, reason_code, checks) {
+    return {
+      status: "DENIED",
+      action_id: action_id || null,
+      reason_code,
+      checks
+    };
+  }
+
+  function authorize(action_id, evidence_id, algorithm, digest_hex, preimage_spec) {
+    // token_demo: NOT SECURITY, only demonstration
+    const token_demo = `DEMO.${action_id}.${evidence_id}.${digest_hex.slice(0,16)}`;
+    return {
+      status: "AUTHORIZED",
+      action_id,
+      evidence_id,
+      token_demo,
+      checks: {
+        responsibility: "PASS",
+        explicit_decision: "PASS",
+        opposable_trace: "PASS",
+        non_neutralizable_cost: "PASS",
+        temporal_exposure: "PASS"
+      },
+      evidence: {
+        hash_algorithm: algorithm,
+        digest_hex,
+        preimage_spec
       }
-      let json = null;
-      try { json = JSON.parse(text); } catch { json = null; }
-      return { url: url.toString(), text, json };
+    };
+  }
+
+  function validateREQs(actionObj, respObj) {
+    // REQ-1: responsibility present
+    const action_id = actionObj.action_id || actionObj.id || null;
+
+    const checks = checksTemplate("SKIP");
+
+    // REQ-1: human_subject_id and role
+    const hasResp = respObj && typeof respObj.human_subject_id === "string" && respObj.human_subject_id.trim() !== ""
+      && typeof respObj.role === "string" && respObj.role.trim() !== "";
+    if (!hasResp) {
+      checks.responsibility = "FAIL";
+      return deny(action_id, "MISSING_RESPONSIBILITY", checks);
+    }
+    checks.responsibility = "PASS";
+
+    // REQ-2: explicit decision
+    const hasDecision = typeof respObj.decision_statement === "string" && respObj.decision_statement.trim() !== "";
+    if (!hasDecision) {
+      checks.explicit_decision = "FAIL";
+      checks.opposable_trace = "SKIP";
+      checks.non_neutralizable_cost = "SKIP";
+      checks.temporal_exposure = "SKIP";
+      return deny(action_id, "IMPLICIT_DECISION", checks);
+    }
+    checks.explicit_decision = "PASS";
+
+    // REQ-4: non-neutralizable cost (demo: must declare a cost_marker or liability_marker)
+    // In real systems this could be mapped to policy or contractual responsibility.
+    const costMarker = actionObj.cost_marker ?? actionObj.liability_marker ?? respObj.cost_marker ?? respObj.liability_marker;
+    const hasCost = (typeof costMarker === "string" && costMarker.trim() !== "") || (typeof costMarker === "number" && isFinite(costMarker));
+    if (!hasCost) {
+      checks.opposable_trace = "SKIP";
+      checks.non_neutralizable_cost = "FAIL";
+      checks.temporal_exposure = "SKIP";
+      return deny(action_id, "NON_NEUTRALIZABLE_COST_MISSING", checks);
+    }
+    checks.non_neutralizable_cost = "PASS";
+
+    // REQ-5: temporal exposure (demo: require decision_timestamp <= request_timestamp if present)
+    // If missing timestamps, fail-closed in strict mode.
+    const reqTs = actionObj.timestamp_request || actionObj.request_timestamp || null;
+    const decTs = respObj.decision_timestamp || null;
+
+    if (!reqTs || !decTs) {
+      checks.temporal_exposure = "FAIL";
+      checks.opposable_trace = "SKIP";
+      return deny(action_id, "TEMPORAL_INVALID", checks);
+    }
+    const reqTime = Date.parse(reqTs);
+    const decTime = Date.parse(decTs);
+    if (!isFinite(reqTime) || !isFinite(decTime) || decTime > reqTime) {
+      checks.temporal_exposure = "FAIL";
+      checks.opposable_trace = "SKIP";
+      return deny(action_id, "TEMPORAL_INVALID", checks);
+    }
+    checks.temporal_exposure = "PASS";
+
+    // REQ-3: opposable trace (demo: requires payload_hash_hex OR context + action_type)
+    const hasTraceInputs =
+      (typeof actionObj.payload_hash_hex === "string" && actionObj.payload_hash_hex.trim() !== "") ||
+      (typeof actionObj.action_type === "string" && actionObj.action_type.trim() !== "" &&
+       typeof actionObj.context === "string" && actionObj.context.trim() !== "");
+    if (!hasTraceInputs) {
+      checks.opposable_trace = "FAIL";
+      return deny(action_id, "NO_EVIDENCE", checks);
+    }
+    checks.opposable_trace = "PASS";
+
+    return { ok:true, action_id };
+  }
+
+  async function buildEvidence(actionObj, respObj, algorithm) {
+    const evidence_id = uuidv4();
+    const action_id = actionObj.action_id || uuidv4();
+    actionObj.action_id = action_id;
+
+    const preimage = {
+      schema: "EXA-EVIDENCE-PREIMAGE-v1",
+      action: actionObj,
+      responsibility: respObj
+    };
+
+    const preimage_json = stableStringify(preimage);
+    const digest_hex = await hashHex(algorithm, preimage_json);
+
+    const preimage_spec = "stable-json(sorted-keys) of {schema, action, responsibility}";
+
+    const evidencePackage = {
+      schema: "EXA-EVIDENCE-PACK-v1",
+      evidence_id,
+      action_id,
+      created_at: isoNow(),
+      hash_algorithm: algorithm,
+      preimage_spec,
+      digest_hex,
+      verifiable_independently: true,
+      execution_record: null
+    };
+
+    return { evidencePackage, digest_hex, preimage_spec, action_id, evidence_id };
+  }
+
+  function render(obj) {
+    out.textContent = JSON.stringify(obj, null, 2);
+  }
+
+  function setEnabledAfterResult(enabled) {
+    btnExport.disabled = !enabled;
+    btnCopy.disabled = !enabled;
+  }
+
+  $("btnFill").addEventListener("click", () => {
+    setNow();
+    const t = isoNow();
+    const actionExample = {
+      action_id: "00000000-0000-0000-0000-000000000001",
+      action_type: "EXECUTE_X",
+      context: "process-Y",
+      requestor_system: "portal-demo",
+      timestamp_request: t,
+      payload_hash_hex: "a".repeat(128),
+      cost_marker: "LIABILITY-ACK-1"
+    };
+    const respExample = {
+      human_subject_id: "HUM-123",
+      role: "AUTHORIZED_OFFICER",
+      decision_statement: "Approve execution of X for process-Y",
+      decision_timestamp: t,
+      liability_marker: "RESPONSIBILITY-NON-REVERSIBLE"
+    };
+    actionTA.value = JSON.stringify(actionExample, null, 2);
+    respTA.value = JSON.stringify(respExample, null, 2);
+    lastEvidencePackage = null;
+    lastOutput = null;
+    render({});
+    setEnabledAfterResult(false);
+  });
+
+  $("btnClear").addEventListener("click", () => {
+    actionTA.value = "";
+    respTA.value = "";
+    lastEvidencePackage = null;
+    lastOutput = null;
+    render({});
+    setEnabledAfterResult(false);
+    setNow();
+  });
+
+  $("btnValidate").addEventListener("click", async () => {
+    setNow();
+
+    const a = safeJsonParse(actionTA.value.trim());
+    if (!a.ok) {
+      lastOutput = { status: "DENIED", reason_code: "BAD_REQUEST", error: "Invalid ActionRequest JSON", details: a.error };
+      render(lastOutput);
+      setEnabledAfterResult(true);
+      return;
     }
 
-    function setState(kind, statusText) {
-      const box = document.getElementById("result");
-      box.classList.remove("hbce-result--idle","hbce-result--pass","hbce-result--fail");
-      box.classList.add(kind === "PASS" ? "hbce-result--pass" : kind === "FAIL" ? "hbce-result--fail" : "hbce-result--idle");
-      document.getElementById("status").textContent = statusText;
+    const r = safeJsonParse(respTA.value.trim());
+    if (!r.ok) {
+      lastOutput = { status: "DENIED", reason_code: "BAD_REQUEST", error: "Invalid ResponsibilityDeclaration JSON", details: r.error };
+      render(lastOutput);
+      setEnabledAfterResult(true);
+      return;
     }
 
-    function logLine(arr, s) { arr.push(s); }
+    const actionObj = a.value;
+    const respObj = r.value;
 
-    // --- Main ---
-    async function runVerify() {
-      const base = document.baseURI;
-      document.getElementById("base").textContent = base;
-      document.getElementById("time").textContent = nowIso();
-
-      const logs = [];
-      setState("IDLE","RUNNING");
-      document.getElementById("calc").textContent = "…";
-      document.getElementById("exp").textContent = "…";
-      document.getElementById("log").textContent = "…";
-
-      try {
-        logLine(logs, "START " + nowIso());
-        logLine(logs, "BASE " + base);
-
-        // 1) fetch canon
-        const canon = await fetchJsonNoStore("ipr.canon.json");
-        logLine(logs, "FETCH " + canon.url);
-
-        // hash deterministico = SHA-512 sul testo così come servito (byte-identical)
-        const calc = await sha512HexFromText(canon.text);
-        logLine(logs, "SHA-512(canon) = " + calc);
-
-        // 2) fetch ipr.json
-        const ipr = await fetchJsonNoStore("ipr.json");
-        logLine(logs, "FETCH " + ipr.url);
-
-        // estrai digest atteso
-        const expected = findAnyDigest(ipr.json || {}, ipr.text);
-
-        // debug: chiavi visibili
-        if (ipr.json && typeof ipr.json === "object") {
-          const topKeys = Object.keys(ipr.json).slice(0, 30).join(", ");
-          logLine(logs, "IPR.TOP_KEYS = " + topKeys);
-        } else {
-          logLine(logs, "IPR.JSON_PARSE = FAILED (not valid JSON?)");
-        }
-
-        document.getElementById("calc").textContent = calc;
-        document.getElementById("exp").textContent = expected ? expected : "—";
-
-        if (!expected) {
-          setState("FAIL","FAIL (digest missing)");
-          logLine(logs, "FAIL: digest atteso non trovato in ipr.json");
-          document.getElementById("log").textContent = logs.join("\n");
-          return;
-        }
-
-        if (normHex(expected) !== normHex(calc)) {
-          setState("FAIL","FAIL (mismatch)");
-          logLine(logs, "FAIL: MISMATCH (canon != expected)");
-          document.getElementById("log").textContent = logs.join("\n");
-          return;
-        }
-
-        setState("PASS","PASS");
-        logLine(logs, "PASS: canon matches expected digest");
-        document.getElementById("log").textContent = logs.join("\n");
-      } catch (e) {
-        setState("FAIL","FAIL (fetch/error)");
-        logLine(logs, "ERROR: " + (e && e.message ? e.message : String(e)));
-        if (e && e.status) logLine(logs, "HTTP_STATUS: " + e.status);
-        if (e && e.text) logLine(logs, "BODY: " + (e.text.slice(0, 300)));
-        document.getElementById("log").textContent = logs.join("\n");
-      }
+    // Validate requirements (fail-closed)
+    const val = validateREQs(actionObj, respObj);
+    if (!val.ok) {
+      lastEvidencePackage = null;
+      lastOutput = val; // already formatted deny
+      render(lastOutput);
+      setEnabledAfterResult(true);
+      return;
     }
 
-    document.getElementById("run").addEventListener("click", runVerify);
-  </script>
+    // Build evidence + authorize
+    const algorithm = algoSel.value;
+    try {
+      const built = await buildEvidence(actionObj, respObj, algorithm);
+      lastEvidencePackage = built.evidencePackage;
+      lastOutput = authorize(built.action_id, built.evidence_id, algorithm, built.digest_hex, built.preimage_spec);
+      render(lastOutput);
+      setEnabledAfterResult(true);
+    } catch (e) {
+      lastEvidencePackage = null;
+      lastOutput = { status: "DENIED", reason_code: "INTERNAL_ERROR", error: String(e.message || e) };
+      render(lastOutput);
+      setEnabledAfterResult(true);
+    }
+  });
+
+  $("btnExport").addEventListener("click", async () => {
+    if (!lastEvidencePackage) return;
+    const blob = new Blob([JSON.stringify(lastEvidencePackage, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `evidence-${lastEvidencePackage.evidence_id}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  $("btnCopy").addEventListener("click", async () => {
+    if (!lastOutput) return;
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(lastOutput, null, 2));
+    } catch {
+      // no-op: clipboard might be blocked
+    }
+  });
+
+  // init
+  setNow();
+})();
+</script>
 </body>
 </html>
