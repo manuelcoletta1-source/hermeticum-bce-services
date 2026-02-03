@@ -3,459 +3,178 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Verify — EXA-DGC (Fail-Closed)</title>
-  <meta name="description" content="Demo offline deterministica: ex-ante validation (fail-closed) + evidence hash-only." />
+  <title>Validatore ex-ante IPR — IPR Europeo</title>
+  <meta name="description" content="Validatore ex-ante IPR Europeo. Fail-closed, hash-only, auditabile. Determina l’ammissibilità tecnica di un’azione prima dell’esecuzione." />
   <style>
     :root { color-scheme: dark; }
     body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
     a { color:#9cd1ff; text-decoration:none; }
     a:hover { text-decoration:underline; }
-    .wrap { max-width: 1020px; margin: 0 auto; padding: 24px 16px; }
-    header { display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
-    .brand { display:flex; flex-direction:column; gap:6px; }
-    .brand h1 { margin:0; font-size: 16px; letter-spacing:.4px; }
-    .brand .sub { opacity:.8; font-size:12px; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 26px 16px; }
+
+    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
+    .brand { font-size:14px; line-height:1.4; }
     nav { display:flex; gap:10px; flex-wrap:wrap; }
-    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background: rgba(255,255,255,.03); }
-    .grid { display:grid; grid-template-columns: 1fr; gap:12px; margin-top: 14px; }
-    @media (min-width: 980px){ .grid { grid-template-columns: 1.2fr .8fr; } }
-    .card { border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.02); border-radius: 14px; padding: 14px; }
-    h2 { margin: 0 0 8px; font-size: 18px; }
-    p { margin: 8px 0; opacity:.9; line-height:1.5; font-size: 13px; }
-    label { display:block; font-size:12px; opacity:.85; margin: 10px 0 6px; }
-    textarea, input, select {
-      width:100%; box-sizing:border-box; border-radius: 12px; border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.03); color:#e6edf3; padding:10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px; line-height: 1.4;
-    }
-    textarea { min-height: 220px; resize: vertical; }
-    .row { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    .btnbar { display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
-    button {
-      border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.06); color:#e6edf3;
-      padding:10px 12px; border-radius: 12px; cursor:pointer; font-size: 12px;
-    }
-    button:hover { background: rgba(255,255,255,.09); }
-    pre { margin: 0; padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,.12); background: rgba(0,0,0,.28); overflow:auto; font-size: 12px; line-height: 1.45; }
-    .k { opacity:.85; font-size: 12px; }
-    .ok { color: #9fffb8; }
-    .no { color: #ffb3b3; }
-    .muted { opacity:.75; }
-    footer { margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.12); display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; }
-    .tiny { font-size: 11px; opacity:.75; }
-    .badge { display:inline-block; padding: 3px 8px; border-radius: 999px; border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.03); font-size: 11px; }
+    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
+
+    h1 { margin:18px 0 6px; font-size:26px; }
+    p { line-height:1.55; opacity:.9; font-size:14px; }
+    .badges { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
+    .badge { border:1px solid rgba(255,255,255,.14); padding:3px 8px; border-radius:999px; font-size:11px; background:rgba(255,255,255,.03); }
+
+    .grid { display:grid; grid-template-columns: 1fr; gap:14px; margin-top:14px; }
+    @media (min-width: 900px){ .grid { grid-template-columns: 1fr 1fr; } }
+
+    .card { border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); border-radius:14px; padding:14px; }
+    .card h2 { margin:0 0 8px; font-size:16px; }
+    textarea { width:100%; min-height:180px; background:#0a0e13; color:#e6edf3; border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:10px; font-family: ui-monospace, monospace; font-size:12px; }
+    button { border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.08); color:#e6edf3; padding:10px 14px; border-radius:12px; font-size:13px; cursor:pointer; }
+    button:hover { background:rgba(255,255,255,.12); }
+
+    .result { margin-top:14px; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,.18); }
+    .ok { border-color:#3fb950; background:rgba(63,185,80,.08); }
+    .ko { border-color:#f85149; background:rgba(248,81,73,.08); }
+
+    pre { background:#0a0e13; padding:10px; border-radius:12px; overflow:auto; font-size:12px; }
+    footer { margin-top:26px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <h1><a href="../">HERMETICUM B.C.E. — Verify</a></h1>
-        <div class="sub">Demo offline deterministica: EXA-DGC · Fail-Closed · Hash-only</div>
-      </div>
-      <nav>
-        <a class="pill" href="../onboarding/">Onboarding</a>
-        <a class="pill" href="../verify/">Verify</a>
-        <a class="pill" href="../manuale/">Manuale</a>
-        <a class="pill" href="../specs/">Specs</a>
-      </nav>
-    </header>
+<div class="wrap">
 
-    <div class="grid">
-      <section class="card">
-        <h2>Input</h2>
-        <p class="muted">Incolla JSON. Il gate valida REQ-1..REQ-5. Se manca un requisito → <b>DENIED</b> (fail-closed).</p>
-
-        <div class="row">
-          <div>
-            <label for="algo">Hash algorithm</label>
-            <select id="algo">
-              <option value="SHA-256">SHA-256</option>
-              <option value="SHA-512" selected>SHA-512</option>
-            </select>
-          </div>
-          <div>
-            <label for="now">Timestamp (auto)</label>
-            <input id="now" type="text" readonly />
-          </div>
-        </div>
-
-        <label for="action">ActionRequest JSON</label>
-        <textarea id="action"></textarea>
-
-        <label for="resp">ResponsibilityDeclaration JSON</label>
-        <textarea id="resp"></textarea>
-
-        <div class="btnbar">
-          <button id="btnFill">Carica esempio</button>
-          <button id="btnValidate">Validate (ex-ante)</button>
-          <button id="btnExport" disabled>Export EvidencePackage</button>
-          <button id="btnCopy" disabled>Copia output</button>
-          <button id="btnClear">Pulisci</button>
-        </div>
-
-        <p class="k">
-          Requisiti: <span class="badge">REQ-1 Responsabilità</span>
-          <span class="badge">REQ-2 Decisione esplicita</span>
-          <span class="badge">REQ-3 Traccia opponibile</span>
-          <span class="badge">REQ-4 Costo non neutralizzabile</span>
-          <span class="badge">REQ-5 Esposizione temporale</span>
-        </p>
-      </section>
-
-      <aside class="card">
-        <h2>Output</h2>
-        <p class="muted">Risultato deterministico + evidence hash-only (verificabile senza stato interno).</p>
-        <pre id="out">{}</pre>
-
-        <footer>
-          <div class="tiny">Mode: <b>FAIL-CLOSED</b></div>
-          <div class="tiny">No custody: <b>HASH-ONLY</b></div>
-        </footer>
-      </aside>
+  <!-- NAV -->
+  <header>
+    <div class="brand">
+      <b>IPR Europeo</b><br/>
+      Validatore ex-ante
     </div>
+    <nav>
+      <a class="pill" href="../">Home</a>
+      <a class="pill" href="../ipr/">IPR</a>
+      <a class="pill" href="../verify/">Validatore</a>
+      <a class="pill" href="../specs/">Specifiche</a>
+      <a class="pill" href="../audit/">Audit</a>
+      <a class="pill" href="../status/">Status</a>
+    </nav>
+  </header>
 
-    <footer>
-      <div class="tiny">HERMETICUM B.C.E. S.r.l. — UE-first · audit-first · fail-closed · hash-only</div>
-      <div class="tiny"><a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a></div>
-    </footer>
+  <!-- HERO -->
+  <h1>Validatore ex-ante IPR</h1>
+  <p>
+    Questo strumento determina se un’azione digitale è <b>ammissibile prima
+    dell’esecuzione</b>, secondo lo standard IPR Europeo.
+  </p>
+
+  <div class="badges">
+    <span class="badge">FAIL-CLOSED</span>
+    <span class="badge">HASH-ONLY</span>
+    <span class="badge">OFFLINE</span>
+    <span class="badge">AUDITABLE</span>
   </div>
 
+  <!-- INPUT -->
+  <div class="grid">
+    <div class="card">
+      <h2>Action Request</h2>
+      <p>Descrive l’azione proposta.</p>
+      <textarea id="action">
+{
+  "action_id": "ACT-001",
+  "action_type": "APPLY_MEASURE",
+  "context": "high_criticality_control",
+  "timestamp": "2026-02-03T15:20:00Z"
+}
+      </textarea>
+    </div>
+
+    <div class="card">
+      <h2>Responsibility Declaration</h2>
+      <p>Dichiara l’attribuzione e la decisione umana.</p>
+      <textarea id="resp">
+{
+  "subject_id": "HUM-001",
+  "role": "AUTHORIZED_OFFICER",
+  "decision": "Approve measure",
+  "decision_timestamp": "2026-02-03T15:19:00Z"
+}
+      </textarea>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;">
+    <button onclick="validate()">Validate ex-ante</button>
+  </div>
+
+  <!-- RESULT -->
+  <div id="output"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      Validatore ex-ante IPR — standard tecnologico europeo<br/>
+      Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
+    </div>
+    <div>
+      <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+</div>
+
 <script>
-(() => {
-  const $ = (id) => document.getElementById(id);
+async function sha512(str){
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-512', buf);
+  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
 
-  const out = $("out");
-  const actionTA = $("action");
-  const respTA = $("resp");
-  const algoSel = $("algo");
-  const nowInput = $("now");
-  const btnExport = $("btnExport");
-  const btnCopy = $("btnCopy");
+async function validate(){
+  const out = document.getElementById('output');
+  out.innerHTML = '';
 
-  let lastEvidencePackage = null;
-  let lastOutput = null;
-
-  function isoNow() {
-    return new Date().toISOString();
+  let action, resp;
+  try {
+    action = JSON.parse(document.getElementById('action').value);
+    resp = JSON.parse(document.getElementById('resp').value);
+  } catch(e){
+    out.innerHTML = `<div class="result ko"><b>DENIED</b><p>Invalid JSON</p></div>`;
+    return;
   }
 
-  function setNow() {
-    nowInput.value = isoNow();
+  const missing = [];
+  if(!action.action_id) missing.push("action_id");
+  if(!action.action_type) missing.push("action_type");
+  if(!resp.subject_id) missing.push("subject_id");
+  if(!resp.decision) missing.push("decision");
+  if(!resp.decision_timestamp) missing.push("decision_timestamp");
+
+  if(missing.length){
+    out.innerHTML = `<div class="result ko"><b>DENIED</b><p>Missing fields: ${missing.join(', ')}</p></div>`;
+    return;
   }
 
-  function safeJsonParse(text) {
-    try {
-      const obj = JSON.parse(text);
-      if (obj === null || typeof obj !== "object" || Array.isArray(obj)) {
-        return { ok:false, error:"JSON must be an object" };
-      }
-      return { ok:true, value: obj };
-    } catch (e) {
-      return { ok:false, error: String(e.message || e) };
-    }
-  }
+  const preimage = JSON.stringify({action, resp});
+  const digest = await sha512(preimage);
 
-  function stableStringify(obj) {
-    // Deterministic JSON stringify (sorted keys, recursive)
-    const seen = new WeakSet();
-    const sorter = (x) => {
-      if (x === null) return null;
-      if (typeof x !== "object") return x;
-      if (seen.has(x)) throw new Error("Circular reference not allowed");
-      seen.add(x);
-      if (Array.isArray(x)) return x.map(sorter);
-      const keys = Object.keys(x).sort();
-      const out = {};
-      for (const k of keys) out[k] = sorter(x[k]);
-      return out;
-    };
-    return JSON.stringify(sorter(obj));
-  }
+  const evidence = {
+    schema: "IPR-EVIDENCE-v1",
+    status: "AUTHORIZED",
+    hash_algorithm: "SHA-512",
+    digest_hex: digest,
+    timestamp: new Date().toISOString(),
+    verifiable_independently: true
+  };
 
-  async function hashHex(algorithm, text) {
-    const enc = new TextEncoder();
-    const data = enc.encode(text);
-    const digest = await crypto.subtle.digest(algorithm, data);
-    const bytes = new Uint8Array(digest);
-    let hex = "";
-    for (const b of bytes) hex += b.toString(16).padStart(2, "0");
-    return hex;
-  }
-
-  function uuidv4() {
-    // RFC4122 v4 using crypto
-    const a = new Uint8Array(16);
-    crypto.getRandomValues(a);
-    a[6] = (a[6] & 0x0f) | 0x40;
-    a[8] = (a[8] & 0x3f) | 0x80;
-    const hex = [...a].map(b => b.toString(16).padStart(2, "0")).join("");
-    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
-  }
-
-  function checksTemplate(v) {
-    return {
-      responsibility: v,
-      explicit_decision: v,
-      opposable_trace: v,
-      non_neutralizable_cost: v,
-      temporal_exposure: v
-    };
-  }
-
-  function deny(action_id, reason_code, checks) {
-    return {
-      status: "DENIED",
-      action_id: action_id || null,
-      reason_code,
-      checks
-    };
-  }
-
-  function authorize(action_id, evidence_id, algorithm, digest_hex, preimage_spec) {
-    // token_demo: NOT SECURITY, only demonstration
-    const token_demo = `DEMO.${action_id}.${evidence_id}.${digest_hex.slice(0,16)}`;
-    return {
-      status: "AUTHORIZED",
-      action_id,
-      evidence_id,
-      token_demo,
-      checks: {
-        responsibility: "PASS",
-        explicit_decision: "PASS",
-        opposable_trace: "PASS",
-        non_neutralizable_cost: "PASS",
-        temporal_exposure: "PASS"
-      },
-      evidence: {
-        hash_algorithm: algorithm,
-        digest_hex,
-        preimage_spec
-      }
-    };
-  }
-
-  function validateREQs(actionObj, respObj) {
-    // REQ-1: responsibility present
-    const action_id = actionObj.action_id || actionObj.id || null;
-
-    const checks = checksTemplate("SKIP");
-
-    // REQ-1: human_subject_id and role
-    const hasResp = respObj && typeof respObj.human_subject_id === "string" && respObj.human_subject_id.trim() !== ""
-      && typeof respObj.role === "string" && respObj.role.trim() !== "";
-    if (!hasResp) {
-      checks.responsibility = "FAIL";
-      return deny(action_id, "MISSING_RESPONSIBILITY", checks);
-    }
-    checks.responsibility = "PASS";
-
-    // REQ-2: explicit decision
-    const hasDecision = typeof respObj.decision_statement === "string" && respObj.decision_statement.trim() !== "";
-    if (!hasDecision) {
-      checks.explicit_decision = "FAIL";
-      checks.opposable_trace = "SKIP";
-      checks.non_neutralizable_cost = "SKIP";
-      checks.temporal_exposure = "SKIP";
-      return deny(action_id, "IMPLICIT_DECISION", checks);
-    }
-    checks.explicit_decision = "PASS";
-
-    // REQ-4: non-neutralizable cost (demo: must declare a cost_marker or liability_marker)
-    // In real systems this could be mapped to policy or contractual responsibility.
-    const costMarker = actionObj.cost_marker ?? actionObj.liability_marker ?? respObj.cost_marker ?? respObj.liability_marker;
-    const hasCost = (typeof costMarker === "string" && costMarker.trim() !== "") || (typeof costMarker === "number" && isFinite(costMarker));
-    if (!hasCost) {
-      checks.opposable_trace = "SKIP";
-      checks.non_neutralizable_cost = "FAIL";
-      checks.temporal_exposure = "SKIP";
-      return deny(action_id, "NON_NEUTRALIZABLE_COST_MISSING", checks);
-    }
-    checks.non_neutralizable_cost = "PASS";
-
-    // REQ-5: temporal exposure (demo: require decision_timestamp <= request_timestamp if present)
-    // If missing timestamps, fail-closed in strict mode.
-    const reqTs = actionObj.timestamp_request || actionObj.request_timestamp || null;
-    const decTs = respObj.decision_timestamp || null;
-
-    if (!reqTs || !decTs) {
-      checks.temporal_exposure = "FAIL";
-      checks.opposable_trace = "SKIP";
-      return deny(action_id, "TEMPORAL_INVALID", checks);
-    }
-    const reqTime = Date.parse(reqTs);
-    const decTime = Date.parse(decTs);
-    if (!isFinite(reqTime) || !isFinite(decTime) || decTime > reqTime) {
-      checks.temporal_exposure = "FAIL";
-      checks.opposable_trace = "SKIP";
-      return deny(action_id, "TEMPORAL_INVALID", checks);
-    }
-    checks.temporal_exposure = "PASS";
-
-    // REQ-3: opposable trace (demo: requires payload_hash_hex OR context + action_type)
-    const hasTraceInputs =
-      (typeof actionObj.payload_hash_hex === "string" && actionObj.payload_hash_hex.trim() !== "") ||
-      (typeof actionObj.action_type === "string" && actionObj.action_type.trim() !== "" &&
-       typeof actionObj.context === "string" && actionObj.context.trim() !== "");
-    if (!hasTraceInputs) {
-      checks.opposable_trace = "FAIL";
-      return deny(action_id, "NO_EVIDENCE", checks);
-    }
-    checks.opposable_trace = "PASS";
-
-    return { ok:true, action_id };
-  }
-
-  async function buildEvidence(actionObj, respObj, algorithm) {
-    const evidence_id = uuidv4();
-    const action_id = actionObj.action_id || uuidv4();
-    actionObj.action_id = action_id;
-
-    const preimage = {
-      schema: "EXA-EVIDENCE-PREIMAGE-v1",
-      action: actionObj,
-      responsibility: respObj
-    };
-
-    const preimage_json = stableStringify(preimage);
-    const digest_hex = await hashHex(algorithm, preimage_json);
-
-    const preimage_spec = "stable-json(sorted-keys) of {schema, action, responsibility}";
-
-    const evidencePackage = {
-      schema: "EXA-EVIDENCE-PACK-v1",
-      evidence_id,
-      action_id,
-      created_at: isoNow(),
-      hash_algorithm: algorithm,
-      preimage_spec,
-      digest_hex,
-      verifiable_independently: true,
-      execution_record: null
-    };
-
-    return { evidencePackage, digest_hex, preimage_spec, action_id, evidence_id };
-  }
-
-  function render(obj) {
-    out.textContent = JSON.stringify(obj, null, 2);
-  }
-
-  function setEnabledAfterResult(enabled) {
-    btnExport.disabled = !enabled;
-    btnCopy.disabled = !enabled;
-  }
-
-  $("btnFill").addEventListener("click", () => {
-    setNow();
-    const t = isoNow();
-    const actionExample = {
-      action_id: "00000000-0000-0000-0000-000000000001",
-      action_type: "EXECUTE_X",
-      context: "process-Y",
-      requestor_system: "portal-demo",
-      timestamp_request: t,
-      payload_hash_hex: "a".repeat(128),
-      cost_marker: "LIABILITY-ACK-1"
-    };
-    const respExample = {
-      human_subject_id: "HUM-123",
-      role: "AUTHORIZED_OFFICER",
-      decision_statement: "Approve execution of X for process-Y",
-      decision_timestamp: t,
-      liability_marker: "RESPONSIBILITY-NON-REVERSIBLE"
-    };
-    actionTA.value = JSON.stringify(actionExample, null, 2);
-    respTA.value = JSON.stringify(respExample, null, 2);
-    lastEvidencePackage = null;
-    lastOutput = null;
-    render({});
-    setEnabledAfterResult(false);
-  });
-
-  $("btnClear").addEventListener("click", () => {
-    actionTA.value = "";
-    respTA.value = "";
-    lastEvidencePackage = null;
-    lastOutput = null;
-    render({});
-    setEnabledAfterResult(false);
-    setNow();
-  });
-
-  $("btnValidate").addEventListener("click", async () => {
-    setNow();
-
-    const a = safeJsonParse(actionTA.value.trim());
-    if (!a.ok) {
-      lastOutput = { status: "DENIED", reason_code: "BAD_REQUEST", error: "Invalid ActionRequest JSON", details: a.error };
-      render(lastOutput);
-      setEnabledAfterResult(true);
-      return;
-    }
-
-    const r = safeJsonParse(respTA.value.trim());
-    if (!r.ok) {
-      lastOutput = { status: "DENIED", reason_code: "BAD_REQUEST", error: "Invalid ResponsibilityDeclaration JSON", details: r.error };
-      render(lastOutput);
-      setEnabledAfterResult(true);
-      return;
-    }
-
-    const actionObj = a.value;
-    const respObj = r.value;
-
-    // Validate requirements (fail-closed)
-    const val = validateREQs(actionObj, respObj);
-    if (!val.ok) {
-      lastEvidencePackage = null;
-      lastOutput = val; // already formatted deny
-      render(lastOutput);
-      setEnabledAfterResult(true);
-      return;
-    }
-
-    // Build evidence + authorize
-    const algorithm = algoSel.value;
-    try {
-      const built = await buildEvidence(actionObj, respObj, algorithm);
-      lastEvidencePackage = built.evidencePackage;
-      lastOutput = authorize(built.action_id, built.evidence_id, algorithm, built.digest_hex, built.preimage_spec);
-      render(lastOutput);
-      setEnabledAfterResult(true);
-    } catch (e) {
-      lastEvidencePackage = null;
-      lastOutput = { status: "DENIED", reason_code: "INTERNAL_ERROR", error: String(e.message || e) };
-      render(lastOutput);
-      setEnabledAfterResult(true);
-    }
-  });
-
-  $("btnExport").addEventListener("click", async () => {
-    if (!lastEvidencePackage) return;
-    const blob = new Blob([JSON.stringify(lastEvidencePackage, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `evidence-${lastEvidencePackage.evidence_id}.json`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  });
-
-  $("btnCopy").addEventListener("click", async () => {
-    if (!lastOutput) return;
-    try {
-      await navigator.clipboard.writeText(JSON.stringify(lastOutput, null, 2));
-    } catch {
-      // no-op: clipboard might be blocked
-    }
-  });
-
-  // init
-  setNow();
-})();
+  out.innerHTML = `
+    <div class="result ok">
+      <b>AUTHORIZED</b>
+      <p>L’azione è tecnicamente ammissibile ex-ante.</p>
+      <pre>${JSON.stringify(evidence, null, 2)}</pre>
+    </div>
+  `;
+}
 </script>
+
 </body>
 </html>
