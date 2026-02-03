@@ -1,244 +1,31 @@
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HERMETICUM B.C.E. — Framework tecnico ex-ante (ΦΩ · Fase 1)</title>
-  <meta name="description" content="Framework tecnico ex-ante per responsabilità e prova delle decisioni digitali: fail-closed, audit-first, hash-only." />
-  <style>
-    :root { color-scheme: dark; }
-    body {
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:#0b0f14;
-      color:#e6edf3;
-    }
-    a { color:#9cd1ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
+<section class="hero">
+  <h1>IPR Europeo</h1>
+  <p>
+    Strumento europeo <b>ex-ante</b> per la responsabilità, l’integrità e
+    l’opponibilità delle azioni digitali e algoritmiche.
+  </p>
 
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 26px 16px; }
-    header {
-      display:flex; gap:14px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
-      padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.12);
-    }
-    .brand { display:flex; flex-direction:column; gap:6px; }
-    .brand .title { margin:0; font-size: 16px; letter-spacing:.4px; }
-    .brand .tag { opacity:.85; font-size: 12px; }
-    nav { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
-    .pill {
-      border:1px solid rgba(255,255,255,.14);
-      padding:8px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      background: rgba(255,255,255,.03);
-    }
+  <p class="muted">
+    Un’azione <b>non è eseguibile</b> se l’IPR non è verificabile prima
+    dell’esecuzione.
+  </p>
 
-    .hero { margin-top: 16px; }
-    .hero h1 { margin:0 0 6px; font-size: 28px; letter-spacing: .2px; }
-    .hero p { margin: 6px 0; opacity:.9; line-height: 1.55; }
-    .badges { display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
-    .badge {
-      display:inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.03);
-      font-size: 11px;
-      opacity:.95;
-    }
-
-    .grid { display:grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
-    @media (min-width: 980px){ .grid { grid-template-columns: 1.1fr .9fr; } }
-
-    .card {
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.02);
-      border-radius: 14px;
-      padding: 14px;
-    }
-    .card h2 { margin: 0 0 8px; font-size: 18px; }
-    .card h3 { margin: 14px 0 8px; font-size: 14px; opacity:.95; }
-    .card p, .card li { opacity:.9; line-height: 1.55; font-size: 13px; }
-    .muted { opacity:.75; }
-    ul, ol { margin: 8px 0 0 18px; }
-
-    blockquote {
-      margin: 10px 0 0;
-      padding: 10px 12px;
-      border-left: 3px solid rgba(156,209,255,.7);
-      background: rgba(156,209,255,.06);
-      border-radius: 10px;
-      opacity:.95;
-    }
-
-    .cta { display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
-    .btn {
-      display:inline-block;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color:#e6edf3;
-      padding:10px 12px;
-      border-radius: 12px;
-      font-size: 12px;
-    }
-    .btn:hover { background: rgba(255,255,255,.09); text-decoration:none; }
-
-    .mono {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      background: rgba(0,0,0,.28);
-      border:1px solid rgba(255,255,255,.12);
-      padding: 10px 12px;
-      border-radius: 12px;
-      overflow:auto;
-    }
-
-    footer {
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,.12);
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-    }
-    .legal { font-size: 12px; opacity:.78; }
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="title"><a href="./">HERMETICUM B.C.E.</a> — Blindata · Computabile · Evolutiva</div>
-        <div class="tag">Framework tecnico ex-ante (ΦΩ · Fase 1)</div>
-      </div>
-      <nav>
-        <a class="pill" href="onboarding/">Onboarding</a>
-        <a class="pill" href="verify/">Verify</a>
-        <a class="pill" href="governance/">Governance</a>
-        <a class="pill" href="manuale/">Manuale</a>
-        <a class="pill" href="istituzioni-ue/">Istituzioni UE</a>
-        <a class="pill" href="specs/">Specs</a>
-        <a class="pill" href="audit/">Audit</a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <h1>Framework tecnico ex-ante</h1>
-      <p>Per la responsabilità e la prova delle decisioni digitali: <b>prima</b> dell’azione, non dopo.</p>
-      <div class="badges">
-        <span class="badge">ΦΩ — ONLY</span>
-        <span class="badge">Fase 1</span>
-        <span class="badge">FAIL-CLOSED</span>
-        <span class="badge">AUDIT-FIRST</span>
-        <span class="badge">HASH-ONLY</span>
-        <span class="badge">NO CUSTODY</span>
-      </div>
-      <div class="cta">
-        <a class="btn" href="verify/">Avvia verifica tecnica</a>
-        <a class="btn" href="specs/">Apri specifiche</a>
-        <a class="btn" href="audit/">Apri Audit Pack</a>
-      </div>
-    </section>
-
-    <div class="grid">
-      <section class="card">
-        <h2>Contesto europeo</h2>
-        <p>
-          Il quadro UE su AI, cybersicurezza e servizi fiduciari è avanzato. Resta però una criticità strutturale:
-        </p>
-        <blockquote>
-          le decisioni digitali e automatizzate vengono eseguite prima che sia possibile verificarne attribuzione,
-          legittimità e opponibilità nel tempo.
-        </blockquote>
-        <p class="muted">Il controllo resta prevalentemente ex-post.</p>
-
-        <h3>Problema operativo</h3>
-        <p>Nei sistemi digitali e di intelligenza artificiale ad alto rischio, l’azione può avvenire:</p>
-        <ul>
-          <li>senza attribuzione umana opponibile;</li>
-          <li>senza verifica tecnica preventiva;</li>
-          <li>senza una prova che regga un audit nel tempo.</li>
-        </ul>
-        <p>Questo espone enti, decisori e cittadini a rischio giuridico e operativo.</p>
-
-        <h3>Soluzione proposta (ambito limitato)</h3>
-        <p>HERMETICUM B.C.E. introduce un vincolo tecnico ex-ante, fondato su tre elementi minimi e non derogabili:</p>
-        <ol>
-          <li><b>Attribuzione umana verificabile</b></li>
-          <li><b>Validazione tecnica preventiva</b> (fail-closed)</li>
-          <li><b>Prova opponibile a lungo termine</b></li>
-        </ol>
-        <p><b>Se anche uno solo di questi elementi manca, l’azione non viene eseguita.</b></p>
-      </section>
-
-      <aside class="card">
-        <h2>Operativo</h2>
-        <p class="muted">Accesso diretto agli artefatti eseguibili e verificabili.</p>
-
-        <div class="cta">
-          <a class="btn" href="verify/">Verify (demo ex-ante)</a>
-          <a class="btn" href="specs/">Specs (norma & implementazione)</a>
-          <a class="btn" href="openapi/exa-dgc-openapi.yaml">OpenAPI 3.1</a>
-          <a class="btn" href="audit/">Audit Pack</a>
-        </div>
-
-        <h3>Cosa fa / Cosa non fa</h3>
-        <p><b>FA</b></p>
-        <ul>
-          <li>blocca l’esecuzione tecnica in assenza di evidenza verificabile;</li>
-          <li>produce prova auditabile e riproducibile;</li>
-          <li>opera prima dell’azione, non dopo.</li>
-        </ul>
-        <p><b>NON FA</b></p>
-        <ul>
-          <li>non decide nel merito;</li>
-          <li>non sostituisce l’autorità umana;</li>
-          <li>non custodisce dati personali (hash-only);</li>
-          <li>non è un sistema di sorveglianza;</li>
-          <li>non è un Identity Provider.</li>
-        </ul>
-      </aside>
-    </div>
-
-    <section class="card">
-      <h2>Architettura funzionale — ΦΩ · Fase 1</h2>
-      <div class="mono">
-Responsabilità Umana (HRR)
-        ↓
-Decision Gate Validator (DGV)
-        ↓
-Long-Term Accountability Vault (LTA)
-
-Regime: FAIL-CLOSED (in assenza di prova, nessuna esecuzione è consentita)
-      </div>
-
-      <h3>Conformità UE (principi)</h3>
-      <ul>
-        <li>UE-first</li>
-        <li>GDPR-min (hash-only)</li>
-        <li>Audit-first</li>
-        <li>No custody</li>
-        <li>No trust by default</li>
-        <li>Federabile tra Stati Membri</li>
-      </ul>
-
-      <h3>Posizionamento</h3>
-      <blockquote>
-        HERMETICUM B.C.E. non propone una nuova governance. Propone un meccanismo tecnico che impedisce l’azione quando la governance non è dimostrabile.
-      </blockquote>
-
-      <div class="cta">
-        <a class="btn" href="specs/NT-EXA-01.md">Leggi NT-EXA-01</a>
-        <a class="btn" href="specs/EXA-DGC-IMP-01.md">Leggi EXA-DGC-IMP-01</a>
-        <a class="btn" href="verify/">Esegui demo fail-closed</a>
-      </div>
-    </section>
-
-    <footer>
-      <div class="legal">HERMETICUM B.C.E. S.r.l. — UE-first · GDPR-min · HASH-only · AUDIT · FAIL-CLOSED</div>
-      <div class="legal">
-        <a href="privacy/">Privacy</a> · <a href="terms/">Terms</a> · <a href="status/">Status</a> · <a href="manifest/">Manifest</a>
-      </div>
-    </footer>
+  <div class="badges">
+    <span class="badge">EX-ANTE</span>
+    <span class="badge">FAIL-CLOSED</span>
+    <span class="badge">AUDIT-FIRST</span>
+    <span class="badge">HASH-ONLY</span>
+    <span class="badge">NO CUSTODY</span>
+    <span class="badge">UE-FIRST</span>
   </div>
-</body>
-</html>
+
+  <div class="cta">
+    <a class="btn" href="verify/">Validatore ex-ante IPR</a>
+    <a class="btn" href="specs/">Specifiche IPR</a>
+    <a class="btn" href="audit/">Evidence & Audit</a>
+  </div>
+
+  <p class="muted" style="margin-top:10px;">
+    sviluppato da <b>HERMETICUM B.C.E. S.r.l.</b>
+  </p>
+</section>
