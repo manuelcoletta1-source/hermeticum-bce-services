@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Specs — HERMETICUM B.C.E.</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
+    a { color:#9cd1ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px; }
+    header { display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+    .brand h1 { margin:0; font-size: 18px; letter-spacing: .4px; }
+    .brand .tag { opacity:.85; margin-top:6px; font-size: 13px; }
+    nav { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius: 999px; font-size: 13px; background: rgba(255,255,255,.03); }
+    .card { margin-top: 14px; padding: 16px; border-radius: 14px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.02); }
+    h2 { margin: 0 0 8px; font-size: 18px; }
+    p, li { opacity:.9; line-height:1.55; }
+    ul { margin: 8px 0 0 18px; }
+    code { background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 8px; }
+    footer { margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+    .legal { opacity:.75; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1><a href="../">HERMETICUM B.C.E.</a></h1>
+        <div class="tag">Blindata · Computabile · Evolutiva</div>
+      </div>
+      <nav>
+        <a class="pill" href="../onboarding/">Onboarding</a>
+        <a class="pill" href="../verify/">Verify</a>
+        <a class="pill" href="../manuale/">Manuale</a>
+        <a class="pill" href="../specs/">Specs</a>
+      </nav>
+    </header>
+
+    <div class="card">
+      <h2>Specifiche e standard</h2>
+      <p>Artefatti tecnici versionati. Documenti normativi, implementazione, API e auditabilità.</p>
+
+      <h3>Norme e implementazione</h3>
+      <ul>
+        <li><a href="NT-EXA-01.md">NT-EXA-01 — Vincolo ex-ante (Fail-Closed)</a></li>
+        <li><a href="EXA-DGC-IMP-01.md">EXA-DGC-IMP-01 — Specifica di implementazione (DGC)</a></li>
+      </ul>
+
+      <h3>API</h3>
+      <ul>
+        <li><a href="../openapi/exa-dgc-openapi.yaml">OpenAPI 3.1 — EXA-DGC</a></li>
+      </ul>
+
+      <h3>Diagrammi</h3>
+      <ul>
+        <li><a href="../docs/uml/components.mmd">Mermaid — Components</a></li>
+        <li><a href="../docs/uml/states.mmd">Mermaid — State machine</a></li>
+        <li><a href="../docs/uml/sequence-authorized.mmd">Mermaid — Sequence AUTHORIZED</a></li>
+        <li><a href="../docs/uml/sequence-denied.mmd">Mermaid — Sequence DENIED</a></li>
+      </ul>
+
+      <h3>Audit</h3>
+      <ul>
+        <li><a href="../audit/">Audit Pack</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      <div class="legal">HERMETICUM B.C.E. S.r.l. — UE-first · GDPR-min · HASH-only · AUDIT · FAIL-CLOSED</div>
+      <div class="legal">
+        <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../status/">Status</a> · <a href="../manifest/">Manifest</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
