@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Status — IPR Europeo</title>
+  <meta name="description" content="Stato operativo del portale IPR Europeo: cosa è live, cosa è demo, cosa è in rollout." />
+  <style>
+    :root { color-scheme: dark; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
+    a { color:#9cd1ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 26px 16px; }
+
+    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
+    .brand { font-size:14px; line-height:1.4; }
+    nav { display:flex; gap:10px; flex-wrap:wrap; }
+    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
+
+    h1 { margin:18px 0 6px; font-size:24px; }
+    p { line-height:1.55; opacity:.9; font-size:14px; }
+
+    .card { margin-top:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); border-radius:14px; padding:14px; }
+    .card h2 { margin:0 0 10px; font-size:16px; }
+
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { text-align:left; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10); vertical-align:top; }
+    th { opacity:.85; font-weight:600; }
+
+    .tag { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.03); }
+    .ok { border-color: rgba(63,185,80,.55); background: rgba(63,185,80,.08); }
+    .warn { border-color: rgba(210,153,34,.60); background: rgba(210,153,34,.10); }
+    .no { border-color: rgba(248,81,73,.60); background: rgba(248,81,73,.10); }
+
+    code { background: rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.12); padding:2px 6px; border-radius:8px; font-family: ui-monospace, monospace; font-size:12px; }
+
+    footer { margin-top:22px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <b>IPR Europeo</b><br/>
+      Stato operativo del portale
+    </div>
+    <nav>
+      <a class="pill" href="../">Home</a>
+      <a class="pill" href="../ipr/">IPR</a>
+      <a class="pill" href="../verify/">Validatore</a>
+      <a class="pill" href="../specs/">Specifiche</a>
+      <a class="pill" href="../audit/">Audit</a>
+      <a class="pill" href="../status/">Status</a>
+    </nav>
+  </header>
+
+  <h1>Status</h1>
+  <p>
+    Questa pagina descrive lo stato effettivo delle componenti: cosa è <b>operativo</b>,
+    cosa è <b>dimostrativo</b>, cosa è <b>non disponibile</b>. È un controllo anti-ambiguità.
+  </p>
+
+  <div class="card">
+    <h2>Stato componenti</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Componente</th>
+          <th>Stato</th>
+          <th>Descrizione</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Standard IPR (pagina canonica)</td>
+          <td><span class="tag ok">LIVE</span></td>
+          <td>Definizione operativa dello standard tecnologico ex-ante.</td>
+          <td><a href="../ipr/">/ipr/</a></td>
+        </tr>
+        <tr>
+          <td>Validatore ex-ante IPR</td>
+          <td><span class="tag ok">LIVE</span></td>
+          <td>Demo offline deterministica. Fail-closed. Evidence hash-only.</td>
+          <td><a href="../verify/">/verify/</a></td>
+        </tr>
+        <tr>
+          <td>Specifiche (Norma / Implementazione)</td>
+          <td><span class="tag warn">ROLLOUT</span></td>
+          <td>Documenti tecnici e normativa. Può essere incompleto.</td>
+          <td><a href="../specs/">/specs/</a></td>
+        </tr>
+        <tr>
+          <td>OpenAPI (interfaccia standard)</td>
+          <td><span class="tag warn">ROLLOUT</span></td>
+          <td>OpenAPI 3.1 presente come artefatto. Explorer opzionale.</td>
+          <td><a href="../openapi/">/openapi/</a></td>
+        </tr>
+        <tr>
+          <td>Audit Pack</td>
+          <td><span class="tag warn">ROLLOUT</span></td>
+          <td>Indice artefatti verificabili. Completa la tracciabilità.</td>
+          <td><a href="../audit/">/audit/</a></td>
+        </tr>
+        <tr>
+          <td>Enforcement runtime (server-side)</td>
+          <td><span class="tag no">NON DISPONIBILE</span></td>
+          <td>Non implementato sul portale pubblico. Solo demo/offline.</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Custodia dati personali</td>
+          <td><span class="tag no">NON PREVISTA</span></td>
+          <td>Principio: hash-only, no-custody.</td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Modalità di prova (auditabile)</h2>
+    <p>
+      Per verificare l’operatività ex-ante:
+    </p>
+    <ol>
+      <li>Aprire <a href="../verify/">/verify/</a></li>
+      <li>Eseguire <code>Validate ex-ante</code></li>
+      <li>Verificare output <b>AUTHORIZED</b> o <b>DENIED</b></li>
+      <li>Conservare l’evidenza (<code>digest_hex</code>) come prova hash-only</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Note di conformità (principi)</h2>
+    <ul>
+      <li><b>FAIL-CLOSED</b>: in assenza di prova, nessuna esecuzione.</li>
+      <li><b>HASH-ONLY</b>: nessuna custodia dati personali sul portale.</li>
+      <li><b>AUDIT-FIRST</b>: artefatti e output verificabili.</li>
+      <li><b>UE-FIRST</b>: posizionamento su accountability e human responsibility.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <div>
+      Status operativo — IPR Europeo<br/>
+      Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
+    </div>
+    <div>
+      <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
