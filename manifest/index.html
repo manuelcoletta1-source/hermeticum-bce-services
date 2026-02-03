@@ -1,36 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MANIFEST — Protocollo Eventi | HERMETICUM B.C.E.</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manifest — IPR Europeo</title>
+  <meta name="description" content="Manifest tecnico del portale IPR Europeo: principi, scope, assunzioni, limiti e asset operativi." />
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;background:#0d1117;color:#e6edf3;line-height:1.6}
-    main,header,footer{max-width:900px;margin:auto;padding:2.2rem 1.5rem}
-    a{color:#58a6ff;text-decoration:none}
-    .box{border:1px solid #30363d;border-radius:12px;padding:1.2rem;background:#0d1117}
-    p{color:#9da7b1}
+    :root { color-scheme: dark; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
+    a { color:#9cd1ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 26px 16px; }
+
+    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
+    .brand { font-size:14px; line-height:1.4; }
+    nav { display:flex; gap:10px; flex-wrap:wrap; }
+    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
+
+    h1 { margin:18px 0 6px; font-size:24px; }
+    p, li { line-height:1.55; opacity:.9; font-size:14px; }
+    ul, ol { margin: 8px 0 0 18px; }
+
+    .card { margin-top:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); border-radius:14px; padding:14px; }
+    .card h2 { margin:0 0 10px; font-size:16px; }
+    .card h3 { margin:14px 0 8px; font-size:13px; opacity:.95; }
+
+    code { background: rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.12); padding:2px 6px; border-radius:8px; font-family: ui-monospace, monospace; font-size:12px; }
+
+    .tag { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.03); }
+
+    footer { margin-top:22px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
   </style>
 </head>
+
 <body>
-<header>
-  <h1>MANIFEST — Protocollo Eventi (Hash-Only)</h1>
-  <p>Specifiche tecniche minime: UE-first · GDPR-min · hash-only · append-only · fail-closed.</p>
-  <p><a href="../">Home</a> · <a href="../terms/">Terms</a> · <a href="../about/">About</a></p>
-</header>
+<div class="wrap">
 
-<main>
-  <div class="box">
-    <h2>Primato biologico</h2>
-    <p>Ogni evento nasce da un soggetto biologico reale. La componente cibernetica è estensione tecnica non autonoma.</p>
+  <header>
+    <div class="brand">
+      <b>IPR Europeo</b><br/>
+      Manifest tecnico
+    </div>
+    <nav>
+      <a class="pill" href="../">Home</a>
+      <a class="pill" href="../ipr/">IPR</a>
+      <a class="pill" href="../verify/">Validatore</a>
+      <a class="pill" href="../specs/">Specifiche</a>
+      <a class="pill" href="../openapi/">OpenAPI</a>
+      <a class="pill" href="../audit/">Audit</a>
+      <a class="pill" href="../status/">Status</a>
+    </nav>
+  </header>
 
-    <h2>Documento</h2>
-    <p>Leggi il protocollo completo nel file <strong>MANIFEST.md</strong> nel repository.</p>
+  <h1>Manifest</h1>
+  <p>
+    Questo documento descrive il <b>scope</b>, i <b>principi</b>, le <b>assunzioni</b> e i <b>limiti</b>
+    del portale e dell’implementazione di riferimento dello standard IPR Europeo.
+  </p>
+
+  <div class="card">
+    <h2>Scope</h2>
+    <ul>
+      <li>Fornire una presentazione pubblica dello <a href="../ipr/">standard IPR</a>.</li>
+      <li>Fornire un <a href="../verify/">validatore ex-ante</a> dimostrativo (offline) coerente con lo standard.</li>
+      <li>Rendere accessibili <a href="../specs/">specifiche</a>, <a href="../openapi/">OpenAPI</a> e <a href="../audit/">Audit Pack</a>.</li>
+      <li>Operare secondo principi UE: accountability, minimizzazione, auditabilità.</li>
+    </ul>
   </div>
-</main>
 
-<footer>
-  <p>HERMETICUM B.C.E. S.r.l.</p>
-</footer>
+  <div class="card">
+    <h2>Principi</h2>
+    <ul>
+      <li><span class="tag">EX-ANTE</span> L’azione è ammessa solo se verificabile prima dell’esecuzione.</li>
+      <li><span class="tag">FAIL-CLOSED</span> In assenza di prova, risultato DENIED.</li>
+      <li><span class="tag">HASH-ONLY</span> Evidence basata su digest crittografici.</li>
+      <li><span class="tag">NO CUSTODY</span> Nessuna custodia di dati personali nel portale pubblico.</li>
+      <li><span class="tag">AUDIT-FIRST</span> Percorsi di verifica riproducibili e indipendenti.</li>
+      <li><span class="tag">UE-FIRST</span> Coerenza con principi di accountability e human responsibility.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Assunzioni operative</h2>
+    <ul>
+      <li>Lo standard definisce <b>ammissibilità tecnica</b>, non merito della decisione.</li>
+      <li>Il validatore pubblico è una <b>demo offline nel browser</b> (non enforcement server-side).</li>
+      <li>Gli output sono progettati per essere <b>verificabili indipendentemente</b>.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Componenti del portale</h2>
+    <ul>
+      <li><a href="../ipr/">/ipr/</a> — pagina canonica dello standard</li>
+      <li><a href="../verify/">/verify/</a> — validatore ex-ante (demo)</li>
+      <li><a href="../specs/">/specs/</a> — specifiche (norma/implementazione)</li>
+      <li><a href="../openapi/">/openapi/</a> — OpenAPI 3.1</li>
+      <li><a href="../audit/">/audit/</a> — audit pack</li>
+      <li><a href="../status/">/status/</a> — stato operativo</li>
+      <li><a href="../privacy/">/privacy/</a> — privacy (hash-only, no-custody)</li>
+      <li><a href="../terms/">/terms/</a> — termini d’uso</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Implementazione di riferimento</h2>
+    <p>
+      L’implementazione di riferimento è mantenuta da <b>HERMETICUM B.C.E. S.r.l.</b>.
+      Il ruolo è tecnico: mantenere un riferimento operativo e documentale dello standard.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Limitazioni</h2>
+    <ul>
+      <li>Nessun servizio di produzione garantito sul portale pubblico.</li>
+      <li>Nessuna custodia o trattamento sistematico di dati personali.</li>
+      <li>Integrazioni reali richiedono policy, governance e audit dedicati.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <div>
+      Manifest — IPR Europeo<br/>
+      Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
+    </div>
+    <div>
+      <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+</div>
 </body>
 </html>
