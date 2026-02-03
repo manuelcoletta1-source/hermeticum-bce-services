@@ -4,40 +4,32 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>IPR Europeo — Standard tecnologico ex-ante</title>
-  <meta name="description" content="IPR Europeo: standard tecnologico ex-ante per l’ammissibilità delle azioni digitali. Implementazione di riferimento a cura di HERMETICUM B.C.E. S.r.l." />
+  <meta name="description" content="IPR Europeo: standard tecnologico ex-ante per l’ammissibilità delle azioni digitali e algoritmiche in ambito UE." />
   <style>
     :root { color-scheme: dark; }
     body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
     a { color:#9cd1ff; text-decoration:none; }
     a:hover { text-decoration:underline; }
-
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 26px 16px; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 26px 16px; }
 
     header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
     .brand { font-size:14px; line-height:1.4; }
     nav { display:flex; gap:10px; flex-wrap:wrap; }
     .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
 
-    .hero { margin-top:22px; }
-    .hero h1 { margin:0 0 8px; font-size:30px; }
-    .hero p { margin:6px 0; line-height:1.55; opacity:.9; }
-
-    .badges { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
-    .badge { border:1px solid rgba(255,255,255,.14); padding:3px 8px; border-radius:999px; font-size:11px; background:rgba(255,255,255,.03); }
-
-    .cta { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
-    .btn { border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); padding:10px 14px; border-radius:12px; font-size:13px; color:#e6edf3; }
-    .btn:hover { background:rgba(255,255,255,.09); text-decoration:none; }
-
-    .section { margin-top:26px; padding:16px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); }
-    .section h2 { margin:0 0 8px; font-size:18px; }
-    .section p, .section li { font-size:13px; line-height:1.55; opacity:.9; }
+    h1 { margin:18px 0 6px; font-size:26px; }
+    p, li { line-height:1.55; opacity:.9; font-size:14px; }
     ul, ol { margin: 8px 0 0 18px; }
 
-    footer { margin-top:28px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+    .card { margin-top:14px; padding:16px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); }
+    .card h2 { margin:0 0 8px; font-size:18px; }
+
+    .badge { display:inline-block; padding:3px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.03); font-size:11px; margin-right:6px; }
+    blockquote { margin: 10px 0; padding: 10px 12px; border-left: 3px solid rgba(156,209,255,.7); background: rgba(156,209,255,.06); border-radius: 10px; }
+
+    footer { margin-top:22px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
   </style>
 </head>
-
 <body>
   <div class="wrap">
 
@@ -47,49 +39,40 @@
         Standard tecnologico ex-ante
       </div>
       <nav>
-        <a class="pill" href="./">Home</a>
-        <a class="pill" href="ipr/">IPR</a>
-        <a class="pill" href="verify/">Validatore</a>
-        <a class="pill" href="specs/">Specifiche</a>
-        <a class="pill" href="openapi/">OpenAPI</a>
-        <a class="pill" href="audit/">Audit</a>
-        <a class="pill" href="status/">Status</a>
+        <a class="pill" href="../">Home</a>
+        <a class="pill" href="../ipr/">IPR</a>
+        <a class="pill" href="../verify/">Validatore</a>
+        <a class="pill" href="../specs/">Specifiche</a>
+        <a class="pill" href="../openapi/">OpenAPI</a>
+        <a class="pill" href="../audit/">Audit</a>
+        <a class="pill" href="../status/">Status</a>
       </nav>
     </header>
 
-    <section class="hero">
-      <h1>IPR Europeo</h1>
+    <h1>IPR Europeo</h1>
+    <p><b>Standard tecnologico ex-ante</b> per l’ammissibilità delle azioni digitali e algoritmiche in ambito europeo.</p>
+    <div>
+      <span class="badge">EX-ANTE</span>
+      <span class="badge">FAIL-CLOSED</span>
+      <span class="badge">AUDIT-FIRST</span>
+      <span class="badge">HASH-ONLY</span>
+      <span class="badge">NO CUSTODY</span>
+      <span class="badge">UE-FIRST</span>
+    </div>
+
+    <section class="card">
+      <h2>Definizione</h2>
       <p>
-        Standard tecnologico <b>ex-ante</b> che rende un’azione digitale
-        <b>tecnicamente inammissibile</b> se la responsabilità non è verificabile
-        prima dell’esecuzione.
+        L’IPR Europeo (Identity / Integrity / Responsibility Record) è uno standard tecnologico che stabilisce
+        se un’azione digitale o algoritmica può essere <b>tecnicamente eseguita</b> in modalità ex-ante.
       </p>
-
-      <div class="badges">
-        <span class="badge">EX-ANTE</span>
-        <span class="badge">FAIL-CLOSED</span>
-        <span class="badge">AUDIT-FIRST</span>
-        <span class="badge">HASH-ONLY</span>
-        <span class="badge">NO CUSTODY</span>
-        <span class="badge">UE-FIRST</span>
-      </div>
-
-      <div class="cta">
-        <a class="btn" href="ipr/">Standard IPR</a>
-        <a class="btn" href="verify/">Validatore ex-ante</a>
-        <a class="btn" href="audit/">Evidence & Audit</a>
-      </div>
-
-      <p style="margin-top:10px; opacity:.7; font-size:13px;">
-        Implementazione di riferimento a cura di <b>HERMETICUM B.C.E. S.r.l.</b>
-      </p>
+      <blockquote>
+        Se la responsabilità e la prova non sono verificabili prima dell’esecuzione, l’azione è tecnicamente non eseguibile.
+      </blockquote>
     </section>
 
-    <section class="section">
-      <h2>Funzione</h2>
-      <p>
-        L’IPR Europeo non decide nel merito. Verifica <b>se un’azione può essere eseguita</b>.
-      </p>
+    <section class="card">
+      <h2>Requisiti minimi ex-ante</h2>
       <ol>
         <li>Attribuzione umana verificabile</li>
         <li>Decisione esplicita</li>
@@ -97,18 +80,33 @@
         <li>Responsabilità non neutralizzabile</li>
         <li>Esposizione temporale auditabile</li>
       </ol>
-      <p><b>In assenza di anche uno solo di questi requisiti, l’azione è DENIED.</b></p>
+    </section>
+
+    <section class="card">
+      <h2>Accesso operativo</h2>
+      <ul>
+        <li><a href="../verify/">Validatore ex-ante IPR</a></li>
+        <li><a href="../specs/">Specifiche tecniche</a></li>
+        <li><a href="../openapi/">OpenAPI</a></li>
+        <li><a href="../audit/">Audit Pack</a></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Implementazione di riferimento</h2>
+      <p>
+        <b>HERMETICUM B.C.E. S.r.l.</b> sviluppa e mantiene una implementazione di riferimento dello standard,
+        includendo validatore, specifiche, OpenAPI e Audit Pack.
+      </p>
     </section>
 
     <footer>
       <div>
         IPR Europeo — standard tecnologico ex-ante<br/>
-        Implementazione: HERMETICUM B.C.E. S.r.l.
+        Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
       </div>
       <div>
-        <a href="privacy/">Privacy</a> ·
-        <a href="terms/">Terms</a> ·
-        <a href="manifest/">Manifest</a>
+        <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a>
       </div>
     </footer>
 
