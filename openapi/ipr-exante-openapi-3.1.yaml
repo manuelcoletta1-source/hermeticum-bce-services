@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: IPR Europeo — Ex-Ante Decision Gate API
+  version: 0.1.0
+  summary: API per la validazione ex-ante secondo lo standard IPR Europeo
+  description: >
+    Questa API definisce un contratto di validazione ex-ante (fail-closed).
+    Se la responsabilità non è verificabile prima dell'esecuzione, l'azione è DENIED.
+servers:
+  - url: https://example.invalid
+    description: Server placeholder (demo site is offline-only)
+
+tags:
+  - name: ex-ante
+    description: Validazione ex-ante (Decision Gate)
+
+paths:
+  /v1/ex-ante/validate:
+    post:
+      tags: [ex-ante]
+      operationId: validateExAnte
+      summary: Validazione ex-ante di un'azione
+      description: >
+        Determina l'ammissibilità tecnica (AUTHORIZED / DENIED) e produce evidence hash-only.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateRequest"
+            examples:
+              ok:
+                value:
+                  action:
+                    schema: IPR-ACTION-v1
+                    action_id: ACT-001
+                    action_type: APPLY_MEASURE
+                    context: high_criticality_control
+                    timestamp: "2026-02-03T15:20:00Z"
+                  responsibility:
+                    schema: IPR-RESP-v1
+                    subject_id: HUM-001
+                    role: AUTHORIZED_OFFICER
+                    decision: Approve measure
+                    decision_timestamp: "2026-02-03T15:19:00Z"
+      responses:
+        "200":
+          description: Decisione ex-ante (AUTHORIZED o DENIED)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Decision"
+        "400":
+          description: Richiesta non valida (JSON malformato o schema errato)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    ValidateRequest:
+      type: object
+      required: [action, responsibility]
+      properties:
+        action:
+          $ref: "#/components/schemas/IPRAction"
+        responsibility:
+          $ref: "#/components/schemas/IPRResponsibility"
+
+    IPRAction:
+      type: object
+      required: [schema, action_id, action_type, timestamp]
+      properties:
+        schema:
+          type: string
+          const: IPR-ACTION-v1
+        action_id:
+          type: string
+          minLength: 1
+        action_type:
+          type: string
+          minLength: 1
+        context:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+
+    IPRResponsibility:
+      type: object
+      required: [schema, subject_id, role, decision, decision_timestamp]
+      properties:
+        schema:
+          type: string
+          const: IPR-RESP-v1
+        subject_id:
+          type: string
+          minLength: 1
+        role:
+          type: string
+          minLength: 1
+        decision:
+          type: string
+          minLength: 1
+        decision_timestamp:
+          type: string
+          format: date-time
+
+    Decision:
+      type: object
+      required: [schema, status]
+      properties:
+        schema:
+          type: string
+          const: IPR-DECISION-v1
+        status:
+          type: string
+          enum: [AUTHORIZED, DENIED]
+        evidence:
+          $ref: "#/components/schemas/Evidence"
+        reason_code:
+          type: string
+        details:
+          type: string
+      oneOf:
+        - required: [schema, status, evidence]
+          properties:
+            status:
+              const: AUTHORIZED
+        - required: [schema, status, reason_code]
+          properties:
+            status:
+              const: DENIED
+
+    Evidence:
+      type: object
+      required: [schema, hash_algorithm, digest_hex, verifiable_independently, generated_at]
+      properties:
+        schema:
+          type: string
+          const: IPR-EVIDENCE-v1
+        hash_algorithm:
+          type: string
+          enum: [SHA-512]
+        digest_hex:
+          type: string
+          pattern: "^[0-9a-f]{128}$"
+        preimage_spec:
+          type: string
+          description: Descrizione della preimage deterministica usata per l'hash
+        verifiable_independently:
+          type: boolean
+          const: true
+        generated_at:
+          type: string
+          format: date-time
+
+    Error:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: string
+          example: BAD_REQUEST
+        message:
+          type: string
+          example: Invalid JSON
