@@ -2,156 +2,78 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Onboarding — cosa significa · scegli profilo e intensità</title>
-
-  <!-- GitHub Pages project site base -->
-  <base href="/hermeticum-bce-platform/">
-
-  <link rel="stylesheet" href="assets/hbce.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Onboarding operativo — HERMETICUM B.C.E.</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
+    a { color:#9cd1ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px; }
+    header { display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+    .brand h1 { margin:0; font-size: 18px; letter-spacing: .4px; }
+    .brand .tag { opacity:.85; margin-top:6px; font-size: 13px; }
+    nav { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius: 999px; font-size: 13px; background: rgba(255,255,255,.03); }
+    .card { margin-top: 14px; padding: 16px; border-radius: 14px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.02); }
+    h2 { margin: 12px 0 8px; font-size: 22px; }
+    p, li { opacity:.9; line-height:1.55; }
+    ul, ol { margin: 8px 0 0 18px; }
+    code { background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 8px; }
+    footer { margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+    .legal { opacity:.75; font-size: 12px; }
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="wrap nav">
+  <div class="wrap">
+    <header>
       <div class="brand">
-        <div class="sig" aria-hidden="true"></div>
-        <div>
-          <h1>Onboarding</h1>
-          <span class="sub">Cosa significa · router ufficiale · profilo + intensità</span>
-        </div>
+        <h1><a href="../">HERMETICUM B.C.E.</a></h1>
+        <div class="tag">Blindata · Computabile · Evolutiva</div>
       </div>
-
-      <nav class="menu" aria-label="Navigazione principale">
-        <a class="pill" data-nav href="./"><strong>Home</strong></a>
-        <a class="pill active" data-nav href="onboarding/"><strong>Onboarding</strong></a>
-        <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
-        <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
-        <a class="pill" data-nav href="institution/">Istituzioni UE</a>
-        <a class="pill" data-nav href="member-states/">Stati Membri</a>
-        <a class="pill" data-nav href="technology/">Tecnologia</a>
-        <a class="pill" data-nav href="verify/">Verify</a>
-        <a class="pill" data-nav href="security/">Sicurezza</a>
-        <a class="pill" data-nav href="governance/">Governance</a>
-        <a class="pill" data-nav href="manual/">Manuale</a>
+      <nav>
+        <a class="pill" href="../onboarding/">Onboarding</a>
+        <a class="pill" href="../verify/">Verify</a>
+        <a class="pill" href="../governance/">Governance</a>
+        <a class="pill" href="../manuale/">Manuale</a>
+        <a class="pill" href="../istituzioni-ue/">Istituzioni UE</a>
       </nav>
+    </header>
+
+    <div class="card">
+      <h2>Onboarding operativo</h2>
+      <p>Questa sezione descrive il flusso minimo “fail-closed” per entrare nel perimetro ΦΩ · Fase 1 senza introdurre custodia dati.</p>
+
+      <h3>Obiettivo</h3>
+      <ul>
+        <li>Definire un soggetto responsabile (ruolo umano).</li>
+        <li>Stabilire un <code>Decision Gate</code> che non esegue senza prova.</li>
+        <li>Produrre un “evidence pack” verificabile nel tempo (hash-only).</li>
+      </ul>
+
+      <h3>Flusso minimo (Fase 1)</h3>
+      <ol>
+        <li>Identifica il contesto: processo, sistema, rischio, confini.</li>
+        <li>Nomina la responsabilità: chi può “pagare il costo” dell’atto.</li>
+        <li>Configura il gate: regole, input richiesti, condizione di blocco.</li>
+        <li>Definisci l’evidenza: cosa viene hashato, dove si conserva, come si verifica.</li>
+        <li>Test fail-closed: prova l’assenza di prova → nessuna esecuzione.</li>
+      </ol>
+
+      <h3>Output</h3>
+      <ul>
+        <li>Policy dichiarata (UE-first · audit-first · fail-closed · hash-only)</li>
+        <li>Traccia tecnica riproducibile (verifica deterministica)</li>
+        <li>Nessuna custodia di dati personali (solo impronte / hash)</li>
+      </ul>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="kicker">ROUTER CANONICO · NIENTE FLOWS DUPLICATI</div>
-      <h2 class="title">Onboarding significa: scegliere “chi sei” e “quanto vincolo vuoi”</h2>
-      <p class="lead">
-        Onboarding = ingresso controllato.  
-        Ti porta al percorso giusto senza confusione: profilo (cittadino / operativo / istituzione)
-        + intensità (Light / Strong).
-      </p>
-
-      <div class="btnrow">
-        <a class="btn" href="verify/">Vai subito a Verify</a>
-        <a class="btn secondary" href="technology/">Capire PASS/FAIL</a>
-        <a class="btn ghost" href="create/">Demo Create</a>
+    <footer>
+      <div class="legal">HERMETICUM B.C.E. S.r.l. — UE-first · GDPR-min · HASH-only · AUDIT · FAIL-CLOSED</div>
+      <div class="legal">
+        <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../status/">Status</a> · <a href="../manifest/">Manifest</a>
       </div>
-    </section>
-
-    <section class="grid">
-      <article class="card cols-12">
-        <h3>Scelta 1 — Profilo</h3>
-        <div class="grid" style="gap:12px">
-          <div class="card cols-4" style="padding:14px">
-            <h4 style="margin:0 0 6px">Cittadino UE</h4>
-            <p style="margin:0 0 10px">
-              Protezione pratica: bloccare azioni e accessi quando non c’è evidenza minima verificabile.
-            </p>
-            <div class="btnrow">
-              <a class="btn" href="citizen/">Apri Cittadini UE</a>
-            </div>
-          </div>
-
-          <div class="card cols-4" style="padding:14px">
-            <h4 style="margin:0 0 6px">Operatore / Professionista</h4>
-            <p style="margin:0 0 10px">
-              Workflow reali: gate ex-ante su tool, pipeline, accessi e modifiche. Audit replicabile.
-            </p>
-            <div class="btnrow">
-              <a class="btn" href="technology/">Apri Tecnologia</a>
-              <a class="btn secondary" href="security/">Apri Sicurezza</a>
-            </div>
-          </div>
-
-          <div class="card cols-4" style="padding:14px">
-            <h4 style="margin:0 0 6px">Istituzione / PA / Regolatore</h4>
-            <p style="margin:0 0 10px">
-              Vista DG CONNECT / ENISA: problema UE → soluzione ex-ante → roadmap → KPI → adozione.
-            </p>
-            <div class="btnrow">
-              <a class="btn" href="institution/">Apri Istituzioni UE</a>
-              <a class="btn secondary" href="member-states/">Stati Membri</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Scelta 2 — Intensità</h3>
-        <div class="grid" style="gap:12px">
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">Light</h4>
-            <ul class="list" style="margin-top:8px">
-              <li>capire il modello (PASS/FAIL)</li>
-              <li>fare la prova minima (Verify)</li>
-              <li>usare Create come demo locale</li>
-            </ul>
-            <div class="btnrow">
-              <a class="btn" href="verify/">Light: Verify</a>
-              <a class="btn secondary" href="create/">Light: Create</a>
-            </div>
-          </div>
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">Strong</h4>
-            <ul class="list" style="margin-top:8px">
-              <li>definire policy + fingerprint contesto</li>
-              <li>attivare gate ex-ante su azioni sensibili</li>
-              <li>misurare KPI e applicare GO/NO-GO</li>
-            </ul>
-            <div class="btnrow">
-              <a class="btn" href="technology/">Strong: Specifica</a>
-              <a class="btn secondary" href="security/">Strong: Threat model</a>
-              <a class="btn ghost" href="member-states/">Strong: Adozione</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Sequenza consigliata (ordine “senza errori”)</h3>
-        <ol class="list">
-          <li><strong>Verify</strong> — prova minima PASS/FAIL</li>
-          <li><strong>Tecnologia</strong> — capire gate, fingerprint, “virgola=FAIL”</li>
-          <li><strong>Sicurezza</strong> — threat model e controlli ex-ante</li>
-          <li><strong>Governance</strong> — limiti (no custody / no surveillance)</li>
-          <li><strong>Istituzioni / Stati Membri</strong> — roadmap UE e GO/NO-GO</li>
-        </ol>
-        <div class="btnrow">
-          <a class="btn" href="verify/">1) Verify</a>
-          <a class="btn secondary" href="technology/">2) Tecnologia</a>
-          <a class="btn ghost" href="security/">3) Sicurezza</a>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">
-      <div class="notice">
-        <strong>Chiusura</strong><br/>
-        Onboarding = profilo + intensità.  
-        Se manca evidenza verificabile: FAIL.
-      </div>
-    </div>
-  </footer>
-
-  <script src="assets/hbce.js"></script>
+    </footer>
+  </div>
 </body>
 </html>
