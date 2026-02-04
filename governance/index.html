@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Governance Model — IPR ex-ante</title>
-  <meta name="description" content="Modello di governance: ruoli, responsabilità e confini del sistema IPR ex-ante. Nessuna autorità. Misura tecnica. Fail-closed." />
+  <meta name="description" content="Ruoli, responsabilità e confini del sistema IPR ex-ante. Misura tecnica, non decisione. Fail-closed." />
   <link rel="stylesheet" href="../assets/style.css" />
 </head>
 
@@ -21,7 +21,6 @@
         <a href="../use-cases/index.html">Use Cases</a>
         <a href="../status/index.html">Status</a>
         <a class="active" href="./index.html">Governance</a>
-        <a href="../specs/index.html">Specs</a>
       </nav>
     </div>
   </header>
@@ -31,107 +30,44 @@
     <h1>Governance Model</h1>
 
     <p class="lead">
-      Questa pagina definisce <strong>ruoli</strong>, <strong>responsabilità</strong> e <strong>confini</strong>
-      del sistema IPR ex-ante.  
-      Non introduce una nuova autorità: introduce una <strong>condizione tecnica di eseguibilità</strong>.
+      Il sistema introduce una <strong>condizione tecnica di eseguibilità</strong>, non una nuova autorità.
+      La responsabilità resta umana o istituzionale.
     </p>
 
     <section class="card">
-      <h2>Principio di responsabilità</h2>
-      <p>
-        La responsabilità resta <strong>umana o istituzionale</strong>.
-        Il sistema non decide nel merito: misura solo se esiste una prova verificabile ex-ante.
-      </p>
-      <p class="hint">
-        Il sistema non sposta il potere. Sposta il <strong>momento</strong> in cui l’azione diventa ammessa.
-      </p>
-    </section>
-
-    <section class="card">
-      <h2>Ruoli (chi fa cosa)</h2>
+      <h2>Ruoli</h2>
       <ul>
-        <li><strong>Soggetto responsabile (Umano / Ente)</strong> — decide e risponde del merito dell’azione.</li>
-        <li><strong>IPR</strong> — riferimento tecnico (hash-only) che rende l’azione attribuibile e verificabile.</li>
-        <li><strong>JOKER Gate / Precheck</strong> — misura ex-ante (PASS/FAIL), nessuna discrezionalità.</li>
-        <li><strong>DataCenter Metrologico</strong> — esegue solo in stato PASS, blocca in stato FAIL.</li>
-        <li><strong>Auditor / Controllore</strong> — verifica evidenze nel tempo (indipendente dal sistema).</li>
+        <li><strong>Soggetto responsabile (Umano / Ente)</strong> — decide e risponde del merito.</li>
+        <li><strong>IPR</strong> — riferimento tecnico (hash-only) che rende verificabile l’origine.</li>
+        <li><strong>Gate / Precheck</strong> — misura ex-ante (PASS/FAIL), nessuna discrezionalità.</li>
+        <li><strong>DataCenter Metrologico</strong> — esegue solo se PASS, blocca se FAIL.</li>
+        <li><strong>Auditor</strong> — verifica le evidenze nel tempo.</li>
       </ul>
-    </section>
-
-    <section class="card">
-      <h2>Matrice responsabilità (sintesi)</h2>
-      <div class="tablewrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Oggetto</th>
-              <th>Chi risponde</th>
-              <th>Chi misura</th>
-              <th>Chi esegue</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Merito della decisione</td>
-              <td>Umano / Ente</td>
-              <td>Nessuno (fuori ambito)</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td>Attribuzione e tracciabilità ex-ante</td>
-              <td>Umano / Ente (emette)</td>
-              <td>Gate / Precheck</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td>Eseguibilità tecnica</td>
-              <td>—</td>
-              <td>Gate / Precheck</td>
-              <td>DataCenter</td>
-            </tr>
-            <tr>
-              <td>Audit opponibile nel tempo</td>
-              <td>—</td>
-              <td>—</td>
-              <td>Auditor (verifica)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="hint">
-        Questa matrice evita la confusione tipica: <strong>misura ≠ decisione</strong>.
-      </p>
     </section>
 
     <section class="card warning">
-      <h2>Fuori ambito (confini dichiarati)</h2>
+      <h2>Confini dichiarati</h2>
       <ul>
-        <li>decisioni di merito</li>
-        <li>valutazioni etiche o politiche</li>
-        <li>sorveglianza, profiling, identificazione persone</li>
-        <li>custodia di dati personali</li>
-        <li>certificazione automatica di conformità</li>
+        <li>Il sistema non valuta il merito</li>
+        <li>Il sistema non fa sorveglianza o profiling</li>
+        <li>Il sistema non custodisce dati personali</li>
+        <li>Il sistema non sostituisce autorità pubbliche</li>
       </ul>
     </section>
 
     <section class="card">
-      <h2>Regole operative (invarianti)</h2>
-      <ul>
-        <li><strong>Fail-closed:</strong> in assenza di prova → nessuna esecuzione.</li>
-        <li><strong>Hash-only:</strong> minimizzazione e assenza di custodia dati personali.</li>
-        <li><strong>Separazione:</strong> misura (control-plane) separata da esecuzione (execution-plane).</li>
-        <li><strong>Nessuna eccezione:</strong> niente fallback permissivi, niente override discrezionali.</li>
-      </ul>
+      <h2>Accountability (frase canonica)</h2>
+      <p>
+        Il merito resta al soggetto responsabile; il sistema garantisce solo
+        <strong>precondizioni tecniche ex-ante</strong> (attribuzione e tracciabilità) e blocca in assenza di prova.
+      </p>
     </section>
 
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>
-        Governance dichiarata, confini dichiarati.  
-        Non cambio chi decide. Cambio quando un’azione è ammessa.
-      </p>
+      <p>Misura ≠ decisione. Fail-closed.</p>
     </div>
   </footer>
 </body>
