@@ -3,113 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IPR Europeo — Standard tecnologico ex-ante</title>
-  <meta name="description" content="IPR Europeo: standard tecnologico ex-ante per l’ammissibilità delle azioni digitali e algoritmiche in ambito UE." />
-  <style>
-    :root { color-scheme: dark; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
-    a { color:#9cd1ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 26px 16px; }
-
-    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
-    .brand { font-size:14px; line-height:1.4; }
-    nav { display:flex; gap:10px; flex-wrap:wrap; }
-    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
-
-    h1 { margin:18px 0 6px; font-size:26px; }
-    p, li { line-height:1.55; opacity:.9; font-size:14px; }
-    ul, ol { margin: 8px 0 0 18px; }
-
-    .card { margin-top:14px; padding:16px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); }
-    .card h2 { margin:0 0 8px; font-size:18px; }
-
-    .badge { display:inline-block; padding:3px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.03); font-size:11px; margin-right:6px; }
-    blockquote { margin: 10px 0; padding: 10px 12px; border-left: 3px solid rgba(156,209,255,.7); background: rgba(156,209,255,.06); border-radius: 10px; }
-
-    footer { margin-top:22px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
-  </style>
+  <title>HERMETICUM B.C.E. — Portale UE</title>
+  <meta name="description" content="Portale europeo per IPR, verifica pubblica e modello IPR-Datacenter (ex-ante, fail-closed, hash-only)." />
 </head>
+
 <body>
-  <div class="wrap">
+  <header>
+    <h1>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</h1>
+    <p><strong>HERMETICUM B.C.E. S.r.l.</strong></p>
 
-    <header>
-      <div class="brand">
-        <b>IPR Europeo</b><br/>
-        Standard tecnologico ex-ante
-      </div>
-      <nav>
-        <a class="pill" href="../">Home</a>
-        <a class="pill" href="../ipr/">IPR</a>
-        <a class="pill" href="../verify/">Validatore</a>
-        <a class="pill" href="../specs/">Specifiche</a>
-        <a class="pill" href="../openapi/">OpenAPI</a>
-        <a class="pill" href="../audit/">Audit</a>
-        <a class="pill" href="../status/">Status</a>
-      </nav>
-    </header>
+    <nav>
+      <a href="ipr/index.html">IPR</a> |
+      <a href="verify/index.html">Verify</a> |
+      <a href="datacenter/index.html">Datacenter</a> |
+      <a href="gate/index.html">JOKER Gate</a> |
+      <a href="specs/index.html">Specs</a>
+    </nav>
+    <hr />
+  </header>
 
-    <h1>IPR Europeo</h1>
-    <p><b>Standard tecnologico ex-ante</b> per l’ammissibilità delle azioni digitali e algoritmiche in ambito europeo.</p>
-    <div>
-      <span class="badge">EX-ANTE</span>
-      <span class="badge">FAIL-CLOSED</span>
-      <span class="badge">AUDIT-FIRST</span>
-      <span class="badge">HASH-ONLY</span>
-      <span class="badge">NO CUSTODY</span>
-      <span class="badge">UE-FIRST</span>
-    </div>
-
-    <section class="card">
-      <h2>Definizione</h2>
+  <main>
+    <section>
+      <h2>Cos’è questo portale</h2>
       <p>
-        L’IPR Europeo (Identity / Integrity / Responsibility Record) è uno standard tecnologico che stabilisce
-        se un’azione digitale o algoritmica può essere <b>tecnicamente eseguita</b> in modalità ex-ante.
+        Questo portale descrive e rende verificabile un modello europeo:
+        nessuna azione digitale ad alto impatto deve essere eseguita se non è
+        preceduta da una decisione attribuibile e da una traccia opponibile nel tempo.
       </p>
-      <blockquote>
-        Se la responsabilità e la prova non sono verificabili prima dell’esecuzione, l’azione è tecnicamente non eseguibile.
-      </blockquote>
+      <p>
+        Non è una nuova autorità. Non è sorveglianza.
+        È un vincolo tecnico ex-ante: in assenza di prova → nessuna esecuzione (fail-closed).
+      </p>
     </section>
 
-    <section class="card">
-      <h2>Requisiti minimi ex-ante</h2>
+    <section>
+      <h2>Flusso rapido</h2>
       <ol>
-        <li>Attribuzione umana verificabile</li>
-        <li>Decisione esplicita</li>
-        <li>Traccia tecnica opponibile</li>
-        <li>Responsabilità non neutralizzabile</li>
-        <li>Esposizione temporale auditabile</li>
+        <li><a href="ipr/create.html">Crea IPR (hash-only)</a></li>
+        <li><a href="ipr/verify.html">Verifica IPR</a></li>
+        <li><a href="datacenter/ipr-datacenter.html">Esecuzione in IPR-Datacenter</a></li>
+        <li><a href="verify/index.html">Audit (evidence pack)</a></li>
       </ol>
     </section>
 
-    <section class="card">
-      <h2>Accesso operativo</h2>
+    <section>
+      <h2>Tre livelli (origine, vincolo, calcolo)</h2>
       <ul>
-        <li><a href="../verify/">Validatore ex-ante IPR</a></li>
-        <li><a href="../specs/">Specifiche tecniche</a></li>
-        <li><a href="../openapi/">OpenAPI</a></li>
-        <li><a href="../audit/">Audit Pack</a></li>
+        <li><strong>Origine</strong>: decisione umana/istituzionale dichiarata.</li>
+        <li><strong>Vincolo</strong>: IPR come prova verificabile e opponibile.</li>
+        <li><strong>Calcolo</strong>: il datacenter esegue solo se il vincolo è soddisfatto.</li>
       </ul>
     </section>
 
-    <section class="card">
-      <h2>Implementazione di riferimento</h2>
+    <section>
+      <h2>Per Pubbliche Amministrazioni, B2G e B2B</h2>
       <p>
-        <b>HERMETICUM B.C.E. S.r.l.</b> sviluppa e mantiene una implementazione di riferimento dello standard,
-        includendo validatore, specifiche, OpenAPI e Audit Pack.
+        Il modello è progettato per contesti UE con obblighi di accountability,
+        audit e prevenzione del rischio: l’azione è ammessa solo se la responsabilità
+        è dimostrabile prima dell’esecuzione.
       </p>
     </section>
 
-    <footer>
-      <div>
-        IPR Europeo — standard tecnologico ex-ante<br/>
-        Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
-      </div>
-      <div>
-        <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a>
-      </div>
-    </footer>
+    <section>
+      <h2>Collegamenti</h2>
+      <ul>
+        <li>IPR: <a href="ipr/index.html">/ipr/</a></li>
+        <li>Verify: <a href="verify/index.html">/verify/</a></li>
+        <li>IPR-Datacenter: <a href="datacenter/ipr-datacenter.html">/datacenter/ipr-datacenter.html</a></li>
+        <li>JOKER Gate: <a href="gate/index.html">/gate/</a></li>
+        <li>Specs: <a href="specs/index.html">/specs/</a></li>
+      </ul>
+    </section>
 
-  </div>
+    <hr />
+    <p><em>Il futuro non accade. Si scrive prima.</em></p>
+  </main>
 </body>
 </html>
