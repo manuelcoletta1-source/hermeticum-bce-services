@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Spec — IPR-Datacenter</title>
+</head>
+<body>
+  <h1>Spec — IPR-Datacenter</h1>
+
+  <h2>Principio</h2>
+  <p>
+    Nessuna azione viene eseguita se prima dell’esecuzione non esiste una prova verificabile
+    di attribuzione, decisione, tracciabilità e esposizione temporale.
+    In assenza di prova → nessuna esecuzione (fail-closed).
+  </p>
+
+  <h2>Componenti</h2>
+  <ul>
+    <li>IPR Manifest (hash-only)</li>
+    <li>JOKER Gate (PASS/FAIL + reason_code)</li>
+    <li>Orchestrator (esegue solo se PASS)</li>
+    <li>Evidence Pack (hash-only)</li>
+  </ul>
+
+  <h2>Flusso</h2>
+  <ol>
+    <li>Richiesta job</li>
+    <li>Verifica IPR</li>
+    <li>PASS → permit</li>
+    <li>Esecuzione</li>
+    <li>Evidence Pack</li>
+  </ol>
+
+  <p><a href="../index.html">Torna alla home</a></p>
+</body>
+</html>
