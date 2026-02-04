@@ -3,168 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IPR Europeo — Standard tecnologico ex-ante</title>
-  <meta name="description" content="IPR Europeo: standard tecnologico ex-ante per l’ammissibilità delle azioni digitali e algoritmiche in ambito UE." />
-  <style>
-    :root { color-scheme: dark; }
-    body {
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:#0b0f14;
-      color:#e6edf3;
-    }
-    a { color:#9cd1ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px; }
-    header { margin-bottom: 18px; }
-    h1 { margin:0 0 8px; font-size: 26px; }
-    h2 { margin: 22px 0 8px; font-size: 18px; }
-    h3 { margin: 16px 0 8px; font-size: 14px; }
-    p, li { line-height:1.55; opacity:.9; font-size: 14px; }
-    ul, ol { margin: 8px 0 0 18px; }
-    .card {
-      margin-top: 14px;
-      padding: 16px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.02);
-    }
-    .badge {
-      display:inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.03);
-      font-size: 11px;
-      margin-right:6px;
-    }
-    blockquote {
-      margin: 10px 0;
-      padding: 10px 12px;
-      border-left: 3px solid rgba(156,209,255,.7);
-      background: rgba(156,209,255,.06);
-      border-radius: 10px;
-    }
-    footer {
-      margin-top: 28px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,.12);
-      font-size: 12px;
-      opacity:.8;
-    }
-  </style>
+  <title>IPR — Identity Primary Record</title>
 </head>
 <body>
-  <div class="wrap">
+  <h1>IPR — Identity Primary Record</h1>
 
-    <header>
-      <h1>IPR Europeo</h1>
-      <p>
-        <b>Standard tecnologico ex-ante</b> per l’ammissibilità delle azioni
-        digitali e algoritmiche in ambito europeo.
-      </p>
-      <div>
-        <span class="badge">EX-ANTE</span>
-        <span class="badge">FAIL-CLOSED</span>
-        <span class="badge">AUDIT-FIRST</span>
-        <span class="badge">HASH-ONLY</span>
-        <span class="badge">NO CUSTODY</span>
-        <span class="badge">UE-FIRST</span>
-      </div>
-    </header>
+  <p>
+    L’IPR è una traccia ex-ante (hash-only) che rende un’azione tecnicamente eseguibile
+    solo se attribuibile e verificabile nel tempo.
+  </p>
 
-    <section class="card">
-      <h2>Definizione</h2>
-      <p>
-        L’<b>IPR Europeo</b> (Identity / Integrity / Responsibility Record) è
-        uno <b>standard tecnologico ex-ante</b> che stabilisce se un’azione
-        digitale o algoritmica può essere <b>tecnicamente eseguita</b>.
-      </p>
-      <p>
-        Un’azione è ammissibile <b>solo se</b> la responsabilità e la prova
-        sono verificabili <b>prima</b> dell’esecuzione.
-      </p>
-    </section>
+  <ul>
+    <li><a href="create.html">Crea IPR</a></li>
+    <li><a href="verify.html">Verifica IPR</a></li>
+  </ul>
 
-    <section class="card">
-      <h2>Cosa fa lo standard</h2>
-      <ul>
-        <li>introduce un vincolo tecnico ex-ante;</li>
-        <li>verifica l’ammissibilità dell’azione;</li>
-        <li>blocca l’esecuzione in assenza di prova;</li>
-        <li>produce evidenza opponibile e auditabile.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Cosa NON fa lo standard</h2>
-      <ul>
-        <li>non decide nel merito;</li>
-        <li>non sostituisce autorità o istituzioni;</li>
-        <li>non custodisce dati personali;</li>
-        <li>non è un sistema di sorveglianza;</li>
-        <li>non impone identità centralizzate.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Requisiti minimi ex-ante</h2>
-      <ol>
-        <li>Attribuzione umana verificabile</li>
-        <li>Decisione esplicita</li>
-        <li>Traccia tecnica opponibile</li>
-        <li>Responsabilità non neutralizzabile</li>
-        <li>Esposizione temporale auditabile</li>
-      </ol>
-      <blockquote>
-        In assenza di anche uno solo di questi requisiti, l’azione è
-        <b>tecnicamente non eseguibile</b>.
-      </blockquote>
-    </section>
-
-    <section class="card">
-      <h2>Relazione con il quadro UE</h2>
-      <ul>
-        <li><b>AI Act</b> — supporto a human oversight e gestione del rischio</li>
-        <li><b>GDPR</b> — minimizzazione, accountability (hash-only)</li>
-        <li><b>eIDAS (principi)</b> — opponibilità e tracciabilità</li>
-        <li><b>Audit pubblico</b> — verificabilità indipendente</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Implementazione di riferimento</h2>
-      <p>
-        <b>HERMETICUM B.C.E. S.r.l.</b> sviluppa e mantiene una
-        <b>implementazione di riferimento</b> dello standard IPR Europeo,
-        inclusi:
-      </p>
-      <ul>
-        <li>validatore ex-ante;</li>
-        <li>specifiche tecniche;</li>
-        <li>OpenAPI standard;</li>
-        <li>Audit Pack.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Accesso operativo</h2>
-      <ul>
-        <li><a href="../verify/">Validatore ex-ante IPR</a></li>
-        <li><a href="../specs/">Specifiche tecniche</a></li>
-        <li><a href="../openapi/">OpenAPI</a></li>
-        <li><a href="../audit/">Audit Pack</a></li>
-      </ul>
-    </section>
-
-    <footer>
-      <p>
-        IPR Europeo — Standard tecnologico ex-ante.<br/>
-        Implementazione di riferimento a cura di
-        <b>HERMETICUM B.C.E. S.r.l.</b>
-      </p>
-    </footer>
-
-  </div>
+  <p><a href="../index.html">Torna alla home</a></p>
 </body>
 </html>
