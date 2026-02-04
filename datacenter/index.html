@@ -3,20 +3,83 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Datacenter</title>
+  <title>IPR DataCenter Metrologico — HERMETICUM</title>
+  <meta name="description" content="DataCenter metrologico europeo: misura ex-ante la legittimità tecnica delle azioni tramite IPR. Fail-closed. Audit-first. Hash-only." />
+  <link rel="stylesheet" href="../assets/style.css" />
 </head>
+
 <body>
-  <h1>Datacenter</h1>
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="../index.html">HERMETICUM B.C.E.</a>
+      <nav class="nav">
+        <a href="../ipr/index.html">IPR</a>
+        <a href="../verify/index.html">Verify</a>
+        <a href="../gate/index.html">Gate</a>
+        <a class="active" href="./index.html">DataCenter</a>
+        <a href="../openapi/index.html">OpenAPI</a>
+        <a href="../use-cases/index.html">Use Cases</a>
+        <a href="../status/index.html">Status</a>
+        <a href="../governance/index.html">Governance</a>
+      </nav>
+    </div>
+  </header>
 
-  <p>
-    Il datacenter fisico resta un datacenter classico (rack, server, rete).
-    Cambia il vincolo: esegue solo se la decisione è verificata ex-ante.
-  </p>
+  <main class="container">
 
-  <ul>
-    <li><a href="ipr-datacenter.html">IPR-Datacenter</a></li>
-  </ul>
+    <section class="hero">
+      <h1>IPR DataCenter Metrologico</h1>
+      <p class="lead">
+        Infrastruttura che <strong>misura ex-ante</strong> la legittimità tecnica di un’azione
+        rispetto a un riferimento IPR, e consente l’esecuzione solo in stato PASS.
+      </p>
+      <p class="badge">Metrologico · Fail-closed · Audit-first · Hash-only</p>
+    </section>
 
-  <p><a href="../index.html">Torna alla home</a></p>
+    <section class="card">
+      <h2>Definizione</h2>
+      <p>
+        Un DataCenter metrologico non è un’autorità e non decide nel merito.
+        È un control-plane tecnico che separa <strong>misura</strong> ed <strong>esecuzione</strong>.
+      </p>
+      <p>In assenza di prova verificabile ex-ante → <strong>blocco</strong>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Architettura (fisica / logica)</h2>
+      <pre class="code">CONTROL-PLANE (metrologico): IPR + Gate/Precheck + Audit
+EXECUTION-PLANE (datacenter): compute/jobs/robot
+PASS -> esegui
+FAIL -> blocca</pre>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Cosa fa</h3>
+        <ul>
+          <li>Misura ex-ante (PASS/FAIL)</li>
+          <li>Fail-closed by design</li>
+          <li>Audit hash-only (append-only)</li>
+          <li>Esecuzione solo se PASS</li>
+        </ul>
+      </div>
+      <div class="card warning">
+        <h3>Cosa non fa</h3>
+        <ul>
+          <li>Non decide nel merito</li>
+          <li>Non custodisce identità</li>
+          <li>Non applica eccezioni</li>
+          <li>Non fa sorveglianza</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Non cambio chi decide. Cambio quando un’azione è ammessa.</p>
+    </div>
+  </footer>
 </body>
 </html>
