@@ -1,0 +1,11 @@
+{
+  "proto": "HBCE-IPR-MANIFEST-v1",
+  "mode": "hash-only",
+  "policy": "UE-FIRST | AUDIT | FAIL-CLOSED | NO-CUSTODY",
+  "subject_ref": "IPR-UE:f6d8fc76e1eea8a5bd0153ff",
+  "context_hash": "sha256:ee05e57399262b15150301fdd4cbb63dba47f28c030d28085769cc91c3d4b094",
+  "payload_hash": "sha256:72c13ee38557934bf3106f55a58fd4cd010c46a8dff21be54d9a8cc8ddf0a8b9",
+  "timestamp": "2026-02-04T20:05:50+01:00",
+  "status": "ISSUED",
+  "notes": "Generated client-side (no custody). Append-only publication."
+}
