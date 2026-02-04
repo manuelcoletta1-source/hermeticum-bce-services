@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Status — HERMETICUM (IPR ex-ante)</title>
-  <meta name="description" content="Pagina di stato istituzionale. Regime fail-closed. Nessuna custodia dati. Modalità demo/pilot." />
+  <meta name="description" content="Pagina di stato istituzionale. Regime fail-closed. Nessuna custodia dati. Modalità pilot." />
   <link rel="stylesheet" href="../assets/style.css" />
 </head>
 
@@ -20,6 +20,7 @@
         <a href="../openapi/index.html">OpenAPI</a>
         <a href="../use-cases/index.html">Use Cases</a>
         <a class="active" href="./index.html">Status</a>
+        <a href="../governance/index.html">Governance</a>
       </nav>
     </div>
   </header>
@@ -28,60 +29,35 @@
     <h1>Status</h1>
 
     <p class="lead">
-      Questa pagina rende esplicito lo stato operativo del sistema e i suoi confini.
-      È pensata per audit, compliance e procurement.
+      Stato operativo e confini dichiarati (audit / compliance / procurement).
     </p>
 
     <section class="card">
       <h2>Stato operativo</h2>
       <ul>
-        <li><strong>Modalità:</strong> DEMO / PILOT</li>
+        <li><strong>Modalità:</strong> PILOT</li>
         <li><strong>Regime:</strong> FAIL-CLOSED</li>
         <li><strong>Custodia dati personali:</strong> NONE</li>
-        <li><strong>Audit:</strong> Audit-first (hash-only, append-only)</li>
+        <li><strong>Portale:</strong> non memorizza dati (solo calcolo locale)</li>
         <li><strong>Ambito:</strong> non-production, ambiente controllato</li>
       </ul>
     </section>
 
-    <section class="card">
-      <h2>Garanzie tecniche dichiarate</h2>
-      <ul>
-        <li>In assenza di prova verificabile ex-ante → nessuna esecuzione</li>
-        <li>Nessun fallback permissivo</li>
-        <li>Separazione tra misura e esecuzione</li>
-        <li>Tracce verificabili nel tempo (opponibilità tecnica)</li>
-      </ul>
-    </section>
-
     <section class="card warning">
-      <h2>Limitazioni e fuori ambito</h2>
+      <h2>Fuori ambito</h2>
       <ul>
-        <li>Il sistema non valuta il merito delle decisioni</li>
-        <li>Il sistema non garantisce correttezza sostanziale</li>
-        <li>Il sistema non sostituisce autorità pubbliche</li>
-        <li>Il sistema non implementa sorveglianza o profiling</li>
-        <li>Il sistema non identifica persone né tratta contenuti sensibili</li>
+        <li>decisioni di merito</li>
+        <li>sorveglianza / profiling / identificazione persone</li>
+        <li>custodia di dati personali</li>
+        <li>certificazione automatica di conformità</li>
       </ul>
     </section>
 
-    <section class="card">
-      <h2>Componenti collegati</h2>
-      <ul>
-        <li><a href="../ipr/index.html">IPR</a> — riferimento</li>
-        <li><a href="../verify/index.html">Verify</a> — verifica evidenze</li>
-        <li><a href="../gate/index.html">Gate</a> — misura PASS/FAIL</li>
-        <li><a href="../datacenter/index.html">DataCenter Metrologico</a> — esecuzione vincolata</li>
-        <li><a href="../openapi/index.html">OpenAPI</a> — specifica tecnica</li>
-      </ul>
-    </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>
-        Stato dichiarato, confini dichiarati.  
-        Non cambio chi decide. Cambio quando un’azione è ammessa.
-      </p>
+      <p>Stato dichiarato. Confini dichiarati. Fail-closed.</p>
     </div>
   </footer>
 </body>
