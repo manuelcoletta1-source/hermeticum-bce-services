@@ -3,80 +3,157 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HERMETICUM B.C.E. — Portale UE</title>
-  <meta name="description" content="Portale europeo per IPR, verifica pubblica e modello IPR-Datacenter (ex-ante, fail-closed, hash-only)." />
+  <title>IPR Europeo — Governance ex-ante</title>
+  <meta name="description" content="Standard tecnologico europeo per la governance ex-ante di azioni digitali, AI e robotica. Fail-closed. Audit-first. Hash-only." />
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 
 <body>
-  <header>
-    <h1>HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA</h1>
-    <p><strong>HERMETICUM B.C.E. S.r.l.</strong></p>
-
-    <nav>
-      <a href="ipr/index.html">IPR</a> |
-      <a href="verify/index.html">Verify</a> |
-      <a href="datacenter/index.html">Datacenter</a> |
-      <a href="gate/index.html">JOKER Gate</a> |
-      <a href="specs/index.html">Specs</a>
-    </nav>
-    <hr />
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="index.html">HERMETICUM B.C.E.</a>
+      <nav class="nav">
+        <a href="ipr/index.html">IPR</a>
+        <a href="verify/index.html">Verify</a>
+        <a href="datacenter/index.html">Datacenter</a>
+        <a href="gate/index.html">JOKER Gate</a>
+        <a href="specs/index.html">Specs</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section>
-      <h2>Cos’è questo portale</h2>
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>IPR Europeo</h1>
+      <p class="lead">
+        Standard tecnologico per impedire che un’azione digitale,
+        algoritmica o robotica venga eseguita
+        <strong>senza origine verificabile ex-ante</strong>.
+      </p>
+
+      <p class="badge">
+        Fail-closed · Audit-first · Hash-only · Nessuna custodia dati
+      </p>
+
+      <div class="row">
+        <a class="button" href="ipr/index.html">Cos’è un IPR</a>
+        <a class="button secondary" href="verify/index.html">Verifica</a>
+      </div>
+    </section>
+
+    <!-- PRINCIPIO -->
+    <section class="card">
+      <h2>Principio fondamentale</h2>
       <p>
-        Questo portale descrive e rende verificabile un modello europeo:
-        nessuna azione digitale ad alto impatto deve essere eseguita se non è
-        preceduta da una decisione attribuibile e da una traccia opponibile nel tempo.
+        Nessuna azione deve essere eseguita se, prima dell’esecuzione,
+        non esistono condizioni tecnicamente verificabili di
+        responsabilità e tracciabilità.
       </p>
       <p>
-        Non è una nuova autorità. Non è sorveglianza.
-        È un vincolo tecnico ex-ante: in assenza di prova → nessuna esecuzione (fail-closed).
+        In assenza di prova → <strong>blocco</strong>.
       </p>
     </section>
 
-    <section>
-      <h2>Flusso rapido</h2>
-      <ol>
-        <li><a href="ipr/create.html">Crea IPR (hash-only)</a></li>
-        <li><a href="ipr/verify.html">Verifica IPR</a></li>
-        <li><a href="datacenter/ipr-datacenter.html">Esecuzione in IPR-Datacenter</a></li>
-        <li><a href="verify/index.html">Audit (evidence pack)</a></li>
+    <!-- FLUSSO -->
+    <section class="card">
+      <h2>Flusso operativo ex-ante</h2>
+      <ol class="flow">
+        <li>Decisione umana o istituzionale</li>
+        <li>Emissione IPR (hash-only)</li>
+        <li>Verifica ex-ante (PASS / FAIL)</li>
+        <li>Esecuzione consentita o bloccata</li>
+        <li>Audit opponibile nel tempo</li>
       </ol>
     </section>
 
-    <section>
-      <h2>Tre livelli (origine, vincolo, calcolo)</h2>
+    <!-- COMPONENTI -->
+    <section class="grid">
+      <div class="card">
+        <h3>IPR</h3>
+        <p>
+          Identity Primary Record.
+          Riferimento tecnico che attesta attribuzione,
+          decisione esplicita e tracciabilità.
+        </p>
+        <a href="ipr/index.html">Vai a IPR →</a>
+      </div>
+
+      <div class="card">
+        <h3>Verify</h3>
+        <p>
+          Verifica pubblica e indipendente.
+          Nessuna custodia dati.
+          Solo evidenza tecnica.
+        </p>
+        <a href="verify/index.html">Vai a Verify →</a>
+      </div>
+
+      <div class="card">
+        <h3>JOKER Gate</h3>
+        <p>
+          Decision gate ex-ante.
+          Misura la legittimità tecnica
+          prima dell’azione.
+        </p>
+        <a href="gate/index.html">Vai a Gate →</a>
+      </div>
+
+      <div class="card">
+        <h3>IPR Datacenter</h3>
+        <p>
+          Infrastruttura che esegue
+          solo azioni precedute da IPR valido.
+        </p>
+        <a href="datacenter/index.html">Vai a Datacenter →</a>
+      </div>
+    </section>
+
+    <!-- COSA NON È -->
+    <section class="card warning">
+      <h2>Cosa questo sistema NON è</h2>
       <ul>
-        <li><strong>Origine</strong>: decisione umana/istituzionale dichiarata.</li>
-        <li><strong>Vincolo</strong>: IPR come prova verificabile e opponibile.</li>
-        <li><strong>Calcolo</strong>: il datacenter esegue solo se il vincolo è soddisfatto.</li>
+        <li>Non è una nuova autorità</li>
+        <li>Non è sorveglianza</li>
+        <li>Non è una IA che decide</li>
+        <li>Non è custodia di dati personali</li>
       </ul>
     </section>
 
-    <section>
-      <h2>Per Pubbliche Amministrazioni, B2G e B2B</h2>
+    <!-- ALLINEAMENTO UE -->
+    <section class="card">
+      <h2>Allineamento UE</h2>
+      <ul class="inline">
+        <li>AI Act — human oversight ex-ante</li>
+        <li>GDPR — minimizzazione, hash-only</li>
+        <li>NIS2 — prevenzione del rischio</li>
+        <li>eIDAS (principi) — opponibilità</li>
+      </ul>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Inizia</h2>
       <p>
-        Il modello è progettato per contesti UE con obblighi di accountability,
-        audit e prevenzione del rischio: l’azione è ammessa solo se la responsabilità
-        è dimostrabile prima dell’esecuzione.
+        Non serve fiducia.
+        Serve una prova verificabile prima dell’azione.
       </p>
+      <div class="row">
+        <a class="button" href="ipr/create.html">Crea IPR</a>
+        <a class="button secondary" href="verify/index.html">Verifica</a>
+      </div>
     </section>
 
-    <section>
-      <h2>Collegamenti</h2>
-      <ul>
-        <li>IPR: <a href="ipr/index.html">/ipr/</a></li>
-        <li>Verify: <a href="verify/index.html">/verify/</a></li>
-        <li>IPR-Datacenter: <a href="datacenter/ipr-datacenter.html">/datacenter/ipr-datacenter.html</a></li>
-        <li>JOKER Gate: <a href="gate/index.html">/gate/</a></li>
-        <li>Specs: <a href="specs/index.html">/specs/</a></li>
-      </ul>
-    </section>
-
-    <hr />
-    <p><em>Il futuro non accade. Si scrive prima.</em></p>
   </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>
+        Non cambio chi decide.  
+        Cambio quando un’azione è ammessa.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
