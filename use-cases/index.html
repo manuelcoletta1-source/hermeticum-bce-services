@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Use Cases UE — IPR DataCenter Metrologico</title>
-  <meta name="description" content="Casi d’uso europei per l’adozione dell’IPR DataCenter Metrologico. Prevenzione ex-ante, fail-closed, audit-first." />
+  <meta name="description" content="Casi d’uso UE per l’adozione dell’IPR DataCenter Metrologico: prevenzione ex-ante, fail-closed, audit-first." />
   <link rel="stylesheet" href="../assets/style.css" />
 </head>
 
@@ -19,6 +19,8 @@
         <a href="../datacenter/index.html">DataCenter</a>
         <a href="../openapi/index.html">OpenAPI</a>
         <a class="active" href="./index.html">Use Cases</a>
+        <a href="../status/index.html">Status</a>
+        <a href="../governance/index.html">Governance</a>
       </nav>
     </div>
   </header>
@@ -26,132 +28,64 @@
   <main class="container">
 
     <h1>Use Cases UE</h1>
-
     <p class="lead">
-      Questa pagina descrive <strong>ambiti di adozione concreti</strong>
-      dell’IPR DataCenter Metrologico in contesti europei ad alto impatto,
-      dove la prevenzione ex-ante del rischio è prioritaria.
+      Adozione concreta in contesti europei ad alto impatto, dove conta la prevenzione ex-ante.
     </p>
 
     <section class="card">
       <h2>Principio comune</h2>
       <p>
-        In tutti i casi d’uso descritti, il sistema introduce
-        un <strong>vincolo tecnico preventivo</strong>:
-        nessuna azione viene eseguita se non esiste una prova
-        verificabile ex-ante di responsabilità e tracciabilità.
+        Nessuna azione è eseguibile se non esiste prova verificabile ex-ante.
+        In assenza di prova → blocco (fail-closed).
       </p>
     </section>
 
-    <!-- PA -->
     <section class="card">
       <h2>Pubblica Amministrazione</h2>
       <p><strong>Problema</strong></p>
-      <ul>
-        <li>azioni automatizzate difficili da attribuire;</li>
-        <li>audit prevalentemente ex-post;</li>
-        <li>contesto normativo complesso.</li>
-      </ul>
-
+      <ul><li>atti automatici non attribuibili, audit ex-post</li></ul>
       <p><strong>Applicazione</strong></p>
-      <ul>
-        <li>workflow amministrativi;</li>
-        <li>graduatorie e assegnazioni;</li>
-        <li>atti digitali ad effetto non reversibile.</li>
-      </ul>
-
-      <p><strong>Effetto</strong></p>
-      <p>
-        L’azione è tecnicamente bloccata se non preceduta
-        da un IPR valido. La responsabilità è dimostrabile
-        prima dell’esecuzione.
-      </p>
+      <ul><li>workflow, graduatorie, atti digitali irreversibili</li></ul>
+      <p><strong>Cosa blocca ex-ante</strong></p>
+      <p>Blocca l’atto se manca attribuzione tecnica verificabile prima dell’esecuzione.</p>
     </section>
 
-    <!-- SANITÀ -->
     <section class="card">
       <h2>Sanità e Welfare</h2>
       <p><strong>Problema</strong></p>
-      <ul>
-        <li>decisioni ad alto impatto su diritti e servizi;</li>
-        <li>uso crescente di supporto algoritmico;</li>
-        <li>rischio di errore irreversibile.</li>
-      </ul>
-
+      <ul><li>decisioni ad alto impatto, rischio errore irreversibile</li></ul>
       <p><strong>Applicazione</strong></p>
-      <ul>
-        <li>attivazione di procedure automatizzate;</li>
-        <li>assegnazione di priorità o risorse;</li>
-        <li>workflow decisionali assistiti.</li>
-      </ul>
-
-      <p><strong>Effetto</strong></p>
-      <p>
-        Nessuna applicazione senza IPR ex-ante.
-        Il sistema non decide nel merito,
-        ma impedisce l’azione non attribuibile.
-      </p>
+      <ul><li>priorità, risorse, procedure assistite</li></ul>
+      <p><strong>Cosa blocca ex-ante</strong></p>
+      <p>Blocca la procedura se non esiste prova ex-ante di responsabilità e tracciabilità.</p>
     </section>
 
-    <!-- INFRA -->
     <section class="card">
-      <h2>Infrastrutture critiche</h2>
+      <h2>Infrastrutture critiche (NIS2)</h2>
       <p><strong>Problema</strong></p>
-      <ul>
-        <li>azioni tecniche con effetti sistemici;</li>
-        <li>necessità di prevenzione, non reazione;</li>
-        <li>contesto NIS2.</li>
-      </ul>
-
+      <ul><li>azioni tecniche con effetti sistemici</li></ul>
       <p><strong>Applicazione</strong></p>
-      <ul>
-        <li>comandi su sistemi energetici;</li>
-        <li>manutenzione automatizzata;</li>
-        <li>orchestrazione infrastrutturale.</li>
-      </ul>
-
-      <p><strong>Effetto</strong></p>
-      <p>
-        Il DataCenter esegue solo azioni precedute
-        da una misura ex-ante verificabile.
-        In assenza di prova → blocco.
-      </p>
+      <ul><li>orchestrazione, manutenzione automatizzata, comandi</li></ul>
+      <p><strong>Cosa blocca ex-ante</strong></p>
+      <p>Blocca il comando se non è preceduto da un IPR verificabile ex-ante.</p>
     </section>
 
-    <!-- ROBOTICA -->
     <section class="card">
       <h2>Robotica e AI ad alto impatto</h2>
       <p><strong>Problema</strong></p>
-      <ul>
-        <li>azioni autonome difficili da controllare;</li>
-        <li>applicazione tecnica dell’AI Act;</li>
-        <li>necessità di human oversight reale.</li>
-      </ul>
-
+      <ul><li>azioni autonome difficili da controllare, AI Act</li></ul>
       <p><strong>Applicazione</strong></p>
-      <ul>
-        <li>robotica in ambienti pubblici;</li>
-        <li>sistemi AI operativi;</li>
-        <li>automazione avanzata.</li>
-      </ul>
-
-      <p><strong>Effetto</strong></p>
-      <p>
-        L’azione è possibile solo se
-        preceduta da una decisione umana
-        resa tecnicamente opponibile.
-      </p>
+      <ul><li>robot in ambienti pubblici, automazione avanzata</li></ul>
+      <p><strong>Cosa blocca ex-ante</strong></p>
+      <p>Blocca l’azione se non è dimostrabile una decisione umana opponibile prima dell’esecuzione.</p>
     </section>
 
-    <!-- FUORI AMBITO -->
     <section class="card warning">
       <h2>Fuori ambito</h2>
       <ul>
-        <li>decisioni di merito;</li>
-        <li>valutazioni etiche;</li>
-        <li>sorveglianza;</li>
-        <li>profiling;</li>
-        <li>identificazione delle persone.</li>
+        <li>decisioni di merito</li>
+        <li>sorveglianza, profiling, identificazione persone</li>
+        <li>custodia di dati personali</li>
       </ul>
     </section>
 
@@ -159,10 +93,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>
-        Prevenzione ex-ante del rischio.  
-        Non cambio chi decide. Cambio quando un’azione è ammessa.
-      </p>
+      <p>Prevenzione ex-ante. Non cambio chi decide. Cambio quando un’azione è ammessa.</p>
     </div>
   </footer>
 </body>
