@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Create IPR (hash-only) — HERMETICUM B.C.E.</title>
-  <meta name="description" content="Creazione di una bozza IPR hash-only. Nessuna custodia dati personali. Regime fail-closed." />
+  <title>Create IPR — Profilo biocibernetico UE (hash-only)</title>
+  <meta name="description" content="Creazione di un draft IPR partendo da dati standard UE dell’utente biologico. I dati restano nel browser: output hash-only. Fail-closed." />
   <link rel="stylesheet" href="../assets/style.css" />
 </head>
 
@@ -14,132 +14,263 @@
       <a class="brand" href="../index.html">HERMETICUM B.C.E.</a>
       <nav class="nav">
         <a href="../ipr/index.html">IPR</a>
+        <a class="active" href="./create.html">Create</a>
         <a href="../verify/index.html">Verify</a>
-        <a href="../datacenter/index.html">Datacenter</a>
-        <a href="../gate/index.html">JOKER Gate</a>
-        <a href="../specs/index.html">Specs</a>
+        <a href="../gate/index.html">Gate</a>
+        <a href="../datacenter/index.html">DataCenter</a>
+        <a href="../openapi/index.html">OpenAPI</a>
+        <a href="../status/index.html">Status</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <h1>Create IPR (hash-only)</h1>
+    <h1>Create IPR</h1>
 
     <p class="lead">
-      Questa pagina genera una <strong>bozza IPR</strong> in modalità <strong>hash-only</strong>.
-      Non salva dati personali. Non decide nel merito. Serve a produrre una
-      <strong>traccia tecnica</strong> che può essere verificata ex-ante.
+      Questa pagina è per l’<strong>utente biologico</strong>.
+      Ti chiede dati standard UE in modo leggibile e genera un <strong>draft hash-only</strong>.
+      <br />
+      <strong>Niente viene inviato a server.</strong> Tutto resta nel tuo browser.
     </p>
 
     <section class="card">
-      <h2>Input minimo</h2>
-      <p>
-        Inserisci solo ciò che è necessario per ottenere un riferimento verificabile.
-        Nessun contenuto in chiaro, solo hash e metadati tecnici.
-      </p>
-
-      <label for="subject_ref">Subject ref (testuale, non personale)</label>
-      <input id="subject_ref" placeholder="es. IPR-HBCE-000 (o un ref interno)" />
-
-      <label for="context_hash">Context hash</label>
-      <input id="context_hash" placeholder="sha256:..." />
-
-      <label for="payload_hash">Payload hash</label>
-      <input id="payload_hash" placeholder="sha256:..." />
-
-      <label for="timestamp">Timestamp (ISO-8601)</label>
-      <input id="timestamp" placeholder="2026-02-04T16:00:00+01:00" />
-
-      <div class="row">
-        <button id="btn_generate">Generate Draft</button>
-        <button id="btn_clear" class="secondary">Clear</button>
-      </div>
-
+      <h2>Privacy (chiaro e verificabile)</h2>
+      <ul>
+        <li>Non salva dati personali sul sito</li>
+        <li>Non invia dati a server</li>
+        <li>Genera solo hash e un draft copiabile</li>
+        <li>Regime: <strong>fail-closed</strong> (se mancano campi minimi → nessun output)</li>
+      </ul>
       <p class="hint">
-        Regime: <strong>fail-closed</strong>. Se mancano campi minimi, nessuna emissione.
+        Se vuoi, puoi inserire dati “minimi” oppure usare uno pseudonimo: ciò che conta è la coerenza che decidi di attestare.
       </p>
     </section>
 
-    <section class="card">
-      <h2>Output (Draft)</h2>
-      <pre id="out" class="code">Compila i campi e premi “Generate Draft”.</pre>
-      <p class="hint">
-        Il draft è pensato per essere copiato nel tuo flusso di emissione (repo IPR / manifest / receipt).
-        Questa pagina non esegue pubblicazione né ancoraggi.
-      </p>
+    <section class="grid">
+
+      <!-- PANEL A: BIOLOGICO -->
+      <section class="card">
+        <h2>A) Dati UE (utente biologico)</h2>
+        <p class="hint">
+          Inserisci dati standard UE come li useresti in un contesto amministrativo.
+          Verranno trasformati in <strong>hash</strong> localmente.
+        </p>
+
+        <label for="full_name">Nome e cognome</label>
+        <input id="full_name" placeholder="es. Mario Rossi" />
+
+        <label for="dob">Data di nascita</label>
+        <input id="dob" placeholder="es. 31/12/1990" />
+
+        <label for="citizenship">Cittadinanza</label>
+        <input id="citizenship" placeholder="es. IT" />
+
+        <label for="doc_type">Documento (tipo)</label>
+        <select id="doc_type">
+          <option value="">Seleziona</option>
+          <option value="CIE">Carta d’Identità (CIE)</option>
+          <option value="PASSPORT">Passaporto</option>
+          <option value="OTHER">Altro</option>
+        </select>
+
+        <label for="doc_id">Documento (numero o riferimento)</label>
+        <input id="doc_id" placeholder="es. CA12345AB (o riferimento interno)" />
+
+        <label for="issuer">Ente emittente (opzionale)</label>
+        <input id="issuer" placeholder="es. Comune / Stato / Autorità" />
+
+        <label for="email">Contatto (opzionale)</label>
+        <input id="email" placeholder="email/PEC (opzionale, verrà hashata)" />
+
+        <hr />
+
+        <label for="iprtype">Tipo di IPR</label>
+        <select id="iprtype">
+          <option value="PERSON">PERSON (biologico)</option>
+          <option value="ORG">ORG (ente/organizzazione)</option>
+          <option value="DEVICE">DEVICE (dispositivo/robot)</option>
+        </select>
+
+        <label for="purpose">Scopo dichiarato (breve)</label>
+        <input id="purpose" placeholder="es. attivazione profilo biocibernetico UE" />
+
+        <label for="timestamp">Timestamp (ISO-8601)</label>
+        <input id="timestamp" placeholder="auto" />
+
+        <div class="row">
+          <button id="btn_generate">Genera IPR (hash-only)</button>
+          <button id="btn_clear" class="secondary">Svuota</button>
+        </div>
+
+        <p class="hint">
+          Suggerimento: se vuoi minimizzare, compila solo Nome+Cognome, Data nascita, Cittadinanza, Tipo documento, Numero documento.
+        </p>
+      </section>
+
+      <!-- PANEL B: OUTPUT -->
+      <section class="card">
+        <h2>B) Output (hash-only)</h2>
+        <p class="hint">
+          Questo è ciò che userai per: manifest, verify, gate, datacenter metrologico.
+          Copia e incolla nel tuo flusso.
+        </p>
+
+        <h3>Anteprima hash</h3>
+        <pre id="hash_preview" class="code">Compila i campi e premi “Genera IPR (hash-only)”.</pre>
+
+        <h3>Draft IPR</h3>
+        <pre id="draft_out" class="code">Nessun draft generato.</pre>
+
+        <p class="hint">
+          Nota: non pubblichiamo nulla qui. L’emissione “reale” avviene nel tuo repo append-only.
+        </p>
+      </section>
+
     </section>
 
     <section class="card">
       <h2>Prossimi passi</h2>
       <ol>
-        <li>Inserisci i campi hash-only e genera il draft.</li>
-        <li>Pubblica il manifest nel tuo repo IPR (append-only).</li>
-        <li>Verifica con <a href="../verify/index.html">Verify</a>.</li>
-        <li>Collega l’azione con <a href="../gate/index.html">JOKER Gate</a>.</li>
+        <li>Crea il draft qui (hash-only)</li>
+        <li>Pubblica il manifest nel tuo repository IPR (append-only)</li>
+        <li>Verifica con <a href="../verify/index.html">Verify</a></li>
+        <li>Usa <a href="../gate/index.html">Gate</a> per PASS/FAIL ex-ante</li>
       </ol>
     </section>
 
     <footer class="footer">
-      <p>
-        Non cambio chi decide. Cambio quando un’azione è ammessa.
-      </p>
+      <p>Non cambio chi decide. Cambio quando un’azione è ammessa.</p>
     </footer>
   </main>
 
   <script>
-    function failClosed(msg) {
-      return {
-        status: "FAIL",
-        reason_code: msg,
-        mode: "fail-closed"
-      };
+    async function sha256Hex(str) {
+      const enc = new TextEncoder();
+      const data = enc.encode(str);
+      const digest = await crypto.subtle.digest("SHA-256", data);
+      const arr = Array.from(new Uint8Array(digest));
+      return arr.map(b => b.toString(16).padStart(2, "0")).join("");
     }
 
-    function nowISO() {
+    function isoNow() {
       try { return new Date().toISOString(); } catch { return ""; }
     }
 
-    function generate() {
-      const subjectRef = document.getElementById("subject_ref").value.trim();
-      const contextHash = document.getElementById("context_hash").value.trim();
-      const payloadHash = document.getElementById("payload_hash").value.trim();
-      const ts = document.getElementById("timestamp").value.trim() || nowISO();
+    function failClosed(reason) {
+      return { status: "FAIL", reason_code: reason, mode: "fail-closed" };
+    }
 
-      // Fail-closed: campi minimi richiesti
-      if (!subjectRef) return failClosed("MISSING_SUBJECT_REF");
-      if (!contextHash || !contextHash.startsWith("sha256:")) return failClosed("MISSING_OR_INVALID_CONTEXT_HASH");
-      if (!payloadHash || !payloadHash.startsWith("sha256:")) return failClosed("MISSING_OR_INVALID_PAYLOAD_HASH");
-      if (!ts) return failClosed("MISSING_TIMESTAMP");
+    function getVal(id) {
+      const el = document.getElementById(id);
+      return (el && el.value) ? String(el.value).trim() : "";
+    }
 
-      // Draft IPR hash-only (placeholder neutro)
-      return {
-        proto: "HBCE-IPR-DRAFT-v1",
+    function setText(id, txt) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = txt;
+    }
+
+    function minimalOk(profile) {
+      // Minimo UE-like (fail-closed): nome, dob, cittadinanza, doc_type, doc_id
+      if (!profile.full_name) return "MISSING_FULL_NAME";
+      if (!profile.dob) return "MISSING_DATE_OF_BIRTH";
+      if (!profile.citizenship) return "MISSING_CITIZENSHIP";
+      if (!profile.doc_type) return "MISSING_DOCUMENT_TYPE";
+      if (!profile.doc_id) return "MISSING_DOCUMENT_ID";
+      return null;
+    }
+
+    document.getElementById("btn_generate").addEventListener("click", async () => {
+      const ts = getVal("timestamp") || isoNow();
+
+      const profile = {
+        full_name: getVal("full_name"),
+        dob: getVal("dob"),
+        citizenship: getVal("citizenship"),
+        doc_type: getVal("doc_type"),
+        doc_id: getVal("doc_id"),
+        issuer: getVal("issuer"),
+        email: getVal("email"),
+        iprtype: getVal("iprtype") || "PERSON",
+        purpose: getVal("purpose"),
+        timestamp: ts
+      };
+
+      const missing = minimalOk(profile);
+      if (missing) {
+        setText("hash_preview", JSON.stringify(failClosed(missing), null, 2));
+        setText("draft_out", "Nessun draft generato.");
+        return;
+      }
+
+      // Normalizzazione deterministica (hash stabile)
+      const canonical = {
+        full_name: profile.full_name,
+        dob: profile.dob,
+        citizenship: profile.citizenship,
+        doc: {
+          type: profile.doc_type,
+          id: profile.doc_id,
+          issuer: profile.issuer || ""
+        },
+        contact_hash_only: profile.email ? "present" : "absent",
+        iprtype: profile.iprtype,
+        purpose: profile.purpose || "",
+        timestamp: profile.timestamp
+      };
+
+      const payloadStr = JSON.stringify(canonical);
+      const payloadHash = "sha256:" + await sha256Hex(payloadStr);
+
+      // Context: descrive cosa stai facendo (non chi sei)
+      const contextStr = JSON.stringify({
+        context: "HBCE-IPR-CREATE-UE",
+        iprtype: canonical.iprtype,
+        purpose: canonical.purpose || "IPR creation",
+        timestamp: canonical.timestamp
+      });
+      const contextHash = "sha256:" + await sha256Hex(contextStr);
+
+      // Subject ref: non custodiamo identità in chiaro, generiamo un ref hash-only
+      const subjectRef = "IPR-UE:" + (await sha256Hex(
+        canonical.full_name + "|" + canonical.dob + "|" + canonical.citizenship + "|" + canonical.doc.type + "|" + canonical.doc.id
+      )).slice(0, 24);
+
+      setText("hash_preview", JSON.stringify({
+        subject_ref: subjectRef,
+        context_hash: contextHash,
+        payload_hash: payloadHash,
+        mode: "hash-only",
+        policy: "UE-FIRST | AUDIT | FAIL-CLOSED | NO-CUSTODY",
+        note: "I dati in chiaro restano nel browser; l’output è solo hash."
+      }, null, 2));
+
+      const draft = {
+        proto: "HBCE-IPR-DRAFT-v2",
         mode: "hash-only",
         policy: "UE-FIRST | AUDIT | FAIL-CLOSED | NO-CUSTODY",
         subject_ref: subjectRef,
         context_hash: contextHash,
         payload_hash: payloadHash,
-        timestamp: ts,
+        timestamp: canonical.timestamp,
         next: {
           publish_manifest: "append-only repository",
           verify: "../verify/index.html",
           gate: "../gate/index.html"
         }
       };
-    }
 
-    document.getElementById("btn_generate").addEventListener("click", () => {
-      const out = document.getElementById("out");
-      const result = generate();
-      out.textContent = JSON.stringify(result, null, 2);
+      setText("draft_out", JSON.stringify(draft, null, 2));
     });
 
     document.getElementById("btn_clear").addEventListener("click", () => {
-      document.getElementById("subject_ref").value = "";
-      document.getElementById("context_hash").value = "";
-      document.getElementById("payload_hash").value = "";
-      document.getElementById("timestamp").value = "";
-      document.getElementById("out").textContent = "Compila i campi e premi “Generate Draft”.";
+      ["full_name","dob","citizenship","doc_type","doc_id","issuer","email","purpose","timestamp"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+      });
+      setText("hash_preview", "Compila i campi e premi “Genera IPR (hash-only)”.");
+      setText("draft_out", "Nessun draft generato.");
     });
   </script>
 </body>
