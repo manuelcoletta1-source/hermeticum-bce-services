@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JOKER Gate</title>
+</head>
+<body>
+  <h1>JOKER Gate (Decision Gate)</h1>
+
+  <p>
+    Il Gate verifica ex-ante e restituisce:
+    PASS oppure FAIL + reason_code.
+    In caso di incertezza → FAIL (fail-closed).
+  </p>
+
+  <h2>Input minimo</h2>
+  <ul>
+    <li>ipr_id</li>
+    <li>job_hash</li>
+    <li>context_hash</li>
+  </ul>
+
+  <h2>Output</h2>
+  <ul>
+    <li>PASS + permit (token di esecuzione)</li>
+    <li>FAIL + reason_code</li>
+  </ul>
+
+  <p>
+    Il datacenter esegue solo se il permit è valido e coerente con gli hash.
+  </p>
+
+  <p><a href="../specs/index.html">Vai alle specifiche</a></p>
+  <p><a href="../index.html">Torna alla home</a></p>
+</body>
+</html>
