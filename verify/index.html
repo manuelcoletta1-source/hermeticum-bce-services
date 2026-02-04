@@ -3,220 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Validatore ex-ante IPR — IPR Europeo</title>
-  <meta name="description" content="Validatore ex-ante IPR Europeo. Fail-closed, hash-only, auditabile. Determina l’ammissibilità tecnica di un’azione prima dell’esecuzione." />
-  <style>
-    :root { color-scheme: dark; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
-    a { color:#9cd1ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 26px 16px; }
-
-    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
-    .brand { font-size:14px; line-height:1.4; }
-    nav { display:flex; gap:10px; flex-wrap:wrap; }
-    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
-
-    h1 { margin:18px 0 6px; font-size:26px; }
-    p { line-height:1.55; opacity:.9; font-size:14px; }
-    .badges { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
-    .badge { border:1px solid rgba(255,255,255,.14); padding:3px 8px; border-radius:999px; font-size:11px; background:rgba(255,255,255,.03); }
-
-    .grid { display:grid; grid-template-columns: 1fr; gap:14px; margin-top:14px; }
-    @media (min-width: 900px){ .grid { grid-template-columns: 1fr 1fr; } }
-
-    .card { border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); border-radius:14px; padding:14px; }
-    .card h2 { margin:0 0 8px; font-size:16px; }
-
-    textarea { width:100%; min-height:180px; background:#0a0e13; color:#e6edf3; border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:12px; }
-
-    button { border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.08); color:#e6edf3; padding:10px 14px; border-radius:12px; font-size:13px; cursor:pointer; }
-    button:hover { background:rgba(255,255,255,.12); }
-
-    .result { margin-top:14px; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,.18); }
-    .ok { border-color: rgba(63,185,80,.55); background: rgba(63,185,80,.08); }
-    .ko { border-color: rgba(248,81,73,.60); background: rgba(248,81,73,.10); }
-
-    pre { background:#0a0e13; padding:10px; border-radius:12px; overflow:auto; font-size:12px; }
-
-    footer { margin-top:26px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
-  </style>
+  <title>Verify — Audit</title>
 </head>
-
 <body>
-<div class="wrap">
+  <h1>Verify — Audit</h1>
 
-  <header>
-    <div class="brand">
-      <b>IPR Europeo</b><br/>
-      Validatore ex-ante
-    </div>
-    <nav>
-      <a class="pill" href="../">Home</a>
-      <a class="pill" href="../ipr/">IPR</a>
-      <a class="pill" href="../verify/">Validatore</a>
-      <a class="pill" href="../specs/">Specifiche</a>
-      <a class="pill" href="../openapi/">OpenAPI</a>
-      <a class="pill" href="../audit/">Audit</a>
-      <a class="pill" href="../status/">Status</a>
-    </nav>
-  </header>
+  <p>
+    Qui si verifica l’evidenza (hash-only) prodotta dal flusso ex-ante:
+    AUTHORIZED o DENIED con reason_code verificabile.
+  </p>
 
-  <h1>Validatore ex-ante IPR</h1>
-  <p>Determina se un’azione è <b>ammissibile prima dell’esecuzione</b>, in regime fail-closed. Output: Evidence hash-only.</p>
+  <h2>Oggetti verificabili</h2>
+  <ul>
+    <li>IPR Manifest</li>
+    <li>PASS/FAIL del Gate</li>
+    <li>Evidence Pack (output hash-only)</li>
+  </ul>
 
-  <div class="badges">
-    <span class="badge">FAIL-CLOSED</span>
-    <span class="badge">HASH-ONLY</span>
-    <span class="badge">OFFLINE</span>
-    <span class="badge">AUDITABLE</span>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <h2>Action Request</h2>
-      <p>Descrive l’azione proposta.</p>
-      <textarea id="action">{
-  "schema": "IPR-ACTION-v1",
-  "action_id": "ACT-001",
-  "action_type": "APPLY_MEASURE",
-  "context": "high_criticality_control",
-  "timestamp": "2026-02-03T15:20:00Z"
-}</textarea>
-    </div>
-
-    <div class="card">
-      <h2>Responsibility Declaration</h2>
-      <p>Dichiara attribuzione e decisione umana.</p>
-      <textarea id="resp">{
-  "schema": "IPR-RESP-v1",
-  "subject_id": "HUM-001",
-  "role": "AUTHORIZED_OFFICER",
-  "decision": "Approve measure",
-  "decision_timestamp": "2026-02-03T15:19:00Z"
-}</textarea>
-    </div>
-  </div>
-
-  <div style="margin-top:14px;">
-    <button onclick="validateExAnte()">Validate ex-ante</button>
-  </div>
-
-  <div id="output"></div>
-
-  <footer>
-    <div>
-      Validatore ex-ante IPR — standard tecnologico europeo<br/>
-      Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
-    </div>
-    <div>
-      <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a>
-    </div>
-  </footer>
-
-</div>
-
-<script>
-function stableStringify(obj){
-  const allKeys = [];
-  JSON.stringify(obj, (k,v)=> (allKeys.push(k), v));
-  allKeys.sort();
-  return JSON.stringify(obj, allKeys);
-}
-
-async function sha512(str){
-  const buf = new TextEncoder().encode(str);
-  const hash = await crypto.subtle.digest("SHA-512", buf);
-  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-
-function deny(reason_code, details){
-  return {
-    schema: "IPR-DECISION-v1",
-    status: "DENIED",
-    reason_code,
-    details: details || null
-  };
-}
-
-function authorize(evidence){
-  return {
-    schema: "IPR-DECISION-v1",
-    status: "AUTHORIZED",
-    evidence
-  };
-}
-
-async function validateExAnte(){
-  const out = document.getElementById("output");
-  out.innerHTML = "";
-
-  let action, resp;
-  try {
-    action = JSON.parse(document.getElementById("action").value);
-    resp = JSON.parse(document.getElementById("resp").value);
-  } catch(e){
-    render(deny("INVALID_JSON", String(e)));
-    return;
-  }
-
-  // REQ-1..REQ-5 (minimo)
-  if(!action.schema || action.schema !== "IPR-ACTION-v1") { render(deny("REQ_SCHEMA_ACTION", "schema must be IPR-ACTION-v1")); return; }
-  if(!resp.schema || resp.schema !== "IPR-RESP-v1") { render(deny("REQ_SCHEMA_RESP", "schema must be IPR-RESP-v1")); return; }
-
-  if(!action.action_id) { render(deny("REQ_ACTION_ID")); return; }
-  if(!action.action_type) { render(deny("REQ_ACTION_TYPE")); return; }
-  if(!action.timestamp) { render(deny("REQ_ACTION_TIMESTAMP")); return; }
-
-  if(!resp.subject_id) { render(deny("REQ_SUBJECT_ID")); return; }
-  if(!resp.role) { render(deny("REQ_ROLE")); return; }
-  if(!resp.decision) { render(deny("REQ_DECISION")); return; }
-  if(!resp.decision_timestamp) { render(deny("REQ_DECISION_TIMESTAMP")); return; }
-
-  // REQ-5: decision_timestamp must be <= action.timestamp (string ISO comparison works if ISO format)
-  if(resp.decision_timestamp > action.timestamp){
-    render(deny("REQ_TIME_ORDER", "decision_timestamp must be <= action.timestamp"));
-    return;
-  }
-
-  // HASH-ONLY evidence (preimage stable)
-  const preimage = stableStringify({action, resp});
-  const digest = await sha512(preimage);
-
-  const evidence = {
-    schema: "IPR-EVIDENCE-v1",
-    hash_algorithm: "SHA-512",
-    digest_hex: digest,
-    preimage_spec: "stable-json(sorted-keys) of {action, resp}",
-    verifiable_independently: true,
-    generated_at: new Date().toISOString()
-  };
-
-  render(authorize(evidence));
-}
-
-function render(decision){
-  const out = document.getElementById("output");
-  const isOk = decision.status === "AUTHORIZED";
-  const cls = isOk ? "result ok" : "result ko";
-  const title = isOk ? "AUTHORIZED" : "DENIED";
-  const msg = isOk
-    ? "L’azione è tecnicamente ammissibile ex-ante. Evidence hash-only prodotta."
-    : "L’azione è tecnicamente non eseguibile (fail-closed).";
-
-  out.innerHTML = `
-    <div class="${cls}">
-      <b>${title}</b>
-      <p>${msg}</p>
-      <pre>${escapeHtml(JSON.stringify(decision, null, 2))}</pre>
-    </div>
-  `;
-}
-
-function escapeHtml(s){
-  return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
-}
-</script>
-
+  <p><a href="../index.html">Torna alla home</a></p>
 </body>
 </html>
