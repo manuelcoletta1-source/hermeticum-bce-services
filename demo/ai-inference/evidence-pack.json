@@ -1,0 +1,9 @@
+{
+  "proto": "HBCE-EVIDENCE-PACK-v1",
+  "ipr_id": "ipr-demo-001",
+  "job_hash": "hash_job_example_123",
+  "output_hash": "example_hash",
+  "result": {
+    "status": "AUTHORIZED"
+  }
+}
