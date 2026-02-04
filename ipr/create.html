@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create IPR (hash-only) — HERMETICUM B.C.E.</title>
+  <meta name="description" content="Creazione di una bozza IPR hash-only. Nessuna custodia dati personali. Regime fail-closed." />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="../index.html">HERMETICUM B.C.E.</a>
+      <nav class="nav">
+        <a href="../ipr/index.html">IPR</a>
+        <a href="../verify/index.html">Verify</a>
+        <a href="../datacenter/index.html">Datacenter</a>
+        <a href="../gate/index.html">JOKER Gate</a>
+        <a href="../specs/index.html">Specs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Create IPR (hash-only)</h1>
+
+    <p class="lead">
+      Questa pagina genera una <strong>bozza IPR</strong> in modalità <strong>hash-only</strong>.
+      Non salva dati personali. Non decide nel merito. Serve a produrre una
+      <strong>traccia tecnica</strong> che può essere verificata ex-ante.
+    </p>
+
+    <section class="card">
+      <h2>Input minimo</h2>
+      <p>
+        Inserisci solo ciò che è necessario per ottenere un riferimento verificabile.
+        Nessun contenuto in chiaro, solo hash e metadati tecnici.
+      </p>
+
+      <label for="subject_ref">Subject ref (testuale, non personale)</label>
+      <input id="subject_ref" placeholder="es. IPR-HBCE-000 (o un ref interno)" />
+
+      <label for="context_hash">Context hash</label>
+      <input id="context_hash" placeholder="sha256:..." />
+
+      <label for="payload_hash">Payload hash</label>
+      <input id="payload_hash" placeholder="sha256:..." />
+
+      <label for="timestamp">Timestamp (ISO-8601)</label>
+      <input id="timestamp" placeholder="2026-02-04T16:00:00+01:00" />
+
+      <div class="row">
+        <button id="btn_generate">Generate Draft</button>
+        <button id="btn_clear" class="secondary">Clear</button>
+      </div>
+
+      <p class="hint">
+        Regime: <strong>fail-closed</strong>. Se mancano campi minimi, nessuna emissione.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Output (Draft)</h2>
+      <pre id="out" class="code">Compila i campi e premi “Generate Draft”.</pre>
+      <p class="hint">
+        Il draft è pensato per essere copiato nel tuo flusso di emissione (repo IPR / manifest / receipt).
+        Questa pagina non esegue pubblicazione né ancoraggi.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Prossimi passi</h2>
+      <ol>
+        <li>Inserisci i campi hash-only e genera il draft.</li>
+        <li>Pubblica il manifest nel tuo repo IPR (append-only).</li>
+        <li>Verifica con <a href="../verify/index.html">Verify</a>.</li>
+        <li>Collega l’azione con <a href="../gate/index.html">JOKER Gate</a>.</li>
+      </ol>
+    </section>
+
+    <footer class="footer">
+      <p>
+        Non cambio chi decide. Cambio quando un’azione è ammessa.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    function failClosed(msg) {
+      return {
+        status: "FAIL",
+        reason_code: msg,
+        mode: "fail-closed"
+      };
+    }
+
+    function nowISO() {
+      try { return new Date().toISOString(); } catch { return ""; }
+    }
+
+    function generate() {
+      const subjectRef = document.getElementById("subject_ref").value.trim();
+      const contextHash = document.getElementById("context_hash").value.trim();
+      const payloadHash = document.getElementById("payload_hash").value.trim();
+      const ts = document.getElementById("timestamp").value.trim() || nowISO();
+
+      // Fail-closed: campi minimi richiesti
+      if (!subjectRef) return failClosed("MISSING_SUBJECT_REF");
+      if (!contextHash || !contextHash.startsWith("sha256:")) return failClosed("MISSING_OR_INVALID_CONTEXT_HASH");
+      if (!payloadHash || !payloadHash.startsWith("sha256:")) return failClosed("MISSING_OR_INVALID_PAYLOAD_HASH");
+      if (!ts) return failClosed("MISSING_TIMESTAMP");
+
+      // Draft IPR hash-only (placeholder neutro)
+      return {
+        proto: "HBCE-IPR-DRAFT-v1",
+        mode: "hash-only",
+        policy: "UE-FIRST | AUDIT | FAIL-CLOSED | NO-CUSTODY",
+        subject_ref: subjectRef,
+        context_hash: contextHash,
+        payload_hash: payloadHash,
+        timestamp: ts,
+        next: {
+          publish_manifest: "append-only repository",
+          verify: "../verify/index.html",
+          gate: "../gate/index.html"
+        }
+      };
+    }
+
+    document.getElementById("btn_generate").addEventListener("click", () => {
+      const out = document.getElementById("out");
+      const result = generate();
+      out.textContent = JSON.stringify(result, null, 2);
+    });
+
+    document.getElementById("btn_clear").addEventListener("click", () => {
+      document.getElementById("subject_ref").value = "";
+      document.getElementById("context_hash").value = "";
+      document.getElementById("payload_hash").value = "";
+      document.getElementById("timestamp").value = "";
+      document.getElementById("out").textContent = "Compila i campi e premi “Generate Draft”.";
+    });
+  </script>
+</body>
+</html>
