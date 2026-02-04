@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="it">
 <head>
@@ -19,7 +20,9 @@
         <a href="../gate/index.html">Gate</a>
         <a href="../datacenter/index.html">DataCenter</a>
         <a href="../openapi/index.html">OpenAPI</a>
+        <a href="../use-cases/index.html">Use Cases</a>
         <a href="../status/index.html">Status</a>
+        <a href="../governance/index.html">Governance</a>
       </nav>
     </div>
   </header>
@@ -28,8 +31,8 @@
     <h1>Create IPR</h1>
 
     <p class="lead">
-      Questa pagina è per l’<strong>utente biologico</strong>.
-      Ti chiede dati standard UE in modo leggibile e genera un <strong>draft hash-only</strong>.
+      Questa pagina è per l’<strong>utente biologico UE</strong>.
+      Compili dati standard (come in un contesto amministrativo) e ottieni un <strong>draft hash-only</strong>.
       <br />
       <strong>Niente viene inviato a server.</strong> Tutto resta nel tuo browser.
     </p>
@@ -43,7 +46,7 @@
         <li>Regime: <strong>fail-closed</strong> (se mancano campi minimi → nessun output)</li>
       </ul>
       <p class="hint">
-        Se vuoi, puoi inserire dati “minimi” oppure usare uno pseudonimo: ciò che conta è la coerenza che decidi di attestare.
+        I campi opzionali esistono solo per chiarezza. L’output finale è sempre hash-only.
       </p>
     </section>
 
@@ -53,20 +56,19 @@
       <section class="card">
         <h2>A) Dati UE (utente biologico)</h2>
         <p class="hint">
-          Inserisci dati standard UE come li useresti in un contesto amministrativo.
-          Verranno trasformati in <strong>hash</strong> localmente.
+          I dati in chiaro vengono usati solo per calcolare hash localmente.
         </p>
 
-        <label for="full_name">Nome e cognome</label>
+        <label for="full_name">Nome e cognome *</label>
         <input id="full_name" placeholder="es. Mario Rossi" />
 
-        <label for="dob">Data di nascita</label>
+        <label for="dob">Data di nascita *</label>
         <input id="dob" placeholder="es. 31/12/1990" />
 
-        <label for="citizenship">Cittadinanza</label>
+        <label for="citizenship">Cittadinanza (codice) *</label>
         <input id="citizenship" placeholder="es. IT" />
 
-        <label for="doc_type">Documento (tipo)</label>
+        <label for="doc_type">Documento (tipo) *</label>
         <select id="doc_type">
           <option value="">Seleziona</option>
           <option value="CIE">Carta d’Identità (CIE)</option>
@@ -74,14 +76,14 @@
           <option value="OTHER">Altro</option>
         </select>
 
-        <label for="doc_id">Documento (numero o riferimento)</label>
-        <input id="doc_id" placeholder="es. CA12345AB (o riferimento interno)" />
+        <label for="doc_id">Documento (numero o riferimento) *</label>
+        <input id="doc_id" placeholder="es. CA12345AB (o ref interno)" />
 
         <label for="issuer">Ente emittente (opzionale)</label>
         <input id="issuer" placeholder="es. Comune / Stato / Autorità" />
 
         <label for="email">Contatto (opzionale)</label>
-        <input id="email" placeholder="email/PEC (opzionale, verrà hashata)" />
+        <input id="email" placeholder="email/PEC (verrà hashata localmente)" />
 
         <hr />
 
@@ -96,7 +98,7 @@
         <input id="purpose" placeholder="es. attivazione profilo biocibernetico UE" />
 
         <label for="timestamp">Timestamp (ISO-8601)</label>
-        <input id="timestamp" placeholder="auto" />
+        <input id="timestamp" placeholder="lascia vuoto per auto" />
 
         <div class="row">
           <button id="btn_generate">Genera IPR (hash-only)</button>
@@ -104,7 +106,7 @@
         </div>
 
         <p class="hint">
-          Suggerimento: se vuoi minimizzare, compila solo Nome+Cognome, Data nascita, Cittadinanza, Tipo documento, Numero documento.
+          * Campi minimi richiesti. Se mancano → FAIL (fail-closed).
         </p>
       </section>
 
@@ -112,19 +114,14 @@
       <section class="card">
         <h2>B) Output (hash-only)</h2>
         <p class="hint">
-          Questo è ciò che userai per: manifest, verify, gate, datacenter metrologico.
-          Copia e incolla nel tuo flusso.
+          Copia e incolla nel tuo flusso (manifest, verify, gate). Questo portale non pubblica nulla.
         </p>
 
-        <h3>Anteprima hash</h3>
+        <h3>Anteprima</h3>
         <pre id="hash_preview" class="code">Compila i campi e premi “Genera IPR (hash-only)”.</pre>
 
         <h3>Draft IPR</h3>
         <pre id="draft_out" class="code">Nessun draft generato.</pre>
-
-        <p class="hint">
-          Nota: non pubblichiamo nulla qui. L’emissione “reale” avviene nel tuo repo append-only.
-        </p>
       </section>
 
     </section>
@@ -132,8 +129,8 @@
     <section class="card">
       <h2>Prossimi passi</h2>
       <ol>
-        <li>Crea il draft qui (hash-only)</li>
-        <li>Pubblica il manifest nel tuo repository IPR (append-only)</li>
+        <li>Genera il draft qui (hash-only)</li>
+        <li>Pubblica il manifest nel tuo repo append-only</li>
         <li>Verifica con <a href="../verify/index.html">Verify</a></li>
         <li>Usa <a href="../gate/index.html">Gate</a> per PASS/FAIL ex-ante</li>
       </ol>
@@ -153,8 +150,24 @@
       return arr.map(b => b.toString(16).padStart(2, "0")).join("");
     }
 
-    function isoNow() {
-      try { return new Date().toISOString(); } catch { return ""; }
+    function isoNowWithOffset() {
+      const d = new Date();
+      const pad = (n) => String(n).padStart(2, "0");
+
+      const y = d.getFullYear();
+      const m = pad(d.getMonth() + 1);
+      const day = pad(d.getDate());
+      const hh = pad(d.getHours());
+      const mm = pad(d.getMinutes());
+      const ss = pad(d.getSeconds());
+
+      const off = -d.getTimezoneOffset(); // minuti
+      const sign = off >= 0 ? "+" : "-";
+      const offAbs = Math.abs(off);
+      const offH = pad(Math.floor(offAbs / 60));
+      const offM = pad(offAbs % 60);
+
+      return `${y}-${m}-${day}T${hh}:${mm}:${ss}${sign}${offH}:${offM}`;
     }
 
     function failClosed(reason) {
@@ -172,7 +185,6 @@
     }
 
     function minimalOk(profile) {
-      // Minimo UE-like (fail-closed): nome, dob, cittadinanza, doc_type, doc_id
       if (!profile.full_name) return "MISSING_FULL_NAME";
       if (!profile.dob) return "MISSING_DATE_OF_BIRTH";
       if (!profile.citizenship) return "MISSING_CITIZENSHIP";
@@ -182,7 +194,14 @@
     }
 
     document.getElementById("btn_generate").addEventListener("click", async () => {
-      const ts = getVal("timestamp") || isoNow();
+      const ts = getVal("timestamp") || isoNowWithOffset();
+
+      // FAIL-CLOSED: timestamp deve essere ISO parsabile
+      if (isNaN(Date.parse(ts))) {
+        setText("hash_preview", JSON.stringify(failClosed("INVALID_TIMESTAMP"), null, 2));
+        setText("draft_out", "Nessun draft generato.");
+        return;
+      }
 
       const profile = {
         full_name: getVal("full_name"),
@@ -204,7 +223,6 @@
         return;
       }
 
-      // Normalizzazione deterministica (hash stabile)
       const canonical = {
         full_name: profile.full_name,
         dob: profile.dob,
@@ -223,7 +241,6 @@
       const payloadStr = JSON.stringify(canonical);
       const payloadHash = "sha256:" + await sha256Hex(payloadStr);
 
-      // Context: descrive cosa stai facendo (non chi sei)
       const contextStr = JSON.stringify({
         context: "HBCE-IPR-CREATE-UE",
         iprtype: canonical.iprtype,
@@ -232,7 +249,6 @@
       });
       const contextHash = "sha256:" + await sha256Hex(contextStr);
 
-      // Subject ref: non custodiamo identità in chiaro, generiamo un ref hash-only
       const subjectRef = "IPR-UE:" + (await sha256Hex(
         canonical.full_name + "|" + canonical.dob + "|" + canonical.citizenship + "|" + canonical.doc.type + "|" + canonical.doc.id
       )).slice(0, 24);
@@ -241,9 +257,10 @@
         subject_ref: subjectRef,
         context_hash: contextHash,
         payload_hash: payloadHash,
+        timestamp: canonical.timestamp,
         mode: "hash-only",
         policy: "UE-FIRST | AUDIT | FAIL-CLOSED | NO-CUSTODY",
-        note: "I dati in chiaro restano nel browser; l’output è solo hash."
+        note: "Dati in chiaro solo nel browser. Output solo hash."
       }, null, 2));
 
       const draft = {
