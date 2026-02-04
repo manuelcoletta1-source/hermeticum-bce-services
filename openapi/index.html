@@ -3,88 +3,96 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>OpenAPI — IPR Europeo</title>
-  <meta name="description" content="OpenAPI 3.1 per IPR Europeo: endpoint di validazione ex-ante e schemi canonici." />
-  <style>
-    :root { color-scheme: dark; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
-    a { color:#9cd1ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 26px 16px; }
-
-    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
-    .brand { font-size:14px; line-height:1.4; }
-    nav { display:flex; gap:10px; flex-wrap:wrap; }
-    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
-
-    h1 { margin:18px 0 6px; font-size:24px; }
-    p { line-height:1.55; opacity:.9; font-size:14px; }
-
-    .card { margin-top:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); border-radius:14px; padding:14px; }
-    .card h2 { margin:0 0 10px; font-size:16px; }
-    ul, ol { margin: 8px 0 0 18px; }
-    li { line-height:1.55; opacity:.9; font-size:13px; }
-
-    code { background: rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.12); padding:2px 6px; border-radius:8px; font-family: ui-monospace, monospace; font-size:12px; }
-
-    footer { margin-top:22px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
-  </style>
+  <title>OpenAPI — IPR Precheck API</title>
+  <meta name="description" content="Specifica OpenAPI per il precheck ex-ante (fail-closed) basato su Identity Primary Record (IPR)." />
+  <link rel="stylesheet" href="../assets/style.css" />
 </head>
 
 <body>
-<div class="wrap">
-
-  <header>
-    <div class="brand">
-      <b>IPR Europeo</b><br/>
-      OpenAPI 3.1
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="../index.html">HERMETICUM B.C.E.</a>
+      <nav class="nav">
+        <a href="../ipr/index.html">IPR</a>
+        <a href="../verify/index.html">Verify</a>
+        <a href="../datacenter/index.html">Datacenter</a>
+        <a href="../gate/index.html">JOKER Gate</a>
+        <a href="../specs/index.html">Specs</a>
+        <a class="active" href="./index.html">OpenAPI</a>
+      </nav>
     </div>
-    <nav>
-      <a class="pill" href="../">Home</a>
-      <a class="pill" href="../ipr/">IPR</a>
-      <a class="pill" href="../verify/">Validatore</a>
-      <a class="pill" href="../specs/">Specifiche</a>
-      <a class="pill" href="../openapi/">OpenAPI</a>
-      <a class="pill" href="../audit/">Audit</a>
-      <a class="pill" href="../status/">Status</a>
-    </nav>
   </header>
 
-  <h1>OpenAPI</h1>
-  <p>
-    Artefatti OpenAPI 3.1 per integrare l’IPR Europeo come <b>Decision Gate ex-ante</b>.
-    Questa interfaccia descrive la validazione e gli schemi canonici.
-  </p>
+  <main class="container">
+    <h1>OpenAPI</h1>
 
-  <div class="card">
-    <h2>Specifica</h2>
-    <ul>
-      <li><a href="./ipr-exante-openapi-3.1.yaml">ipr-exante-openapi-3.1.yaml</a> — OpenAPI 3.1</li>
-    </ul>
-    <p>
-      Endpoint principale: <code>POST /v1/ex-ante/validate</code>
-      → output <code>DENIED</code> o <code>AUTHORIZED</code> con evidence hash-only.
+    <p class="lead">
+      Specifica tecnica per <strong>IPR Precheck API</strong>:
+      verifica ex-ante di azioni digitali in regime <strong>fail-closed</strong>.
+      Nessuna custodia dati personali. Hash-only.
     </p>
-  </div>
 
-  <div class="card">
-    <h2>Nota operativa</h2>
-    <p>
-      Il portale pubblico ospita una demo offline (<a href="../verify/">/verify/</a>).
-      Questa OpenAPI è il contratto per integrazioni server-side o federate.
-    </p>
-  </div>
+    <section class="card">
+      <h2>Endpoint minimo</h2>
+      <p><code>POST /precheck</code></p>
+      <p class="hint">
+        Output: <strong>PASS</strong> (evidence_hash) oppure <strong>FAIL</strong> (reason_code).
+      </p>
 
-  <footer>
-    <div>
-      OpenAPI — IPR Europeo<br/>
-      Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
-    </div>
-    <div>
-      <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a>
-    </div>
-  </footer>
+      <h3>Esempio request</h3>
+      <pre class="code">{
+  "action_hash": "sha256:abcdef123456",
+  "ipr_ref": "IPR-HBCE-000",
+  "timestamp": "2026-02-04T16:00:00+01:00"
+}</pre>
 
-</div>
+      <h3>Esempio response (FAIL)</h3>
+      <pre class="code">{
+  "status": "FAIL",
+  "reason_code": "IPR_NOT_VERIFIABLE",
+  "mode": "fail-closed"
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>Specifica OpenAPI (YAML)</h2>
+      <p>
+        La specifica vive nel repo tecnico <strong>ipr-precheck-api</strong>.
+        Qui sotto trovi i link diretti.
+      </p>
+
+      <ul>
+        <li>
+          YAML (raw):
+          <a href="https://raw.githubusercontent.com/manuelcoletta1-source/ipr-precheck-api/main/openapi.yaml" target="_blank" rel="noopener">
+            openapi.yaml
+          </a>
+        </li>
+        <li>
+          Repo:
+          <a href="https://github.com/manuelcoletta1-source/ipr-precheck-api" target="_blank" rel="noopener">
+            ipr-precheck-api
+          </a>
+        </li>
+      </ul>
+
+      <p class="hint">
+        Nota: il portale non esegue la spec. La espone. L’esecuzione è condizionata dall’IPR.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Integrazione con il sistema</h2>
+      <ul>
+        <li><a href="../ipr/create.html">Crea IPR</a> (hash-only draft)</li>
+        <li><a href="../verify/index.html">Verify</a> (verifica evidenze)</li>
+        <li><a href="../gate/index.html">JOKER Gate</a> (PASS/FAIL operativo)</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>Non cambio chi decide. Cambio quando un’azione è ammessa.</p>
+    </footer>
+  </main>
 </body>
 </html>
