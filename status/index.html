@@ -3,141 +3,86 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Status — IPR Europeo</title>
-  <meta name="description" content="Stato operativo del portale IPR Europeo: cosa è live, cosa è demo, cosa è in rollout." />
-  <style>
-    :root { color-scheme: dark; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
-    a { color:#9cd1ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 26px 16px; }
-
-    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
-    .brand { font-size:14px; line-height:1.4; }
-    nav { display:flex; gap:10px; flex-wrap:wrap; }
-    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
-
-    h1 { margin:18px 0 6px; font-size:24px; }
-    p { line-height:1.55; opacity:.9; font-size:14px; }
-
-    .card { margin-top:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); border-radius:14px; padding:14px; }
-    .card h2 { margin:0 0 10px; font-size:16px; }
-
-    table { width:100%; border-collapse:collapse; font-size:13px; }
-    th, td { text-align:left; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10); vertical-align:top; }
-    th { opacity:.85; font-weight:600; }
-
-    .tag { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.03); }
-    .ok { border-color: rgba(63,185,80,.55); background: rgba(63,185,80,.08); }
-    .warn { border-color: rgba(210,153,34,.60); background: rgba(210,153,34,.10); }
-    .no { border-color: rgba(248,81,73,.60); background: rgba(248,81,73,.10); }
-
-    code { background: rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.12); padding:2px 6px; border-radius:8px; font-family: ui-monospace, monospace; font-size:12px; }
-
-    footer { margin-top:22px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
-  </style>
+  <title>Status — HERMETICUM (IPR ex-ante)</title>
+  <meta name="description" content="Pagina di stato istituzionale. Regime fail-closed. Nessuna custodia dati. Modalità demo/pilot." />
+  <link rel="stylesheet" href="../assets/style.css" />
 </head>
 
 <body>
-<div class="wrap">
-
-  <header>
-    <div class="brand">
-      <b>IPR Europeo</b><br/>
-      Stato operativo del portale
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="../index.html">HERMETICUM B.C.E.</a>
+      <nav class="nav">
+        <a href="../ipr/index.html">IPR</a>
+        <a href="../verify/index.html">Verify</a>
+        <a href="../gate/index.html">Gate</a>
+        <a href="../datacenter/index.html">DataCenter</a>
+        <a href="../openapi/index.html">OpenAPI</a>
+        <a href="../use-cases/index.html">Use Cases</a>
+        <a class="active" href="./index.html">Status</a>
+      </nav>
     </div>
-    <nav>
-      <a class="pill" href="../">Home</a>
-      <a class="pill" href="../ipr/">IPR</a>
-      <a class="pill" href="../verify/">Validatore</a>
-      <a class="pill" href="../specs/">Specifiche</a>
-      <a class="pill" href="../openapi/">OpenAPI</a>
-      <a class="pill" href="../audit/">Audit</a>
-      <a class="pill" href="../status/">Status</a>
-    </nav>
   </header>
 
-  <h1>Status</h1>
-  <p>Stato effettivo: cosa è live, cosa è in rollout, cosa non è previsto. Anti-ambiguità.</p>
+  <main class="container">
+    <h1>Status</h1>
 
-  <div class="card">
-    <h2>Componenti</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Componente</th>
-          <th>Stato</th>
-          <th>Descrizione</th>
-          <th>Link</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Standard IPR</td>
-          <td><span class="tag ok">LIVE</span></td>
-          <td>Pagina canonica dello standard tecnologico ex-ante.</td>
-          <td><a href="../ipr/">/ipr/</a></td>
-        </tr>
-        <tr>
-          <td>Validatore ex-ante</td>
-          <td><span class="tag ok">LIVE</span></td>
-          <td>Demo offline deterministica. Fail-closed. Evidence hash-only.</td>
-          <td><a href="../verify/">/verify/</a></td>
-        </tr>
-        <tr>
-          <td>Specifiche</td>
-          <td><span class="tag warn">ROLLOUT</span></td>
-          <td>Norma e specifica di implementazione.</td>
-          <td><a href="../specs/">/specs/</a></td>
-        </tr>
-        <tr>
-          <td>OpenAPI</td>
-          <td><span class="tag warn">ROLLOUT</span></td>
-          <td>Artefatti OpenAPI 3.1; explorer opzionale.</td>
-          <td><a href="../openapi/">/openapi/</a></td>
-        </tr>
-        <tr>
-          <td>Audit Pack</td>
-          <td><span class="tag warn">ROLLOUT</span></td>
-          <td>Indice artefatti verificabili e riferimenti.</td>
-          <td><a href="../audit/">/audit/</a></td>
-        </tr>
-        <tr>
-          <td>Enforcement runtime (server-side)</td>
-          <td><span class="tag no">NON DISPONIBILE</span></td>
-          <td>Non implementato sul portale pubblico.</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>Custodia dati personali</td>
-          <td><span class="tag no">NON PREVISTA</span></td>
-          <td>Principio: hash-only, no-custody.</td>
-          <td>-</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <p class="lead">
+      Questa pagina rende esplicito lo stato operativo del sistema e i suoi confini.
+      È pensata per audit, compliance e procurement.
+    </p>
 
-  <div class="card">
-    <h2>Prova operativa</h2>
-    <ol>
-      <li>Apri <a href="../verify/">/verify/</a></li>
-      <li>Premi <code>Validate ex-ante</code></li>
-      <li>Leggi <b>AUTHORIZED</b> o <b>DENIED</b></li>
-      <li>Conserva <code>digest_hex</code> come prova hash-only</li>
-    </ol>
-  </div>
+    <section class="card">
+      <h2>Stato operativo</h2>
+      <ul>
+        <li><strong>Modalità:</strong> DEMO / PILOT</li>
+        <li><strong>Regime:</strong> FAIL-CLOSED</li>
+        <li><strong>Custodia dati personali:</strong> NONE</li>
+        <li><strong>Audit:</strong> Audit-first (hash-only, append-only)</li>
+        <li><strong>Ambito:</strong> non-production, ambiente controllato</li>
+      </ul>
+    </section>
 
-  <footer>
-    <div>
-      Status operativo — IPR Europeo<br/>
-      Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
-    </div>
-    <div>
-      <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a>
+    <section class="card">
+      <h2>Garanzie tecniche dichiarate</h2>
+      <ul>
+        <li>In assenza di prova verificabile ex-ante → nessuna esecuzione</li>
+        <li>Nessun fallback permissivo</li>
+        <li>Separazione tra misura e esecuzione</li>
+        <li>Tracce verificabili nel tempo (opponibilità tecnica)</li>
+      </ul>
+    </section>
+
+    <section class="card warning">
+      <h2>Limitazioni e fuori ambito</h2>
+      <ul>
+        <li>Il sistema non valuta il merito delle decisioni</li>
+        <li>Il sistema non garantisce correttezza sostanziale</li>
+        <li>Il sistema non sostituisce autorità pubbliche</li>
+        <li>Il sistema non implementa sorveglianza o profiling</li>
+        <li>Il sistema non identifica persone né tratta contenuti sensibili</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Componenti collegati</h2>
+      <ul>
+        <li><a href="../ipr/index.html">IPR</a> — riferimento</li>
+        <li><a href="../verify/index.html">Verify</a> — verifica evidenze</li>
+        <li><a href="../gate/index.html">Gate</a> — misura PASS/FAIL</li>
+        <li><a href="../datacenter/index.html">DataCenter Metrologico</a> — esecuzione vincolata</li>
+        <li><a href="../openapi/index.html">OpenAPI</a> — specifica tecnica</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>
+        Stato dichiarato, confini dichiarati.  
+        Non cambio chi decide. Cambio quando un’azione è ammessa.
+      </p>
     </div>
   </footer>
-
-</div>
 </body>
 </html>
