@@ -3,169 +3,136 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Governance — limiti dichiarati · responsabilità umana · no surveillance</title>
-
-  <!-- GitHub Pages project site base -->
-  <base href="/hermeticum-bce-platform/">
-
-  <link rel="stylesheet" href="assets/hbce.css" />
+  <title>Governance Model — IPR ex-ante</title>
+  <meta name="description" content="Modello di governance: ruoli, responsabilità e confini del sistema IPR ex-ante. Nessuna autorità. Misura tecnica. Fail-closed." />
+  <link rel="stylesheet" href="../assets/style.css" />
 </head>
+
 <body>
   <header class="topbar">
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="sig" aria-hidden="true"></div>
-        <div>
-          <h1>Governance</h1>
-          <span class="sub">Limiti dichiarati · responsabilità · fail-closed</span>
-        </div>
-      </div>
-
-      <nav class="menu" aria-label="Navigazione principale">
-        <a class="pill" data-nav href="./"><strong>Home</strong></a>
-        <a class="pill" data-nav href="onboarding/"><strong>Onboarding</strong></a>
-        <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
-        <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
-        <a class="pill" data-nav href="institution/">Istituzioni UE</a>
-        <a class="pill" data-nav href="member-states/">Stati Membri</a>
-        <a class="pill" data-nav href="technology/">Tecnologia</a>
-        <a class="pill" data-nav href="verify/">Verify</a>
-        <a class="pill" data-nav href="security/">Sicurezza</a>
-        <a class="pill active" data-nav href="governance/"><strong>Governance</strong></a>
-        <a class="pill" data-nav href="manual/">Manuale</a>
+    <div class="container">
+      <a class="brand" href="../index.html">HERMETICUM B.C.E.</a>
+      <nav class="nav">
+        <a href="../ipr/index.html">IPR</a>
+        <a href="../verify/index.html">Verify</a>
+        <a href="../gate/index.html">Gate</a>
+        <a href="../datacenter/index.html">DataCenter</a>
+        <a href="../openapi/index.html">OpenAPI</a>
+        <a href="../use-cases/index.html">Use Cases</a>
+        <a href="../status/index.html">Status</a>
+        <a class="active" href="./index.html">Governance</a>
+        <a href="../specs/index.html">Specs</a>
       </nav>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="kicker">LIMITI PRIMA DEL POTERE</div>
-      <h2 class="title">Governance significa: definire cosa NON è permesso</h2>
-      <p class="lead">
-        Questa pagina è un vincolo dichiarativo: stabilisce limiti e responsabilità del modello.
-        Se un’implementazione viola questi limiti, è fuori scope.
+  <main class="container">
+
+    <h1>Governance Model</h1>
+
+    <p class="lead">
+      Questa pagina definisce <strong>ruoli</strong>, <strong>responsabilità</strong> e <strong>confini</strong>
+      del sistema IPR ex-ante.  
+      Non introduce una nuova autorità: introduce una <strong>condizione tecnica di eseguibilità</strong>.
+    </p>
+
+    <section class="card">
+      <h2>Principio di responsabilità</h2>
+      <p>
+        La responsabilità resta <strong>umana o istituzionale</strong>.
+        Il sistema non decide nel merito: misura solo se esiste una prova verificabile ex-ante.
       </p>
+      <p class="hint">
+        Il sistema non sposta il potere. Sposta il <strong>momento</strong> in cui l’azione diventa ammessa.
+      </p>
+    </section>
 
-      <div class="btnrow">
-        <a class="btn" href="technology/">Specifica tecnica</a>
-        <a class="btn secondary" href="security/">Threat model</a>
-        <a class="btn ghost" href="verify/">Prova minima</a>
+    <section class="card">
+      <h2>Ruoli (chi fa cosa)</h2>
+      <ul>
+        <li><strong>Soggetto responsabile (Umano / Ente)</strong> — decide e risponde del merito dell’azione.</li>
+        <li><strong>IPR</strong> — riferimento tecnico (hash-only) che rende l’azione attribuibile e verificabile.</li>
+        <li><strong>JOKER Gate / Precheck</strong> — misura ex-ante (PASS/FAIL), nessuna discrezionalità.</li>
+        <li><strong>DataCenter Metrologico</strong> — esegue solo in stato PASS, blocca in stato FAIL.</li>
+        <li><strong>Auditor / Controllore</strong> — verifica evidenze nel tempo (indipendente dal sistema).</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Matrice responsabilità (sintesi)</h2>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Oggetto</th>
+              <th>Chi risponde</th>
+              <th>Chi misura</th>
+              <th>Chi esegue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Merito della decisione</td>
+              <td>Umano / Ente</td>
+              <td>Nessuno (fuori ambito)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Attribuzione e tracciabilità ex-ante</td>
+              <td>Umano / Ente (emette)</td>
+              <td>Gate / Precheck</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Eseguibilità tecnica</td>
+              <td>—</td>
+              <td>Gate / Precheck</td>
+              <td>DataCenter</td>
+            </tr>
+            <tr>
+              <td>Audit opponibile nel tempo</td>
+              <td>—</td>
+              <td>—</td>
+              <td>Auditor (verifica)</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <p class="hint">
+        Questa matrice evita la confusione tipica: <strong>misura ≠ decisione</strong>.
+      </p>
     </section>
 
-    <section class="grid">
-      <article class="card cols-12">
-        <h3>Cosa è (in 3 righe)</h3>
-        <ul class="list">
-          <li>un criterio tecnico di <strong>eseguibilità ex-ante</strong> (PASS/FAIL)</li>
-          <li>basato su evidenza minima verificabile (hash/fingerprint)</li>
-          <li>progettato per essere auditabile e contestabile nel tempo</li>
-        </ul>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Cosa NON è (non-equivalenze vincolanti)</h3>
-        <ul class="list">
-          <li>non è un registro centrale di identità (no custody)</li>
-          <li>non è un sistema di sorveglianza (no surveillance)</li>
-          <li>non è un giudice automatico di diritti (no auto-rights)</li>
-          <li>non è una promessa di sicurezza totale (no “invincibility” claims)</li>
-          <li>non sostituisce framework UE: si integra come requisito tecnico e prova replicabile</li>
-        </ul>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Limiti dichiarati (hard rules)</h3>
-        <div class="grid" style="gap:12px">
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">No surveillance</h4>
-            <p style="margin:0">
-              Il modello non richiede profilazione, monitoraggio continuo o raccolta comportamentale.
-              Se un’implementazione lo fa, sta violando la governance.
-            </p>
-            <div class="meta"><span class="tag">hard limit</span></div>
-          </div>
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">No custody</h4>
-            <p style="margin:0">
-              Nessuna custodia centrale di dati personali “per far funzionare” il sistema.
-              Si usano impronte (hash/fingerprint) e prove minimali.
-            </p>
-            <div class="meta"><span class="tag">hard limit</span></div>
-          </div>
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">Human responsibility</h4>
-            <p style="margin:0">
-              La responsabilità resta umana e istituzionale. Il gate decide solo “eseguibile/non eseguibile”
-              rispetto a evidenze e limiti dichiarati.
-            </p>
-            <div class="meta"><span class="tag ok">responsibility</span></div>
-          </div>
-
-          <div class="card cols-6" style="padding:14px">
-            <h4 style="margin:0 0 6px">Fail-closed</h4>
-            <p style="margin:0">
-              Se manca evidenza verificabile, si blocca. Nessun fallback silenzioso.
-              Questo è il cuore operativo della governance.
-            </p>
-            <div class="meta"><span class="tag ok">default: block</span></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Decadenza e opponibilità (concetto operativo)</h3>
-        <p>
-          “Decadenza” qui non è un difetto: è una proprietà necessaria.
-          Un atto tecnico che non può decadere o essere contestato diventa dogma, non governance.
-        </p>
-        <ul class="list">
-          <li>il sistema è progettato per essere <strong>contestabile</strong> (audit replicabile)</li>
-          <li>le versioni sono tracciate (append-only) per evitare riscritture invisibili</li>
-          <li>la prova resta verificabile nel tempo finché la traccia persiste</li>
-        </ul>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Regola anti-“pollaio” (operativa)</h3>
-        <p style="margin-top:0; color:rgba(232,236,255,.82)">
-          Un ecosistema continentale collassa se la governance è narrativa e non verificabile.
-          Quindi:
-        </p>
-        <ul class="list">
-          <li>ogni claim deve avere una prova minima riproducibile (Verify / PASS/FAIL)</li>
-          <li>ogni cambio deve avere traccia e motivo (append-only, changelog)</li>
-          <li>ogni eccezione deve essere esplicita e misurabile (no eccezioni “di fatto”)</li>
-        </ul>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Prova minima (di governance)</h3>
-        <p>
-          Se la prova minima fallisce, il modello si auto-boccia.
-          È la forma più onesta di governance: fallire quando non si può provare.
-        </p>
-        <div class="btnrow">
-          <a class="btn" href="verify/">Esegui Verify</a>
-          <a class="btn secondary" href="technology/">Rivedi specifica</a>
-          <a class="btn ghost" href="institution/">Vista istituzionale UE</a>
-        </div>
-      </article>
+    <section class="card warning">
+      <h2>Fuori ambito (confini dichiarati)</h2>
+      <ul>
+        <li>decisioni di merito</li>
+        <li>valutazioni etiche o politiche</li>
+        <li>sorveglianza, profiling, identificazione persone</li>
+        <li>custodia di dati personali</li>
+        <li>certificazione automatica di conformità</li>
+      </ul>
     </section>
+
+    <section class="card">
+      <h2>Regole operative (invarianti)</h2>
+      <ul>
+        <li><strong>Fail-closed:</strong> in assenza di prova → nessuna esecuzione.</li>
+        <li><strong>Hash-only:</strong> minimizzazione e assenza di custodia dati personali.</li>
+        <li><strong>Separazione:</strong> misura (control-plane) separata da esecuzione (execution-plane).</li>
+        <li><strong>Nessuna eccezione:</strong> niente fallback permissivi, niente override discrezionali.</li>
+      </ul>
+    </section>
+
   </main>
 
   <footer class="footer">
-    <div class="wrap">
-      <div class="notice">
-        <strong>Chiusura</strong><br/>
-        Governance = limiti + responsabilità umana + default block.  
-        Se manca evidenza verificabile: FAIL.
-      </div>
+    <div class="container">
+      <p>
+        Governance dichiarata, confini dichiarati.  
+        Non cambio chi decide. Cambio quando un’azione è ammessa.
+      </p>
     </div>
   </footer>
-
-  <script src="assets/hbce.js"></script>
 </body>
 </html>
