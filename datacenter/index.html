@@ -1,26 +1,109 @@
-<h1>IPR DataCenter = esecuzione metrologica</h1>
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <base href="/hermeticum-bce-platform/" />
 
-<p class="hbce-lead">
-L’IPR DataCenter è l’ambiente di esecuzione dell’infrastruttura HERMETICUM.
-Esegue operazioni solo se precedute da verifica ex-ante valida.
-</p>
+  <title>DataCenter Metrologico — Esecuzione vincolata</title>
+  <meta name="description" content="IPR DataCenter Metrologico: esecuzione consentita solo in PASS. In FAIL: blocco, nessun output, nessun fallback permissivo. Fail-closed, audit-first, hash-only." />
 
-<p class="hbce-muted">
-Non custodisce identità.
-Non introduce discrezionalità.
-Non esiste esecuzione senza PASS.
-</p>
+  <link rel="stylesheet" href="../assets/hbce.css" />
+  <style>
+    .hbce-wrap{max-width:980px;margin:0 auto;padding:28px 18px}
+    .hbce-top{border-bottom:1px solid rgba(255,255,255,.12);padding:18px}
+    .hbce-top__inner{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .hbce-brand__name{font-weight:800;letter-spacing:.3px}
+    .hbce-brand__sub{opacity:.82}
+    .hbce-nav a{margin-right:10px;text-decoration:none;opacity:.9}
+    .hbce-nav a:hover{text-decoration:underline;opacity:1}
+    .hbce-banner{margin:16px 0;padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:14px}
+    .hbce-hr{border:0;height:1px;background:rgba(255,255,255,.12);margin:22px 0}
+    .hbce-muted{opacity:.82}
+    .hbce-footer{border-top:1px solid rgba(255,255,255,.12);padding:18px;opacity:.9}
+    .hbce-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .hbce-btn{display:inline-block;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);text-decoration:none;font-weight:600}
+    .hbce-btn:hover{border-color:rgba(255,255,255,.35)}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+  </style>
+</head>
 
-<h2>Comportamento</h2>
-<ul>
-<li>PASS → esecuzione consentita</li>
-<li>FAIL → nessuna esecuzione</li>
-<li>Nessun fallback permissivo</li>
-<li>Nessuna custodia dati personali</li>
-</ul>
+<body>
+  <header class="hbce-top">
+    <div class="hbce-top__inner">
+      <div>
+        <div class="hbce-brand__name">HERMETICUM</div>
+        <div class="hbce-brand__sub">DataCenter · Esecuzione metrologica</div>
+      </div>
 
-<h2>Funzione nell’infrastruttura</h2>
-<p>
-Il DataCenter non decide.
-Applica esiti metrologici deterministici provenienti dal Gate.
-</p>
+      <nav class="hbce-nav" aria-label="Navigazione">
+        <a href="../">Home</a>
+        <a href="../architecture/">Architecture</a>
+        <a href="../modules/">IPR Stack</a>
+        <a href="../gate/">Gate</a>
+        <a href="./">DataCenter</a>
+        <a href="../use-cases/">Use-Cases</a>
+        <a href="../governance/">Governance</a>
+        <a href="../verify/">Verify</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hbce-wrap">
+    <div class="hbce-banner">
+      <strong>PUBLIC PILOT</strong> · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
+    </div>
+
+    <h1>IPR DataCenter = esecuzione metrologica</h1>
+
+    <p>
+      L’IPR DataCenter è l’ambiente di esecuzione dell’infrastruttura HERMETICUM.
+      Esegue operazioni solo se precedute da verifica ex-ante valida.
+    </p>
+
+    <p class="hbce-muted">
+      Non custodisce identità. Non introduce discrezionalità.
+      In stato <code>FAIL</code> non esiste output e non esiste fallback permissivo.
+    </p>
+
+    <div class="hbce-cta">
+      <a class="hbce-btn" href="../gate/">Gate PASS/FAIL</a>
+      <a class="hbce-btn" href="../verify/">Verify</a>
+      <a class="hbce-btn" href="../evidence/">Evidence</a>
+    </div>
+
+    <hr class="hbce-hr" />
+
+    <h2>Comportamento</h2>
+    <ul>
+      <li><strong>PASS</strong> → esecuzione consentita</li>
+      <li><strong>FAIL</strong> → esecuzione bloccata (nessun output)</li>
+      <li>Nessun fallback permissivo</li>
+      <li>Nessuna custodia dati personali (hash-only)</li>
+    </ul>
+
+    <h2>Ruolo nell’infrastruttura</h2>
+    <p>
+      Il DataCenter non decide nel merito.
+      Applica l’esito metrologico deterministico prodotto dal Gate.
+    </p>
+
+    <hr class="hbce-hr" />
+
+    <h2>Firma</h2>
+    <p>
+      <strong>HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</strong><br />
+      <strong>HERMETICUM B.C.E. S.r.l.</strong><br />
+      Torino · Unione Europea
+    </p>
+  </main>
+
+  <footer class="hbce-footer">
+    <div class="hbce-muted">
+      Portale pubblico — informativo e valutativo. Nessun effetto giuridico automatico.
+    </div>
+  </footer>
+
+  <script src="../assets/hbce.js" defer></script>
+</body>
+</html>
