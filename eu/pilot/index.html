@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>HERMETICUM — EU Pilot</title>
+  <meta name="description" content="HERMETICUM — EU Pilot scenario. Testable plan: scope, actors, checks, outputs, and success metrics." />
+
+  <style>
+    /* ===== Minimal, uniform UI (safe default) ===== */
+    :root{
+      --bg: #0b0d10;
+      --card: #0f1318;
+      --text: #e7edf5;
+      --muted: #9fb0c2;
+      --line: rgba(255,255,255,.10);
+      --soft: rgba(255,255,255,.06);
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      line-height: 1.45;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+    /* Navbar */
+    .nav{
+      border-bottom: 1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      backdrop-filter: blur(6px);
+    }
+    .nav-container{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+    }
+    .brand{
+      font-weight: 800;
+      letter-spacing: .8px;
+    }
+    .nav-links{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items:center;
+      justify-content:flex-end;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .nav-links a{
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+    .nav-links a:hover{
+      background: var(--soft);
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    /* Policy banner */
+    .policy-banner{
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: .25px;
+      padding: 10px 16px;
+    }
+
+    /* Main */
+    main{ padding: 28px 0 40px; }
+
+    .hero{
+      padding: 18px 0 6px;
+    }
+    .hero h1{
+      margin: 0 0 8px;
+      font-size: 26px;
+      line-height: 1.15;
+    }
+    .hero p{
+      margin: 0;
+      color: var(--muted);
+      max-width: 92ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .card{
+      grid-column: span 12;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    @media (min-width: 900px){
+      .card.half{ grid-column: span 6; }
+      .card.third{ grid-column: span 4; }
+    }
+
+    .card h2{
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .card p{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .list{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .item{
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 12px;
+      background: rgba(255,255,255,.02);
+    }
+    .item strong{
+      display:block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .item span{
+      display:block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size: 14px;
+      color: var(--text);
+    }
+    .btn:hover{
+      background: rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0,0,0,.18);
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    /* Footer */
+    .footer{
+      border-top: 1px solid var(--line);
+      padding: 22px 0 26px;
+      color: var(--muted);
+      background: rgba(0,0,0,.14);
+    }
+    .footer-inner{ max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+    .footer .mini{ font-size: 13px; color: var(--muted); opacity: .95; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Canonical Navbar (uniform across all pages) ===== -->
+  <nav class="nav">
+    <div class="nav-container">
+
+      <div class="brand">HERMETICUM</div>
+
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/architecture/">Architecture</a>
+        <a href="/use-cases/">Use-Cases</a>
+        <a href="/verify/">Verify</a>
+        <a href="/create/">Create</a>
+        <a href="/eu/position-paper/eu-ipr-technical-positioning.md">EU Positioning</a>
+        <a href="/eu/pilot/">EU Pilot</a>
+        <a href="/company/">Company</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ===== Canonical Policy Banner (uniform across all pages) ===== -->
+  <section class="policy-banner">
+    <div class="wrap">
+      PUBLIC PILOT · EU-ALIGNED · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
+    </div>
+  </section>
+
+  <main class="wrap">
+
+    <section class="hero">
+      <h1>EU Pilot Scenario — Supply Chain Attribution (Pilot-Ready)</h1>
+      <p>
+        Scenario testabile: attribuzione e tracciabilità opponibile in supply chain B2B.
+        Obiettivo: ridurre contenzioso e costo audit tramite receipts hash-only e verifiche pass/fail.
+      </p>
+    </section>
+
+    <section class="grid">
+
+      <div class="card half">
+        <h2>Scope (minimal viable pilot)</h2>
+        <p>Pilot piccolo, misurabile, ripetibile. Nessun PII obbligatorio. Solo verificabilità.</p>
+        <ul class="list">
+          <li class="item"><strong>Duration</strong><span>4–8 settimane (setup → run → report).</span></li>
+          <li class="item"><strong>Actors</strong><span>3–5 attori: producer · transporter · warehouse · buyer · auditor.</span></li>
+          <li class="item"><strong>Artifacts</strong><span>signed manifest + receipts hash-only + audit report.</span></li>
+          <li class="item"><strong>Checks</strong><span>pass/fail deterministic verification (fail-closed).</span></li>
+        </ul>
+      </div>
+
+      <div class="card half">
+        <h2>Baseline pain (oggi)</h2>
+        <p>Perché costa: ambiguità identitaria e record non opponibili aumentano audit e dispute.</p>
+        <ul class="list">
+          <li class="item"><strong>Audit overhead</strong><span>ricostruzione manuale di eventi e responsabilità.</span></li>
+          <li class="item"><strong>Dispute</strong><span>attribuzione incerta (chi ha deciso/cambiato cosa e quando).</span></li>
+          <li class="item"><strong>Fraud exposure</strong><span>record modificabili, catene di delega opache.</span></li>
+        </ul>
+      </div>
+
+      <div class="card third">
+        <h2>Pilot workflow</h2>
+        <p>Sequenza semplice, ripetibile.</p>
+        <div class="mono">
+1) create signed manifest (per shipment/event)
+2) emit receipt (hash-only reference)
+3) publish verification endpoint
+4) auditor runs deterministic checks
+5) export audit report (pass/fail + reasons)
+        </div>
+      </div>
+
+      <div class="card third">
+        <h2>Success metrics</h2>
+        <p>Misure “Bruxelles-style”: costo e rischio.</p>
+        <ul class="list">
+          <li class="item"><strong>Audit time</strong><span>↓ tempo di audit per evento.</span></li>
+          <li class="item"><strong>Dispute time</strong><span>↓ tempo di risoluzione dispute.</span></li>
+          <li class="item"><strong>Verification repeatability</strong><span>output deterministico verificabile da terzi.</span></li>
+        </ul>
+      </div>
+
+      <div class="card third">
+        <h2>Outputs</h2>
+        <p>Deliverables concreti (no slideware).</p>
+        <ul class="list">
+          <li class="item"><strong>Evidence pack</strong><span>manifest firmato + receipts + log verifiche.</span></li>
+          <li class="item"><strong>Verifier</strong><span>tool deterministico pass/fail (fail-closed).</span></li>
+          <li class="item"><strong>Pilot report</strong><span>delta costo/rischio + raccomandazioni.</span></li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn" href="/verify/">Verify</a>
+          <a class="btn" href="/use-cases/">Use-Cases</a>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ===== Canonical Footer (uniform across all pages) ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p><strong>HERMETICUM</strong> — EU-aligned cybernetic infrastructure</p>
+      <p>Attribution · Responsibility · Traceability · Time</p>
+      <p class="mini">No custody · Hash verification · Fail-closed architecture</p>
+    </div>
+  </footer>
+
+</body>
+</html>
