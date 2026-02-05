@@ -1,148 +1,217 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <title>HERMETICUM — Use Cases</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>HERMETICUM — Use-Cases</title>
-  <meta name="description" content="HERMETICUM — IPR Use-Cases UE. Audit-first, fail-closed, hash-only, no data custody." />
+  <meta name="description" content="HERMETICUM use cases — attribution and verification scenarios.">
 
   <style>
     :root{
-      --bg:#0b0d10; --card:#0f1318; --text:#e7edf5; --muted:#9fb0c2;
-      --line:rgba(255,255,255,.10); --soft:rgba(255,255,255,.06); --max:1100px;
+      --bg:#0b0d10;
+      --card:#0f1318;
+      --text:#e7edf5;
+      --muted:#9fb0c2;
+      --line:rgba(255,255,255,.12);
+      --soft:rgba(255,255,255,.06);
+      --max:1100px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      line-height:1.45;
+    }
+
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
+
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.18);backdrop-filter:blur(6px)}
-    .nav-container{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+    /* NAV */
+    .nav{
+      border-bottom:1px solid var(--line);
+      background:rgba(0,0,0,.2);
+      backdrop-filter:blur(6px);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+    }
     .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{display:flex;flex-wrap:wrap;gap:12px;font-size:14px;color:var(--muted)}
-    .nav-links a{padding:6px 8px;border-radius:10px}
-    .nav-links a:hover{background:var(--soft);color:var(--text);text-decoration:none}
+    .nav-links{
+      display:flex;
+      gap:12px;
+      font-size:14px;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
+    .nav-links a{
+      padding:6px 8px;
+      border-radius:10px;
+    }
+    .nav-links a:hover{
+      background:var(--soft);
+      color:var(--text);
+      text-decoration:none;
+    }
 
-    .policy-banner{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);
-      color:var(--muted);font-size:13px;letter-spacing:.25px;padding:10px 16px}
+    /* POLICY */
+    .policy{
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:13px;
+      color:var(--muted);
+      padding:10px 16px;
+    }
 
-    main{padding:28px 0 40px}
-    .hero h1{margin:0 0 8px;font-size:26px}
-    .hero p{margin:0;color:var(--muted);max-width:90ch}
+    main{padding:32px 0}
 
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);
-      border-radius:16px;padding:16px}
-    @media(min-width:900px){.card.half{grid-column:span 6}.card.third{grid-column:span 4}}
-    .card h2{margin:0 0 8px;font-size:16px}
-    .card p{margin:0 0 10px;color:var(--muted);font-size:14px}
+    .hero h1{
+      margin:0 0 10px;
+      font-size:26px;
+      line-height:1.15;
+    }
+    .hero p{
+      margin:0;
+      max-width:90ch;
+      color:var(--muted);
+    }
 
-    .list{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:10px}
-    .item{border:1px solid var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.02)}
-    .item strong{display:block;font-size:14px;margin-bottom:4px}
-    .item span{font-size:13px;color:var(--muted)}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+      margin-top:24px;
+    }
 
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-    .btn{padding:10px 12px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(255,255,255,.03);font-size:14px}
-    .btn:hover{background:rgba(255,255,255,.06);text-decoration:none}
+    .card{
+      grid-column:span 12;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+    }
 
-    .footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);background:rgba(0,0,0,.14)}
-    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .mini{font-size:13px;opacity:.95}
+    @media(min-width:900px){
+      .half{grid-column:span 6}
+      .third{grid-column:span 4}
+    }
+
+    .card h2{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .card p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      padding:22px 0 26px;
+      color:var(--muted);
+    }
+    .footer-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 16px;
+    }
+    .mini{font-size:13px;opacity:.9}
+    .sig{
+      margin-top:18px;
+      font-size:12px;
+      opacity:.6;
+      letter-spacing:.4px;
+    }
   </style>
 </head>
 
 <body>
 
-<nav class="nav">
-  <div class="nav-container">
-    <div class="brand">HERMETICUM</div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/architecture/">Architecture</a>
-      <a href="/use-cases/">Use-Cases</a>
-      <a href="/verify/">Verify</a>
-      <a href="/create/">Create</a>
-      <a href="/eu/position-paper/eu-ipr-technical-positioning.md">EU Positioning</a>
-      <a href="/eu/pilot/">EU Pilot</a>
-      <a href="/company/">Company</a>
-    </div>
-  </div>
-</nav>
-
-<section class="policy-banner">
-  <div class="wrap">
-    PUBLIC PILOT · EU-ALIGNED · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
-  </div>
-</section>
-
-<main class="wrap">
-
-  <section class="hero">
-    <h1>Use-Cases UE</h1>
-    <p>Casi d’uso prioritari UE dove attribuzione opponibile e tracciabilità riducono rischio,
-       costo di audit e contenzioso.</p>
-  </section>
-
-  <section class="grid">
-
-    <div class="card half">
-      <h2>B2B & Supply Chain</h2>
-      <p>Attribuzione contrattuale verificabile end-to-end.</p>
-      <ul class="list">
-        <li class="item"><strong>Problema</strong><span>identità operative ambigue, audit costoso</span></li>
-        <li class="item"><strong>Con IPR</strong><span>receipts hash-only, verifiche pass/fail</span></li>
-        <li class="item"><strong>Output</strong><span>riduzione dispute e tempi di audit</span></li>
-      </ul>
-      <div class="cta-row">
-        <a class="btn" href="/eu/pilot/">EU Pilot</a>
-        <a class="btn" href="/verify/">Verify</a>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">HERMETICUM</div>
+      <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="../architecture/">Architecture</a>
+        <a href="../verify/">Verify</a>
+        <a href="../create/">Create</a>
+        <a href="../eu/pilot/">EU Pilot</a>
       </div>
     </div>
+  </nav>
 
-    <div class="card half">
-      <h2>AI & Robotica</h2>
-      <p>Binding umano-macchina e responsabilità decisionale.</p>
-      <ul class="list">
-        <li class="item"><strong>Problema</strong><span>liability incerta</span></li>
-        <li class="item"><strong>Con IPR</strong><span>attribuzione verificabile</span></li>
-        <li class="item"><strong>Output</strong><span>audit decisionale ripetibile</span></li>
-      </ul>
+  <!-- POLICY -->
+  <div class="policy">
+    <div class="wrap">
+      Audit-first · Fail-closed · Hash-only · No data custody
     </div>
+  </div>
 
-    <div class="card third">
-      <h2>Infrastrutture critiche</h2>
-      <p>Energia, mobilità, spazio.</p>
-    </div>
+  <main class="wrap">
 
-    <div class="card third">
-      <h2>Digital Governance</h2>
-      <p>Atti, firme, responsabilità opponibili nel tempo.</p>
-    </div>
+    <section class="hero">
+      <h1>Casi d’uso</h1>
+      <p>
+        Applicazioni di attribuzione, tracciabilità e verifica in contesti digitali.
+      </p>
+    </section>
 
-    <div class="card third">
-      <h2>Pilot-ready</h2>
-      <p>Pattern testabile UE-style.</p>
-      <div class="cta-row">
-        <a class="btn" href="/eu/pilot/">Open EU Pilot</a>
+    <section class="grid">
+
+      <div class="card half">
+        <h2>Supply chain</h2>
+        <p>Attribuzione eventi e responsabilità tra attori multipli.</p>
+      </div>
+
+      <div class="card half">
+        <h2>AI e robotica</h2>
+        <p>Tracciabilità decisionale e verifica post-evento.</p>
+      </div>
+
+      <div class="card third">
+        <h2>Infrastrutture critiche</h2>
+        <p>Registro append-only di operazioni.</p>
+      </div>
+
+      <div class="card third">
+        <h2>Governance digitale</h2>
+        <p>Verifica indipendente di azioni amministrative.</p>
+      </div>
+
+      <div class="card third">
+        <h2>Audit distribuiti</h2>
+        <p>Confronto verificabile tra soggetti.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="mini">
+        HERMETICUM — digital responsibility infrastructure
+      </div>
+      <div class="sig">
+        HERMETICUM B.C.E. S.r.l. · EU
       </div>
     </div>
-
-  </section>
-
-</main>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <p><strong>HERMETICUM</strong> — EU-aligned cybernetic infrastructure</p>
-    <p>Attribution · Responsibility · Traceability · Time</p>
-    <p class="mini">No custody · Hash verification · Fail-closed architecture</p>
-  </div>
-</footer>
+  </footer>
 
 </body>
 </html>
