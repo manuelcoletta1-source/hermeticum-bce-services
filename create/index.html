@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>HERMETICUM — Create IPR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HERMETICUM create — official IPR artifact generation (hash-only, no data custody).">
+  <meta name="description" content="HERMETICUM create — official IPR artifact generation with embedded private payload (hash-only, no data custody).">
+
   <style>
     :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
     *{box-sizing:border-box}
@@ -23,13 +24,18 @@
     .hero p{margin:0;max-width:90ch;color:var(--muted)}
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:24px}
     .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    @media(min-width:900px){.half{grid-column:span 6}}
+    @media(min-width:900px){.half{grid-column:span 6}.third{grid-column:span 4}}
     label{display:block;font-size:13px;color:var(--muted);margin-top:10px}
-    input,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none}
+    input,textarea{
+      width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
+    }
     textarea{min-height:140px;resize:vertical}
+    input[type="file"]{padding:10px}
     .btn{margin-top:12px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;cursor:pointer}
     .btn:hover{background:rgba(255,255,255,.06)}
-    .out{margin-top:10px;padding:14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;white-space:pre-line}
+    .out{margin-top:10px;padding:14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;white-space:pre-line;overflow:auto}
+    .hint{font-size:12px;color:var(--muted);margin-top:8px}
     footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:22px 0 26px;color:var(--muted)}
     .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
     .mini{font-size:13px;opacity:.9}
@@ -46,6 +52,7 @@
       <a href="../architecture/">Architecture</a>
       <a href="../use-cases/">Use-Cases</a>
       <a href="../verify/">Verify</a>
+      <a href="../audit/">Audit</a>
       <a href="../eu/pilot/">EU Pilot</a>
     </div>
   </div>
@@ -55,28 +62,42 @@
 
 <main class="wrap">
   <section class="hero">
-    <h1>Generazione IPR Ufficiale</h1>
-    <p>Generazione deterministica di riferimento (SHA-256) e artefatto IPR ufficiale con sigillo infrastrutturale.</p>
+    <h1>Generazione IPR Ufficiale (Private Artifact)</h1>
+    <p>
+      Genera un riferimento SHA-256 e un artefatto IPR ufficiale con payload incastonato (riservato all’utente).
+      Nessun dato viene inviato o custodito dal sistema.
+    </p>
   </section>
 
   <section class="grid">
     <div class="card half">
       <label>Identità biologica (dichiarata)</label>
       <input id="nome" placeholder="Nome Cognome">
-
       <label>Nazione</label>
       <input id="nazione" placeholder="IT">
 
-      <label>Contenuto evento (testo non sensibile)</label>
-      <textarea id="contenuto" placeholder="contenuto evento"></textarea>
+      <label>Payload — Testo (riservato)</label>
+      <textarea id="contenuto" placeholder="scrivi qui, oppure carica un file sotto"></textarea>
 
-      <button class="btn" onclick="generaHash()">Genera Hash</button>
+      <label>Payload — File (riservato)</label>
+      <input id="file" type="file">
+
+      <div class="hint">
+        Nota: se carichi un file, l’hash viene calcolato sul file. Se non carichi file, l’hash viene calcolato sul testo.
+        L’artefatto PRIVATE include il payload; non condividerlo se non vuoi esporlo.
+      </div>
+
+      <button class="btn" onclick="generateHash()">Genera Hash</button>
       <div id="hashout" class="out">STATO: IDLE</div>
     </div>
 
     <div class="card half">
-      <button class="btn" onclick="generaIPR()">GENERA IPR UFFICIALE</button>
+      <button class="btn" onclick="generateIPRPrivate()">GENERA IPR UFFICIALE (PRIVATE)</button>
+      <button class="btn" onclick="generateIPRPublic()">GENERA IPR UFFICIALE (PUBLIC)</button>
       <div id="iprout" class="out">STATO: IDLE</div>
+      <div class="hint">
+        PUBLIC = senza payload (condivisibile). PRIVATE = contiene payload (riservato).
+      </div>
     </div>
   </section>
 </main>
@@ -90,39 +111,111 @@
 
 <script>
 let lastHash = "";
+let lastAlgo = "SHA-256";
+let payloadMode = "";        // "TEXT" | "FILE"
+let payloadText = "";
+let payloadFileMeta = null;  // {name,type,size}
+let payloadFileB64 = "";     // base64 of file bytes
 
-async function sha256(text){
-  const enc = new TextEncoder().encode(text);
-  const buf = await crypto.subtle.digest("SHA-256", enc);
+async function sha256Bytes(uint8){
+  const buf = await crypto.subtle.digest("SHA-256", uint8);
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
 }
 
-async function generaHash(){
-  const txt = document.getElementById("contenuto").value.trim();
-  const out = document.getElementById("hashout");
-  if(!txt){
-    out.textContent = "STATO: FAIL\\nMOTIVO: contenuto mancante";
-    lastHash = "";
-    return;
+function base64FromBytes(bytes){
+  // chunked conversion to avoid call stack blowups
+  let binary = "";
+  const chunk = 0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i+chunk));
   }
-  lastHash = await sha256(txt);
-  out.textContent = "STATO: OK\\nALGORITMO: SHA-256\\nRIFERIMENTO:\\n" + lastHash;
+  return btoa(binary);
 }
 
-function generaIPR(){
-  const out = document.getElementById("iprout");
-  if(!lastHash){
-    out.textContent = "STATO: FAIL\\nMOTIVO: genera prima l'hash";
+function makeId(prefix, iso){
+  return prefix + iso.replace(/[-:TZ.]/g,"").slice(0,14);
+}
+
+async function readFileAsBytes(file){
+  const ab = await file.arrayBuffer();
+  return new Uint8Array(ab);
+}
+
+async function generateHash(){
+  const out = document.getElementById("hashout");
+  const fileInput = document.getElementById("file");
+  const file = fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
+
+  payloadText = "";
+  payloadFileMeta = null;
+  payloadFileB64 = "";
+  lastHash = "";
+  payloadMode = "";
+
+  if(file){
+    // FILE mode
+    const bytes = await readFileAsBytes(file);
+    lastHash = await sha256Bytes(bytes);
+    payloadMode = "FILE";
+    payloadFileMeta = { name: file.name, type: file.type || "application/octet-stream", size: file.size };
+    payloadFileB64 = base64FromBytes(bytes);
+    out.textContent =
+      "STATO: OK\n" +
+      "MODE: FILE\n" +
+      "ALGORITMO: " + lastAlgo + "\n" +
+      "FILE: " + payloadFileMeta.name + " (" + payloadFileMeta.size + " bytes)\n" +
+      "RIFERIMENTO:\n" + lastHash;
     return;
   }
 
-  const nome = (document.getElementById("nome").value || "").trim() || "N/A";
-  const naz  = (document.getElementById("nazione").value || "").trim() || "N/A";
-  const now  = new Date().toISOString();
-  const iprID = "IPR-O-" + now.replace(/[-:TZ.]/g,"").slice(0,14);
+  // TEXT mode
+  const txt = (document.getElementById("contenuto").value || "").trim();
+  if(!txt){
+    out.textContent = "STATO: FAIL\nMOTIVO: payload mancante (testo o file)";
+    return;
+  }
+  payloadMode = "TEXT";
+  payloadText = txt;
+  const bytes = new TextEncoder().encode(txt);
+  lastHash = await sha256Bytes(bytes);
+  out.textContent =
+    "STATO: OK\n" +
+    "MODE: TEXT\n" +
+    "ALGORITMO: " + lastAlgo + "\n" +
+    "RIFERIMENTO:\n" + lastHash;
+}
 
-  const doc =
-`IPR — IDENTITY PRIMARY RECORD
+function buildIPRDoc({iprID, nowISO, name, nation, hash, includePayload}){
+  const payloadSection = includePayload ? (
+    payloadMode === "FILE"
+      ? (
+`Embedded Payload (PRIVATE)
+Mode: FILE
+Filename: ${payloadFileMeta.name}
+MIME: ${payloadFileMeta.type}
+Size: ${payloadFileMeta.size} bytes
+Encoding: base64
+
+-----BEGIN PAYLOAD BASE64-----
+${payloadFileB64}
+-----END PAYLOAD BASE64-----`
+      )
+      : (
+`Embedded Payload (PRIVATE)
+Mode: TEXT
+Encoding: utf-8
+
+-----BEGIN PAYLOAD TEXT-----
+${payloadText}
+-----END PAYLOAD TEXT-----`
+      )
+  ) : (
+`Embedded Payload
+Mode: NONE (PUBLIC ARTIFACT)
+Note: This public artifact intentionally excludes the payload.`
+  );
+
+  return `IPR — IDENTITY PRIMARY RECORD
 Official Responsibility Artifact
 
 System: HERMETICUM
@@ -133,11 +226,11 @@ IPR ID:
 ${iprID}
 
 Timestamp (UTC):
-${now}
+${nowISO}
 
 Declared Biological Identity
-Name: ${nome}
-Nation: ${naz}
+Name: ${name}
+Nation: ${nation}
 Status: Self-declared biological subject
 
 The identity above is declared by the subject.
@@ -147,8 +240,10 @@ Digital Event
 Digital event under responsibility of the declared subject.
 
 Cryptographic Reference
-Hash: ${lastHash}
-Algorithm: SHA-256
+Hash: ${hash}
+Algorithm: ${lastAlgo}
+
+${payloadSection}
 
 Responsibility Statement
 The declared subject assumes responsibility for the digital event
@@ -157,6 +252,7 @@ associated with the reference hash above.
 Infrastructure Seal
 Generated by HERMETICUM infrastructure
 Digital Responsibility Infrastructure
+HERMETICUM B.C.E. S.r.l. · EU
 
 Status
 Active · Traceable · Verifiable
@@ -165,14 +261,118 @@ Note
 This document does not constitute legal identification.
 It provides a verifiable responsibility record only.
 `;
+}
 
-  out.textContent = "STATO: OK\\nARTEFATTO GENERATO\\nID: " + iprID;
-
-  const blob = new Blob([doc], {type:"text/plain"});
+function downloadText(filename, content){
+  const blob = new Blob([content], {type:"text/plain"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = iprID + ".txt";
+  a.download = filename;
   a.click();
+}
+
+function downloadJson(filename, obj){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+}
+
+async function sha256String(text){
+  const bytes = new TextEncoder().encode(text);
+  return await sha256Bytes(bytes);
+}
+
+async function generateIPRPrivate(){
+  const out = document.getElementById("iprout");
+  if(!lastHash){
+    out.textContent = "STATO: FAIL\nMOTIVO: genera prima l'hash";
+    return;
+  }
+  if(payloadMode !== "TEXT" && payloadMode !== "FILE"){
+    out.textContent = "STATO: FAIL\nMOTIVO: payload non definito";
+    return;
+  }
+
+  const now = new Date().toISOString();
+  const iprID = makeId("IPR-O-", now);
+  const name = (document.getElementById("nome").value || "").trim() || "N/A";
+  const nation = (document.getElementById("nazione").value || "").trim() || "N/A";
+
+  const doc = buildIPRDoc({iprID, nowISO: now, name, nation, hash:lastHash, includePayload:true});
+
+  // JSON artifact (machine)
+  const json = {
+    kind: "IPR_OFFICIAL",
+    version: "IPR-OFFICIAL-v1",
+    system: "HERMETICUM",
+    regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
+    ipr_id: iprID,
+    timestamp_utc: now,
+    declared_identity: { name, nation, status: "SELF_DECLARED" },
+    reference: { hash: lastHash, algorithm: lastAlgo },
+    payload: payloadMode === "FILE"
+      ? { mode:"FILE", filename: payloadFileMeta.name, mime: payloadFileMeta.type, size: payloadFileMeta.size, encoding:"base64", data: payloadFileB64 }
+      : { mode:"TEXT", encoding:"utf-8", data: payloadText },
+    interface: { name:"AI JOKER ΦΩ — C2 SOFTWARE", availability:"PUBLIC", entrypoints:{ verify:"../verify/", audit:"../audit/", pilot:"../eu/pilot/" } },
+    seal: { generated_by:"HERMETICUM infrastructure", signature_line:"HERMETICUM B.C.E. S.r.l. · EU" }
+  };
+
+  const receipt = await sha256String(JSON.stringify(json, null, 2));
+
+  out.textContent =
+    "STATO: OK\n" +
+    "ARTEFATTO: PRIVATE\n" +
+    "ID: " + iprID + "\n" +
+    "receipt_sha256(json):\n" + receipt + "\n\n" +
+    "Download avviato (TXT + JSON).";
+
+  downloadText(iprID + "_PRIVATE.txt", doc);
+  downloadJson(iprID + "_PRIVATE.json", json);
+  downloadText(iprID + "_PRIVATE.receipt.sha256.txt", receipt + "\n");
+}
+
+async function generateIPRPublic(){
+  const out = document.getElementById("iprout");
+  if(!lastHash){
+    out.textContent = "STATO: FAIL\nMOTIVO: genera prima l'hash";
+    return;
+  }
+
+  const now = new Date().toISOString();
+  const iprID = makeId("IPR-O-", now);
+  const name = (document.getElementById("nome").value || "").trim() || "N/A";
+  const nation = (document.getElementById("nazione").value || "").trim() || "N/A";
+
+  const doc = buildIPRDoc({iprID, nowISO: now, name, nation, hash:lastHash, includePayload:false});
+
+  const json = {
+    kind: "IPR_OFFICIAL_PUBLIC",
+    version: "IPR-OFFICIAL-v1",
+    system: "HERMETICUM",
+    regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
+    ipr_id: iprID,
+    timestamp_utc: now,
+    declared_identity: { name, nation, status: "SELF_DECLARED" },
+    reference: { hash: lastHash, algorithm: lastAlgo },
+    payload: { mode:"NONE" },
+    interface: { name:"AI JOKER ΦΩ — C2 SOFTWARE", availability:"PUBLIC", entrypoints:{ verify:"../verify/", audit:"../audit/", pilot:"../eu/pilot/" } },
+    seal: { generated_by:"HERMETICUM infrastructure", signature_line:"HERMETICUM B.C.E. S.r.l. · EU" }
+  };
+
+  const receipt = await sha256String(JSON.stringify(json, null, 2));
+
+  out.textContent =
+    "STATO: OK\n" +
+    "ARTEFATTO: PUBLIC\n" +
+    "ID: " + iprID + "\n" +
+    "receipt_sha256(json):\n" + receipt + "\n\n" +
+    "Download avviato (TXT + JSON).";
+
+  downloadText(iprID + "_PUBLIC.txt", doc);
+  downloadJson(iprID + "_PUBLIC.json", json);
+  downloadText(iprID + "_PUBLIC.receipt.sha256.txt", receipt + "\n");
 }
 </script>
 
