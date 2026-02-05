@@ -17,16 +17,11 @@
       --max:980px;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0;background:var(--bg);color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      line-height:1.45
-    }
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    /* Header UE-style (istituzionale, asciutto) */
     header{border-bottom:1px solid var(--line);background:rgba(0,0,0,.22);backdrop-filter:blur(6px)}
     .head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0}
     .brand{font-weight:900;letter-spacing:.9px}
@@ -39,13 +34,7 @@
 
     main{padding:22px 0 34px}
 
-    /* Card “sportello banca” */
-    .card{
-      background:var(--paper);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-    }
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px}
     h1{margin:0 0 6px;font-size:22px}
     .subtitle{margin:0;color:var(--muted);max-width:92ch;font-size:13px}
 
@@ -54,14 +43,8 @@
 
     label{display:block;font-size:12px;color:var(--muted);margin-top:10px}
     input,textarea{
-      width:100%;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.22);
-      color:var(--text);
-      font-size:14px;
-      outline:none
+      width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
     }
     textarea{min-height:120px;resize:vertical}
     input[type="file"]{padding:10px}
@@ -72,10 +55,8 @@
     .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     .btn{
       display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 14px;border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      font-size:14px;cursor:pointer
+      padding:10px 14px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(255,255,255,.03);font-size:14px;cursor:pointer
     }
     .btn:hover{background:rgba(255,255,255,.06)}
     .btn.primary{background:rgba(255,255,255,.06)}
@@ -209,10 +190,14 @@
 <script>
 let lastHash = "";
 let lastAlgo = "SHA-256";
-let payloadMode = "";        // "TEXT" | "FILE"
+
+// testo e file vengono gestiti insieme:
+// - hash basis: FILE se presente, altrimenti TEXT
+// - PRIVATE embed: FILE (se presente) + TEXT (se presente)
 let payloadText = "";
 let payloadFileMeta = null;  // {name,type,size}
 let payloadFileB64 = "";     // base64
+let hashBasis = "";          // "FILE" | "TEXT"
 
 async function sha256Bytes(uint8){
   const buf = await crypto.subtle.digest("SHA-256", uint8);
@@ -277,33 +262,39 @@ async function generateHash(){
   const fileInput = document.getElementById("file");
   const file = fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
 
-  payloadText = "";
+  // leggi sempre testo
+  payloadText = (document.getElementById("contenuto").value || "").trim();
+
+  // reset file
   payloadFileMeta = null;
   payloadFileB64 = "";
   lastHash = "";
-  payloadMode = "";
+  hashBasis = "";
 
   if(file){
     const bytes = await readFileAsBytes(file);
     lastHash = await sha256Bytes(bytes);
-    payloadMode = "FILE";
+    hashBasis = "FILE";
     payloadFileMeta = { name:file.name, type:file.type || "application/octet-stream", size:file.size };
     payloadFileB64 = base64FromBytes(bytes);
+
     out.textContent =
-      "STATO: OK\nMODE: FILE\nALGORITMO: " + lastAlgo +
-      "\nFILE: " + payloadFileMeta.name + " (" + payloadFileMeta.size + " bytes)\nRIFERIMENTO:\n" + lastHash;
+      "STATO: OK\nHASH_BASIS: FILE\nALGORITMO: " + lastAlgo +
+      "\nFILE: " + payloadFileMeta.name + " (" + payloadFileMeta.size + " bytes)\n" +
+      (payloadText ? "TESTO: presente (sarà incastonato nel PRIVATE)\n" : "TESTO: assente\n") +
+      "RIFERIMENTO:\n" + lastHash;
     return;
   }
 
-  const txt = (document.getElementById("contenuto").value || "").trim();
-  if(!txt){
+  if(!payloadText){
     out.textContent = "STATO: FAIL\nMOTIVO: inserire testo o allegare un file";
     return;
   }
-  payloadMode = "TEXT";
-  payloadText = txt;
-  lastHash = await sha256Bytes(new TextEncoder().encode(txt));
-  out.textContent = "STATO: OK\nMODE: TEXT\nALGORITMO: " + lastAlgo + "\nRIFERIMENTO:\n" + lastHash;
+
+  lastHash = await sha256Bytes(new TextEncoder().encode(payloadText));
+  hashBasis = "TEXT";
+  out.textContent =
+    "STATO: OK\nHASH_BASIS: TEXT\nALGORITMO: " + lastAlgo + "\nRIFERIMENTO:\n" + lastHash;
 }
 
 function buildPayloadSectionTXT(includePayload){
@@ -312,9 +303,20 @@ function buildPayloadSectionTXT(includePayload){
 Mode: NONE (PUBLIC ARTIFACT)
 Note: This public artifact intentionally excludes the payload.`;
   }
-  if(payloadMode === "FILE"){
+
+  const hasText = !!(payloadText && payloadText.trim());
+  const hasFile = !!(payloadFileMeta && payloadFileB64);
+
+  if(hasText && hasFile){
     return `Embedded Payload (PRIVATE)
-Mode: FILE
+Mode: FILE + TEXT
+Hash basis: ${hashBasis}
+
+-----BEGIN PAYLOAD TEXT-----
+${payloadText}
+-----END PAYLOAD TEXT-----
+
+File:
 Filename: ${payloadFileMeta.name}
 MIME: ${payloadFileMeta.type}
 Size: ${payloadFileMeta.size} bytes
@@ -324,12 +326,28 @@ Encoding: base64
 ${payloadFileB64}
 -----END PAYLOAD BASE64-----`;
   }
+
+  if(hasFile){
+    return `Embedded Payload (PRIVATE)
+Mode: FILE
+Hash basis: ${hashBasis}
+Filename: ${payloadFileMeta.name}
+MIME: ${payloadFileMeta.type}
+Size: ${payloadFileMeta.size} bytes
+Encoding: base64
+
+-----BEGIN PAYLOAD BASE64-----
+${payloadFileB64}
+-----END PAYLOAD BASE64-----`;
+  }
+
   return `Embedded Payload (PRIVATE)
 Mode: TEXT
+Hash basis: ${hashBasis}
 Encoding: utf-8
 
 -----BEGIN PAYLOAD TEXT-----
-${payloadText}
+${payloadText || ""}
 -----END PAYLOAD TEXT-----`;
 }
 
@@ -367,6 +385,7 @@ Digital event under responsibility of the declared subject.
 Cryptographic Reference
 Hash: ${hash}
 Algorithm: ${lastAlgo}
+Hash basis: ${hashBasis}
 
 ${buildPayloadSectionTXT(includePayload)}
 
@@ -388,12 +407,15 @@ async function generateIPR(includePayload){
   const status = document.getElementById("iprout");
   document.getElementById("dlbox").style.display = "none";
 
-  if(!lastHash){
+  if(!lastHash || !hashBasis){
     status.textContent = "STATO: FAIL\nMOTIVO: calcolare prima l'hash";
     return;
   }
-  if(includePayload && (payloadMode !== "TEXT" && payloadMode !== "FILE")){
-    status.textContent = "STATO: FAIL\nMOTIVO: payload non definito";
+
+  // PRIVATE deve avere almeno testo o file
+  const hasAny = (!!(payloadText && payloadText.trim())) || (!!payloadFileMeta);
+  if(includePayload && !hasAny){
+    status.textContent = "STATO: FAIL\nMOTIVO: inserire testo e/o file";
     return;
   }
 
@@ -404,6 +426,26 @@ async function generateIPR(includePayload){
   const identity = getIdentity();
   const doc = buildIPRDoc({iprID, nowISO: now, identity, hash: lastHash, includePayload});
 
+  const payloadObj = includePayload
+    ? {
+        mode: (payloadFileMeta && payloadText && payloadText.trim()) ? "FILE+TEXT"
+             : (payloadFileMeta ? "FILE" : "TEXT"),
+        hash_basis: hashBasis,
+        text: (payloadText && payloadText.trim()) ? payloadText : undefined,
+        file: payloadFileMeta ? {
+          filename: payloadFileMeta.name,
+          mime: payloadFileMeta.type,
+          size: payloadFileMeta.size,
+          encoding: "base64",
+          data: payloadFileB64
+        } : undefined
+      }
+    : { mode: "NONE" };
+
+  // pulizia undefined
+  if(payloadObj.text === undefined) delete payloadObj.text;
+  if(payloadObj.file === undefined) delete payloadObj.file;
+
   const jsonObj = {
     kind: includePayload ? "IPR_OFFICIAL_PRIVATE" : "IPR_OFFICIAL_PUBLIC",
     version: "IPR-OFFICIAL-v1",
@@ -413,19 +455,15 @@ async function generateIPR(includePayload){
     timestamp_utc: now,
     subject_type: "BIOLOGICAL_SUBJECT",
     declared_identity: identity,
-    reference: { hash: lastHash, algorithm: lastAlgo },
-    payload: includePayload
-      ? (payloadMode === "FILE"
-          ? { mode:"FILE", filename: payloadFileMeta.name, mime: payloadFileMeta.type, size: payloadFileMeta.size, encoding:"base64", data: payloadFileB64 }
-          : { mode:"TEXT", encoding:"utf-8", data: payloadText })
-      : { mode:"NONE" },
+    reference: { hash: lastHash, algorithm: lastAlgo, hash_basis: hashBasis },
+    payload: payloadObj,
     seal: { generated_by:"HERMETICUM infrastructure", signature_line:"HERMETICUM B.C.E. S.r.l. · EU" }
   };
 
   const jsonText = JSON.stringify(jsonObj, null, 2);
   const receipt = await sha256String(jsonText);
 
-  // Fallback manuale sempre pronto
+  // fallback manuale sempre pronto
   const txtBlob = new Blob([doc], {type:"text/plain"});
   const jsonBlob = new Blob([jsonText], {type:"application/json"});
   const rcptBlob = new Blob([receipt + "\n"], {type:"text/plain"});
@@ -442,14 +480,8 @@ async function generateIPR(includePayload){
   aJson.href = jsonURL; aJson.download = iprID + "_" + suffix + ".json";
   aRcpt.href = rcptURL; aRcpt.download = iprID + "_" + suffix + ".receipt.sha256.txt";
 
-  // Auto-download come prima (3 file)
-  try{
-    aTxt.click();
-    aJson.click();
-    aRcpt.click();
-  }catch(e){
-    // se il browser blocca, restano i pulsanti manuali
-  }
+  // auto-download (come prima)
+  try{ aTxt.click(); aJson.click(); aRcpt.click(); } catch(e){}
 
   status.textContent =
     "STATO: OK\n" +
