@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>HERMETICUM — Verify</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HERMETICUM verification — hash checks + receipt validation for artifacts.">
+  <meta name="description" content="HERMETICUM verification — hash checks + receipt validation + disclosure of declared identity/location and AI interface metadata.">
 
   <style>
     :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
@@ -24,7 +24,7 @@
 
     main{padding:32px 0}
     .hero h1{margin:0 0 10px;font-size:26px;line-height:1.15}
-    .hero p{margin:0;max-width:90ch;color:var(--muted)}
+    .hero p{margin:0;max-width:92ch;color:var(--muted)}
 
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:24px}
     .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
@@ -35,15 +35,12 @@
       width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
       background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
     }
-    textarea{min-height:150px;resize:vertical}
+    textarea{min-height:160px;resize:vertical}
 
     .btn{margin-top:12px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;cursor:pointer}
     .btn:hover{background:rgba(255,255,255,.06)}
 
-    .out{
-      margin-top:10px;padding:14px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;white-space:pre-line;overflow:auto
-    }
+    .out{margin-top:10px;padding:14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;white-space:pre-line;overflow:auto}
     .hint{font-size:12px;color:var(--muted);margin-top:8px}
 
     footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:22px 0 26px;color:var(--muted)}
@@ -61,9 +58,12 @@
     <div class="nav-links">
       <a href="../">Home</a>
       <a href="../architecture/">Architecture</a>
+      <a href="../use-cases/">Use-Cases</a>
       <a href="../create/">Create</a>
+      <a href="../verify/">Verify</a>
       <a href="../audit/">Audit</a>
       <a href="../eu/pilot/">EU Pilot</a>
+      <a href="../company/">Company</a>
     </div>
   </div>
 </nav>
@@ -73,11 +73,13 @@
 <main class="wrap">
   <section class="hero">
     <h1>Verifica</h1>
-    <p>Verifica deterministica: formato hash + receipt SHA-256 per artefatti JSON (PUBLIC/PRIVATE).</p>
+    <p>
+      Verifica deterministica: formato hash + receipt SHA-256 per artefatti JSON.
+      Disclosure tecnica (best-effort): identity/location self-declared e metadati AI (se presenti).
+    </p>
   </section>
 
   <section class="grid">
-
     <div class="card half">
       <h2>1) Verifica formato hash</h2>
 
@@ -87,9 +89,7 @@
       <button class="btn" onclick="checkHash()">Verifica hash</button>
       <div id="hashOut" class="out">STATO: IDLE</div>
 
-      <div class="hint">
-        Formati accettati: hex 32–128 caratteri (0x opzionale).
-      </div>
+      <div class="hint">Hex 32–128 caratteri (0x opzionale).</div>
     </div>
 
     <div class="card half">
@@ -99,16 +99,15 @@
       <textarea id="json" placeholder="{ ... }"></textarea>
 
       <label>Receipt atteso (SHA-256 del JSON)</label>
-      <input id="receipt" placeholder="incolla receipt_sha256(json)">
+      <input id="receipt" placeholder="receipt_sha256(json)">
 
       <button class="btn" onclick="checkReceipt()">Verifica receipt</button>
       <div id="receiptOut" class="out">STATO: IDLE</div>
 
       <div class="hint">
-        Se l’artefatto contiene payload (PRIVATE), verrà segnalato. Il sistema non invia né conserva nulla.
+        Se payload presente → PRIVATE. Il sistema non invia né conserva nulla.
       </div>
     </div>
-
   </section>
 </main>
 
@@ -124,6 +123,7 @@ function isHexHash(s){
   const t = (s||"").trim().replace(/^0x/,'');
   return /^[a-fA-F0-9]{32,128}$/.test(t);
 }
+function normalizeHex(s){ return (s||"").trim().toLowerCase().replace(/^0x/,''); }
 
 async function sha256String(text){
   const bytes = new TextEncoder().encode(text);
@@ -131,23 +131,20 @@ async function sha256String(text){
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
 }
 
-function normalizeHex(s){
-  return (s||"").trim().toLowerCase().replace(/^0x/,'');
-}
-
 function checkHash(){
   const v = document.getElementById("hash").value.trim();
   const out = document.getElementById("hashOut");
-
-  if(!v){
-    out.textContent = "STATO: FAIL\nMOTIVO: input mancante";
-    return;
-  }
-  if(!isHexHash(v)){
-    out.textContent = "STATO: FAIL\nMOTIVO: formato non valido";
-    return;
-  }
+  if(!v) return out.textContent = "STATO: FAIL\nMOTIVO: input mancante";
+  if(!isHexHash(v)) return out.textContent = "STATO: FAIL\nMOTIVO: formato non valido";
   out.textContent = "STATO: PASS\nFORMAT: OK\nHASH:\n" + normalizeHex(v);
+}
+
+function safeGet(obj, path, fallback){
+  try{
+    return path.split('.').reduce((o,k)=> (o && (k in o)) ? o[k] : undefined, obj) ?? fallback;
+  }catch(e){
+    return fallback;
+  }
 }
 
 async function checkReceipt(){
@@ -155,55 +152,79 @@ async function checkReceipt(){
   const receipt = (document.getElementById("receipt").value || "").trim();
   const out = document.getElementById("receiptOut");
 
-  if(!jsonText){
-    out.textContent = "STATO: FAIL\nMOTIVO: JSON mancante";
-    return;
-  }
-  if(!receipt){
-    out.textContent = "STATO: FAIL\nMOTIVO: receipt mancante";
-    return;
-  }
-  if(!isHexHash(receipt)){
-    out.textContent = "STATO: FAIL\nMOTIVO: receipt formato non valido";
-    return;
-  }
+  if(!jsonText) return out.textContent = "STATO: FAIL\nMOTIVO: JSON mancante";
+  if(!receipt)  return out.textContent = "STATO: FAIL\nMOTIVO: receipt mancante";
+  if(!isHexHash(receipt)) return out.textContent = "STATO: FAIL\nMOTIVO: receipt formato non valido";
 
-  // parse to inspect payload mode (best-effort)
-  let mode = "UNKNOWN";
+  let payloadMode = "UNKNOWN";
+  let privacy = "UNKNOWN";
+  let ai = "OFF";
+  let aiMode = "N/A";
+  let aiAvail = "N/A";
+
+  let idName = "N/A";
+  let idNation = "N/A";
+  let locCountry = "N/A";
+  let locRegion = "N/A";
+  let locCity = "N/A";
+  let locZone = "N/A";
+  let locGran = "N/A";
+
   try{
     const obj = JSON.parse(jsonText);
-    if(obj && obj.payload && typeof obj.payload.mode === "string"){
-      mode = obj.payload.mode;
+
+    payloadMode = safeGet(obj, "payload.mode", "UNKNOWN");
+    privacy =
+      (payloadMode === "FILE" || payloadMode === "TEXT") ? "PRIVATE (contiene payload)"
+      : (payloadMode === "NONE") ? "PUBLIC (senza payload)"
+      : "UNKNOWN";
+
+    // identity + location (self-declared)
+    idName = safeGet(obj, "declared_identity.name", "N/A");
+    idNation = safeGet(obj, "declared_identity.nation", "N/A");
+    locCountry = safeGet(obj, "declared_identity.location.country", idNation || "N/A");
+    locRegion  = safeGet(obj, "declared_identity.location.region", "N/A");
+    locCity    = safeGet(obj, "declared_identity.location.city", "N/A");
+    locZone    = safeGet(obj, "declared_identity.location.zone", "N/A");
+    locGran    = safeGet(obj, "declared_identity.location.granularity", "N/A");
+
+    // ai
+    if(safeGet(obj, "ai_interface.enabled", false) === true){
+      ai = "ON";
+      aiMode = safeGet(obj, "ai_interface.mode", "N/A");
+      aiAvail = safeGet(obj, "ai_interface.availability", "N/A");
     }
   }catch(e){
-    // keep going: receipt check can still work over raw text
+    // best-effort parse only
   }
 
   const computed = await sha256String(jsonText);
   const exp = normalizeHex(receipt);
 
   if(computed !== exp){
-    out.textContent =
-      "STATO: FAIL\n" +
-      "MOTIVO: receipt non corrisponde\n\n" +
+    return out.textContent =
+      "STATO: FAIL\nMOTIVO: receipt non corrisponde\n\n" +
       "EXPECTED:\n" + exp + "\n\n" +
       "COMPUTED:\n" + computed + "\n\n" +
-      "PAYLOAD MODE:\n" + mode;
-    return;
+      "ARTIFACT:\n" + privacy + "\n" +
+      "AI_INTERFACE:\n" + ai;
   }
 
-  const privacy =
-    (mode === "FILE" || mode === "TEXT")
-      ? "PRIVATE (contiene payload)"
-      : (mode === "NONE")
-        ? "PUBLIC (senza payload)"
-        : "UNKNOWN";
-
   out.textContent =
-    "STATO: PASS\n" +
-    "RECEIPT: OK\n" +
-    "COMPUTED:\n" + computed + "\n\n" +
-    "ARTIFACT:\n" + privacy;
+    "STATO: PASS\nRECEIPT: OK\nCOMPUTED:\n" + computed + "\n\n" +
+    "ARTIFACT:\n" + privacy + "\n\n" +
+    "DECLARED IDENTITY:\n" +
+    "Name: " + idName + "\n" +
+    "Nation: " + idNation + "\n\n" +
+    "DECLARED LOCATION (LOW GRANULARITY):\n" +
+    "Country: " + locCountry + "\n" +
+    "Region: " + locRegion + "\n" +
+    "City: " + locCity + "\n" +
+    "Zone: " + locZone + "\n" +
+    "Granularity: " + locGran + "\n\n" +
+    "AI_INTERFACE:\n" + ai + "\n" +
+    "AI_AVAILABILITY:\n" + aiAvail + "\n" +
+    "AI_MODE:\n" + aiMode;
 }
 </script>
 
