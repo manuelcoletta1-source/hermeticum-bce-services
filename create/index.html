@@ -1,195 +1,282 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <title>HERMETICUM — Create</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>HERMETICUM — Create (Demo)</title>
-  <meta name="description" content="HERMETICUM — Create IPR demo flow. EU-aligned, audit-first, fail-closed, hash-only, no data custody." />
+  <meta name="description" content="HERMETICUM create — deterministic hash generation without data custody.">
 
   <style>
     :root{
-      --bg:#0b0d10; --card:#0f1318; --text:#e7edf5; --muted:#9fb0c2;
-      --line:rgba(255,255,255,.10); --soft:rgba(255,255,255,.06); --max:1100px;
+      --bg:#0b0d10;
+      --card:#0f1318;
+      --text:#e7edf5;
+      --muted:#9fb0c2;
+      --line:rgba(255,255,255,.12);
+      --soft:rgba(255,255,255,.06);
+      --max:1100px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      line-height:1.45;
+    }
+
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
+
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.18);backdrop-filter:blur(6px)}
-    .nav-container{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    /* NAV */
+    .nav{
+      border-bottom:1px solid var(--line);
+      background:rgba(0,0,0,.2);
+      backdrop-filter:blur(6px);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+    }
     .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{display:flex;flex-wrap:wrap;gap:12px;font-size:14px;color:var(--muted);justify-content:flex-end}
-    .nav-links a{padding:6px 8px;border-radius:10px}
-    .nav-links a:hover{background:var(--soft);color:var(--text);text-decoration:none}
+    .nav-links{
+      display:flex;
+      gap:12px;
+      font-size:14px;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
+    .nav-links a{
+      padding:6px 8px;
+      border-radius:10px;
+    }
+    .nav-links a:hover{
+      background:var(--soft);
+      color:var(--text);
+      text-decoration:none;
+    }
 
-    .policy-banner{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);
-      color:var(--muted);font-size:13px;letter-spacing:.25px;padding:10px 16px}
+    /* POLICY */
+    .policy{
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:13px;
+      color:var(--muted);
+      padding:10px 16px;
+    }
 
-    main{padding:28px 0 40px}
-    .hero h1{margin:0 0 8px;font-size:26px}
-    .hero p{margin:0;color:var(--muted);max-width:92ch}
+    main{padding:32px 0}
 
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    @media(min-width:900px){.card.half{grid-column:span 6}.card.third{grid-column:span 4}}
-    .card h2{margin:0 0 8px;font-size:16px}
-    .card p{margin:0 0 10px;color:var(--muted);font-size:14px}
+    .hero h1{
+      margin:0 0 10px;
+      font-size:26px;
+      line-height:1.15;
+    }
+    .hero p{
+      margin:0;
+      max-width:90ch;
+      color:var(--muted);
+    }
 
-    .label{font-size:12px;color:var(--muted);letter-spacing:.25px;margin-bottom:6px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+      margin-top:24px;
+    }
+
+    .card{
+      grid-column:span 12;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    @media(min-width:900px){
+      .half{grid-column:span 6}
+      .third{grid-column:span 4}
+    }
+
+    .card h2{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .card p{
+      margin:0 0 8px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
     textarea{
-      width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);
-      background:rgba(0,0,0,.22);color:var(--text);outline:none;font-size:14px;min-height:140px;resize:vertical
+      width:100%;
+      min-height:140px;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      color:var(--text);
+      font-size:14px;
+      outline:none;
+      resize:vertical;
     }
 
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;align-items:center}
     .btn{
-      display:inline-block;padding:10px 12px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(255,255,255,.03);font-size:14px;color:var(--text);cursor:pointer
+      margin-top:10px;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:14px;
+      cursor:pointer;
     }
-    .btn:hover{background:rgba(255,255,255,.06);text-decoration:none}
-
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:14px;padding:12px;
-      background:rgba(0,0,0,.18);white-space:pre-wrap
+    .btn:hover{
+      background:rgba(255,255,255,.06);
     }
 
-    .footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);background:rgba(0,0,0,.14)}
-    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .mini{font-size:13px;opacity:.95}
+    .output{
+      margin-top:10px;
+      padding:14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      font-family:ui-monospace,monospace;
+      font-size:13px;
+      white-space:pre-line;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      padding:22px 0 26px;
+      color:var(--muted);
+    }
+    .footer-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 16px;
+    }
+    .mini{font-size:13px;opacity:.9}
+    .sig{
+      margin-top:18px;
+      font-size:12px;
+      opacity:.6;
+      letter-spacing:.4px;
+    }
   </style>
 </head>
 
 <body>
 
-<nav class="nav">
-  <div class="nav-container">
-    <div class="brand">HERMETICUM</div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/architecture/">Architecture</a>
-      <a href="/use-cases/">Use-Cases</a>
-      <a href="/verify/">Verify</a>
-      <a href="/create/">Create</a>
-      <a href="/eu/position-paper/eu-ipr-technical-positioning.md">EU Positioning</a>
-      <a href="/eu/pilot/">EU Pilot</a>
-      <a href="/company/">Company</a>
-    </div>
-  </div>
-</nav>
-
-<section class="policy-banner">
-  <div class="wrap">
-    PUBLIC PILOT · EU-ALIGNED · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST · DEMO OFFLINE
-  </div>
-</section>
-
-<main class="wrap">
-
-  <section class="hero">
-    <h1>Create (Demo Offline)</h1>
-    <p>Flusso demo per generare una receipt hash-only senza custodia dati personali. In produzione: manifest firmati + evidence pack verificabile.</p>
-  </section>
-
-  <section class="grid">
-
-    <div class="card half">
-      <h2>Input (demo)</h2>
-      <p>Inserisci testo/JSON non sensibile. Il sistema genera un riferimento (SHA-256) deterministico.</p>
-
-      <div class="label">Payload (avoid personal data)</div>
-      <textarea id="payload" placeholder="paste text or json (avoid personal data)"></textarea>
-
-      <div class="cta-row">
-        <button class="btn" onclick="generateReceipt()">Generate receipt</button>
-        <button class="btn" onclick="clearAll()">Clear</button>
-        <a class="btn" href="/eu/pilot/">EU Pilot</a>
-        <a class="btn" href="/verify/">Go to Verify</a>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">HERMETICUM</div>
+      <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="../architecture/">Architecture</a>
+        <a href="../use-cases/">Use-Cases</a>
+        <a href="../verify/">Verify</a>
+        <a href="../eu/pilot/">EU Pilot</a>
       </div>
     </div>
+  </nav>
 
-    <div class="card half">
-      <h2>Receipt (demo)</h2>
-      <p>Output audit-first. In produzione: firme + manifest + pack evidenze.</p>
-      <div class="mono" id="out">IDLE</div>
+  <!-- POLICY -->
+  <div class="policy">
+    <div class="wrap">
+      Audit-first · Fail-closed · Hash-only · No data custody
     </div>
+  </div>
 
-    <div class="card third">
-      <h2>Principi</h2>
-      <div class="mono">Principles:
-- NO DATA CUSTODY
-- HASH-ONLY OUTPUT
-- AUDIT-FIRST FORMAT
-- FAIL-CLOSED ON EMPTY</div>
-    </div>
+  <main class="wrap">
 
-    <div class="card third">
-      <h2>Production target</h2>
-      <div class="mono">Next:
-- signed manifest (ED25519)
-- evidence pack
-- deterministic verifier
-- exportable audit report</div>
-    </div>
+    <section class="hero">
+      <h1>Creazione</h1>
+      <p>
+        Generazione deterministica di riferimenti crittografici.
+        Nessun dato viene conservato.
+      </p>
+    </section>
 
-    <div class="card third">
-      <h2>EU Positioning</h2>
-      <p>Documento tecnico: scope, non-scope, compatibilità e casi d’uso.</p>
-      <div class="cta-row">
-        <a class="btn" href="/eu/position-paper/eu-ipr-technical-positioning.md">Read Paper</a>
-        <a class="btn" href="/architecture/">Architecture</a>
+    <section class="grid">
+
+      <div class="card half">
+        <h2>Input</h2>
+        <p>Inserisci un contenuto testuale non sensibile.</p>
+        <textarea id="data" placeholder="contenuto testuale"></textarea>
+        <button class="btn" onclick="generate()">Genera riferimento</button>
+      </div>
+
+      <div class="card half">
+        <h2>Output</h2>
+        <div id="out" class="output">
+STATO: IDLE
+        </div>
+      </div>
+
+      <div class="card third">
+        <h2>Metodo</h2>
+        <p>Hash crittografico deterministico.</p>
+      </div>
+
+      <div class="card third">
+        <h2>Persistenza</h2>
+        <p>Nessuna memorizzazione server-side.</p>
+      </div>
+
+      <div class="card third">
+        <h2>Uso</h2>
+        <p>Riferimento verificabile in seguito.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="mini">
+        HERMETICUM — digital responsibility infrastructure
+      </div>
+      <div class="sig">
+        HERMETICUM B.C.E. S.r.l. · EU
       </div>
     </div>
-
-  </section>
-
-</main>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <p><strong>HERMETICUM</strong> — EU-aligned cybernetic infrastructure</p>
-    <p>Attribution · Responsibility · Traceability · Time</p>
-    <p class="mini">No custody · Hash verification · Fail-closed architecture</p>
-  </div>
-</footer>
+  </footer>
 
 <script>
-  async function sha256Hex(text){
-    const enc = new TextEncoder();
-    const data = enc.encode(text);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-  }
-
-  async function generateReceipt(){
-    const payload = (document.getElementById("payload").value || "").trim();
+  async function generate(){
+    const data = document.getElementById("data").value;
     const out = document.getElementById("out");
 
-    if(!payload){
+    if(!data.trim()){
       out.textContent =
-        "FAIL_CLOSED\n" +
-        "Reason: empty payload.\n" +
-        "Action: provide non-sensitive text to generate demo receipt.";
+        "STATO: FAIL\n" +
+        "MOTIVO: input mancante";
       return;
     }
 
-    const h = await sha256Hex(payload);
-    out.textContent =
-      "RECEIPT (DEMO)\n" +
-      "HASH_SHA256: " + h + "\n" +
-      "MODE: DEMO_OFFLINE\n" +
-      "POLICY: NO_DATA_CUSTODY | HASH_ONLY | FAIL_CLOSED | AUDIT_FIRST\n\n" +
-      "Note: replace with signed manifest + evidence pack in production.";
-  }
+    const enc = new TextEncoder();
+    const buffer = await crypto.subtle.digest("SHA-256", enc.encode(data));
+    const hashArray = Array.from(new Uint8Array(buffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
 
-  function clearAll(){
-    document.getElementById("payload").value = "";
-    document.getElementById("out").textContent = "IDLE";
+    out.textContent =
+      "STATO: OK\n" +
+      "ALGORITMO: SHA-256\n" +
+      "RIFERIMENTO:\n" +
+      hashHex;
   }
 </script>
 
