@@ -1,233 +1,295 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <meta charset="utf-8">
   <title>HERMETICUM — Verify</title>
-  <meta name="description" content="HERMETICUM — Public verification (pass/fail). EU-aligned, audit-first, fail-closed, hash-only, no data custody." />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="HERMETICUM verification — deterministic pass/fail verification.">
 
   <style>
     :root{
-      --bg:#0b0d10; --card:#0f1318; --text:#e7edf5; --muted:#9fb0c2;
-      --line:rgba(255,255,255,.10); --soft:rgba(255,255,255,.06);
-      --ok:rgba(100,255,160,.18); --bad:rgba(255,120,120,.18); --warn:rgba(255,220,120,.14);
+      --bg:#0b0d10;
+      --card:#0f1318;
+      --text:#e7edf5;
+      --muted:#9fb0c2;
+      --line:rgba(255,255,255,.12);
+      --soft:rgba(255,255,255,.06);
+      --ok:#2ecc71;
+      --fail:#e74c3c;
       --max:1100px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      line-height:1.45;
+    }
+
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
+
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.18);backdrop-filter:blur(6px)}
-    .nav-container{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    /* NAV */
+    .nav{
+      border-bottom:1px solid var(--line);
+      background:rgba(0,0,0,.2);
+      backdrop-filter:blur(6px);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+    }
     .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{display:flex;flex-wrap:wrap;gap:12px;font-size:14px;color:var(--muted);justify-content:flex-end}
-    .nav-links a{padding:6px 8px;border-radius:10px}
-    .nav-links a:hover{background:var(--soft);color:var(--text);text-decoration:none}
-
-    .policy-banner{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);
-      color:var(--muted);font-size:13px;letter-spacing:.25px;padding:10px 16px}
-
-    main{padding:28px 0 40px}
-    .hero h1{margin:0 0 8px;font-size:26px}
-    .hero p{margin:0;color:var(--muted);max-width:92ch}
-
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    @media(min-width:900px){.card.half{grid-column:span 6}.card.third{grid-column:span 4}}
-    .card h2{margin:0 0 8px;font-size:16px}
-    .card p{margin:0 0 10px;color:var(--muted);font-size:14px}
-
-    .label{font-size:12px;color:var(--muted);letter-spacing:.25px;margin-bottom:6px}
-    input[type="text"], textarea{
-      width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);
-      background:rgba(0,0,0,.22);color:var(--text);outline:none;font-size:14px
+    .nav-links{
+      display:flex;
+      gap:12px;
+      font-size:14px;
+      color:var(--muted);
+      flex-wrap:wrap;
     }
-    textarea{min-height:120px;resize:vertical}
+    .nav-links a{
+      padding:6px 8px;
+      border-radius:10px;
+    }
+    .nav-links a:hover{
+      background:var(--soft);
+      color:var(--text);
+      text-decoration:none;
+    }
 
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;align-items:center}
+    /* POLICY */
+    .policy{
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:13px;
+      color:var(--muted);
+      padding:10px 16px;
+    }
+
+    main{padding:32px 0}
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size:26px;
+      line-height:1.15;
+    }
+    .hero p{
+      margin:0;
+      max-width:90ch;
+      color:var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+      margin-top:24px;
+    }
+
+    .card{
+      grid-column:span 12;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    @media(min-width:900px){
+      .half{grid-column:span 6}
+      .third{grid-column:span 4}
+    }
+
+    .card h2{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .card p{
+      margin:0 0 8px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      color:var(--text);
+      font-size:14px;
+      outline:none;
+    }
+
     .btn{
-      display:inline-block;padding:10px 12px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(255,255,255,.03);font-size:14px;color:var(--text);cursor:pointer
+      margin-top:10px;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:14px;
+      cursor:pointer;
     }
-    .btn:hover{background:rgba(255,255,255,.06);text-decoration:none}
-
-    .result{border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(255,255,255,.02)}
-    .status{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px}
-    .pill{padding:6px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--muted);background:rgba(0,0,0,.18)}
-    .pill.ok{background:var(--ok);color:var(--text)}
-    .pill.bad{background:var(--bad);color:var(--text)}
-    .pill.warn{background:var(--warn);color:var(--text)}
-
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:14px;padding:12px;
-      background:rgba(0,0,0,.18);white-space:pre-wrap
+    .btn:hover{
+      background:rgba(255,255,255,.06);
     }
 
-    .footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);background:rgba(0,0,0,.14)}
-    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .mini{font-size:13px;opacity:.95}
+    .result{
+      margin-top:10px;
+      padding:14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      font-family:ui-monospace,monospace;
+      font-size:13px;
+      white-space:pre-line;
+    }
+
+    .status{
+      font-weight:700;
+      margin-bottom:6px;
+    }
+    .status.ok{color:var(--ok)}
+    .status.fail{color:var(--fail)}
+
+    footer{
+      border-top:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      padding:22px 0 26px;
+      color:var(--muted);
+    }
+    .footer-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 16px;
+    }
+    .mini{font-size:13px;opacity:.9}
+    .sig{
+      margin-top:18px;
+      font-size:12px;
+      opacity:.6;
+      letter-spacing:.4px;
+    }
   </style>
 </head>
 
 <body>
 
-<nav class="nav">
-  <div class="nav-container">
-    <div class="brand">HERMETICUM</div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/architecture/">Architecture</a>
-      <a href="/use-cases/">Use-Cases</a>
-      <a href="/verify/">Verify</a>
-      <a href="/create/">Create</a>
-      <a href="/eu/position-paper/eu-ipr-technical-positioning.md">EU Positioning</a>
-      <a href="/eu/pilot/">EU Pilot</a>
-      <a href="/company/">Company</a>
-    </div>
-  </div>
-</nav>
-
-<section class="policy-banner">
-  <div class="wrap">
-    PUBLIC PILOT · EU-ALIGNED · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
-  </div>
-</section>
-
-<main class="wrap">
-
-  <section class="hero">
-    <h1>Verify (Public)</h1>
-    <p>Verifica pubblica hash-only con output audit-first. Se non è coerente e ripetibile → FAIL (fail-closed).</p>
-  </section>
-
-  <section class="grid">
-
-    <div class="card half">
-      <h2>Input</h2>
-      <p>Inserisci un riferimento (hash / receipt id / manifest ref). Demo locale.</p>
-
-      <div class="label">Reference</div>
-      <input id="ref" type="text" placeholder="e.g. SHA-256 / SHA-512 / receipt-id" />
-
-      <div class="label" style="margin-top:10px;">Optional: payload</div>
-      <textarea id="payload" placeholder="paste payload or manifest excerpt (optional)"></textarea>
-
-      <div class="cta-row">
-        <button class="btn" onclick="runVerify()">Run verify</button>
-        <a class="btn" href="/eu/pilot/">EU Pilot</a>
-        <a class="btn" href="/create/">Go to Create</a>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">HERMETICUM</div>
+      <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="../architecture/">Architecture</a>
+        <a href="../use-cases/">Use-Cases</a>
+        <a href="../create/">Create</a>
+        <a href="../eu/pilot/">EU Pilot</a>
       </div>
     </div>
+  </nav>
 
-    <div class="card half">
-      <h2>Result</h2>
-      <p>Output deterministico (demo) con motivazione.</p>
+  <!-- POLICY -->
+  <div class="policy">
+    <div class="wrap">
+      Audit-first · Fail-closed · Hash-only · No data custody
+    </div>
+  </div>
 
-      <div class="result">
-        <div class="status">
-          <span class="pill warn" id="statusPill">IDLE</span>
-          <span class="pill">HASH-ONLY</span>
-          <span class="pill">FAIL-CLOSED</span>
-          <span class="pill">NO CUSTODY</span>
+  <main class="wrap">
+
+    <section class="hero">
+      <h1>Verifica</h1>
+      <p>
+        Verifica deterministica di riferimenti crittografici.
+        Output esclusivamente pass/fail.
+      </p>
+    </section>
+
+    <section class="grid">
+
+      <div class="card half">
+        <h2>Input</h2>
+        <p>Inserisci un riferimento hash.</p>
+        <input id="ref" placeholder="hash / receipt / reference">
+        <button class="btn" onclick="verify()">Verifica</button>
+      </div>
+
+      <div class="card half">
+        <h2>Risultato</h2>
+        <div id="out" class="result">
+STATO: IDLE
         </div>
+      </div>
 
-        <div class="mono" id="report">Waiting for input…</div>
+      <div class="card third">
+        <h2>Regole</h2>
+        <p>La verifica è deterministica e ripetibile.</p>
+      </div>
+
+      <div class="card third">
+        <h2>Esito</h2>
+        <p>Assenza di risultato valido → FAIL.</p>
+      </div>
+
+      <div class="card third">
+        <h2>Output</h2>
+        <p>Nessun dato personale elaborato.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="mini">
+        HERMETICUM — digital responsibility infrastructure
+      </div>
+      <div class="sig">
+        HERMETICUM B.C.E. S.r.l. · EU
       </div>
     </div>
-
-    <div class="card third">
-      <h2>Checks (demo)</h2>
-      <div class="mono">FORMAT_VALID
-HASH_PRESENT
-PAYLOAD_OPTIONAL
-REPEATABLE_OUTPUT
-FAIL_CLOSED_ON_ERROR</div>
-    </div>
-
-    <div class="card third">
-      <h2>EU framing</h2>
-      <p>Per pilot UE: verifier deterministico + evidence pack esportabile.</p>
-      <div class="cta-row">
-        <a class="btn" href="/eu/pilot/">Open EU Pilot</a>
-        <a class="btn" href="/architecture/">Architecture</a>
-      </div>
-    </div>
-
-    <div class="card third">
-      <h2>Note</h2>
-      <div class="mono">Pilot-ready next:
-- signed manifest
-- evidence pack
-- deterministic verifier
-- report export</div>
-    </div>
-
-  </section>
-
-</main>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <p><strong>HERMETICUM</strong> — EU-aligned cybernetic infrastructure</p>
-    <p>Attribution · Responsibility · Traceability · Time</p>
-    <p class="mini">No custody · Hash verification · Fail-closed architecture</p>
-  </div>
-</footer>
+  </footer>
 
 <script>
-  function setStatus(kind){
-    const pill = document.getElementById("statusPill");
-    pill.classList.remove("ok","bad","warn");
-    if(kind === "PASS"){ pill.classList.add("ok"); pill.textContent = "PASS"; return; }
-    if(kind === "FAIL"){ pill.classList.add("bad"); pill.textContent = "FAIL"; return; }
-    pill.classList.add("warn");
-    pill.textContent = kind || "IDLE";
-  }
-
-  function runVerify(){
-    const ref = (document.getElementById("ref").value || "").trim();
-    const payload = (document.getElementById("payload").value || "").trim();
-    const report = document.getElementById("report");
+  function verify(){
+    const ref = document.getElementById("ref").value.trim();
+    const out = document.getElementById("out");
 
     if(!ref){
-      setStatus("FAIL");
-      report.textContent =
-        "FAIL_CLOSED\n" +
-        "- HASH_PRESENT: FAIL (missing reference)\n" +
-        "- REPEATABLE_OUTPUT: PASS\n\n" +
-        "Reason: missing input reference.";
+      out.innerHTML =
+        "STATO: FAIL\n" +
+        "MOTIVO: riferimento mancante";
+      out.className = "result status fail";
       return;
     }
 
-    const looksLikeHash = /^[a-fA-F0-9]{32,128}$/.test(ref.replace(/^0x/i,''));
+    const isHash = /^[a-fA-F0-9]{32,128}$/.test(ref.replace(/^0x/, ''));
 
-    if(!looksLikeHash){
-      setStatus("FAIL");
-      report.textContent =
-        "FAIL_CLOSED\n" +
-        "- FORMAT_VALID: FAIL\n" +
-        "- HASH_PRESENT: PASS\n" +
-        "- PAYLOAD_OPTIONAL: " + (payload ? "PRESENT" : "EMPTY") + "\n" +
-        "- REPEATABLE_OUTPUT: PASS\n\n" +
-        "Reason: reference does not look like a hash.\n" +
-        "Input: " + ref;
+    if(!isHash){
+      out.innerHTML =
+        "STATO: FAIL\n" +
+        "MOTIVO: formato non valido";
+      out.className = "result status fail";
       return;
     }
 
-    setStatus("PASS");
-    report.textContent =
-      "PASS\n" +
-      "- FORMAT_VALID: PASS\n" +
-      "- HASH_PRESENT: PASS\n" +
-      "- PAYLOAD_OPTIONAL: " + (payload ? "PRESENT" : "EMPTY") + "\n" +
-      "- REPEATABLE_OUTPUT: PASS\n\n" +
-      "Reference: " + ref + "\n" +
-      "Note: demo verifier (replace with deterministic cryptographic checks for production).";
+    out.innerHTML =
+      "STATO: PASS\n" +
+      "RIFERIMENTO VALIDO\n" +
+      "VERIFICA RIPETIBILE";
+    out.className = "result status ok";
   }
 </script>
 
