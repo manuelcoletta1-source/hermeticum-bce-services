@@ -1,283 +1,192 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <title>HERMETICUM — Create</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>HERMETICUM — Create IPR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta name="description" content="HERMETICUM create — deterministic hash generation without data custody.">
+<style>
+:root{
+ --bg:#0b0d10;
+ --card:#0f1318;
+ --text:#e7edf5;
+ --muted:#9fb0c2;
+ --line:rgba(255,255,255,.12);
+ --max:1100px;
+}
 
-  <style>
-    :root{
-      --bg:#0b0d10;
-      --card:#0f1318;
-      --text:#e7edf5;
-      --muted:#9fb0c2;
-      --line:rgba(255,255,255,.12);
-      --soft:rgba(255,255,255,.06);
-      --max:1100px;
-    }
+body{
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+}
 
-    *{box-sizing:border-box}
+.wrap{max-width:var(--max);margin:auto;padding:20px}
 
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      line-height:1.45;
-    }
+.card{
+ background:var(--card);
+ border:1px solid var(--line);
+ border-radius:16px;
+ padding:16px;
+ margin-top:18px;
+}
 
-    a{color:inherit;text-decoration:none}
-    a:hover{text-decoration:underline}
+input, textarea{
+ width:100%;
+ padding:12px;
+ border-radius:10px;
+ border:1px solid var(--line);
+ background:#000;
+ color:#fff;
+ margin-top:6px;
+}
 
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+button{
+ margin-top:12px;
+ padding:12px 16px;
+ border-radius:12px;
+ border:1px solid var(--line);
+ background:#111;
+ color:#fff;
+ cursor:pointer;
+}
 
-    /* NAV */
-    .nav{
-      border-bottom:1px solid var(--line);
-      background:rgba(0,0,0,.2);
-      backdrop-filter:blur(6px);
-    }
-    .nav-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 16px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px;
-    }
-    .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{
-      display:flex;
-      gap:12px;
-      font-size:14px;
-      color:var(--muted);
-      flex-wrap:wrap;
-    }
-    .nav-links a{
-      padding:6px 8px;
-      border-radius:10px;
-    }
-    .nav-links a:hover{
-      background:var(--soft);
-      color:var(--text);
-      text-decoration:none;
-    }
+button:hover{background:#1a1a1a}
 
-    /* POLICY */
-    .policy{
-      border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      font-size:13px;
-      color:var(--muted);
-      padding:10px 16px;
-    }
+pre{
+ background:#000;
+ padding:14px;
+ border-radius:12px;
+ overflow:auto;
+}
 
-    main{padding:32px 0}
-
-    .hero h1{
-      margin:0 0 10px;
-      font-size:26px;
-      line-height:1.15;
-    }
-    .hero p{
-      margin:0;
-      max-width:90ch;
-      color:var(--muted);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:14px;
-      margin-top:24px;
-    }
-
-    .card{
-      grid-column:span 12;
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-    }
-
-    @media(min-width:900px){
-      .half{grid-column:span 6}
-      .third{grid-column:span 4}
-    }
-
-    .card h2{
-      margin:0 0 8px;
-      font-size:16px;
-    }
-    .card p{
-      margin:0 0 8px;
-      font-size:14px;
-      color:var(--muted);
-    }
-
-    textarea{
-      width:100%;
-      min-height:140px;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.22);
-      color:var(--text);
-      font-size:14px;
-      outline:none;
-      resize:vertical;
-    }
-
-    .btn{
-      margin-top:10px;
-      padding:10px 14px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      font-size:14px;
-      cursor:pointer;
-    }
-    .btn:hover{
-      background:rgba(255,255,255,.06);
-    }
-
-    .output{
-      margin-top:10px;
-      padding:14px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      font-family:ui-monospace,monospace;
-      font-size:13px;
-      white-space:pre-line;
-    }
-
-    footer{
-      border-top:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      padding:22px 0 26px;
-      color:var(--muted);
-    }
-    .footer-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:0 16px;
-    }
-    .mini{font-size:13px;opacity:.9}
-    .sig{
-      margin-top:18px;
-      font-size:12px;
-      opacity:.6;
-      letter-spacing:.4px;
-    }
-  </style>
+.footer{
+ margin-top:40px;
+ opacity:.6;
+ font-size:12px;
+}
+</style>
 </head>
 
 <body>
+<div class="wrap">
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="brand">HERMETICUM</div>
-      <div class="nav-links">
-        <a href="../">Home</a>
-        <a href="../architecture/">Architecture</a>
-        <a href="../use-cases/">Use-Cases</a>
-        <a href="../verify/">Verify</a>
-        <a href="../eu/pilot/">EU Pilot</a>
-      </div>
-    </div>
-  </nav>
+<h2>Generazione IPR Ufficiale</h2>
 
-  <!-- POLICY -->
-  <div class="policy">
-    <div class="wrap">
-      Audit-first · Fail-closed · Hash-only · No data custody
-    </div>
-  </div>
+<div class="card">
+<label>Identità biologica (nome e cognome)</label>
+<input id="nome" placeholder="Nome Cognome">
 
-  <main class="wrap">
+<label>Nazione</label>
+<input id="nazione" placeholder="IT">
 
-    <section class="hero">
-      <h1>Creazione</h1>
-      <p>
-        Generazione deterministica di riferimenti crittografici.
-        Nessun dato viene conservato.
-      </p>
-    </section>
+<label>Contenuto evento (testo, file, riferimento)</label>
+<textarea id="contenuto" rows="6" placeholder="contenuto evento"></textarea>
 
-    <section class="grid">
+<button onclick="genera()">Genera Hash</button>
+<pre id="hashout">STATO: IDLE</pre>
 
-      <div class="card half">
-        <h2>Input</h2>
-        <p>Inserisci un contenuto testuale non sensibile.</p>
-        <textarea id="data" placeholder="contenuto testuale"></textarea>
-        <button class="btn" onclick="generate()">Genera riferimento</button>
-      </div>
+<button onclick="generaIPR()">GENERA IPR UFFICIALE</button>
+<pre id="iprout"></pre>
 
-      <div class="card half">
-        <h2>Output</h2>
-        <div id="out" class="output">
-STATO: IDLE
-        </div>
-      </div>
+</div>
 
-      <div class="card third">
-        <h2>Metodo</h2>
-        <p>Hash crittografico deterministico.</p>
-      </div>
+<div class="footer">
+HERMETICUM — digital responsibility infrastructure  
+HERMETICUM B.C.E. S.r.l. · EU
+</div>
 
-      <div class="card third">
-        <h2>Persistenza</h2>
-        <p>Nessuna memorizzazione server-side.</p>
-      </div>
-
-      <div class="card third">
-        <h2>Uso</h2>
-        <p>Riferimento verificabile in seguito.</p>
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="mini">
-        HERMETICUM — digital responsibility infrastructure
-      </div>
-      <div class="sig">
-        HERMETICUM B.C.E. S.r.l. · EU
-      </div>
-    </div>
-  </footer>
+</div>
 
 <script>
-  async function generate(){
-    const data = document.getElementById("data").value;
-    const out = document.getElementById("out");
+let hashGlobale = "";
 
-    if(!data.trim()){
-      out.textContent =
-        "STATO: FAIL\n" +
-        "MOTIVO: input mancante";
-      return;
-    }
+async function sha256(text){
+ const enc = new TextEncoder().encode(text);
+ const buf = await crypto.subtle.digest("SHA-256", enc);
+ return Array.from(new Uint8Array(buf))
+ .map(b=>b.toString(16).padStart(2,"0")).join("");
+}
 
-    const enc = new TextEncoder();
-    const buffer = await crypto.subtle.digest("SHA-256", enc.encode(data));
-    const hashArray = Array.from(new Uint8Array(buffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+async function genera(){
+ const txt = document.getElementById("contenuto").value;
+ if(!txt.trim()){
+  alert("Inserire contenuto evento");
+  return;
+ }
 
-    out.textContent =
-      "STATO: OK\n" +
-      "ALGORITMO: SHA-256\n" +
-      "RIFERIMENTO:\n" +
-      hashHex;
-  }
+ hashGlobale = await sha256(txt);
+ document.getElementById("hashout").textContent =
+ "HASH GENERATO:\n"+hashGlobale;
+}
+
+function generaIPR(){
+ if(!hashGlobale){
+  alert("Genera prima hash");
+  return;
+ }
+
+ const nome = document.getElementById("nome").value || "N/A";
+ const naz = document.getElementById("nazione").value || "N/A";
+
+ const now = new Date().toISOString();
+ const iprID = "IPR-O-"+now.replace(/[-:TZ.]/g,"").slice(0,14);
+
+ const doc =
+`IPR — IDENTITY PRIMARY RECORD
+Official Responsibility Artifact
+
+System: HERMETICUM
+Regime: Audit-first · Fail-closed · Hash-only · No data custody
+Version: IPR-OFFICIAL-v1
+
+IPR ID:
+${iprID}
+
+Timestamp (UTC):
+${now}
+
+Declared Biological Identity
+Name: ${nome}
+Nation: ${naz}
+Status: Self-declared biological subject
+
+The identity above is declared by the subject.
+No external verification is performed by the infrastructure.
+
+Digital Event
+Digital event under responsibility of the declared subject.
+
+Cryptographic Reference
+Hash: ${hashGlobale}
+Algorithm: SHA-256
+
+Responsibility Statement
+The declared subject assumes responsibility for the digital event
+associated with the reference hash above.
+
+Infrastructure Seal
+Generated by HERMETICUM infrastructure
+Digital Responsibility Infrastructure
+
+Status
+Active · Traceable · Verifiable
+
+Note
+This document does not constitute legal identification.
+It provides a verifiable responsibility record only.
+`;
+
+ document.getElementById("iprout").textContent = doc;
+
+ // download file
+ const blob = new Blob([doc], {type:"text/plain"});
+ const a = document.createElement("a");
+ a.href = URL.createObjectURL(blob);
+ a.download = iprID+".txt";
+ a.click();
+}
 </script>
 
 </body>
