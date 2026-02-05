@@ -2,243 +2,343 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <base href="/hermeticum-bce-platform/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Create — Creazione guidata IPR (demo)</title>
-  <meta name="description" content="Creazione guidata IPR (demo) in locale: genera ipr.canon.json e SHA-512, produce ipr.json e guida a Verify. Hash-only, fail-closed, no custody." />
+  <title>HERMETICUM — Create (Demo)</title>
+  <meta name="description" content="HERMETICUM — Create IPR demo flow. EU-aligned, audit-first, fail-closed, hash-only, no data custody." />
 
-  <link rel="stylesheet" href="../assets/hbce.css" />
   <style>
-    .hbce-wrap{max-width:980px;margin:0 auto;padding:28px 18px}
-    .hbce-top{border-bottom:1px solid rgba(255,255,255,.12);padding:18px}
-    .hbce-top__inner{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    .hbce-brand__name{font-weight:800;letter-spacing:.3px}
-    .hbce-brand__sub{opacity:.82}
-    .hbce-nav a{margin-right:10px;text-decoration:none;opacity:.9}
-    .hbce-nav a:hover{text-decoration:underline;opacity:1}
-    .hbce-banner{margin:16px 0;padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:14px}
-    .hbce-hr{border:0;height:1px;background:rgba(255,255,255,.12);margin:22px 0}
-    .hbce-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:12px}
-    .hbce-card{grid-column:span 6;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px}
-    @media(max-width:820px){.hbce-card{grid-column:span 12}}
-    .hbce-muted{opacity:.82}
-    .hbce-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .hbce-btn{display:inline-block;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);text-decoration:none;font-weight:600;cursor:pointer;background:transparent;color:inherit}
-    .hbce-btn:hover{border-color:rgba(255,255,255,.35)}
-    .hbce-field{display:block;margin:10px 0}
-    .hbce-field label{display:block;font-weight:650;margin-bottom:6px}
-    .hbce-field input,.hbce-field textarea{
-      width:100%; box-sizing:border-box; padding:10px 10px; border-radius:12px;
-      border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.15); color:inherit
+    /* ===== Minimal, uniform UI (safe default) ===== */
+    :root{
+      --bg: #0b0d10;
+      --card: #0f1318;
+      --text: #e7edf5;
+      --muted: #9fb0c2;
+      --line: rgba(255,255,255,.10);
+      --soft: rgba(255,255,255,.06);
+      --max: 1100px;
     }
-    .hbce-field textarea{min-height:110px; resize:vertical}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    pre{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px;overflow:auto}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    .hbce-footer{border-top:1px solid rgba(255,255,255,.12);padding:18px;opacity:.9}
-    .small{font-size:.92rem}
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      line-height: 1.45;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+    /* Navbar */
+    .nav{
+      border-bottom: 1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      backdrop-filter: blur(6px);
+    }
+    .nav-container{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+    }
+    .brand{
+      font-weight: 800;
+      letter-spacing: .8px;
+    }
+    .nav-links{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items:center;
+      justify-content:flex-end;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .nav-links a{
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+    .nav-links a:hover{
+      background: var(--soft);
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    /* Policy banner */
+    .policy-banner{
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: .25px;
+      padding: 10px 16px;
+    }
+
+    /* Main */
+    main{ padding: 28px 0 40px; }
+
+    .hero{
+      padding: 18px 0 6px;
+    }
+    .hero h1{
+      margin: 0 0 8px;
+      font-size: 26px;
+      line-height: 1.15;
+    }
+    .hero p{
+      margin: 0;
+      color: var(--muted);
+      max-width: 92ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .card{
+      grid-column: span 12;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    @media (min-width: 900px){
+      .card.half{ grid-column: span 6; }
+      .card.third{ grid-column: span 4; }
+    }
+
+    .card h2{
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .card p{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .label{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .25px;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], textarea{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      outline: none;
+      font-size: 14px;
+    }
+    textarea{ min-height: 120px; resize: vertical; }
+
+    .cta-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size: 14px;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .btn:hover{
+      background: rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(0,0,0,.18);
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    /* Footer */
+    .footer{
+      border-top: 1px solid var(--line);
+      padding: 22px 0 26px;
+      color: var(--muted);
+      background: rgba(0,0,0,.14);
+    }
+    .footer-inner{ max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+    .footer .mini{ font-size: 13px; color: var(--muted); opacity: .95; }
   </style>
 </head>
 
 <body>
-  <header class="hbce-top">
-    <div class="hbce-top__inner">
-      <div>
-        <div class="hbce-brand__name">HERMETICUM</div>
-        <div class="hbce-brand__sub">Create · creazione guidata IPR (demo) · hash-only</div>
+
+  <!-- ===== Canonical Navbar (uniform across all pages) ===== -->
+  <nav class="nav">
+    <div class="nav-container">
+
+      <div class="brand">HERMETICUM</div>
+
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/architecture/">Architecture</a>
+        <a href="/use-cases/">Use-Cases</a>
+        <a href="/verify/">Verify</a>
+        <a href="/create/">Create</a>
+        <a href="/eu/position-paper/eu-ipr-technical-positioning.md">EU Positioning</a>
+        <a href="/company/">Company</a>
       </div>
 
-      <nav class="hbce-nav" aria-label="Navigazione">
-        <a href="../">Home</a>
-        <a href="../architecture/">Architecture</a>
-        <a href="../modules/">IPR Stack</a>
-        <a href="../gate/">Gate</a>
-        <a href="../datacenter/">DataCenter</a>
-        <a href="../use-cases/">Use-Cases</a>
-        <a href="../governance/">Governance</a>
-        <a href="../professional/">Company</a>
-        <a href="../verify/">Verify</a>
-      </nav>
     </div>
-  </header>
+  </nav>
 
-  <main class="hbce-wrap">
-    <div class="hbce-banner">
-      <strong>PUBLIC PILOT</strong> · DEMO OFFLINE · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
+  <!-- ===== Canonical Policy Banner (uniform across all pages) ===== -->
+  <section class="policy-banner">
+    <div class="wrap">
+      PUBLIC PILOT · EU-ALIGNED · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST · DEMO OFFLINE
     </div>
+  </section>
 
-    <h1>Create — Creazione guidata IPR (demo)</h1>
+  <main class="wrap">
 
-    <p>
-      Questa pagina genera un <strong>draft IPR</strong> nel tuo browser e calcola il digest <strong>SHA-512</strong>
-      del canonico. Non invia dati a server: è <strong>hash-only</strong>.  
-      Poi ti guida ad allineare <code>ipr.canon.json</code> e <code>ipr.json</code> e verificare con <strong>Verify</strong>.
-    </p>
+    <section class="hero">
+      <h1>Create (Demo Offline)</h1>
+      <p>
+        Flusso demo per generare una “receipt” (riferimento hash) senza custodia dati personali.
+        In produzione: generazione di manifest firmati + evidence pack verificabile. Qui: dimostrazione di struttura audit-first.
+      </p>
+    </section>
 
-    <div class="hbce-cta">
-      <button class="hbce-btn" id="btn-generate">Genera canon + digest</button>
-      <a class="hbce-btn" href="../verify/">Vai a Verify</a>
-      <a class="hbce-btn" href="../technology/">Specifica PASS/FAIL</a>
-    </div>
+    <section class="grid">
 
-    <hr class="hbce-hr" />
+      <div class="card half">
+        <h2>Input (demo)</h2>
+        <p>Inserisci un payload testuale (non dati sensibili). Il sistema genera un riferimento hash-like per test UI.</p>
 
-    <h2>Input (minimo)</h2>
-    <p class="hbce-muted small">
-      Consiglio: non inserire dati personali. Il modello è dimostrativo e hash-only.
-      Se metti dati personali nel canonico, il digest diventa una “firma tecnica” di quel contenuto.
-    </p>
+        <div class="label">Payload (text / JSON) — demo</div>
+        <textarea id="payload" placeholder="paste text or json (avoid personal data)"></textarea>
 
-    <div class="hbce-grid">
-      <section class="hbce-card">
-        <div class="hbce-field">
-          <label for="subject">subject (nome tecnico)</label>
-          <input id="subject" type="text" placeholder="es: manuhell" />
+        <div class="cta-row">
+          <button class="btn" onclick="generateReceipt()">Generate receipt</button>
+          <button class="btn" onclick="clearAll()">Clear</button>
+          <a class="btn" href="/verify/">Go to Verify</a>
         </div>
+      </div>
 
-        <div class="hbce-field">
-          <label for="scope">scope (cosa copre)</label>
-          <input id="scope" type="text" placeholder="es: ai_governance_ex_ante" />
+      <div class="card half">
+        <h2>Receipt (demo)</h2>
+        <p>Output deterministico (demo) con hash-like reference. In produzione: firme + manifest + pack evidenze.</p>
+
+        <div class="mono" id="out">
+IDLE
         </div>
+      </div>
 
-        <div class="hbce-field">
-          <label for="policy">policy (stringa)</label>
-          <input id="policy" type="text" value="UE-FIRST|AUDIT-FIRST|FAIL-CLOSED|HASH-ONLY" />
+      <div class="card third">
+        <h2>Principi</h2>
+        <p>Il demo non custodisce PII. Mostra flusso e disciplinamento fail-closed.</p>
+        <div class="mono">
+Principles:
+- NO DATA CUSTODY
+- HASH-ONLY OUTPUT
+- AUDIT-FIRST FORMAT
+- FAIL-CLOSED ON EMPTY
         </div>
+      </div>
 
-        <div class="hbce-field">
-          <label for="context">context fingerprint (demo)</label>
-          <input id="context" type="text" value="context:demo-runtime-v1" />
+      <div class="card third">
+        <h2>Production target</h2>
+        <p>Per pilot UE: generazione di ricevute firmate e verificatore deterministico.</p>
+        <div class="mono">
+Next:
+- signed manifest (ED25519)
+- evidence pack
+- deterministic verifier
+- exportable audit report
         </div>
-      </section>
+      </div>
 
-      <section class="hbce-card">
-        <div class="hbce-field">
-          <label for="limits">limits (una per riga)</label>
-          <textarea id="limits" placeholder="no_surveillance&#10;no_custody&#10;no_auto_rights&#10;fail_closed_only">no_surveillance
-no_custody
-no_auto_rights
-fail_closed_only</textarea>
+      <div class="card third">
+        <h2>EU Positioning</h2>
+        <p>Documento tecnico: scope, non-scope, compatibilità e casi d’uso.</p>
+        <div class="cta-row">
+          <a class="btn" href="/eu/position-paper/eu-ipr-technical-positioning.md">Read Paper</a>
+          <a class="btn" href="/architecture/">Architecture</a>
         </div>
-      </section>
-    </div>
+      </div>
 
-    <hr class="hbce-hr" />
+    </section>
 
-    <h2>Output</h2>
-
-    <h3>Digest (SHA-512 del canonico)</h3>
-    <pre class="mono" id="digest">—</pre>
-
-    <h3>ipr.canon.json (da copiare nel repo)</h3>
-    <pre class="mono" id="canon">—</pre>
-
-    <h3>ipr.json (digest atteso)</h3>
-    <pre class="mono" id="digestjson">—</pre>
-
-    <hr class="hbce-hr" />
-
-    <h2>Istruzioni operative (pratiche)</h2>
-    <ol>
-      <li>Clicca <strong>Genera canon + digest</strong>.</li>
-      <li>Copia l’output <code>ipr.canon.json</code> e incollalo nel file omonimo in root del repo.</li>
-      <li>Copia l’output <code>ipr.json</code> e incollalo nel file omonimo in root del repo.</li>
-      <li>Commit e deploy (GitHub Pages).</li>
-      <li>Vai su <a href="../verify/">Verify</a>: deve dare <strong>PASS</strong>.</li>
-    </ol>
-
-    <p class="hbce-muted">
-      Chiusura: Create produce un draft locale. Verify dimostra la coerenza.
-      Se canonico e digest non sono allineati: <strong>FAIL</strong>.
-    </p>
-
-    <hr class="hbce-hr" />
-
-    <h2>Firma</h2>
-    <p>
-      <strong>HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</strong><br />
-      <strong>HERMETICUM B.C.E. S.r.l.</strong><br />
-      Torino · Unione Europea
-    </p>
   </main>
 
-  <footer class="hbce-footer">
-    <div class="hbce-muted">
-      PUBLIC PILOT · DEMO OFFLINE · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
+  <!-- ===== Canonical Footer (uniform across all pages) ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p><strong>HERMETICUM</strong> — EU-aligned cybernetic infrastructure</p>
+      <p>Attribution · Responsibility · Traceability · Time</p>
+      <p class="mini">No custody · Hash verification · Fail-closed architecture</p>
     </div>
   </footer>
 
-  <!--
-    Se nel repo hai già la logica JS di generazione (Create demo),
-    collega qui il tuo script (esempio): <script src="./create.js" defer></script>
-    oppure usa hbce.js se contiene già gli handler.
-  -->
-  <script src="../assets/hbce.js" defer></script>
-
   <script>
-    // Implementazione demo minimale (compatibile) — tutto locale.
-    // Se hai già uno script nel repo, puoi rimuovere questo blocco e usare il tuo.
-    async function sha512Hex(str) {
-      const enc = new TextEncoder().encode(str);
-      const hash = await crypto.subtle.digest("SHA-512", enc);
-      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
+    // Demo-only: uses Web Crypto SHA-256 (available in modern browsers).
+    async function sha256Hex(text){
+      const enc = new TextEncoder();
+      const data = enc.encode(text);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
     }
 
-    function canonJson() {
-      const subject = (document.getElementById("subject").value || "demo-subject").trim();
-      const scope = (document.getElementById("scope").value || "demo-scope").trim();
-      const policy = (document.getElementById("policy").value || "UE-FIRST|AUDIT-FIRST|FAIL-CLOSED|HASH-ONLY").trim();
-      const context = (document.getElementById("context").value || "context:demo-runtime-v1").trim();
-      const limitsLines = (document.getElementById("limits").value || "").split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    async function generateReceipt(){
+      const payload = (document.getElementById("payload").value || "").trim();
+      const out = document.getElementById("out");
 
-      // Canonico deterministico: ordine campi fisso, array in ordine inserito.
-      return {
-        context_fingerprint: context,
-        created_at: new Date().toISOString(),
-        limits: limitsLines,
-        policy,
-        schema: "HBCE-IPR-CANON-v1",
-        scope,
-        subject,
-        type: "IPR_CANONICAL"
-      };
+      // Fail-closed
+      if(!payload){
+        out.textContent =
+          "FAIL_CLOSED\n" +
+          "Reason: empty payload.\n" +
+          "Action: provide non-sensitive text to generate demo receipt.";
+        return;
+      }
+
+      const h = await sha256Hex(payload);
+      out.textContent =
+        "RECEIPT (DEMO)\n" +
+        "HASH_SHA256: " + h + "\n" +
+        "MODE: DEMO_OFFLINE\n" +
+        "POLICY: NO_DATA_CUSTODY | HASH_ONLY | FAIL_CLOSED | AUDIT_FIRST\n" +
+        "\n" +
+        "Note: replace with signed manifest + evidence pack in production.";
     }
 
-    function stableStringify(obj) {
-      // Stringify deterministico per questo schema (campi noti, ordine fisso).
-      const ordered = {
-        context_fingerprint: obj.context_fingerprint,
-        created_at: obj.created_at,
-        limits: obj.limits,
-        policy: obj.policy,
-        schema: obj.schema,
-        scope: obj.scope,
-        subject: obj.subject,
-        type: obj.type
-      };
-      return JSON.stringify(ordered, null, 2);
+    function clearAll(){
+      document.getElementById("payload").value = "";
+      document.getElementById("out").textContent = "IDLE";
     }
-
-    document.getElementById("btn-generate").addEventListener("click", async () => {
-      const canon = canonJson();
-      const canonStr = stableStringify(canon);
-      const digest = await sha512Hex(canonStr);
-
-      const digestObj = {
-        hash: { algorithm: "SHA-512", digest_hex: digest },
-        schema: "HBCE-IPR-DIGEST-v1",
-        source: "ipr.canon.json",
-        type: "IPR_DIGEST"
-      };
-
-      document.getElementById("digest").textContent =
-        digest + "\n" +
-        "time: " + canon.created_at + "  mode: fail-closed  hash-only";
-
-      document.getElementById("canon").textContent = canonStr;
-      document.getElementById("digestjson").textContent = JSON.stringify(digestObj, null, 2);
-    });
   </script>
+
 </body>
 </html>
