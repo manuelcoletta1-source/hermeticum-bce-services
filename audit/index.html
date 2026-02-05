@@ -4,346 +4,330 @@
   <meta charset="utf-8">
   <title>HERMETICUM — Audit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HERMETICUM audit — temporal append-only audit record generator with optional AI interface metadata and optional self-declared low-granularity location context.">
+  <meta name="description" content="Audit (stile banca UE) — catena temporale prev_hash -> receipt_sha256(json). Client-side, hash-only, no data custody. Bundle unico.">
 
   <style>
-    :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
+    :root{--bg:#0b0d10;--paper:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:980px}
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
     a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.2);backdrop-filter:blur(6px)}
-    .nav-inner{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-    .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{display:flex;gap:12px;font-size:14px;color:var(--muted);flex-wrap:wrap}
-    .nav-links a{padding:6px 8px;border-radius:10px}
-    .nav-links a:hover{background:var(--soft);color:var(--text);text-decoration:none}
+    header{border-bottom:1px solid var(--line);background:rgba(0,0,0,.22);backdrop-filter:blur(6px)}
+    .head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0}
+    .brand{font-weight:900;letter-spacing:.9px}
+    .brand small{display:block;font-weight:600;letter-spacing:.2px;color:var(--muted);font-size:12px;margin-top:2px}
+    nav{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+    nav a{padding:6px 8px;border-radius:10px}
+    nav a:hover{background:var(--soft);color:var(--text);text-decoration:none}
+    .policy{border-top:1px solid var(--line);padding:10px 0;font-size:12px;color:var(--muted)}
+    .policy b{color:var(--text);font-weight:800}
 
-    .policy{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);font-size:13px;color:var(--muted);padding:10px 16px}
+    main{padding:22px 0 34px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px}
+    h1{margin:0 0 6px;font-size:22px}
+    .subtitle{margin:0;color:var(--muted);max-width:92ch;font-size:13px}
+    .divider{height:1px;background:rgba(255,255,255,.08);margin:14px 0}
+    .section-title{margin:0 0 8px;font-size:13px;color:var(--text);letter-spacing:.2px}
 
-    main{padding:32px 0}
-    .hero h1{margin:0 0 10px;font-size:26px;line-height:1.15}
-    .hero p{margin:0;max-width:92ch;color:var(--muted)}
-
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:24px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    @media(min-width:900px){.half{grid-column:span 6}}
-
-    label{display:block;font-size:13px;color:var(--muted);margin-top:10px}
-    input,textarea,select{
+    label{display:block;font-size:12px;color:var(--muted);margin-top:10px}
+    input,textarea{
       width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
       background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
     }
     textarea{min-height:120px;resize:vertical}
+    input[type="file"]{padding:10px}
 
     .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-top:10px}
     .row > div{flex:1;min-width:170px}
 
-    .chk{display:flex;align-items:center;gap:10px;margin-top:10px;color:var(--muted);font-size:13px}
-    .btn{margin-top:12px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;cursor:pointer}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 14px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(255,255,255,.03);font-size:14px;cursor:pointer
+    }
     .btn:hover{background:rgba(255,255,255,.06)}
+    .btn.primary{background:rgba(255,255,255,.06)}
+    .btn.primary:hover{background:rgba(255,255,255,.09)}
 
-    .out{margin-top:10px;padding:14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;white-space:pre-line;overflow:auto}
     .hint{font-size:12px;color:var(--muted);margin-top:8px}
+    .out{
+      margin-top:12px;padding:14px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;
+      white-space:pre-line;overflow:auto
+    }
 
-    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:22px 0 26px;color:var(--muted)}
-    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .mini{font-size:13px;opacity:.9}
-    .sig{margin-top:18px;font-size:12px;opacity:.6;letter-spacing:.4px}
+    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:18px 0 24px;color:var(--muted)}
+    .sig{margin-top:10px;font-size:12px;opacity:.7;letter-spacing:.4px}
   </style>
 </head>
 
 <body>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="brand">HERMETICUM</div>
-    <div class="nav-links">
+<header>
+  <div class="wrap head">
+    <div class="brand">
+      HERMETICUM
+      <small>Audit — Catena temporale (EU-style)</small>
+    </div>
+    <nav>
       <a href="../">Home</a>
-      <a href="../architecture/">Architecture</a>
-      <a href="../use-cases/">Use-Cases</a>
       <a href="../create/">Create</a>
-      <a href="../verify/">Verify</a>
-      <a href="../audit/">Audit</a>
+      <a href="../verify/">Verifica</a>
       <a href="../eu/pilot/">EU Pilot</a>
       <a href="../company/">Company</a>
-    </div>
+    </nav>
   </div>
-</nav>
-
-<div class="policy"><div class="wrap">Audit-first · Fail-closed · Hash-only · No data custody</div></div>
+  <div class="wrap policy">
+    <b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b>
+  </div>
+</header>
 
 <main class="wrap">
-  <section class="hero">
+  <div class="card">
     <h1>Audit temporale</h1>
-    <p>
-      Generatore append-only derivato da prev_hash. Output: TXT + JSON + receipt SHA-256.
-      Context location opzionale: self-declared, granularità bassa.
+    <p class="subtitle">
+      Inserisci <b>prev_hash</b> (receipt precedente). Aggiungi un evento (testo e/o file).
+      Il sistema genera un nuovo record audit con <b>receipt_sha256(json)</b> e scarica un <b>bundle unico</b>.
+      Nessun dato viene inviato o conservato.
     </p>
-  </section>
 
-  <section class="grid">
-    <div class="card half">
-      <label>prev_hash (riferimento precedente)</label>
-      <input id="prev" placeholder="hash / receipt / reference">
+    <div class="divider"></div>
 
-      <label>Step label (opzionale)</label>
-      <input id="step" placeholder="STEP-0001">
+    <p class="section-title">A) Catena</p>
 
-      <label>Note (opzionale, non sensibile)</label>
-      <textarea id="notes" placeholder="note tecniche"></textarea>
+    <label>prev_hash (receipt_sha256(json) precedente)</label>
+    <input id="prev_hash" placeholder="es. 620d9a35... (64 hex)">
 
-      <div class="row">
-        <div>
-          <label>Context — Nazione (ISO2 consigliato)</label>
-          <input id="ctx_country" placeholder="IT">
-        </div>
-        <div>
-          <label>Context — Regione</label>
-          <input id="ctx_region" placeholder="Piemonte">
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>Context — Città</label>
-          <input id="ctx_city" placeholder="Torino">
-        </div>
-        <div>
-          <label>Context — Zona (quartiere/area/municipio — no indirizzo)</label>
-          <input id="ctx_zone" placeholder="Area / Quartiere / Municipio">
-        </div>
-      </div>
-
-      <div class="hint">
-        Context location: opzionale, self-declared, LOW granularity (no indirizzi, no coordinate).
-      </div>
-
-      <div class="chk">
-        <input id="ai_enabled" type="checkbox" />
-        <label for="ai_enabled" style="margin:0">Includi metadati AI / interfaccia JOKER</label>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>AI Availability</label>
-          <select id="ai_avail">
-            <option value="PUBLIC">PUBLIC</option>
-            <option value="PILOT">PILOT</option>
-            <option value="INSTITUTIONAL">INSTITUTIONAL</option>
-          </select>
-        </div>
-        <div>
-          <label>AI Mode</label>
-          <select id="ai_mode">
-            <option value="READ_ONLY">READ_ONLY</option>
-            <option value="AUDIT_ASSIST">AUDIT_ASSIST</option>
-            <option value="C2_INTERFACE">C2_INTERFACE</option>
-          </select>
-        </div>
-      </div>
-
-      <label>Joker handle / endpoint (opzionale)</label>
-      <input id="ai_handle" placeholder="TBD">
-
-      <button class="btn" onclick="generateAudit()">GENERA AUDIT</button>
-      <div id="status" class="out">STATO: IDLE</div>
+    <div class="hint">
+      Regola: ogni audit punta al receipt del passo prima. Questo crea la catena opponibile nel tempo.
     </div>
 
-    <div class="card half">
-      <button class="btn" onclick="downloadTxt()" id="dlTxt" disabled>Download TXT</button>
-      <button class="btn" onclick="downloadJson()" id="dlJson" disabled>Download JSON</button>
+    <div class="divider"></div>
 
-      <div id="preview" class="out">OUTPUT: IDLE</div>
-      <div id="receipt" class="out" style="margin-top:14px">receipt: IDLE</div>
+    <p class="section-title">B) Evento audit (opzionale, riservato)</p>
+
+    <label>Testo evento (facoltativo)</label>
+    <textarea id="note" placeholder="Nota riservata (verrà inclusa SOLO nel bundle scaricato)"></textarea>
+
+    <label>File evidenza (facoltativo)</label>
+    <input id="evidence" type="file">
+
+    <div class="btnrow">
+      <button class="btn primary" onclick="prepare()">Prepara audit (calcolo hash)</button>
     </div>
-  </section>
+
+    <div id="prepout" class="out">STATO: IDLE</div>
+
+    <div class="divider"></div>
+
+    <p class="section-title">C) Emissione</p>
+
+    <div class="btnrow">
+      <button class="btn primary" onclick="issue()">Genera AUDIT (bundle)</button>
+    </div>
+
+    <div id="out" class="out">STATO: IDLE</div>
+
+    <div id="dlbox" style="margin-top:12px; display:none;">
+      <p class="section-title">Download manuale (fallback)</p>
+      <div class="btnrow">
+        <a class="btn" id="dl_bundle" href="#" download>Scarica bundle AUDIT</a>
+      </div>
+      <div class="hint">Se il browser blocca l’avvio automatico, usa questo pulsante.</div>
+    </div>
+
+    <div class="hint">
+      In pagina mostriamo solo hash e receipt (nessun payload). Il contenuto rimane nel file scaricato.
+    </div>
+  </div>
 </main>
 
 <footer>
-  <div class="footer-inner">
-    <div class="mini">HERMETICUM — digital responsibility infrastructure</div>
+  <div class="wrap">
+    <div>HERMETICUM — digital responsibility infrastructure</div>
     <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
   </div>
 </footer>
 
 <script>
-let AUDIT_TXT = "";
-let AUDIT_JSON = "";
-let AUDIT_ID = "";
+let algo = "SHA-256";
+let prepared = false;
 
-function isHexHash(s){
-  const t = (s || "").trim().replace(/^0x/,'');
-  return /^[a-fA-F0-9]{32,128}$/.test(t);
-}
+let noteText = "";
+let evidenceMeta = null;
+let evidenceB64 = "";
+let evidenceHash = ""; // sha256(file) if present
+let eventHash = "";    // sha256(note) if present AND no file; else evidenceHash when file present
+let eventBasis = "";   // "FILE" | "TEXT" | "EMPTY"
 
-async function sha256String(text){
-  const bytes = new TextEncoder().encode(text);
-  const buf = await crypto.subtle.digest("SHA-256", bytes);
+async function sha256Bytes(uint8){
+  const buf = await crypto.subtle.digest("SHA-256", uint8);
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
 }
-
-function makeIdFromISO(iso){
-  return "IPR-A-" + iso.replace(/[-:TZ.]/g,"").slice(0,14);
+async function sha256String(text){
+  const bytes = new TextEncoder().encode(text);
+  return await sha256Bytes(bytes);
+}
+async function readFileAsBytes(file){
+  const ab = await file.arrayBuffer();
+  return new Uint8Array(ab);
+}
+function base64FromBytes(bytes){
+  let binary = "";
+  const chunk = 0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i+chunk));
+  }
+  return btoa(binary);
+}
+function normHex(s){
+  return (s || "").trim().toLowerCase().replace(/^0x/,"").replace(/[^0-9a-f]/g,"");
+}
+function makeId(prefix, iso){
+  return prefix + iso.replace(/[-:TZ.]/g,"").slice(0,14);
 }
 
-function aiConfig(){
-  const enabled = document.getElementById("ai_enabled").checked;
-  if(!enabled) return { enabled:false };
-  return {
-    enabled: true,
-    name: "AI JOKER ΦΩ — C2 SOFTWARE",
-    availability: document.getElementById("ai_avail").value,
-    mode: document.getElementById("ai_mode").value,
-    handle: (document.getElementById("ai_handle").value || "").trim() || "TBD",
-    entrypoints: { verify:"../verify/", audit:"../audit/", pilot:"../eu/pilot/" }
+async function prepare(){
+  const prepout = document.getElementById("prepout");
+  prepared = false;
+
+  noteText = (document.getElementById("note").value || "").trim();
+
+  const f = document.getElementById("evidence").files[0];
+  evidenceMeta = null;
+  evidenceB64 = "";
+  evidenceHash = "";
+  eventHash = "";
+  eventBasis = "";
+
+  if(f){
+    const bytes = await readFileAsBytes(f);
+    evidenceHash = await sha256Bytes(bytes);
+    evidenceMeta = { name:f.name, type:f.type || "application/octet-stream", size:f.size };
+    evidenceB64 = base64FromBytes(bytes);
+    eventHash = evidenceHash;
+    eventBasis = "FILE";
+
+    prepout.textContent =
+      "STATO: OK\nEVENT_BASIS: FILE\nALGORITMO: " + algo +
+      "\nFILE: " + evidenceMeta.name + " (" + evidenceMeta.size + " bytes)\n" +
+      (noteText ? "TESTO: presente (incluso nel bundle)\n" : "TESTO: assente\n") +
+      "EVENT_HASH:\n" + eventHash;
+    prepared = true;
+    return;
+  }
+
+  if(noteText){
+    eventHash = await sha256String(noteText);
+    eventBasis = "TEXT";
+    prepout.textContent =
+      "STATO: OK\nEVENT_BASIS: TEXT\nALGORITMO: " + algo +
+      "\nEVENT_HASH:\n" + eventHash;
+    prepared = true;
+    return;
+  }
+
+  // nessun evento: consentito, ma dichiarato
+  eventBasis = "EMPTY";
+  eventHash = "0".repeat(64);
+  prepout.textContent =
+    "STATO: OK\nEVENT_BASIS: EMPTY\nEVENT_HASH:\n" + eventHash + "\nNOTA: audit senza evento allegato.";
+  prepared = true;
+}
+
+async function issue(){
+  const out = document.getElementById("out");
+  const dlbox = document.getElementById("dlbox");
+  dlbox.style.display = "none";
+
+  const prev = normHex(document.getElementById("prev_hash").value);
+  if(!prev || prev.length !== 64){
+    out.textContent = "STATO: FAIL\nMOTIVO: prev_hash non valido (serve SHA-256 64 hex)";
+    return;
+  }
+  if(!prepared){
+    out.textContent = "STATO: FAIL\nMOTIVO: eseguire prima 'Prepara audit (calcolo hash)'";
+    return;
+  }
+
+  const now = new Date().toISOString();
+  const auditID = makeId("AUDIT-", now);
+
+  // JSON audit (catena + evento)
+  const payload = {
+    mode: (eventBasis === "FILE" && noteText) ? "FILE+TEXT"
+        : (eventBasis === "FILE" ? "FILE"
+        : (eventBasis === "TEXT" ? "TEXT" : "EMPTY")),
+    event_basis: eventBasis,
+    event_hash: eventHash,
+    note: noteText ? noteText : undefined,
+    evidence: evidenceMeta ? {
+      filename: evidenceMeta.name,
+      mime: evidenceMeta.type,
+      size: evidenceMeta.size,
+      encoding: "base64",
+      data: evidenceB64,
+      sha256: evidenceHash
+    } : undefined
   };
-}
+  if(payload.note === undefined) delete payload.note;
+  if(payload.evidence === undefined) delete payload.evidence;
 
-function contextLocation(){
-  const country = (document.getElementById("ctx_country").value || "").trim();
-  const region  = (document.getElementById("ctx_region").value || "").trim();
-  const city    = (document.getElementById("ctx_city").value || "").trim();
-  const zone    = (document.getElementById("ctx_zone").value || "").trim();
-
-  const any = country || region || city || zone;
-  if(!any) return { enabled:false };
-
-  return {
-    enabled: true,
-    status: "SELF_DECLARED",
-    granularity: "LOW",
-    note: "No address, no coordinates",
-    country: country || "N/A",
-    region: region || "N/A",
-    city: city || "N/A",
-    zone: zone || "N/A"
-  };
-}
-
-async function generateAudit(){
-  const prev = document.getElementById("prev").value.trim();
-  const step = document.getElementById("step").value.trim() || "STEP";
-  const notes = document.getElementById("notes").value.trim() || "";
-
-  const status = document.getElementById("status");
-  const preview = document.getElementById("preview");
-  const receiptEl = document.getElementById("receipt");
-
-  if(!prev) return status.textContent = "STATO: FAIL\nMOTIVO: prev_hash mancante";
-  if(!isHexHash(prev)) return status.textContent = "STATO: FAIL\nMOTIVO: formato prev_hash non valido";
-
-  const ts = new Date().toISOString();
-  AUDIT_ID = makeIdFromISO(ts);
-
-  const ai = aiConfig();
-  const ctx = contextLocation();
-
-  const record = {
-    kind: "IPR_AUDIT",
-    version: "IPR-AUDIT-v1",
+  const jsonObj = {
+    kind: "HBCE_AUDIT_RECORD",
+    version: "AUDIT-v1",
     system: "HERMETICUM",
     regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
-    audit_id: AUDIT_ID,
-    timestamp_utc: ts,
-    prev_hash: prev,
-    step: step,
-    notes: notes,
-    context: {
-      location: ctx
+    audit_id: auditID,
+    timestamp_utc: now,
+    chain: { prev_hash: prev },
+    event: {
+      algorithm: algo,
+      hash_basis: eventBasis,
+      event_hash: eventHash
     },
-    checks: {
-      prev_hash_format: "PASS",
-      deterministic_record: "PASS",
-      append_only_chain: "PASS"
-    },
-    ai_interface: ai,
-    seal: {
-      generated_by: "HERMETICUM infrastructure",
-      signature_line: "HERMETICUM B.C.E. S.r.l. · EU"
-    }
+    payload: payload,
+    seal: { generated_by:"HERMETICUM infrastructure", signature_line:"HERMETICUM B.C.E. S.r.l. · EU" }
   };
 
-  AUDIT_JSON = JSON.stringify(record, null, 2);
-  const recHash = await sha256String(AUDIT_JSON);
+  const jsonText = JSON.stringify(jsonObj, null, 2);
+  const receipt = await sha256String(jsonText);
 
-  const ctxTxt = ctx.enabled ? `Context location (self-declared, LOW granularity)
-Country: ${ctx.country}
-Region: ${ctx.region}
-City: ${ctx.city}
-Zone: ${ctx.zone}
-Note: ${ctx.note}` : "Context location: NONE";
+  // bundle unico (download singolo)
+  const bundle =
+`HERMETICUM AUDIT BUNDLE (single-file)
+ID: ${auditID}
+prev_hash: ${prev}
+receipt_sha256(json): ${receipt}
 
-  const aiTxt = ai.enabled ? `AI Interface (optional)
-Interface: ${ai.name}
-Availability: ${ai.availability}
-Mode: ${ai.mode}
-Handle: ${ai.handle}
-Entrypoints:
-- verify: ${ai.entrypoints.verify}
-- audit: ${ai.entrypoints.audit}
-- pilot: ${ai.entrypoints.pilot}` : "AI Interface (optional)\nMode: NONE";
+===== SECTION: AUDIT.JSON =====
+${jsonText}
 
-  AUDIT_TXT =
-`IPR AUDIT RECORD
-System: HERMETICUM
-Regime: Audit-first · Fail-closed · Hash-only · No data custody
-Version: IPR-AUDIT-v1
-
-AUDIT ID:
-${AUDIT_ID}
-
-Timestamp (UTC):
-${ts}
-
-prev_hash:
-${prev}
-
-Step:
-${step}
-
-${ctxTxt}
-
-Checks:
-- prev_hash_format: PASS
-- deterministic_record: PASS
-- append_only_chain: PASS
-
-Receipt (SHA-256 of JSON):
-${recHash}
-
-${aiTxt}
-
-Seal:
-Generated by HERMETICUM infrastructure
-HERMETICUM B.C.E. S.r.l. · EU
+===== SECTION: RECEIPT.SHA256.TXT =====
+${receipt}
 `;
 
-  status.textContent = "STATO: OK\nAUDIT GENERATO\nID: " + AUDIT_ID;
-  preview.textContent = AUDIT_TXT;
-  receiptEl.textContent = "receipt_sha256(json):\n" + recHash;
+  const blob = new Blob([bundle], {type:"text/plain"});
+  const url = URL.createObjectURL(blob);
+  const filename = `${auditID}_BUNDLE.txt`;
 
-  document.getElementById("dlTxt").disabled = false;
-  document.getElementById("dlJson").disabled = false;
-}
+  // fallback manuale
+  dlbox.style.display = "block";
+  const a = document.getElementById("dl_bundle");
+  a.href = url;
+  a.download = filename;
 
-function downloadTxt(){
-  if(!AUDIT_TXT) return;
-  const blob = new Blob([AUDIT_TXT], {type:"text/plain"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = (AUDIT_ID || "IPR-AUDIT") + ".txt";
-  a.click();
-}
+  // auto-download
+  try{ a.click(); }catch(e){}
 
-function downloadJson(){
-  if(!AUDIT_JSON) return;
-  const blob = new Blob([AUDIT_JSON], {type:"application/json"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = (AUDIT_ID || "IPR-AUDIT") + ".json";
-  a.click();
+  // output in pagina: solo chain + receipt (no payload)
+  out.textContent =
+    "STATO: OK\n" +
+    "AUDIT_ID: " + auditID + "\n" +
+    "prev_hash:\n" + prev + "\n" +
+    "receipt_sha256(json):\n" + receipt + "\n\n" +
+    "Download automatico avviato (bundle unico).";
 }
 </script>
 
