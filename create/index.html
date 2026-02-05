@@ -4,22 +4,16 @@
   <meta charset="utf-8">
   <title>HERMETICUM — Creazione IPR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Creazione IPR (stile banca UE) — soggetto biologico, testo e/o file, PUBLIC/PRIVATE, hash-only, no data custody. Download automatico con fallback manuale.">
+  <meta name="description" content="Creazione IPR (stile banca UE) — soggetto biologico, testo e/o file, PUBLIC/PRIVATE, hash-only, no data custody. Download automatico (bundle unico).">
 
   <style>
     :root{
-      --bg:#0b0d10;
-      --paper:#0f1318;
-      --text:#e7edf5;
-      --muted:#9fb0c2;
-      --line:rgba(255,255,255,.12);
-      --soft:rgba(255,255,255,.06);
-      --max:980px;
+      --bg:#0b0d10; --paper:#0f1318; --text:#e7edf5; --muted:#9fb0c2;
+      --line:rgba(255,255,255,.12); --soft:rgba(255,255,255,.06); --max:980px;
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
-    a{color:inherit;text-decoration:none}
-    a:hover{text-decoration:underline}
+    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
     header{border-bottom:1px solid var(--line);background:rgba(0,0,0,.22);backdrop-filter:blur(6px)}
@@ -30,14 +24,12 @@
     nav a{padding:6px 8px;border-radius:10px}
     nav a:hover{background:var(--soft);color:var(--text);text-decoration:none}
     .policy{border-top:1px solid var(--line);padding:10px 0;font-size:12px;color:var(--muted)}
-    .policy b{color:var(--text);font-weight:700}
+    .policy b{color:var(--text);font-weight:800}
 
     main{padding:22px 0 34px}
-
     .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px}
     h1{margin:0 0 6px;font-size:22px}
     .subtitle{margin:0;color:var(--muted);max-width:92ch;font-size:13px}
-
     .divider{height:1px;background:rgba(255,255,255,.08);margin:14px 0}
     .section-title{margin:0 0 8px;font-size:13px;color:var(--text);letter-spacing:.2px}
 
@@ -75,7 +67,6 @@
 </head>
 
 <body>
-
 <header>
   <div class="wrap head">
     <div class="brand">
@@ -100,8 +91,8 @@
     <h1>Creazione IPR</h1>
     <p class="subtitle">
       Compila i dati essenziali (self-declared). Inserisci un testo e/o allega un file.
-      Genera un artefatto <b>PUBLIC</b> (condivisibile) o <b>PRIVATE</b> (con payload incastonato).
-      Nessun dato viene conservato sul server.
+      L’artefatto <b>PRIVATE</b> include il payload <b>solo nel file scaricato</b> (non viene mostrato in pagina).
+      L’artefatto <b>PUBLIC</b> esclude il payload. Nessuna custodia dati.
     </p>
 
     <div class="divider"></div>
@@ -133,49 +124,45 @@
       </div>
     </div>
 
-    <div class="hint">
-      Nota UE: dati <b>self-declared</b>, non verificati. Non inserire indirizzi, coordinate o dati sensibili.
-    </div>
+    <div class="hint">Nota UE: self-declared. Non inserire indirizzi/civici/coordinate o dati sensibili.</div>
 
     <div class="divider"></div>
 
     <p class="section-title">B) Contenuto (testo e/o file)</p>
 
     <label>Testo (facoltativo)</label>
-    <textarea id="contenuto" placeholder="Descrizione / nota / dichiarazione (evita dati sensibili)"></textarea>
+    <textarea id="contenuto" placeholder="Testo riservato (verrà incluso SOLO nel PRIVATE scaricato)"></textarea>
 
     <label>File (facoltativo)</label>
     <input id="file" type="file">
 
     <div class="btnrow">
-      <button class="btn primary" onclick="generateHash()">Calcola riferimento (hash)</button>
+      <button class="btn primary" onclick="calcReference()">Calcola riferimento (hash)</button>
     </div>
 
-    <div id="hashout" class="out">STATO: IDLE</div>
+    <div id="refout" class="out">STATO: IDLE</div>
 
     <div class="divider"></div>
 
     <p class="section-title">C) Emissione artefatto</p>
 
     <div class="btnrow">
-      <button class="btn primary" onclick="generateIPR(true)">Crea IPR (PRIVATE)</button>
-      <button class="btn" onclick="generateIPR(false)">Crea IPR (PUBLIC)</button>
+      <button class="btn primary" onclick="issueArtifact(true)">Crea IPR (PRIVATE)</button>
+      <button class="btn" onclick="issueArtifact(false)">Crea IPR (PUBLIC)</button>
     </div>
 
-    <div id="iprout" class="out">STATO: IDLE</div>
+    <div id="status" class="out">STATO: IDLE</div>
 
     <div id="dlbox" style="margin-top:12px; display:none;">
       <p class="section-title">Download manuale (fallback)</p>
       <div class="btnrow">
-        <a class="btn" id="dl_txt" href="#" download>Scarica TXT</a>
-        <a class="btn" id="dl_json" href="#" download>Scarica JSON</a>
-        <a class="btn" id="dl_rcpt" href="#" download>Scarica receipt</a>
+        <a class="btn" id="dl_bundle" href="#" download>Scarica bundle IPR</a>
       </div>
-      <div class="hint">Se il browser blocca i download automatici, usa questi 3 pulsanti.</div>
+      <div class="hint">Se il browser blocca l’avvio automatico, usa questo pulsante.</div>
     </div>
 
     <div class="hint">
-      PUBLIC: condivisibile (senza payload). PRIVATE: contiene payload (non condividere).
+      Scelta consigliata: <b>bundle unico</b> (un file) per evitare blocchi download su mobile.
     </div>
   </div>
 </main>
@@ -188,16 +175,13 @@
 </footer>
 
 <script>
-let lastHash = "";
+let lastRef = "";
 let lastAlgo = "SHA-256";
+let hashBasis = ""; // "FILE" | "TEXT"
 
-// testo e file vengono gestiti insieme:
-// - hash basis: FILE se presente, altrimenti TEXT
-// - PRIVATE embed: FILE (se presente) + TEXT (se presente)
 let payloadText = "";
-let payloadFileMeta = null;  // {name,type,size}
-let payloadFileB64 = "";     // base64
-let hashBasis = "";          // "FILE" | "TEXT"
+let payloadFileMeta = null;
+let payloadFileB64 = "";
 
 async function sha256Bytes(uint8){
   const buf = await crypto.subtle.digest("SHA-256", uint8);
@@ -223,19 +207,6 @@ async function readFileAsBytes(file){
   return new Uint8Array(ab);
 }
 
-function downloadBlob(filename, blob){
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  a.click();
-}
-function downloadText(filename, content){
-  downloadBlob(filename, new Blob([content], {type:"text/plain"}));
-}
-function downloadJson(filename, content){
-  downloadBlob(filename, new Blob([content], {type:"application/json"}));
-}
-
 function getIdentity(){
   const name = (document.getElementById("nome").value || "").trim() || "N/A";
   const nation = (document.getElementById("nazione").value || "").trim() || "N/A";
@@ -246,10 +217,7 @@ function getIdentity(){
     name, nation,
     status: "SELF_DECLARED",
     location: {
-      country: nation,
-      region,
-      city,
-      zone,
+      country: nation, region, city, zone,
       granularity: "LOW",
       status: "SELF_DECLARED",
       note: "No address, no coordinates"
@@ -257,23 +225,20 @@ function getIdentity(){
   };
 }
 
-async function generateHash(){
-  const out = document.getElementById("hashout");
+async function calcReference(){
+  const out = document.getElementById("refout");
   const fileInput = document.getElementById("file");
   const file = fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
 
-  // leggi sempre testo
   payloadText = (document.getElementById("contenuto").value || "").trim();
-
-  // reset file
   payloadFileMeta = null;
   payloadFileB64 = "";
-  lastHash = "";
+  lastRef = "";
   hashBasis = "";
 
   if(file){
     const bytes = await readFileAsBytes(file);
-    lastHash = await sha256Bytes(bytes);
+    lastRef = await sha256Bytes(bytes);
     hashBasis = "FILE";
     payloadFileMeta = { name:file.name, type:file.type || "application/octet-stream", size:file.size };
     payloadFileB64 = base64FromBytes(bytes);
@@ -281,8 +246,8 @@ async function generateHash(){
     out.textContent =
       "STATO: OK\nHASH_BASIS: FILE\nALGORITMO: " + lastAlgo +
       "\nFILE: " + payloadFileMeta.name + " (" + payloadFileMeta.size + " bytes)\n" +
-      (payloadText ? "TESTO: presente (sarà incastonato nel PRIVATE)\n" : "TESTO: assente\n") +
-      "RIFERIMENTO:\n" + lastHash;
+      (payloadText ? "TESTO: presente (incluso solo nel PRIVATE scaricato)\n" : "TESTO: assente\n") +
+      "RIFERIMENTO:\n" + lastRef;
     return;
   }
 
@@ -291,68 +256,41 @@ async function generateHash(){
     return;
   }
 
-  lastHash = await sha256Bytes(new TextEncoder().encode(payloadText));
+  lastRef = await sha256Bytes(new TextEncoder().encode(payloadText));
   hashBasis = "TEXT";
   out.textContent =
-    "STATO: OK\nHASH_BASIS: TEXT\nALGORITMO: " + lastAlgo + "\nRIFERIMENTO:\n" + lastHash;
+    "STATO: OK\nHASH_BASIS: TEXT\nALGORITMO: " + lastAlgo + "\nRIFERIMENTO:\n" + lastRef;
 }
 
-function buildPayloadSectionTXT(includePayload){
-  if(!includePayload){
-    return `Embedded Payload
-Mode: NONE (PUBLIC ARTIFACT)
-Note: This public artifact intentionally excludes the payload.`;
-  }
-
-  const hasText = !!(payloadText && payloadText.trim());
-  const hasFile = !!(payloadFileMeta && payloadFileB64);
-
-  if(hasText && hasFile){
-    return `Embedded Payload (PRIVATE)
-Mode: FILE + TEXT
-Hash basis: ${hashBasis}
-
------BEGIN PAYLOAD TEXT-----
-${payloadText}
------END PAYLOAD TEXT-----
-
-File:
-Filename: ${payloadFileMeta.name}
-MIME: ${payloadFileMeta.type}
-Size: ${payloadFileMeta.size} bytes
-Encoding: base64
-
------BEGIN PAYLOAD BASE64-----
-${payloadFileB64}
------END PAYLOAD BASE64-----`;
-  }
-
-  if(hasFile){
-    return `Embedded Payload (PRIVATE)
-Mode: FILE
-Hash basis: ${hashBasis}
-Filename: ${payloadFileMeta.name}
-MIME: ${payloadFileMeta.type}
-Size: ${payloadFileMeta.size} bytes
-Encoding: base64
-
------BEGIN PAYLOAD BASE64-----
-${payloadFileB64}
------END PAYLOAD BASE64-----`;
-  }
-
-  return `Embedded Payload (PRIVATE)
-Mode: TEXT
-Hash basis: ${hashBasis}
-Encoding: utf-8
-
------BEGIN PAYLOAD TEXT-----
-${payloadText || ""}
------END PAYLOAD TEXT-----`;
-}
-
-function buildIPRDoc({iprID, nowISO, identity, hash, includePayload}){
+function buildArtifactTXT({iprID, nowISO, identity, includePayload}){
   const loc = identity.location || {};
+  const hasText = !!(payloadText && payloadText.trim());
+  const hasFile = !!payloadFileMeta;
+
+  // IMPORTANTISSIMO: NON stampiamo mai payload quando includePayload=false
+  const payloadBlock = includePayload ? (() => {
+    if(!hasText && !hasFile){
+      return "Embedded Payload (PRIVATE)\nMode: EMPTY\n";
+    }
+    let s = "Embedded Payload (PRIVATE)\n";
+    s += "Mode: " + (hasFile && hasText ? "FILE+TEXT" : (hasFile ? "FILE" : "TEXT")) + "\n";
+    s += "Hash basis: " + hashBasis + "\n\n";
+    if(hasText){
+      s += "-----BEGIN PAYLOAD TEXT-----\n" + payloadText + "\n-----END PAYLOAD TEXT-----\n\n";
+    }
+    if(hasFile){
+      s += "File:\n";
+      s += "Filename: " + payloadFileMeta.name + "\n";
+      s += "MIME: " + payloadFileMeta.type + "\n";
+      s += "Size: " + payloadFileMeta.size + " bytes\n";
+      s += "Encoding: base64\n\n";
+      s += "-----BEGIN PAYLOAD BASE64-----\n" + payloadFileB64 + "\n-----END PAYLOAD BASE64-----\n";
+    }
+    return s;
+  })() : (
+    "Embedded Payload\nMode: NONE (PUBLIC ARTIFACT)\nNote: public artifact excludes the payload.\n"
+  );
+
   return `IPR — IDENTITY PRIMARY RECORD
 Official Responsibility Artifact
 
@@ -379,15 +317,12 @@ Zone: ${loc.zone}
 Granularity: ${loc.granularity}
 Note: ${loc.note}
 
-Digital Event
-Digital event under responsibility of the declared subject.
-
 Cryptographic Reference
-Hash: ${hash}
+Hash: ${lastRef}
 Algorithm: ${lastAlgo}
 Hash basis: ${hashBasis}
 
-${buildPayloadSectionTXT(includePayload)}
+${payloadBlock}
 
 Infrastructure Seal
 Generated by HERMETICUM infrastructure
@@ -403,51 +338,47 @@ It provides a verifiable responsibility record only.
 `;
 }
 
-async function generateIPR(includePayload){
-  const status = document.getElementById("iprout");
-  document.getElementById("dlbox").style.display = "none";
+async function issueArtifact(isPrivate){
+  const status = document.getElementById("status");
+  const dlbox = document.getElementById("dlbox");
+  dlbox.style.display = "none";
 
-  if(!lastHash || !hashBasis){
-    status.textContent = "STATO: FAIL\nMOTIVO: calcolare prima l'hash";
+  if(!lastRef || !hashBasis){
+    status.textContent = "STATO: FAIL\nMOTIVO: calcolare prima il riferimento (hash)";
     return;
   }
 
-  // PRIVATE deve avere almeno testo o file
-  const hasAny = (!!(payloadText && payloadText.trim())) || (!!payloadFileMeta);
-  if(includePayload && !hasAny){
-    status.textContent = "STATO: FAIL\nMOTIVO: inserire testo e/o file";
+  const anyPayload = (!!(payloadText && payloadText.trim())) || (!!payloadFileMeta);
+  if(isPrivate && !anyPayload){
+    status.textContent = "STATO: FAIL\nMOTIVO: PRIVATE richiede testo e/o file";
     return;
   }
 
   const now = new Date().toISOString();
   const iprID = makeId("IPR-O-", now);
-  const suffix = includePayload ? "PRIVATE" : "PUBLIC";
-
+  const suffix = isPrivate ? "PRIVATE" : "PUBLIC";
   const identity = getIdentity();
-  const doc = buildIPRDoc({iprID, nowISO: now, identity, hash: lastHash, includePayload});
 
-  const payloadObj = includePayload
-    ? {
-        mode: (payloadFileMeta && payloadText && payloadText.trim()) ? "FILE+TEXT"
-             : (payloadFileMeta ? "FILE" : "TEXT"),
-        hash_basis: hashBasis,
-        text: (payloadText && payloadText.trim()) ? payloadText : undefined,
-        file: payloadFileMeta ? {
-          filename: payloadFileMeta.name,
-          mime: payloadFileMeta.type,
-          size: payloadFileMeta.size,
-          encoding: "base64",
-          data: payloadFileB64
-        } : undefined
-      }
-    : { mode: "NONE" };
+  const artifactTXT = buildArtifactTXT({iprID, nowISO: now, identity, includePayload: isPrivate});
 
-  // pulizia undefined
+  const payloadObj = isPrivate ? {
+    mode: (payloadFileMeta && payloadText && payloadText.trim()) ? "FILE+TEXT" : (payloadFileMeta ? "FILE" : "TEXT"),
+    hash_basis: hashBasis,
+    text: (payloadText && payloadText.trim()) ? payloadText : undefined,
+    file: payloadFileMeta ? {
+      filename: payloadFileMeta.name,
+      mime: payloadFileMeta.type,
+      size: payloadFileMeta.size,
+      encoding: "base64",
+      data: payloadFileB64
+    } : undefined
+  } : { mode: "NONE" };
+
   if(payloadObj.text === undefined) delete payloadObj.text;
   if(payloadObj.file === undefined) delete payloadObj.file;
 
   const jsonObj = {
-    kind: includePayload ? "IPR_OFFICIAL_PRIVATE" : "IPR_OFFICIAL_PUBLIC",
+    kind: isPrivate ? "IPR_OFFICIAL_PRIVATE" : "IPR_OFFICIAL_PUBLIC",
     version: "IPR-OFFICIAL-v1",
     system: "HERMETICUM",
     regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
@@ -455,7 +386,7 @@ async function generateIPR(includePayload){
     timestamp_utc: now,
     subject_type: "BIOLOGICAL_SUBJECT",
     declared_identity: identity,
-    reference: { hash: lastHash, algorithm: lastAlgo, hash_basis: hashBasis },
+    reference: { hash: lastRef, algorithm: lastAlgo, hash_basis: hashBasis },
     payload: payloadObj,
     seal: { generated_by:"HERMETICUM infrastructure", signature_line:"HERMETICUM B.C.E. S.r.l. · EU" }
   };
@@ -463,32 +394,49 @@ async function generateIPR(includePayload){
   const jsonText = JSON.stringify(jsonObj, null, 2);
   const receipt = await sha256String(jsonText);
 
-  // fallback manuale sempre pronto
-  const txtBlob = new Blob([doc], {type:"text/plain"});
-  const jsonBlob = new Blob([jsonText], {type:"application/json"});
-  const rcptBlob = new Blob([receipt + "\n"], {type:"text/plain"});
-  const txtURL = URL.createObjectURL(txtBlob);
-  const jsonURL = URL.createObjectURL(jsonBlob);
-  const rcptURL = URL.createObjectURL(rcptBlob);
+  // BUNDLE UNICO (un file solo) => meno blocchi su mobile
+  const bundle =
+`HERMETICUM IPR BUNDLE (single-file)
+ID: ${iprID}
+TYPE: ${suffix}
+receipt_sha256(json): ${receipt}
 
-  document.getElementById("dlbox").style.display = "block";
-  const aTxt = document.getElementById("dl_txt");
-  const aJson = document.getElementById("dl_json");
-  const aRcpt = document.getElementById("dl_rcpt");
+===== SECTION: ARTIFACT.TXT =====
+${artifactTXT}
 
-  aTxt.href = txtURL;   aTxt.download = iprID + "_" + suffix + ".txt";
-  aJson.href = jsonURL; aJson.download = iprID + "_" + suffix + ".json";
-  aRcpt.href = rcptURL; aRcpt.download = iprID + "_" + suffix + ".receipt.sha256.txt";
+===== SECTION: ARTIFACT.JSON =====
+${jsonText}
 
-  // auto-download (come prima)
-  try{ aTxt.click(); aJson.click(); aRcpt.click(); } catch(e){}
+===== SECTION: RECEIPT.SHA256.TXT =====
+${receipt}
+`;
 
+  const blob = new Blob([bundle], {type:"text/plain"});
+  const url = URL.createObjectURL(blob);
+  const filename = `${iprID}_${suffix}_BUNDLE.txt`;
+
+  // fallback manuale pronto
+  dlbox.style.display = "block";
+  const a = document.getElementById("dl_bundle");
+  a.href = url;
+  a.download = filename;
+
+  // AUTO-DOWNLOAD (come vuoi tu)
+  try { a.click(); } catch(e) {}
+
+  // NON mostriamo payload in pagina: solo status + receipt
   status.textContent =
     "STATO: OK\n" +
     "ARTEFATTO: " + suffix + "\n" +
     "ID: " + iprID + "\n" +
     "receipt_sha256(json):\n" + receipt + "\n\n" +
-    "Download avviato (TXT + JSON + receipt).";
+    "Download automatico avviato (bundle unico).";
+  
+  // “non si veda fuori”: pulizia immediata a richiesta
+  // (se vuoi tenere i campi compilati, commenta le 3 righe sotto)
+  // document.getElementById("contenuto").value = "";
+  // document.getElementById("file").value = "";
+  // payloadText = "";
 }
 </script>
 
