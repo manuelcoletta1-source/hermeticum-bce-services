@@ -1,223 +1,264 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <meta charset="utf-8">
   <title>HERMETICUM — Architecture</title>
-  <meta name="description" content="HERMETICUM — IPR Architecture. EU-aligned, audit-first, fail-closed, hash-only, no data custody." />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="HERMETICUM architecture — attribution, traceability and verification infrastructure.">
 
   <style>
     :root{
-      --bg:#0b0d10; --card:#0f1318; --text:#e7edf5; --muted:#9fb0c2;
-      --line:rgba(255,255,255,.10); --soft:rgba(255,255,255,.06); --max:1100px;
+      --bg:#0b0d10;
+      --card:#0f1318;
+      --text:#e7edf5;
+      --muted:#9fb0c2;
+      --line:rgba(255,255,255,.12);
+      --soft:rgba(255,255,255,.06);
+      --max:1100px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      line-height:1.45;
+    }
+
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
+
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.18);backdrop-filter:blur(6px)}
-    .nav-container{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:flex-end;font-size:14px;color:var(--muted)}
-    .nav-links a{padding:6px 8px;border-radius:10px}
-    .nav-links a:hover{background:var(--soft);text-decoration:none;color:var(--text)}
-
-    .policy-banner{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);
-      color:var(--muted);font-size:13px;letter-spacing:.25px;padding:10px 16px}
-
-    main{padding:28px 0 40px}
-
-    .hero{padding:18px 0 6px}
-    .hero h1{margin:0 0 8px;font-size:26px;line-height:1.15}
-    .hero p{margin:0;color:var(--muted);max-width:88ch}
-
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    @media(min-width:900px){.card.half{grid-column:span 6}.card.third{grid-column:span 4}}
-
-    .card h2{margin:0 0 8px;font-size:16px}
-    .card p{margin:0 0 10px;color:var(--muted);font-size:14px}
-
-    .list{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:10px}
-    .item{border:1px solid var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.02)}
-    .item strong{display:block;font-size:14px;margin-bottom:4px}
-    .item span{display:block;color:var(--muted);font-size:13px}
-
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-    .btn{display:inline-block;padding:10px 12px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(255,255,255,.03);font-size:14px;color:var(--text)}
-    .btn:hover{background:rgba(255,255,255,.06);text-decoration:none}
-
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:14px;padding:12px;
-      background:rgba(0,0,0,.18);overflow-x:auto
+    /* NAV */
+    .nav{
+      border-bottom:1px solid var(--line);
+      background:rgba(0,0,0,.2);
+      backdrop-filter:blur(6px);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:.8px;
+    }
+    .nav-links{
+      display:flex;
+      gap:12px;
+      font-size:14px;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
+    .nav-links a{
+      padding:6px 8px;
+      border-radius:10px;
+    }
+    .nav-links a:hover{
+      background:var(--soft);
+      color:var(--text);
+      text-decoration:none;
     }
 
-    .diagram-wrap{
+    /* POLICY */
+    .policy{
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:13px;
+      color:var(--muted);
+      padding:10px 16px;
+    }
+
+    main{padding:32px 0}
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size:26px;
+      line-height:1.15;
+    }
+    .hero p{
+      margin:0;
+      max-width:90ch;
+      color:var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+      margin-top:24px;
+    }
+
+    .card{
+      grid-column:span 12;
+      background:var(--card);
       border:1px solid var(--line);
       border-radius:16px;
-      background:rgba(255,255,255,.02);
-      padding:12px;
-      overflow:hidden;
-    }
-    .diagram-wrap img{
-      width:100%;
-      height:auto;
-      display:block;
-      border-radius:12px;
+      padding:16px;
     }
 
-    .footer{border-top:1px solid var(--line);padding:22px 0 26px;color:var(--muted);background:rgba(0,0,0,.14)}
-    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .footer .mini{font-size:13px;color:var(--muted);opacity:.95}
+    @media(min-width:900px){
+      .half{grid-column:span 6}
+      .third{grid-column:span 4}
+    }
+
+    .card h2{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .card p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .mono{
+      margin-top:10px;
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(0,0,0,.18);
+      font-family:ui-monospace,monospace;
+      font-size:13px;
+      color:var(--muted);
+      white-space:pre-line;
+    }
+
+    .diagram{
+      margin-top:10px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:rgba(255,255,255,.02);
+    }
+    .diagram img{
+      width:100%;
+      border-radius:10px;
+      display:block;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      padding:22px 0 26px;
+      color:var(--muted);
+    }
+    .footer-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 16px;
+    }
+    .mini{font-size:13px;opacity:.9}
+    .sig{
+      margin-top:18px;
+      font-size:12px;
+      opacity:.6;
+      letter-spacing:.4px;
+    }
   </style>
 </head>
 
 <body>
 
-<nav class="nav">
-  <div class="nav-container">
-    <div class="brand">HERMETICUM</div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/architecture/">Architecture</a>
-      <a href="/use-cases/">Use-Cases</a>
-      <a href="/verify/">Verify</a>
-      <a href="/create/">Create</a>
-      <a href="/eu/position-paper/eu-ipr-technical-positioning.md">EU Positioning</a>
-      <a href="/eu/pilot/">EU Pilot</a>
-      <a href="/company/">Company</a>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">HERMETICUM</div>
+      <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="../use-cases/">Use-Cases</a>
+        <a href="../verify/">Verify</a>
+        <a href="../create/">Create</a>
+        <a href="../eu/pilot/">EU Pilot</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- POLICY -->
+  <div class="policy">
+    <div class="wrap">
+      Audit-first · Fail-closed · Hash-only · No data custody
     </div>
   </div>
-</nav>
 
-<section class="policy-banner">
-  <div class="wrap">
-    PUBLIC PILOT · EU-ALIGNED · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
-  </div>
-</section>
+  <main class="wrap">
 
-<main class="wrap">
+    <section class="hero">
+      <h1>Architettura</h1>
+      <p>
+        Modello tecnico per attribuzione, tracciabilità e verifica pubblica delle azioni digitali.
+      </p>
+    </section>
 
-  <section class="hero">
-    <h1>Architecture</h1>
-    <p>
-      Struttura astratta dell’IPR come layer di attribuzione e responsabilità sopra sistemi esistenti.
-      Obiettivo: verificabilità pubblica senza custodia dati personali, con tracciabilità append-only e comportamento fail-closed.
-    </p>
-  </section>
+    <section class="grid">
 
-  <section class="grid">
-
-    <div class="card">
-      <h2>Architecture diagram (EU-ready)</h2>
-      <p>Diagramma stampabile e linkabile per report e pilot evaluation.</p>
-
-      <div class="diagram-wrap">
-        <img src="/assets/architecture-diagram.svg" alt="HERMETICUM IPR Architecture Diagram" />
+      <div class="card">
+        <h2>Diagramma</h2>
+        <div class="diagram">
+          <img src="../assets/architecture-diagram.svg" alt="Architecture diagram">
+        </div>
       </div>
 
-      <div class="cta-row">
-        <a class="btn" href="/assets/architecture-diagram.svg">Open SVG</a>
-        <a class="btn" href="/eu/pilot/">EU Pilot</a>
-      </div>
-    </div>
-
-    <div class="card half">
-      <h2>Layer model (astratto)</h2>
-      <p>5 strati, modulari, federabili, integrabili con wallet eIDAS / identità già verificate.</p>
-
-      <ul class="list">
-        <li class="item">
-          <strong>1) Identity anchor</strong>
-          <span>Collegamento a identità verificata (esterna o sovrana). Nessuna custodia centrale obbligatoria.</span>
-        </li>
-        <li class="item">
-          <strong>2) Responsibility layer</strong>
-          <span>Attribuzione di decisione/azione a un soggetto identificabile e verificabile.</span>
-        </li>
-        <li class="item">
-          <strong>3) Trace layer</strong>
-          <span>Registrazione append-only (hash) per opponibilità nel tempo e auditabilità.</span>
-        </li>
-        <li class="item">
-          <strong>4) Verification layer</strong>
-          <span>Verifica pubblica pass/fail senza esporre dati personali (hash-only).</span>
-        </li>
-        <li class="item">
-          <strong>5) Interoperability layer</strong>
-          <span>API / integrazione con sistemi B2B, B2G, processi di compliance e registri istituzionali.</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="card half">
-      <h2>Fail-closed & Audit-first</h2>
-      <p>Principio operativo: se non è verificabile, non è valido. Se manca coerenza, si blocca.</p>
-
-      <div class="mono">
-Policy primitives:
-- NO DATA CUSTODY
-- HASH-ONLY VERIFICATION
-- APPEND-ONLY TRACE
-- FAIL-CLOSED DEFAULT
-- AUDIT-FIRST OUTPUT
+      <div class="card half">
+        <h2>Layer</h2>
+        <div class="mono">
+1. Identity anchor  
+2. Responsibility attribution  
+3. Append-only trace  
+4. Public verification  
+5. Interoperability layer
+        </div>
       </div>
 
-      <div class="cta-row">
-        <a class="btn" href="/verify/">Open Verify</a>
-        <a class="btn" href="/eu/pilot/">Open EU Pilot</a>
-        <a class="btn" href="/eu/position-paper/eu-ipr-technical-positioning.md">Read EU Positioning</a>
+      <div class="card half">
+        <h2>Principi</h2>
+        <div class="mono">
+FAIL-CLOSED  
+AUDIT-FIRST  
+HASH-ONLY  
+NO DATA CUSTODY  
+MINIMAL SURFACE
+        </div>
+      </div>
+
+      <div class="card third">
+        <h2>Verifica</h2>
+        <p>Output deterministico pass/fail.</p>
+      </div>
+
+      <div class="card third">
+        <h2>Traccia</h2>
+        <p>Append-only, opponibile nel tempo.</p>
+      </div>
+
+      <div class="card third">
+        <h2>Interoperabilità</h2>
+        <p>Compatibile con sistemi esistenti.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="mini">
+        HERMETICUM — digital responsibility infrastructure
+      </div>
+      <div class="sig">
+        HERMETICUM B.C.E. S.r.l. · EU
       </div>
     </div>
-
-    <div class="card third">
-      <h2>Threat surface (sintesi)</h2>
-      <p>Riduzione attacco: nessun database centrale obbligatorio e verifiche basate su hash e firme.</p>
-      <ul class="list">
-        <li class="item"><strong>Frode identitaria</strong><span>ridotta tramite ancoraggio verificabile e controlli pass/fail.</span></li>
-        <li class="item"><strong>Manipolazione record</strong><span>ridotta con append-only e verifiche ripetibili.</span></li>
-        <li class="item"><strong>Esposizione dati</strong><span>ridotta con minimizzazione + hash-only (no custody).</span></li>
-      </ul>
-    </div>
-
-    <div class="card third">
-      <h2>Interoperabilità</h2>
-      <p>IPR come layer “sopra” sistemi esistenti: identità statali, eIDAS, processi enterprise.</p>
-      <ul class="list">
-        <li class="item"><strong>eIDAS wallet-ready</strong><span>attributi verificabili, compatibilità cross-border.</span></li>
-        <li class="item"><strong>Enterprise-ready</strong><span>audit trail e controlli compliance integrabili.</span></li>
-        <li class="item"><strong>Public verification</strong><span>verifica indipendente senza esporre PII.</span></li>
-      </ul>
-    </div>
-
-    <div class="card third">
-      <h2>Entry points</h2>
-      <p>Il reviewer UE deve trovare subito gli ingressi corretti.</p>
-      <div class="cta-row">
-        <a class="btn" href="/use-cases/">Use-Cases</a>
-        <a class="btn" href="/eu/pilot/">EU Pilot</a>
-        <a class="btn" href="/verify/">Verify</a>
-        <a class="btn" href="/create/">Create (demo)</a>
-      </div>
-    </div>
-
-  </section>
-
-</main>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <p><strong>HERMETICUM</strong> — EU-aligned cybernetic infrastructure</p>
-    <p>Attribution · Responsibility · Traceability · Time</p>
-    <p class="mini">No custody · Hash verification · Fail-closed architecture</p>
-  </div>
-</footer>
+  </footer>
 
 </body>
 </html>
