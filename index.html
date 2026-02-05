@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <base href="/hermeticum-bce-platform/" />
 
-  <title>HERMETICUM — Infrastruttura Cibernetica UE</title>
-  <meta name="description" content="HERMETICUM è un’infrastruttura cibernetica UE che vincola l’esecuzione ex-ante tramite IPR (struttura), Gate PASS/FAIL (misura) e DataCenter (esecuzione), in regime fail-closed e hash-only." />
+  <title>HERMETICUM — Infrastruttura cibernetica</title>
+  <meta name="description" content="HERMETICUM è un’infrastruttura cibernetica europea basata su IPR: struttura computabile, verificabile e auditabile ex-ante." />
 
   <link rel="stylesheet" href="assets/hbce.css" />
+
   <style>
     .hbce-wrap{max-width:980px;margin:0 auto;padding:28px 18px}
     .hbce-top{border-bottom:1px solid rgba(255,255,255,.12);padding:18px}
@@ -18,169 +19,159 @@
     .hbce-nav a{margin-right:10px;text-decoration:none;opacity:.9}
     .hbce-nav a:hover{text-decoration:underline;opacity:1}
     .hbce-banner{margin:16px 0;padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:14px}
-    .hbce-pills{margin-top:10px}
-    .hbce-pill{display:inline-block;padding:6px 10px;border:1px solid rgba(255,255,255,.16);border-radius:999px;margin:4px 6px 0 0;font-size:12px}
-    .hbce-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .hbce-btn{display:inline-block;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);text-decoration:none;font-weight:600}
-    .hbce-btn:hover{border-color:rgba(255,255,255,.35)}
-    .hbce-hr{border:0;height:1px;background:rgba(255,255,255,.12);margin:22px 0}
-    .hbce-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:12px}
-    .hbce-card{grid-column:span 6;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px}
+    .hbce-hr{border:0;height:1px;background:rgba(255,255,255,.12);margin:26px 0}
+    .hbce-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px}
+    .hbce-card{grid-column:span 6;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px}
+    .hbce-card h3{margin-top:0}
     @media(max-width:820px){.hbce-card{grid-column:span 12}}
     .hbce-muted{opacity:.82}
-    .hbce-footer{border-top:1px solid rgba(255,255,255,.12);padding:18px;opacity:.9}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .hbce-footer{border-top:1px solid rgba(255,255,255,.12);padding:18px;margin-top:30px}
+    .hbce-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .hbce-btn{display:inline-block;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.18);text-decoration:none;font-weight:600}
+    .hbce-btn:hover{border-color:rgba(255,255,255,.35)}
   </style>
 </head>
 
 <body>
-  <header class="hbce-top">
-    <div class="hbce-top__inner">
-      <div>
-        <div class="hbce-brand__name">HERMETICUM</div>
-        <div class="hbce-brand__sub">Infrastruttura Cibernetica UE · IPR ex-ante · PASS/FAIL</div>
-      </div>
 
-      <nav class="hbce-nav" aria-label="Navigazione">
-        <a href="./">Home</a>
-        <a href="./architecture/">Architecture</a>
-        <a href="./modules/">IPR Stack</a>
-        <a href="./gate/">Gate</a>
-        <a href="./datacenter/">DataCenter</a>
-        <a href="./use-cases/">Use-Cases</a>
-        <a href="./governance/">Governance</a>
-        <a href="./professional/">Company</a>
-        <a href="./verify/">Verify</a>
-      </nav>
-    </div>
-  </header>
+<header class="hbce-top">
+  <div class="hbce-top__inner">
 
-  <main class="hbce-wrap">
-    <div class="hbce-banner">
-      <strong>PUBLIC PILOT</strong> · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
+    <div>
+      <div class="hbce-brand__name">HERMETICUM</div>
+      <div class="hbce-brand__sub">Infrastruttura cibernetica · UE-first</div>
     </div>
 
-    <h1>HERMETICUM = infrastruttura cibernetica</h1>
+    <nav class="hbce-nav">
+      <a href="./">Home</a>
+      <a href="./architecture/">Architecture</a>
+      <a href="./modules/">IPR Stack</a>
+      <a href="./gate/">Gate</a>
+      <a href="./datacenter/">DataCenter</a>
+      <a href="./use-cases/">Use-Cases</a>
+      <a href="./governance/">Governance</a>
+      <a href="./professional/">Company</a>
+      <a href="./verify/">Verify</a>
+    </nav>
 
-    <p>
-      Hermeticum è un’infrastruttura cibernetica europea che vincola l’esecuzione di azioni digitali e fisiche
-      alla verifica <strong>ex-ante</strong> di condizioni minime di responsabilità e tracciabilità.
-    </p>
+  </div>
+</header>
 
-    <p class="hbce-muted">
-      Non introduce nuove autorità. Non è sorveglianza. Non custodisce identità personali.
-      Opera come strato tecnico neutrale: misura e applica <strong>fail-closed</strong>.
-    </p>
+<main class="hbce-wrap">
 
-    <div class="hbce-pills">
-      <span class="hbce-pill">UE-first</span>
-      <span class="hbce-pill">Audit-first</span>
-      <span class="hbce-pill">Fail-closed</span>
-      <span class="hbce-pill">Hash-only</span>
-      <span class="hbce-pill">No data custody</span>
-    </div>
+<div class="hbce-banner">
+<strong>PUBLIC PILOT</strong> · UE-FIRST · AUDIT-FIRST · FAIL-CLOSED · HASH-ONLY · NO DATA CUSTODY
+</div>
 
-    <div class="hbce-cta">
-      <a class="hbce-btn" href="./architecture/">Architecture</a>
-      <a class="hbce-btn" href="./create/">Crea IPR</a>
-      <a class="hbce-btn" href="./verify/">Verifica</a>
-      <a class="hbce-btn" href="./professional/">Company</a>
-    </div>
+<h1>Infrastruttura cibernetica europea</h1>
 
-    <hr class="hbce-hr" />
+<p>
+HERMETICUM è un’infrastruttura cibernetica fondata su <strong>IPR (Identity Primary Record)</strong>.
+IPR è una struttura computabile che consente autorizzazione ex-ante,
+verifica deterministica e auditabilità continua.
+</p>
 
-    <h2>Definizioni UE (infrastruttura / struttura / misura / esecuzione)</h2>
+<p class="hbce-muted">
+L’azione digitale è consentita solo se preceduta da evidenza verificabile.
+In assenza di coerenza → blocco.
+</p>
 
-    <div class="hbce-grid">
-      <article class="hbce-card">
-        <h3>Hermeticum = infrastruttura</h3>
-        <p>
-          Strato tecnico operativo che condiziona l’eseguibilità delle azioni a verifiche ex-ante.
-          Non decide nel merito: definisce ammissibilità tecnica.
-        </p>
-      </article>
+<div class="hbce-cta">
+  <a class="hbce-btn" href="architecture/">Architettura</a>
+  <a class="hbce-btn" href="verify/">Verifica</a>
+  <a class="hbce-btn" href="use-cases/">Use-cases</a>
+</div>
 
-      <article class="hbce-card">
-        <h3>IPR = struttura</h3>
-        <p>
-          Struttura cibernetica (hash-only) che rende verificabili attribuzione, decisione,
-          traccia opponibile ed esposizione temporale.
-        </p>
-      </article>
+<hr class="hbce-hr"/>
 
-      <article class="hbce-card">
-        <h3>JOKER = misura (Gate)</h3>
-        <p>
-          Interfaccia metrologica ex-ante: restituisce <code>PASS</code>/<code>FAIL</code>.
-          Non è autorità. Non decide nel merito.
-        </p>
-        <p><a href="./gate/">Apri Gate →</a></p>
-      </article>
+<h2>Struttura del sistema</h2>
 
-      <article class="hbce-card">
-        <h3>DataCenter = esecuzione vincolata</h3>
-        <p>
-          Esecuzione consentita solo in <code>PASS</code>. In <code>FAIL</code> nessun output e nessun fallback permissivo.
-        </p>
-        <p><a href="./datacenter/">Apri DataCenter →</a></p>
-      </article>
-    </div>
+<div class="hbce-grid">
 
-    <hr class="hbce-hr" />
+<section class="hbce-card">
+<h3>IPR</h3>
+<p>
+Struttura cibernetica primaria.  
+Definisce identità, limiti e stato operativo di un soggetto o sistema.
+</p>
+<a href="modules/">Vai allo stack IPR →</a>
+</section>
 
-    <h2>Assioma operativo</h2>
-    <p>
-      <strong>In assenza di prova ex-ante → nessuna esecuzione.</strong><br />
-      Questo è il vincolo minimo per governare AI, sistemi cyber-fisici e infrastrutture critiche senza custodia identitaria.
-    </p>
+<section class="hbce-card">
+<h3>Gate ex-ante</h3>
+<p>
+Motore di autorizzazione preventiva.  
+Nessuna esecuzione senza coerenza verificabile.
+</p>
+<a href="gate/">Vai al Gate →</a>
+</section>
 
-    <h2>Entrare nel sistema</h2>
-    <div class="hbce-grid">
-      <article class="hbce-card">
-        <h3>1) Crea IPR</h3>
-        <p class="hbce-muted">Genera un record hash-only che precede l’azione.</p>
-        <p><a href="./create/">Vai a Create →</a></p>
-      </article>
+<section class="hbce-card">
+<h3>IPR Datacenter</h3>
+<p>
+Infrastruttura computazionale che esegue solo azioni precedute da IPR valido.
+</p>
+<a href="datacenter/">Vai al DataCenter →</a>
+</section>
 
-      <article class="hbce-card">
-        <h3>2) Verifica</h3>
-        <p class="hbce-muted">Applica verifica deterministica e auditabile.</p>
-        <p><a href="./verify/">Vai a Verify →</a></p>
-      </article>
+<section class="hbce-card">
+<h3>Verifica pubblica</h3>
+<p>
+Digest, receipt e manifest verificabili pubblicamente.
+</p>
+<a href="verify/">Vai a Verify →</a>
+</section>
 
-      <article class="hbce-card">
-        <h3>3) IPR Stack</h3>
-        <p class="hbce-muted">Attiva capacità modulari verificabili (capability-based).</p>
-        <p><a href="./modules/">Vai a Modules →</a></p>
-      </article>
+</div>
 
-      <article class="hbce-card">
-        <h3>4) Use-Cases UE</h3>
-        <p class="hbce-muted">Adozione operativa: robotica, automotive, datacenter, B2B/B2G.</p>
-        <p><a href="./use-cases/">Vai a Use-Cases →</a></p>
-      </article>
-    </div>
+<hr class="hbce-hr"/>
 
-    <hr class="hbce-hr" />
+<h2>Allineamento UE</h2>
 
-    <h2>Firma</h2>
-    <p>
-      <strong>HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</strong><br />
-      <strong>HERMETICUM B.C.E. S.r.l.</strong><br />
-      Torino · Unione Europea
-    </p>
+<p>
+Il modello è progettato per interoperare con ecosistemi europei (eIDAS2, EUDI)
+senza sostituirli.  
+Opera come layer tecnico ex-ante verificabile.
+</p>
 
-    <p class="hbce-muted">
-      Portale pubblico — informativo e valutativo. Nessun effetto giuridico automatico.
-    </p>
-  </main>
+<div class="hbce-cta">
+  <a class="hbce-btn" href="use-cases/">Use-cases UE</a>
+  <a class="hbce-btn" href="governance/">Governance</a>
+  <a class="hbce-btn" href="professional/">Company</a>
+</div>
 
-  <footer class="hbce-footer">
-    <div class="hbce-muted">
-      PUBLIC PILOT · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
-    </div>
-  </footer>
+<hr class="hbce-hr"/>
 
-  <script src="assets/hbce.js" defer></script>
+<h2>Directory tecnica</h2>
+
+<p class="hbce-muted">
+Appendici operative, audit e normative disponibili nel manuale tecnico.
+</p>
+
+<a class="hbce-btn" href="manual/">Apri directory tecnica</a>
+
+<hr class="hbce-hr"/>
+
+<h2>Firma</h2>
+
+<p>
+<strong>HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</strong><br>
+<strong>HERMETICUM B.C.E. S.r.l.</strong><br>
+Torino · Unione Europea
+</p>
+
+<p class="hbce-muted">
+Portale informativo e valutativo. Nessun effetto giuridico automatico.
+</p>
+
+</main>
+
+<footer class="hbce-footer">
+<div class="hbce-muted">
+PUBLIC PILOT · UE-FIRST · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
+</div>
+</footer>
+
+<script src="assets/hbce.js" defer></script>
 </body>
 </html>
