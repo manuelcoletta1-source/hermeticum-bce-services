@@ -1,103 +1,208 @@
-<h1>HERMETICUM — Infrastruttura cibernetica (UE)</h1>
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <base href="/hermeticum-bce-platform/" />
 
-<p>
-  Hermeticum è un’infrastruttura cibernetica europea che impedisce tecnicamente l’esecuzione di azioni digitali,
-  algoritmiche o robotiche quando non esistono, <strong>prima dell’azione</strong>, condizioni verificabili di responsabilità e tracciabilità.
-</p>
+  <title>HERMETICUM — Infrastruttura Cibernetica UE</title>
+  <meta name="description" content="HERMETICUM è un’infrastruttura cibernetica UE che vincola l’esecuzione ex-ante tramite IPR, Gate PASS/FAIL e evidenza hash-only (fail-closed, audit-first, no data custody)." />
 
-<p>
-  <strong>HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</strong><br>
-  <strong>HERMETICUM B.C.E. S.r.l.</strong> · Torino · Unione Europea
-</p>
+  <link rel="stylesheet" href="assets/hbce.css" />
+</head>
 
-<p>
-  Metrologico · Fail-closed · Audit-first · Hash-only · No data custody
-</p>
+<body>
+  <!-- HEADER / NAV (canonico, semplice e istituzionale) -->
+  <header class="hbce-top">
+    <div class="hbce-top__inner">
+      <div class="hbce-brand">
+        <div class="hbce-brand__name">HERMETICUM</div>
+        <div class="hbce-brand__sub">Infrastruttura Cibernetica UE · IPR ex-ante · PASS/FAIL</div>
+      </div>
 
-<div class="hbce-cta">
-  <a class="btn" href="./create/">Crea IPR</a>
-  <a class="btn" href="./verify/">Verifica</a>
-  <a class="btn" href="./modules/">IPR Stack</a>
-</div>
+      <nav class="hbce-nav" aria-label="Navigazione">
+        <a href="./" class="hbce-nav__item">Home</a>
+        <a href="./modules/" class="hbce-nav__item">IPR Stack</a>
+        <a href="./gate/" class="hbce-nav__item">Gate</a>
+        <a href="./datacenter/" class="hbce-nav__item">DataCenter</a>
+        <a href="./use-cases/" class="hbce-nav__item">Use-Cases</a>
+        <a href="./governance/" class="hbce-nav__item">Governance</a>
+        <a href="./verify/" class="hbce-nav__item">Verify</a>
+      </nav>
+    </div>
+  </header>
 
-<h2>Assioma operativo</h2>
-<p>
-  Un’azione non deve essere eseguita se, prima dell’esecuzione, non esistono condizioni tecnicamente verificabili
-  di responsabilità e tracciabilità.<br>
-  <strong>In assenza di prova → blocco automatico.</strong>
-</p>
+  <main class="hbce-wrap">
+    <!-- HERO -->
+    <section class="hbce-hero">
+      <h1>HERMETICUM = infrastruttura cibernetica</h1>
 
-<h2>Definizioni UE (infrastruttura / struttura)</h2>
+      <p class="hbce-lead">
+        Hermeticum è un’infrastruttura cibernetica europea che vincola l’esecuzione di azioni digitali e fisiche
+        alla verifica <strong>ex-ante</strong> di condizioni minime di responsabilità e tracciabilità.
+      </p>
 
-<h3>Hermeticum = infrastruttura cibernetica</h3>
-<p>
-  Strato tecnico neutrale che misura ex-ante la coerenza tra decisione, responsabilità ed esecuzione.
-  Non decide nel merito. Non è sorveglianza. Non custodisce identità personali.
-</p>
+      <p class="hbce-muted">
+        Non introduce nuove autorità. Non è sorveglianza. Non custodisce identità personali.
+        Opera come strato tecnico neutrale: misura e applica <strong>fail-closed</strong>.
+      </p>
 
-<h3>IPR = struttura cibernetica</h3>
-<p>
-  L’Identity Primary Record (IPR) è la struttura cibernetica che attraversa l’infrastruttura:
-  rende verificabili attribuzione, decisione, traccia opponibile ed esposizione temporale (hash-only).
-</p>
+      <div class="hbce-pills">
+        <span class="hbce-pill">UE-first</span>
+        <span class="hbce-pill">Audit-first</span>
+        <span class="hbce-pill">Fail-closed</span>
+        <span class="hbce-pill">Hash-only</span>
+        <span class="hbce-pill">No data custody</span>
+      </div>
 
-<h2>Flusso operativo ex-ante</h2>
-<ol>
-  <li>Decisione umana o istituzionale</li>
-  <li>Emissione IPR (hash-only)</li>
-  <li>Misura ex-ante (PASS / FAIL)</li>
-  <li>Esecuzione consentita o bloccata</li>
-  <li>Evidenza e audit opponibile nel tempo</li>
-</ol>
+      <div class="hbce-cta">
+        <a class="hbce-btn" href="./create/">Crea IPR</a>
+        <a class="hbce-btn" href="./verify/">Verifica</a>
+        <a class="hbce-btn" href="./modules/">Apri IPR Stack</a>
+        <a class="hbce-btn" href="./status/">Status</a>
+      </div>
+    </section>
 
-<h2>Componenti (già operative nel portale)</h2>
+    <hr class="hbce-hr" />
 
-<h3>IPR</h3>
-<p>Riferimento tecnico che precede l’azione.</p>
-<p><a href="./ipr/">Documentazione →</a></p>
+    <!-- DEFINIZIONI UE -->
+    <section class="hbce-section">
+      <h2>Definizioni UE (infrastruttura / struttura)</h2>
 
-<h3>Gate (JOKER)</h3>
-<p>
-  <strong>Interfaccia metrologica</strong>: applica un pre-check deterministico PASS/FAIL prima dell’esecuzione.
-  Non introduce autorità. Misura condizioni minime di ammissibilità.
-</p>
-<p><a href="./gate/">Gate →</a></p>
+      <div class="hbce-grid">
+        <article class="hbce-card">
+          <h3>Hermeticum = infrastruttura cibernetica</h3>
+          <p>
+            Strato tecnico operativo che misura ex-ante la coerenza tra decisione, responsabilità ed esecuzione.
+            Non decide nel merito: rende l’azione <strong>ammissibile</strong> o <strong>inammissibile</strong>
+            in base a condizioni verificabili.
+          </p>
+        </article>
 
-<h3>DataCenter Metrologico</h3>
-<p>Esecuzione vincolata: se FAIL, nessuna discrezionalità, nessun output.</p>
-<p><a href="./datacenter/">DataCenter →</a></p>
+        <article class="hbce-card">
+          <h3>IPR = struttura cibernetica</h3>
+          <p>
+            L’Identity Primary Record (IPR) è la struttura cibernetica che attraversa l’infrastruttura:
+            rende verificabili attribuzione, decisione, traccia opponibile ed esposizione temporale.
+            Regime: <strong>hash-only</strong>.
+          </p>
+        </article>
+      </div>
+    </section>
 
-<h3>OpenAPI</h3>
-<p>Interfaccia tecnica del pre-check ex-ante per integrazione B2B/B2G.</p>
-<p><a href="./openapi/">OpenAPI →</a></p>
+    <!-- ASSIOMA OPERATIVO -->
+    <section class="hbce-section">
+      <h2>Assioma operativo</h2>
+      <p>
+        <strong>In assenza di prova ex-ante → nessuna esecuzione.</strong><br />
+        Comportamento minimo richiesto per governare AI, sistemi cyber-fisici e infrastrutture critiche
+        senza custodia identitaria o sorveglianza.
+      </p>
+    </section>
 
-<h3>Use Cases UE</h3>
-<p>Adozione concreta in contesti pubblici e infrastrutturali (robot, automotive, datacenter, sistemi critici).</p>
-<p><a href="./use-cases/">Use Cases →</a></p>
+    <!-- FLUSSO -->
+    <section class="hbce-section">
+      <h2>Flusso ex-ante (sequenza unica)</h2>
+      <ol class="hbce-steps">
+        <li><strong>Decisione</strong> (umana / istituzionale)</li>
+        <li><strong>IPR</strong> (struttura cibernetica: riferimento hash-only)</li>
+        <li><strong>Gate</strong> (misura ex-ante: PASS / FAIL)</li>
+        <li><strong>Esecuzione</strong> (consentita o bloccata)</li>
+        <li><strong>Evidenza</strong> (pack auditabile e opponibile nel tempo)</li>
+      </ol>
+    </section>
 
-<h2>Cosa questo sistema NON è</h2>
-<ul>
-  <li>Non è una nuova autorità</li>
-  <li>Non è sorveglianza</li>
-  <li>Non è un’IA che decide</li>
-  <li>Non custodisce dati personali</li>
-</ul>
+    <!-- COMPONENTI -->
+    <section class="hbce-section">
+      <h2>Componenti del portale</h2>
 
-<h2>Allineamento UE</h2>
-<ul>
-  <li>AI Act — human oversight ex-ante</li>
-  <li>GDPR — minimizzazione, hash-only</li>
-  <li>NIS2 — prevenzione del rischio</li>
-  <li>eIDAS (principi) — opponibilità</li>
-</ul>
+      <div class="hbce-grid">
+        <article class="hbce-card">
+          <h3>IPR Stack (moduli di capacità)</h3>
+          <p class="hbce-muted">
+            Architettura modulare: abilita capacità operative solo quando il modulo è attivo e verificabile.
+          </p>
+          <p><a href="./modules/">Apri moduli →</a></p>
+        </article>
 
-<h2>Entrare nel sistema</h2>
-<p>
-  Qui non si chiede fiducia. Si richiede una prova verificabile prima dell’azione.<br>
-  <strong>Non cambia chi decide. Cambia quando un’azione è ammessa.</strong>
-</p>
+        <article class="hbce-card">
+          <h3>JOKER Gate (PASS / FAIL)</h3>
+          <p>
+            Interfaccia metrologica dell’infrastruttura: verifica ex-ante condizioni minime di ammissibilità e restituisce
+            <code>PASS</code> o <code>FAIL</code>. Non è autorità. Non decide nel merito.
+          </p>
+          <p><a href="./gate/">Apri Gate →</a></p>
+        </article>
 
-<div class="hbce-cta">
-  <a class="btn" href="./create/">Crea IPR</a>
-  <a class="btn" href="./status/">Status</a>
-</div>
+        <article class="hbce-card">
+          <h3>DataCenter Metrologico</h3>
+          <p>
+            Esecuzione vincolata: in stato FAIL non esiste output e non esiste fallback permissivo.
+            Comportamento deterministico e auditabile.
+          </p>
+          <p><a href="./datacenter/">Apri DataCenter →</a></p>
+        </article>
+
+        <article class="hbce-card">
+          <h3>Use-Cases UE</h3>
+          <p>
+            Adozione operativa: robotica, automotive, datacenter, sistemi critici, ambienti B2B/B2G.
+          </p>
+          <p><a href="./use-cases/">Apri use-cases →</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- NON È -->
+    <section class="hbce-section">
+      <h2>Cosa questo sistema NON è</h2>
+      <ul class="hbce-list">
+        <li>Non è una nuova autorità o un sostituto istituzionale</li>
+        <li>Non è sorveglianza e non effettua profiling</li>
+        <li>Non custodisce identità personali o database centralizzati</li>
+        <li>Non è una “IA che decide”: è una misura ex-ante (PASS/FAIL)</li>
+      </ul>
+    </section>
+
+    <!-- ALLINEAMENTO UE -->
+    <section class="hbce-section">
+      <h2>Allineamento UE</h2>
+      <ul class="hbce-list">
+        <li><strong>AI Act</strong> — supervisione umana ex-ante (operativa, non ex-post)</li>
+        <li><strong>GDPR</strong> — minimizzazione (hash-only), no custody</li>
+        <li><strong>NIS2</strong> — prevenzione del rischio prima dell’esecuzione</li>
+        <li><strong>eIDAS (principi)</strong> — tracciabilità e opponibilità</li>
+      </ul>
+    </section>
+
+    <hr class="hbce-hr" />
+
+    <!-- FIRMA -->
+    <section class="hbce-section hbce-signature">
+      <p>
+        <strong>HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</strong><br />
+        <strong>HERMETICUM B.C.E. S.r.l.</strong><br />
+        Torino · Unione Europea
+      </p>
+
+      <div class="hbce-cta">
+        <a class="hbce-btn" href="./governance/">Governance</a>
+        <a class="hbce-btn" href="./privacy/">Privacy</a>
+        <a class="hbce-btn" href="./terms/">Terms</a>
+        <a class="hbce-btn" href="./credits/">Credits</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="hbce-footer">
+    <div class="hbce-footer__inner">
+      <div class="hbce-muted">
+        Portale pubblico — informativo e valutativo. Nessun effetto giuridico automatico.
+        Esecuzione condizionata ex-ante tramite verifiche riproducibili (audit-first).
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/hbce.js" defer></script>
+</body>
+</html>
