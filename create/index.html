@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>HERMETICUM — Create IPR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HERMETICUM create — official IPR artifact generation with embedded private payload, optional AI interface metadata, and standardized self-declared fields (hash-only, no data custody).">
+  <meta name="description" content="HERMETICUM create — IPR official artifact (BIO subject), embedded payload (PRIVATE), hash-only, no data custody. Copy-safe outputs for mobile browsers.">
 
   <style>
     :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
@@ -34,7 +34,7 @@
     .divider{height:1px;background:rgba(255,255,255,.08);margin:14px 0}
 
     label{display:block;font-size:13px;color:var(--muted);margin-top:12px}
-    input,textarea,select{
+    input,textarea{
       width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
       background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
     }
@@ -44,13 +44,11 @@
     .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-top:10px}
     .row > div{flex:1;min-width:170px}
 
-    .chk{display:flex;align-items:center;gap:10px;margin-top:12px;color:var(--muted);font-size:13px}
     .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     .btn{padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;cursor:pointer}
     .btn:hover{background:rgba(255,255,255,.06)}
     .btn.primary{background:rgba(255,255,255,.06)}
     .btn.primary:hover{background:rgba(255,255,255,.09)}
-    .btn:disabled{opacity:.5;cursor:not-allowed}
 
     .out{margin-top:12px;padding:14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;white-space:pre-line;overflow:auto}
     .hint{font-size:12px;color:var(--muted);margin-top:8px}
@@ -83,83 +81,56 @@
 
 <main class="wrap">
   <section class="hero">
-    <h1>Generazione IPR Ufficiale</h1>
+    <h1>Generazione IPR Ufficiale (BIO)</h1>
     <p>
-      Artefatto PUBLIC/PRIVATE con payload incastonato (PRIVATE), metadati AI opzionali,
-      e dati self-declared standardizzati. Nessuna custodia dati.
+      Soggetto biologico (self-declared). Artefatto PUBLIC/PRIVATE.
+      PRIVATE contiene il payload incastonato. PUBLIC lo esclude.
+      Nessuna custodia dati. Output “copy-safe” per browser mobile.
     </p>
   </section>
 
   <section class="grid">
     <div class="card half">
-      <div class="section-title">Tipo soggetto</div>
+      <div class="section-title">Dati del soggetto (self-declared)</div>
+
+      <label>Nome e Cognome</label>
+      <input id="nome" placeholder="Nome Cognome">
+
       <div class="row">
-        <div class="chk">
-          <input id="sub_bio" type="radio" name="subtype" checked onchange="renderSubjectMode()">
-          <label for="sub_bio" style="margin:0">BIOLOGICO (utente)</label>
+        <div>
+          <label>Nazione (ISO2 consigliato)</label>
+          <input id="nazione" placeholder="IT">
         </div>
-        <div class="chk">
-          <input id="sub_ai" type="radio" name="subtype" onchange="renderSubjectMode()">
-          <label for="sub_ai" style="margin:0">AI (entità cibernetica personale evolutiva)</label>
+        <div>
+          <label>Regione</label>
+          <input id="regione" placeholder="Piemonte">
         </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Città</label>
+          <input id="citta" placeholder="Torino">
+        </div>
+        <div>
+          <label>Zona (quartiere/area/municipio — no indirizzo)</label>
+          <input id="zona" placeholder="Area / Quartiere / Municipio">
+        </div>
+      </div>
+
+      <div class="hint">
+        Nota UE: self-declared, non verificato. Granularità bassa (no indirizzi, no coordinate).
       </div>
 
       <div class="divider"></div>
 
-      <div class="section-title" id="subjectTitle">Dati del soggetto (self-declared)</div>
+      <div class="section-title">Personalizzazione AI (opzionale)</div>
+      <label>AI personalization tag (solo timbro base, nessuna interfaccia)</label>
+      <input id="ai_tag" placeholder="es. AI_JOKER_PERSONAL / label interno / tracking tag">
 
-      <div id="bioBlock">
-        <label>Nome e Cognome</label>
-        <input id="nome" placeholder="Nome Cognome">
-
-        <div class="row">
-          <div>
-            <label>Nazione (ISO2 consigliato)</label>
-            <input id="nazione" placeholder="IT">
-          </div>
-          <div>
-            <label>Regione</label>
-            <input id="regione" placeholder="Piemonte">
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <label>Città</label>
-            <input id="citta" placeholder="Torino">
-          </div>
-          <div>
-            <label>Zona (quartiere/area/municipio — no indirizzo)</label>
-            <input id="zona" placeholder="Area / Quartiere / Municipio">
-          </div>
-        </div>
-
-        <div class="hint">
-          Nota UE: self-declared, non verificato. Inserire granularità bassa (no indirizzi, no coordinate).
-        </div>
-      </div>
-
-      <div id="aiBlock" style="display:none">
-        <label>Nome entità AI (self-declared)</label>
-        <input id="ai_name" placeholder="AI JOKER / entità personale">
-
-        <div class="row">
-          <div>
-            <label>Tipo</label>
-            <input id="ai_type" value="CYBERNETIC_ENTITY_PERSONAL_EVOLUTIVE" />
-          </div>
-          <div>
-            <label>Version / Epoch (opzionale)</label>
-            <input id="ai_epoch" placeholder="v1 / epoch / build">
-          </div>
-        </div>
-
-        <label>Owner IPR / Root reference (opzionale)</label>
-        <input id="ai_owner" placeholder="IPR-3 / root hash / reference">
-
-        <div class="hint">
-          UE-style: entità AI dichiarata, nessuna verifica identità. Audit temporale in /audit/ usando prev_hash=receipt.
-        </div>
+      <div class="hint">
+        Questo campo è solo un’etichetta dichiarativa dentro l’artefatto (tracciabilità base).
+        Non abilita nulla, non promette nulla.
       </div>
 
       <div class="divider"></div>
@@ -174,7 +145,6 @@
 
       <div class="hint">
         Hash calcolato su file (se presente) altrimenti su testo.
-        PRIVATE include payload (non condividere). PUBLIC esclude payload (condivisibile).
       </div>
 
       <div class="btnrow">
@@ -185,68 +155,36 @@
     </div>
 
     <div class="card half">
-      <div class="section-title">Interfaccia AI (opzionale)</div>
-
-      <div class="chk">
-        <input id="ai_enabled" type="checkbox" />
-        <label for="ai_enabled" style="margin:0">Includi metadati AI / interfaccia JOKER</label>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>Availability</label>
-          <select id="ai_avail">
-            <option value="PUBLIC">PUBLIC</option>
-            <option value="PILOT">PILOT</option>
-            <option value="INSTITUTIONAL">INSTITUTIONAL</option>
-          </select>
-        </div>
-        <div>
-          <label>Mode</label>
-          <select id="ai_mode">
-            <option value="READ_ONLY">READ_ONLY</option>
-            <option value="AUDIT_ASSIST">AUDIT_ASSIST</option>
-            <option value="C2_INTERFACE">C2_INTERFACE</option>
-          </select>
-        </div>
-      </div>
-
-      <label>Joker handle / endpoint (opzionale)</label>
-      <input id="ai_handle" placeholder="TBD">
-
-      <div class="hint">
-        Metadati AI = descrizione di interfaccia tecnica. Nessuna verifica identità, nessuna promessa operativa.
-      </div>
-
-      <div class="divider"></div>
-
       <div class="section-title">Generazione artefatto</div>
 
       <div class="btnrow">
-        <button class="btn primary" onclick="generateIPRPrivate()">GENERA IPR UFFICIALE (PRIVATE)</button>
-        <button class="btn" onclick="generateIPRPublic()">GENERA IPR UFFICIALE (PUBLIC)</button>
+        <button class="btn primary" onclick="generateIPR(true)">GENERA IPR (PRIVATE)</button>
+        <button class="btn" onclick="generateIPR(false)">GENERA IPR (PUBLIC)</button>
       </div>
 
       <div id="iprout" class="out">STATO: IDLE</div>
 
       <div class="divider"></div>
 
-      <div class="section-title">Download (Android-safe)</div>
-      <div class="hint">
-        Il TXT viene scaricato automaticamente (un solo download → meno blocchi).
-        JSON e receipt si scaricano manualmente.
-      </div>
+      <div class="section-title">Output pronto (copy-safe)</div>
+
       <div class="btnrow">
-        <button class="btn" id="dl_json" onclick="downloadLast('json')" disabled>Scarica JSON</button>
-        <button class="btn" id="dl_rcpt" onclick="downloadLast('rcpt')" disabled>Scarica receipt</button>
+        <button class="btn" onclick="copyField('out_txt')">Copia TXT</button>
+        <button class="btn" onclick="copyField('out_json')">Copia JSON</button>
+        <button class="btn" onclick="copyField('out_rcpt')">Copia receipt</button>
       </div>
 
-      <div class="divider"></div>
+      <label>Artefatto TXT</label>
+      <textarea id="out_txt" placeholder="qui apparirà il TXT" style="min-height:160px"></textarea>
 
-      <div class="section-title">AI: crea IPR entità + audit</div>
+      <label>Artefatto JSON</label>
+      <textarea id="out_json" placeholder="qui apparirà il JSON" style="min-height:160px"></textarea>
+
+      <label>receipt_sha256(json)</label>
+      <input id="out_rcpt" placeholder="qui apparirà il receipt">
+
       <div class="hint">
-        Dopo aver creato l’IPR, vai su <b>/audit/</b> e usa come <b>prev_hash</b> il
-        <b>receipt_sha256(json)</b>. Firma infrastruttura: <b>HERMETICUM B.C.E. S.r.l.</b>
+        Per audit temporale: vai su <b>/audit/</b> e usa come <b>prev_hash</b> il valore di <b>receipt_sha256(json)</b>.
       </div>
     </div>
   </section>
@@ -266,23 +204,6 @@ let payloadMode = "";        // "TEXT" | "FILE"
 let payloadText = "";
 let payloadFileMeta = null;  // {name,type,size}
 let payloadFileB64 = "";     // base64
-
-// holds last JSON + receipt for manual download
-window.__IPR_LAST__ = null;
-
-function setManualDownloadsEnabled(on){
-  document.getElementById("dl_json").disabled = !on;
-  document.getElementById("dl_rcpt").disabled = !on;
-}
-
-function renderSubjectMode(){
-  const isAI = document.getElementById("sub_ai").checked;
-  document.getElementById("bioBlock").style.display = isAI ? "none" : "block";
-  document.getElementById("aiBlock").style.display = isAI ? "block" : "none";
-  document.getElementById("subjectTitle").textContent = isAI
-    ? "Dati soggetto AI (self-declared)"
-    : "Dati del soggetto (self-declared)";
-}
 
 async function sha256Bytes(uint8){
   const buf = await crypto.subtle.digest("SHA-256", uint8);
@@ -308,70 +229,23 @@ async function readFileAsBytes(file){
   return new Uint8Array(ab);
 }
 
-function downloadText(filename, content){
-  const blob = new Blob([content], {type:"text/plain"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  a.click();
-}
-
-function downloadLast(kind){
-  const x = window.__IPR_LAST__;
-  if(!x) return;
-  if(kind === "json") return downloadText(x.json_filename, x.json_content);
-  if(kind === "rcpt") return downloadText(x.rcpt_filename, x.rcpt_content);
-}
-
-function aiConfig(){
-  const enabled = document.getElementById("ai_enabled").checked;
-  if(!enabled) return { enabled:false };
-  return {
-    enabled: true,
-    name: "AI JOKER ΦΩ — C2 SOFTWARE",
-    availability: document.getElementById("ai_avail").value,
-    mode: document.getElementById("ai_mode").value,
-    handle: (document.getElementById("ai_handle").value || "").trim() || "TBD",
-    entrypoints: { verify:"../verify/", audit:"../audit/", pilot:"../eu/pilot/" }
-  };
-}
-
-function getSubject(){
-  const isAI = document.getElementById("sub_ai").checked;
-
-  if(isAI){
-    const ai_name = (document.getElementById("ai_name").value || "").trim() || "N/A";
-    const ai_type = (document.getElementById("ai_type").value || "").trim() || "CYBERNETIC_ENTITY_PERSONAL_EVOLUTIVE";
-    const ai_epoch = (document.getElementById("ai_epoch").value || "").trim() || "N/A";
-    const ai_owner = (document.getElementById("ai_owner").value || "").trim() || "N/A";
-    return {
-      subject_type: "AI_CYBERNETIC_ENTITY",
-      declared_identity: { name: ai_name, nation: "N/A", status: "SELF_DECLARED" },
-      ai: { name: ai_name, type: ai_type, epoch: ai_epoch, owner_reference: ai_owner }
-    };
-  }
-
+function getIdentity(){
   const name = (document.getElementById("nome").value || "").trim() || "N/A";
   const nation = (document.getElementById("nazione").value || "").trim() || "N/A";
   const region = (document.getElementById("regione").value || "").trim() || "N/A";
   const city = (document.getElementById("citta").value || "").trim() || "N/A";
   const zone = (document.getElementById("zona").value || "").trim() || "N/A";
-
   return {
-    subject_type: "BIOLOGICAL_SUBJECT",
-    declared_identity: {
-      name,
-      nation,
+    name, nation,
+    status: "SELF_DECLARED",
+    location: {
+      country: nation,
+      region,
+      city,
+      zone,
+      granularity: "LOW",
       status: "SELF_DECLARED",
-      location: {
-        country: nation,
-        region,
-        city,
-        zone,
-        granularity: "LOW",
-        status: "SELF_DECLARED",
-        note: "No address, no coordinates"
-      }
+      note: "No address, no coordinates"
     }
   };
 }
@@ -410,54 +284,6 @@ async function generateHash(){
   out.textContent = "STATO: OK\nMODE: TEXT\nALGORITMO: " + lastAlgo + "\nRIFERIMENTO:\n" + lastHash;
 }
 
-function buildAISectionTXT(ai){
-  if(!ai || !ai.enabled) return "AI Interface (optional)\nMode: NONE\n";
-  return `AI Interface (optional)
-Interface: ${ai.name}
-Availability: ${ai.availability}
-Mode: ${ai.mode}
-Handle: ${ai.handle}
-Entrypoints:
-- verify: ${ai.entrypoints.verify}
-- audit: ${ai.entrypoints.audit}
-- pilot: ${ai.entrypoints.pilot}
-`;
-}
-
-function buildSubjectSectionTXT(subject){
-  if(subject.subject_type === "AI_CYBERNETIC_ENTITY"){
-    return `Declared Subject
-Type: AI_CYBERNETIC_ENTITY (self-declared)
-
-AI Identity (self-declared)
-Name: ${subject.ai.name}
-Type: ${subject.ai.type}
-Epoch: ${subject.ai.epoch}
-Owner reference: ${subject.ai.owner_reference}
-
-No external verification is performed by the infrastructure.
-`;
-  }
-
-  const id = subject.declared_identity || {};
-  const loc = id.location || {};
-  return `Declared Biological Identity
-Name: ${id.name}
-Nation: ${id.nation}
-Status: ${id.status}
-
-Declared Location (self-declared, low granularity)
-Country: ${loc.country}
-Region: ${loc.region}
-City: ${loc.city}
-Zone: ${loc.zone}
-Granularity: ${loc.granularity}
-Note: ${loc.note}
-
-No external verification is performed by the infrastructure.
-`;
-}
-
 function buildPayloadSectionTXT(includePayload){
   if(!includePayload){
     return `Embedded Payload
@@ -485,7 +311,8 @@ ${payloadText}
 -----END PAYLOAD TEXT-----`;
 }
 
-function buildIPRDoc({iprID, nowISO, subject, hash, includePayload, ai}){
+function buildIPRDoc({iprID, nowISO, identity, hash, includePayload, aiTag}){
+  const loc = identity.location || {};
   return `IPR — IDENTITY PRIMARY RECORD
 Official Responsibility Artifact
 
@@ -499,7 +326,21 @@ ${iprID}
 Timestamp (UTC):
 ${nowISO}
 
-${buildSubjectSectionTXT(subject)}
+Declared Biological Identity (self-declared)
+Name: ${identity.name}
+Nation: ${identity.nation}
+Status: ${identity.status}
+
+Declared Location (self-declared, low granularity)
+Country: ${loc.country}
+Region: ${loc.region}
+City: ${loc.city}
+Zone: ${loc.zone}
+Granularity: ${loc.granularity}
+Note: ${loc.note}
+
+AI Personalization Tag (optional)
+${aiTag || "NONE"}
 
 Digital Event
 Digital event under responsibility of the declared subject.
@@ -509,8 +350,6 @@ Hash: ${hash}
 Algorithm: ${lastAlgo}
 
 ${buildPayloadSectionTXT(includePayload)}
-
-${buildAISectionTXT(ai)}
 
 Responsibility Statement
 The declared subject assumes responsibility for the digital event
@@ -531,23 +370,32 @@ It provides a verifiable responsibility record only.
 }
 
 async function generateIPR(includePayload){
-  const out = document.getElementById("iprout");
-  setManualDownloadsEnabled(false);
-  window.__IPR_LAST__ = null;
+  const status = document.getElementById("iprout");
+  const outTXT = document.getElementById("out_txt");
+  const outJSON = document.getElementById("out_json");
+  const outRCPT = document.getElementById("out_rcpt");
 
-  if(!lastHash) return out.textContent = "STATO: FAIL\nMOTIVO: genera prima l'hash";
+  outTXT.value = "";
+  outJSON.value = "";
+  outRCPT.value = "";
+
+  if(!lastHash){
+    status.textContent = "STATO: FAIL\nMOTIVO: genera prima l'hash";
+    return;
+  }
   if(includePayload && (payloadMode !== "TEXT" && payloadMode !== "FILE")){
-    return out.textContent = "STATO: FAIL\nMOTIVO: payload non definito";
+    status.textContent = "STATO: FAIL\nMOTIVO: payload non definito";
+    return;
   }
 
   const now = new Date().toISOString();
   const iprID = makeId("IPR-O-", now);
   const suffix = includePayload ? "PRIVATE" : "PUBLIC";
 
-  const subject = getSubject();
-  const ai = aiConfig();
+  const identity = getIdentity();
+  const aiTag = (document.getElementById("ai_tag").value || "").trim();
 
-  const doc = buildIPRDoc({iprID, nowISO:now, subject, hash:lastHash, includePayload, ai});
+  const doc = buildIPRDoc({iprID, nowISO: now, identity, hash: lastHash, includePayload, aiTag});
 
   const jsonObj = {
     kind: includePayload ? "IPR_OFFICIAL_PRIVATE" : "IPR_OFFICIAL_PUBLIC",
@@ -556,49 +404,46 @@ async function generateIPR(includePayload){
     regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
     ipr_id: iprID,
     timestamp_utc: now,
-    subject_type: subject.subject_type,
-    declared_identity: subject.declared_identity,
-    ai_subject: subject.ai ? subject.ai : undefined,
-    reference: { hash:lastHash, algorithm:lastAlgo },
+    subject_type: "BIOLOGICAL_SUBJECT",
+    declared_identity: identity,
+    ai_personalization_tag: aiTag || "NONE",
+    reference: { hash: lastHash, algorithm: lastAlgo },
     payload: includePayload
       ? (payloadMode === "FILE"
           ? { mode:"FILE", filename: payloadFileMeta.name, mime: payloadFileMeta.type, size: payloadFileMeta.size, encoding:"base64", data: payloadFileB64 }
           : { mode:"TEXT", encoding:"utf-8", data: payloadText })
       : { mode:"NONE" },
-    ai_interface: ai,
     seal: { generated_by:"HERMETICUM infrastructure", signature_line:"HERMETICUM B.C.E. S.r.l. · EU" }
   };
-  if(jsonObj.ai_subject === undefined) delete jsonObj.ai_subject;
 
   const jsonText = JSON.stringify(jsonObj, null, 2);
   const receipt = await sha256String(jsonText);
 
-  // AUTO-DOWNLOAD: SOLO TXT (Android-safe)
-  downloadText(iprID + "_" + suffix + ".txt", doc);
+  outTXT.value = doc;
+  outJSON.value = jsonText;
+  outRCPT.value = receipt;
 
-  // MANUAL: JSON + receipt
-  window.__IPR_LAST__ = {
-    json_filename: iprID + "_" + suffix + ".json",
-    json_content: jsonText,
-    rcpt_filename: iprID + "_" + suffix + ".receipt.sha256.txt",
-    rcpt_content: receipt + "\n"
-  };
-  setManualDownloadsEnabled(true);
-
-  out.textContent =
+  status.textContent =
     "STATO: OK\n" +
     "ARTEFATTO: " + suffix + "\n" +
-    "AI_INTERFACE: " + (ai.enabled ? "ON" : "OFF") + "\n" +
     "ID: " + iprID + "\n" +
     "receipt_sha256(json):\n" + receipt + "\n\n" +
-    "TXT scaricato automaticamente.\nJSON e receipt: usa i pulsanti sotto.";
+    "Output pronto: copia TXT/JSON/receipt (mobile-safe).";
 }
 
-function generateIPRPrivate(){ return generateIPR(true); }
-function generateIPRPublic(){ return generateIPR(false); }
-
-// init
-renderSubjectMode();
+async function copyField(id){
+  const el = document.getElementById(id);
+  const val = (el.value || "").toString();
+  if(!val) return;
+  try{
+    await navigator.clipboard.writeText(val);
+  }catch(e){
+    // fallback per browser che blocca clipboard API
+    el.focus();
+    el.select();
+    document.execCommand("copy");
+  }
+}
 </script>
 
 </body>
