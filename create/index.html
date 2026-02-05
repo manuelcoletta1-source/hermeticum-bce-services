@@ -158,7 +158,7 @@
         <input id="ai_owner" placeholder="IPR-3 / root hash / reference">
 
         <div class="hint">
-          UE-style: entità AI dichiarata, nessuna verifica identità. Audit temporale gestito in /audit/.
+          UE-style: entità AI dichiarata, nessuna verifica identità. Audit temporale in /audit/ usando prev_hash=receipt.
         </div>
       </div>
 
@@ -231,24 +231,22 @@
 
       <div class="divider"></div>
 
-      <div class="section-title">Download manuale (anti-blocco browser)</div>
-      <div class="btnrow">
-        <button class="btn" id="dl_txt" onclick="downloadPrepared('txt')" disabled>Scarica TXT</button>
-        <button class="btn" id="dl_json" onclick="downloadPrepared('json')" disabled>Scarica JSON</button>
-        <button class="btn" id="dl_rcpt" onclick="downloadPrepared('rcpt')" disabled>Scarica receipt</button>
-      </div>
-
+      <div class="section-title">Download (Android-safe)</div>
       <div class="hint">
-        Android/Chrome spesso blocca download automatici multipli. Qui fai 3 click manuali: zero blocchi.
+        Il TXT viene scaricato automaticamente (un solo download → meno blocchi).
+        JSON e receipt si scaricano manualmente.
+      </div>
+      <div class="btnrow">
+        <button class="btn" id="dl_json" onclick="downloadLast('json')" disabled>Scarica JSON</button>
+        <button class="btn" id="dl_rcpt" onclick="downloadLast('rcpt')" disabled>Scarica receipt</button>
       </div>
 
       <div class="divider"></div>
 
-      <div class="section-title">AI: crea IPR entità cibernetica + audit</div>
+      <div class="section-title">AI: crea IPR entità + audit</div>
       <div class="hint">
-        Dopo aver creato l’IPR (PUBLIC o PRIVATE), vai su <b>/audit/</b> e usa come <b>prev_hash</b> il
-        <b>receipt_sha256(json)</b>. Quello è l’aggancio audit-temporale.
-        Firma infrastruttura: <b>HERMETICUM B.C.E. S.r.l.</b>
+        Dopo aver creato l’IPR, vai su <b>/audit/</b> e usa come <b>prev_hash</b> il
+        <b>receipt_sha256(json)</b>. Firma infrastruttura: <b>HERMETICUM B.C.E. S.r.l.</b>
       </div>
     </div>
   </section>
@@ -269,20 +267,10 @@ let payloadText = "";
 let payloadFileMeta = null;  // {name,type,size}
 let payloadFileB64 = "";     // base64
 
-// prepared downloads (manual)
-let PREP = {
-  id: "",
-  suffix: "",
-  txtName: "",
-  jsonName: "",
-  rcptName: "",
-  txtContent: "",
-  jsonContent: "",
-  rcptContent: ""
-};
+// holds last JSON + receipt for manual download
+window.__IPR_LAST__ = null;
 
-function setDownloadEnabled(on){
-  document.getElementById("dl_txt").disabled = !on;
+function setManualDownloadsEnabled(on){
   document.getElementById("dl_json").disabled = !on;
   document.getElementById("dl_rcpt").disabled = !on;
 }
@@ -320,6 +308,21 @@ async function readFileAsBytes(file){
   return new Uint8Array(ab);
 }
 
+function downloadText(filename, content){
+  const blob = new Blob([content], {type:"text/plain"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+}
+
+function downloadLast(kind){
+  const x = window.__IPR_LAST__;
+  if(!x) return;
+  if(kind === "json") return downloadText(x.json_filename, x.json_content);
+  if(kind === "rcpt") return downloadText(x.rcpt_filename, x.rcpt_content);
+}
+
 function aiConfig(){
   const enabled = document.getElementById("ai_enabled").checked;
   if(!enabled) return { enabled:false };
@@ -343,8 +346,8 @@ function getSubject(){
     const ai_owner = (document.getElementById("ai_owner").value || "").trim() || "N/A";
     return {
       subject_type: "AI_CYBERNETIC_ENTITY",
-      ai: { name: ai_name, type: ai_type, epoch: ai_epoch, owner_reference: ai_owner },
-      declared_identity: { name: ai_name, nation: "N/A", status: "SELF_DECLARED" }
+      declared_identity: { name: ai_name, nation: "N/A", status: "SELF_DECLARED" },
+      ai: { name: ai_name, type: ai_type, epoch: ai_epoch, owner_reference: ai_owner }
     };
   }
 
@@ -527,31 +530,10 @@ It provides a verifiable responsibility record only.
 `;
 }
 
-function prepareDownloadText(filename, content){
-  const blob = new Blob([content], {type:"text/plain"});
-  return { filename, blob };
-}
-function prepareDownloadJson(filename, content){
-  const blob = new Blob([content], {type:"application/json"});
-  return { filename, blob };
-}
-function saveBlob(filename, blob){
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  a.click();
-}
-
-function downloadPrepared(kind){
-  if(!PREP.id) return;
-  if(kind === "txt") return saveBlob(PREP.txtName, new Blob([PREP.txtContent], {type:"text/plain"}));
-  if(kind === "json") return saveBlob(PREP.jsonName, new Blob([PREP.jsonContent], {type:"application/json"}));
-  if(kind === "rcpt") return saveBlob(PREP.rcptName, new Blob([PREP.rcptContent], {type:"text/plain"}));
-}
-
 async function generateIPR(includePayload){
   const out = document.getElementById("iprout");
-  setDownloadEnabled(false);
+  setManualDownloadsEnabled(false);
+  window.__IPR_LAST__ = null;
 
   if(!lastHash) return out.textContent = "STATO: FAIL\nMOTIVO: genera prima l'hash";
   if(includePayload && (payloadMode !== "TEXT" && payloadMode !== "FILE")){
@@ -586,33 +568,30 @@ async function generateIPR(includePayload){
     ai_interface: ai,
     seal: { generated_by:"HERMETICUM infrastructure", signature_line:"HERMETICUM B.C.E. S.r.l. · EU" }
   };
-
-  // remove undefined fields (ai_subject) cleanly
   if(jsonObj.ai_subject === undefined) delete jsonObj.ai_subject;
 
   const jsonText = JSON.stringify(jsonObj, null, 2);
   const receipt = await sha256String(jsonText);
 
-  // prepare downloads instead of auto-click
-  PREP.id = iprID;
-  PREP.suffix = suffix;
-  PREP.txtName = iprID + "_" + suffix + ".txt";
-  PREP.jsonName = iprID + "_" + suffix + ".json";
-  PREP.rcptName = iprID + "_" + suffix + ".receipt.sha256.txt";
-  PREP.txtContent = doc;
-  PREP.jsonContent = jsonText;
-  PREP.rcptContent = receipt + "\n";
+  // AUTO-DOWNLOAD: SOLO TXT (Android-safe)
+  downloadText(iprID + "_" + suffix + ".txt", doc);
 
-  setDownloadEnabled(true);
+  // MANUAL: JSON + receipt
+  window.__IPR_LAST__ = {
+    json_filename: iprID + "_" + suffix + ".json",
+    json_content: jsonText,
+    rcpt_filename: iprID + "_" + suffix + ".receipt.sha256.txt",
+    rcpt_content: receipt + "\n"
+  };
+  setManualDownloadsEnabled(true);
 
-  // message exactly in your style (but "Download pronto", not "avviato")
   out.textContent =
     "STATO: OK\n" +
     "ARTEFATTO: " + suffix + "\n" +
     "AI_INTERFACE: " + (ai.enabled ? "ON" : "OFF") + "\n" +
     "ID: " + iprID + "\n" +
     "receipt_sha256(json):\n" + receipt + "\n\n" +
-    "Download pronto: usa i 3 pulsanti (TXT + JSON + receipt).";
+    "TXT scaricato automaticamente.\nJSON e receipt: usa i pulsanti sotto.";
 }
 
 function generateIPRPrivate(){ return generateIPR(true); }
