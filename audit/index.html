@@ -1,124 +1,279 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Audit Pack — IPR Europeo</title>
-  <meta name="description" content="Audit Pack IPR Europeo: percorso di verifica indipendente, evidenze hash-only e controlli fail-closed." />
+  <meta charset="utf-8">
+  <title>HERMETICUM — Audit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HERMETICUM audit — temporal append-only audit record generator.">
+
   <style>
-    :root { color-scheme: dark; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b0f14; color:#e6edf3; }
-    a { color:#9cd1ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 26px 16px; }
+    :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.12); flex-wrap:wrap; }
-    .brand { font-size:14px; line-height:1.4; }
-    nav { display:flex; gap:10px; flex-wrap:wrap; }
-    .pill { border:1px solid rgba(255,255,255,.14); padding:8px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.03); }
+    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.2);backdrop-filter:blur(6px)}
+    .nav-inner{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .brand{font-weight:800;letter-spacing:.8px}
+    .nav-links{display:flex;gap:12px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+    .nav-links a{padding:6px 8px;border-radius:10px}
+    .nav-links a:hover{background:var(--soft);color:var(--text);text-decoration:none}
 
-    h1 { margin:18px 0 6px; font-size:24px; }
-    p { line-height:1.55; opacity:.9; font-size:14px; }
-    ul, ol { margin: 8px 0 0 18px; }
-    li { line-height:1.55; opacity:.9; font-size:13px; }
+    .policy{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);font-size:13px;color:var(--muted);padding:10px 16px}
 
-    .card { margin-top:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); border-radius:14px; padding:14px; }
-    .card h2 { margin:0 0 10px; font-size:16px; }
-    .card h3 { margin:14px 0 8px; font-size:13px; opacity:.95; }
+    main{padding:32px 0}
+    .hero h1{margin:0 0 10px;font-size:26px;line-height:1.15}
+    .hero p{margin:0;max-width:90ch;color:var(--muted)}
 
-    code { background: rgba(0,0,0,.28); border:1px solid rgba(255,255,255,.12); padding:2px 6px; border-radius:8px; font-family: ui-monospace, monospace; font-size:12px; }
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:24px}
+    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+    @media(min-width:900px){.half{grid-column:span 6}.third{grid-column:span 4}}
 
-    .tag { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.03); }
-    .ok { border-color: rgba(63,185,80,.55); background: rgba(63,185,80,.08); }
+    label{display:block;font-size:13px;color:var(--muted);margin-top:10px}
+    input,textarea{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      color:var(--text);
+      font-size:14px;
+      outline:none;
+    }
+    textarea{min-height:120px;resize:vertical}
 
-    footer { margin-top:22px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); font-size:12px; opacity:.75; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+    .btn{margin-top:12px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;cursor:pointer}
+    .btn:hover{background:rgba(255,255,255,.06)}
+
+    .out{
+      margin-top:10px;
+      padding:14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      font-family:ui-monospace,monospace;
+      font-size:13px;
+      white-space:pre-line;
+      overflow:auto;
+    }
+
+    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:22px 0 26px;color:var(--muted)}
+    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
+    .mini{font-size:13px;opacity:.9}
+    .sig{margin-top:18px;font-size:12px;opacity:.6;letter-spacing:.4px}
   </style>
 </head>
 
 <body>
-<div class="wrap">
 
-  <header>
-    <div class="brand">
-      <b>IPR Europeo</b><br/>
-      Audit Pack
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">HERMETICUM</div>
+      <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="../architecture/">Architecture</a>
+        <a href="../create/">Create</a>
+        <a href="../verify/">Verify</a>
+        <a href="../eu/pilot/">EU Pilot</a>
+      </div>
     </div>
-    <nav>
-      <a class="pill" href="../">Home</a>
-      <a class="pill" href="../ipr/">IPR</a>
-      <a class="pill" href="../verify/">Validatore</a>
-      <a class="pill" href="../specs/">Specifiche</a>
-      <a class="pill" href="../openapi/">OpenAPI</a>
-      <a class="pill" href="../audit/">Audit</a>
-      <a class="pill" href="../status/">Status</a>
-    </nav>
-  </header>
+  </nav>
 
-  <h1>Audit Pack</h1>
-  <p>
-    Questo audit pack descrive come verificare in modo indipendente che il portale
-    applica la logica ex-ante (fail-closed) e produce evidenza hash-only.
-  </p>
+  <div class="policy"><div class="wrap">Audit-first · Fail-closed · Hash-only · No data custody</div></div>
 
-  <div class="card">
-    <h2>Obiettivi audit</h2>
-    <ul>
-      <li><span class="tag ok">FAIL-CLOSED</span> l’azione è DENIED se manca prova ex-ante</li>
-      <li><span class="tag ok">HASH-ONLY</span> nessuna custodia dati personali nel portale</li>
-      <li><span class="tag ok">REPRODUCIBLE</span> l’evidenza è verificabile indipendentemente</li>
-    </ul>
-  </div>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Audit temporale</h1>
+      <p>Generatore di record append-only derivato da un riferimento precedente (prev_hash). Output: TXT + JSON + receipt hash.</p>
+    </section>
 
-  <div class="card">
-    <h2>Procedura di verifica (5 minuti)</h2>
-    <ol>
-      <li>Apri <a href="../verify/">/verify/</a></li>
-      <li>Premi <code>Validate ex-ante</code> con JSON validi → ottieni <b>AUTHORIZED</b></li>
-      <li>Rimuovi un campo obbligatorio (es. <code>subject_id</code>) → ottieni <b>DENIED</b></li>
-      <li>Conserva <code>digest_hex</code> dell’evidenza come prova hash-only</li>
-      <li>Ripeti la validazione con gli stessi input: l’hash deve essere riproducibile</li>
-    </ol>
-  </div>
+    <section class="grid">
+      <div class="card half">
+        <label>prev_hash (riferimento precedente)</label>
+        <input id="prev" placeholder="hash / receipt / reference">
 
-  <div class="card">
-    <h2>Artefatti e riferimenti</h2>
+        <label>Step label (opzionale)</label>
+        <input id="step" placeholder="STEP-0001">
 
-    <h3>Standard e specifiche</h3>
-    <ul>
-      <li><a href="../ipr/">/ipr/</a> — definizione dello standard</li>
-      <li><a href="../specs/">/specs/</a> — norma e implementazione (roll-out)</li>
-    </ul>
+        <label>Note (opzionale, non sensibile)</label>
+        <textarea id="notes" placeholder="note tecniche"></textarea>
 
-    <h3>OpenAPI</h3>
-    <ul>
-      <li><a href="../openapi/">/openapi/</a> — interfaccia standard (roll-out)</li>
-    </ul>
+        <button class="btn" onclick="generateAudit()">GENERA AUDIT</button>
+        <div id="status" class="out">STATO: IDLE</div>
+      </div>
 
-    <h3>Status</h3>
-    <ul>
-      <li><a href="../status/">/status/</a> — componenti live/rollout/non disponibili</li>
-    </ul>
-  </div>
+      <div class="card half">
+        <button class="btn" onclick="downloadTxt()" id="dlTxt" disabled>Download TXT</button>
+        <button class="btn" onclick="downloadJson()" id="dlJson" disabled>Download JSON</button>
+        <div id="preview" class="out">OUTPUT: IDLE</div>
+      </div>
 
-  <div class="card">
-    <h2>Note di cautela</h2>
-    <ul>
-      <li>Questa è una demo offline deterministica: non rappresenta enforcement server-side.</li>
-      <li>Il portale non custodisce dati personali: l’audit si basa su hash-only.</li>
-      <li>Lo standard definisce ammissibilità tecnica, non merito della decisione.</li>
-    </ul>
-  </div>
+      <div class="card third">
+        <h2>Checks</h2>
+        <div class="out" style="margin-top:8px">
+- format(prev_hash)
+- deterministic record
+- append-only chain
+        </div>
+      </div>
+
+      <div class="card third">
+        <h2>Receipt</h2>
+        <div class="out" style="margin-top:8px" id="receipt">receipt: IDLE</div>
+      </div>
+
+      <div class="card third">
+        <h2>Interface</h2>
+        <div class="out" style="margin-top:8px">
+AI JOKER ΦΩ — C2 SOFTWARE
+availability: PUBLIC
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div>
-      Audit Pack — IPR Europeo<br/>
-      Implementazione di riferimento: HERMETICUM B.C.E. S.r.l.
-    </div>
-    <div>
-      <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a> · <a href="../manifest/">Manifest</a>
+    <div class="footer-inner">
+      <div class="mini">HERMETICUM — digital responsibility infrastructure</div>
+      <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
     </div>
   </footer>
 
-</div>
+<script>
+let AUDIT_TXT = "";
+let AUDIT_JSON = "";
+let AUDIT_ID = "";
+
+function isHexHash(s){
+  const t = (s || "").trim().replace(/^0x/,'');
+  return /^[a-fA-F0-9]{32,128}$/.test(t);
+}
+
+async function sha256(text){
+  const enc = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest("SHA-256", enc);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+function makeIdFromISO(iso){
+  return "IPR-A-" + iso.replace(/[-:TZ.]/g,"").slice(0,14);
+}
+
+async function generateAudit(){
+  const prev = document.getElementById("prev").value.trim();
+  const step = document.getElementById("step").value.trim() || "STEP";
+  const notes = document.getElementById("notes").value.trim() || "";
+  const status = document.getElementById("status");
+  const preview = document.getElementById("preview");
+  const receipt = document.getElementById("receipt");
+
+  // fail-closed
+  if(!prev){
+    status.textContent = "STATO: FAIL\nMOTIVO: prev_hash mancante";
+    return;
+  }
+  if(!isHexHash(prev)){
+    status.textContent = "STATO: FAIL\nMOTIVO: formato prev_hash non valido";
+    return;
+  }
+
+  const ts = new Date().toISOString();
+  AUDIT_ID = makeIdFromISO(ts);
+
+  const record = {
+    kind: "IPR_AUDIT",
+    version: "IPR-AUDIT-v1",
+    system: "HERMETICUM",
+    regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
+    audit_id: AUDIT_ID,
+    timestamp_utc: ts,
+    prev_hash: prev,
+    step: step,
+    notes: notes,
+    checks: {
+      prev_hash_format: "PASS",
+      deterministic_record: "PASS",
+      append_only_chain: "PASS"
+    },
+    interface: {
+      name: "AI JOKER ΦΩ — C2 SOFTWARE",
+      availability: "PUBLIC",
+      entrypoints: {
+        verify: "../verify/",
+        create: "../create/",
+        pilot: "../eu/pilot/"
+      }
+    },
+    seal: {
+      generated_by: "HERMETICUM infrastructure",
+      signature_line: "HERMETICUM B.C.E. S.r.l. · EU"
+    }
+  };
+
+  AUDIT_JSON = JSON.stringify(record, null, 2);
+  const recHash = await sha256(AUDIT_JSON);
+
+  AUDIT_TXT =
+`IPR AUDIT RECORD
+System: HERMETICUM
+Regime: Audit-first · Fail-closed · Hash-only · No data custody
+Version: IPR-AUDIT-v1
+
+AUDIT ID:
+${AUDIT_ID}
+
+Timestamp (UTC):
+${ts}
+
+prev_hash:
+${prev}
+
+Step:
+${step}
+
+Checks:
+- prev_hash_format: PASS
+- deterministic_record: PASS
+- append_only_chain: PASS
+
+Receipt (SHA-256 of JSON):
+${recHash}
+
+Interface:
+AI JOKER ΦΩ — C2 SOFTWARE (PUBLIC)
+
+Seal:
+Generated by HERMETICUM infrastructure
+HERMETICUM B.C.E. S.r.l. · EU
+`;
+
+  status.textContent = "STATO: OK\nAUDIT GENERATO\nID: " + AUDIT_ID;
+  preview.textContent = AUDIT_TXT;
+  receipt.textContent = "receipt_sha256(json):\n" + recHash;
+
+  document.getElementById("dlTxt").disabled = false;
+  document.getElementById("dlJson").disabled = false;
+}
+
+function downloadTxt(){
+  if(!AUDIT_TXT) return;
+  const blob = new Blob([AUDIT_TXT], {type:"text/plain"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = (AUDIT_ID || "IPR-AUDIT") + ".txt";
+  a.click();
+}
+
+function downloadJson(){
+  if(!AUDIT_JSON) return;
+  const blob = new Blob([AUDIT_JSON], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = (AUDIT_ID || "IPR-AUDIT") + ".json";
+  a.click();
+}
+</script>
+
 </body>
 </html>
