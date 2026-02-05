@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>HERMETICUM — Audit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HERMETICUM audit — temporal append-only audit record generator.">
+  <meta name="description" content="HERMETICUM audit — temporal append-only audit record generator with optional AI interface metadata and optional self-declared low-granularity location context.">
 
   <style>
     :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
@@ -24,39 +24,28 @@
 
     main{padding:32px 0}
     .hero h1{margin:0 0 10px;font-size:26px;line-height:1.15}
-    .hero p{margin:0;max-width:90ch;color:var(--muted)}
+    .hero p{margin:0;max-width:92ch;color:var(--muted)}
 
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:24px}
     .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    @media(min-width:900px){.half{grid-column:span 6}.third{grid-column:span 4}}
+    @media(min-width:900px){.half{grid-column:span 6}}
 
     label{display:block;font-size:13px;color:var(--muted);margin-top:10px}
-    input,textarea{
-      width:100%;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.22);
-      color:var(--text);
-      font-size:14px;
-      outline:none;
+    input,textarea,select{
+      width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
     }
     textarea{min-height:120px;resize:vertical}
 
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-top:10px}
+    .row > div{flex:1;min-width:170px}
+
+    .chk{display:flex;align-items:center;gap:10px;margin-top:10px;color:var(--muted);font-size:13px}
     .btn{margin-top:12px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;cursor:pointer}
     .btn:hover{background:rgba(255,255,255,.06)}
 
-    .out{
-      margin-top:10px;
-      padding:14px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      font-family:ui-monospace,monospace;
-      font-size:13px;
-      white-space:pre-line;
-      overflow:auto;
-    }
+    .out{margin-top:10px;padding:14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;white-space:pre-line;overflow:auto}
+    .hint{font-size:12px;color:var(--muted);margin-top:8px}
 
     footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:22px 0 26px;color:var(--muted)}
     .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
@@ -67,78 +56,117 @@
 
 <body>
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="brand">HERMETICUM</div>
-      <div class="nav-links">
-        <a href="../">Home</a>
-        <a href="../architecture/">Architecture</a>
-        <a href="../create/">Create</a>
-        <a href="../verify/">Verify</a>
-        <a href="../eu/pilot/">EU Pilot</a>
-      </div>
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">HERMETICUM</div>
+    <div class="nav-links">
+      <a href="../">Home</a>
+      <a href="../architecture/">Architecture</a>
+      <a href="../use-cases/">Use-Cases</a>
+      <a href="../create/">Create</a>
+      <a href="../verify/">Verify</a>
+      <a href="../audit/">Audit</a>
+      <a href="../eu/pilot/">EU Pilot</a>
+      <a href="../company/">Company</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <div class="policy"><div class="wrap">Audit-first · Fail-closed · Hash-only · No data custody</div></div>
+<div class="policy"><div class="wrap">Audit-first · Fail-closed · Hash-only · No data custody</div></div>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Audit temporale</h1>
-      <p>Generatore di record append-only derivato da un riferimento precedente (prev_hash). Output: TXT + JSON + receipt hash.</p>
-    </section>
+<main class="wrap">
+  <section class="hero">
+    <h1>Audit temporale</h1>
+    <p>
+      Generatore append-only derivato da prev_hash. Output: TXT + JSON + receipt SHA-256.
+      Context location opzionale: self-declared, granularità bassa.
+    </p>
+  </section>
 
-    <section class="grid">
-      <div class="card half">
-        <label>prev_hash (riferimento precedente)</label>
-        <input id="prev" placeholder="hash / receipt / reference">
+  <section class="grid">
+    <div class="card half">
+      <label>prev_hash (riferimento precedente)</label>
+      <input id="prev" placeholder="hash / receipt / reference">
 
-        <label>Step label (opzionale)</label>
-        <input id="step" placeholder="STEP-0001">
+      <label>Step label (opzionale)</label>
+      <input id="step" placeholder="STEP-0001">
 
-        <label>Note (opzionale, non sensibile)</label>
-        <textarea id="notes" placeholder="note tecniche"></textarea>
+      <label>Note (opzionale, non sensibile)</label>
+      <textarea id="notes" placeholder="note tecniche"></textarea>
 
-        <button class="btn" onclick="generateAudit()">GENERA AUDIT</button>
-        <div id="status" class="out">STATO: IDLE</div>
-      </div>
-
-      <div class="card half">
-        <button class="btn" onclick="downloadTxt()" id="dlTxt" disabled>Download TXT</button>
-        <button class="btn" onclick="downloadJson()" id="dlJson" disabled>Download JSON</button>
-        <div id="preview" class="out">OUTPUT: IDLE</div>
-      </div>
-
-      <div class="card third">
-        <h2>Checks</h2>
-        <div class="out" style="margin-top:8px">
-- format(prev_hash)
-- deterministic record
-- append-only chain
+      <div class="row">
+        <div>
+          <label>Context — Nazione (ISO2 consigliato)</label>
+          <input id="ctx_country" placeholder="IT">
+        </div>
+        <div>
+          <label>Context — Regione</label>
+          <input id="ctx_region" placeholder="Piemonte">
         </div>
       </div>
 
-      <div class="card third">
-        <h2>Receipt</h2>
-        <div class="out" style="margin-top:8px" id="receipt">receipt: IDLE</div>
-      </div>
-
-      <div class="card third">
-        <h2>Interface</h2>
-        <div class="out" style="margin-top:8px">
-AI JOKER ΦΩ — C2 SOFTWARE
-availability: PUBLIC
+      <div class="row">
+        <div>
+          <label>Context — Città</label>
+          <input id="ctx_city" placeholder="Torino">
+        </div>
+        <div>
+          <label>Context — Zona (quartiere/area/municipio — no indirizzo)</label>
+          <input id="ctx_zone" placeholder="Area / Quartiere / Municipio">
         </div>
       </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="footer-inner">
-      <div class="mini">HERMETICUM — digital responsibility infrastructure</div>
-      <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
+      <div class="hint">
+        Context location: opzionale, self-declared, LOW granularity (no indirizzi, no coordinate).
+      </div>
+
+      <div class="chk">
+        <input id="ai_enabled" type="checkbox" />
+        <label for="ai_enabled" style="margin:0">Includi metadati AI / interfaccia JOKER</label>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>AI Availability</label>
+          <select id="ai_avail">
+            <option value="PUBLIC">PUBLIC</option>
+            <option value="PILOT">PILOT</option>
+            <option value="INSTITUTIONAL">INSTITUTIONAL</option>
+          </select>
+        </div>
+        <div>
+          <label>AI Mode</label>
+          <select id="ai_mode">
+            <option value="READ_ONLY">READ_ONLY</option>
+            <option value="AUDIT_ASSIST">AUDIT_ASSIST</option>
+            <option value="C2_INTERFACE">C2_INTERFACE</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Joker handle / endpoint (opzionale)</label>
+      <input id="ai_handle" placeholder="TBD">
+
+      <button class="btn" onclick="generateAudit()">GENERA AUDIT</button>
+      <div id="status" class="out">STATO: IDLE</div>
     </div>
-  </footer>
+
+    <div class="card half">
+      <button class="btn" onclick="downloadTxt()" id="dlTxt" disabled>Download TXT</button>
+      <button class="btn" onclick="downloadJson()" id="dlJson" disabled>Download JSON</button>
+
+      <div id="preview" class="out">OUTPUT: IDLE</div>
+      <div id="receipt" class="out" style="margin-top:14px">receipt: IDLE</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="mini">HERMETICUM — digital responsibility infrastructure</div>
+    <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
+  </div>
+</footer>
 
 <script>
 let AUDIT_TXT = "";
@@ -150,9 +178,9 @@ function isHexHash(s){
   return /^[a-fA-F0-9]{32,128}$/.test(t);
 }
 
-async function sha256(text){
-  const enc = new TextEncoder().encode(text);
-  const buf = await crypto.subtle.digest("SHA-256", enc);
+async function sha256String(text){
+  const bytes = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest("SHA-256", bytes);
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
 }
 
@@ -160,26 +188,57 @@ function makeIdFromISO(iso){
   return "IPR-A-" + iso.replace(/[-:TZ.]/g,"").slice(0,14);
 }
 
+function aiConfig(){
+  const enabled = document.getElementById("ai_enabled").checked;
+  if(!enabled) return { enabled:false };
+  return {
+    enabled: true,
+    name: "AI JOKER ΦΩ — C2 SOFTWARE",
+    availability: document.getElementById("ai_avail").value,
+    mode: document.getElementById("ai_mode").value,
+    handle: (document.getElementById("ai_handle").value || "").trim() || "TBD",
+    entrypoints: { verify:"../verify/", audit:"../audit/", pilot:"../eu/pilot/" }
+  };
+}
+
+function contextLocation(){
+  const country = (document.getElementById("ctx_country").value || "").trim();
+  const region  = (document.getElementById("ctx_region").value || "").trim();
+  const city    = (document.getElementById("ctx_city").value || "").trim();
+  const zone    = (document.getElementById("ctx_zone").value || "").trim();
+
+  const any = country || region || city || zone;
+  if(!any) return { enabled:false };
+
+  return {
+    enabled: true,
+    status: "SELF_DECLARED",
+    granularity: "LOW",
+    note: "No address, no coordinates",
+    country: country || "N/A",
+    region: region || "N/A",
+    city: city || "N/A",
+    zone: zone || "N/A"
+  };
+}
+
 async function generateAudit(){
   const prev = document.getElementById("prev").value.trim();
   const step = document.getElementById("step").value.trim() || "STEP";
   const notes = document.getElementById("notes").value.trim() || "";
+
   const status = document.getElementById("status");
   const preview = document.getElementById("preview");
-  const receipt = document.getElementById("receipt");
+  const receiptEl = document.getElementById("receipt");
 
-  // fail-closed
-  if(!prev){
-    status.textContent = "STATO: FAIL\nMOTIVO: prev_hash mancante";
-    return;
-  }
-  if(!isHexHash(prev)){
-    status.textContent = "STATO: FAIL\nMOTIVO: formato prev_hash non valido";
-    return;
-  }
+  if(!prev) return status.textContent = "STATO: FAIL\nMOTIVO: prev_hash mancante";
+  if(!isHexHash(prev)) return status.textContent = "STATO: FAIL\nMOTIVO: formato prev_hash non valido";
 
   const ts = new Date().toISOString();
   AUDIT_ID = makeIdFromISO(ts);
+
+  const ai = aiConfig();
+  const ctx = contextLocation();
 
   const record = {
     kind: "IPR_AUDIT",
@@ -191,20 +250,15 @@ async function generateAudit(){
     prev_hash: prev,
     step: step,
     notes: notes,
+    context: {
+      location: ctx
+    },
     checks: {
       prev_hash_format: "PASS",
       deterministic_record: "PASS",
       append_only_chain: "PASS"
     },
-    interface: {
-      name: "AI JOKER ΦΩ — C2 SOFTWARE",
-      availability: "PUBLIC",
-      entrypoints: {
-        verify: "../verify/",
-        create: "../create/",
-        pilot: "../eu/pilot/"
-      }
-    },
+    ai_interface: ai,
     seal: {
       generated_by: "HERMETICUM infrastructure",
       signature_line: "HERMETICUM B.C.E. S.r.l. · EU"
@@ -212,7 +266,24 @@ async function generateAudit(){
   };
 
   AUDIT_JSON = JSON.stringify(record, null, 2);
-  const recHash = await sha256(AUDIT_JSON);
+  const recHash = await sha256String(AUDIT_JSON);
+
+  const ctxTxt = ctx.enabled ? `Context location (self-declared, LOW granularity)
+Country: ${ctx.country}
+Region: ${ctx.region}
+City: ${ctx.city}
+Zone: ${ctx.zone}
+Note: ${ctx.note}` : "Context location: NONE";
+
+  const aiTxt = ai.enabled ? `AI Interface (optional)
+Interface: ${ai.name}
+Availability: ${ai.availability}
+Mode: ${ai.mode}
+Handle: ${ai.handle}
+Entrypoints:
+- verify: ${ai.entrypoints.verify}
+- audit: ${ai.entrypoints.audit}
+- pilot: ${ai.entrypoints.pilot}` : "AI Interface (optional)\nMode: NONE";
 
   AUDIT_TXT =
 `IPR AUDIT RECORD
@@ -232,6 +303,8 @@ ${prev}
 Step:
 ${step}
 
+${ctxTxt}
+
 Checks:
 - prev_hash_format: PASS
 - deterministic_record: PASS
@@ -240,8 +313,7 @@ Checks:
 Receipt (SHA-256 of JSON):
 ${recHash}
 
-Interface:
-AI JOKER ΦΩ — C2 SOFTWARE (PUBLIC)
+${aiTxt}
 
 Seal:
 Generated by HERMETICUM infrastructure
@@ -250,7 +322,7 @@ HERMETICUM B.C.E. S.r.l. · EU
 
   status.textContent = "STATO: OK\nAUDIT GENERATO\nID: " + AUDIT_ID;
   preview.textContent = AUDIT_TXT;
-  receipt.textContent = "receipt_sha256(json):\n" + recHash;
+  receiptEl.textContent = "receipt_sha256(json):\n" + recHash;
 
   document.getElementById("dlTxt").disabled = false;
   document.getElementById("dlJson").disabled = false;
