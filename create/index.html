@@ -2,9 +2,9 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <title>HERMETICUM — Create IPR</title>
+  <title>HERMETICUM — Create</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HERMETICUM create — IPR official artifact (BIO subject), embedded payload (PRIVATE), hash-only, no data custody. Copy-safe outputs for mobile browsers.">
+  <meta name="description" content="HERMETICUM create — IPR official artifact (BIO subject), embedded payload (PRIVATE), hash-only, no data custody. Auto-download TXT+JSON+receipt.">
 
   <style>
     :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
@@ -83,9 +83,8 @@
   <section class="hero">
     <h1>Generazione IPR Ufficiale (BIO)</h1>
     <p>
-      Soggetto biologico (self-declared). Artefatto PUBLIC/PRIVATE.
-      PRIVATE contiene il payload incastonato. PUBLIC lo esclude.
-      Nessuna custodia dati. Output “copy-safe” per browser mobile.
+      Artefatto PUBLIC/PRIVATE. PRIVATE contiene il payload incastonato (testo o file).
+      PUBLIC esclude il payload. Nessuna custodia dati. Download automatico (TXT + JSON + receipt).
     </p>
   </section>
 
@@ -124,17 +123,6 @@
 
       <div class="divider"></div>
 
-      <div class="section-title">Personalizzazione AI (opzionale)</div>
-      <label>AI personalization tag (solo timbro base, nessuna interfaccia)</label>
-      <input id="ai_tag" placeholder="es. AI_JOKER_PERSONAL / label interno / tracking tag">
-
-      <div class="hint">
-        Questo campo è solo un’etichetta dichiarativa dentro l’artefatto (tracciabilità base).
-        Non abilita nulla, non promette nulla.
-      </div>
-
-      <div class="divider"></div>
-
       <div class="section-title">Payload (riservato)</div>
 
       <label>Payload — Testo</label>
@@ -144,7 +132,7 @@
       <input id="file" type="file">
 
       <div class="hint">
-        Hash calcolato su file (se presente) altrimenti su testo.
+        Hash calcolato su file (se presente) altrimenti su testo. PRIVATE include payload.
       </div>
 
       <div class="btnrow">
@@ -158,33 +146,14 @@
       <div class="section-title">Generazione artefatto</div>
 
       <div class="btnrow">
-        <button class="btn primary" onclick="generateIPR(true)">GENERA IPR (PRIVATE)</button>
-        <button class="btn" onclick="generateIPR(false)">GENERA IPR (PUBLIC)</button>
+        <button class="btn primary" onclick="generateIPR(true)">GENERA IPR UFFICIALE (PRIVATE)</button>
+        <button class="btn" onclick="generateIPR(false)">GENERA IPR UFFICIALE (PUBLIC)</button>
       </div>
 
       <div id="iprout" class="out">STATO: IDLE</div>
 
-      <div class="divider"></div>
-
-      <div class="section-title">Output pronto (copy-safe)</div>
-
-      <div class="btnrow">
-        <button class="btn" onclick="copyField('out_txt')">Copia TXT</button>
-        <button class="btn" onclick="copyField('out_json')">Copia JSON</button>
-        <button class="btn" onclick="copyField('out_rcpt')">Copia receipt</button>
-      </div>
-
-      <label>Artefatto TXT</label>
-      <textarea id="out_txt" placeholder="qui apparirà il TXT" style="min-height:160px"></textarea>
-
-      <label>Artefatto JSON</label>
-      <textarea id="out_json" placeholder="qui apparirà il JSON" style="min-height:160px"></textarea>
-
-      <label>receipt_sha256(json)</label>
-      <input id="out_rcpt" placeholder="qui apparirà il receipt">
-
       <div class="hint">
-        Per audit temporale: vai su <b>/audit/</b> e usa come <b>prev_hash</b> il valore di <b>receipt_sha256(json)</b>.
+        Se il browser blocca i download multipli: consenti “download multipli” per il sito e riprova.
       </div>
     </div>
   </section>
@@ -229,6 +198,20 @@ async function readFileAsBytes(file){
   return new Uint8Array(ab);
 }
 
+function downloadBlob(filename, blob){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+}
+
+function downloadText(filename, content){
+  downloadBlob(filename, new Blob([content], {type:"text/plain"}));
+}
+function downloadJson(filename, content){
+  downloadBlob(filename, new Blob([content], {type:"application/json"}));
+}
+
 function getIdentity(){
   const name = (document.getElementById("nome").value || "").trim() || "N/A";
   const nation = (document.getElementById("nazione").value || "").trim() || "N/A";
@@ -267,6 +250,7 @@ async function generateHash(){
     payloadMode = "FILE";
     payloadFileMeta = { name:file.name, type:file.type || "application/octet-stream", size:file.size };
     payloadFileB64 = base64FromBytes(bytes);
+
     out.textContent =
       "STATO: OK\nMODE: FILE\nALGORITMO: " + lastAlgo +
       "\nFILE: " + payloadFileMeta.name + " (" + payloadFileMeta.size + " bytes)\nRIFERIMENTO:\n" + lastHash;
@@ -278,9 +262,11 @@ async function generateHash(){
     out.textContent = "STATO: FAIL\nMOTIVO: payload mancante (testo o file)";
     return;
   }
+
   payloadMode = "TEXT";
   payloadText = txt;
   lastHash = await sha256Bytes(new TextEncoder().encode(txt));
+
   out.textContent = "STATO: OK\nMODE: TEXT\nALGORITMO: " + lastAlgo + "\nRIFERIMENTO:\n" + lastHash;
 }
 
@@ -311,7 +297,7 @@ ${payloadText}
 -----END PAYLOAD TEXT-----`;
 }
 
-function buildIPRDoc({iprID, nowISO, identity, hash, includePayload, aiTag}){
+function buildIPRDoc({iprID, nowISO, identity, hash, includePayload}){
   const loc = identity.location || {};
   return `IPR — IDENTITY PRIMARY RECORD
 Official Responsibility Artifact
@@ -338,9 +324,6 @@ City: ${loc.city}
 Zone: ${loc.zone}
 Granularity: ${loc.granularity}
 Note: ${loc.note}
-
-AI Personalization Tag (optional)
-${aiTag || "NONE"}
 
 Digital Event
 Digital event under responsibility of the declared subject.
@@ -371,13 +354,6 @@ It provides a verifiable responsibility record only.
 
 async function generateIPR(includePayload){
   const status = document.getElementById("iprout");
-  const outTXT = document.getElementById("out_txt");
-  const outJSON = document.getElementById("out_json");
-  const outRCPT = document.getElementById("out_rcpt");
-
-  outTXT.value = "";
-  outJSON.value = "";
-  outRCPT.value = "";
 
   if(!lastHash){
     status.textContent = "STATO: FAIL\nMOTIVO: genera prima l'hash";
@@ -393,9 +369,7 @@ async function generateIPR(includePayload){
   const suffix = includePayload ? "PRIVATE" : "PUBLIC";
 
   const identity = getIdentity();
-  const aiTag = (document.getElementById("ai_tag").value || "").trim();
-
-  const doc = buildIPRDoc({iprID, nowISO: now, identity, hash: lastHash, includePayload, aiTag});
+  const doc = buildIPRDoc({iprID, nowISO: now, identity, hash: lastHash, includePayload});
 
   const jsonObj = {
     kind: includePayload ? "IPR_OFFICIAL_PRIVATE" : "IPR_OFFICIAL_PUBLIC",
@@ -406,7 +380,6 @@ async function generateIPR(includePayload){
     timestamp_utc: now,
     subject_type: "BIOLOGICAL_SUBJECT",
     declared_identity: identity,
-    ai_personalization_tag: aiTag || "NONE",
     reference: { hash: lastHash, algorithm: lastAlgo },
     payload: includePayload
       ? (payloadMode === "FILE"
@@ -419,30 +392,17 @@ async function generateIPR(includePayload){
   const jsonText = JSON.stringify(jsonObj, null, 2);
   const receipt = await sha256String(jsonText);
 
-  outTXT.value = doc;
-  outJSON.value = jsonText;
-  outRCPT.value = receipt;
+  // AUTO-DOWNLOAD: COME PRIMA (3 FILE)
+  downloadText(iprID + "_" + suffix + ".txt", doc);
+  downloadJson(iprID + "_" + suffix + ".json", jsonText);
+  downloadText(iprID + "_" + suffix + ".receipt.sha256.txt", receipt + "\n");
 
   status.textContent =
     "STATO: OK\n" +
     "ARTEFATTO: " + suffix + "\n" +
     "ID: " + iprID + "\n" +
     "receipt_sha256(json):\n" + receipt + "\n\n" +
-    "Output pronto: copia TXT/JSON/receipt (mobile-safe).";
-}
-
-async function copyField(id){
-  const el = document.getElementById(id);
-  const val = (el.value || "").toString();
-  if(!val) return;
-  try{
-    await navigator.clipboard.writeText(val);
-  }catch(e){
-    // fallback per browser che blocca clipboard API
-    el.focus();
-    el.select();
-    document.execCommand("copy");
-  }
+    "Download avviato (TXT + JSON + receipt).";
 }
 </script>
 
