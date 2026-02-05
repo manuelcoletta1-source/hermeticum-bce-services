@@ -4,293 +4,207 @@
   <meta charset="utf-8">
   <title>HERMETICUM — Verify</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta name="description" content="HERMETICUM verification — deterministic pass/fail verification.">
+  <meta name="description" content="HERMETICUM verification — hash checks + receipt validation for artifacts.">
 
   <style>
-    :root{
-      --bg:#0b0d10;
-      --card:#0f1318;
-      --text:#e7edf5;
-      --muted:#9fb0c2;
-      --line:rgba(255,255,255,.12);
-      --soft:rgba(255,255,255,.06);
-      --ok:#2ecc71;
-      --fail:#e74c3c;
-      --max:1100px;
-    }
-
+    :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
     *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      line-height:1.45;
-    }
-
-    a{color:inherit;text-decoration:none}
-    a:hover{text-decoration:underline}
-
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-    /* NAV */
-    .nav{
-      border-bottom:1px solid var(--line);
-      background:rgba(0,0,0,.2);
-      backdrop-filter:blur(6px);
-    }
-    .nav-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 16px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px;
-    }
+    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.2);backdrop-filter:blur(6px)}
+    .nav-inner{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
     .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{
-      display:flex;
-      gap:12px;
-      font-size:14px;
-      color:var(--muted);
-      flex-wrap:wrap;
-    }
-    .nav-links a{
-      padding:6px 8px;
-      border-radius:10px;
-    }
-    .nav-links a:hover{
-      background:var(--soft);
-      color:var(--text);
-      text-decoration:none;
-    }
+    .nav-links{display:flex;gap:12px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+    .nav-links a{padding:6px 8px;border-radius:10px}
+    .nav-links a:hover{background:var(--soft);color:var(--text);text-decoration:none}
 
-    /* POLICY */
-    .policy{
-      border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      font-size:13px;
-      color:var(--muted);
-      padding:10px 16px;
-    }
+    .policy{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);font-size:13px;color:var(--muted);padding:10px 16px}
 
     main{padding:32px 0}
+    .hero h1{margin:0 0 10px;font-size:26px;line-height:1.15}
+    .hero p{margin:0;max-width:90ch;color:var(--muted)}
 
-    .hero h1{
-      margin:0 0 10px;
-      font-size:26px;
-      line-height:1.15;
-    }
-    .hero p{
-      margin:0;
-      max-width:90ch;
-      color:var(--muted);
-    }
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:24px}
+    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+    @media(min-width:900px){.half{grid-column:span 6}}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:14px;
-      margin-top:24px;
+    label{display:block;font-size:13px;color:var(--muted);margin-top:10px}
+    input,textarea{
+      width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
     }
+    textarea{min-height:150px;resize:vertical}
 
-    .card{
-      grid-column:span 12;
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-    }
+    .btn{margin-top:12px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;cursor:pointer}
+    .btn:hover{background:rgba(255,255,255,.06)}
 
-    @media(min-width:900px){
-      .half{grid-column:span 6}
-      .third{grid-column:span 4}
+    .out{
+      margin-top:10px;padding:14px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;white-space:pre-line;overflow:auto
     }
+    .hint{font-size:12px;color:var(--muted);margin-top:8px}
 
-    .card h2{
-      margin:0 0 8px;
-      font-size:16px;
-    }
-    .card p{
-      margin:0 0 8px;
-      font-size:14px;
-      color:var(--muted);
-    }
-
-    input{
-      width:100%;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.22);
-      color:var(--text);
-      font-size:14px;
-      outline:none;
-    }
-
-    .btn{
-      margin-top:10px;
-      padding:10px 14px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      font-size:14px;
-      cursor:pointer;
-    }
-    .btn:hover{
-      background:rgba(255,255,255,.06);
-    }
-
-    .result{
-      margin-top:10px;
-      padding:14px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      font-family:ui-monospace,monospace;
-      font-size:13px;
-      white-space:pre-line;
-    }
-
-    .status{
-      font-weight:700;
-      margin-bottom:6px;
-    }
-    .status.ok{color:var(--ok)}
-    .status.fail{color:var(--fail)}
-
-    footer{
-      border-top:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      padding:22px 0 26px;
-      color:var(--muted);
-    }
-    .footer-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:0 16px;
-    }
+    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:22px 0 26px;color:var(--muted)}
+    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
     .mini{font-size:13px;opacity:.9}
-    .sig{
-      margin-top:18px;
-      font-size:12px;
-      opacity:.6;
-      letter-spacing:.4px;
-    }
+    .sig{margin-top:18px;font-size:12px;opacity:.6;letter-spacing:.4px}
   </style>
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="brand">HERMETICUM</div>
-      <div class="nav-links">
-        <a href="../">Home</a>
-        <a href="../architecture/">Architecture</a>
-        <a href="../use-cases/">Use-Cases</a>
-        <a href="../create/">Create</a>
-        <a href="../eu/pilot/">EU Pilot</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- POLICY -->
-  <div class="policy">
-    <div class="wrap">
-      Audit-first · Fail-closed · Hash-only · No data custody
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">HERMETICUM</div>
+    <div class="nav-links">
+      <a href="../">Home</a>
+      <a href="../architecture/">Architecture</a>
+      <a href="../create/">Create</a>
+      <a href="../audit/">Audit</a>
+      <a href="../eu/pilot/">EU Pilot</a>
     </div>
   </div>
+</nav>
 
-  <main class="wrap">
+<div class="policy"><div class="wrap">Audit-first · Fail-closed · Hash-only · No data custody</div></div>
 
-    <section class="hero">
-      <h1>Verifica</h1>
-      <p>
-        Verifica deterministica di riferimenti crittografici.
-        Output esclusivamente pass/fail.
-      </p>
-    </section>
+<main class="wrap">
+  <section class="hero">
+    <h1>Verifica</h1>
+    <p>Verifica deterministica: formato hash + receipt SHA-256 per artefatti JSON (PUBLIC/PRIVATE).</p>
+  </section>
 
-    <section class="grid">
+  <section class="grid">
 
-      <div class="card half">
-        <h2>Input</h2>
-        <p>Inserisci un riferimento hash.</p>
-        <input id="ref" placeholder="hash / receipt / reference">
-        <button class="btn" onclick="verify()">Verifica</button>
-      </div>
+    <div class="card half">
+      <h2>1) Verifica formato hash</h2>
 
-      <div class="card half">
-        <h2>Risultato</h2>
-        <div id="out" class="result">
-STATO: IDLE
-        </div>
-      </div>
+      <label>Hash / Reference</label>
+      <input id="hash" placeholder="hash / reference (hex)">
 
-      <div class="card third">
-        <h2>Regole</h2>
-        <p>La verifica è deterministica e ripetibile.</p>
-      </div>
+      <button class="btn" onclick="checkHash()">Verifica hash</button>
+      <div id="hashOut" class="out">STATO: IDLE</div>
 
-      <div class="card third">
-        <h2>Esito</h2>
-        <p>Assenza di risultato valido → FAIL.</p>
-      </div>
-
-      <div class="card third">
-        <h2>Output</h2>
-        <p>Nessun dato personale elaborato.</p>
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="mini">
-        HERMETICUM — digital responsibility infrastructure
-      </div>
-      <div class="sig">
-        HERMETICUM B.C.E. S.r.l. · EU
+      <div class="hint">
+        Formati accettati: hex 32–128 caratteri (0x opzionale).
       </div>
     </div>
-  </footer>
+
+    <div class="card half">
+      <h2>2) Verifica receipt SHA-256 (JSON)</h2>
+
+      <label>Artifact JSON (incolla qui)</label>
+      <textarea id="json" placeholder="{ ... }"></textarea>
+
+      <label>Receipt atteso (SHA-256 del JSON)</label>
+      <input id="receipt" placeholder="incolla receipt_sha256(json)">
+
+      <button class="btn" onclick="checkReceipt()">Verifica receipt</button>
+      <div id="receiptOut" class="out">STATO: IDLE</div>
+
+      <div class="hint">
+        Se l’artefatto contiene payload (PRIVATE), verrà segnalato. Il sistema non invia né conserva nulla.
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="mini">HERMETICUM — digital responsibility infrastructure</div>
+    <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
+  </div>
+</footer>
 
 <script>
-  function verify(){
-    const ref = document.getElementById("ref").value.trim();
-    const out = document.getElementById("out");
+function isHexHash(s){
+  const t = (s||"").trim().replace(/^0x/,'');
+  return /^[a-fA-F0-9]{32,128}$/.test(t);
+}
 
-    if(!ref){
-      out.innerHTML =
-        "STATO: FAIL\n" +
-        "MOTIVO: riferimento mancante";
-      out.className = "result status fail";
-      return;
-    }
+async function sha256String(text){
+  const bytes = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
 
-    const isHash = /^[a-fA-F0-9]{32,128}$/.test(ref.replace(/^0x/, ''));
+function normalizeHex(s){
+  return (s||"").trim().toLowerCase().replace(/^0x/,'');
+}
 
-    if(!isHash){
-      out.innerHTML =
-        "STATO: FAIL\n" +
-        "MOTIVO: formato non valido";
-      out.className = "result status fail";
-      return;
-    }
+function checkHash(){
+  const v = document.getElementById("hash").value.trim();
+  const out = document.getElementById("hashOut");
 
-    out.innerHTML =
-      "STATO: PASS\n" +
-      "RIFERIMENTO VALIDO\n" +
-      "VERIFICA RIPETIBILE";
-    out.className = "result status ok";
+  if(!v){
+    out.textContent = "STATO: FAIL\nMOTIVO: input mancante";
+    return;
   }
+  if(!isHexHash(v)){
+    out.textContent = "STATO: FAIL\nMOTIVO: formato non valido";
+    return;
+  }
+  out.textContent = "STATO: PASS\nFORMAT: OK\nHASH:\n" + normalizeHex(v);
+}
+
+async function checkReceipt(){
+  const jsonText = (document.getElementById("json").value || "").trim();
+  const receipt = (document.getElementById("receipt").value || "").trim();
+  const out = document.getElementById("receiptOut");
+
+  if(!jsonText){
+    out.textContent = "STATO: FAIL\nMOTIVO: JSON mancante";
+    return;
+  }
+  if(!receipt){
+    out.textContent = "STATO: FAIL\nMOTIVO: receipt mancante";
+    return;
+  }
+  if(!isHexHash(receipt)){
+    out.textContent = "STATO: FAIL\nMOTIVO: receipt formato non valido";
+    return;
+  }
+
+  // parse to inspect payload mode (best-effort)
+  let mode = "UNKNOWN";
+  try{
+    const obj = JSON.parse(jsonText);
+    if(obj && obj.payload && typeof obj.payload.mode === "string"){
+      mode = obj.payload.mode;
+    }
+  }catch(e){
+    // keep going: receipt check can still work over raw text
+  }
+
+  const computed = await sha256String(jsonText);
+  const exp = normalizeHex(receipt);
+
+  if(computed !== exp){
+    out.textContent =
+      "STATO: FAIL\n" +
+      "MOTIVO: receipt non corrisponde\n\n" +
+      "EXPECTED:\n" + exp + "\n\n" +
+      "COMPUTED:\n" + computed + "\n\n" +
+      "PAYLOAD MODE:\n" + mode;
+    return;
+  }
+
+  const privacy =
+    (mode === "FILE" || mode === "TEXT")
+      ? "PRIVATE (contiene payload)"
+      : (mode === "NONE")
+        ? "PUBLIC (senza payload)"
+        : "UNKNOWN";
+
+  out.textContent =
+    "STATO: PASS\n" +
+    "RECEIPT: OK\n" +
+    "COMPUTED:\n" + computed + "\n\n" +
+    "ARTIFACT:\n" + privacy;
+}
 </script>
 
 </body>
