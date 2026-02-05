@@ -6,7 +6,7 @@
   <base href="/hermeticum-bce-platform/" />
 
   <title>HERMETICUM — Infrastruttura Cibernetica UE</title>
-  <meta name="description" content="HERMETICUM è un’infrastruttura cibernetica UE: esecuzione vincolata ex-ante tramite IPR (struttura), Gate PASS/FAIL (misura) e DataCenter (esecuzione), in regime fail-closed e hash-only." />
+  <meta name="description" content="HERMETICUM è un’infrastruttura cibernetica UE che vincola l’esecuzione ex-ante tramite IPR (struttura), Gate PASS/FAIL (misura) e DataCenter (esecuzione), in regime fail-closed e hash-only." />
 
   <link rel="stylesheet" href="assets/hbce.css" />
   <style>
@@ -18,6 +18,7 @@
     .hbce-nav a{margin-right:10px;text-decoration:none;opacity:.9}
     .hbce-nav a:hover{text-decoration:underline;opacity:1}
     .hbce-banner{margin:16px 0;padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:14px}
+    .hbce-pills{margin-top:10px}
     .hbce-pill{display:inline-block;padding:6px 10px;border:1px solid rgba(255,255,255,.16);border-radius:999px;margin:4px 6px 0 0;font-size:12px}
     .hbce-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .hbce-btn{display:inline-block;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);text-decoration:none;font-weight:600}
@@ -48,6 +49,7 @@
         <a href="./datacenter/">DataCenter</a>
         <a href="./use-cases/">Use-Cases</a>
         <a href="./governance/">Governance</a>
+        <a href="./professional/">Company</a>
         <a href="./verify/">Verify</a>
       </nav>
     </div>
@@ -70,7 +72,7 @@
       Opera come strato tecnico neutrale: misura e applica <strong>fail-closed</strong>.
     </p>
 
-    <div>
+    <div class="hbce-pills">
       <span class="hbce-pill">UE-first</span>
       <span class="hbce-pill">Audit-first</span>
       <span class="hbce-pill">Fail-closed</span>
@@ -79,15 +81,15 @@
     </div>
 
     <div class="hbce-cta">
+      <a class="hbce-btn" href="./architecture/">Architecture</a>
       <a class="hbce-btn" href="./create/">Crea IPR</a>
       <a class="hbce-btn" href="./verify/">Verifica</a>
-      <a class="hbce-btn" href="./modules/">Apri IPR Stack</a>
-      <a class="hbce-btn" href="./architecture/">Architettura</a>
+      <a class="hbce-btn" href="./professional/">Company</a>
     </div>
 
     <hr class="hbce-hr" />
 
-    <h2>Definizioni UE (infrastruttura / struttura)</h2>
+    <h2>Definizioni UE (infrastruttura / struttura / misura / esecuzione)</h2>
 
     <div class="hbce-grid">
       <article class="hbce-card">
@@ -101,42 +103,61 @@
       <article class="hbce-card">
         <h3>IPR = struttura</h3>
         <p>
-          L’Identity Primary Record (IPR) è la struttura cibernetica che attraversa l’infrastruttura:
-          attribuzione, decisione, traccia opponibile, esposizione temporale (hash-only).
+          Struttura cibernetica (hash-only) che rende verificabili attribuzione, decisione,
+          traccia opponibile ed esposizione temporale.
         </p>
       </article>
+
+      <article class="hbce-card">
+        <h3>JOKER = misura (Gate)</h3>
+        <p>
+          Interfaccia metrologica ex-ante: restituisce <code>PASS</code>/<code>FAIL</code>.
+          Non è autorità. Non decide nel merito.
+        </p>
+        <p><a href="./gate/">Apri Gate →</a></p>
+      </article>
+
+      <article class="hbce-card">
+        <h3>DataCenter = esecuzione vincolata</h3>
+        <p>
+          Esecuzione consentita solo in <code>PASS</code>. In <code>FAIL</code> nessun output e nessun fallback permissivo.
+        </p>
+        <p><a href="./datacenter/">Apri DataCenter →</a></p>
+      </article>
     </div>
+
+    <hr class="hbce-hr" />
 
     <h2>Assioma operativo</h2>
     <p>
       <strong>In assenza di prova ex-ante → nessuna esecuzione.</strong><br />
-      Nessun fallback permissivo.
+      Questo è il vincolo minimo per governare AI, sistemi cyber-fisici e infrastrutture critiche senza custodia identitaria.
     </p>
 
-    <h2>Componenti</h2>
+    <h2>Entrare nel sistema</h2>
     <div class="hbce-grid">
       <article class="hbce-card">
-        <h3>Architecture</h3>
-        <p class="hbce-muted">Schema ufficiale: infrastruttura/struttura/misura/esecuzione.</p>
-        <p><a href="./architecture/">Apri →</a></p>
+        <h3>1) Crea IPR</h3>
+        <p class="hbce-muted">Genera un record hash-only che precede l’azione.</p>
+        <p><a href="./create/">Vai a Create →</a></p>
       </article>
 
       <article class="hbce-card">
-        <h3>IPR Stack</h3>
-        <p class="hbce-muted">Moduli di capacità: UNEBDO, OPC, CYBERGLOBAL, METAEXCHANGE, NEUROLOOP, IOSPACE.</p>
-        <p><a href="./modules/">Apri →</a></p>
+        <h3>2) Verifica</h3>
+        <p class="hbce-muted">Applica verifica deterministica e auditabile.</p>
+        <p><a href="./verify/">Vai a Verify →</a></p>
       </article>
 
       <article class="hbce-card">
-        <h3>JOKER Gate</h3>
-        <p>Interfaccia metrologica ex-ante: <code>PASS</code> / <code>FAIL</code>.</p>
-        <p><a href="./gate/">Apri →</a></p>
+        <h3>3) IPR Stack</h3>
+        <p class="hbce-muted">Attiva capacità modulari verificabili (capability-based).</p>
+        <p><a href="./modules/">Vai a Modules →</a></p>
       </article>
 
       <article class="hbce-card">
-        <h3>DataCenter Metrologico</h3>
-        <p>Esecuzione vincolata: in FAIL non esiste output.</p>
-        <p><a href="./datacenter/">Apri →</a></p>
+        <h3>4) Use-Cases UE</h3>
+        <p class="hbce-muted">Adozione operativa: robotica, automotive, datacenter, B2B/B2G.</p>
+        <p><a href="./use-cases/">Vai a Use-Cases →</a></p>
       </article>
     </div>
 
@@ -148,11 +169,15 @@
       <strong>HERMETICUM B.C.E. S.r.l.</strong><br />
       Torino · Unione Europea
     </p>
+
+    <p class="hbce-muted">
+      Portale pubblico — informativo e valutativo. Nessun effetto giuridico automatico.
+    </p>
   </main>
 
   <footer class="hbce-footer">
     <div class="hbce-muted">
-      Portale pubblico — informativo e valutativo. Nessun effetto giuridico automatico.
+      PUBLIC PILOT · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
     </div>
   </footer>
 
