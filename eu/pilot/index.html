@@ -4,246 +4,99 @@
   <meta charset="utf-8">
   <title>HERMETICUM — EU Pilot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta name="description" content="HERMETICUM EU Pilot — technical evaluation material for audit-first infrastructure.">
-
+  <meta name="description" content="HERMETICUM EU Pilot — technical evaluation material.">
   <style>
-    :root{
-      --bg:#0b0d10;
-      --card:#0f1318;
-      --text:#e7edf5;
-      --muted:#9fb0c2;
-      --line:rgba(255,255,255,.12);
-      --soft:rgba(255,255,255,.06);
-      --max:1100px;
-    }
-
+    :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
     *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      line-height:1.45;
-    }
-
-    a{color:inherit;text-decoration:none}
-    a:hover{text-decoration:underline}
-
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-
-    /* NAV */
-    .nav{
-      border-bottom:1px solid var(--line);
-      background:rgba(0,0,0,.2);
-      backdrop-filter:blur(6px);
-    }
-    .nav-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 16px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px;
-    }
+    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.2);backdrop-filter:blur(6px)}
+    .nav-inner{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
     .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{
-      display:flex;
-      gap:12px;
-      font-size:14px;
-      color:var(--muted);
-      flex-wrap:wrap;
-    }
-    .nav-links a{
-      padding:6px 8px;
-      border-radius:10px;
-    }
-    .nav-links a:hover{
-      background:var(--soft);
-      color:var(--text);
-      text-decoration:none;
-    }
-
-    /* POLICY */
-    .policy{
-      border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      font-size:13px;
-      color:var(--muted);
-      padding:10px 16px;
-    }
-
+    .nav-links{display:flex;gap:12px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+    .nav-links a{padding:6px 8px;border-radius:10px}
+    .nav-links a:hover{background:var(--soft);color:var(--text);text-decoration:none}
+    .policy{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);font-size:13px;color:var(--muted);padding:10px 16px}
     main{padding:32px 0}
-
-    .hero h1{
-      margin:0 0 10px;
-      font-size:26px;
-      line-height:1.15;
-    }
-    .hero p{
-      margin:0;
-      max-width:90ch;
-      color:var(--muted);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:14px;
-      margin-top:24px;
-    }
-
-    .card{
-      grid-column:span 12;
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-    }
-
-    @media(min-width:900px){
-      .half{grid-column:span 6}
-      .third{grid-column:span 4}
-    }
-
-    .card h2{
-      margin:0 0 8px;
-      font-size:16px;
-    }
-    .card p{
-      margin:0;
-      font-size:14px;
-      color:var(--muted);
-    }
-
-    .list{
-      margin-top:8px;
-      padding-left:16px;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    footer{
-      border-top:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      padding:22px 0 26px;
-      color:var(--muted);
-    }
-    .footer-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:0 16px;
-    }
+    .hero h1{margin:0 0 10px;font-size:26px;line-height:1.15}
+    .hero p{margin:0;max-width:90ch;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:24px}
+    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+    @media(min-width:900px){.half{grid-column:span 6}.third{grid-column:span 4}}
+    .card h2{margin:0 0 8px;font-size:16px}
+    .card p{margin:0;font-size:14px;color:var(--muted)}
+    .list{margin-top:8px;padding-left:16px;color:var(--muted);font-size:14px}
+    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:22px 0 26px;color:var(--muted)}
+    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
     .mini{font-size:13px;opacity:.9}
-    .sig{
-      margin-top:18px;
-      font-size:12px;
-      opacity:.6;
-      letter-spacing:.4px;
-    }
+    .sig{margin-top:18px;font-size:12px;opacity:.6;letter-spacing:.4px}
   </style>
 </head>
-
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="brand">HERMETICUM</div>
-      <div class="nav-links">
-        <a href="../">Home</a>
-        <a href="../architecture/">Architecture</a>
-        <a href="../verify/">Verify</a>
-        <a href="../create/">Create</a>
-        <a href="../use-cases/">Use-Cases</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- POLICY -->
-  <div class="policy">
-    <div class="wrap">
-      Audit-first · Fail-closed · Hash-only · No data custody
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">HERMETICUM</div>
+    <div class="nav-links">
+      <a href="../../">Home</a>
+      <a href="../../architecture/">Architecture</a>
+      <a href="../../verify/">Verify</a>
+      <a href="../../create/">Create</a>
+      <a href="../../use-cases/">Use-Cases</a>
     </div>
   </div>
+</nav>
 
-  <main class="wrap">
+<div class="policy"><div class="wrap">Audit-first · Fail-closed · Hash-only · No data custody</div></div>
 
-    <section class="hero">
-      <h1>EU Pilot</h1>
-      <p>
-        Materiale per la valutazione tecnica di un’infrastruttura
-        di attribuzione, tracciabilità e verifica.
-      </p>
-    </section>
+<main class="wrap">
+  <section class="hero">
+    <h1>EU Pilot</h1>
+    <p>Materiale per la valutazione tecnica di un’infrastruttura di attribuzione, tracciabilità e verifica.</p>
+  </section>
 
-    <section class="grid">
-
-      <div class="card half">
-        <h2>Oggetto della valutazione</h2>
-        <p>
-          Infrastruttura tecnica per la verifica deterministica
-          di azioni digitali e responsabilità associate.
-        </p>
-      </div>
-
-      <div class="card half">
-        <h2>Ambito</h2>
-        <ul class="list">
-          <li>Attribuzione eventi</li>
-          <li>Traccia append-only</li>
-          <li>Verifica pubblica pass/fail</li>
-        </ul>
-      </div>
-
-      <div class="card third">
-        <h2>Input</h2>
-        <p>Riferimenti crittografici e manifest.</p>
-      </div>
-
-      <div class="card third">
-        <h2>Output</h2>
-        <p>Esito deterministico verificabile.</p>
-      </div>
-
-      <div class="card third">
-        <h2>Vincoli</h2>
-        <p>Nessuna custodia dati personali.</p>
-      </div>
-
-      <div class="card half">
-        <h2>Materiale disponibile</h2>
-        <ul class="list">
-          <li><a href="report-template.md">Template report di valutazione</a></li>
-          <li><a href="example-report.md">Report esempio compilato</a></li>
-          <li><a href="../assets/architecture-diagram.svg">Diagramma architetturale</a></li>
-        </ul>
-      </div>
-
-      <div class="card half">
-        <h2>Valutazione</h2>
-        <p>
-          Il pilot è progettato per consentire
-          valutazioni indipendenti e ripetibili.
-        </p>
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="mini">
-        HERMETICUM — digital responsibility infrastructure
-      </div>
-      <div class="sig">
-        HERMETICUM B.C.E. S.r.l. · EU
-      </div>
+  <section class="grid">
+    <div class="card half">
+      <h2>Oggetto della valutazione</h2>
+      <p>Infrastruttura tecnica per la verifica deterministica di azioni digitali e responsabilità associate.</p>
     </div>
-  </footer>
+
+    <div class="card half">
+      <h2>Ambito</h2>
+      <ul class="list">
+        <li>Attribuzione eventi</li>
+        <li>Traccia append-only</li>
+        <li>Verifica pubblica pass/fail</li>
+      </ul>
+    </div>
+
+    <div class="card third"><h2>Input</h2><p>Riferimenti crittografici e manifest.</p></div>
+    <div class="card third"><h2>Output</h2><p>Esito deterministico verificabile.</p></div>
+    <div class="card third"><h2>Vincoli</h2><p>Nessuna custodia dati personali.</p></div>
+
+    <div class="card half">
+      <h2>Materiale disponibile</h2>
+      <ul class="list">
+        <li><a href="report-template.html">Template report di valutazione</a></li>
+        <li><a href="example-report.html">Report esempio compilato</a></li>
+        <li><a href="../../assets/architecture-diagram.svg">Diagramma architetturale</a></li>
+      </ul>
+    </div>
+
+    <div class="card half">
+      <h2>Valutazione</h2>
+      <p>Il pilot è progettato per consentire valutazioni indipendenti e ripetibili.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="mini">HERMETICUM — digital responsibility infrastructure</div>
+    <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
+  </div>
+</footer>
 
 </body>
 </html>
