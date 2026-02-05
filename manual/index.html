@@ -3,146 +3,223 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Manuale — IPR Manuale Europeo del dopo</title>
+  <base href="/hermeticum-bce-platform/" />
 
-  <!-- GitHub Pages project site base -->
-  <base href="/hermeticum-bce-platform/">
+  <title>Manuale — Directory tecnica (appendici)</title>
+  <meta name="description" content="Directory tecnica (appendici) del portale HERMETICUM: operativo, audit, normative, security, istituzionale. UE-first, audit-first, fail-closed, hash-only." />
 
-  <link rel="stylesheet" href="assets/hbce.css" />
+  <link rel="stylesheet" href="../assets/hbce.css" />
+  <style>
+    .hbce-wrap{max-width:980px;margin:0 auto;padding:28px 18px}
+    .hbce-top{border-bottom:1px solid rgba(255,255,255,.12);padding:18px}
+    .hbce-top__inner{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .hbce-brand__name{font-weight:800;letter-spacing:.3px}
+    .hbce-brand__sub{opacity:.82}
+    .hbce-nav a{margin-right:10px;text-decoration:none;opacity:.9}
+    .hbce-nav a:hover{text-decoration:underline;opacity:1}
+    .hbce-banner{margin:16px 0;padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:14px}
+    .hbce-hr{border:0;height:1px;background:rgba(255,255,255,.12);margin:22px 0}
+    .hbce-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:12px}
+    .hbce-card{grid-column:span 6;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px}
+    @media(max-width:820px){.hbce-card{grid-column:span 12}}
+    .hbce-muted{opacity:.82}
+    .hbce-footer{border-top:1px solid rgba(255,255,255,.12);padding:18px;opacity:.9}
+    .hbce-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .hbce-btn{display:inline-block;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);text-decoration:none;font-weight:600}
+    .hbce-btn:hover{border-color:rgba(255,255,255,.35)}
+    ul{margin:10px 0 0 18px}
+    li{margin:6px 0}
+  </style>
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="sig" aria-hidden="true"></div>
-        <div>
-          <h1>Manuale</h1>
-          <span class="sub">IPR Manuale Europeo del dopo · allegati tecnici</span>
-        </div>
+  <header class="hbce-top">
+    <div class="hbce-top__inner">
+      <div>
+        <div class="hbce-brand__name">HERMETICUM</div>
+        <div class="hbce-brand__sub">Manuale · Directory tecnica (appendici)</div>
       </div>
-      <nav class="menu" aria-label="Navigazione principale">
-        <a class="pill" data-nav href="./"><strong>Home</strong></a>
-        <a class="pill" data-nav href="citizen/"><strong>Cittadini UE</strong></a>
-        <a class="pill" data-nav href="ai-joker-c2/"><strong>AI JOKER-C2</strong></a>
-        <a class="pill" data-nav href="institution/">Istituzioni UE</a>
-        <a class="pill" data-nav href="member-states/">Stati Membri</a>
-        <a class="pill" data-nav href="technology/">Tecnologia</a>
-        <a class="pill" data-nav href="security/">Sicurezza</a>
-        <a class="pill" data-nav href="governance/">Governance</a>
-        <a class="pill active" data-nav href="manual/"><strong>Manuale</strong></a>
+
+      <nav class="hbce-nav" aria-label="Navigazione canonica">
+        <a href="../">Home</a>
+        <a href="../architecture/">Architecture</a>
+        <a href="../modules/">IPR Stack</a>
+        <a href="../gate/">Gate</a>
+        <a href="../datacenter/">DataCenter</a>
+        <a href="../use-cases/">Use-Cases</a>
+        <a href="../governance/">Governance</a>
+        <a href="../professional/">Company</a>
+        <a href="../verify/">Verify</a>
       </nav>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="kicker">DOCUMENTATION HUB · EU-READY · AUDIT-FIRST</div>
-      <h2 class="title">IPR Manuale Europeo del dopo</h2>
-      <p class="lead">
-        Questa sezione raccoglie la documentazione necessaria per comprendere, valutare e adottare
-        il modello <strong>IPR / AI JOKER-C2</strong> come meccanismo di governance ex-ante.
-        Linguaggio chiaro, struttura verificabile, senza promesse.
-      </p>
+  <main class="hbce-wrap">
+    <div class="hbce-banner">
+      <strong>PUBLIC PILOT</strong> · UE-FIRST · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
+    </div>
 
-      <div class="btnrow">
-        <a class="btn" href="technology/">Vai alla tecnologia</a>
-        <a class="btn secondary" href="security/">Vai alla sicurezza</a>
-        <a class="btn ghost" href="institution/">Pacchetto istituzionale UE</a>
-      </div>
-    </section>
+    <h1>Directory tecnica (appendici)</h1>
 
-    <section class="grid">
-      <article class="card cols-12">
-        <h3>Manuale principale</h3>
-        <p>
-          <strong>IPR Manuale Europeo del dopo</strong> — testo base, concetti, esempi, percorsi d’adozione.
-        </p>
-        <div class="meta">
-          <span class="tag ok">manuale</span>
-          <span class="tag">capitoli</span>
-          <span class="tag">append-only</span>
-        </div>
-        <div class="btnrow">
-          <!-- Placeholder: se aggiungi il file, punta qui -->
-          <a class="btn" href="#">Apri manuale (da pubblicare qui)</a>
-          <a class="btn ghost" href="citizen/">Versione cittadini</a>
-          <a class="btn secondary" href="member-states/">Versione Stati Membri</a>
-        </div>
-      </article>
+    <p>
+      La navbar principale del portale mostra solo le pagine <strong>core</strong> dell’infrastruttura.
+      Tutto ciò che segue resta pubblico e consultabile, ma è classificato come <strong>appendice tecnica</strong>:
+      operativo, audit, prove, normative, sicurezza, pacchetti istituzionali.
+    </p>
 
-      <article class="card cols-6">
-        <h3>Allegato A — Architettura tecnica</h3>
-        <p>Moduli, confini, pre-check, integrazione minima.</p>
-        <div class="btnrow">
-          <a class="btn ghost" href="#">Apri Allegato A</a>
-        </div>
-      </article>
+    <p class="hbce-muted">
+      Regola: le appendici non cambiano i principi. Sono strumenti di consultazione e verifica.
+    </p>
 
-      <article class="card cols-6">
-        <h3>Allegato B — Flussi e sequence diagram</h3>
-        <p>PASS/FAIL, creazione IPR, verifica, evidence pack.</p>
-        <div class="btnrow">
-          <a class="btn ghost" href="#">Apri Allegato B</a>
-        </div>
-      </article>
+    <div class="hbce-cta">
+      <a class="hbce-btn" href="../create/">Create (demo)</a>
+      <a class="hbce-btn" href="../verify/">Verify</a>
+      <a class="hbce-btn" href="../technology/">Technology</a>
+      <a class="hbce-btn" href="../status/">Status</a>
+    </div>
 
-      <article class="card cols-6">
-        <h3>Allegato C — Mapping normativo</h3>
-        <p>AI Act, NIS2, GDPR, Data Act: mappatura tecnica dei controlli.</p>
-        <div class="btnrow">
-          <a class="btn ghost" href="#">Apri Allegato C</a>
-        </div>
-      </article>
+    <hr class="hbce-hr" />
 
-      <article class="card cols-6">
-        <h3>Allegato D — Threat model (ENISA-style)</h3>
-        <p>Catalogo minacce, controlli, rischio residuo, KPI.</p>
-        <div class="btnrow">
-          <a class="btn ghost" href="security/">Apri Threat model</a>
-        </div>
-      </article>
-
-      <article class="card cols-6">
-        <h3>Allegato E — KPI & criteri di certificazione</h3>
-        <p>Metriche verificabili, GO/NO-GO, audit replicabile.</p>
-        <div class="btnrow">
-          <a class="btn ghost" href="#">Apri Allegato E</a>
-        </div>
-      </article>
-
-      <article class="card cols-6">
-        <h3>Allegato F — Adozione per Stati Membri</h3>
-        <p>Timeline, ruoli, pilot, scaling, federazione UE.</p>
-        <div class="btnrow">
-          <a class="btn ghost" href="member-states/">Apri Adozione UE</a>
-        </div>
-      </article>
-
-      <article class="card cols-12">
-        <h3>Indice rapido (portale)</h3>
-        <ul class="list">
-          <li><strong>Per cittadini:</strong> protezione senza sorveglianza → <a href="citizen/">/citizen/</a></li>
-          <li><strong>Per istituzioni UE:</strong> valutazione e pacchetto → <a href="institution/">/institution/</a></li>
-          <li><strong>Per Stati Membri:</strong> adozione federata → <a href="member-states/">/member-states/</a></li>
-          <li><strong>Tecnologia:</strong> PASS/FAIL e determinismo → <a href="technology/">/technology/</a></li>
-          <li><strong>Sicurezza:</strong> threat model → <a href="security/">/security/</a></li>
-          <li><strong>Governance:</strong> limiti e responsabilità → <a href="governance/">/governance/</a></li>
-          <li><strong>AI governance:</strong> AI JOKER-C2 → <a href="ai-joker-c2/">/ai-joker-c2/</a></li>
+    <h2>Operativo</h2>
+    <div class="hbce-grid">
+      <section class="hbce-card">
+        <h3>Creazione & verifica</h3>
+        <ul>
+          <li><a href="../create/">Create — generazione IPR (demo)</a></li>
+          <li><a href="../verify/">Verify — PASS/FAIL coerenza</a></li>
+          <li><a href="../technology/">Technology — regole deterministiche</a></li>
+          <li><a href="../openapi/">OpenAPI — precheck before action</a></li>
         </ul>
-      </article>
-    </section>
+      </section>
+
+      <section class="hbce-card">
+        <h3>Onboarding & accesso</h3>
+        <ul>
+          <li><a href="../onboarding/">Onboarding — flusso operativo (fase 1)</a></li>
+          <li><a href="../register/">Register — entrypoint light/strong</a></li>
+          <li><a href="../cta/">CTA — gateway controllato</a></li>
+          <li><a href="../phase-1/">Phase-1 — declass operativa</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <hr class="hbce-hr" />
+
+    <h2>Pacchetti istituzionali (UE / Stati Membri)</h2>
+    <div class="hbce-grid">
+      <section class="hbce-card">
+        <h3>UE / Istituzioni</h3>
+        <ul>
+          <li><a href="../institution/">Institution — pacchetto valutativo UE</a></li>
+          <li><a href="../brussels-model/">Brussels Model — modello directory</a></li>
+          <li><a href="../member-states/">Member States — adozione per Stati Membri</a></li>
+          <li><a href="../node/">Node — demo istituzionale (declass)</a></li>
+        </ul>
+      </section>
+
+      <section class="hbce-card">
+        <h3>Cittadini</h3>
+        <ul>
+          <li><a href="../citizen/">Citizen — sezione cittadini UE</a></li>
+          <li><a href="../corridors/">Corridors — percorsi B2G / registri</a></li>
+          <li><a href="../map/">Map — ecosistema semplificato</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <hr class="hbce-hr" />
+
+    <h2>Audit, prove, manifesti, ancoraggi</h2>
+    <div class="hbce-grid">
+      <section class="hbce-card">
+        <h3>Audit hub</h3>
+        <ul>
+          <li><a href="../audit/">Audit — indici operativi</a></li>
+          <li><a href="../tech/">Tech — checklist e controlli</a></li>
+          <li><a href="../docs/">Docs — freeze e snapshot</a></li>
+          <li><a href="../changelog/">Changelog — cronologia</a></li>
+        </ul>
+      </section>
+
+      <section class="hbce-card">
+        <h3>Evidence & manifest</h3>
+        <ul>
+          <li><a href="../evidence/">Evidence — sample pack</a></li>
+          <li><a href="../evidence-pack/">Evidence-Pack — contesto adozione</a></li>
+          <li><a href="../manifest/">Manifest — pagina manifest</a></li>
+          <li><a href="../manifests/">Manifests — pubblicazioni</a></li>
+          <li><a href="../anchor/">Anchor — builder pack (manual)</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <hr class="hbce-hr" />
+
+    <h2>Normative & sicurezza</h2>
+    <div class="hbce-grid">
+      <section class="hbce-card">
+        <h3>Allineamento UE</h3>
+        <ul>
+          <li><a href="../normative/">Normative Mapping — eIDAS2/EUDI & non-equivalenze</a></li>
+          <li><a href="../standards/">Standards — UE–ΦΩ–001</a></li>
+          <li><a href="../research/">Research — Horizon pre-standard</a></li>
+        </ul>
+      </section>
+
+      <section class="hbce-card">
+        <h3>Sicurezza & privacy</h3>
+        <ul>
+          <li><a href="../security/">Security — threat model (ENISA-style)</a></li>
+          <li><a href="../privacy/">Privacy — GDPR-min, hash-only</a></li>
+          <li><a href="../legal/">Legal — policy & privacy</a></li>
+          <li><a href="../terms/">Terms — condizioni</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <hr class="hbce-hr" />
+
+    <h2>Stato & eventi</h2>
+    <div class="hbce-grid">
+      <section class="hbce-card">
+        <h3>Stato del portale</h3>
+        <ul>
+          <li><a href="../status/">Status — PILOT</a></li>
+          <li><a href="../events/">Events — timeline dichiarativa</a></li>
+          <li><a href="../credits/">Credits — ownership e responsabilità</a></li>
+        </ul>
+      </section>
+
+      <section class="hbce-card">
+        <h3>Componenti AI</h3>
+        <ul>
+          <li><a href="../ai-joker-c2/">AI JOKER-C2 — governance layer</a></li>
+          <li><a href="../ai/">AI — comportamento tool (no custody)</a></li>
+          <li><a href="../demo/ai-inference/">Demo — AI inference (evidence example)</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <hr class="hbce-hr" />
+
+    <h2>Firma</h2>
+    <p>
+      <strong>HERMETICUM – BLINDATA · COMPUTABILE · EVOLUTIVA</strong><br />
+      <strong>HERMETICUM B.C.E. S.r.l.</strong><br />
+      Torino · Unione Europea
+    </p>
+
+    <p class="hbce-muted">
+      Portale pubblico — informativo e valutativo. Nessun effetto giuridico automatico.
+    </p>
   </main>
 
-  <footer class="footer">
-    <div class="wrap">
-      <div class="notice">
-        <strong>Nota</strong><br/>
-        I link “Apri manuale / allegati” sono placeholder finché i file non vengono pubblicati nella cartella <span class="mono">/manual/</span>.
-        La struttura è pronta per essere popolata in modo append-only e auditabile.
-      </div>
+  <footer class="hbce-footer">
+    <div class="hbce-muted">
+      PUBLIC PILOT · UE-FIRST · NO DATA CUSTODY · HASH-ONLY · FAIL-CLOSED · AUDIT-FIRST
     </div>
   </footer>
 
-  <script src="assets/hbce.js"></script>
+  <script src="../assets/hbce.js" defer></script>
 </body>
 </html>
