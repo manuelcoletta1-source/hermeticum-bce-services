@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <title>HERMETICUM — Verify Receipt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root{--bg:#0b0d10;--paper:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:980px}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+    header{border-bottom:1px solid var(--line);background:rgba(0,0,0,.22);backdrop-filter:blur(6px)}
+    .head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0}
+    .brand{font-weight:900;letter-spacing:.9px}
+    .brand small{display:block;font-weight:600;letter-spacing:.2px;color:var(--muted);font-size:12px;margin-top:2px}
+    nav{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+    nav a{padding:6px 8px;border-radius:10px}
+    nav a:hover{background:var(--soft);color:var(--text);text-decoration:none}
+    .policy{border-top:1px solid var(--line);padding:10px 0;font-size:12px;color:var(--muted)}
+    .policy b{color:var(--text);font-weight:800}
+
+    main{padding:22px 0 34px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px}
+    h1{margin:0 0 6px;font-size:22px}
+    .subtitle{margin:0;color:var(--muted);max-width:92ch;font-size:13px}
+    .divider{height:1px;background:rgba(255,255,255,.08);margin:14px 0}
+
+    label{display:block;font-size:12px;color:var(--muted);margin-top:10px}
+    input,textarea{
+      width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
+    }
+    input[type="file"]{padding:10px}
+    textarea{min-height:110px;resize:vertical}
+
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;cursor:pointer}
+    .btn:hover{background:rgba(255,255,255,.06)}
+    .btn.primary{background:rgba(255,255,255,.06)}
+    .btn.primary:hover{background:rgba(255,255,255,.09)}
+
+    .out{margin-top:12px;padding:14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;white-space:pre-line;overflow:auto}
+    .hint{font-size:12px;color:var(--muted);margin-top:8px}
+
+    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:18px 0 24px;color:var(--muted)}
+    .sig{margin-top:10px;font-size:12px;opacity:.7;letter-spacing:.4px}
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap head">
+    <div class="brand">HERMETICUM<small>Verify Receipt — receipt_sha256(json)</small></div>
+    <nav>
+      <a href="../../">Home</a>
+      <a href="../../create/">Create</a>
+      <a href="../">Verify</a>
+      <a href="../../audit/">Audit</a>
+      <a href="../../company/">Company</a>
+    </nav>
+  </div>
+  <div class="wrap policy"><b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b></div>
+</header>
+
+<main class="wrap">
+  <div class="card">
+    <h1>Verifica receipt (SHA-256)</h1>
+    <p class="subtitle">
+      Carica il file <b>.json</b> dell’IPR (o audit JSON) e fornisci il <b>receipt_sha256(json)</b>.
+      Il calcolo avviene localmente (client-side). Nessun dato viene inviato o conservato.
+    </p>
+
+    <div class="divider"></div>
+
+    <label>JSON (file)</label>
+    <input id="jsonfile" type="file" accept=".json,application/json">
+
+    <label>receipt_sha256(json) (incolla qui) — oppure carica il file receipt sotto</label>
+    <input id="receipt" placeholder="es. 620d9a35... (64 hex)">
+
+    <label>receipt file (opzionale) — .txt con 1 riga hash</label>
+    <input id="receiptfile" type="file" accept=".txt,text/plain">
+
+    <div class="btnrow">
+      <button class="btn primary" onclick="verify()">Verifica</button>
+    </div>
+
+    <div id="out" class="out">STATO: IDLE</div>
+    <div class="hint">PASS = JSON integro rispetto al receipt. FAIL = mismatch (file diverso o modificato).</div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>HERMETICUM — digital responsibility infrastructure</div>
+    <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
+  </div>
+</footer>
+
+<script>
+async function sha256Bytes(uint8){
+  const buf = await crypto.subtle.digest("SHA-256", uint8);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+async function readFileAsBytes(file){
+  const ab = await file.arrayBuffer();
+  return new Uint8Array(ab);
+}
+async function readFileAsText(file){
+  return await file.text();
+}
+function normHex(s){
+  return (s || "").trim().toLowerCase().replace(/^0x/,"").replace(/[^0-9a-f]/g,"");
+}
+
+async function verify(){
+  const out = document.getElementById("out");
+  const jf = document.getElementById("jsonfile").files[0];
+  if(!jf){ out.textContent = "STATO: FAIL\nMOTIVO: manca il file JSON"; return; }
+
+  let r = normHex(document.getElementById("receipt").value);
+
+  const rf = document.getElementById("receiptfile").files[0];
+  if(!r && rf){
+    const t = await readFileAsText(rf);
+    r = normHex(t);
+  }
+
+  if(!r || r.length !== 64){
+    out.textContent = "STATO: FAIL\nMOTIVO: receipt non valido (serve SHA-256 64 hex)";
+    return;
+  }
+
+  const bytes = await readFileAsBytes(jf);
+  const h = await sha256Bytes(bytes);
+
+  if(h === r){
+    out.textContent = "STATO: PASS\nreceipt_sha256(json): " + r + "\ncomputed_sha256(json): " + h;
+  }else{
+    out.textContent = "STATO: FAIL\nreceipt_sha256(json): " + r + "\ncomputed_sha256(json): " + h;
+  }
+}
+</script>
+</body>
+</html>
