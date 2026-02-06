@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>HERMETICUM — Creazione IPR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Creazione IPR (stile banca UE) — PRIVATE incastona payload nel file scaricato, PUBLIC è condivisibile (hash-only). Client-side, no data custody.">
+  <meta name="description" content="Creazione IPR UE-style — PUBLIC hash-only, PRIVATE include payload sealed (🜏) nel file scaricato. Client-side, no data custody.">
 
   <style>
     :root{--bg:#05070a;--paper:#0b0f14;--text:#e9f0f8;--muted:#8fa3b8;--line:#1c2733;--line2:#223140;--max:980px}
@@ -47,8 +47,8 @@
       background:rgba(255,255,255,.03);font-size:14px;cursor:pointer
     }
     .btn:hover{background:rgba(255,255,255,.06)}
-    .btn.primary{background:rgba(255,255,255,.06)}
-    .btn.primary:hover{background:rgba(255,255,255,.09)}
+    .btn.primary{background:rgba(255,255,255,.08)}
+    .btn.primary:hover{background:rgba(255,255,255,.11)}
 
     .hint{font-size:12px;color:var(--muted);margin-top:8px}
     .out{
@@ -74,7 +74,7 @@
       <a href="/hermeticum-bce-platform/">Home</a>
       <a href="/hermeticum-bce-platform/verify/">Verifica</a>
       <a href="/hermeticum-bce-platform/audit/">Audit</a>
-      <a href="/hermeticum-bce-platform/eu/pilot/">EU Pilot</a>
+      <a href="/hermeticum-bce-platform/standard/ipr/">Standard</a>
       <a href="/hermeticum-bce-platform/company/">Company</a>
     </nav>
   </div>
@@ -87,14 +87,13 @@
   <div class="card">
     <h1>Creazione IPR</h1>
     <p class="subtitle">
-      Compila i dati essenziali (self-declared). Inserisci un testo e/o allega un file.
-      Genera un artefatto <b>PUBLIC</b> (condivisibile, hash-only) o <b>PRIVATE</b> (con payload incastonato nel file scaricato).
-      Nessun dato viene inviato o conservato.
+      PUBLIC = condivisibile (hash-only). PRIVATE = include payload <b>sigillato</b> (🜏) nel file scaricato.
+      Tutto client-side. Nessuna custodia dati.
     </p>
 
     <div class="divider"></div>
 
-    <p class="section-title">A) Identità dichiarata (soggetto biologico)</p>
+    <p class="section-title">A) Identità dichiarata (self-declared)</p>
     <div class="row">
       <div>
         <label>Nome e Cognome</label>
@@ -121,20 +120,20 @@
         <input id="zone" placeholder="es. Centro / Circoscrizione 1">
       </div>
     </div>
-    <div class="hint">Nota UE: dati self-declared, non verificati. Non inserire indirizzi, coordinate o dati sensibili.</div>
+    <div class="hint">Nota UE: dati self-declared. Non inserire indirizzi, coordinate, dati sensibili.</div>
 
     <div class="divider"></div>
 
-    <p class="section-title">B) Contenuto (testo e/o file)</p>
+    <p class="section-title">B) Contenuto (riservato all’utente)</p>
     <div class="row">
       <div>
         <label>Testo (facoltativo)</label>
-        <textarea id="note" placeholder="Testo riservato (verrà incluso SOLO nel PRIVATE scaricato)"></textarea>
+        <textarea id="note" placeholder="Testo riservato (comparirà SOLO nel PRIVATE scaricato)"></textarea>
       </div>
       <div>
         <label>File (facoltativo)</label>
         <input id="file" type="file">
-        <div class="hint">Se carichi un file, l’hash contenuto sarà SHA-256(file). Altrimenti SHA-256(testo).</div>
+        <div class="hint">Se presente il file: SHA-256(file). Altrimenti: SHA-256(testo). Se entrambi: file = hash principale, testo viene comunque sigillato nel PRIVATE.</div>
       </div>
     </div>
 
@@ -145,24 +144,26 @@
 
     <div class="divider"></div>
 
-    <p class="section-title">C) Emissione artefatto</p>
+    <p class="section-title">C) Emissione</p>
     <div class="btnrow">
-      <button class="btn primary" onclick="issue('PRIVATE')">Crea IPR (PRIVATE)</button>
-      <button class="btn" onclick="issue('PUBLIC')">Crea IPR (PUBLIC)</button>
+      <button class="btn primary" onclick="issuePRIVATE()">Crea IPR (PRIVATE)</button>
+      <button class="btn" onclick="issuePUBLIC()">Crea IPR (PUBLIC)</button>
     </div>
     <div id="out" class="out">STATO: IDLE</div>
 
     <div id="dlbox" style="margin-top:12px; display:none;">
       <p class="section-title">Download manuale (fallback)</p>
       <div class="btnrow">
-        <a class="btn" id="dl_txt" href="#" download>Scarica TXT</a>
+        <a class="btn" id="dl_bundle" href="#" download>Scarica bundle</a>
         <a class="btn" id="dl_json" href="#" download>Scarica JSON</a>
         <a class="btn" id="dl_receipt" href="#" download>Scarica receipt</a>
       </div>
-      <div class="hint">Se il browser blocca i download automatici, usa questi 3 pulsanti.</div>
+      <div class="hint">Se Android blocca l’avvio automatico, usa questi pulsanti.</div>
     </div>
 
-    <div class="hint">PUBLIC: condivisibile (senza payload). PRIVATE: contiene payload (non condividere).</div>
+    <div class="hint">
+      PUBLIC non contiene payload. PRIVATE contiene payload sigillato (🜏) e rende l’utente responsabile del contenuto.
+    </div>
   </div>
 </main>
 
@@ -176,9 +177,9 @@
 
 <script>
 const ALGO = "SHA-256";
+const VERSION = "CREATE-v2.2"; // utile per capire se stai vedendo la pagina aggiornata (cache)
 let prepared = false;
 
-// snapshot preparato (così quello che scrivi resta quello che viene incastonato)
 let SNAP = {
   mode: "EMPTY",
   content_hash: "",
@@ -221,7 +222,6 @@ async function prepare(){
   const note = norm(document.getElementById("note").value);
   const f = document.getElementById("file").files[0];
 
-  // reset snapshot
   SNAP = { mode:"EMPTY", content_hash:"", content_basis:"EMPTY", note:"", file_meta:null, file_b64:"", file_hash:"" };
 
   if(f){
@@ -230,16 +230,18 @@ async function prepare(){
     SNAP.file_hash = fh;
     SNAP.file_meta = { name:f.name, type:(f.type||"application/octet-stream"), size:f.size };
     SNAP.file_b64 = base64FromBytes(bytes);
-    SNAP.note = note; // se presente, lo includiamo nel PRIVATE
+    SNAP.note = note;
     SNAP.content_hash = fh;
     SNAP.content_basis = "FILE";
     SNAP.mode = note ? "FILE+TEXT" : "FILE";
 
     prepout.textContent =
-      "STATO: OK\nMODE: " + SNAP.mode + "\nALGORITMO: " + ALGO +
+      "STATO: OK\nVERSION: " + VERSION +
+      "\nMODE: " + SNAP.mode +
+      "\nALGORITMO: " + ALGO +
       "\nCONTENT_BASIS: FILE\nCONTENT_HASH:\n" + SNAP.content_hash +
       "\nFILE: " + SNAP.file_meta.name + " (" + SNAP.file_meta.size + " bytes)\n" +
-      (note ? "TESTO: presente (incluso nel PRIVATE)\n" : "TESTO: assente\n");
+      (note ? "TESTO: presente (sigillato nel PRIVATE)\n" : "TESTO: assente\n");
     prepared = true;
     return;
   }
@@ -252,21 +254,25 @@ async function prepare(){
     SNAP.mode = "TEXT";
 
     prepout.textContent =
-      "STATO: OK\nMODE: TEXT\nALGORITMO: " + ALGO +
+      "STATO: OK\nVERSION: " + VERSION +
+      "\nMODE: TEXT\nALGORITMO: " + ALGO +
       "\nCONTENT_BASIS: TEXT\nCONTENT_HASH:\n" + SNAP.content_hash;
     prepared = true;
     return;
   }
 
-  // empty allowed (but discouraged)
   SNAP.content_hash = "0".repeat(64);
   SNAP.content_basis = "EMPTY";
   SNAP.mode = "EMPTY";
   prepout.textContent =
-    "STATO: OK\nMODE: EMPTY\nCONTENT_HASH:\n" + SNAP.content_hash +
-    "\nNOTA: nessun contenuto inserito (auditabile ma poco utile).";
+    "STATO: OK\nVERSION: " + VERSION +
+    "\nMODE: EMPTY\nCONTENT_HASH:\n" + SNAP.content_hash +
+    "\nNOTA: nessun contenuto inserito.";
   prepared = true;
 }
+
+function issuePRIVATE(){ issue("PRIVATE"); }
+function issuePUBLIC(){ issue("PUBLIC"); }
 
 async function issue(kind){
   const out = document.getElementById("out");
@@ -278,7 +284,6 @@ async function issue(kind){
     return;
   }
 
-  // identity snapshot (self-declared)
   const full_name = norm(document.getElementById("full_name").value);
   const country = norm(document.getElementById("country").value);
   const region = norm(document.getElementById("region").value);
@@ -288,12 +293,13 @@ async function issue(kind){
   const now = new Date().toISOString();
   const id = makeId("IPR-O-", now);
 
-  // build base JSON (PUBLIC/PRIVATE differ only in payload)
   const base = {
     kind: "HBCE_IPR_OFFICIAL",
     version: "IPR-O-v1",
+    generator: { module: "HERMETICUM_CREATE", module_version: VERSION },
     system: "HERMETICUM",
     regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
+    artifact: { visibility: kind },
     ipr_id: id,
     timestamp_utc: now,
     subject: {
@@ -328,7 +334,7 @@ async function issue(kind){
   if(base.subject.geo.city === undefined) delete base.subject.geo.city;
   if(base.subject.geo.zone === undefined) delete base.subject.geo.zone;
 
-  // add payload ONLY for PRIVATE
+  // payload ONLY PRIVATE
   if(kind === "PRIVATE"){
     const payload = {
       note: SNAP.note || undefined,
@@ -350,16 +356,31 @@ async function issue(kind){
   const jsonText = JSON.stringify(base, null, 2);
   const receipt = await sha256String(jsonText);
 
-  // bundle TXT (PRIVATE includes payload because JSON includes it; PUBLIC does not)
+  // SEALED payload section (only PRIVATE, readable)
+  const sealed =
+    (kind === "PRIVATE")
+      ? (`===== SECTION: PRIVATE_PAYLOAD (SEALED) =====
+🜏 HERMETICUM — Blindata · Computabile · Evolutiva
+HERMETICUM B.C.E. S.r.l. · EU
+
+NOTE:
+${SNAP.note ? SNAP.note : "[ASSENTE]"}
+
+FILE:
+${SNAP.file_meta ? (SNAP.file_meta.name + " (" + SNAP.file_meta.size + " bytes) sha256=" + SNAP.file_hash) : "[ASSENTE]"}
+`)
+      : "";
+
   const bundle =
 `HERMETICUM IPR BUNDLE (single-file)
 IPR_ID: ${id}
-KIND: ${kind}
+ARTEFATTO: ${kind}
 timestamp_utc: ${now}
 content_basis: ${SNAP.content_basis}
 content_hash_sha256: ${SNAP.content_hash}
 receipt_sha256(json): ${receipt}
 
+${sealed}
 ===== SECTION: IPR.JSON =====
 ${jsonText}
 
@@ -367,42 +388,41 @@ ${jsonText}
 ${receipt}
 `;
 
-  // create blobs
-  const txtBlob = new Blob([bundle], {type:"text/plain"});
-  const jsonBlob = new Blob([jsonText], {type:"application/json"});
-  const rBlob = new Blob([receipt + "\n"], {type:"text/plain"});
+  const bBundle = new Blob([bundle], {type:"text/plain"});
+  const bJson = new Blob([jsonText], {type:"application/json"});
+  const bRec = new Blob([receipt + "\n"], {type:"text/plain"});
 
-  const txtUrl = URL.createObjectURL(txtBlob);
-  const jsonUrl = URL.createObjectURL(jsonBlob);
-  const rUrl = URL.createObjectURL(rBlob);
+  const uBundle = URL.createObjectURL(bBundle);
+  const uJson = URL.createObjectURL(bJson);
+  const uRec = URL.createObjectURL(bRec);
 
   const fnBase = `${id}_${kind}`;
-  const fnTxt = `${fnBase}_BUNDLE.txt`;
+  const fnBundle = `${fnBase}_BUNDLE.txt`;
   const fnJson = `${fnBase}.json`;
   const fnRec = `${fnBase}.receipt.sha256.txt`;
 
-  // fallback manual
+  // fallback
   dlbox.style.display = "block";
-  const aTxt = document.getElementById("dl_txt");
-  const aJson = document.getElementById("dl_json");
-  const aRec = document.getElementById("dl_receipt");
-  aTxt.href = txtUrl;  aTxt.download = fnTxt;
-  aJson.href = jsonUrl; aJson.download = fnJson;
-  aRec.href = rUrl;   aRec.download = fnRec;
+  const aB = document.getElementById("dl_bundle");
+  const aJ = document.getElementById("dl_json");
+  const aR = document.getElementById("dl_receipt");
+  aB.href = uBundle; aB.download = fnBundle;
+  aJ.href = uJson;   aJ.download = fnJson;
+  aR.href = uRec;    aR.download = fnRec;
 
-  // auto-download (best-effort)
-  try{ aTxt.click(); }catch(e){}
+  // auto download best-effort
+  try{ aB.click(); }catch(e){}
 
-  // output in page (NO payload shown)
   out.textContent =
     "STATO: OK\n" +
     "ARTEFATTO: " + kind + "\n" +
     "ID: " + id + "\n" +
+    "VERSION: " + VERSION + "\n" +
     "MODE: " + SNAP.mode + "\n" +
-    "ALGORITMO: " + ALGO + "\n" +
     "RIFERIMENTO (content_hash):\n" + SNAP.content_hash + "\n" +
     "receipt_sha256(json):\n" + receipt + "\n\n" +
-    "Download avviato (bundle) — fallback disponibile (TXT/JSON/receipt).";
+    (kind === "PRIVATE" ? "PRIVATE include payload sigillato (🜏) nel bundle.\n" : "PUBLIC è hash-only (nessun payload).\n") +
+    "Download avviato — fallback disponibile.";
 }
 </script>
 
