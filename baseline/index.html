@@ -2,129 +2,159 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<title>HERMETICUM — Baseline Infrastruttura</title>
+<title>HERMETICUM — Baseline</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Baseline infrastrutturale Hermeticum: stato stabilizzato v1, regime audit-first, hash-only, no data custody. Documento operativo UE-ready.">
 
 <style>
 :root{
---bg:#05070a;
---panel:#0b0f14;
---text:#e9f0f8;
---muted:#8fa3b8;
---line:#1c2733;
---max:900px;
+  --bg:#05070a;
+  --panel:#0b0f14;
+  --text:#eaf2ff;
+  --muted:#8aa0b8;
+  --line:#1c2733;
+  --line2:#223140;
+  --accent:#b7c9ff;
+  --max:980px;
 }
-
+*{box-sizing:border-box}
 body{
-margin:0;
-background:var(--bg);
-color:var(--text);
-font-family:system-ui,Segoe UI,Roboto,Arial;
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45;
 }
+a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+header{border-bottom:1px solid var(--line);padding:18px 0;background:rgba(0,0,0,.18)}
+.brand{font-weight:800;letter-spacing:2px}
+.brand small{display:block;color:var(--muted);font-weight:600;letter-spacing:.6px;margin-top:6px;font-size:12px}
+nav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+nav a{font-size:12px;color:var(--muted);padding:6px 10px;border:1px solid transparent}
+nav a:hover{border-color:var(--line);color:var(--text);text-decoration:none}
+.policy{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;color:var(--muted);font-size:12px}
+.policy b{color:var(--text);font-weight:800}
 
-.wrap{
-max-width:var(--max);
-margin:auto;
-padding:48px 22px 60px;
+main{padding:22px 0 46px}
+.card{border:1px solid var(--line);background:var(--panel);padding:18px}
+h1{margin:0 0 8px;font-size:20px;letter-spacing:.6px;font-weight:800}
+.sub{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.hr{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
+h2{margin:0 0 8px;font-size:12px;letter-spacing:1.2px;color:var(--text);font-weight:900}
+
+.kv{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:10px 14px;
+  border:1px solid var(--line2);
+  background:rgba(0,0,0,.18);
+  padding:14px;
+  margin-top:10px;
 }
+.kv div{padding:6px 0}
+.kv .k{color:var(--muted);font-size:12px;letter-spacing:.6px}
+.kv .v{color:var(--text);font-size:13px}
 
-h1{
-font-size:34px;
-letter-spacing:2px;
-margin-bottom:10px;
-}
+.note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
 
-.subtitle{
-color:var(--muted);
-margin-bottom:28px;
-}
-
-.card{
-border:1px solid var(--line);
-background:var(--panel);
-padding:22px;
-margin-top:18px;
-}
-
-p{
-color:var(--muted);
-line-height:1.7;
-}
-
-.status{
-margin-top:20px;
-font-family:monospace;
-font-size:12px;
-color:var(--muted);
-border:1px solid var(--line);
-padding:14px;
-background:#06090d;
+.block{
+  margin-top:12px;
+  padding:14px;
+  border:1px solid var(--line2);
+  background:rgba(0,0,0,.18);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  font-size:12px;
+  color:var(--muted);
+  white-space:pre-line;
 }
 
 .footer{
-margin-top:60px;
-border-top:1px solid var(--line);
-padding-top:20px;
-font-size:12px;
-color:var(--muted);
-line-height:1.6;
+  border-top:1px solid var(--line);
+  margin-top:60px;
+  padding-top:22px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
 }
+.symbol{font-size:22px;letter-spacing:6px;margin:10px 0 8px;color:var(--text)}
 </style>
 </head>
 
 <body>
-<div class="wrap">
+<header>
+  <div class="wrap">
+    <div class="brand">HERMETICUM <small>Baseline — Stabilizzazione infrastrutturale (UE-ready)</small></div>
+    <nav>
+      <a href="/hermeticum-bce-platform/">Home</a>
+      <a href="/hermeticum-bce-platform/create/">Create IPR</a>
+      <a href="/hermeticum-bce-platform/verify/">Verify</a>
+      <a href="/hermeticum-bce-platform/audit/">Audit Chain</a>
+      <a href="/hermeticum-bce-platform/seal/">Seal</a>
+      <a href="/hermeticum-bce-platform/company/">Company</a>
+    </nav>
+    <div class="policy"><b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b></div>
+  </div>
+</header>
 
-<h1>Baseline Infrastruttura Hermeticum</h1>
-<div class="subtitle">Stato iniziale stabilizzato del sistema</div>
+<main class="wrap">
+  <div class="card">
+    <h1>Baseline infrastrutturale (v1)</h1>
+    <p class="sub">
+      Questo documento stabilisce lo stato iniziale stabilizzato dell’infrastruttura HERMETICUM
+      prima di ulteriori estensioni e adozione istituzionale. Il baseline definisce continuità strutturale,
+      coerenza evolutiva e principio di non-retroattività operativa (audit-first).
+    </p>
 
-<div class="card">
-<p>
-Questo documento definisce la baseline operativa iniziale dell’infrastruttura digitale Hermeticum.
-</p>
+    <div class="hr"></div>
 
-<p>
-La baseline stabilisce il primo stato coerente e verificabile del sistema prima di ogni espansione,
-integrazione istituzionale o evoluzione tecnica.
-</p>
-</div>
+    <h2>A) Identità del baseline</h2>
+    <div class="kv">
+      <div class="k">DOCUMENTO</div><div class="v">Hermeticum Infrastructure — Initial Baseline</div>
+      <div class="k">STATUS</div><div class="v">ACTIVE</div>
+      <div class="k">VERSIONE</div><div class="v">BASELINE-v1</div>
+      <div class="k">REGIME</div><div class="v">Audit-first · Fail-closed · Hash-only · No data custody</div>
+      <div class="k">VERIFICABILITÀ</div><div class="v">Client-side verifiable (SHA-256 receipts)</div>
+      <div class="k">SCOPO</div><div class="v">Stabilizzazione e continuità prima di esposizione istituzionale</div>
+    </div>
 
-<div class="card">
-<p><b>Componenti attivi</b></p>
+    <div class="note">
+      Nota: il baseline non è un “marketing statement”. È un record operativo di stabilizzazione.
+    </div>
 
-<p>
-• Generazione IPR (Identity Primary Record)<br>
-• Verifica crittografica receipt<br>
-• Catena audit temporale<br>
-• Standard tecnico UE-aligned<br>
-• Infrastruttura hash-only senza custodia dati
-</p>
-</div>
+    <div class="hr"></div>
 
-<div class="card">
-<p>
-La baseline garantisce continuità strutturale e impedisce modifiche retroattive
-ai componenti fondamentali dell’infrastruttura.
-</p>
+    <h2>B) Capacità incluse nel baseline</h2>
+    <div class="kv">
+      <div class="k">IPR GENERATION</div><div class="v">Emissione IPR PUBLIC/PRIVATE (PRIVATE sigillato nel bundle)</div>
+      <div class="k">RECEIPT VERIFICATION</div><div class="v">Ricalcolo receipt_sha256(json) e confronto (PASS/FAIL)</div>
+      <div class="k">TEMPORAL AUDIT CHAIN</div><div class="v">Catena prev_hash → receipt_sha256(json) con bundle sigillato</div>
+      <div class="k">STANDARD PUBBLICO</div><div class="v">Pubblicazione pagine operative in stile UE (infrastruttura)</div>
+    </div>
 
-<p>
-Ogni evoluzione successiva deve risultare derivata e coerente con questo stato iniziale.
-</p>
-</div>
+    <div class="hr"></div>
 
-<div class="status">
-STATO: ATTIVO<br>
-REGIME: AUDIT-FIRST · FAIL-CLOSED · HASH-ONLY · NO-DATA-CUSTODY<br>
-INTEGRITÀ: VERIFICABILE LATO CLIENT<br>
-DOMINIO: INFRASTRUTTURA EUROPEA RESPONSABILITÀ DIGITALE
-</div>
+    <h2>C) Regole di stabilità</h2>
+    <div class="block">
+1) Fail-closed: input invalido → nessuna emissione.
+2) Hash-only: in pagina si mostrano solo hash/receipt; nessun payload esposto.
+3) No data custody: nessun dato conservato server-side.
+4) Audit-first: ogni evoluzione successiva avviene tramite audit chain.
+5) Non-retroattività: i record emessi restano verificabili nel tempo.
+    </div>
 
-<div class="footer">
-HERMETICUM — Infrastruttura di responsabilità digitale<br>
-HERMETICUM — Blindata · Computabile · Evolutiva<br>
-HERMETICUM B.C.E. S.r.l. · UE
-</div>
+    <div class="hr"></div>
 
-</div>
+    <h2>D) Uso operativo</h2>
+    <div class="note">
+      Uso minimo: emetti un IPR (PRIVATE) → conserva bundle e JSON → condividi solo PUBLIC se serve → usa audit chain per evoluzione temporale.
+      In caso di verifica: usa la console Verify con il JSON originale scaricato (evita copia manuale).
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="symbol">🜏</div>
+    HERMETICUM — Blindata · Computabile · Evolutiva<br>
+    HERMETICUM B.C.E. S.r.l. · UE
+  </div>
+</main>
 </body>
 </html>
