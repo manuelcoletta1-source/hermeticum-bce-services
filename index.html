@@ -1,99 +1,144 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <title>HERMETICUM</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HERMETICUM — digital responsibility infrastructure (audit-first, fail-closed, hash-only).">
+<meta charset="utf-8">
+<title>HERMETICUM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
-    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+<style>
+:root{
+--bg:#0b0d10;
+--panel:#0f1318;
+--text:#e7edf5;
+--muted:#9fb0c2;
+--line:rgba(255,255,255,.12);
+--max:900px;
+}
 
-    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.2);backdrop-filter:blur(6px)}
-    .nav-inner{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-    .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{display:flex;gap:12px;font-size:14px;color:var(--muted);flex-wrap:wrap}
-    .nav-links a{padding:6px 8px;border-radius:10px}
-    .nav-links a:hover{background:var(--soft);color:var(--text);text-decoration:none}
+body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:system-ui,Segoe UI,Roboto,Arial;
+}
 
-    .policy{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);font-size:13px;color:var(--muted);padding:10px 16px}
+.wrap{
+max-width:var(--max);
+margin:auto;
+padding:40px 20px;
+}
 
-    main{padding:32px 0}
-    .hero h1{margin:0 0 10px;font-size:28px;line-height:1.15}
-    .hero p{margin:0;max-width:90ch;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:24px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    @media(min-width:900px){.half{grid-column:span 6}.third{grid-column:span 4}}
-    .card h2{margin:0 0 8px;font-size:16px}
-    .card p{margin:0;color:var(--muted);font-size:14px}
+h1{
+font-size:34px;
+margin-bottom:6px;
+letter-spacing:1px;
+}
 
-    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:22px 0 26px;color:var(--muted)}
-    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .mini{font-size:13px;opacity:.9}
-    .sig{margin-top:18px;font-size:12px;opacity:.6;letter-spacing:.4px}
-  </style>
+.subtitle{
+color:var(--muted);
+margin-bottom:30px;
+}
+
+.status{
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:14px;
+padding:18px;
+margin-top:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+margin-top:30px;
+}
+
+.box{
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:14px;
+padding:18px;
+transition:0.2s;
+}
+
+.box:hover{
+border-color:#ffffff33;
+}
+
+a{
+text-decoration:none;
+color:var(--text);
+display:block;
+font-weight:600;
+}
+
+.small{
+color:var(--muted);
+font-size:14px;
+margin-top:6px;
+}
+
+.footer{
+margin-top:60px;
+color:var(--muted);
+font-size:12px;
+}
+</style>
 </head>
 
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="brand">HERMETICUM</div>
-    <div class="nav-links">
-      <a href="./">Home</a>
-      <a href="./architecture/">Architecture</a>
-      <a href="./use-cases/">Use-Cases</a>
-      <a href="./create/">Create</a>
-      <a href="./verify/">Verify</a>
-      <a href="./audit/">Audit</a>
-      <a href="./eu/pilot/">EU Pilot</a>
-      <a href="./company/">Company</a>
-    </div>
-  </div>
-</nav>
+<div class="wrap">
 
-<div class="policy"><div class="wrap">Audit-first · Fail-closed · Hash-only · No data custody</div></div>
+<h1>HERMETICUM</h1>
+<div class="subtitle">Infrastruttura di responsabilità digitale</div>
 
-<main class="wrap">
-  <section class="hero">
-    <h1>HERMETICUM</h1>
-    <p>Infrastruttura tecnica per attribuzione, tracciabilità e verifica deterministica di eventi digitali.</p>
-  </section>
+<div class="status">
+Stato: Attivo<br>
+Regime: audit-first · hash-only · no data custody<br>
+Integrità: verificabile lato client
+</div>
 
-  <section class="grid">
-    <div class="card half">
-      <h2>Create</h2>
-      <p>Generazione di riferimento SHA-256 e artefatto IPR (PUBLIC/PRIVATE).</p>
-    </div>
-    <div class="card half">
-      <h2>Verify</h2>
-      <p>Verifica hash e receipt SHA-256 (artefatti JSON).</p>
-    </div>
-    <div class="card third">
-      <h2>Audit</h2>
-      <p>Record temporali append-only derivati da prev_hash.</p>
-    </div>
-    <div class="card third">
-      <h2>Architecture</h2>
-      <p>Struttura e componenti dell’infrastruttura.</p>
-    </div>
-    <div class="card third">
-      <h2>EU Pilot</h2>
-      <p>Materiale per valutazione tecnica ripetibile.</p>
-    </div>
-  </section>
-</main>
+<div class="grid">
 
-<footer>
-  <div class="footer-inner">
-    <div class="mini">HERMETICUM — digital responsibility infrastructure</div>
-    <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
-  </div>
-</footer>
+<div class="box">
+<a href="create/">Crea IPR</a>
+<div class="small">Generazione record crittografico</div>
+</div>
 
+<div class="box">
+<a href="verify/">Verifica</a>
+<div class="small">Verifica integrità e receipt</div>
+</div>
+
+<div class="box">
+<a href="audit/">Audit temporale</a>
+<div class="small">Catena di continuità verificabile</div>
+</div>
+
+<div class="box">
+<a href="standard/ipr/">Standard tecnico</a>
+<div class="small">Specifiche IPR ufficiali</div>
+</div>
+
+<div class="box">
+<a href="baseline/">Baseline sistema</a>
+<div class="small">Stato iniziale stabilizzato</div>
+</div>
+
+<div class="box">
+<a href="company/">Struttura</a>
+<div class="small">Entità infrastrutturale</div>
+</div>
+
+</div>
+
+<div class="footer">
+HERMETICUM — Infrastruttura di responsabilità digitale<br>
+HERMETICUM B.C.E. S.r.l. · UE
+</div>
+
+</div>
 </body>
 </html>
