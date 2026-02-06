@@ -18,14 +18,11 @@
 --max:1100px;
 }
 
-*{box-sizing:border-box}
-
 body{
 margin:0;
-background:linear-gradient(180deg,#05070a 0%,#06090d 60%,#05070a 100%);
+background:#05070a;
 color:var(--text);
 font-family:system-ui,Segoe UI,Roboto,Arial;
-letter-spacing:.2px;
 }
 
 .wrap{
@@ -34,92 +31,46 @@ margin:auto;
 padding:48px 24px 70px;
 }
 
-h1{
-font-size:52px;
-letter-spacing:4px;
-margin:0;
-font-weight:900;
-}
-
-.subtitle{
-margin-top:14px;
-color:var(--muted);
-max-width:720px;
-font-size:16px;
-line-height:1.6;
-}
+h1{font-size:48px;letter-spacing:4px;margin:0;font-weight:900}
+.subtitle{margin-top:14px;color:var(--muted);max-width:700px}
 
 .panel{
 border:1px solid var(--line);
-background:linear-gradient(180deg,var(--panel),var(--panel2));
-padding:26px;
-margin-top:26px;
-}
-
-.panel h2{
-margin-top:0;
-font-size:18px;
-letter-spacing:1px;
-}
-
-p{
-color:var(--muted);
-line-height:1.65;
+background:var(--panel);
+padding:24px;
+margin-top:24px;
 }
 
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:18px;
+gap:16px;
 margin-top:20px;
-}
-
-@media(max-width:900px){
-.grid{grid-template-columns:1fr}
-h1{font-size:40px}
 }
 
 .box{
 border:1px solid var(--line2);
 padding:18px;
 background:#070b10;
-transition:0.2s;
 }
 
-.box:hover{
-border-color:#3a4c5f;
-background:#0a1118;
-}
+.box:hover{border-color:#3a4c5f}
 
 a{
 text-decoration:none;
-color:var(--accent);
+color:white;
 font-weight:700;
-letter-spacing:.5px;
+display:block;
 }
 
-.small{
-font-size:14px;
-color:var(--muted);
-margin-top:8px;
-}
-
-.status{
-margin-top:22px;
-border:1px solid var(--line);
-padding:16px;
-font-family:monospace;
-font-size:12px;
-background:#05080c;
-}
+.small{font-size:14px;color:var(--muted);margin-top:6px}
 
 .footer{
 margin-top:60px;
 border-top:1px solid var(--line);
-padding-top:22px;
+padding-top:20px;
 font-size:12px;
 color:var(--muted);
-line-height:1.7;
 }
 </style>
 </head>
@@ -128,101 +79,52 @@ line-height:1.7;
 <div class="wrap">
 
 <h1>HERMETICUM</h1>
+<div class="subtitle">Infrastruttura europea per identità verificabile e responsabilità digitale</div>
 
-<div class="subtitle">
-Infrastruttura europea per identità verificabile e responsabilità digitale nel tempo.
-Sistema hash-only senza custodia dati. Auditabile.
-</div>
-
-<div class="status">
-STATUS: ACTIVE<br>
-REGIME: AUDIT-FIRST · FAIL-CLOSED · HASH-ONLY · NO-DATA-CUSTODY<br>
-INTEGRITY: CLIENT-SIDE VERIFIABLE<br>
-DOMAIN: EUROPEAN DIGITAL RESPONSIBILITY
+<div class="panel">
+IPR è un record crittografico personale verificabile nel tempo.<br>
+Sistema europeo senza custodia dati.
 </div>
 
 <div class="panel">
-<h2>IPR — Identity Primary Record</h2>
-<p>
-IPR è un record crittografico personale che permette a un cittadino,
-lavoratore o istituzione di generare continuità verificabile nel tempo.
-</p>
-
-<p>
-Non è un documento statale.  
-Non custodisce dati.  
-È uno strato europeo di responsabilità digitale verificabile.
-</p>
-</div>
-
-<div class="panel">
-<h2>Perché serve</h2>
+Console infrastruttura
 
 <div class="grid">
 
 <div class="box">
-<b>Cittadino</b>
-<p>Continuità personale verificabile senza dipendere da piattaforme private.</p>
+<a href="/hermeticum-bce-platform/create/">CREA IPR</a>
+<div class="small">Generazione record</div>
 </div>
 
 <div class="box">
-<b>Lavoratore</b>
-<p>Tracciabilità professionale e responsabilità digitale opponibile nel tempo.</p>
+<a href="/hermeticum-bce-platform/verify/">VERIFICA</a>
+<div class="small">Verifica integrità</div>
 </div>
 
 <div class="box">
-<b>Istituzioni UE</b>
-<p>Standard auditabile per interazioni digitali e identità verificabile.</p>
+<a href="/hermeticum-bce-platform/audit/">AUDIT</a>
+<div class="small">Audit temporale</div>
 </div>
 
 <div class="box">
-<b>Europa</b>
-<p>Infrastruttura di sovranità digitale senza custodia centralizzata dei dati.</p>
-</div>
-
-</div>
-</div>
-
-<div class="panel">
-<h2>Console infrastruttura</h2>
-
-<div class="grid">
-
-<div class="box">
-<a href="create/">CREA IPR</a>
-<div class="small">Generazione record crittografico personale</div>
+<a href="/hermeticum-bce-platform/standard/ipr/">STANDARD UE</a>
+<div class="small">Specifiche tecniche</div>
 </div>
 
 <div class="box">
-<a href="verify/">VERIFICA</a>
-<div class="small">Controllo integrità e receipt</div>
+<a href="/hermeticum-bce-platform/baseline/">BASELINE</a>
+<div class="small">Stato sistema</div>
 </div>
 
 <div class="box">
-<a href="audit/">AUDIT</a>
-<div class="small">Catena temporale verificabile</div>
-</div>
-
-<div class="box">
-<a href="standard/ipr/">STANDARD UE</a>
-<div class="small">Specifiche tecniche ufficiali</div>
-</div>
-
-<div class="box">
-<a href="baseline/">BASELINE</a>
-<div class="small">Stato iniziale stabilizzato</div>
-</div>
-
-<div class="box">
-<a href="company/">STRUTTURA</a>
-<div class="small">Entità infrastrutturale</div>
+<a href="/hermeticum-bce-platform/company/">STRUTTURA</a>
+<div class="small">Entità</div>
 </div>
 
 </div>
 </div>
 
 <div class="footer">
-HERMETICUM — Infrastruttura di responsabilità digitale<br>
 HERMETICUM — Blindata · Computabile · Evolutiva<br>
 HERMETICUM B.C.E. S.r.l. · UE
 </div>
