@@ -2,125 +2,164 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<title>HERMETICUM — Sigillo Infrastrutturale</title>
+<title>HERMETICUM — Seal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Sigillo HERMETICUM (🜏): definizione tecnica, righe di firma, regole d’uso in IPR/AUDIT bundle e receipt. UE-ready.">
 
 <style>
 :root{
---bg:#05070a;
---panel:#0b0f14;
---text:#e9f0f8;
---muted:#8fa3b8;
---line:#1c2733;
---max:900px;
+  --bg:#05070a;
+  --panel:#0b0f14;
+  --text:#eaf2ff;
+  --muted:#8aa0b8;
+  --line:#1c2733;
+  --line2:#223140;
+  --accent:#b7c9ff;
+  --max:980px;
 }
-
+*{box-sizing:border-box}
 body{
-margin:0;
-background:var(--bg);
-color:var(--text);
-font-family:system-ui,Segoe UI,Roboto,Arial;
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45;
+}
+a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+header{border-bottom:1px solid var(--line);padding:18px 0;background:rgba(0,0,0,.18)}
+.brand{font-weight:800;letter-spacing:2px}
+.brand small{display:block;color:var(--muted);font-weight:600;letter-spacing:.6px;margin-top:6px;font-size:12px}
+nav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+nav a{font-size:12px;color:var(--muted);padding:6px 10px;border:1px solid transparent}
+nav a:hover{border-color:var(--line);color:var(--text);text-decoration:none}
+.policy{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;color:var(--muted);font-size:12px}
+.policy b{color:var(--text);font-weight:800}
+
+main{padding:22px 0 46px}
+.card{border:1px solid var(--line);background:var(--panel);padding:18px}
+h1{margin:0 0 8px;font-size:20px;letter-spacing:.6px;font-weight:800}
+.sub{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.hr{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
+h2{margin:0 0 8px;font-size:12px;letter-spacing:1.2px;color:var(--text);font-weight:900}
+
+.kv{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:10px 14px;
+  border:1px solid var(--line2);
+  background:rgba(0,0,0,.18);
+  padding:14px;
+  margin-top:10px;
+}
+.kv .k{color:var(--muted);font-size:12px;letter-spacing:.6px;padding:6px 0}
+.kv .v{color:var(--text);font-size:13px;padding:6px 0}
+
+.block{
+  margin-top:12px;
+  padding:14px;
+  border:1px solid var(--line2);
+  background:rgba(0,0,0,.18);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  font-size:12px;
+  color:var(--muted);
+  white-space:pre-line;
 }
 
-.wrap{
-max-width:var(--max);
-margin:auto;
-padding:50px 22px 70px;
-}
-
-h1{
-font-size:34px;
-letter-spacing:2px;
-margin-bottom:10px;
-}
-
-.subtitle{
-color:var(--muted);
-margin-bottom:30px;
-}
-
-.card{
-border:1px solid var(--line);
-background:var(--panel);
-padding:22px;
-margin-top:18px;
-}
-
-p{
-color:var(--muted);
-line-height:1.7;
-}
-
-.symbol{
-text-align:center;
-font-size:42px;
-letter-spacing:6px;
-margin-top:40px;
-margin-bottom:20px;
-}
+.note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
 
 .footer{
-margin-top:60px;
-padding-top:22px;
-border-top:1px solid var(--line);
-font-size:12px;
-color:var(--muted);
-line-height:1.6;
-text-align:center;
+  border-top:1px solid var(--line);
+  margin-top:60px;
+  padding-top:22px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
 }
+.symbol{font-size:24px;letter-spacing:8px;margin:10px 0 8px;color:var(--text)}
 </style>
 </head>
 
 <body>
-<div class="wrap">
+<header>
+  <div class="wrap">
+    <div class="brand">HERMETICUM <small>Seal — Definizione tecnica e regole d’uso (UE-ready)</small></div>
+    <nav>
+      <a href="/hermeticum-bce-platform/">Home</a>
+      <a href="/hermeticum-bce-platform/create/">Create IPR</a>
+      <a href="/hermeticum-bce-platform/verify/">Verify</a>
+      <a href="/hermeticum-bce-platform/audit/">Audit Chain</a>
+      <a href="/hermeticum-bce-platform/baseline/">Baseline</a>
+      <a href="/hermeticum-bce-platform/company/">Company</a>
+    </nav>
+    <div class="policy"><b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b></div>
+  </div>
+</header>
 
-<h1>Sigillo Infrastrutturale Hermeticum</h1>
-<div class="subtitle">Definizione tecnica ufficiale</div>
+<main class="wrap">
+  <div class="card">
+    <h1>Sigillo HERMETICUM (🜏)</h1>
+    <p class="sub">
+      Il sigillo 🜏 identifica l’emissione infrastrutturale di artefatti HERMETICUM (IPR/AUDIT) e
+      vincola l’uso delle righe di firma in modo coerente e verificabile (hash-only).
+    </p>
 
-<div class="card">
-<p>
-Il simbolo Hermeticum costituisce il sigillo infrastrutturale dell’ecosistema tecnico HERMETICUM.
-</p>
+    <div class="hr"></div>
 
-<p>
-Non rappresenta un elemento religioso, esoterico o simbolico in senso culturale.
-È utilizzato esclusivamente come marcatore strutturale e firma di integrità del sistema.
-</p>
-</div>
+    <h2>A) Identità del sigillo</h2>
+    <div class="kv">
+      <div class="k">SEAL_SYMBOL</div><div class="v">🜏</div>
+      <div class="k">SIGNATURE_LINE_1</div><div class="v">HERMETICUM — Blindata · Computabile · Evolutiva</div>
+      <div class="k">SIGNATURE_LINE_2</div><div class="v">HERMETICUM B.C.E. S.r.l. · UE</div>
+      <div class="k">FUNZIONE</div><div class="v">Segnalare emissione infrastrutturale e coerenza del regime (audit-first, hash-only, no data custody)</div>
+      <div class="k">REGIME</div><div class="v">Audit-first · Fail-closed · Hash-only · No data custody</div>
+    </div>
 
-<div class="card">
-<p><b>Funzione tecnica</b></p>
+    <div class="hr"></div>
 
-<p>
-• Identificazione visiva dell’infrastruttura Hermeticum<br>
-• Sigillo finale di documenti e artefatti IPR<br>
-• Marcatura di baseline e standard tecnici<br>
-• Continuità visiva tra sistema e audit chain
-</p>
-</div>
+    <h2>B) Regole d’uso (fail-closed)</h2>
+    <div class="block">
+1) Il sigillo 🜏 deve comparire:
+   - nel bundle TXT (intestazione e sezione payload sigillato)
+   - nel JSON (campo seal.*)
+   - nel footer delle pagine operative
 
-<div class="card">
-<p><b>Regime di utilizzo</b></p>
+2) La firma non implica verifica identità del soggetto:
+   - i dati "self-declared" restano dichiarativi
+   - la verificabilità riguarda integrità e tempo (hash/receipt)
 
-<p>
-Il sigillo è utilizzato esclusivamente in contesti infrastrutturali,
-tecnici e documentali connessi all’ecosistema Hermeticum.
-</p>
+3) In pagina non si mostra mai il payload:
+   - il payload è riservato e vive solo nel file scaricato
+   - PUBLIC = hash-only; PRIVATE = payload sigillato
 
-<p>
-Non è utilizzato come marchio commerciale decorativo,
-ma come firma strutturale di sistema.
-</p>
-</div>
+4) Ogni variazione del JSON cambia il receipt:
+   - receipt_sha256(json) = SHA-256 del testo JSON usato in emissione
+   - verifica con file JSON originale (no copia manuale)
 
-<div class="symbol">🜏</div>
+5) Coerenza grafica:
+   - linee nette, stile istituzionale, nessun elemento “crypto hype”
+    </div>
 
-<div class="footer">
-HERMETICUM — Infrastruttura di responsabilità digitale<br>
-HERMETICUM — Blindata · Computabile · Evolutiva<br>
-HERMETICUM B.C.E. S.r.l. · UE
-</div>
+    <div class="hr"></div>
 
-</div>
+    <h2>C) Esempio (estratto)</h2>
+    <div class="block">
+seal: {
+  seal_symbol: "🜏",
+  signature_line_1: "HERMETICUM — Blindata · Computabile · Evolutiva",
+  signature_line_2: "HERMETICUM B.C.E. S.r.l. · UE",
+  generated_by: "HERMETICUM infrastructure"
+}
+    </div>
+
+    <div class="note">
+      Nota: il sigillo è un elemento di coerenza infrastrutturale. La prova crittografica resta nel receipt SHA-256 e nella catena audit.
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="symbol">🜏</div>
+    HERMETICUM — Blindata · Computabile · Evolutiva<br>
+    HERMETICUM B.C.E. S.r.l. · UE
+  </div>
+</main>
 </body>
 </html>
