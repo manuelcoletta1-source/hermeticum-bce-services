@@ -1,166 +1,234 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <title>HERMETICUM — Audit</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Audit (stile banca UE) — catena temporale prev_hash -> receipt_sha256(json). Client-side, hash-only, no data custody. Bundle unico.">
+<meta charset="utf-8">
+<title>HERMETICUM — Audit Chain</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Audit temporale UE-ready: catena prev_hash -> receipt_sha256(json). Client-side, hash-only, no data custody. Payload sigillato nel bundle (🜏).">
 
-  <style>
-    :root{--bg:#0b0d10;--paper:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:980px}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
-    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+<style>
+:root{
+  --bg:#05070a;
+  --panel:#0b0f14;
+  --text:#eaf2ff;
+  --muted:#8aa0b8;
+  --line:#1c2733;
+  --line2:#223140;
+  --accent:#b7c9ff;
+  --ok:#7dffb2;
+  --fail:#ff7d8b;
+  --max:980px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45;
+}
+a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+header{border-bottom:1px solid var(--line);padding:18px 0;background:rgba(0,0,0,.18)}
+.brand{font-weight:800;letter-spacing:2px}
+.brand small{display:block;color:var(--muted);font-weight:600;letter-spacing:.6px;margin-top:6px;font-size:12px}
+nav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+nav a{font-size:12px;color:var(--muted);padding:6px 10px;border:1px solid transparent}
+nav a:hover{border-color:var(--line);color:var(--text);text-decoration:none}
+.policy{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;color:var(--muted);font-size:12px}
+.policy b{color:var(--text);font-weight:800}
 
-    header{border-bottom:1px solid var(--line);background:rgba(0,0,0,.22);backdrop-filter:blur(6px)}
-    .head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0}
-    .brand{font-weight:900;letter-spacing:.9px}
-    .brand small{display:block;font-weight:600;letter-spacing:.2px;color:var(--muted);font-size:12px;margin-top:2px}
-    nav{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
-    nav a{padding:6px 8px;border-radius:10px}
-    nav a:hover{background:var(--soft);color:var(--text);text-decoration:none}
-    .policy{border-top:1px solid var(--line);padding:10px 0;font-size:12px;color:var(--muted)}
-    .policy b{color:var(--text);font-weight:800}
+main{padding:22px 0 46px}
+.card{border:1px solid var(--line);background:var(--panel);padding:18px}
+h1{margin:0 0 8px;font-size:20px;letter-spacing:.6px;font-weight:800}
+.sub{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.hr{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
+h2{margin:0 0 8px;font-size:12px;letter-spacing:1.2px;color:var(--text);font-weight:900}
 
-    main{padding:22px 0 34px}
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px}
-    h1{margin:0 0 6px;font-size:22px}
-    .subtitle{margin:0;color:var(--muted);max-width:92ch;font-size:13px}
-    .divider{height:1px;background:rgba(255,255,255,.08);margin:14px 0}
-    .section-title{margin:0 0 8px;font-size:13px;color:var(--text);letter-spacing:.2px}
+label{display:block;font-size:12px;color:var(--muted);margin-top:10px}
+input,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--line2);
+  background:rgba(0,0,0,.18);
+  color:var(--text);
+  border-radius:0;
+  font-size:14px;
+  outline:none;
+}
+textarea{min-height:110px;resize:vertical}
+input[type="file"]{padding:10px}
 
-    label{display:block;font-size:12px;color:var(--muted);margin-top:10px}
-    input,textarea{
-      width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
-    }
-    textarea{min-height:120px;resize:vertical}
-    input[type="file"]{padding:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
 
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-top:10px}
-    .row > div{flex:1;min-width:170px}
+.note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
 
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 14px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(255,255,255,.03);font-size:14px;cursor:pointer
-    }
-    .btn:hover{background:rgba(255,255,255,.06)}
-    .btn.primary{background:rgba(255,255,255,.06)}
-    .btn.primary:hover{background:rgba(255,255,255,.09)}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn{
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.03);
+  color:var(--text);
+  padding:10px 14px;
+  border-radius:0;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.6px;
+}
+.btn:hover{background:rgba(255,255,255,.06)}
+.btn.primary{border-color:rgba(183,201,255,.35);background:rgba(183,201,255,.06)}
+.btn.primary:hover{background:rgba(183,201,255,.10)}
 
-    .hint{font-size:12px;color:var(--muted);margin-top:8px}
-    .out{
-      margin-top:12px;padding:14px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;
-      white-space:pre-line;overflow:auto
-    }
+.out{
+  margin-top:12px;
+  padding:14px;
+  border:1px solid var(--line2);
+  background:rgba(0,0,0,.18);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  font-size:12px;
+  color:var(--muted);
+  white-space:pre-line;
+  overflow:auto;
+}
 
-    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:18px 0 24px;color:var(--muted)}
-    .sig{margin-top:10px;font-size:12px;opacity:.7;letter-spacing:.4px}
-  </style>
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 10px;border:1px solid var(--line2);
+  font-family:ui-monospace,monospace;font-size:12px;color:var(--muted);
+}
+.badge b{color:var(--text)}
+.badge.ok{border-color:rgba(125,255,178,.35)}
+.badge.ok b{color:var(--ok)}
+.badge.fail{border-color:rgba(255,125,139,.35)}
+.badge.fail b{color:var(--fail)}
+
+.dl{display:none;margin-top:12px}
+.dl .btn{display:inline-flex;align-items:center;justify-content:center}
+
+.footer{
+  border-top:1px solid var(--line);
+  margin-top:60px;
+  padding-top:22px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+}
+.symbol{font-size:22px;letter-spacing:6px;margin:10px 0 8px;color:var(--text)}
+</style>
 </head>
 
 <body>
 <header>
-  <div class="wrap head">
-    <div class="brand">
-      HERMETICUM
-      <small>Audit — Catena temporale (EU-style)</small>
-    </div>
+  <div class="wrap">
+    <div class="brand">HERMETICUM <small>Audit Chain — Console UE-ready (prev_hash strict)</small></div>
     <nav>
-      <a href="../">Home</a>
-      <a href="../create/">Create</a>
-      <a href="../verify/">Verifica</a>
-      <a href="../eu/pilot/">EU Pilot</a>
-      <a href="../company/">Company</a>
+      <a href="/hermeticum-bce-platform/">Home</a>
+      <a href="/hermeticum-bce-platform/create/">Create IPR</a>
+      <a href="/hermeticum-bce-platform/verify/">Verify</a>
+      <a href="/hermeticum-bce-platform/baseline/">Baseline</a>
+      <a href="/hermeticum-bce-platform/seal/">Seal</a>
+      <a href="/hermeticum-bce-platform/company/">Company</a>
     </nav>
-  </div>
-  <div class="wrap policy">
-    <b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b>
+    <div class="policy"><b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b></div>
   </div>
 </header>
 
 <main class="wrap">
   <div class="card">
     <h1>Audit temporale</h1>
-    <p class="subtitle">
-      Inserisci <b>prev_hash</b> (receipt precedente). Aggiungi un evento (testo e/o file).
-      Il sistema genera un nuovo record audit con <b>receipt_sha256(json)</b> e scarica un <b>bundle unico</b>.
-      Nessun dato viene inviato o conservato.
+    <p class="sub">
+      Genera un record di audit collegato al <b>receipt</b> precedente (<b>prev_hash</b>).
+      Il contenuto resta riservato nel bundle scaricato (🜏). In pagina mostriamo solo hash e receipt.
     </p>
 
-    <div class="divider"></div>
+    <div class="hr"></div>
 
-    <p class="section-title">A) Catena</p>
-
+    <h2>A) Catena</h2>
     <label>prev_hash (receipt_sha256(json) precedente)</label>
-    <input id="prev_hash" placeholder="es. 620d9a35... (64 hex)">
+    <input id="prev_hash" placeholder="64 hex (SHA-256)">
 
-    <div class="hint">
-      Regola: ogni audit punta al receipt del passo prima. Questo crea la catena opponibile nel tempo.
+    <div class="note">
+      Regola: ogni audit punta al receipt del passo prima. Se prev_hash è errato → catena invalida (fail-closed).
     </div>
 
-    <div class="divider"></div>
+    <div class="hr"></div>
 
-    <p class="section-title">B) Evento audit (opzionale, riservato)</p>
-
-    <label>Testo evento (facoltativo)</label>
-    <textarea id="note" placeholder="Nota riservata (verrà inclusa SOLO nel bundle scaricato)"></textarea>
-
-    <label>File evidenza (facoltativo)</label>
-    <input id="evidence" type="file">
+    <h2>B) Evento (riservato all’utente)</h2>
+    <div class="grid">
+      <div>
+        <label>Testo evento (facoltativo)</label>
+        <textarea id="note" placeholder="Testo riservato (sarà incluso SOLO nel bundle)"></textarea>
+      </div>
+      <div>
+        <label>File evidenza (facoltativo)</label>
+        <input id="evidence" type="file">
+        <div class="note">
+          Regola hash evento: se file presente → SHA-256(file). Altrimenti → SHA-256(testo). Se entrambi: file = hash principale.
+        </div>
+      </div>
+    </div>
 
     <div class="btnrow">
-      <button class="btn primary" onclick="prepare()">Prepara audit (calcolo hash)</button>
+      <button class="btn primary" onclick="prepare()">Prepara evento (calcolo hash)</button>
+      <button class="btn" onclick="resetPrep()">Reset evento</button>
     </div>
 
-    <div id="prepout" class="out">STATO: IDLE</div>
+    <div class="note">Nota UE: nessun invio dati, nessuna custodia. Il payload vive solo nel bundle scaricato.</div>
 
-    <div class="divider"></div>
+    <div class="hr"></div>
 
-    <p class="section-title">C) Emissione</p>
-
+    <h2>C) Emissione</h2>
     <div class="btnrow">
       <button class="btn primary" onclick="issue()">Genera AUDIT (bundle)</button>
     </div>
 
+    <div id="status" class="badge"><b>STATO</b>: IDLE</div>
+    <div id="prepout" class="out">STATO: IDLE</div>
     <div id="out" class="out">STATO: IDLE</div>
 
-    <div id="dlbox" style="margin-top:12px; display:none;">
-      <p class="section-title">Download manuale (fallback)</p>
+    <div id="dlbox" class="dl">
+      <div class="note"><b>Download manuale (fallback)</b> — se Android blocca l’avvio automatico</div>
       <div class="btnrow">
         <a class="btn" id="dl_bundle" href="#" download>Scarica bundle AUDIT</a>
+        <a class="btn" id="dl_json" href="#" download>Scarica JSON</a>
+        <a class="btn" id="dl_receipt" href="#" download>Scarica receipt</a>
       </div>
-      <div class="hint">Se il browser blocca l’avvio automatico, usa questo pulsante.</div>
     </div>
 
-    <div class="hint">
-      In pagina mostriamo solo hash e receipt (nessun payload). Il contenuto rimane nel file scaricato.
+    <div class="note">
+      Output in pagina: solo <b>prev_hash</b> e <b>receipt_sha256(json)</b>. Il testo/file resta nel bundle.
     </div>
+  </div>
+
+  <div class="footer">
+    <div class="symbol">🜏</div>
+    HERMETICUM — Blindata · Computabile · Evolutiva<br>
+    HERMETICUM B.C.E. S.r.l. · UE
   </div>
 </main>
 
-<footer>
-  <div class="wrap">
-    <div>HERMETICUM — digital responsibility infrastructure</div>
-    <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
-  </div>
-</footer>
-
 <script>
-let algo = "SHA-256";
+const ALGO = "SHA-256";
+const MODULE_VERSION = "AUDIT-v2.0-UE";
+
 let prepared = false;
+let SNAP = {
+  mode: "EMPTY",          // FILE | TEXT | FILE+TEXT | EMPTY
+  event_basis: "EMPTY",   // FILE | TEXT | EMPTY
+  event_hash: "0".repeat(64),
+  note: "",
+  evidence_meta: null,
+  evidence_b64: "",
+  evidence_hash: ""
+};
 
-let noteText = "";
-let evidenceMeta = null;
-let evidenceB64 = "";
-let evidenceHash = ""; // sha256(file) if present
-let eventHash = "";    // sha256(note) if present AND no file; else evidenceHash when file present
-let eventBasis = "";   // "FILE" | "TEXT" | "EMPTY"
-
+function normHex(s){
+  return (s||"").trim().toLowerCase().replace(/^0x/,"").replace(/[^0-9a-f]/g,"");
+}
+function setBadge(type, text){
+  const el = document.getElementById("status");
+  el.className = "badge" + (type ? (" " + type) : "");
+  el.innerHTML = "<b>STATO</b>: " + text;
+}
 async function sha256Bytes(uint8){
   const buf = await crypto.subtle.digest("SHA-256", uint8);
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
@@ -181,94 +249,119 @@ function base64FromBytes(bytes){
   }
   return btoa(binary);
 }
-function normHex(s){
-  return (s || "").trim().toLowerCase().replace(/^0x/,"").replace(/[^0-9a-f]/g,"");
-}
 function makeId(prefix, iso){
   return prefix + iso.replace(/[-:TZ.]/g,"").slice(0,14);
+}
+function resetPrep(){
+  prepared = false;
+  SNAP = {
+    mode:"EMPTY", event_basis:"EMPTY", event_hash:"0".repeat(64),
+    note:"", evidence_meta:null, evidence_b64:"", evidence_hash:""
+  };
+  document.getElementById("note").value = "";
+  document.getElementById("evidence").value = "";
+  document.getElementById("prepout").textContent = "STATO: IDLE";
+  setBadge("", "IDLE");
 }
 
 async function prepare(){
   const prepout = document.getElementById("prepout");
+  setBadge("", "WORKING");
   prepared = false;
 
-  noteText = (document.getElementById("note").value || "").trim();
-
+  const note = (document.getElementById("note").value || "").trim();
   const f = document.getElementById("evidence").files[0];
-  evidenceMeta = null;
-  evidenceB64 = "";
-  evidenceHash = "";
-  eventHash = "";
-  eventBasis = "";
+
+  SNAP = {
+    mode:"EMPTY", event_basis:"EMPTY", event_hash:"0".repeat(64),
+    note:"", evidence_meta:null, evidence_b64:"", evidence_hash:""
+  };
 
   if(f){
     const bytes = await readFileAsBytes(f);
-    evidenceHash = await sha256Bytes(bytes);
-    evidenceMeta = { name:f.name, type:f.type || "application/octet-stream", size:f.size };
-    evidenceB64 = base64FromBytes(bytes);
-    eventHash = evidenceHash;
-    eventBasis = "FILE";
+    const fh = await sha256Bytes(bytes);
+    SNAP.evidence_hash = fh;
+    SNAP.evidence_meta = { name:f.name, type:(f.type||"application/octet-stream"), size:f.size };
+    SNAP.evidence_b64 = base64FromBytes(bytes);
+    SNAP.note = note;
+    SNAP.event_hash = fh;
+    SNAP.event_basis = "FILE";
+    SNAP.mode = note ? "FILE+TEXT" : "FILE";
 
     prepout.textContent =
-      "STATO: OK\nEVENT_BASIS: FILE\nALGORITMO: " + algo +
-      "\nFILE: " + evidenceMeta.name + " (" + evidenceMeta.size + " bytes)\n" +
-      (noteText ? "TESTO: presente (incluso nel bundle)\n" : "TESTO: assente\n") +
-      "EVENT_HASH:\n" + eventHash;
+      "STATO: OK\nMODULE: " + MODULE_VERSION +
+      "\nMODE: " + SNAP.mode +
+      "\nEVENT_BASIS: FILE\nALGORITMO: " + ALGO +
+      "\nEVENT_HASH:\n" + SNAP.event_hash +
+      "\nFILE: " + SNAP.evidence_meta.name + " (" + SNAP.evidence_meta.size + " bytes)\n" +
+      (note ? "TESTO: presente (sigillato nel bundle)\n" : "TESTO: assente\n");
     prepared = true;
+    setBadge("ok", "READY");
     return;
   }
 
-  if(noteText){
-    eventHash = await sha256String(noteText);
-    eventBasis = "TEXT";
+  if(note){
+    const th = await sha256String(note);
+    SNAP.note = note;
+    SNAP.event_hash = th;
+    SNAP.event_basis = "TEXT";
+    SNAP.mode = "TEXT";
+
     prepout.textContent =
-      "STATO: OK\nEVENT_BASIS: TEXT\nALGORITMO: " + algo +
-      "\nEVENT_HASH:\n" + eventHash;
+      "STATO: OK\nMODULE: " + MODULE_VERSION +
+      "\nMODE: TEXT\nEVENT_BASIS: TEXT\nALGORITMO: " + ALGO +
+      "\nEVENT_HASH:\n" + SNAP.event_hash;
     prepared = true;
+    setBadge("ok", "READY");
     return;
   }
 
-  // nessun evento: consentito, ma dichiarato
-  eventBasis = "EMPTY";
-  eventHash = "0".repeat(64);
+  // empty event allowed (but explicit)
+  SNAP.mode = "EMPTY";
+  SNAP.event_basis = "EMPTY";
+  SNAP.event_hash = "0".repeat(64);
+  SNAP.note = "";
   prepout.textContent =
-    "STATO: OK\nEVENT_BASIS: EMPTY\nEVENT_HASH:\n" + eventHash + "\nNOTA: audit senza evento allegato.";
+    "STATO: OK\nMODULE: " + MODULE_VERSION +
+    "\nMODE: EMPTY\nEVENT_HASH:\n" + SNAP.event_hash +
+    "\nNOTA: audit senza evento allegato.";
   prepared = true;
+  setBadge("ok", "READY");
 }
 
 async function issue(){
   const out = document.getElementById("out");
   const dlbox = document.getElementById("dlbox");
   dlbox.style.display = "none";
+  setBadge("", "WORKING");
 
   const prev = normHex(document.getElementById("prev_hash").value);
   if(!prev || prev.length !== 64){
-    out.textContent = "STATO: FAIL\nMOTIVO: prev_hash non valido (serve SHA-256 64 hex)";
+    setBadge("fail", "FAIL");
+    out.textContent = "STATO: FAIL\nMOTIVO: prev_hash non valido (serve SHA-256 64 hex).";
     return;
   }
   if(!prepared){
-    out.textContent = "STATO: FAIL\nMOTIVO: eseguire prima 'Prepara audit (calcolo hash)'";
+    setBadge("fail", "FAIL");
+    out.textContent = "STATO: FAIL\nMOTIVO: eseguire prima 'Prepara evento (calcolo hash)'.";
     return;
   }
 
   const now = new Date().toISOString();
   const auditID = makeId("AUDIT-", now);
 
-  // JSON audit (catena + evento)
   const payload = {
-    mode: (eventBasis === "FILE" && noteText) ? "FILE+TEXT"
-        : (eventBasis === "FILE" ? "FILE"
-        : (eventBasis === "TEXT" ? "TEXT" : "EMPTY")),
-    event_basis: eventBasis,
-    event_hash: eventHash,
-    note: noteText ? noteText : undefined,
-    evidence: evidenceMeta ? {
-      filename: evidenceMeta.name,
-      mime: evidenceMeta.type,
-      size: evidenceMeta.size,
+    mode: SNAP.mode,
+    event_basis: SNAP.event_basis,
+    event_hash: SNAP.event_hash,
+    note: SNAP.note ? SNAP.note : undefined,
+    evidence: SNAP.evidence_meta ? {
+      filename: SNAP.evidence_meta.name,
+      mime: SNAP.evidence_meta.type,
+      size: SNAP.evidence_meta.size,
       encoding: "base64",
-      data: evidenceB64,
-      sha256: evidenceHash
+      data: SNAP.evidence_b64,
+      sha256: SNAP.evidence_hash
     } : undefined
   };
   if(payload.note === undefined) delete payload.note;
@@ -277,30 +370,45 @@ async function issue(){
   const jsonObj = {
     kind: "HBCE_AUDIT_RECORD",
     version: "AUDIT-v1",
+    generator: { module: "HERMETICUM_AUDIT", module_version: MODULE_VERSION },
     system: "HERMETICUM",
     regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
     audit_id: auditID,
     timestamp_utc: now,
     chain: { prev_hash: prev },
-    event: {
-      algorithm: algo,
-      hash_basis: eventBasis,
-      event_hash: eventHash
-    },
+    event: { algorithm: ALGO, hash_basis: SNAP.event_basis, event_hash: SNAP.event_hash, mode: SNAP.mode },
     payload: payload,
-    seal: { generated_by:"HERMETICUM infrastructure", signature_line:"HERMETICUM B.C.E. S.r.l. · EU" }
+    seal: {
+      seal_symbol: "🜏",
+      signature_line_1: "HERMETICUM — Blindata · Computabile · Evolutiva",
+      signature_line_2: "HERMETICUM B.C.E. S.r.l. · UE",
+      generated_by: "HERMETICUM infrastructure"
+    }
   };
 
   const jsonText = JSON.stringify(jsonObj, null, 2);
   const receipt = await sha256String(jsonText);
 
-  // bundle unico (download singolo)
+  const sealed =
+`===== SECTION: PRIVATE_PAYLOAD (SEALED) =====
+🜏 HERMETICUM — Blindata · Computabile · Evolutiva
+HERMETICUM B.C.E. S.r.l. · UE
+
+NOTE:
+${SNAP.note ? SNAP.note : "[ASSENTE]"}
+
+FILE:
+${SNAP.evidence_meta ? (SNAP.evidence_meta.name + " (" + SNAP.evidence_meta.size + " bytes) sha256=" + SNAP.evidence_hash) : "[ASSENTE]"}
+`;
+
   const bundle =
 `HERMETICUM AUDIT BUNDLE (single-file)
-ID: ${auditID}
+AUDIT_ID: ${auditID}
 prev_hash: ${prev}
 receipt_sha256(json): ${receipt}
+timestamp_utc: ${now}
 
+${sealed}
 ===== SECTION: AUDIT.JSON =====
 ${jsonText}
 
@@ -308,28 +416,39 @@ ${jsonText}
 ${receipt}
 `;
 
-  const blob = new Blob([bundle], {type:"text/plain"});
-  const url = URL.createObjectURL(blob);
-  const filename = `${auditID}_BUNDLE.txt`;
+  const bBundle = new Blob([bundle], {type:"text/plain"});
+  const bJson = new Blob([jsonText], {type:"application/json"});
+  const bRec = new Blob([receipt + "\n"], {type:"text/plain"});
 
-  // fallback manuale
+  const uBundle = URL.createObjectURL(bBundle);
+  const uJson = URL.createObjectURL(bJson);
+  const uRec = URL.createObjectURL(bRec);
+
+  const fnBase = `${auditID}_BUNDLE`;
+  const fnBundle = `${fnBase}.txt`;
+  const fnJson = `${auditID}.json`;
+  const fnRec = `${auditID}.receipt.sha256.txt`;
+
   dlbox.style.display = "block";
-  const a = document.getElementById("dl_bundle");
-  a.href = url;
-  a.download = filename;
+  const aB = document.getElementById("dl_bundle");
+  const aJ = document.getElementById("dl_json");
+  const aR = document.getElementById("dl_receipt");
+  aB.href = uBundle; aB.download = fnBundle;
+  aJ.href = uJson;   aJ.download = fnJson;
+  aR.href = uRec;    aR.download = fnRec;
 
-  // auto-download
-  try{ a.click(); }catch(e){}
+  try{ aB.click(); }catch(e){}
 
-  // output in pagina: solo chain + receipt (no payload)
+  setBadge("ok", "OK");
   out.textContent =
     "STATO: OK\n" +
     "AUDIT_ID: " + auditID + "\n" +
+    "MODULE: " + MODULE_VERSION + "\n" +
     "prev_hash:\n" + prev + "\n" +
     "receipt_sha256(json):\n" + receipt + "\n\n" +
-    "Download automatico avviato (bundle unico).";
+    "Download avviato — fallback disponibile.\n" +
+    "NOTA: in pagina non mostriamo payload; è sigillato nel bundle (🜏).";
 }
 </script>
-
 </body>
 </html>
