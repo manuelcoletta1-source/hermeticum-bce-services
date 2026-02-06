@@ -1,100 +1,142 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <title>HERMETICUM — Creazione IPR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Creazione IPR UE-style — PUBLIC hash-only, PRIVATE include payload sealed (🜏) nel file scaricato. Client-side, no data custody.">
+<meta charset="utf-8">
+<title>HERMETICUM — Create IPR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Creazione IPR (UE-ready). PUBLIC hash-only condivisibile. PRIVATE sigillato (🜏) con payload nel bundle scaricato. Client-side, no data custody.">
 
-  <style>
-    :root{--bg:#05070a;--paper:#0b0f14;--text:#e9f0f8;--muted:#8fa3b8;--line:#1c2733;--line2:#223140;--max:980px}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
-    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-    header{border-bottom:1px solid var(--line);background:rgba(0,0,0,.22);backdrop-filter:blur(6px)}
-    .head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0}
-    .brand{font-weight:900;letter-spacing:.9px}
-    .brand small{display:block;font-weight:600;letter-spacing:.2px;color:var(--muted);font-size:12px;margin-top:2px}
-    nav{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
-    nav a{padding:6px 8px;border-radius:10px}
-    nav a:hover{background:rgba(255,255,255,.06);color:var(--text);text-decoration:none}
-    .policy{border-top:1px solid var(--line);padding:10px 0;font-size:12px;color:var(--muted)}
-    .policy b{color:var(--text);font-weight:800}
+<style>
+:root{
+  --bg:#05070a;
+  --panel:#0b0f14;
+  --text:#eaf2ff;
+  --muted:#8aa0b8;
+  --line:#1c2733;
+  --line2:#223140;
+  --accent:#b7c9ff;
+  --max:980px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45;
+}
+a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+header{border-bottom:1px solid var(--line);padding:18px 0;background:rgba(0,0,0,.18)}
+.brand{font-weight:800;letter-spacing:2px}
+.brand small{display:block;color:var(--muted);font-weight:600;letter-spacing:.6px;margin-top:6px;font-size:12px}
+nav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+nav a{font-size:12px;color:var(--muted);padding:6px 10px;border:1px solid transparent}
+nav a:hover{border-color:var(--line);color:var(--text);text-decoration:none}
+.policy{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;color:var(--muted);font-size:12px}
+.policy b{color:var(--text);font-weight:800}
 
-    main{padding:22px 0 34px}
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:0;padding:18px}
-    h1{margin:0 0 6px;font-size:22px;letter-spacing:.5px}
-    .subtitle{margin:0;color:var(--muted);max-width:92ch;font-size:13px}
-    .divider{height:1px;background:rgba(255,255,255,.08);margin:14px 0}
-    .section-title{margin:0 0 8px;font-size:13px;color:var(--text);letter-spacing:.6px}
+main{padding:22px 0 46px}
+.card{
+  border:1px solid var(--line);
+  background:var(--panel);
+  padding:18px;
+}
+h1{margin:0 0 8px;font-size:20px;letter-spacing:.6px;font-weight:800}
+.sub{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.hr{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
+h2{margin:0 0 8px;font-size:12px;letter-spacing:1.2px;color:var(--text);font-weight:900}
 
-    label{display:block;font-size:12px;color:var(--muted);margin-top:10px}
-    input,textarea{
-      width:100%;padding:12px;border-radius:0;border:1px solid var(--line2);
-      background:rgba(0,0,0,.22);color:var(--text);font-size:14px;outline:none
-    }
-    textarea{min-height:110px;resize:vertical}
-    input[type="file"]{padding:10px}
+label{display:block;font-size:12px;color:var(--muted);margin-top:10px}
+input,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--line2);
+  background:rgba(0,0,0,.18);
+  color:var(--text);
+  border-radius:0;
+  font-size:14px;
+  outline:none;
+}
+textarea{min-height:110px;resize:vertical}
+input[type="file"]{padding:10px}
 
-    .row{display:flex;gap:10px;flex-wrap:wrap}
-    .row > div{flex:1;min-width:180px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
 
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 14px;border-radius:0;border:1px solid var(--line2);
-      background:rgba(255,255,255,.03);font-size:14px;cursor:pointer
-    }
-    .btn:hover{background:rgba(255,255,255,.06)}
-    .btn.primary{background:rgba(255,255,255,.08)}
-    .btn.primary:hover{background:rgba(255,255,255,.11)}
+.note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
 
-    .hint{font-size:12px;color:var(--muted);margin-top:8px}
-    .out{
-      margin-top:12px;padding:14px;border-radius:0;border:1px solid var(--line2);
-      background:rgba(0,0,0,.18);font-family:ui-monospace,monospace;font-size:13px;
-      white-space:pre-line;overflow:auto
-    }
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn{
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.03);
+  color:var(--text);
+  padding:10px 14px;
+  border-radius:0;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.6px;
+}
+.btn:hover{background:rgba(255,255,255,.06)}
+.btn.primary{border-color:rgba(183,201,255,.35);background:rgba(183,201,255,.06)}
+.btn.primary:hover{background:rgba(183,201,255,.10)}
 
-    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:18px 0 24px;color:var(--muted)}
-    .sig{margin-top:10px;font-size:12px;opacity:.75;letter-spacing:.4px;text-align:center}
-    .seal{font-size:22px;letter-spacing:6px;margin-top:18px;text-align:center}
-  </style>
+.out{
+  margin-top:12px;
+  padding:14px;
+  border:1px solid var(--line2);
+  background:rgba(0,0,0,.18);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  font-size:12px;
+  color:var(--muted);
+  white-space:pre-line;
+  overflow:auto;
+}
+.out b{color:var(--text)}
+
+.dl{display:none;margin-top:12px}
+.dl .btn{display:inline-flex;align-items:center;justify-content:center}
+
+.footer{
+  border-top:1px solid var(--line);
+  margin-top:60px;
+  padding-top:22px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+}
+.symbol{font-size:22px;letter-spacing:6px;margin:10px 0 8px;color:var(--text)}
+</style>
 </head>
 
 <body>
 <header>
-  <div class="wrap head">
-    <div class="brand">
-      HERMETICUM
-      <small>Creazione IPR — Modulo Standard (UE-style)</small>
-    </div>
+  <div class="wrap">
+    <div class="brand">HERMETICUM <small>Create IPR — Interfaccia UE-ready</small></div>
     <nav>
       <a href="/hermeticum-bce-platform/">Home</a>
-      <a href="/hermeticum-bce-platform/verify/">Verifica</a>
-      <a href="/hermeticum-bce-platform/audit/">Audit</a>
-      <a href="/hermeticum-bce-platform/standard/ipr/">Standard</a>
+      <a href="/hermeticum-bce-platform/verify/">Verify</a>
+      <a href="/hermeticum-bce-platform/audit/">Audit Chain</a>
+      <a href="/hermeticum-bce-platform/baseline/">Baseline</a>
+      <a href="/hermeticum-bce-platform/seal/">Seal</a>
       <a href="/hermeticum-bce-platform/company/">Company</a>
     </nav>
-  </div>
-  <div class="wrap policy">
-    <b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b>
+    <div class="policy"><b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b></div>
   </div>
 </header>
 
 <main class="wrap">
   <div class="card">
-    <h1>Creazione IPR</h1>
-    <p class="subtitle">
-      PUBLIC = condivisibile (hash-only). PRIVATE = include payload <b>sigillato</b> (🜏) nel file scaricato.
-      Tutto client-side. Nessuna custodia dati.
+    <h1>Emissione IPR</h1>
+    <p class="sub">
+      Questo modulo genera un artefatto IPR in due forme:
+      <b>PUBLIC</b> (condivisibile, hash-only) e <b>PRIVATE</b> (sigillato, con payload solo nel file scaricato).
+      Nessun dato viene trasmesso o conservato dal server.
     </p>
 
-    <div class="divider"></div>
+    <div class="hr"></div>
 
-    <p class="section-title">A) Identità dichiarata (self-declared)</p>
-    <div class="row">
+    <h2>A) Soggetto (self-declared)</h2>
+    <div class="grid">
       <div>
         <label>Nome e Cognome</label>
         <input id="full_name" placeholder="es. Mario Rossi">
@@ -103,8 +145,6 @@
         <label>Paese (ISO2 consigliato)</label>
         <input id="country" placeholder="es. IT">
       </div>
-    </div>
-    <div class="row">
       <div>
         <label>Regione</label>
         <input id="region" placeholder="es. Piemonte">
@@ -114,26 +154,28 @@
         <input id="city" placeholder="es. Torino">
       </div>
     </div>
-    <div class="row">
-      <div>
-        <label>Zona (quartiere/area/municipio — no indirizzo)</label>
-        <input id="zone" placeholder="es. Centro / Circoscrizione 1">
-      </div>
+    <label>Zona (quartiere/area/municipio — no indirizzo)</label>
+    <input id="zone" placeholder="es. Centro / Circoscrizione 1">
+
+    <div class="note">
+      Nota UE: dati dichiarati, non verificati. Evitare indirizzi, coordinate, dati sensibili.
     </div>
-    <div class="hint">Nota UE: dati self-declared. Non inserire indirizzi, coordinate, dati sensibili.</div>
 
-    <div class="divider"></div>
+    <div class="hr"></div>
 
-    <p class="section-title">B) Contenuto (riservato all’utente)</p>
-    <div class="row">
+    <h2>B) Contenuto (riservato all’utente)</h2>
+    <div class="grid">
       <div>
         <label>Testo (facoltativo)</label>
-        <textarea id="note" placeholder="Testo riservato (comparirà SOLO nel PRIVATE scaricato)"></textarea>
+        <textarea id="note" placeholder="Il testo apparirà SOLO nel bundle PRIVATE scaricato"></textarea>
       </div>
       <div>
         <label>File (facoltativo)</label>
         <input id="file" type="file">
-        <div class="hint">Se presente il file: SHA-256(file). Altrimenti: SHA-256(testo). Se entrambi: file = hash principale, testo viene comunque sigillato nel PRIVATE.</div>
+        <div class="note">
+          Regola hash: se file presente → SHA-256(file). Altrimenti → SHA-256(testo).
+          Se entrambi: hash principale = file, testo comunque sigillato nel PRIVATE.
+        </div>
       </div>
     </div>
 
@@ -142,48 +184,46 @@
     </div>
     <div id="prepout" class="out">STATO: IDLE</div>
 
-    <div class="divider"></div>
+    <div class="hr"></div>
 
-    <p class="section-title">C) Emissione</p>
+    <h2>C) Emissione</h2>
     <div class="btnrow">
       <button class="btn primary" onclick="issuePRIVATE()">Crea IPR (PRIVATE)</button>
       <button class="btn" onclick="issuePUBLIC()">Crea IPR (PUBLIC)</button>
     </div>
+
     <div id="out" class="out">STATO: IDLE</div>
 
-    <div id="dlbox" style="margin-top:12px; display:none;">
-      <p class="section-title">Download manuale (fallback)</p>
+    <div id="dlbox" class="dl">
+      <div class="note"><b>Download manuale (fallback)</b> — se Android blocca l’avvio automatico</div>
       <div class="btnrow">
         <a class="btn" id="dl_bundle" href="#" download>Scarica bundle</a>
         <a class="btn" id="dl_json" href="#" download>Scarica JSON</a>
         <a class="btn" id="dl_receipt" href="#" download>Scarica receipt</a>
       </div>
-      <div class="hint">Se Android blocca l’avvio automatico, usa questi pulsanti.</div>
     </div>
 
-    <div class="hint">
-      PUBLIC non contiene payload. PRIVATE contiene payload sigillato (🜏) e rende l’utente responsabile del contenuto.
+    <div class="note">
+      PUBLIC non contiene payload. PRIVATE contiene payload sigillato (🜏) nel bundle e rende l’utente titolare/responsabile del contenuto.
     </div>
+  </div>
+
+  <div class="footer">
+    <div class="symbol">🜏</div>
+    HERMETICUM — Blindata · Computabile · Evolutiva<br>
+    HERMETICUM B.C.E. S.r.l. · UE
   </div>
 </main>
 
-<footer>
-  <div class="wrap">
-    <div>HERMETICUM — digital responsibility infrastructure</div>
-    <div class="seal">🜏</div>
-    <div class="sig">HERMETICUM — Blindata · Computabile · Evolutiva<br>HERMETICUM B.C.E. S.r.l. · EU</div>
-  </div>
-</footer>
-
 <script>
 const ALGO = "SHA-256";
-const VERSION = "CREATE-v2.2"; // utile per capire se stai vedendo la pagina aggiornata (cache)
+const MODULE_VERSION = "CREATE-v3.0-UE";
 let prepared = false;
 
 let SNAP = {
   mode: "EMPTY",
   content_hash: "",
-  content_basis: "",
+  content_basis: "EMPTY",
   note: "",
   file_meta: null,
   file_b64: "",
@@ -211,12 +251,10 @@ function base64FromBytes(bytes){
   return btoa(binary);
 }
 function norm(s){ return (s||"").trim(); }
-function makeId(prefix, iso){
-  return prefix + iso.replace(/[-:TZ.]/g,"").slice(0,14);
-}
+function makeId(prefix, iso){ return prefix + iso.replace(/[-:TZ.]/g,"").slice(0,14); }
 
 async function prepare(){
-  const prepout = document.getElementById("prepout");
+  const o = document.getElementById("prepout");
   prepared = false;
 
   const note = norm(document.getElementById("note").value);
@@ -235,11 +273,11 @@ async function prepare(){
     SNAP.content_basis = "FILE";
     SNAP.mode = note ? "FILE+TEXT" : "FILE";
 
-    prepout.textContent =
-      "STATO: OK\nVERSION: " + VERSION +
+    o.textContent =
+      "STATO: OK\nMODULE: " + MODULE_VERSION +
       "\nMODE: " + SNAP.mode +
-      "\nALGORITMO: " + ALGO +
-      "\nCONTENT_BASIS: FILE\nCONTENT_HASH:\n" + SNAP.content_hash +
+      "\nCONTENT_BASIS: FILE\nALGORITMO: " + ALGO +
+      "\nCONTENT_HASH:\n" + SNAP.content_hash +
       "\nFILE: " + SNAP.file_meta.name + " (" + SNAP.file_meta.size + " bytes)\n" +
       (note ? "TESTO: presente (sigillato nel PRIVATE)\n" : "TESTO: assente\n");
     prepared = true;
@@ -252,11 +290,10 @@ async function prepare(){
     SNAP.content_hash = th;
     SNAP.content_basis = "TEXT";
     SNAP.mode = "TEXT";
-
-    prepout.textContent =
-      "STATO: OK\nVERSION: " + VERSION +
-      "\nMODE: TEXT\nALGORITMO: " + ALGO +
-      "\nCONTENT_BASIS: TEXT\nCONTENT_HASH:\n" + SNAP.content_hash;
+    o.textContent =
+      "STATO: OK\nMODULE: " + MODULE_VERSION +
+      "\nMODE: TEXT\nCONTENT_BASIS: TEXT\nALGORITMO: " + ALGO +
+      "\nCONTENT_HASH:\n" + SNAP.content_hash;
     prepared = true;
     return;
   }
@@ -264,8 +301,8 @@ async function prepare(){
   SNAP.content_hash = "0".repeat(64);
   SNAP.content_basis = "EMPTY";
   SNAP.mode = "EMPTY";
-  prepout.textContent =
-    "STATO: OK\nVERSION: " + VERSION +
+  o.textContent =
+    "STATO: OK\nMODULE: " + MODULE_VERSION +
     "\nMODE: EMPTY\nCONTENT_HASH:\n" + SNAP.content_hash +
     "\nNOTA: nessun contenuto inserito.";
   prepared = true;
@@ -296,7 +333,7 @@ async function issue(kind){
   const base = {
     kind: "HBCE_IPR_OFFICIAL",
     version: "IPR-O-v1",
-    generator: { module: "HERMETICUM_CREATE", module_version: VERSION },
+    generator: { module: "HERMETICUM_CREATE", module_version: MODULE_VERSION },
     system: "HERMETICUM",
     regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
     artifact: { visibility: kind },
@@ -322,7 +359,7 @@ async function issue(kind){
     seal: {
       seal_symbol: "🜏",
       signature_line_1: "HERMETICUM — Blindata · Computabile · Evolutiva",
-      signature_line_2: "HERMETICUM B.C.E. S.r.l. · EU",
+      signature_line_2: "HERMETICUM B.C.E. S.r.l. · UE",
       generated_by: "HERMETICUM infrastructure"
     }
   };
@@ -334,7 +371,6 @@ async function issue(kind){
   if(base.subject.geo.city === undefined) delete base.subject.geo.city;
   if(base.subject.geo.zone === undefined) delete base.subject.geo.zone;
 
-  // payload ONLY PRIVATE
   if(kind === "PRIVATE"){
     const payload = {
       note: SNAP.note || undefined,
@@ -349,27 +385,24 @@ async function issue(kind){
     };
     if(payload.note === undefined) delete payload.note;
     if(payload.evidence === undefined) delete payload.evidence;
-
     base.payload = payload;
   }
 
   const jsonText = JSON.stringify(base, null, 2);
   const receipt = await sha256String(jsonText);
 
-  // SEALED payload section (only PRIVATE, readable)
-  const sealed =
-    (kind === "PRIVATE")
-      ? (`===== SECTION: PRIVATE_PAYLOAD (SEALED) =====
+  const sealed = (kind === "PRIVATE") ? (
+`===== SECTION: PRIVATE_PAYLOAD (SEALED) =====
 🜏 HERMETICUM — Blindata · Computabile · Evolutiva
-HERMETICUM B.C.E. S.r.l. · EU
+HERMETICUM B.C.E. S.r.l. · UE
 
 NOTE:
 ${SNAP.note ? SNAP.note : "[ASSENTE]"}
 
 FILE:
 ${SNAP.file_meta ? (SNAP.file_meta.name + " (" + SNAP.file_meta.size + " bytes) sha256=" + SNAP.file_hash) : "[ASSENTE]"}
-`)
-      : "";
+`
+  ) : "";
 
   const bundle =
 `HERMETICUM IPR BUNDLE (single-file)
@@ -401,7 +434,6 @@ ${receipt}
   const fnJson = `${fnBase}.json`;
   const fnRec = `${fnBase}.receipt.sha256.txt`;
 
-  // fallback
   dlbox.style.display = "block";
   const aB = document.getElementById("dl_bundle");
   const aJ = document.getElementById("dl_json");
@@ -410,21 +442,19 @@ ${receipt}
   aJ.href = uJson;   aJ.download = fnJson;
   aR.href = uRec;    aR.download = fnRec;
 
-  // auto download best-effort
   try{ aB.click(); }catch(e){}
 
   out.textContent =
     "STATO: OK\n" +
     "ARTEFATTO: " + kind + "\n" +
     "ID: " + id + "\n" +
-    "VERSION: " + VERSION + "\n" +
+    "MODULE: " + MODULE_VERSION + "\n" +
     "MODE: " + SNAP.mode + "\n" +
     "RIFERIMENTO (content_hash):\n" + SNAP.content_hash + "\n" +
     "receipt_sha256(json):\n" + receipt + "\n\n" +
-    (kind === "PRIVATE" ? "PRIVATE include payload sigillato (🜏) nel bundle.\n" : "PUBLIC è hash-only (nessun payload).\n") +
+    (kind === "PRIVATE" ? "PRIVATE: payload sigillato (🜏) incluso nel bundle.\n" : "PUBLIC: hash-only (nessun payload).\n") +
     "Download avviato — fallback disponibile.";
 }
 </script>
-
 </body>
 </html>
