@@ -107,7 +107,7 @@ main{
 }
 
 .cta{
-  margin-top:40px;
+  margin-top:26px;
   display:flex;
   gap:14px;
   flex-wrap:wrap;
@@ -118,9 +118,11 @@ main{
   font-size:13px;
   letter-spacing:.8px;
   text-decoration:none;
+  display:inline-block;
 }
 .btn:hover{
   border-color:var(--text);
+  text-decoration:none;
 }
 
 .symbol{
@@ -159,6 +161,7 @@ HERMETICUM
 <a href="/hermeticum-bce-platform/use-cases/">Use-cases</a>
 <a href="/hermeticum-bce-platform/ai/">AI Interface</a>
 <a href="/hermeticum-bce-platform/baseline/">Baseline</a>
+<a href="/hermeticum-bce-platform/seal/">Seal</a>
 <a href="/hermeticum-bce-platform/company/">Company</a>
 </nav>
 
@@ -181,14 +184,14 @@ Senza audit nel tempo non esiste responsabilità tecnica.
 </p>
 
 <p>
-HERMETICUM implementa uno strato operativo compatibile con il quadro normativo europeo
-per l’integrazione di identità, AI e sistemi autonomi.
+HERMETICUM implementa uno strato operativo UE-ready per integrazione di identità, AI e sistemi autonomi:
+<b>receipt SHA-256(JSON)</b>, <b>verifica deterministica</b>, <b>catena temporale audit</b>.
 </p>
 
 <div class="cta">
-<a class="btn" href="/hermeticum-bce-platform/create/">Genera IPR</a>
-<a class="btn" href="/hermeticum-bce-platform/verify/">Verifica integrità</a>
-<a class="btn" href="/hermeticum-bce-platform/ai/">Interfaccia AI</a>
+  <a class="btn" href="/hermeticum-bce-platform/create/">Genera IPR</a>
+  <a class="btn" href="/hermeticum-bce-platform/verify/">Verifica integrità</a>
+  <a class="btn" href="/hermeticum-bce-platform/ai/">Interfaccia AI</a>
 </div>
 </div>
 
@@ -197,48 +200,42 @@ per l’integrazione di identità, AI e sistemi autonomi.
 <div class="box">
 <h2>Per il cittadino</h2>
 <p>
-Identità digitale verificabile nel tempo.
-Prova opponibile di contenuti e decisioni.
+Identità digitale verificabile nel tempo. Prova opponibile di contenuti e decisioni (hash/receipt).
 </p>
 </div>
 
 <div class="box">
 <h2>Per industria e lavoro</h2>
 <p>
-Tracciabilità di progetti, ricerca e produzione.
-Audit evolutivo senza custodia dati centralizzata.
+Tracciabilità di progetti, ricerca e produzione. Audit evolutivo senza custodia dati centralizzata.
 </p>
 </div>
 
 <div class="box">
 <h2>Per l’Europa</h2>
 <p>
-Strato di sicurezza per AI, robotica e automazione.
-Compatibile con identità digitale e cybersecurity UE.
+Strato di sicurezza per AI, robotica e automazione. Compatibile con cybersecurity e governance UE.
 </p>
 </div>
 
 <div class="box">
 <h2>Per sistemi AI</h2>
 <p>
-Ogni agente può avere identità primaria e audit chain.
-Riduzione del rischio sistemico e manipolazione.
+Identità primaria e audit chain per agenti e modelli. Riduzione del rischio di manipolazione.
 </p>
 </div>
 
 <div class="box">
-<h2>Per robotica</h2>
+<h2>Per infrastrutture</h2>
 <p>
-Robot con identità verificabile e cronologia operativa.
-Responsabilità tecnica nel tempo.
+Sanità, sicurezza, istruzione, policy, infrastrutture critiche: integrità e timeline verificabili.
 </p>
 </div>
 
 <div class="box">
 <h2>Per il futuro</h2>
 <p>
-L’automazione senza identità genera caos.
-L’automazione con identità genera infrastruttura.
+L’automazione senza identità genera rischio. L’automazione con identità verificabile genera infrastruttura.
 </p>
 </div>
 
@@ -254,3 +251,4 @@ HERMETICUM B.C.E. S.r.l. · UE
 </main>
 </body>
 </html>
+```0
