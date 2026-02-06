@@ -62,6 +62,7 @@ input[type="file"]{padding:10px}
 @media(max-width:860px){.grid{grid-template-columns:1fr}}
 
 .note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
+.mini{margin-top:8px;color:var(--muted);font-size:11px;line-height:1.5}
 
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 .btn{
@@ -90,7 +91,6 @@ input[type="file"]{padding:10px}
   white-space:pre-line;
   overflow:auto;
 }
-.out b{color:var(--text)}
 
 .dl{display:none;margin-top:12px}
 .dl .btn{display:inline-flex;align-items:center;justify-content:center}
@@ -121,6 +121,7 @@ input[type="file"]{padding:10px}
       <a href="/hermeticum-bce-platform/company/">Company</a>
     </nav>
     <div class="policy"><b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b></div>
+    <div class="mini" id="build"></div>
   </div>
 </header>
 
@@ -217,14 +218,17 @@ input[type="file"]{padding:10px}
 
 <script>
 const ALGO = "SHA-256";
-const MODULE_VERSION = "CREATE-v3.0-UE";
-let prepared = false;
+const MODULE_VERSION = "CREATE-v3.1-UE";
+const BUILD_ID = "HBCE_CREATE_BUILD_2026-02-06_1";
+document.getElementById("build").textContent = "BUILD: " + BUILD_ID + " · MODULE: " + MODULE_VERSION;
 
+let prepared = false;
 let SNAP = {
   mode: "EMPTY",
-  content_hash: "",
+  content_hash: "0".repeat(64),
   content_basis: "EMPTY",
   note: "",
+  note_sha256: "",
   file_meta: null,
   file_b64: "",
   file_hash: ""
@@ -257,10 +261,11 @@ async function prepare(){
   const o = document.getElementById("prepout");
   prepared = false;
 
-  const note = norm(document.getElementById("note").value);
+  const note = (document.getElementById("note").value || "");
+  const noteTrim = note.trim();
   const f = document.getElementById("file").files[0];
 
-  SNAP = { mode:"EMPTY", content_hash:"", content_basis:"EMPTY", note:"", file_meta:null, file_b64:"", file_hash:"" };
+  SNAP = { mode:"EMPTY", content_hash:"0".repeat(64), content_basis:"EMPTY", note:"", note_sha256:"", file_meta:null, file_b64:"", file_hash:"" };
 
   if(f){
     const bytes = await readFileAsBytes(f);
@@ -268,10 +273,13 @@ async function prepare(){
     SNAP.file_hash = fh;
     SNAP.file_meta = { name:f.name, type:(f.type||"application/octet-stream"), size:f.size };
     SNAP.file_b64 = base64FromBytes(bytes);
-    SNAP.note = note;
+
+    SNAP.note = noteTrim;
+    SNAP.note_sha256 = noteTrim ? await sha256String(noteTrim) : "";
+
     SNAP.content_hash = fh;
     SNAP.content_basis = "FILE";
-    SNAP.mode = note ? "FILE+TEXT" : "FILE";
+    SNAP.mode = noteTrim ? "FILE+TEXT" : "FILE";
 
     o.textContent =
       "STATO: OK\nMODULE: " + MODULE_VERSION +
@@ -279,28 +287,31 @@ async function prepare(){
       "\nCONTENT_BASIS: FILE\nALGORITMO: " + ALGO +
       "\nCONTENT_HASH:\n" + SNAP.content_hash +
       "\nFILE: " + SNAP.file_meta.name + " (" + SNAP.file_meta.size + " bytes)\n" +
-      (note ? "TESTO: presente (sigillato nel PRIVATE)\n" : "TESTO: assente\n");
+      "TESTO_PRIVATO_LEN: " + (noteTrim ? noteTrim.length : 0) + "\n" +
+      (noteTrim ? ("TESTO_PRIVATO_SHA256:\n" + SNAP.note_sha256 + "\n") : "TESTO_PRIVATO: assente\n");
     prepared = true;
     return;
   }
 
-  if(note){
-    const th = await sha256String(note);
-    SNAP.note = note;
+  if(noteTrim){
+    const th = await sha256String(noteTrim);
+    SNAP.note = noteTrim;
+    SNAP.note_sha256 = await sha256String(noteTrim);
+
     SNAP.content_hash = th;
     SNAP.content_basis = "TEXT";
     SNAP.mode = "TEXT";
+
     o.textContent =
       "STATO: OK\nMODULE: " + MODULE_VERSION +
       "\nMODE: TEXT\nCONTENT_BASIS: TEXT\nALGORITMO: " + ALGO +
-      "\nCONTENT_HASH:\n" + SNAP.content_hash;
+      "\nCONTENT_HASH:\n" + SNAP.content_hash +
+      "\nTESTO_PRIVATO_LEN: " + noteTrim.length + "\n" +
+      "TESTO_PRIVATO_SHA256:\n" + SNAP.note_sha256;
     prepared = true;
     return;
   }
 
-  SNAP.content_hash = "0".repeat(64);
-  SNAP.content_basis = "EMPTY";
-  SNAP.mode = "EMPTY";
   o.textContent =
     "STATO: OK\nMODULE: " + MODULE_VERSION +
     "\nMODE: EMPTY\nCONTENT_HASH:\n" + SNAP.content_hash +
@@ -333,7 +344,7 @@ async function issue(kind){
   const base = {
     kind: "HBCE_IPR_OFFICIAL",
     version: "IPR-O-v1",
-    generator: { module: "HERMETICUM_CREATE", module_version: MODULE_VERSION },
+    generator: { module: "HERMETICUM_CREATE", module_version: MODULE_VERSION, build_id: BUILD_ID },
     system: "HERMETICUM",
     regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
     artifact: { visibility: kind },
@@ -343,19 +354,9 @@ async function issue(kind){
       type: "BIOLOGICAL",
       self_declared: true,
       full_name: full_name || undefined,
-      geo: {
-        country: country || undefined,
-        region: region || undefined,
-        city: city || undefined,
-        zone: zone || undefined
-      }
+      geo: { country: country || undefined, region: region || undefined, city: city || undefined, zone: zone || undefined }
     },
-    content: {
-      algorithm: ALGO,
-      basis: SNAP.content_basis,
-      hash: SNAP.content_hash,
-      mode: SNAP.mode
-    },
+    content: { algorithm: ALGO, basis: SNAP.content_basis, hash: SNAP.content_hash, mode: SNAP.mode },
     seal: {
       seal_symbol: "🜏",
       signature_line_1: "HERMETICUM — Blindata · Computabile · Evolutiva",
@@ -373,7 +374,8 @@ async function issue(kind){
 
   if(kind === "PRIVATE"){
     const payload = {
-      note: SNAP.note || undefined,
+      note: SNAP.note ? SNAP.note : undefined,
+      note_sha256: SNAP.note_sha256 ? SNAP.note_sha256 : undefined,
       evidence: SNAP.file_meta ? {
         filename: SNAP.file_meta.name,
         mime: SNAP.file_meta.type,
@@ -384,6 +386,7 @@ async function issue(kind){
       } : undefined
     };
     if(payload.note === undefined) delete payload.note;
+    if(payload.note_sha256 === undefined) delete payload.note_sha256;
     if(payload.evidence === undefined) delete payload.evidence;
     base.payload = payload;
   }
@@ -391,16 +394,22 @@ async function issue(kind){
   const jsonText = JSON.stringify(base, null, 2);
   const receipt = await sha256String(jsonText);
 
+  // Sezione SEALED: con marcatori rigidi BEGIN/END (anti-bug / anti-ambiguità)
   const sealed = (kind === "PRIVATE") ? (
 `===== SECTION: PRIVATE_PAYLOAD (SEALED) =====
 🜏 HERMETICUM — Blindata · Computabile · Evolutiva
 HERMETICUM B.C.E. S.r.l. · UE
 
-NOTE:
-${SNAP.note ? SNAP.note : "[ASSENTE]"}
+PRIVATE_TEXT_LEN: ${SNAP.note ? SNAP.note.length : 0}
+PRIVATE_TEXT_SHA256: ${SNAP.note_sha256 ? SNAP.note_sha256 : "[ASSENTE]"}
 
-FILE:
+----- PRIVATE_TEXT_BEGIN -----
+${SNAP.note ? SNAP.note : ""}
+----- PRIVATE_TEXT_END -----
+
+----- PRIVATE_FILE_META -----
 ${SNAP.file_meta ? (SNAP.file_meta.name + " (" + SNAP.file_meta.size + " bytes) sha256=" + SNAP.file_hash) : "[ASSENTE]"}
+----- PRIVATE_FILE_META_END -----
 `
   ) : "";
 
@@ -412,9 +421,9 @@ timestamp_utc: ${now}
 content_basis: ${SNAP.content_basis}
 content_hash_sha256: ${SNAP.content_hash}
 receipt_sha256(json): ${receipt}
+build_id: ${BUILD_ID}
 
-${sealed}
-===== SECTION: IPR.JSON =====
+${sealed}===== SECTION: IPR.JSON =====
 ${jsonText}
 
 ===== SECTION: RECEIPT.SHA256.TXT =====
@@ -442,6 +451,7 @@ ${receipt}
   aJ.href = uJson;   aJ.download = fnJson;
   aR.href = uRec;    aR.download = fnRec;
 
+  // Auto-download (se bloccato, hai il fallback)
   try{ aB.click(); }catch(e){}
 
   out.textContent =
@@ -449,10 +459,13 @@ ${receipt}
     "ARTEFATTO: " + kind + "\n" +
     "ID: " + id + "\n" +
     "MODULE: " + MODULE_VERSION + "\n" +
+    "BUILD: " + BUILD_ID + "\n" +
     "MODE: " + SNAP.mode + "\n" +
     "RIFERIMENTO (content_hash):\n" + SNAP.content_hash + "\n" +
     "receipt_sha256(json):\n" + receipt + "\n\n" +
-    (kind === "PRIVATE" ? "PRIVATE: payload sigillato (🜏) incluso nel bundle.\n" : "PUBLIC: hash-only (nessun payload).\n") +
+    (kind === "PRIVATE"
+      ? ("PRIVATE: payload sigillato (🜏) nel bundle.\nTESTO_PRIVATO_LEN: " + (SNAP.note ? SNAP.note.length : 0) + "\n")
+      : "PUBLIC: hash-only (nessun payload).\n") +
     "Download avviato — fallback disponibile.";
 }
 </script>
