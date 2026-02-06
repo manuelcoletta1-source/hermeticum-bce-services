@@ -7,95 +7,119 @@
 
 <style>
 :root{
---bg:#06080b;
---panel:#0f1318;
---text:#e7edf5;
---muted:#9fb0c2;
---line:rgba(255,255,255,.12);
---max:1000px;
+--bg:#05070a;
+--panel:#0b0f14;
+--panel2:#0e1319;
+--text:#e9f0f8;
+--muted:#8fa3b8;
+--line:#1c2733;
+--line2:#223140;
+--accent:#e9f0f8;
+--max:1100px;
 }
+
+*{box-sizing:border-box}
 
 body{
 margin:0;
-background:radial-gradient(1200px 800px at 20% 10%, rgba(255,255,255,.06), transparent 60%), #06080b;
+background:linear-gradient(180deg,#05070a 0%,#06090d 60%,#05070a 100%);
 color:var(--text);
 font-family:system-ui,Segoe UI,Roboto,Arial;
+letter-spacing:.2px;
 }
 
 .wrap{
 max-width:var(--max);
 margin:auto;
-padding:40px 20px 60px;
+padding:48px 24px 70px;
 }
 
 h1{
-font-size:42px;
-letter-spacing:2px;
-margin-bottom:8px;
+font-size:52px;
+letter-spacing:4px;
+margin:0;
+font-weight:900;
 }
 
 .subtitle{
+margin-top:14px;
 color:var(--muted);
+max-width:720px;
 font-size:16px;
-margin-bottom:30px;
-max-width:700px;
+line-height:1.6;
 }
 
-.section{
-background:var(--panel);
+.panel{
 border:1px solid var(--line);
-border-radius:18px;
-padding:22px;
-margin-top:18px;
+background:linear-gradient(180deg,var(--panel),var(--panel2));
+padding:26px;
+margin-top:26px;
 }
 
-.section h2{
+.panel h2{
 margin-top:0;
-font-size:20px;
+font-size:18px;
+letter-spacing:1px;
 }
 
 p{
 color:var(--muted);
-line-height:1.6;
+line-height:1.65;
 }
 
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:16px;
-margin-top:16px;
+gap:18px;
+margin-top:20px;
 }
 
-@media(max-width:800px){
+@media(max-width:900px){
 .grid{grid-template-columns:1fr}
+h1{font-size:40px}
 }
 
 .box{
-background:rgba(0,0,0,.2);
-border:1px solid var(--line);
-border-radius:14px;
+border:1px solid var(--line2);
 padding:18px;
+background:#070b10;
+transition:0.2s;
+}
+
+.box:hover{
+border-color:#3a4c5f;
+background:#0a1118;
 }
 
 a{
-color:var(--text);
 text-decoration:none;
+color:var(--accent);
 font-weight:700;
+letter-spacing:.5px;
 }
 
 .small{
-color:var(--muted);
 font-size:14px;
-margin-top:6px;
+color:var(--muted);
+margin-top:8px;
+}
+
+.status{
+margin-top:22px;
+border:1px solid var(--line);
+padding:16px;
+font-family:monospace;
+font-size:12px;
+background:#05080c;
 }
 
 .footer{
 margin-top:60px;
-padding-top:20px;
 border-top:1px solid var(--line);
-color:var(--muted);
+padding-top:22px;
 font-size:12px;
-line-height:1.6;
+color:var(--muted);
+line-height:1.7;
 }
 </style>
 </head>
@@ -104,96 +128,93 @@ line-height:1.6;
 <div class="wrap">
 
 <h1>HERMETICUM</h1>
+
 <div class="subtitle">
-Infrastruttura europea per la responsabilità digitale e l’identità verificabile nel tempo.
+Infrastruttura europea per identità verificabile e responsabilità digitale nel tempo.
+Sistema hash-only senza custodia dati. Auditabile.
 </div>
 
-<div class="section">
-<h2>Cos’è IPR</h2>
+<div class="status">
+STATUS: ACTIVE<br>
+REGIME: AUDIT-FIRST · FAIL-CLOSED · HASH-ONLY · NO-DATA-CUSTODY<br>
+INTEGRITY: CLIENT-SIDE VERIFIABLE<br>
+DOMAIN: EUROPEAN DIGITAL RESPONSIBILITY
+</div>
+
+<div class="panel">
+<h2>IPR — Identity Primary Record</h2>
 <p>
-IPR (Identity Primary Record) è un record crittografico personale che permette a un essere umano,
-un lavoratore o una istituzione di generare una traccia verificabile nel tempo.
+IPR è un record crittografico personale che permette a un cittadino,
+lavoratore o istituzione di generare continuità verificabile nel tempo.
 </p>
 
 <p>
 Non è un documento statale.  
-Non sostituisce l’identità civile.  
-Non custodisce dati personali.
-</p>
-
-<p>
-È uno strato digitale europeo di responsabilità e continuità verificabile.
+Non custodisce dati.  
+È uno strato europeo di responsabilità digitale verificabile.
 </p>
 </div>
 
-<div class="section">
-<h2>A cosa serve all’utente</h2>
+<div class="panel">
+<h2>Perché serve</h2>
 
 <div class="grid">
 
 <div class="box">
 <b>Cittadino</b>
-<p>
-Dimostrare nel tempo decisioni, opere e identità senza dipendere da piattaforme private o archivi centrali.
-</p>
+<p>Continuità personale verificabile senza dipendere da piattaforme private.</p>
 </div>
 
 <div class="box">
 <b>Lavoratore</b>
-<p>
-Costruire continuità verificabile di attività, creazioni e responsabilità professionali.
-</p>
+<p>Tracciabilità professionale e responsabilità digitale opponibile nel tempo.</p>
 </div>
 
 <div class="box">
-<b>Istituzioni</b>
-<p>
-Standard verificabile per interazioni digitali, audit e responsabilità distribuita.
-</p>
+<b>Istituzioni UE</b>
+<p>Standard auditabile per interazioni digitali e identità verificabile.</p>
 </div>
 
 <div class="box">
 <b>Europa</b>
-<p>
-Rafforzare la sovranità digitale europea con infrastrutture verificabili senza custodia dati.
-</p>
+<p>Infrastruttura di sovranità digitale senza custodia centralizzata dei dati.</p>
 </div>
 
 </div>
 </div>
 
-<div class="section">
+<div class="panel">
 <h2>Console infrastruttura</h2>
 
 <div class="grid">
 
 <div class="box">
-<a href="create/">Crea IPR</a>
+<a href="create/">CREA IPR</a>
 <div class="small">Generazione record crittografico personale</div>
 </div>
 
 <div class="box">
-<a href="verify/">Verifica</a>
-<div class="small">Verifica integrità e receipt</div>
+<a href="verify/">VERIFICA</a>
+<div class="small">Controllo integrità e receipt</div>
 </div>
 
 <div class="box">
-<a href="audit/">Audit temporale</a>
-<div class="small">Continuità verificabile nel tempo</div>
+<a href="audit/">AUDIT</a>
+<div class="small">Catena temporale verificabile</div>
 </div>
 
 <div class="box">
-<a href="standard/ipr/">Standard tecnico UE</a>
-<div class="small">Specifiche e struttura IPR</div>
+<a href="standard/ipr/">STANDARD UE</a>
+<div class="small">Specifiche tecniche ufficiali</div>
 </div>
 
 <div class="box">
-<a href="baseline/">Baseline sistema</a>
+<a href="baseline/">BASELINE</a>
 <div class="small">Stato iniziale stabilizzato</div>
 </div>
 
 <div class="box">
-<a href="company/">Struttura</a>
+<a href="company/">STRUTTURA</a>
 <div class="small">Entità infrastrutturale</div>
 </div>
 
