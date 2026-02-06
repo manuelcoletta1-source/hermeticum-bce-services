@@ -1,93 +1,126 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <title>HERMETICUM — Architecture</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="HERMETICUM architecture — audit-first infrastructure overview.">
-  <style>
-    :root{--bg:#0b0d10;--card:#0f1318;--text:#e7edf5;--muted:#9fb0c2;--line:rgba(255,255,255,.12);--soft:rgba(255,255,255,.06);--max:1100px}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
-    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .nav{border-bottom:1px solid var(--line);background:rgba(0,0,0,.2);backdrop-filter:blur(6px)}
-    .nav-inner{max-width:var(--max);margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-    .brand{font-weight:800;letter-spacing:.8px}
-    .nav-links{display:flex;gap:12px;font-size:14px;color:var(--muted);flex-wrap:wrap}
-    .nav-links a{padding:6px 8px;border-radius:10px}
-    .nav-links a:hover{background:var(--soft);color:var(--text);text-decoration:none}
-    .policy{border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);font-size:13px;color:var(--muted);padding:10px 16px}
-    main{padding:32px 0}
-    .hero h1{margin:0 0 10px;font-size:26px;line-height:1.15}
-    .hero p{margin:0;max-width:90ch;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:24px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-    @media(min-width:900px){.third{grid-column:span 4}.half{grid-column:span 6}}
-    .card h2{margin:0 0 8px;font-size:16px}
-    .card p{margin:0;color:var(--muted);font-size:14px}
-    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.18);padding:22px 0 26px;color:var(--muted)}
-    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .mini{font-size:13px;opacity:.9}
-    .sig{margin-top:18px;font-size:12px;opacity:.6;letter-spacing:.4px}
-  </style>
+<meta charset="utf-8">
+<title>HERMETICUM — Architecture</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Architettura HERMETICUM: IPR, receipt SHA-256(JSON), audit chain prev_hash, regime hash-only e no data custody. UE-ready.">
+
+<style>
+:root{
+  --bg:#05070a;--panel:#0b0f14;--text:#eaf2ff;--muted:#8aa0b8;
+  --line:#1c2733;--line2:#223140;--max:980px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+header{border-bottom:1px solid var(--line);padding:18px 0;background:rgba(0,0,0,.18)}
+.brand{font-weight:800;letter-spacing:2px}
+.brand small{display:block;color:var(--muted);font-weight:600;letter-spacing:.6px;margin-top:6px;font-size:12px}
+nav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+nav a{font-size:12px;color:var(--muted);padding:6px 10px;border:1px solid transparent}
+nav a:hover{border-color:var(--line);color:var(--text);text-decoration:none}
+.policy{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;color:var(--muted);font-size:12px}
+.policy b{color:var(--text);font-weight:800}
+
+main{padding:22px 0 46px}
+.card{border:1px solid var(--line);background:var(--panel);padding:18px}
+h1{margin:0 0 8px;font-size:20px;letter-spacing:.6px;font-weight:800}
+.sub{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.hr{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
+h2{margin:0 0 8px;font-size:12px;letter-spacing:1.2px;color:var(--text);font-weight:900}
+
+.block{
+  margin-top:12px;padding:14px;border:1px solid var(--line2);background:rgba(0,0,0,.18);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  font-size:12px;color:var(--muted);white-space:pre-line;
+}
+.note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
+
+.footer{
+  border-top:1px solid var(--line);margin-top:60px;padding-top:22px;text-align:center;color:var(--muted);
+  font-size:12px;line-height:1.6;
+}
+.symbol{font-size:22px;letter-spacing:6px;margin:10px 0 8px;color:var(--text)}
+</style>
 </head>
+
 <body>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="brand">HERMETICUM</div>
-    <div class="nav-links">
-      <a href="../">Home</a>
-      <a href="./">Architecture</a>
-      <a href="../use-cases/">Use-Cases</a>
-      <a href="../create/">Create</a>
-      <a href="../verify/">Verify</a>
-      <a href="../audit/">Audit</a>
-      <a href="../eu/pilot/">EU Pilot</a>
-      <a href="../company/">Company</a>
-    </div>
+<header>
+  <div class="wrap">
+    <div class="brand">HERMETICUM <small>Architecture — Sovereign layer (UE-ready)</small></div>
+    <nav>
+      <a href="/hermeticum-bce-platform/">Home</a>
+      <a href="/hermeticum-bce-platform/create/">Create IPR</a>
+      <a href="/hermeticum-bce-platform/verify/">Verify</a>
+      <a href="/hermeticum-bce-platform/audit/">Audit Chain</a>
+      <a href="/hermeticum-bce-platform/use-cases/">Use-cases</a>
+      <a href="/hermeticum-bce-platform/baseline/">Baseline</a>
+      <a href="/hermeticum-bce-platform/seal/">Seal</a>
+      <a href="/hermeticum-bce-platform/company/">Company</a>
+    </nav>
+    <div class="policy"><b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b></div>
   </div>
-</nav>
-
-<div class="policy"><div class="wrap">Audit-first · Fail-closed · Hash-only · No data custody</div></div>
+</header>
 
 <main class="wrap">
-  <section class="hero">
-    <h1>Architecture</h1>
-    <p>Componenti e flusso: Create → Verify → Audit (append-only) → EU Pilot.</p>
-  </section>
+  <div class="card">
+    <h1>Architettura</h1>
+    <p class="sub">
+      HERMETICUM implementa uno strato sovrano di identità e audit: emissione di artefatti (IPR) con receipt SHA-256(JSON),
+      verifica deterministica e catena temporale di audit (prev_hash → receipt).
+    </p>
 
-  <section class="grid">
-    <div class="card third">
-      <h2>Create</h2>
-      <p>Generazione hash SHA-256 e artefatto IPR (PUBLIC/PRIVATE).</p>
-    </div>
-    <div class="card third">
-      <h2>Verify</h2>
-      <p>Verifica deterministica di hash e receipt SHA-256 del JSON.</p>
-    </div>
-    <div class="card third">
-      <h2>Audit</h2>
-      <p>Record temporali derivati (prev_hash) per evoluzione misurabile.</p>
-    </div>
-    <div class="card half">
-      <h2>Regime</h2>
-      <p>Audit-first, fail-closed, hash-only, no data custody.</p>
-    </div>
-    <div class="card half">
-      <h2>Output</h2>
-      <p>Artefatti TXT/JSON e receipt per opponibilità tecnica.</p>
-    </div>
-  </section>
-</main>
+    <div class="hr"></div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="mini">HERMETICUM — digital responsibility infrastructure</div>
-    <div class="sig">HERMETICUM B.C.E. S.r.l. · EU</div>
+    <h2>A) Componenti</h2>
+    <div class="block">
+1) IPR (Identity Primary Record)
+   - PUBLIC: condivisibile (hash-only)
+   - PRIVATE: payload sigillato (🜏) nel bundle scaricato
+
+2) Receipt
+   - receipt_sha256(json) = SHA-256 del testo JSON emesso
+
+3) Verify
+   - ricalcolo receipt e confronto PASS/FAIL (client-side)
+
+4) Audit Chain
+   - ogni audit include prev_hash (receipt precedente)
+   - genera receipt nuovo e bundle sigillato
+    </div>
+
+    <div class="hr"></div>
+
+    <h2>B) Regime</h2>
+    <div class="block">
+- Audit-first: evoluzione tracciata nel tempo.
+- Fail-closed: input invalido → nessuna emissione.
+- Hash-only: in pagina non si espone payload.
+- No data custody: nessuna persistenza server-side.
+    </div>
+
+    <div class="note">
+      Implicazione: integrità e timeline sono verificabili senza autorità centrale; la responsabilità del contenuto resta al titolare del PRIVATE.
+    </div>
+
+    <div class="hr"></div>
+
+    <h2>C) Flusso operativo</h2>
+    <div class="block">
+1) Create IPR PRIVATE → bundle + JSON + receipt (con payload sigillato)
+2) Create IPR PUBLIC → hash-only condivisibile
+3) Verify → PASS/FAIL su receipt_sha256(json)
+4) Audit → collegamento evolutivo (prev_hash → nuovo receipt)
+    </div>
   </div>
-</footer>
 
+  <div class="footer">
+    <div class="symbol">🜏</div>
+    HERMETICUM — Blindata · Computabile · Evolutiva<br>
+    HERMETICUM B.C.E. S.r.l. · UE
+  </div>
+</main>
 </body>
 </html>
