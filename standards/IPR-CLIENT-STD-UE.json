@@ -1,0 +1,27 @@
+{
+  "std": "HBCE-CLIENT-STD-UE-v1",
+  "scope": "IPR_EU_ACTIVATION",
+  "client": {
+    "type": "PERSON|ORG",
+    "display_name": "",
+    "contact": {
+      "email": "",
+      "phone": "",
+      "country": "IT"
+    }
+  },
+  "declarations": {
+    "truthfulness": true,
+    "understands_hash_only": true,
+    "understands_no_data_custody": true
+  },
+  "ipr_request": {
+    "kind": "IPR_EU_BASE",
+    "reason": "attivazione_base",
+    "notes": ""
+  },
+  "optional": {
+    "joker_symbiotic_mode": false,
+    "joker_tag": ""
+  }
+}
