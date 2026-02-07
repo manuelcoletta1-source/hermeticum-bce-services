@@ -1,100 +1,126 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>JOKER — 🜏 HERMETICUM</title>
-  <link rel="stylesheet" href="../assets/css/main.css" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>JOKER Node — IPR</title>
+
+<link rel="stylesheet" href="../assets/css/main.css"/>
+<link rel="stylesheet" href="../assets/css/brand.css"/>
+
+<script src="../assets/js/joker-node.js" defer></script>
 </head>
+
 <body>
+
 <header class="topbar">
   <div class="wrap">
     <div class="row">
-      <div class="brand">🜏 HERMETICUM</div>
+
+      <div class="brandmark">
+        <img src="../assets/img/hermeticum-mark-neon.svg" alt="IPR"/>
+        <span>IPR</span>
+      </div>
 
       <nav class="nav">
         <a href="../">Gateway</a>
-        <a href="../status/">Status</a>
         <a href="../activate/">Activate</a>
         <a href="../verify/">Verify</a>
         <a href="../infrastructure/">Infrastructure</a>
-        <a class="active" href="./">JOKER</a>
         <a href="../docs/">Docs</a>
+        <a href="../status/">Status</a>
       </nav>
 
       <div class="spacer"></div>
-      <div class="status active">Infrastructure Status: ACTIVE</div>
+      <div class="status active">EU Infrastructure: ACTIVE</div>
+
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <section class="hero">
-    <h1>JOKER (Ex-Ante Interface)</h1>
-    <p class="lead">
-      JOKER è un’interfaccia di misura ex-ante: verifica prerequisiti tecnici, produce evidenza (hash-only),
-      e applica PASS/FAIL in regime fail-closed. Non decide nel merito.
-    </p>
-  </section>
 
-  <section class="section">
-    <div class="grid">
-      <div class="card">Cosa è<small>Misura ex-ante / gate tecnico</small></div>
-      <div class="card">Cosa non è<small>Autorità / decisore / giudice</small></div>
-      <div class="card">Output<small>AUTHORIZED / DENIED + reason_code</small></div>
-    </div>
-  </section>
+<section class="hero">
+  <h1>JOKER Node Console</h1>
+  <p class="lead">
+    Evolutive node layer bound to a verified IPR receipt.
+    This console creates an append-only local timeline (hash-chained).
+    No server. No custody. Hash-only evidence.
+  </p>
 
-  <section class="section">
-    <div class="panel">
-      <h2>Funzione</h2>
-      <div style="color:var(--muted);line-height:1.7">
-        <p style="margin:0 0 10px">
-          JOKER opera come <strong>strato di ammissibilità</strong>: prima dell’esecuzione di un’azione (digitale o fisica),
-          misura la coerenza dei prerequisiti definiti da policy e receipt.
-        </p>
-        <p style="margin:0">
-          Se la prova è assente, incoerente o non verificabile, l’azione è <strong>bloccata</strong> (fail-closed).
-          Se i prerequisiti sono soddisfatti, l’azione è <strong>ammessa</strong> (AUTHORIZED).
-        </p>
-      </div>
-    </div>
-  </section>
+  <div class="cta">
+    <a class="btn" href="../verify/">Verify</a>
+    <button class="btn primary" type="button" onclick="JOKER_addEvent()">Add Event</button>
+    <button class="btn" type="button" onclick="JOKER_downloadTimeline()">Download Timeline</button>
+  </div>
 
-  <section class="section">
-    <div class="panel">
-      <h2>Non-goals (per evitare equivoci)</h2>
-      <ul style="color:var(--muted);line-height:1.75;margin:10px 0 0;padding-left:18px">
-        <li>Non certifica “bontà” o “merito” dell’azione.</li>
-        <li>Non sostituisce decisioni umane, giuridiche o politiche.</li>
-        <li>Non conserva dati personali di identità (no data custody).</li>
-        <li>Non opera profilazione: espone solo evidenza hash-only.</li>
-      </ul>
-    </div>
-  </section>
+  <div class="pillrow">
+    <span class="pill">Local-only</span>
+    <span class="pill">Append-only</span>
+    <span class="pill">Hash-chained</span>
+    <span class="pill">Audit-ready</span>
+  </div>
+</section>
 
-  <section class="section">
-    <div class="panel">
-      <h2>Flusso operativo</h2>
-      <div style="color:var(--muted);line-height:1.8">
-        Decisione → IPR (receipt) → Verify/JOKER → <strong>AUTHORIZED</strong> / <strong>DENIED</strong> → Evidence (hash-only)
-      </div>
-      <div class="cta">
-        <a class="btn primary" href="../verify/">Verify</a>
-        <a class="btn" href="../docs/">Docs</a>
-      </div>
+<section class="section">
+  <div class="panel">
+    <h2>Node Status</h2>
+    <div id="joker_status" class="result">Loading…</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="panel">
+    <h2>Receipt Binding (hash-only)</h2>
+    <div style="color:var(--muted);line-height:1.7">
+      <div><strong>nickname:</strong> <span id="joker_nickname">—</span></div>
+      <div><strong>payload_sha256:</strong> <span id="joker_payload">—</span></div>
+      <div><strong>receipt_sha256:</strong> <span id="joker_receipt">—</span></div>
+      <div><strong>sealed by:</strong> HERMETICUM B.C.E. S.r.l.</div>
     </div>
-  </section>
+  </div>
+</section>
+
+<section class="section">
+  <div class="panel">
+    <h2>New timeline event</h2>
+
+    <label for="joker_type">Event type</label>
+    <input id="joker_type" type="text" placeholder="e.g. CHECKPOINT | EVOLVE | ACCESS | AUDIT | NOTE"/>
+
+    <label for="joker_note">Event note (public-safe)</label>
+    <input id="joker_note" type="text" placeholder="Short note (avoid personal data)"/>
+
+    <div class="cta">
+      <button class="btn primary" type="button" onclick="JOKER_addEvent()">Append event</button>
+      <button class="btn" type="button" onclick="JOKER_clearDraft()">Clear</button>
+    </div>
+
+    <div style="color:var(--muted);line-height:1.7;margin-top:10px">
+      Events are stored locally and chained by hashes (previous_hash → event_hash).
+      Exporting produces a single JSON evidence pack.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="panel">
+    <h2>Timeline (append-only)</h2>
+    <div id="joker_timeline" class="result">No events yet.</div>
+  </div>
+</section>
+
 </main>
 
 <footer class="footer">
   <div class="wrap">
     <div class="row">
-      <strong>🜏 HERMETICUM</strong>
-      <div>JOKER — Ex-Ante Interface</div>
-      <div>UE-first · audit-first · hash-only · fail-closed · no data custody</div>
+      <strong>IPR Infrastructure</strong>
+      <div>JOKER Node — temporal evolution layer (local hash-chain)</div>
+      <div>EU-first · audit-first · fail-closed · hash-only · no data custody</div>
     </div>
   </div>
 </footer>
+
 </body>
 </html>
