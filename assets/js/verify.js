@@ -1,75 +1,98 @@
-function stripBOM(s){ return s.replace(/^\uFEFF/, ""); }
-function isHex64(s){ return /^[0-9a-f]{64}$/i.test(s); }
+// HBCE VERIFY ENGINE v2
+// Deterministic | fail-closed | hash-only
 
-function tryParseJSON(raw){
-  const t = stripBOM(String(raw || "").trim());
-  if (!t) return { ok:false, err:"EMPTY_INPUT" };
-
-  // Quick path: single SHA-256
-  if (isHex64(t)) return { ok:true, kind:"hash", value:t.toLowerCase() };
-
-  // JSON path
-  try {
-    const obj = JSON.parse(t);
-    return { ok:true, kind:"json", value:obj };
-  } catch (e) {
-    return { ok:false, err:"INPUT_NOT_JSON_OR_HASH" };
-  }
+function canonicalize(obj){
+  const isObj = (x)=>x && typeof x==="object" && !Array.isArray(x);
+  const sortRec = (x)=>{
+    if(Array.isArray(x)) return x.map(sortRec);
+    if(!isObj(x)) return x;
+    const o={};
+    Object.keys(x).sort().forEach(k=>o[k]=sortRec(x[k]));
+    return o;
+  };
+  return JSON.stringify(sortRec(obj));
 }
 
-function normalize(parsed){
-  if (parsed.kind === "hash") return { parsed_as:"hash", hash:parsed.value };
-
-  const v = parsed.value;
-
-  // wrapper: { receipt: {...}, client_std_full: {...} }
-  if (v && typeof v === "object" && v.receipt) {
-    return { parsed_as:"wrapper", receipt:v.receipt, client_std_full: v.client_std_full || null };
-  }
-
-  // array: [ {type:"receipt",data:{...}}, {type:"client_std",data:{...}} ]
-  if (Array.isArray(v)) {
-    const receipt = v.find(x => x && x.type === "receipt")?.data || null;
-    const client  = v.find(x => x && x.type === "client_std")?.data || null;
-    return { parsed_as:"array", receipt, client_std_full: client };
-  }
-
-  // receipt object
-  return { parsed_as:"receipt", receipt:v, client_std_full:null };
+async function sha256Hex(str){
+  const enc = new TextEncoder().encode(str);
+  const buf = await crypto.subtle.digest("SHA-256", enc);
+  const arr = new Uint8Array(buf);
+  return Array.from(arr).map(b=>b.toString(16).padStart(2,"0")).join("");
 }
 
-function deny(outEl, reason, extra){
-  outEl.className = "result bad";
-  outEl.textContent = ["DENIED", "reason_code=" + reason, extra || ""].filter(Boolean).join("\n");
+function out(txt, ok){
+  const el = document.getElementById("hbce_out");
+  if(!el) return;
+  el.className = "result " + (ok ? "ok":"err");
+  el.textContent = txt;
 }
 
-function ok(outEl, parsedAs, extra){
-  outEl.className = "result ok";
-  outEl.textContent = ["AUTHORIZED", "parsed_as=" + parsedAs, "policy=HASH_ONLY|FAIL_CLOSED", extra || ""].filter(Boolean).join("\n");
+function tryParseJSON(x){
+  try{return JSON.parse(x);}catch{return null;}
 }
 
-window.HBCE_verify = function(){
-  const input = document.getElementById("hbce_input");
-  const outEl = document.getElementById("hbce_out");
+async function verifyReceipt(obj){
 
-  const parsed = tryParseJSON(input.value);
-  if (!parsed.ok) {
-    return deny(outEl, parsed.err, "Atteso: JSON receipt (inizia con '{') oppure hash SHA-256 (64 caratteri).");
+  if(!obj.payload_sha256) return out("DENIED\nreason_code=MISSING_PAYLOAD_HASH", false);
+  if(!obj.receipt_sha256) return out("DENIED\nreason_code=MISSING_RECEIPT_HASH", false);
+
+  const canon = canonicalize({
+    proto: obj.proto,
+    kind: obj.kind,
+    policy: obj.policy,
+    payload_sha256: obj.payload_sha256,
+    issued_at: obj.issued_at,
+    public: obj.public,
+    issuer: obj.issuer
+  });
+
+  const calc = await sha256Hex(canon);
+
+  if(calc !== obj.receipt_sha256){
+    return out("DENIED\nreason_code=HASH_MISMATCH", false);
   }
 
-  const n = normalize(parsed);
+  return out("AUTHORIZED\nreceipt valid\npayload="+obj.payload_sha256, true);
+}
 
-  // Hash-only quick check (format)
-  if (n.parsed_as === "hash") {
-    return ok(outEl, "hash", "note=Formato hash valido (64 hex).");
+async function HBCE_verify(){
+
+  const raw = document.getElementById("hbce_input").value.trim();
+  if(!raw) return out("Waiting for input.", false);
+
+  // SHA only check
+  if(/^[a-f0-9]{64}$/i.test(raw)){
+    return out("FORMAT OK\nhash received\n(no receipt object to verify)", true);
   }
 
-  // Fail-closed structural checks
-  const r = n.receipt;
-  if (!r || typeof r !== "object") return deny(outEl, "RECEIPT_MISSING");
-  if (!r.payload_sha256 || !isHex64(String(r.payload_sha256))) return deny(outEl, "PAYLOAD_SHA256_INVALID");
-  if (!r.receipt_sha256 || !isHex64(String(r.receipt_sha256))) return deny(outEl, "RECEIPT_SHA256_INVALID");
+  const parsed = tryParseJSON(raw);
+  if(!parsed) return out("DENIED\nreason_code=INVALID_JSON", false);
 
-  // Step successivo (quando vuoi): ricalcolo deterministico receipt_sha256 e confronto.
-  return ok(outEl, n.parsed_as, "note=Struttura receipt valida.");
-};
+  // wrapper
+  if(parsed.receipt) return verifyReceipt(parsed.receipt);
+
+  // direct receipt
+  if(parsed.payload_sha256) return verifyReceipt(parsed);
+
+  // array
+  if(Array.isArray(parsed)){
+    const r = parsed.find(x=>x.type==="receipt");
+    if(r && r.data) return verifyReceipt(r.data);
+  }
+
+  return out("DENIED\nreason_code=UNSUPPORTED_FORMAT", false);
+}
+
+// AUTOLOAD RECEIPT FROM CREATE
+window.addEventListener("DOMContentLoaded", ()=>{
+  try{
+    const r = localStorage.getItem("HBCE_LAST_RECEIPT");
+    if(r){
+      const obj = JSON.parse(r);
+      const input = document.getElementById("hbce_input");
+      if(input) input.value = JSON.stringify(obj,null,2);
+    }
+  }catch(e){}
+});
+
+window.HBCE_verify = HBCE_verify;
