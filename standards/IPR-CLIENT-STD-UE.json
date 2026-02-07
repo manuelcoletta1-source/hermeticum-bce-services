@@ -20,7 +20,6 @@
     "reason": "attivazione_base",
     "notes": ""
   },
-
   "identity_eu": {
     "enabled": false,
     "level": "BASIC|EU_IDV1",
@@ -55,9 +54,8 @@
       "personal_data_stays_private": true
     }
   },
-
   "optional": {
-    "joker_symbiotic_mode": true,
-    "joker_tag": "ManuHell"
+    "joker_symbiotic_mode": false,
+    "joker_tag": ""
   }
 }
