@@ -1,69 +1,97 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Verify — HERMETICUM</title>
+  <title>Verify — IPR Infrastructure</title>
 
-  <!-- CSS globale (UE-style) -->
   <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/brand.css" />
 
-  <!-- Verify engine -->
   <script src="../assets/js/verify.js" defer></script>
 </head>
+
 <body>
+
 <header class="topbar">
   <div class="wrap">
     <div class="row">
-      <div class="brand">🜏 HERMETICUM</div>
+
+      <div class="brandmark">
+        <img src="../assets/img/hermeticum-mark-neon.svg" alt="IPR"/>
+        <span>IPR</span>
+      </div>
 
       <nav class="nav">
         <a href="../">Gateway</a>
-        <a href="../status/">Status</a>
         <a href="../activate/">Activate</a>
         <a class="active" href="./">Verify</a>
         <a href="../infrastructure/">Infrastructure</a>
-        <a href="../joker/">JOKER</a>
         <a href="../docs/">Docs</a>
+        <a href="../status/">Status</a>
       </nav>
 
       <div class="spacer"></div>
-      <div class="status active">Infrastructure Status: ACTIVE</div>
+      <div class="status active">EU Infrastructure: ACTIVE</div>
+
     </div>
   </div>
 </header>
 
 <main class="wrap">
+
   <section class="hero">
     <h1>Verify (Ex-Ante)</h1>
     <p class="lead">
-      Incolla una <strong>receipt JSON</strong> (da <code>{</code> a <code>}</code>) oppure un <strong>hash SHA-256</strong>.
-      Il validator misura prerequisiti tecnici e applica PASS/FAIL (fail-closed).
+      Paste a <strong>receipt JSON</strong> (full object) or a <strong>SHA-256</strong> (64 hex).
+      The verifier is fail-closed: missing or invalid evidence returns <strong>DENIED</strong> with <strong>reason_code</strong>.
     </p>
+
+    <div class="cta">
+      <a class="btn" href="../activate/">Activate IPR</a>
+      <a class="btn" href="../docs/">Documentation</a>
+      <a class="btn" href="../status/">Status</a>
+    </div>
   </section>
 
   <section class="section">
     <div class="panel">
       <label for="hbce_input">Input</label>
-      <textarea id="hbce_input" placeholder="Incolla qui receipt JSON (completa) oppure hash SHA-256 (64 caratteri)"></textarea>
+      <textarea id="hbce_input" placeholder="Paste receipt JSON { ... } OR SHA-256 (64 hex)"></textarea>
 
       <div class="cta">
         <button class="btn primary" type="button" onclick="HBCE_verify()">Verify</button>
-        <a class="btn" href="../activate/">Attiva IPR</a>
+        <button class="btn" type="button" onclick="document.getElementById('hbce_input').value='';document.getElementById('hbce_out').className='result';document.getElementById('hbce_out').textContent='Waiting for input.';">Clear</button>
       </div>
 
-      <div id="hbce_out" class="result">In attesa di input.</div>
+      <div id="hbce_out" class="result">Waiting for input.</div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="panel">
+      <h2>Accepted formats</h2>
+      <div style="color:var(--muted);line-height:1.7">
+        <ul style="margin:0;padding-left:18px">
+          <li><strong>Receipt JSON</strong> — an object containing <code>payload_sha256</code> and <code>receipt_sha256</code></li>
+          <li><strong>Wrapper</strong> — <code>{"receipt":{...},"client_std_full":{...}}</code></li>
+          <li><strong>Array</strong> — <code>[{"type":"receipt","data":{...}}, {"type":"client_std","data":{...}}]</code></li>
+          <li><strong>SHA-256</strong> — 64 hex characters (format check)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="footer">
   <div class="wrap">
     <div class="row">
-      <strong>🜏 HERMETICUM</strong>
-      <div>UE-first · audit-first · hash-only · fail-closed · no data custody</div>
+      <strong>IPR Infrastructure</strong>
+      <div>EU-first · audit-first · fail-closed · hash-only</div>
     </div>
   </div>
 </footer>
+
 </body>
 </html>
