@@ -16,7 +16,8 @@
     <h1>Attiva IPR Europeo (Base)</h1>
     <p class="muted">
       Standard Cliente (UE) → payload_sha256 → scontrino timbrato (receipt) con marchio Hermeticum.<br>
-      Timbri: UNEBDO + OPC. AI JOKER opzionale (symbiotic temporal) ma <strong>fail-closed</strong> sullo standard cliente.
+      Opzionale: <strong>Identità UE (tipo banca)</strong> per opponibilità avanzata (CIE/eIDAS/CF ecc.).<br>
+      Pubblico: registry contiene solo hash e receipt. Privato: i dati personali restano nel tuo payload (PRIVATE).
     </p>
 
     <nav class="nav">
@@ -38,7 +39,7 @@
       </p>
 
       <label>Standard Cliente (JSON)</label>
-      <textarea id="clientStd" rows="12"></textarea>
+      <textarea id="clientStd" rows="14"></textarea>
 
       <div class="row">
         <div>
@@ -51,8 +52,8 @@
         <div>
           <label>AI JOKER (opzionale)</label>
           <p class="small">
-            Qui imposti JOKER, ma viene scritto nello <strong>Standard Cliente</strong> prima dell’hash.
-            Il receipt lo riflette in modo <strong>coerente</strong> (fail-closed).
+            JOKER viene scritto nello <strong>Standard Cliente</strong> prima dell’hash.
+            Il receipt lo riflette in modo coerente (fail-closed).
           </p>
           <div class="row">
             <div>
@@ -83,7 +84,7 @@
       <input id="outPayloadSha" readonly />
 
       <label>receipt (JSON timbrato Hermeticum)</label>
-      <textarea id="outReceipt" rows="14" readonly></textarea>
+      <textarea id="outReceipt" rows="16" readonly></textarea>
 
       <div class="hr"></div>
 
@@ -113,7 +114,6 @@
 
     function setPill(t){ $("pill").textContent = t; }
 
-    // pre-carica template
     fetch("../standards/IPR-CLIENT-STD-UE.json")
       .then(r => r.text())
       .then(t => { if(!$("clientStd").value.trim()) $("clientStd").value = t; })
@@ -131,21 +131,22 @@
         return;
       }
 
-      // 1) scrive JOKER nello standard cliente (prima dell’hash)
       const client = parsed.value;
+
+      // JOKER scritto nel payload (prima dell’hash)
       client.optional = client.optional || {};
       client.optional.joker_symbiotic_mode = ($("jokerEnabled").value === "true");
       client.optional.joker_tag = ($("jokerTag").value || "").trim();
 
-      // 2) rende visibile all’utente cosa sta “attivando”
+      // mostra all’utente cosa sta attivando
       $("clientStd").value = JSON.stringify(client, null, 2);
 
       lastClient = client;
 
-      // 3) hash sullo standard cliente aggiornato
+      // hash sul payload aggiornato
       const payloadSha = await sha256Hex(canonicalStringify(lastClient));
 
-      // 4) receipt timbrato: JOKER deriva SOLO dal client standard (fail-closed)
+      // receipt timbrato (identity level derivato da identity_eu.enabled)
       const receipt = await buildStampedIpREuReceipt({
         mode,
         payloadSha256: payloadSha,
