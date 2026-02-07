@@ -15,13 +15,14 @@
     </div>
     <h1>Nodo Centrale</h1>
     <p class="muted">
-      Attivazione IPR Europeo (Base) con standard cliente → hash → scontrino timbrato (receipt).<br>
-      Regime: UE_FIRST · AUDIT_FIRST · HASH_ONLY · FAIL_CLOSED · NO_DATA_CUSTODY
+      Nodo UE pubblico: attivazione IPR → conferma OPC → registry append-only su GitHub.
     </p>
 
     <nav class="nav">
       <a href="./">Home</a>
       <a href="./activate/">Attiva IPR Europeo</a>
+      <a href="./opc/confirm/">OPC Confirm</a>
+      <a href="./registry/">Registry</a>
       <a href="./verify/">Verify</a>
       <a href="./audit/">Audit</a>
       <a href="./architecture/">Architettura</a>
@@ -31,46 +32,23 @@
 
   <main class="wrap">
     <section class="card">
-      <h2>Attiva IPR Europeo (Base)</h2>
-      <p>
-        Per il lettore: <strong>crei il tuo IPR</strong> come atto opponibile.<br>
-        Per la tecnica: il sito genera un <strong>riferimento SHA-256</strong> e rilascia uno
-        <strong>scontrino timbrato</strong> (receipt) con marchio Hermeticum, UNEBDO e OPC.
-      </p>
-      <a class="btn" href="./activate/">Apri “Attiva IPR Europeo”</a>
+      <h2>Flusso UE (pubblico)</h2>
+      <div class="mono">
+1) Attiva IPR Europeo (Base) → HBCE_RECEIPT_IPR_EU.json
+2) OPC Confirm → OPC_CONFIRM_RECEIPT.json (prev_hash = receipt_sha256 base)
+3) Registry → append entry (entry_hash) → commit su GitHub
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Regime</h2>
       <div class="tags">
         <span class="pill">UE_FIRST</span>
         <span class="pill">AUDIT_FIRST</span>
         <span class="pill">HASH_ONLY</span>
         <span class="pill">FAIL_CLOSED</span>
         <span class="pill">NO_DATA_CUSTODY</span>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Verify</h2>
-      <p>Verifica deterministica PASS/FAIL del receipt e (opzionale) del payload.</p>
-      <a class="btn" href="./verify/">Apri Verify</a>
-    </section>
-
-    <section class="card">
-      <h2>Audit</h2>
-      <p>Catena append-only con <strong>prev_hash</strong> per opponibilità temporale.</p>
-      <a class="btn" href="./audit/">Apri Audit</a>
-    </section>
-
-    <section class="card">
-      <h2>Sequenza unica</h2>
-      <div class="mono">
-Standard Cliente (UE)
-↓
-payload_sha256 (hash-only)
-↓
-Receipt timbrato (Hermeticum + UNEBDO + OPC)
-↓
-Verify (PASS/FAIL)
-↓
-Audit (prev_hash append-only)
+        <span class="pill">PUBLIC_REGISTRY</span>
       </div>
     </section>
   </main>
