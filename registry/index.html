@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registry — Hermeticum</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <header class="hdr">
+    <div class="sym">🜏</div>
+    <div class="brand">
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+      <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
+    </div>
+    <h1>Registry pubblico IPR UE</h1>
+    <p class="muted">
+      Registro append-only su GitHub. Il browser prepara l’aggiornamento, tu lo committi.<br>
+      Pubblico: contiene hash e receipt (non custodiamo dati).
+    </p>
+
+    <nav class="nav">
+      <a href="../">Home</a>
+      <a href="../activate/">Attiva IPR Europeo</a>
+      <a href="../opc/confirm/">OPC Confirm</a>
+      <a href="../verify/">Verify</a>
+      <a href="../audit/">Audit</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>Input</h2>
+
+      <label>IPR Base receipt (JSON)</label>
+      <textarea id="baseReceipt" rows="10" placeholder="Incolla HBCE_RECEIPT_IPR_EU.json"></textarea>
+
+      <label>OPC Confirm receipt (JSON)</label>
+      <textarea id="opcConfirm" rows="10" placeholder="Incolla OPC_CONFIRM_RECEIPT.json"></textarea>
+
+      <div class="hr"></div>
+
+      <button class="btn" id="btnBuild">PREPARA ENTRY REGISTRY</button>
+      <span class="pill" id="pill">IDLE</span>
+
+      <div class="hr"></div>
+
+      <label>registry update (JSON completo)</label>
+      <textarea id="outRegistry" rows="14" readonly></textarea>
+
+      <div class="row">
+        <button class="btn" id="btnDlRegistry">Scarica ipr_registry.json aggiornato</button>
+      </div>
+
+      <p class="small">
+        Operatività: apri il repo su GitHub → modifica <strong>registry/ipr_registry.json</strong> → incolla l’output → commit.
+        Questo è il meccanismo “pubblico” senza backend.
+      </p>
+    </section>
+  </main>
+
+  <footer class="ftr">
+    🜏 HERMETICUM — Registry pubblico · HERMETICUM B.C.E. S.r.l.
+  </footer>
+
+  <script src="../assets/app.js"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let lastRegistry = null;
+
+    function setPill(t){ $("pill").textContent = t; }
+
+    async function loadRegistry(){
+      const r = await fetch("./ipr_registry.json", { cache: "no-store" });
+      if(!r.ok) throw new Error("Impossibile caricare registry/ipr_registry.json");
+      return await r.json();
+    }
+
+    $("btnBuild").addEventListener("click", async () => {
+      setPill("WORK");
+
+      const br = safeParseJson($("baseReceipt").value.trim());
+      if(!br.ok){ setPill("FAIL"); alert("Base receipt non valido:\n"+br.error); return; }
+
+      const oc = safeParseJson($("opcConfirm").value.trim());
+      if(!oc.ok){ setPill("FAIL"); alert("OPC confirm non valido:\n"+oc.error); return; }
+
+      // controlli minimi di coerenza
+      if(oc.value.prev_hash !== br.value.receipt_sha256){
+        setPill("FAIL");
+        alert("Coerenza fallita: OPC.prev_hash deve essere uguale a base.receipt_sha256");
+        return;
+      }
+
+      let registry;
+      try { registry = await loadRegistry(); }
+      catch(e){ setPill("FAIL"); alert(String(e)); return; }
+
+      const entries = Array.isArray(registry.entries) ? registry.entries : [];
+      const prevEntryHash = (entries.length ? entries[entries.length - 1].entry_hash : (registry.registry_prev_hash || ""));
+
+      const entry = await buildRegistryEntry({
+        registry_prev_hash: prevEntryHash,
+        baseReceipt: br.value,
+        opcConfirm: oc.value
+      });
+
+      // append-only
+      registry.entries = entries.concat([entry]);
+      registry.registry_prev_hash = entry.entry_hash;
+      registry.updated_at = nowISO();
+
+      lastRegistry = registry;
+      $("outRegistry").value = JSON.stringify(registry, null, 2);
+      setPill("OK");
+    });
+
+    $("btnDlRegistry").addEventListener("click", () => {
+      if(!lastRegistry){ alert("Prepara prima l’entry."); return; }
+      downloadText("ipr_registry.json", JSON.stringify(lastRegistry, null, 2));
+    });
+  </script>
+</body>
+</html>
