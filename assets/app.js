@@ -40,10 +40,14 @@ function safeParseJson(text){
 /**
  * HBCE-IPR-EU Receipt (BASE)
  * - JOKER FAIL-CLOSED: si attiva solo se clientStd.optional.joker_symbiotic_mode === true
+ * - identity level: BASIC (default) o EU_IDV1 se identity_eu.enabled === true
  * - receipt_sha256 = sha256(canonical_json(core))
  */
 async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientStd }){
   const jokerOn = (clientStd?.optional?.joker_symbiotic_mode === true);
+
+  const idvEnabled = (clientStd?.identity_eu?.enabled === true);
+  const identityLevel = idvEnabled ? (clientStd?.identity_eu?.level || "EU_IDV1") : "BASIC";
 
   const core = {
     proto: "HBCE-IPR-EU-v1",
@@ -66,6 +70,11 @@ async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientS
       std: clientStd?.std || "HBCE-CLIENT-STD-UE-v1",
       scope: clientStd?.scope || "IPR_EU_ACTIVATION"
     },
+    identity: {
+      level: identityLevel,
+      enabled: idvEnabled,
+      methods: idvEnabled ? (clientStd?.identity_eu?.method || {}) : {}
+    },
     joker: jokerOn ? {
       enabled: true,
       mode: "SYMBIOTIC_TEMPORAL",
@@ -78,41 +87,7 @@ async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientS
 }
 
 /**
- * OPC CONFIRM RECEIPT (UE NODE)
- * - Conferma un IPR_EU_BASE_RECEIPT
- * - prev_hash = receipt_sha256 del base receipt
- */
-async function buildOpcConfirmReceipt({ baseReceipt, confirm_note }){
-  const baseReceiptSha = baseReceipt?.receipt_sha256 || "";
-  const basePayloadSha = baseReceipt?.payload_sha256 || "";
-
-  const core = {
-    proto: "OPC-CONFIRM-v1",
-    kind: "OPC_CONFIRM_RECEIPT",
-    issuer: {
-      hallmark: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
-      legal: "HERMETICUM B.C.E. S.r.l.",
-      symbol: "🜏"
-    },
-    policy: ["UE_FIRST","AUDIT_FIRST","HASH_ONLY","FAIL_CLOSED","NO_DATA_CUSTODY"],
-    stamps: {
-      OPC: { proto: "OPC-v1", stamp: "OPC_CONFIRMED" },
-      UNEBDO: { proto: "UNEBDO-v1", stamp: "UNEBDO_STAMP_PRESENT" }
-    },
-    created_at: nowISO(),
-    // riferimento al base receipt (append-only)
-    prev_hash: baseReceiptSha,
-    base_receipt_sha256: baseReceiptSha,
-    base_payload_sha256: basePayloadSha,
-    note: (confirm_note || "").trim()
-  };
-
-  const confirmSha = await sha256Hex(canonicalStringify(core));
-  return { ...core, receipt_sha256: confirmSha };
-}
-
-/**
- * Verify deterministico receipt timbrati / OPC confirm
+ * Verify deterministico receipt timbrati
  */
 async function verifyStampedReceipt(receiptObj, payloadObjOrNull){
   let payloadSha = receiptObj?.payload_sha256 || "";
@@ -123,7 +98,6 @@ async function verifyStampedReceipt(receiptObj, payloadObjOrNull){
   const core = { ...receiptObj };
   delete core.receipt_sha256;
 
-  // forza payload_sha256 coerente solo se il receipt ha payload_sha256
   if (Object.prototype.hasOwnProperty.call(core, "payload_sha256")){
     core.payload_sha256 = payloadSha;
   }
@@ -138,34 +112,4 @@ async function verifyStampedReceipt(receiptObj, payloadObjOrNull){
     declared_receipt_sha256: declared,
     payload_sha256: payloadSha
   };
-}
-
-/**
- * REGISTRY (public)
- * - entry_hash = sha256(canonical_json(entry_without_entry_hash))
- * - registry_prev_hash = hash dell'entry precedente (append-only)
- */
-async function buildRegistryEntry({ registry_prev_hash, baseReceipt, opcConfirm }){
-  const core = {
-    proto: "HBCE-REGISTRY-v1",
-    kind: "IPR_EU_REGISTRY_ENTRY",
-    issuer: {
-      hallmark: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
-      legal: "HERMETICUM B.C.E. S.r.l.",
-      symbol: "🜏"
-    },
-    created_at: nowISO(),
-    registry_prev_hash: registry_prev_hash || "",
-    ipr: {
-      base_receipt_sha256: baseReceipt?.receipt_sha256 || "",
-      base_payload_sha256: baseReceipt?.payload_sha256 || ""
-    },
-    opc: {
-      confirm_receipt_sha256: opcConfirm?.receipt_sha256 || "",
-      prev_hash: opcConfirm?.prev_hash || ""
-    }
-  };
-
-  const entry_hash = await sha256Hex(canonicalStringify(core));
-  return { ...core, entry_hash };
 }
