@@ -4,14 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Verify — HERMETICUM</title>
+
+  <!-- CSS globale (UE-style) -->
   <link rel="stylesheet" href="../assets/css/main.css" />
+
+  <!-- Verify engine -->
   <script src="../assets/js/verify.js" defer></script>
 </head>
 <body>
 <header class="topbar">
   <div class="wrap">
     <div class="row">
-      <div class="brand">HERMETICUM</div>
+      <div class="brand">🜏 HERMETICUM</div>
+
       <nav class="nav">
         <a href="../">Gateway</a>
         <a href="../status/">Status</a>
@@ -21,6 +26,7 @@
         <a href="../joker/">JOKER</a>
         <a href="../docs/">Docs</a>
       </nav>
+
       <div class="spacer"></div>
       <div class="status active">Infrastructure Status: ACTIVE</div>
     </div>
@@ -31,19 +37,21 @@
   <section class="hero">
     <h1>Verify (Ex-Ante)</h1>
     <p class="lead">
-      Incolla una <strong>receipt JSON</strong> oppure un <strong>hash SHA-256</strong>. Il validator non decide nel merito:
-      misura prerequisiti tecnici e applica PASS/FAIL (fail-closed).
+      Incolla una <strong>receipt JSON</strong> (da <code>{</code> a <code>}</code>) oppure un <strong>hash SHA-256</strong>.
+      Il validator misura prerequisiti tecnici e applica PASS/FAIL (fail-closed).
     </p>
   </section>
 
   <section class="section">
     <div class="panel">
       <label for="hbce_input">Input</label>
-      <textarea id="hbce_input" placeholder="Incolla qui receipt JSON (da { a }) oppure hash SHA-256 (64 caratteri)"></textarea>
+      <textarea id="hbce_input" placeholder="Incolla qui receipt JSON (completa) oppure hash SHA-256 (64 caratteri)"></textarea>
+
       <div class="cta">
-        <button class="btn primary" onclick="HBCE_verify()">Verify</button>
+        <button class="btn primary" type="button" onclick="HBCE_verify()">Verify</button>
         <a class="btn" href="../activate/">Attiva IPR</a>
       </div>
+
       <div id="hbce_out" class="result">In attesa di input.</div>
     </div>
   </section>
@@ -52,7 +60,7 @@
 <footer class="footer">
   <div class="wrap">
     <div class="row">
-      <strong>HERMETICUM</strong>
+      <strong>🜏 HERMETICUM</strong>
       <div>UE-first · audit-first · hash-only · fail-closed · no data custody</div>
     </div>
   </div>
