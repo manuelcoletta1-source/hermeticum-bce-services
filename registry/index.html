@@ -1,124 +1,85 @@
-<!DOCTYPE html>
-<html lang="it">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registry — Hermeticum</title>
-  <link rel="stylesheet" href="../assets/style.css" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IPR Node Registry</title>
+
+<link rel="stylesheet" href="../assets/css/main.css"/>
+<link rel="stylesheet" href="../assets/css/brand.css"/>
+
+<script src="../assets/js/registry.js" defer></script>
 </head>
+
 <body>
-  <header class="hdr">
-    <div class="sym">🜏</div>
-    <div class="brand">
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-      <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
-    </div>
-    <h1>Registry pubblico IPR UE</h1>
-    <p class="muted">
-      Registro append-only su GitHub. Il browser prepara l’aggiornamento, tu lo committi.<br>
-      Pubblico: contiene hash e receipt (non custodiamo dati).
-    </p>
 
-    <nav class="nav">
-      <a href="../">Home</a>
-      <a href="../activate/">Attiva IPR Europeo</a>
-      <a href="../opc/confirm/">OPC Confirm</a>
-      <a href="../verify/">Verify</a>
-      <a href="../audit/">Audit</a>
-    </nav>
-  </header>
+<header class="topbar">
+<div class="wrap">
+<div class="row">
 
-  <main class="wrap">
-    <section class="card">
-      <h2>Input</h2>
+<div class="brandmark">
+<img src="../assets/img/hermeticum-mark-neon.svg"/>
+<span>IPR</span>
+</div>
 
-      <label>IPR Base receipt (JSON)</label>
-      <textarea id="baseReceipt" rows="10" placeholder="Incolla HBCE_RECEIPT_IPR_EU.json"></textarea>
+<nav class="nav">
+<a href="../">Gateway</a>
+<a href="../activate/">Activate</a>
+<a href="../verify/">Verify</a>
+<a href="../projects/">Projects</a>
+<a class="active" href="./">Registry</a>
+</nav>
 
-      <label>OPC Confirm receipt (JSON)</label>
-      <textarea id="opcConfirm" rows="10" placeholder="Incolla OPC_CONFIRM_RECEIPT.json"></textarea>
+<div class="spacer"></div>
+<div class="status active">Public Node Network</div>
 
-      <div class="hr"></div>
+</div>
+</div>
+</header>
 
-      <button class="btn" id="btnBuild">PREPARA ENTRY REGISTRY</button>
-      <span class="pill" id="pill">IDLE</span>
+<main class="wrap">
 
-      <div class="hr"></div>
+<section class="hero">
+<h1>IPR Node Network</h1>
+<p class="lead">
+Public append-only registry of verified IPR nodes.  
+No personal data. Hash-only identity.
+</p>
+</section>
 
-      <label>registry update (JSON completo)</label>
-      <textarea id="outRegistry" rows="14" readonly></textarea>
+<section class="section">
 
-      <div class="row">
-        <button class="btn" id="btnDlRegistry">Scarica ipr_registry.json aggiornato</button>
-      </div>
+<div class="panel">
+<h2>Register node</h2>
 
-      <p class="small">
-        Operatività: apri il repo su GitHub → modifica <strong>registry/ipr_registry.json</strong> → incolla l’output → commit.
-        Questo è il meccanismo “pubblico” senza backend.
-      </p>
-    </section>
-  </main>
+<div style="color:var(--muted)">
+You must have verified your IPR locally before registering.
+</div>
 
-  <footer class="ftr">
-    🜏 HERMETICUM — Registry pubblico · HERMETICUM B.C.E. S.r.l.
-  </footer>
+<div class="cta">
+<button class="btn primary" onclick="registerNode()">Register this node</button>
+</div>
 
-  <script src="../assets/app.js"></script>
-  <script>
-    const $ = (id) => document.getElementById(id);
-    let lastRegistry = null;
+<div id="reg_status" class="result"></div>
 
-    function setPill(t){ $("pill").textContent = t; }
+</div>
 
-    async function loadRegistry(){
-      const r = await fetch("./ipr_registry.json", { cache: "no-store" });
-      if(!r.ok) throw new Error("Impossibile caricare registry/ipr_registry.json");
-      return await r.json();
-    }
+</section>
 
-    $("btnBuild").addEventListener("click", async () => {
-      setPill("WORK");
+<section class="section">
+<div class="panel">
+<h2>Active nodes</h2>
+<pre id="node_list" class="result">loading...</pre>
+</div>
+</section>
 
-      const br = safeParseJson($("baseReceipt").value.trim());
-      if(!br.ok){ setPill("FAIL"); alert("Base receipt non valido:\n"+br.error); return; }
+</main>
 
-      const oc = safeParseJson($("opcConfirm").value.trim());
-      if(!oc.ok){ setPill("FAIL"); alert("OPC confirm non valido:\n"+oc.error); return; }
+<footer class="footer">
+<div class="wrap">
+<strong>IPR Public Registry</strong>
+</div>
+</footer>
 
-      // controlli minimi di coerenza
-      if(oc.value.prev_hash !== br.value.receipt_sha256){
-        setPill("FAIL");
-        alert("Coerenza fallita: OPC.prev_hash deve essere uguale a base.receipt_sha256");
-        return;
-      }
-
-      let registry;
-      try { registry = await loadRegistry(); }
-      catch(e){ setPill("FAIL"); alert(String(e)); return; }
-
-      const entries = Array.isArray(registry.entries) ? registry.entries : [];
-      const prevEntryHash = (entries.length ? entries[entries.length - 1].entry_hash : (registry.registry_prev_hash || ""));
-
-      const entry = await buildRegistryEntry({
-        registry_prev_hash: prevEntryHash,
-        baseReceipt: br.value,
-        opcConfirm: oc.value
-      });
-
-      // append-only
-      registry.entries = entries.concat([entry]);
-      registry.registry_prev_hash = entry.entry_hash;
-      registry.updated_at = nowISO();
-
-      lastRegistry = registry;
-      $("outRegistry").value = JSON.stringify(registry, null, 2);
-      setPill("OK");
-    });
-
-    $("btnDlRegistry").addEventListener("click", () => {
-      if(!lastRegistry){ alert("Prepara prima l’entry."); return; }
-      downloadText("ipr_registry.json", JSON.stringify(lastRegistry, null, 2));
-    });
-  </script>
 </body>
 </html>
