@@ -39,7 +39,7 @@ function safeParseJson(text){
 
 /**
  * HBCE-IPR-EU Receipt (BASE)
- * - JOKER è FAIL-CLOSED: si attiva solo se clientStd.optional.joker_symbiotic_mode === true
+ * - JOKER FAIL-CLOSED: si attiva solo se clientStd.optional.joker_symbiotic_mode === true
  * - receipt_sha256 = sha256(canonical_json(core))
  */
 async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientStd }){
@@ -78,9 +78,41 @@ async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientS
 }
 
 /**
- * Verify deterministico del receipt “stampato”
- * - Se payload fornito: ricalcola payload_sha256 da payload
- * - expected_receipt_sha256 = sha256(canonical_json(core_without_receipt_sha256))
+ * OPC CONFIRM RECEIPT (UE NODE)
+ * - Conferma un IPR_EU_BASE_RECEIPT
+ * - prev_hash = receipt_sha256 del base receipt
+ */
+async function buildOpcConfirmReceipt({ baseReceipt, confirm_note }){
+  const baseReceiptSha = baseReceipt?.receipt_sha256 || "";
+  const basePayloadSha = baseReceipt?.payload_sha256 || "";
+
+  const core = {
+    proto: "OPC-CONFIRM-v1",
+    kind: "OPC_CONFIRM_RECEIPT",
+    issuer: {
+      hallmark: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
+      legal: "HERMETICUM B.C.E. S.r.l.",
+      symbol: "🜏"
+    },
+    policy: ["UE_FIRST","AUDIT_FIRST","HASH_ONLY","FAIL_CLOSED","NO_DATA_CUSTODY"],
+    stamps: {
+      OPC: { proto: "OPC-v1", stamp: "OPC_CONFIRMED" },
+      UNEBDO: { proto: "UNEBDO-v1", stamp: "UNEBDO_STAMP_PRESENT" }
+    },
+    created_at: nowISO(),
+    // riferimento al base receipt (append-only)
+    prev_hash: baseReceiptSha,
+    base_receipt_sha256: baseReceiptSha,
+    base_payload_sha256: basePayloadSha,
+    note: (confirm_note || "").trim()
+  };
+
+  const confirmSha = await sha256Hex(canonicalStringify(core));
+  return { ...core, receipt_sha256: confirmSha };
+}
+
+/**
+ * Verify deterministico receipt timbrati / OPC confirm
  */
 async function verifyStampedReceipt(receiptObj, payloadObjOrNull){
   let payloadSha = receiptObj?.payload_sha256 || "";
@@ -91,8 +123,10 @@ async function verifyStampedReceipt(receiptObj, payloadObjOrNull){
   const core = { ...receiptObj };
   delete core.receipt_sha256;
 
-  // forza payload_sha256 coerente se payload presente
-  core.payload_sha256 = payloadSha;
+  // forza payload_sha256 coerente solo se il receipt ha payload_sha256
+  if (Object.prototype.hasOwnProperty.call(core, "payload_sha256")){
+    core.payload_sha256 = payloadSha;
+  }
 
   const expected = await sha256Hex(canonicalStringify(core));
   const declared = receiptObj?.receipt_sha256 || "";
@@ -104,4 +138,34 @@ async function verifyStampedReceipt(receiptObj, payloadObjOrNull){
     declared_receipt_sha256: declared,
     payload_sha256: payloadSha
   };
+}
+
+/**
+ * REGISTRY (public)
+ * - entry_hash = sha256(canonical_json(entry_without_entry_hash))
+ * - registry_prev_hash = hash dell'entry precedente (append-only)
+ */
+async function buildRegistryEntry({ registry_prev_hash, baseReceipt, opcConfirm }){
+  const core = {
+    proto: "HBCE-REGISTRY-v1",
+    kind: "IPR_EU_REGISTRY_ENTRY",
+    issuer: {
+      hallmark: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
+      legal: "HERMETICUM B.C.E. S.r.l.",
+      symbol: "🜏"
+    },
+    created_at: nowISO(),
+    registry_prev_hash: registry_prev_hash || "",
+    ipr: {
+      base_receipt_sha256: baseReceipt?.receipt_sha256 || "",
+      base_payload_sha256: baseReceipt?.payload_sha256 || ""
+    },
+    opc: {
+      confirm_receipt_sha256: opcConfirm?.receipt_sha256 || "",
+      prev_hash: opcConfirm?.prev_hash || ""
+    }
+  };
+
+  const entry_hash = await sha256Hex(canonicalStringify(core));
+  return { ...core, entry_hash };
 }
