@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IPR Network</title>
+
+<link rel="stylesheet" href="../assets/css/main.css"/>
+<link rel="stylesheet" href="../assets/css/brand.css"/>
+
+<script src="../assets/js/network.js" defer></script>
+</head>
+
+<body>
+
+<header class="topbar">
+<div class="wrap">
+<div class="row">
+
+<div class="brandmark">
+<img src="../assets/img/hermeticum-mark-neon.svg"/>
+<span>IPR</span>
+</div>
+
+<nav class="nav">
+<a href="../">Gateway</a>
+<a href="../verify/">Verify</a>
+<a href="../joker/">JOKER</a>
+<a class="active" href="./">Network</a>
+<a href="../status/">Status</a>
+</nav>
+
+<div class="spacer"></div>
+<div class="status active">IPR Network: ACTIVE</div>
+
+</div>
+</div>
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+<h1>IPR Network Registry</h1>
+
+<p class="lead">
+Append-only public registry of verified IPR nodes.  
+No personal data. Hash-only identity references.
+</p>
+</section>
+
+<section class="section">
+<div class="panel">
+<h2>Network status</h2>
+<div id="net_status" class="result">checking…</div>
+</div>
+</section>
+
+<section class="section">
+<div class="panel">
+<h2>Origin node</h2>
+<div id="origin_node" class="result">loading…</div>
+</div>
+</section>
+
+<section class="section">
+<div class="panel">
+<h2>Append node to network</h2>
+
+<button class="btn primary" onclick="NET_join()">Join network</button>
+<div id="join_result" class="result"></div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="panel">
+<h2>Registered nodes</h2>
+<div id="node_list" class="result">empty</div>
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="wrap">
+<div class="row">
+<strong>IPR Network</strong>
+<div>Append-only · hash-only · EU-first</div>
+</div>
+</div>
+</footer>
+
+</body>
+</html>
