@@ -1,153 +1,114 @@
-<!DOCTYPE html>
-<html lang="it">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create — Riferimento (hash + receipt)</title>
-  <link rel="stylesheet" href="../assets/style.css" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Create IPR — EU Base Identity</title>
+
+<link rel="stylesheet" href="../assets/css/main.css"/>
+<link rel="stylesheet" href="../assets/css/brand.css"/>
+
+<script src="../assets/js/ipr-create.js" defer></script>
 </head>
+
 <body>
-  <header class="hdr">
-    <div class="sym">🜏</div>
-    <div class="brand">
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
-      <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
-    </div>
-    <h1>Create — Riferimento (hash + receipt)</h1>
-    <p class="muted">Non genera IPR. Produce hash-only + receipt. Nessuna custodia dati.</p>
-    <nav class="nav">
-      <a href="../">Home</a>
-      <a href="./">Create</a>
-      <a href="../verify/">Verify</a>
-      <a href="../audit/">Audit</a>
-      <a href="../architecture/">Architettura</a>
-      <a href="../eu/pilot/">Pilota UE</a>
-    </nav>
-  </header>
 
-  <main class="wrap">
-    <section class="card">
-      <h2>Istruzioni (importante)</h2>
-      <p class="small">
-        1) Incolla un <strong>payload JSON</strong><br>
-        2) Premi <strong>Crea riferimento</strong><br>
-        3) Poi premi <strong>Scarica receipt.json</strong> (sempre disponibile)<br>
-        4) Se sei in modalità <strong>PRIVATE</strong>, puoi anche scaricare <strong>payload.json</strong>
-      </p>
-      <p class="small">
-        Su Android/Chrome: se il download non parte, riprova una seconda volta oppure apri in browser esterno.
-        Il sistema non invia dati: genera i file localmente nel tuo browser.
-      </p>
-    </section>
+<header class="topbar">
+<div class="wrap">
+<div class="row">
 
-    <section class="card">
-      <h2>Input</h2>
+<div class="brandmark">
+<img src="../assets/img/hermeticum-mark-neon.svg" alt="IPR"/>
+<span>IPR</span>
+</div>
 
-      <label>Modalità</label>
-      <select id="mode">
-        <option value="PRIVATE">PRIVATE (include payload nel download)</option>
-        <option value="PUBLIC">PUBLIC (solo receipt, payload non incluso)</option>
-      </select>
+<nav class="nav">
+<a href="../">Gateway</a>
+<a class="active" href="./">Create</a>
+<a href="../verify/">Verify</a>
+<a href="../docs/">Docs</a>
+<a href="../status/">Status</a>
+</nav>
 
-      <label>Payload (JSON)</label>
-      <textarea id="payload" rows="10" placeholder='Esempio: {"evento":"X","valore":123}'></textarea>
+<div class="spacer"></div>
+<div class="status active">EU Infrastructure: ACTIVE</div>
 
-      <div class="hr"></div>
+</div>
+</div>
+</header>
 
-      <button class="btn" id="btnCreate">Crea riferimento</button>
-      <span class="pill" id="pillStatus">IDLE</span>
+<main class="wrap">
 
-      <p class="small" id="hintAfterCreate">
-        Dopo la creazione, sotto compariranno <strong>payload_sha256</strong> e <strong>receipt</strong>.
-        Poi usa i pulsanti “Scarica”.
-      </p>
+<section class="hero">
+<h1>Activate European IPR</h1>
 
-      <div class="hr"></div>
+<p class="lead">
+Generate a base Identity Primary Record.  
+No central storage. Hash-only verification.  
+Your identity remains under your control.
+</p>
+</section>
 
-      <h2>Output</h2>
+<section class="section">
 
-      <label>payload_sha256</label>
-      <input id="outPayloadSha" readonly />
+<div class="panel">
 
-      <label>receipt (JSON)</label>
-      <textarea id="outReceipt" rows="10" readonly></textarea>
+<label>First Name</label>
+<input id="name" class="input"/>
 
-      <div class="hr"></div>
+<label>Last Name</label>
+<input id="surname" class="input"/>
 
-      <h2>Download</h2>
-      <p class="small">
-        <strong>receipt.json</strong> è sempre scaricabile dopo “Crea riferimento”.<br>
-        <strong>payload.json</strong> è scaricabile solo in modalità <strong>PRIVATE</strong>.
-      </p>
+<label>Country</label>
+<input id="country" class="input"/>
 
-      <div class="row">
-        <button class="btn" id="btnDlReceipt">Scarica receipt.json</button>
-        <button class="btn" id="btnDlPayload">Scarica payload.json (PRIVATE)</button>
-      </div>
+<label>Region</label>
+<input id="region" class="input"/>
 
-      <p class="small">
-        Nota tecnica: il payload viene canonicalizzato (chiavi ordinate) prima dell’hash.
-        In PUBLIC scarichi solo il receipt (hash-only). In PRIVATE scarichi receipt + payload.
-      </p>
-    </section>
-  </main>
+<label>City</label>
+<input id="city" class="input"/>
 
-  <footer class="ftr">
-    🜏 HERMETICUM — Create (hash-only) · HERMETICUM B.C.E. S.r.l.
-  </footer>
+<label>District</label>
+<input id="district" class="input"/>
 
-<script src="../assets/app.js"></script>
-<script>
-  const $ = (id) => document.getElementById(id);
+<label>Public Nickname (visible)</label>
+<input id="nickname" class="input"/>
 
-  let lastReceipt = null;
-  let lastPayloadObj = null;
+<div class="cta">
+<button class="btn primary" onclick="generateIPR()">Generate IPR</button>
+</div>
 
-  function setStatus(t){
-    $("pillStatus").textContent = t;
-  }
+</div>
 
-  $("btnCreate").addEventListener("click", async () => {
-    setStatus("WORK");
-    const mode = $("mode").value.trim();
-    const parsed = safeParseJson($("payload").value.trim());
+</section>
 
-    if(!parsed.ok){
-      setStatus("FAIL");
-      alert("Payload JSON non valido:\n" + parsed.error);
-      return;
-    }
+<section class="section">
 
-    lastPayloadObj = parsed.value;
-    const payloadCanon = canonicalStringify(lastPayloadObj);
-    const payloadSha = await sha256Hex(payloadCanon);
+<div class="panel">
+<h2>Generated IPR</h2>
 
-    const receipt = await buildReceipt({
-      mode,
-      payloadSha256: payloadSha,
-      prevHash: ""
-    });
+<textarea id="ipr_out" style="height:140px"></textarea>
 
-    lastReceipt = receipt;
+<div class="cta">
+<button class="btn" onclick="downloadIPR()">Download IPR</button>
+<button class="btn" onclick="downloadReceipt()">Download Receipt</button>
+<a class="btn primary" href="../verify/">Verify</a>
+</div>
 
-    $("outPayloadSha").value = payloadSha;
-    $("outReceipt").value = JSON.stringify(receipt, null, 2);
-    setStatus("OK");
-  });
+</div>
 
-  $("btnDlReceipt").addEventListener("click", () => {
-    if(!lastReceipt){ alert("Prima premi: Crea riferimento."); return; }
-    downloadText("receipt.json", JSON.stringify(lastReceipt, null, 2));
-  });
+</section>
 
-  $("btnDlPayload").addEventListener("click", () => {
-    if(!lastReceipt){ alert("Prima premi: Crea riferimento."); return; }
-    if($("mode").value !== "PRIVATE"){
-      alert("payload.json è disponibile solo in modalità PRIVATE.");
-      return;
-    }
-    downloadText("payload.json", JSON.stringify(lastPayloadObj, null, 2));
-  });
-</script>
+</main>
+
+<footer class="footer">
+<div class="wrap">
+<div class="row">
+<strong>IPR Infrastructure</strong>
+<div>EU-first · hash-only · no data custody</div>
+</div>
+</div>
+</footer>
+
 </body>
 </html>
