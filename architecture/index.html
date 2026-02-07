@@ -10,14 +10,15 @@
   <header class="hdr">
     <div class="sym">🜏</div>
     <div class="brand">
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
       <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
     </div>
     <h1>Architettura</h1>
-    <p class="muted">Strato tecnico: identità → autorizzazione → audit → opponibilità</p>
+    <p class="muted">IPR Europeo (Base) come atto + receipt timbrato: hash-only, auditabile, opponibile.</p>
+
     <nav class="nav">
       <a href="../">Home</a>
-      <a href="../create/">Create</a>
+      <a href="../activate/">Attiva IPR Europeo</a>
       <a href="../verify/">Verify</a>
       <a href="../audit/">Audit</a>
       <a href="./">Architettura</a>
@@ -27,20 +28,24 @@
 
   <main class="wrap">
     <section class="card">
-      <h2>Sequenza</h2>
+      <h2>Schema</h2>
       <div class="mono">
-Sistema / AI / Infrastruttura
+Standard Cliente (HBCE-CLIENT-STD-UE-v1)
 ↓
-Riferimento (payload_sha256)
+payload_sha256 = sha256(canonical_json)
 ↓
-Receipt (receipt_sha256)
+Receipt timbrato (HBCE-IPR-EU-v1)
+  - Hermeticum hallmark + 🜏
+  - timestamp
+  - stamps UNEBDO + OPC
+  - joker tag opzionale
 ↓
-Verifica deterministica (PASS/FAIL)
+Verify (PASS/FAIL)
 ↓
-Audit (prev_hash) — append-only
+Audit (prev_hash append-only)
       </div>
       <p class="small">
-        Create/Verify/Audit operano su hash e receipt (hash-only). Nessuna custodia dati.
+        UNEBDO e OPC qui sono “timbri” di regime: confermano che la logica è audit-first e opponibile.
       </p>
     </section>
   </main>
