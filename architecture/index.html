@@ -1,54 +1,52 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Architettura — Hermeticum</title>
-
-<style>
-body{font-family:Arial;background:#0a0a0a;color:#eaeaea;margin:0}
-header{text-align:center;padding:40px;border-bottom:1px solid #222}
-.section{max-width:900px;margin:auto;padding:60px 20px}
-.block{border:1px solid #222;background:#111;padding:25px;margin:20px 0}
-footer{text-align:center;padding:40px;border-top:1px solid #222;opacity:.6}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architettura — Hermeticum</title>
+  <link rel="stylesheet" href="../assets/style.css" />
 </head>
-
 <body>
+  <header class="hdr">
+    <div class="sym">🜏</div>
+    <div class="brand">
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
+      <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
+    </div>
+    <h1>Architettura</h1>
+    <p class="muted">Strato tecnico: identità → autorizzazione → audit → opponibilità</p>
+    <nav class="nav">
+      <a href="../">Home</a>
+      <a href="../create/">Create</a>
+      <a href="../verify/">Verify</a>
+      <a href="../audit/">Audit</a>
+      <a href="./">Architettura</a>
+      <a href="../eu/pilot/">Pilota UE</a>
+    </nav>
+  </header>
 
-<header>
-<h1>Architettura IPR</h1>
-<p>Strato di identità e responsabilità operativa</p>
-</header>
+  <main class="wrap">
+    <section class="card">
+      <h2>Sequenza</h2>
+      <div class="mono">
+Sistema / AI / Infrastruttura
+↓
+Riferimento (payload_sha256)
+↓
+Receipt (receipt_sha256)
+↓
+Verifica deterministica (PASS/FAIL)
+↓
+Audit (prev_hash) — append-only
+      </div>
+      <p class="small">
+        Create/Verify/Audit operano su hash e receipt (hash-only). Nessuna custodia dati.
+      </p>
+    </section>
+  </main>
 
-<div class="section">
-
-<div class="block">
-<h2>Struttura</h2>
-<p>
-Sistema → Identità → Autorizzazione → Azione → Audit → Responsabilità
-</p>
-</div>
-
-<div class="block">
-<h2>Funzione</h2>
-<p>
-Collegare identità verificabile e operazioni in continuità temporale.
-</p>
-</div>
-
-<div class="block">
-<h2>Contesto</h2>
-<p>
-Infrastrutture digitali e sistemi autonomi — Unione Europea
-</p>
-</div>
-
-</div>
-
-<footer>
-HERMETICUM B.C.E. S.r.l.
-</footer>
-
+  <footer class="ftr">
+    🜏 HERMETICUM — Architettura · HERMETICUM B.C.E. S.r.l.
+  </footer>
 </body>
 </html>
