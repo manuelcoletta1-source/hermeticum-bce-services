@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OPC Confirm — Hermeticum</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+</head>
+<body>
+  <header class="hdr">
+    <div class="sym">🜏</div>
+    <div class="brand">
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+      <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
+    </div>
+    <h1>OPC Confirm</h1>
+    <p class="muted">
+      Conferma ufficiale (OPC) di un IPR Europeo Base: genera un secondo scontrino append-only.<br>
+      Regola: <strong>prev_hash = receipt_sha256</strong> del base receipt.
+    </p>
+
+    <nav class="nav">
+      <a href="../../">Home</a>
+      <a href="../../activate/">Attiva IPR Europeo</a>
+      <a href="../../verify/">Verify</a>
+      <a href="../../audit/">Audit</a>
+      <a href="../../registry/">Registry</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>Input</h2>
+      <label>IPR Base receipt (JSON)</label>
+      <textarea id="baseReceipt" rows="12" placeholder="Incolla HBCE_RECEIPT_IPR_EU.json"></textarea>
+
+      <label>Nota conferma (opzionale)</label>
+      <input id="note" placeholder="es. conferma operativa nodo UE (OPC)" />
+
+      <div class="hr"></div>
+
+      <button class="btn" id="btnConfirm">GENERA OPC_CONFIRM_RECEIPT</button>
+      <span class="pill" id="pill">IDLE</span>
+
+      <div class="hr"></div>
+
+      <label>OPC confirm receipt (JSON)</label>
+      <textarea id="outConfirm" rows="12" readonly></textarea>
+
+      <div class="row">
+        <button class="btn" id="btnDlConfirm">Scarica OPC_CONFIRM_RECEIPT.json</button>
+      </div>
+
+      <p class="small">
+        Questo receipt è il “protocollo” del tuo atto: conferma nel tempo senza riscrivere il base.
+      </p>
+    </section>
+  </main>
+
+  <footer class="ftr">
+    🜏 HERMETICUM — OPC Confirm · HERMETICUM B.C.E. S.r.l.
+  </footer>
+
+  <script src="../../assets/app.js"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let lastConfirm = null;
+
+    function setPill(t){ $("pill").textContent = t; }
+
+    $("btnConfirm").addEventListener("click", async () => {
+      setPill("WORK");
+
+      const parsed = safeParseJson($("baseReceipt").value.trim());
+      if(!parsed.ok){ setPill("FAIL"); alert("Base receipt non valido:\n"+parsed.error); return; }
+
+      const confirm = await buildOpcConfirmReceipt({
+        baseReceipt: parsed.value,
+        confirm_note: $("note").value || ""
+      });
+
+      lastConfirm = confirm;
+      $("outConfirm").value = JSON.stringify(confirm, null, 2);
+      setPill("OK");
+    });
+
+    $("btnDlConfirm").addEventListener("click", () => {
+      if(!lastConfirm){ alert("Genera prima la conferma OPC."); return; }
+      downloadText("OPC_CONFIRM_RECEIPT.json", JSON.stringify(lastConfirm, null, 2));
+    });
+  </script>
+</body>
+</html>
