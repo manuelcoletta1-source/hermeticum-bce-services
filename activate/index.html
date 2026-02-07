@@ -16,7 +16,7 @@
     <h1>Attiva IPR Europeo (Base)</h1>
     <p class="muted">
       Standard Cliente (UE) → payload_sha256 → scontrino timbrato (receipt) con marchio Hermeticum.<br>
-      Timbri: UNEBDO + OPC. Interfaccia AI JOKER opzionale (symbiotic temporal).
+      Timbri: UNEBDO + OPC. AI JOKER opzionale (symbiotic temporal) ma <strong>fail-closed</strong> sullo standard cliente.
     </p>
 
     <nav class="nav">
@@ -50,10 +50,23 @@
         </div>
         <div>
           <label>AI JOKER (opzionale)</label>
-          <select id="jokerEnabled">
-            <option value="false">Disattivo</option>
-            <option value="true">Attivo (symbiotic temporal)</option>
-          </select>
+          <p class="small">
+            Qui imposti JOKER, ma viene scritto nello <strong>Standard Cliente</strong> prima dell’hash.
+            Il receipt lo riflette in modo <strong>coerente</strong> (fail-closed).
+          </p>
+          <div class="row">
+            <div>
+              <label>JOKER — symbiotic temporal</label>
+              <select id="jokerEnabled">
+                <option value="false">Disattivo</option>
+                <option value="true">Attivo</option>
+              </select>
+            </div>
+            <div>
+              <label>JOKER tag (opzionale)</label>
+              <input id="jokerTag" placeholder="es. JOKER-ΦΩ-LTA1" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -94,6 +107,7 @@
   <script src="../assets/app.js"></script>
   <script>
     const $ = (id) => document.getElementById(id);
+
     let lastReceipt = null;
     let lastClient = null;
 
@@ -109,7 +123,6 @@
       setPill("WORK");
 
       const mode = $("mode").value.trim();
-      const jokerEnabled = $("jokerEnabled").value === "true";
 
       const parsed = safeParseJson($("clientStd").value.trim());
       if(!parsed.ok){
@@ -118,15 +131,26 @@
         return;
       }
 
-      lastClient = parsed.value;
+      // 1) scrive JOKER nello standard cliente (prima dell’hash)
+      const client = parsed.value;
+      client.optional = client.optional || {};
+      client.optional.joker_symbiotic_mode = ($("jokerEnabled").value === "true");
+      client.optional.joker_tag = ($("jokerTag").value || "").trim();
+
+      // 2) rende visibile all’utente cosa sta “attivando”
+      $("clientStd").value = JSON.stringify(client, null, 2);
+
+      lastClient = client;
+
+      // 3) hash sullo standard cliente aggiornato
       const payloadSha = await sha256Hex(canonicalStringify(lastClient));
 
+      // 4) receipt timbrato: JOKER deriva SOLO dal client standard (fail-closed)
       const receipt = await buildStampedIpREuReceipt({
         mode,
         payloadSha256: payloadSha,
         prevHash: "",
-        clientStd: lastClient,
-        jokerEnabled
+        clientStd: lastClient
       });
 
       lastReceipt = receipt;
