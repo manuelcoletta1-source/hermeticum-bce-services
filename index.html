@@ -10,17 +10,18 @@
   <header class="hdr">
     <div class="sym">🜏</div>
     <div class="brand">
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
       <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
     </div>
     <h1>Nodo Centrale</h1>
     <p class="muted">
-      Infrastruttura tecnica audit-first · fail-closed · hash-only · no data custody
+      Attivazione IPR Europeo (Base) con standard cliente → hash → scontrino timbrato (receipt).<br>
+      Regime: UE_FIRST · AUDIT_FIRST · HASH_ONLY · FAIL_CLOSED · NO_DATA_CUSTODY
     </p>
 
     <nav class="nav">
       <a href="./">Home</a>
-      <a href="./create/">Create</a>
+      <a href="./activate/">Attiva IPR Europeo</a>
       <a href="./verify/">Verify</a>
       <a href="./audit/">Audit</a>
       <a href="./architecture/">Architettura</a>
@@ -30,44 +31,46 @@
 
   <main class="wrap">
     <section class="card">
-      <h2>Create</h2>
+      <h2>Attiva IPR Europeo (Base)</h2>
       <p>
-        Crea un <strong>riferimento verificabile</strong> (SHA-256) e un <strong>receipt</strong>.
-        Non “genera IPR”. Nessuna custodia dati.
+        Per il lettore: <strong>crei il tuo IPR</strong> come atto opponibile.<br>
+        Per la tecnica: il sito genera un <strong>riferimento SHA-256</strong> e rilascia uno
+        <strong>scontrino timbrato</strong> (receipt) con marchio Hermeticum, UNEBDO e OPC.
       </p>
-      <a class="btn" href="./create/">Apri Create</a>
+      <a class="btn" href="./activate/">Apri “Attiva IPR Europeo”</a>
+      <div class="tags">
+        <span class="pill">UE_FIRST</span>
+        <span class="pill">AUDIT_FIRST</span>
+        <span class="pill">HASH_ONLY</span>
+        <span class="pill">FAIL_CLOSED</span>
+        <span class="pill">NO_DATA_CUSTODY</span>
+      </div>
     </section>
 
     <section class="card">
       <h2>Verify</h2>
-      <p>
-        Verifica deterministica di un receipt (PASS/FAIL).
-        Se hai anche il payload, verifica che l’hash combaci.
-      </p>
+      <p>Verifica deterministica PASS/FAIL del receipt e (opzionale) del payload.</p>
       <a class="btn" href="./verify/">Apri Verify</a>
     </section>
 
     <section class="card">
       <h2>Audit</h2>
-      <p>
-        Crea una catena <strong>append-only</strong> basata su <strong>prev_hash</strong>
-        per opponibilità nel tempo.
-      </p>
+      <p>Catena append-only con <strong>prev_hash</strong> per opponibilità temporale.</p>
       <a class="btn" href="./audit/">Apri Audit</a>
     </section>
 
     <section class="card">
       <h2>Sequenza unica</h2>
       <div class="mono">
-Decisione (umana / istituzionale)
+Standard Cliente (UE)
 ↓
-Riferimento (hash-only)
+payload_sha256 (hash-only)
 ↓
-Gate metrologico (PASS / FAIL)
+Receipt timbrato (Hermeticum + UNEBDO + OPC)
 ↓
-Esecuzione vincolata (solo in PASS)
+Verify (PASS/FAIL)
 ↓
-Evidence pack (receipt + hash)
+Audit (prev_hash append-only)
       </div>
     </section>
   </main>
