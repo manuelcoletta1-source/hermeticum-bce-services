@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JOKER — 🜏 HERMETICUM</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div class="row">
+      <div class="brand">🜏 HERMETICUM</div>
+
+      <nav class="nav">
+        <a href="../">Gateway</a>
+        <a href="../status/">Status</a>
+        <a href="../activate/">Activate</a>
+        <a href="../verify/">Verify</a>
+        <a href="../infrastructure/">Infrastructure</a>
+        <a class="active" href="./">JOKER</a>
+        <a href="../docs/">Docs</a>
+      </nav>
+
+      <div class="spacer"></div>
+      <div class="status active">Infrastructure Status: ACTIVE</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>JOKER (Ex-Ante Interface)</h1>
+    <p class="lead">
+      JOKER è un’interfaccia di misura ex-ante: verifica prerequisiti tecnici, produce evidenza (hash-only),
+      e applica PASS/FAIL in regime fail-closed. Non decide nel merito.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="grid">
+      <div class="card">Cosa è<small>Misura ex-ante / gate tecnico</small></div>
+      <div class="card">Cosa non è<small>Autorità / decisore / giudice</small></div>
+      <div class="card">Output<small>AUTHORIZED / DENIED + reason_code</small></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="panel">
+      <h2>Funzione</h2>
+      <div style="color:var(--muted);line-height:1.7">
+        <p style="margin:0 0 10px">
+          JOKER opera come <strong>strato di ammissibilità</strong>: prima dell’esecuzione di un’azione (digitale o fisica),
+          misura la coerenza dei prerequisiti definiti da policy e receipt.
+        </p>
+        <p style="margin:0">
+          Se la prova è assente, incoerente o non verificabile, l’azione è <strong>bloccata</strong> (fail-closed).
+          Se i prerequisiti sono soddisfatti, l’azione è <strong>ammessa</strong> (AUTHORIZED).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="panel">
+      <h2>Non-goals (per evitare equivoci)</h2>
+      <ul style="color:var(--muted);line-height:1.75;margin:10px 0 0;padding-left:18px">
+        <li>Non certifica “bontà” o “merito” dell’azione.</li>
+        <li>Non sostituisce decisioni umane, giuridiche o politiche.</li>
+        <li>Non conserva dati personali di identità (no data custody).</li>
+        <li>Non opera profilazione: espone solo evidenza hash-only.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="panel">
+      <h2>Flusso operativo</h2>
+      <div style="color:var(--muted);line-height:1.8">
+        Decisione → IPR (receipt) → Verify/JOKER → <strong>AUTHORIZED</strong> / <strong>DENIED</strong> → Evidence (hash-only)
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="../verify/">Verify</a>
+        <a class="btn" href="../docs/">Docs</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="row">
+      <strong>🜏 HERMETICUM</strong>
+      <div>JOKER — Ex-Ante Interface</div>
+      <div>UE-first · audit-first · hash-only · fail-closed · no data custody</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
