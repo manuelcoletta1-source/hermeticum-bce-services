@@ -1,59 +1,69 @@
 # HERMETICUM — Dichiarazione di esistenza infrastrutturale
 
-## Esistenza
-
-Hermeticum è una infrastruttura in consolidamento progettata
-per introdurre identità verificabile e responsabilità operativa
-nei sistemi digitali e autonomi.
-
-Opera come strato tecnico sovrapposto ai sistemi esistenti.
+Stato: ATTIVO  
+Tipo: Nodo tecnico pubblico osservabile  
+Giurisdizione di riferimento: Unione Europea  
+Modalità: Permissionless · Hash-only · Fail-closed  
 
 ---
 
-## Struttura
+## 1. Esistenza
 
-Nodo centrale  
-hermeticum-bce-platform
+Il presente nodo costituisce una implementazione tecnica pubblicamente
+osservabile di una infrastruttura di attribuzione verificabile della responsabilità
+basata su Identity Primary Record (IPR).
 
-Motore identitario  
-Identity Primary Record (IPR)
+Il nodo è accessibile pubblicamente e verificabile in modo deterministico.
 
-Moduli collegati  
-UNEBDO  
-OPC  
-Registry  
-AI Joker  
+Non rappresenta un servizio commerciale.
+Non opera come identity provider.
+Non custodisce dati personali.
 
 ---
 
-## Funzione
+## 2. Funzione
 
-Collegare identità, operazioni e responsabilità
-in una continuità verificabile.
+Il nodo implementa:
 
-Consentire responsabilità operativa preventiva
-nei sistemi complessi.
+- attivazione IPR
+- verifica deterministica hash-based
+- registro append-only
+- modello di attribuzione ex-ante
+- logica metrologica di pre-esecuzione
 
----
-
-## Posizionamento
-
-Contesto: Unione Europea  
-Ambito: infrastrutture digitali e sistemi autonomi  
-
-Direzione: sviluppo come infrastruttura
-di identità e responsabilità operativa.
+La funzione è di riferimento tecnico osservabile.
 
 ---
 
-## Stato
+## 3. Posizione
 
-Architettura definita  
-Motore identitario stabilito  
-Sistema coerente  
-Infrastruttura in consolidamento  
+Questa infrastruttura esiste come:
+
+nodo tecnico di riferimento  
+ambiente osservabile di ricerca  
+implementazione sperimentale pubblica  
+base per contesti futuri di standardizzazione  
+
+Non richiede autorizzazione per essere replicata.
 
 ---
 
-HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA  
+## 4. Indipendenza
+
+Il modello infrastrutturale non dipende da questo nodo specifico.
+
+Qualsiasi implementazione compatibile può esistere indipendentemente.
+
+La persistenza di almeno un nodo valido garantisce la continuità del modello.
+
+---
+
+## 5. Sigillo
+
+HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA  
 HERMETICUM B.C.E. S.r.l.
+
+Nodo tecnico di riferimento osservabile.
+
+Stato: ATTIVO  
+Modalità evoluzione: append-only
