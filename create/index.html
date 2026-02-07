@@ -1,473 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<title>HERMETICUM — Create IPR</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Creazione IPR (UE-ready). PUBLIC hash-only condivisibile. PRIVATE sigillato (🜏) con payload nel bundle scaricato. Client-side, no data custody.">
-
-<style>
-:root{
-  --bg:#05070a;
-  --panel:#0b0f14;
-  --text:#eaf2ff;
-  --muted:#8aa0b8;
-  --line:#1c2733;
-  --line2:#223140;
-  --accent:#b7c9ff;
-  --max:980px;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45;
-}
-a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
-header{border-bottom:1px solid var(--line);padding:18px 0;background:rgba(0,0,0,.18)}
-.brand{font-weight:800;letter-spacing:2px}
-.brand small{display:block;color:var(--muted);font-weight:600;letter-spacing:.6px;margin-top:6px;font-size:12px}
-nav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-nav a{font-size:12px;color:var(--muted);padding:6px 10px;border:1px solid transparent}
-nav a:hover{border-color:var(--line);color:var(--text);text-decoration:none}
-.policy{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;color:var(--muted);font-size:12px}
-.policy b{color:var(--text);font-weight:800}
-
-main{padding:22px 0 46px}
-.card{
-  border:1px solid var(--line);
-  background:var(--panel);
-  padding:18px;
-}
-h1{margin:0 0 8px;font-size:20px;letter-spacing:.6px;font-weight:800}
-.sub{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
-.hr{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
-h2{margin:0 0 8px;font-size:12px;letter-spacing:1.2px;color:var(--text);font-weight:900}
-
-label{display:block;font-size:12px;color:var(--muted);margin-top:10px}
-input,textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid var(--line2);
-  background:rgba(0,0,0,.18);
-  color:var(--text);
-  border-radius:0;
-  font-size:14px;
-  outline:none;
-}
-textarea{min-height:110px;resize:vertical}
-input[type="file"]{padding:10px}
-
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:860px){.grid{grid-template-columns:1fr}}
-
-.note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
-.mini{margin-top:8px;color:var(--muted);font-size:11px;line-height:1.5}
-
-.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.btn{
-  border:1px solid var(--line2);
-  background:rgba(255,255,255,.03);
-  color:var(--text);
-  padding:10px 14px;
-  border-radius:0;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.6px;
-}
-.btn:hover{background:rgba(255,255,255,.06)}
-.btn.primary{border-color:rgba(183,201,255,.35);background:rgba(183,201,255,.06)}
-.btn.primary:hover{background:rgba(183,201,255,.10)}
-
-.out{
-  margin-top:12px;
-  padding:14px;
-  border:1px solid var(--line2);
-  background:rgba(0,0,0,.18);
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  font-size:12px;
-  color:var(--muted);
-  white-space:pre-line;
-  overflow:auto;
-}
-
-.dl{display:none;margin-top:12px}
-.dl .btn{display:inline-flex;align-items:center;justify-content:center}
-
-.footer{
-  border-top:1px solid var(--line);
-  margin-top:60px;
-  padding-top:22px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.6;
-}
-.symbol{font-size:22px;letter-spacing:6px;margin:10px 0 8px;color:var(--text)}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create — Riferimento (hash + receipt)</title>
+  <link rel="stylesheet" href="../assets/style.css" />
 </head>
-
 <body>
-<header>
-  <div class="wrap">
-    <div class="brand">HERMETICUM <small>Create IPR — Interfaccia UE-ready</small></div>
-    <nav>
-      <a href="/hermeticum-bce-platform/">Home</a>
-      <a href="/hermeticum-bce-platform/verify/">Verify</a>
-      <a href="/hermeticum-bce-platform/audit/">Audit Chain</a>
-      <a href="/hermeticum-bce-platform/baseline/">Baseline</a>
-      <a href="/hermeticum-bce-platform/seal/">Seal</a>
-      <a href="/hermeticum-bce-platform/company/">Company</a>
+  <header class="hdr">
+    <div class="sym">🜏</div>
+    <div class="brand">
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
+      <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
+    </div>
+    <h1>Create — Riferimento (hash + receipt)</h1>
+    <p class="muted">Non genera IPR. Produce hash-only + receipt. Nessuna custodia dati.</p>
+    <nav class="nav">
+      <a href="../">Home</a>
+      <a href="./">Create</a>
+      <a href="../verify/">Verify</a>
+      <a href="../audit/">Audit</a>
+      <a href="../architecture/">Architettura</a>
+      <a href="../eu/pilot/">Pilota UE</a>
     </nav>
-    <div class="policy"><b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b></div>
-    <div class="mini" id="build"></div>
-  </div>
-</header>
+  </header>
 
-<main class="wrap">
-  <div class="card">
-    <h1>Emissione IPR</h1>
-    <p class="sub">
-      Questo modulo genera un artefatto IPR in due forme:
-      <b>PUBLIC</b> (condivisibile, hash-only) e <b>PRIVATE</b> (sigillato, con payload solo nel file scaricato).
-      Nessun dato viene trasmesso o conservato dal server.
-    </p>
+  <main class="wrap">
+    <section class="card">
+      <h2>Input</h2>
 
-    <div class="hr"></div>
+      <label>Modalità</label>
+      <select id="mode">
+        <option value="PRIVATE">PRIVATE (include payload nel download)</option>
+        <option value="PUBLIC">PUBLIC (solo receipt, payload non incluso)</option>
+      </select>
 
-    <h2>A) Soggetto (self-declared)</h2>
-    <div class="grid">
-      <div>
-        <label>Nome e Cognome</label>
-        <input id="full_name" placeholder="es. Mario Rossi">
+      <label>Payload (JSON)</label>
+      <textarea id="payload" rows="10" placeholder='Esempio: {"evento":"X","valore":123}'></textarea>
+
+      <div class="hr"></div>
+      <button class="btn" id="btnCreate">Crea riferimento</button>
+      <span class="pill" id="pillStatus">IDLE</span>
+
+      <div class="hr"></div>
+
+      <label>payload_sha256</label>
+      <input id="outPayloadSha" readonly />
+
+      <label>receipt (JSON)</label>
+      <textarea id="outReceipt" rows="10" readonly></textarea>
+
+      <div class="row">
+        <button class="btn" id="btnDlReceipt">Download receipt.json</button>
+        <button class="btn" id="btnDlBundle">Download bundle (PRIVATE)</button>
       </div>
-      <div>
-        <label>Paese (ISO2 consigliato)</label>
-        <input id="country" placeholder="es. IT">
-      </div>
-      <div>
-        <label>Regione</label>
-        <input id="region" placeholder="es. Piemonte">
-      </div>
-      <div>
-        <label>Città</label>
-        <input id="city" placeholder="es. Torino">
-      </div>
-    </div>
-    <label>Zona (quartiere/area/municipio — no indirizzo)</label>
-    <input id="zone" placeholder="es. Centro / Circoscrizione 1">
 
-    <div class="note">
-      Nota UE: dati dichiarati, non verificati. Evitare indirizzi, coordinate, dati sensibili.
-    </div>
+      <p class="small">
+        Nota operativa: il payload viene canonicalizzato (chiavi ordinate) prima dell’hash.
+        In modalità PUBLIC scarichi solo il receipt. In PRIVATE scarichi receipt + payload.
+      </p>
+    </section>
+  </main>
 
-    <div class="hr"></div>
+  <footer class="ftr">
+    🜏 HERMETICUM — Create (hash-only) · HERMETICUM B.C.E. S.r.l.
+  </footer>
 
-    <h2>B) Contenuto (riservato all’utente)</h2>
-    <div class="grid">
-      <div>
-        <label>Testo (facoltativo)</label>
-        <textarea id="note" placeholder="Il testo apparirà SOLO nel bundle PRIVATE scaricato"></textarea>
-      </div>
-      <div>
-        <label>File (facoltativo)</label>
-        <input id="file" type="file">
-        <div class="note">
-          Regola hash: se file presente → SHA-256(file). Altrimenti → SHA-256(testo).
-          Se entrambi: hash principale = file, testo comunque sigillato nel PRIVATE.
-        </div>
-      </div>
-    </div>
-
-    <div class="btnrow">
-      <button class="btn primary" onclick="prepare()">Calcola riferimento (hash)</button>
-    </div>
-    <div id="prepout" class="out">STATO: IDLE</div>
-
-    <div class="hr"></div>
-
-    <h2>C) Emissione</h2>
-    <div class="btnrow">
-      <button class="btn primary" onclick="issuePRIVATE()">Crea IPR (PRIVATE)</button>
-      <button class="btn" onclick="issuePUBLIC()">Crea IPR (PUBLIC)</button>
-    </div>
-
-    <div id="out" class="out">STATO: IDLE</div>
-
-    <div id="dlbox" class="dl">
-      <div class="note"><b>Download manuale (fallback)</b> — se Android blocca l’avvio automatico</div>
-      <div class="btnrow">
-        <a class="btn" id="dl_bundle" href="#" download>Scarica bundle</a>
-        <a class="btn" id="dl_json" href="#" download>Scarica JSON</a>
-        <a class="btn" id="dl_receipt" href="#" download>Scarica receipt</a>
-      </div>
-    </div>
-
-    <div class="note">
-      PUBLIC non contiene payload. PRIVATE contiene payload sigillato (🜏) nel bundle e rende l’utente titolare/responsabile del contenuto.
-    </div>
-  </div>
-
-  <div class="footer">
-    <div class="symbol">🜏</div>
-    HERMETICUM — Blindata · Computabile · Evolutiva<br>
-    HERMETICUM B.C.E. S.r.l. · UE
-  </div>
-</main>
-
+<script src="../assets/app.js"></script>
 <script>
-const ALGO = "SHA-256";
-const MODULE_VERSION = "CREATE-v3.1-UE";
-const BUILD_ID = "HBCE_CREATE_BUILD_2026-02-06_1";
-document.getElementById("build").textContent = "BUILD: " + BUILD_ID + " · MODULE: " + MODULE_VERSION;
+  const $ = (id) => document.getElementById(id);
 
-let prepared = false;
-let SNAP = {
-  mode: "EMPTY",
-  content_hash: "0".repeat(64),
-  content_basis: "EMPTY",
-  note: "",
-  note_sha256: "",
-  file_meta: null,
-  file_b64: "",
-  file_hash: ""
-};
+  let lastReceipt = null;
+  let lastPayloadObj = null;
 
-async function sha256Bytes(uint8){
-  const buf = await crypto.subtle.digest("SHA-256", uint8);
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-async function sha256String(text){
-  const bytes = new TextEncoder().encode(text);
-  return await sha256Bytes(bytes);
-}
-async function readFileAsBytes(file){
-  const ab = await file.arrayBuffer();
-  return new Uint8Array(ab);
-}
-function base64FromBytes(bytes){
-  let binary = "";
-  const chunk = 0x8000;
-  for(let i=0;i<bytes.length;i+=chunk){
-    binary += String.fromCharCode.apply(null, bytes.subarray(i, i+chunk));
-  }
-  return btoa(binary);
-}
-function norm(s){ return (s||"").trim(); }
-function makeId(prefix, iso){ return prefix + iso.replace(/[-:TZ.]/g,"").slice(0,14); }
-
-async function prepare(){
-  const o = document.getElementById("prepout");
-  prepared = false;
-
-  const note = (document.getElementById("note").value || "");
-  const noteTrim = note.trim();
-  const f = document.getElementById("file").files[0];
-
-  SNAP = { mode:"EMPTY", content_hash:"0".repeat(64), content_basis:"EMPTY", note:"", note_sha256:"", file_meta:null, file_b64:"", file_hash:"" };
-
-  if(f){
-    const bytes = await readFileAsBytes(f);
-    const fh = await sha256Bytes(bytes);
-    SNAP.file_hash = fh;
-    SNAP.file_meta = { name:f.name, type:(f.type||"application/octet-stream"), size:f.size };
-    SNAP.file_b64 = base64FromBytes(bytes);
-
-    SNAP.note = noteTrim;
-    SNAP.note_sha256 = noteTrim ? await sha256String(noteTrim) : "";
-
-    SNAP.content_hash = fh;
-    SNAP.content_basis = "FILE";
-    SNAP.mode = noteTrim ? "FILE+TEXT" : "FILE";
-
-    o.textContent =
-      "STATO: OK\nMODULE: " + MODULE_VERSION +
-      "\nMODE: " + SNAP.mode +
-      "\nCONTENT_BASIS: FILE\nALGORITMO: " + ALGO +
-      "\nCONTENT_HASH:\n" + SNAP.content_hash +
-      "\nFILE: " + SNAP.file_meta.name + " (" + SNAP.file_meta.size + " bytes)\n" +
-      "TESTO_PRIVATO_LEN: " + (noteTrim ? noteTrim.length : 0) + "\n" +
-      (noteTrim ? ("TESTO_PRIVATO_SHA256:\n" + SNAP.note_sha256 + "\n") : "TESTO_PRIVATO: assente\n");
-    prepared = true;
-    return;
+  function setStatus(t){
+    $("pillStatus").textContent = t;
   }
 
-  if(noteTrim){
-    const th = await sha256String(noteTrim);
-    SNAP.note = noteTrim;
-    SNAP.note_sha256 = await sha256String(noteTrim);
+  $("btnCreate").addEventListener("click", async () => {
+    setStatus("WORK");
+    const mode = $("mode").value.trim();
+    const parsed = safeParseJson($("payload").value.trim());
 
-    SNAP.content_hash = th;
-    SNAP.content_basis = "TEXT";
-    SNAP.mode = "TEXT";
-
-    o.textContent =
-      "STATO: OK\nMODULE: " + MODULE_VERSION +
-      "\nMODE: TEXT\nCONTENT_BASIS: TEXT\nALGORITMO: " + ALGO +
-      "\nCONTENT_HASH:\n" + SNAP.content_hash +
-      "\nTESTO_PRIVATO_LEN: " + noteTrim.length + "\n" +
-      "TESTO_PRIVATO_SHA256:\n" + SNAP.note_sha256;
-    prepared = true;
-    return;
-  }
-
-  o.textContent =
-    "STATO: OK\nMODULE: " + MODULE_VERSION +
-    "\nMODE: EMPTY\nCONTENT_HASH:\n" + SNAP.content_hash +
-    "\nNOTA: nessun contenuto inserito.";
-  prepared = true;
-}
-
-function issuePRIVATE(){ issue("PRIVATE"); }
-function issuePUBLIC(){ issue("PUBLIC"); }
-
-async function issue(kind){
-  const out = document.getElementById("out");
-  const dlbox = document.getElementById("dlbox");
-  dlbox.style.display = "none";
-
-  if(!prepared){
-    out.textContent = "STATO: FAIL\nMOTIVO: eseguire prima 'Calcola riferimento (hash)'";
-    return;
-  }
-
-  const full_name = norm(document.getElementById("full_name").value);
-  const country = norm(document.getElementById("country").value);
-  const region = norm(document.getElementById("region").value);
-  const city = norm(document.getElementById("city").value);
-  const zone = norm(document.getElementById("zone").value);
-
-  const now = new Date().toISOString();
-  const id = makeId("IPR-O-", now);
-
-  const base = {
-    kind: "HBCE_IPR_OFFICIAL",
-    version: "IPR-O-v1",
-    generator: { module: "HERMETICUM_CREATE", module_version: MODULE_VERSION, build_id: BUILD_ID },
-    system: "HERMETICUM",
-    regime: ["AUDIT-FIRST","FAIL-CLOSED","HASH-ONLY","NO-DATA-CUSTODY"],
-    artifact: { visibility: kind },
-    ipr_id: id,
-    timestamp_utc: now,
-    subject: {
-      type: "BIOLOGICAL",
-      self_declared: true,
-      full_name: full_name || undefined,
-      geo: { country: country || undefined, region: region || undefined, city: city || undefined, zone: zone || undefined }
-    },
-    content: { algorithm: ALGO, basis: SNAP.content_basis, hash: SNAP.content_hash, mode: SNAP.mode },
-    seal: {
-      seal_symbol: "🜏",
-      signature_line_1: "HERMETICUM — Blindata · Computabile · Evolutiva",
-      signature_line_2: "HERMETICUM B.C.E. S.r.l. · UE",
-      generated_by: "HERMETICUM infrastructure"
+    if(!parsed.ok){
+      setStatus("FAIL");
+      alert("Payload JSON non valido:\n" + parsed.error);
+      return;
     }
-  };
 
-  // cleanup undefined
-  if(base.subject.full_name === undefined) delete base.subject.full_name;
-  if(base.subject.geo.country === undefined) delete base.subject.geo.country;
-  if(base.subject.geo.region === undefined) delete base.subject.geo.region;
-  if(base.subject.geo.city === undefined) delete base.subject.geo.city;
-  if(base.subject.geo.zone === undefined) delete base.subject.geo.zone;
+    lastPayloadObj = parsed.value;
+    const payloadCanon = canonicalStringify(lastPayloadObj);
+    const payloadSha = await sha256Hex(payloadCanon);
 
-  if(kind === "PRIVATE"){
-    const payload = {
-      note: SNAP.note ? SNAP.note : undefined,
-      note_sha256: SNAP.note_sha256 ? SNAP.note_sha256 : undefined,
-      evidence: SNAP.file_meta ? {
-        filename: SNAP.file_meta.name,
-        mime: SNAP.file_meta.type,
-        size: SNAP.file_meta.size,
-        encoding: "base64",
-        data: SNAP.file_b64,
-        sha256: SNAP.file_hash
-      } : undefined
-    };
-    if(payload.note === undefined) delete payload.note;
-    if(payload.note_sha256 === undefined) delete payload.note_sha256;
-    if(payload.evidence === undefined) delete payload.evidence;
-    base.payload = payload;
-  }
+    const receipt = await buildReceipt({
+      mode,
+      payloadSha256: payloadSha,
+      prevHash: ""
+    });
 
-  const jsonText = JSON.stringify(base, null, 2);
-  const receipt = await sha256String(jsonText);
+    lastReceipt = receipt;
 
-  // Sezione SEALED: con marcatori rigidi BEGIN/END (anti-bug / anti-ambiguità)
-  const sealed = (kind === "PRIVATE") ? (
-`===== SECTION: PRIVATE_PAYLOAD (SEALED) =====
-🜏 HERMETICUM — Blindata · Computabile · Evolutiva
-HERMETICUM B.C.E. S.r.l. · UE
+    $("outPayloadSha").value = payloadSha;
+    $("outReceipt").value = JSON.stringify(receipt, null, 2);
+    setStatus("OK");
+  });
 
-PRIVATE_TEXT_LEN: ${SNAP.note ? SNAP.note.length : 0}
-PRIVATE_TEXT_SHA256: ${SNAP.note_sha256 ? SNAP.note_sha256 : "[ASSENTE]"}
+  $("btnDlReceipt").addEventListener("click", () => {
+    if(!lastReceipt){ alert("Crea prima un riferimento."); return; }
+    downloadText("receipt.json", JSON.stringify(lastReceipt, null, 2));
+  });
 
------ PRIVATE_TEXT_BEGIN -----
-${SNAP.note ? SNAP.note : ""}
------ PRIVATE_TEXT_END -----
-
------ PRIVATE_FILE_META -----
-${SNAP.file_meta ? (SNAP.file_meta.name + " (" + SNAP.file_meta.size + " bytes) sha256=" + SNAP.file_hash) : "[ASSENTE]"}
------ PRIVATE_FILE_META_END -----
-`
-  ) : "";
-
-  const bundle =
-`HERMETICUM IPR BUNDLE (single-file)
-IPR_ID: ${id}
-ARTEFATTO: ${kind}
-timestamp_utc: ${now}
-content_basis: ${SNAP.content_basis}
-content_hash_sha256: ${SNAP.content_hash}
-receipt_sha256(json): ${receipt}
-build_id: ${BUILD_ID}
-
-${sealed}===== SECTION: IPR.JSON =====
-${jsonText}
-
-===== SECTION: RECEIPT.SHA256.TXT =====
-${receipt}
-`;
-
-  const bBundle = new Blob([bundle], {type:"text/plain"});
-  const bJson = new Blob([jsonText], {type:"application/json"});
-  const bRec = new Blob([receipt + "\n"], {type:"text/plain"});
-
-  const uBundle = URL.createObjectURL(bBundle);
-  const uJson = URL.createObjectURL(bJson);
-  const uRec = URL.createObjectURL(bRec);
-
-  const fnBase = `${id}_${kind}`;
-  const fnBundle = `${fnBase}_BUNDLE.txt`;
-  const fnJson = `${fnBase}.json`;
-  const fnRec = `${fnBase}.receipt.sha256.txt`;
-
-  dlbox.style.display = "block";
-  const aB = document.getElementById("dl_bundle");
-  const aJ = document.getElementById("dl_json");
-  const aR = document.getElementById("dl_receipt");
-  aB.href = uBundle; aB.download = fnBundle;
-  aJ.href = uJson;   aJ.download = fnJson;
-  aR.href = uRec;    aR.download = fnRec;
-
-  // Auto-download (se bloccato, hai il fallback)
-  try{ aB.click(); }catch(e){}
-
-  out.textContent =
-    "STATO: OK\n" +
-    "ARTEFATTO: " + kind + "\n" +
-    "ID: " + id + "\n" +
-    "MODULE: " + MODULE_VERSION + "\n" +
-    "BUILD: " + BUILD_ID + "\n" +
-    "MODE: " + SNAP.mode + "\n" +
-    "RIFERIMENTO (content_hash):\n" + SNAP.content_hash + "\n" +
-    "receipt_sha256(json):\n" + receipt + "\n\n" +
-    (kind === "PRIVATE"
-      ? ("PRIVATE: payload sigillato (🜏) nel bundle.\nTESTO_PRIVATO_LEN: " + (SNAP.note ? SNAP.note.length : 0) + "\n")
-      : "PUBLIC: hash-only (nessun payload).\n") +
-    "Download avviato — fallback disponibile.";
-}
+  $("btnDlBundle").addEventListener("click", () => {
+    if(!lastReceipt){ alert("Crea prima un riferimento."); return; }
+    if($("mode").value !== "PRIVATE"){
+      alert("Il bundle PRIVATE è disponibile solo in modalità PRIVATE.");
+      return;
+    }
+    downloadText("receipt.json", JSON.stringify(lastReceipt, null, 2));
+    downloadText("payload.json", JSON.stringify(lastPayloadObj, null, 2));
+  });
 </script>
 </body>
 </html>
