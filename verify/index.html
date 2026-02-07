@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verify — PASS/FAIL</title>
+  <title>Verify — Hermeticum</title>
   <link rel="stylesheet" href="../assets/style.css" />
 </head>
 <body>
   <header class="hdr">
     <div class="sym">🜏</div>
     <div class="brand">
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
       <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
     </div>
-    <h1>Verify — Verifica deterministica (PASS/FAIL)</h1>
-    <p class="muted">Hash-only. Nessuna custodia dati. Verifica receipt e (opzionale) payload.</p>
+    <h1>Verify — Verifica scontrino timbrato</h1>
+    <p class="muted">PASS/FAIL deterministico del receipt. Opzionale: verifica anche lo standard cliente.</p>
+
     <nav class="nav">
       <a href="../">Home</a>
-      <a href="../create/">Create</a>
+      <a href="../activate/">Attiva IPR Europeo</a>
       <a href="./">Verify</a>
       <a href="../audit/">Audit</a>
       <a href="../architecture/">Architettura</a>
@@ -29,28 +30,24 @@
     <section class="card">
       <h2>Input</h2>
 
-      <label>Receipt (JSON)</label>
-      <textarea id="receipt" rows="10" placeholder='Incolla receipt.json'></textarea>
+      <label>Receipt timbrato (JSON)</label>
+      <textarea id="receipt" rows="12" placeholder="Incolla HBCE_RECEIPT_IPR_EU.json"></textarea>
 
-      <label>Payload (JSON) — opzionale</label>
-      <textarea id="payload" rows="8" placeholder='Se lo hai, incollalo: serve a verificare anche payload_sha256'></textarea>
+      <label>Standard Cliente (JSON) — opzionale</label>
+      <textarea id="payload" rows="10" placeholder="Se lo hai (PRIVATE), incollalo per verificare anche payload_sha256"></textarea>
 
       <div class="hr"></div>
-      <button class="btn" id="btnVerify">Verifica</button>
+
+      <button class="btn" id="btnVerify">VERIFICA</button>
       <span class="pill" id="pill">IDLE</span>
 
       <div class="hr"></div>
 
-      <div class="row">
-        <div>
-          <label>Esito</label>
-          <input id="outResult" readonly />
-        </div>
-        <div>
-          <label>payload_sha256 (calcolato)</label>
-          <input id="outPayloadSha" readonly />
-        </div>
-      </div>
+      <label>Esito</label>
+      <input id="outResult" readonly />
+
+      <label>payload_sha256 (calcolato)</label>
+      <input id="outPayloadSha" readonly />
 
       <label>expected_receipt_sha256</label>
       <input id="outExpected" readonly />
@@ -59,57 +56,46 @@
       <input id="outDeclared" readonly />
 
       <p class="small">
-        PASS significa che la firma hash del receipt è coerente con i campi e (se fornito) con il payload.
-        FAIL significa che non combacia.
+        PASS = il receipt è coerente con i campi e (se fornito) con lo standard cliente.<br>
+        FAIL = non combacia.
       </p>
     </section>
   </main>
 
   <footer class="ftr">
-    🜏 HERMETICUM — Verify (hash-only) · HERMETICUM B.C.E. S.r.l.
+    🜏 HERMETICUM — Verify · HERMETICUM B.C.E. S.r.l.
   </footer>
 
-<script src="../assets/app.js"></script>
-<script>
-  const $ = (id) => document.getElementById(id);
+  <script src="../assets/app.js"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    function setPill(t){ $("pill").textContent = t; }
 
-  function setPill(t){
-    $("pill").textContent = t;
-  }
+    $("btnVerify").addEventListener("click", async () => {
+      setPill("WORK");
 
-  $("btnVerify").addEventListener("click", async () => {
-    setPill("WORK");
+      const r = safeParseJson($("receipt").value.trim());
+      if(!r.ok){ setPill("FAIL"); alert("Receipt non valido:\n"+r.error); return; }
 
-    const r = safeParseJson($("receipt").value.trim());
-    if(!r.ok){
-      setPill("FAIL");
-      alert("Receipt JSON non valido:\n" + r.error);
-      return;
-    }
-
-    let payloadObj = null;
-    const payloadTxt = $("payload").value.trim();
-    if(payloadTxt.length > 0){
-      const p = safeParseJson(payloadTxt);
-      if(!p.ok){
-        setPill("FAIL");
-        alert("Payload JSON non valido:\n" + p.error);
-        return;
+      let payloadObj = null;
+      const payloadTxt = $("payload").value.trim();
+      if(payloadTxt.length){
+        const p = safeParseJson(payloadTxt);
+        if(!p.ok){ setPill("FAIL"); alert("Standard cliente non valido:\n"+p.error); return; }
+        payloadObj = p.value;
       }
-      payloadObj = p.value;
-    }
 
-    const out = await verifyReceipt(r.value, payloadObj);
+      const out = await verifyStampedReceipt(r.value, payloadObj);
 
-    $("outResult").value = out.pass ? "PASS" : "FAIL";
-    $("outResult").className = out.pass ? "ok" : "bad";
+      $("outResult").value = out.pass ? "PASS" : "FAIL";
+      $("outResult").className = out.pass ? "ok" : "bad";
 
-    $("outPayloadSha").value = out.payload_sha256 || "";
-    $("outExpected").value = out.expected_receipt_sha256 || "";
-    $("outDeclared").value = r.value.receipt_sha256 || "";
+      $("outPayloadSha").value = out.payload_sha256 || "";
+      $("outExpected").value = out.expected_receipt_sha256 || "";
+      $("outDeclared").value = out.declared_receipt_sha256 || "";
 
-    setPill(out.pass ? "PASS" : "FAIL");
-  });
-</script>
+      setPill(out.pass ? "PASS" : "FAIL");
+    });
+  </script>
 </body>
 </html>
