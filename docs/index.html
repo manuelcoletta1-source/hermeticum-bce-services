@@ -1,129 +1,182 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Docs — 🜏 HERMETICUM</title>
-  <link rel="stylesheet" href="../assets/css/main.css" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Documentation — IPR Infrastructure</title>
+
+<link rel="stylesheet" href="../assets/css/main.css"/>
+<link rel="stylesheet" href="../assets/css/brand.css"/>
 </head>
+
 <body>
+
 <header class="topbar">
   <div class="wrap">
     <div class="row">
-      <div class="brand">🜏 HERMETICUM</div>
+
+      <div class="brandmark">
+        <img src="../assets/img/hermeticum-mark-neon.svg" alt="IPR"/>
+        <span>IPR</span>
+      </div>
 
       <nav class="nav">
         <a href="../">Gateway</a>
-        <a href="../status/">Status</a>
         <a href="../activate/">Activate</a>
         <a href="../verify/">Verify</a>
         <a href="../infrastructure/">Infrastructure</a>
-        <a href="../joker/">JOKER</a>
         <a class="active" href="./">Docs</a>
+        <a href="../status/">Status</a>
       </nav>
 
       <div class="spacer"></div>
-      <div class="status active">Infrastructure Status: ACTIVE</div>
+      <div class="status active">EU Infrastructure: ACTIVE</div>
+
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <section class="hero">
-    <h1>Docs</h1>
-    <p class="lead">
-      Specifiche operative del gateway pubblico: IPR (Identity Primary Record), verifica ex-ante, evidenza (hash-only),
-      e policy fail-closed.
-    </p>
-  </section>
 
-  <section class="section">
-    <div class="panel">
-      <h2>Concetti base</h2>
-      <div style="color:var(--muted);line-height:1.7">
-        <p style="margin:0 0 10px">
-          <strong>IPR</strong> è un riferimento operativo. L’attivazione produce una <strong>receipt</strong> che contiene
-          hash di evidenza (hash-only). La receipt è verificabile e opponibile nel tempo.
-        </p>
-        <p style="margin:0">
-          <strong>Verify (Ex-Ante)</strong> applica un gate tecnico: misura prerequisiti e restituisce
-          <strong>AUTHORIZED</strong> o <strong>DENIED</strong> con un <strong>reason_code</strong>.
-          Incertezza → blocco (fail-closed).
-        </p>
-      </div>
-    </div>
-  </section>
+<section class="hero">
+<h1>IPR Technical Documentation</h1>
 
-  <section class="section">
-    <div class="panel">
-      <h2>Procedura (EU)</h2>
-      <ol style="color:var(--muted);line-height:1.75;margin:10px 0 0;padding-left:18px">
-        <li>Vai su <a href="../activate/"><strong>Activate</strong></a> e genera IPR (Create).</li>
-        <li>Salva la <strong>receipt JSON completa</strong> (inizia con <code>{</code> e finisce con <code>}</code>).</li>
-        <li>Vai su <a href="../verify/"><strong>Verify</strong></a> e incolla la receipt.</li>
-        <li>Output: <strong>AUTHORIZED</strong> oppure <strong>DENIED</strong> con reason_code.</li>
-      </ol>
-      <div class="cta">
-        <a class="btn primary" href="../activate/">Attiva IPR</a>
-        <a class="btn" href="../verify/">Verify</a>
-      </div>
-    </div>
-  </section>
+<p class="lead">
+Reference documentation for the Identity Primary Record infrastructure.  
+Designed for public verification, auditability and EU-aligned deployment.
+</p>
 
-  <section class="section">
-    <div class="panel">
-      <h2>Contratto input Verify</h2>
-      <div style="color:var(--muted);line-height:1.7">
-        <p style="margin:0 0 10px"><strong>Verify accetta un solo input</strong>, in uno dei formati:</p>
-        <ul style="margin:0;padding-left:18px">
-          <li><strong>Receipt JSON</strong> (oggetto JSON)</li>
-          <li><strong>Wrapper</strong>: <code>{"receipt":{...},"client_std_full":{...}}</code></li>
-          <li><strong>Array</strong>: <code>[{"type":"receipt","data":{...}}, {"type":"client_std","data":{...}}]</code></li>
-          <li><strong>Hash SHA-256</strong> (64 caratteri hex) per controllo formato rapido</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<div class="cta">
+<a class="btn" href="../activate/">Activate</a>
+<a class="btn" href="../verify/">Verify</a>
+<a class="btn" href="../status/">Status</a>
+</div>
+</section>
 
-  <section class="section">
-    <div class="panel">
-      <h2>Reason codes (DENIED)</h2>
-      <div style="color:var(--muted);line-height:1.7">
-        <ul style="margin:0;padding-left:18px">
-          <li><strong>EMPTY_INPUT</strong> — input vuoto</li>
-          <li><strong>INPUT_NOT_JSON_OR_HASH</strong> — non è JSON e non è hash SHA-256</li>
-          <li><strong>RECEIPT_MISSING</strong> — receipt assente o non oggetto</li>
-          <li><strong>PAYLOAD_SHA256_INVALID</strong> — payload_sha256 mancante o non valido</li>
-          <li><strong>RECEIPT_SHA256_INVALID</strong> — receipt_sha256 mancante o non valido</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<section class="section">
+<h2>Core principles</h2>
 
-  <section class="section">
-    <div class="panel">
-      <h2>Policy (operativa)</h2>
-      <div style="color:var(--muted);line-height:1.7">
-        <ul style="margin:0;padding-left:18px">
-          <li><strong>UE-first</strong>: impostazione UE come standard normativo di riferimento.</li>
-          <li><strong>Audit-first</strong>: tutto è tracciabile e verificabile.</li>
-          <li><strong>Hash-only</strong>: esposizione pubblica basata su hash/evidenza, non su dati personali.</li>
-          <li><strong>Fail-closed</strong>: incertezza o incoerenza → blocco.</li>
-          <li><strong>No data custody</strong>: il gateway non detiene identità personali.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<div class="grid">
+
+<div class="card">
+Fail-Closed
+<small>If verification fails → execution invalid</small>
+</div>
+
+<div class="card">
+Audit-First
+<small>Outputs designed for inspection</small>
+</div>
+
+<div class="card">
+Hash-Only
+<small>No raw personal data required</small>
+</div>
+
+<div class="card">
+No Data Custody
+<small>No centralized identity storage</small>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<h2>System architecture</h2>
+
+<div class="panel">
+<div style="color:var(--muted);line-height:1.8">
+
+<div><strong>Layer 1 — Identity anchor</strong><br>
+External or sovereign identity reference.</div>
+
+<br>
+
+<div><strong>Layer 2 — Attribution</strong><br>
+Responsibility binding and timestamp.</div>
+
+<br>
+
+<div><strong>Layer 3 — Evidence</strong><br>
+Hash-based receipt and append-only trace.</div>
+
+<br>
+
+<div><strong>Layer 4 — Verification</strong><br>
+Deterministic PASS / FAIL.</div>
+
+<br>
+
+<div><strong>Layer 5 — Interoperability</strong><br>
+B2B · B2G · EU pilot-ready.</div>
+
+</div>
+</div>
+</section>
+
+<section class="section">
+<h2>Verification model</h2>
+
+<div class="panel">
+<div style="color:var(--muted);line-height:1.8">
+
+<div>Input: receipt JSON or SHA-256 reference</div>
+<div>Process: deterministic hash verification</div>
+<div>Output: AUTHORIZED or DENIED</div>
+<div>Mode: ex-ante (before execution)</div>
+
+</div>
+
+<div class="cta">
+<a class="btn primary" href="../verify/">Open Verify</a>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<h2>Operational domains</h2>
+
+<div class="grid">
+
+<a class="card" href="../infrastructure/#ai">
+AI Systems
+<small>Decision accountability layer</small>
+</a>
+
+<a class="card" href="../infrastructure/#robot">
+Robotics
+<small>Physical action responsibility</small>
+</a>
+
+<a class="card" href="../infrastructure/#datacenter">
+Datacenters
+<small>Execution authorization</small>
+</a>
+
+<a class="card" href="../infrastructure/#critical">
+Critical infrastructure
+<small>Energy · transport · digital</small>
+</a>
+
+<a class="card" href="../infrastructure/#gov">
+Governance
+<small>EU pilot alignment</small>
+</a>
+
+</div>
+</section>
+
 </main>
 
 <footer class="footer">
-  <div class="wrap">
-    <div class="row">
-      <strong>🜏 HERMETICUM</strong>
-      <div>Docs — Public Gateway</div>
-      <div>UE-first · audit-first · hash-only · fail-closed · no data custody</div>
-    </div>
-  </div>
+<div class="wrap">
+<div class="row">
+<strong>IPR Infrastructure</strong>
+<div>EU-first · audit-first · fail-closed · hash-only</div>
+</div>
+</div>
 </footer>
+
 </body>
 </html>
