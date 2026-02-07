@@ -20,8 +20,44 @@
     "reason": "attivazione_base",
     "notes": ""
   },
+
+  "identity_eu": {
+    "enabled": false,
+    "level": "BASIC|EU_IDV1",
+    "method": {
+      "eidas_wallet": false,
+      "cie": false,
+      "passport": false,
+      "residence_permit": false
+    },
+    "person": {
+      "legal_name": "",
+      "birth_date": "",
+      "birth_place": "",
+      "citizenship": "",
+      "tax_id": {
+        "country": "IT",
+        "codice_fiscale": ""
+      }
+    },
+    "document": {
+      "type": "CIE|PASSPORT|RESIDENCE_PERMIT|OTHER",
+      "issuer_country": "IT",
+      "number": "",
+      "expiry": ""
+    },
+    "consent": {
+      "user_attests_ownership": false,
+      "allows_use_for_ipr_opponibility": false
+    },
+    "privacy": {
+      "public_registry_contains_only_hashes": true,
+      "personal_data_stays_private": true
+    }
+  },
+
   "optional": {
-    "joker_symbiotic_mode": false,
-    "joker_tag": ""
+    "joker_symbiotic_mode": true,
+    "joker_tag": "ManuHell"
   }
 }
