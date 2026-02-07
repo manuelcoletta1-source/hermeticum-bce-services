@@ -37,8 +37,14 @@ function safeParseJson(text){
   catch(e){ return { ok:false, error: String(e) }; }
 }
 
-// Receipt timbrato per Attivazione IPR Europeo (BASE)
-async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientStd, jokerEnabled }){
+/**
+ * HBCE-IPR-EU Receipt (BASE)
+ * - JOKER è FAIL-CLOSED: si attiva solo se clientStd.optional.joker_symbiotic_mode === true
+ * - receipt_sha256 = sha256(canonical_json(core))
+ */
+async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientStd }){
+  const jokerOn = (clientStd?.optional?.joker_symbiotic_mode === true);
+
   const core = {
     proto: "HBCE-IPR-EU-v1",
     kind: "IPR_EU_BASE_RECEIPT",
@@ -60,7 +66,7 @@ async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientS
       std: clientStd?.std || "HBCE-CLIENT-STD-UE-v1",
       scope: clientStd?.scope || "IPR_EU_ACTIVATION"
     },
-    joker: jokerEnabled ? {
+    joker: jokerOn ? {
       enabled: true,
       mode: "SYMBIOTIC_TEMPORAL",
       tag: clientStd?.optional?.joker_tag || ""
@@ -71,24 +77,31 @@ async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientS
   return { ...core, receipt_sha256: receiptSha };
 }
 
-// Verify deterministico del receipt (e opzionale payload)
+/**
+ * Verify deterministico del receipt “stampato”
+ * - Se payload fornito: ricalcola payload_sha256 da payload
+ * - expected_receipt_sha256 = sha256(canonical_json(core_without_receipt_sha256))
+ */
 async function verifyStampedReceipt(receiptObj, payloadObjOrNull){
-  // payload hash: se il payload è fornito, lo ricalcolo e lo confronto implicitamente
   let payloadSha = receiptObj?.payload_sha256 || "";
   if (payloadObjOrNull !== null){
     payloadSha = await sha256Hex(canonicalStringify(payloadObjOrNull));
   }
 
-  // ricostruisco core senza receipt_sha256
   const core = { ...receiptObj };
   delete core.receipt_sha256;
 
-  // forza payload_sha256 coerente (se payload fornito)
+  // forza payload_sha256 coerente se payload presente
   core.payload_sha256 = payloadSha;
 
   const expected = await sha256Hex(canonicalStringify(core));
   const declared = receiptObj?.receipt_sha256 || "";
   const pass = (expected === declared);
 
-  return { pass, expected_receipt_sha256: expected, declared_receipt_sha256: declared, payload_sha256: payloadSha };
+  return {
+    pass,
+    expected_receipt_sha256: expected,
+    declared_receipt_sha256: declared,
+    payload_sha256: payloadSha
+  };
 }
