@@ -2,63 +2,62 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Status — HERMETICUM (IPR ex-ante)</title>
-  <meta name="description" content="Pagina di stato istituzionale. Regime fail-closed. Nessuna custodia dati. Modalità pilot." />
-  <link rel="stylesheet" href="../assets/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Status — HERMETICUM</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="container">
-      <a class="brand" href="../index.html">HERMETICUM B.C.E.</a>
+<header class="topbar">
+  <div class="wrap">
+    <div class="row">
+      <div class="brand">HERMETICUM</div>
       <nav class="nav">
-        <a href="../ipr/index.html">IPR</a>
-        <a href="../verify/index.html">Verify</a>
-        <a href="../gate/index.html">Gate</a>
-        <a href="../datacenter/index.html">DataCenter</a>
-        <a href="../openapi/index.html">OpenAPI</a>
-        <a href="../use-cases/index.html">Use Cases</a>
-        <a class="active" href="./index.html">Status</a>
-        <a href="../governance/index.html">Governance</a>
+        <a href="../">Gateway</a>
+        <a class="active" href="./">Status</a>
+        <a href="../activate/">Activate</a>
+        <a href="../verify/">Verify</a>
+        <a href="../infrastructure/">Infrastructure</a>
+        <a href="../joker/">JOKER</a>
+        <a href="../docs/">Docs</a>
       </nav>
+      <div class="spacer"></div>
+      <div class="status active">Infrastructure Status: ACTIVE</div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="container">
-    <h1>Status</h1>
+<main class="wrap">
+  <section class="hero">
+    <h1>Infrastructure Status</h1>
+    <p class="lead">Stato operativo del gateway pubblico. Non cambia chi decide. Cambia quando un’azione è ammessa.</p>
+  </section>
 
-    <p class="lead">
-      Stato operativo e confini dichiarati (audit / compliance / procurement).
-    </p>
-
-    <section class="card">
-      <h2>Stato operativo</h2>
-      <ul>
-        <li><strong>Modalità:</strong> PILOT</li>
-        <li><strong>Regime:</strong> FAIL-CLOSED</li>
-        <li><strong>Custodia dati personali:</strong> NONE</li>
-        <li><strong>Portale:</strong> non memorizza dati (solo calcolo locale)</li>
-        <li><strong>Ambito:</strong> non-production, ambiente controllato</li>
-      </ul>
-    </section>
-
-    <section class="card warning">
-      <h2>Fuori ambito</h2>
-      <ul>
-        <li>decisioni di merito</li>
-        <li>sorveglianza / profiling / identificazione persone</li>
-        <li>custodia di dati personali</li>
-        <li>certificazione automatica di conformità</li>
-      </ul>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <p>Stato dichiarato. Confini dichiarati. Fail-closed.</p>
+  <section class="section">
+    <div class="grid">
+      <div class="card">IPR Core<small>ACTIVE</small></div>
+      <div class="card">Verify (Ex-Ante)<small>ACTIVE</small></div>
+      <div class="card">Evidence (Hash-only)<small>ACTIVE</small></div>
+      <div class="card">Policy Engine<small>UE-first · audit-first</small></div>
+      <div class="card">Fail-Closed<small>Incertezza = blocco</small></div>
+      <div class="card">Data Custody<small>NONE</small></div>
     </div>
-  </footer>
+    <hr />
+    <div class="panel">
+      <strong>Policy</strong>
+      <div style="color:var(--muted);margin-top:8px">
+        UE-first · audit-first · hash-only · fail-closed · no identity custody · no profiling.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="row">
+      <strong>HERMETICUM</strong>
+      <div>Gateway pubblico operativo</div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
