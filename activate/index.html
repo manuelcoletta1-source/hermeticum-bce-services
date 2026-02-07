@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Activate — HERMETICUM</title>
+  <title>Activate — 🜏 HERMETICUM</title>
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
 <body>
 <header class="topbar">
   <div class="wrap">
     <div class="row">
-      <div class="brand">HERMETICUM</div>
+      <div class="brand">🜏 HERMETICUM</div>
+
       <nav class="nav">
         <a href="../">Gateway</a>
         <a href="../status/">Status</a>
@@ -20,6 +21,7 @@
         <a href="../joker/">JOKER</a>
         <a href="../docs/">Docs</a>
       </nav>
+
       <div class="spacer"></div>
       <div class="status active">Infrastructure Status: ACTIVE</div>
     </div>
@@ -31,22 +33,31 @@
     <h1>Attiva IPR</h1>
     <p class="lead">
       Procedura operativa: genera → ottieni receipt → verifica → stato attivo.
-      La receipt è la prova (hash-only) che rende opponibile l’atto nel tempo.
+      La receipt (hash-only) è la prova che rende opponibile l’atto nel tempo.
     </p>
+
     <div class="cta">
-      <a class="btn primary" href="../create/">Genera (Create)</a>
-      <a class="btn" href="../verify/">Verifica</a>
+      <a class="btn primary" href="../create/">Genera IPR (Create)</a>
+      <a class="btn" href="../verify/">Verifica IPR</a>
+      <a class="btn" href="../status/">Status</a>
+    </div>
+
+    <div class="pillrow">
+      <span class="pill">Step 1: Generate</span>
+      <span class="pill">Step 2: Receipt</span>
+      <span class="pill">Step 3: Verify</span>
+      <span class="pill">Step 4: ACTIVE</span>
     </div>
   </section>
 
   <section class="section">
     <div class="panel">
-      <strong>Procedura</strong>
+      <strong>Procedura (EU)</strong>
       <ol style="color:var(--muted);line-height:1.7;margin:10px 0 0;padding-left:18px">
-        <li>Genera IPR (create).</li>
-        <li>Copia o salva la receipt JSON completa.</li>
-        <li>Incolla la receipt in Verify (ex-ante) e verifica.</li>
-        <li>Conserva gli hash come riferimento opponibile.</li>
+        <li>Apri <strong>Create</strong> e genera IPR.</li>
+        <li>Copia o salva la <strong>receipt JSON completa</strong> (da <code>{</code> a <code>}</code>).</li>
+        <li>Vai su <strong>Verify</strong> e incolla la receipt: otterrai <strong>AUTHORIZED</strong> o <strong>DENIED</strong> con reason_code.</li>
+        <li>Conserva gli hash come riferimento opponibile nel tempo.</li>
       </ol>
     </div>
   </section>
@@ -55,7 +66,7 @@
 <footer class="footer">
   <div class="wrap">
     <div class="row">
-      <strong>HERMETICUM</strong>
+      <strong>🜏 HERMETICUM</strong>
       <div>Activation Flow — EU public gateway</div>
     </div>
   </div>
