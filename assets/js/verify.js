@@ -5,8 +5,10 @@ function tryParseJSON(raw){
   const t = stripBOM(String(raw || "").trim());
   if (!t) return { ok:false, err:"EMPTY_INPUT" };
 
+  // Quick path: single SHA-256
   if (isHex64(t)) return { ok:true, kind:"hash", value:t.toLowerCase() };
 
+  // JSON path
   try {
     const obj = JSON.parse(t);
     return { ok:true, kind:"json", value:obj };
@@ -20,12 +22,12 @@ function normalize(parsed){
 
   const v = parsed.value;
 
-  // wrapper
+  // wrapper: { receipt: {...}, client_std_full: {...} }
   if (v && typeof v === "object" && v.receipt) {
     return { parsed_as:"wrapper", receipt:v.receipt, client_std_full: v.client_std_full || null };
   }
 
-  // array
+  // array: [ {type:"receipt",data:{...}}, {type:"client_std",data:{...}} ]
   if (Array.isArray(v)) {
     const receipt = v.find(x => x && x.type === "receipt")?.data || null;
     const client  = v.find(x => x && x.type === "client_std")?.data || null;
@@ -57,15 +59,17 @@ window.HBCE_verify = function(){
 
   const n = normalize(parsed);
 
+  // Hash-only quick check (format)
   if (n.parsed_as === "hash") {
     return ok(outEl, "hash", "note=Formato hash valido (64 hex).");
   }
 
+  // Fail-closed structural checks
   const r = n.receipt;
   if (!r || typeof r !== "object") return deny(outEl, "RECEIPT_MISSING");
   if (!r.payload_sha256 || !isHex64(String(r.payload_sha256))) return deny(outEl, "PAYLOAD_SHA256_INVALID");
   if (!r.receipt_sha256 || !isHex64(String(r.receipt_sha256))) return deny(outEl, "RECEIPT_SHA256_INVALID");
 
-  // Qui (step futuro) aggiungiamo: ricalcolo deterministico receipt_sha256 e confronto.
+  // Step successivo (quando vuoi): ricalcolo deterministico receipt_sha256 e confronto.
   return ok(outEl, n.parsed_as, "note=Struttura receipt valida.");
 };
