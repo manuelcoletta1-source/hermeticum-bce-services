@@ -3,21 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Audit — Catena append-only</title>
+  <title>Audit — Hermeticum</title>
   <link rel="stylesheet" href="../assets/style.css" />
 </head>
 <body>
   <header class="hdr">
     <div class="sym">🜏</div>
     <div class="brand">
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
       <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
     </div>
     <h1>Audit — Catena append-only</h1>
-    <p class="muted">Crea receipt concatenati con prev_hash. Nessuna custodia dati: solo locale (browser).</p>
+    <p class="muted">
+      Crea una sequenza di receipt concatenati tramite <strong>prev_hash</strong>.
+      La catena è salvata solo nel browser (localStorage).
+    </p>
+
     <nav class="nav">
       <a href="../">Home</a>
-      <a href="../create/">Create</a>
+      <a href="../activate/">Attiva IPR Europeo</a>
       <a href="../verify/">Verify</a>
       <a href="./">Audit</a>
       <a href="../architecture/">Architettura</a>
@@ -32,133 +36,116 @@
       <label>prev_hash (receipt_sha256 precedente) — opzionale</label>
       <input id="prevHash" placeholder="Se vuoto: inizio catena" />
 
-      <label>Modalità</label>
-      <select id="mode">
-        <option value="PUBLIC">PUBLIC (solo receipt)</option>
-        <option value="PRIVATE">PRIVATE (receipt + payload)</option>
-      </select>
-
-      <label>Payload (JSON)</label>
-      <textarea id="payload" rows="8" placeholder='Esempio: {"azione":"step","n":1}'></textarea>
+      <label>Receipt timbrato (JSON) da inserire in catena</label>
+      <textarea id="receipt" rows="10" placeholder="Incolla un receipt timbrato (HBCE_RECEIPT_IPR_EU.json)"></textarea>
 
       <div class="hr"></div>
-      <button class="btn" id="btnStep">Crea step</button>
-      <button class="btn" id="btnClear">Pulisci storage locale</button>
+
+      <button class="btn" id="btnAppend">APPENDI IN CATENA</button>
+      <button class="btn" id="btnClear">PULISCI CATENA LOCALE</button>
       <span class="pill" id="pill">IDLE</span>
 
       <div class="hr"></div>
 
-      <label>receipt generato (JSON)</label>
+      <label>Receipt aggiornato (con prev_hash inserito)</label>
       <textarea id="outReceipt" rows="10" readonly></textarea>
 
       <div class="row">
-        <button class="btn" id="btnDlReceipt">Download receipt.json</button>
-        <button class="btn" id="btnDlPayload">Download payload.json (solo PRIVATE)</button>
+        <button class="btn" id="btnDlReceipt">Scarica receipt aggiornato</button>
+        <button class="btn" id="btnDlChain">Scarica chain.json</button>
       </div>
 
       <p class="small">
-        Nota: la catena è “append-only” perché ogni receipt può includere il prev_hash del receipt precedente.
-        La lista degli step viene salvata solo in <strong>localStorage</strong> del browser.
+        Regola: prev_hash deve puntare al receipt_sha256 del passo precedente.
       </p>
     </section>
 
     <section class="card">
-      <h2>Catena locale (browser)</h2>
+      <h2>Catena locale</h2>
       <div class="mono" id="chain">Nessun elemento.</div>
     </section>
   </main>
 
   <footer class="ftr">
-    🜏 HERMETICUM — Audit (append-only) · HERMETICUM B.C.E. S.r.l.
+    🜏 HERMETICUM — Audit · HERMETICUM B.C.E. S.r.l.
   </footer>
 
-<script src="../assets/app.js"></script>
-<script>
-  const $ = (id) => document.getElementById(id);
-  const KEY = "HBCE_AUDIT_CHAIN_V1";
+  <script src="../assets/app.js"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const KEY = "HBCE_AUDIT_CHAIN_V1";
 
-  let lastReceipt = null;
-  let lastPayloadObj = null;
+    function setPill(t){ $("pill").textContent = t; }
 
-  function loadChain(){
-    const raw = localStorage.getItem(KEY);
-    if(!raw) return [];
-    try { return JSON.parse(raw); } catch(e){ return []; }
-  }
-
-  function saveChain(arr){
-    localStorage.setItem(KEY, JSON.stringify(arr));
-  }
-
-  function renderChain(){
-    const arr = loadChain();
-    if(arr.length === 0){
-      $("chain").textContent = "Nessun elemento.";
-      return;
+    function loadChain(){
+      const raw = localStorage.getItem(KEY);
+      if(!raw) return [];
+      try { return JSON.parse(raw); } catch(e){ return []; }
     }
-    const lines = arr.map((x,i) =>
-      `#${i+1}  ${x.receipt_sha256}\n     prev: ${x.prev_hash || "(inizio)"}\n     at:   ${x.created_at}`
-    );
-    $("chain").textContent = lines.join("\n\n");
-  }
+    function saveChain(arr){ localStorage.setItem(KEY, JSON.stringify(arr)); }
 
-  function setPill(t){ $("pill").textContent = t; }
-
-  $("btnStep").addEventListener("click", async () => {
-    setPill("WORK");
-    const prevHash = $("prevHash").value.trim();
-    const mode = $("mode").value.trim();
-
-    const parsed = safeParseJson($("payload").value.trim());
-    if(!parsed.ok){
-      setPill("FAIL");
-      alert("Payload JSON non valido:\n" + parsed.error);
-      return;
+    function renderChain(){
+      const arr = loadChain();
+      if(arr.length === 0){ $("chain").textContent = "Nessun elemento."; return; }
+      const lines = arr.map((x,i)=>
+        `#${i+1}  ${x.receipt_sha256}\n     prev: ${x.prev_hash || "(inizio)"}\n     at:   ${x.created_at}`
+      );
+      $("chain").textContent = lines.join("\n\n");
     }
 
-    lastPayloadObj = parsed.value;
-    const payloadCanon = canonicalStringify(lastPayloadObj);
-    const payloadSha = await sha256Hex(payloadCanon);
+    let lastOut = null;
 
-    const receipt = await buildReceipt({ mode, payloadSha256: payloadSha, prevHash });
-    lastReceipt = receipt;
+    $("btnAppend").addEventListener("click", async () => {
+      setPill("WORK");
 
-    // salva in catena locale
-    const chain = loadChain();
-    chain.push(receipt);
-    saveChain(chain);
+      const parsed = safeParseJson($("receipt").value.trim());
+      if(!parsed.ok){ setPill("FAIL"); alert("Receipt non valido:\n"+parsed.error); return; }
 
-    $("outReceipt").value = JSON.stringify(receipt, null, 2);
-    $("prevHash").value = receipt.receipt_sha256; // auto-prosegue
-    setPill("OK");
+      const prevHash = $("prevHash").value.trim();
+
+      // aggiorna prev_hash e ricalcola receipt_sha256 (nuovo receipt “audit-step”)
+      const r = parsed.value;
+      const updated = { ...r, prev_hash: prevHash || "" };
+      const core = { ...updated };
+      delete core.receipt_sha256;
+
+      const expected = await sha256Hex(canonicalStringify(core));
+      updated.receipt_sha256 = expected;
+
+      lastOut = updated;
+
+      $("outReceipt").value = JSON.stringify(updated, null, 2);
+      $("prevHash").value = updated.receipt_sha256;
+
+      const chain = loadChain();
+      chain.push(updated);
+      saveChain(chain);
+
+      setPill("OK");
+      renderChain();
+    });
+
+    $("btnClear").addEventListener("click", () => {
+      localStorage.removeItem(KEY);
+      $("receipt").value = "";
+      $("outReceipt").value = "";
+      $("prevHash").value = "";
+      lastOut = null;
+      setPill("IDLE");
+      renderChain();
+    });
+
+    $("btnDlReceipt").addEventListener("click", () => {
+      if(!lastOut){ alert("Prima appendi uno step."); return; }
+      downloadText("HBCE_RECEIPT_AUDIT_STEP.json", JSON.stringify(lastOut, null, 2));
+    });
+
+    $("btnDlChain").addEventListener("click", () => {
+      const chain = loadChain();
+      downloadText("HBCE_AUDIT_CHAIN.json", JSON.stringify(chain, null, 2));
+    });
+
     renderChain();
-  });
-
-  $("btnClear").addEventListener("click", () => {
-    localStorage.removeItem(KEY);
-    lastReceipt = null;
-    lastPayloadObj = null;
-    $("outReceipt").value = "";
-    $("prevHash").value = "";
-    setPill("IDLE");
-    renderChain();
-  });
-
-  $("btnDlReceipt").addEventListener("click", () => {
-    if(!lastReceipt){ alert("Crea prima uno step."); return; }
-    downloadText("receipt.json", JSON.stringify(lastReceipt, null, 2));
-  });
-
-  $("btnDlPayload").addEventListener("click", () => {
-    if(!lastReceipt){ alert("Crea prima uno step."); return; }
-    if($("mode").value !== "PRIVATE"){
-      alert("Il payload si scarica solo in modalità PRIVATE.");
-      return;
-    }
-    downloadText("payload.json", JSON.stringify(lastPayloadObj, null, 2));
-  });
-
-  renderChain();
-</script>
+  </script>
 </body>
 </html>
