@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>IPR Verification Engine</title>
+<title>Motore di Verifica IPR</title>
 
 <link rel="stylesheet" href="../assets/css/main.css"/>
 <link rel="stylesheet" href="../assets/css/brand.css"/>
@@ -23,15 +23,15 @@
 
 <nav class="nav">
 <a href="../">Gateway</a>
-<a href="../activate/">Activate</a>
-<a href="../verify/" class="active">Verify</a>
-<a href="../registry/">Registry</a>
-<a href="../projects/">Access</a>
-<a href="../status/">Status</a>
+<a href="../activate/">Attiva</a>
+<a href="../verify/" class="active">Verifica</a>
+<a href="../registry/">Registro</a>
+<a href="../projects/">Accesso</a>
+<a href="../status/">Stato</a>
 </nav>
 
 <div class="spacer"></div>
-<div class="status active">Verification Engine</div>
+<div class="status active">Motore di verifica</div>
 
 </div>
 </div>
@@ -40,25 +40,25 @@
 <main class="wrap">
 
 <section class="hero">
-<h1>Deterministic IPR Verification</h1>
+<h1>Verifica deterministica IPR</h1>
 <p class="lead">
-Public hash-based verification of Identity Primary Record receipts
+Verifica pubblica basata su hash delle ricevute Identity Primary Record
 </p>
 </section>
 
 <section class="section">
 <div class="panel">
 
-<h2>Verification model</h2>
+<h2>Modello di verifica</h2>
 
 <div style="color:var(--muted);line-height:1.8">
 
-This engine performs deterministic verification of IPR receipts.  
-No identity data required.  
-No server validation required.  
-Hash-only reference model.
+Questo motore esegue la verifica deterministica delle ricevute IPR.  
+Non richiede dati personali.  
+Non richiede server centrale.  
+Modello basato esclusivamente su hash.
 
-If verification fails → execution context considered invalid.  
+Se la verifica fallisce → il contesto di esecuzione è considerato non valido.
 
 </div>
 
@@ -68,7 +68,7 @@ If verification fails → execution context considered invalid.
 <section class="section">
 <div class="panel">
 
-<h2>Verify receipt</h2>
+<h2>Verifica ricevuta</h2>
 
 <textarea id="hbce_input" style="
 width:100%;
@@ -81,7 +81,7 @@ font-family:monospace;
 "></textarea>
 
 <div class="cta" style="margin-top:18px">
-<button class="btn primary" onclick="HBCE_verify()">Verify</button>
+<button class="btn primary" onclick="HBCE_verify()">Verifica</button>
 </div>
 
 <pre id="hbce_out" class="result" style="margin-top:20px"></pre>
@@ -92,20 +92,20 @@ font-family:monospace;
 <section class="section">
 <div class="panel">
 
-<h2>Execution logic</h2>
+<h2>Logica di esecuzione</h2>
 
 <div style="color:var(--muted);line-height:1.8">
 
-Verification result is binary:
+Il risultato della verifica è binario:
 
-AUTHORIZED  
-DENIED  
+AUTORIZZATO  
+NEGATO  
 
-No partial state.  
-Fail-closed logic.  
+Nessuno stato intermedio.  
+Logica fail-closed.
 
-This engine does not grant permissions.  
-It measures verifiability of attribution before execution.
+Questo motore non concede permessi.  
+Misura la verificabilità dell’attribuzione prima dell’esecuzione.
 
 </div>
 
@@ -116,7 +116,7 @@ It measures verifiability of attribution before execution.
 
 <footer class="footer">
 <div class="wrap">
-<strong>IPR Verification Engine — Public Deterministic Layer</strong>
+<strong>Motore di Verifica IPR — Layer pubblico deterministico</strong>
 </div>
 </footer>
 
