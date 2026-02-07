@@ -1,0 +1,12 @@
+{
+  "proto": "HBCE-IPR-REGISTRY-v1",
+  "policy": [
+    "APPEND_ONLY",
+    "HASH_ONLY",
+    "NO_DATA_CUSTODY",
+    "PUBLIC_VERIFY"
+  ],
+  "network": "IPR European Node Network",
+  "sealed_by": "HERMETICUM B.C.E. S.r.l.",
+  "nodes": []
+}
