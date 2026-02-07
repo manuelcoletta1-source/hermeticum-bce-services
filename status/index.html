@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Status — IPR Infrastructure</title>
+<title>Reference Node Status</title>
 
 <link rel="stylesheet" href="../assets/css/main.css"/>
 <link rel="stylesheet" href="../assets/css/brand.css"/>
@@ -12,88 +12,93 @@
 <body>
 
 <header class="topbar">
-  <div class="wrap">
-    <div class="row">
+<div class="wrap">
+<div class="row">
 
-      <div class="brandmark">
-        <img src="../assets/img/hermeticum-mark-neon.svg" alt="IPR"/>
-        <span>IPR</span>
-      </div>
+<div class="brandmark">
+<img src="../assets/img/hermeticum-mark-neon.svg"/>
+<span>IPR</span>
+</div>
 
-      <nav class="nav">
-        <a href="../">Gateway</a>
-        <a href="../activate/">Activate</a>
-        <a href="../verify/">Verify</a>
-        <a href="../infrastructure/">Infrastructure</a>
-        <a href="../docs/">Docs</a>
-        <a class="active" href="./">Status</a>
-      </nav>
+<nav class="nav">
+<a href="../">Gateway</a>
+<a href="../activate/">Activate</a>
+<a href="../verify/">Verify</a>
+<a href="../registry/">Registry</a>
+<a href="../projects/">Access</a>
+<a href="../status/" class="active">Status</a>
+</nav>
 
-      <div class="spacer"></div>
-      <div class="status active">EU Infrastructure: ACTIVE</div>
+<div class="spacer"></div>
+<div class="status active">Node Active</div>
 
-    </div>
-  </div>
+</div>
+</div>
 </header>
 
 <main class="wrap">
 
 <section class="hero">
-<h1>Infrastructure Status</h1>
-
+<h1>Reference Infrastructure Node</h1>
 <p class="lead">
-Public operational view of the IPR gateway.  
-This page reports the platform posture: components, policies, and verification readiness.
+Operational status of public responsibility infrastructure reference node
 </p>
-
-<div class="cta">
-<a class="btn" href="../docs/">Documentation</a>
-<a class="btn" href="../verify/">Verify</a>
-<a class="btn" href="../activate/">Activate</a>
-</div>
 </section>
 
 <section class="section">
-<h2>Core components</h2>
-
-<div class="grid">
-  <div class="card">Gateway UI<small>ACTIVE</small></div>
-  <div class="card">Activation Flow<small>ACTIVE</small></div>
-  <div class="card">Ex-Ante Verify<small>ACTIVE</small></div>
-  <div class="card">Evidence Model<small>HASH-ONLY</small></div>
-  <div class="card">Audit Posture<small>AUDIT-FIRST</small></div>
-  <div class="card">Fail-Closed Gate<small>ENFORCED</small></div>
-</div>
-</section>
-
-<section class="section">
-<h2>Policy posture</h2>
-
 <div class="panel">
-  <div style="color:var(--muted);line-height:1.8">
-    <div><strong>EU-first</strong> — EU alignment is the default reference posture.</div>
-    <div><strong>Audit-first</strong> — outputs are designed to be inspected and compared.</div>
-    <div><strong>Hash-only</strong> — public verification uses cryptographic references, not raw identity data.</div>
-    <div><strong>No data custody</strong> — no centralized custody of personal identity data.</div>
-    <div><strong>Fail-closed</strong> — if verification is not possible, execution is treated as invalid.</div>
-  </div>
+
+<h2>Node state</h2>
+
+<div style="color:var(--muted);line-height:1.8">
+
+Status: ACTIVE  
+Mode: Public observable  
+Jurisdiction: EU-aligned  
+Architecture: Hash-only · Fail-closed · Audit-first  
+
+Node type: Reference implementation  
+Function: Responsibility attribution precondition layer  
+
+</div>
+
 </div>
 </section>
 
 <section class="section">
-<h2>Verification readiness</h2>
-
 <div class="panel">
-  <div style="color:var(--muted);line-height:1.8">
-    <div><strong>Accepted input:</strong> receipt JSON / wrapper / array / SHA-256 format-check.</div>
-    <div><strong>Result:</strong> AUTHORIZED or DENIED with reason_code.</div>
-    <div><strong>Deterministic:</strong> same input → same output.</div>
-  </div>
 
-  <div class="cta">
-    <a class="btn primary" href="../verify/">Open Verify</a>
-    <a class="btn" href="../docs/">Read Docs</a>
-  </div>
+<h2>Operational components</h2>
+
+<div style="color:var(--muted);line-height:1.8">
+
+IPR activation: active  
+verification engine: active  
+receipt generation: active  
+registry: append-only  
+metrological core: active  
+
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="panel">
+
+<h2>Persistence</h2>
+
+<div style="color:var(--muted);line-height:1.8">
+
+This node operates as a continuous public technical reference.
+
+Append-only evolution.  
+No central dependency.  
+Replication permitted.  
+Observation permitted.  
+
+</div>
+
 </div>
 </section>
 
@@ -101,10 +106,7 @@ This page reports the platform posture: components, policies, and verification r
 
 <footer class="footer">
 <div class="wrap">
-<div class="row">
-<strong>IPR Infrastructure</strong>
-<div>EU-first · audit-first · fail-closed · hash-only</div>
-</div>
+<strong>European Responsibility Infrastructure — Reference Node</strong>
 </div>
 </footer>
 
