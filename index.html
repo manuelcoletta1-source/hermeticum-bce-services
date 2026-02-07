@@ -3,239 +3,118 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HERMETICUM — Infrastruttura Europea di Responsabilità Operativa</title>
-
+<title>HERMETICUM — Nodo Centrale</title>
 <style>
-  :root{
-    --bg:#0a0a0a;
-    --panel:#111;
-    --text:#eaeaea;
-    --muted:#b8b8b8;
-    --line:#222;
-    --line2:#333;
-  }
-  body{
-    font-family: Arial, Helvetica, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    margin:0;
-    padding:0;
-  }
-  header{
-    padding:44px 18px 34px 18px;
-    text-align:center;
-    border-bottom:1px solid var(--line);
-  }
-  .symbol{
-    font-size:52px;
-    line-height:1;
-    margin-bottom:10px;
-  }
-  .brand{
-    font-size:14px;
-    letter-spacing:2px;
-    color:var(--muted);
-  }
-  h1{
-    font-size:34px;
-    margin:22px 0 10px 0;
-  }
-  .subtitle{
-    font-size:18px;
-    color:var(--muted);
-    max-width:980px;
-    margin:0 auto;
-    line-height:1.5;
-  }
-  .wrap{
-    max-width:980px;
-    margin:0 auto;
-    padding:52px 18px;
-  }
-  .panel{
-    background:var(--panel);
-    border:1px solid var(--line);
-    padding:28px;
-    margin:18px 0;
-  }
-  h2{
-    margin:0 0 12px 0;
-    font-size:20px;
-  }
-  p{
-    margin:10px 0;
-    line-height:1.7;
-    color:var(--text);
-  }
-  .muted{
-    color:var(--muted);
-  }
-  .schema{
-    background:#0f0f0f;
-    border:1px solid var(--line2);
-    padding:24px;
-    text-align:center;
-    line-height:2;
-    margin:18px 0 0 0;
-    color:var(--text);
-  }
-  .grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap:12px;
-    margin-top:14px;
-  }
-  a.btn{
-    display:block;
-    text-decoration:none;
-    color:var(--text);
-    background:var(--panel);
-    border:1px solid #444;
-    padding:14px 14px;
-    text-align:center;
-  }
-  a.btn:hover{
-    background:#1a1a1a;
-  }
-  .links{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-    margin-top:16px;
-  }
-  .links a{
-    color:var(--text);
-    text-decoration:none;
-    border-bottom:1px solid #444;
-    padding-bottom:2px;
-  }
-  .links a:hover{
-    border-bottom:1px solid var(--text);
-  }
-  footer{
-    border-top:1px solid var(--line);
-    padding:34px 18px;
-    text-align:center;
-    color:var(--muted);
-    line-height:1.6;
-  }
-  .tag{
-    display:inline-block;
-    border:1px solid #333;
-    padding:6px 10px;
-    margin:6px 6px 0 0;
-    color:var(--muted);
-    font-size:12px;
-    letter-spacing:1px;
-  }
+  :root{--bg:#0a0a0a;--panel:#111;--text:#eaeaea;--muted:#b8b8b8;--line:#222;--line2:#333;}
+  body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);margin:0}
+  header{padding:34px 18px;text-align:center;border-bottom:1px solid var(--line)}
+  nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  nav a{color:var(--text);text-decoration:none;border-bottom:1px solid #444;padding-bottom:2px}
+  nav a:hover{border-bottom:1px solid var(--text)}
+  .brand{letter-spacing:2px;font-size:14px;color:var(--muted)}
+  .symbol{font-size:52px;line-height:1;margin-bottom:10px}
+  h1{font-size:34px;margin:18px 0 8px}
+  .subtitle{max-width:980px;margin:0 auto;color:var(--muted);line-height:1.6}
+  .wrap{max-width:980px;margin:0 auto;padding:44px 18px}
+  .panel{background:var(--panel);border:1px solid var(--line);padding:26px;margin:14px 0}
+  h2{margin:0 0 10px 0;font-size:20px}
+  p{margin:10px 0;line-height:1.7}
+  .schema{background:#0f0f0f;border:1px solid var(--line2);padding:22px;text-align:center;line-height:2;margin-top:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+  a.btn{display:block;text-decoration:none;color:var(--text);background:var(--panel);border:1px solid #444;padding:14px;text-align:center}
+  a.btn:hover{background:#1a1a1a}
+  .tag{display:inline-block;border:1px solid #333;padding:6px 10px;margin:6px 6px 0 0;color:var(--muted);font-size:12px;letter-spacing:1px}
+  footer{border-top:1px solid var(--line);padding:30px 18px;text-align:center;color:var(--muted);line-height:1.6}
 </style>
 </head>
-
 <body>
 
 <header>
   <div class="symbol">🜏</div>
-
   <div class="brand">
     HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
     HERMETICUM B.C.E. S.r.l. · UE
   </div>
 
-  <h1>Infrastruttura Europea di Responsabilità Operativa</h1>
-
+  <h1>HERMETICUM</h1>
   <div class="subtitle">
-    Nodo centrale del sistema HERMETICUM per identità verificabile e responsabilità preventiva
-    in sistemi digitali, autonomi e infrastrutturali. Basato su Identity Primary Record (IPR).
+    Infrastruttura tecnica per attribuzione, tracciabilità e verifica deterministica di eventi digitali.
+    Modalità: audit-first · fail-closed · hash-only · no data custody.
   </div>
 
-  <div class="links" aria-label="Link principali">
-    <a href="architecture.html">Architettura</a>
-    <a href="eu-pilot.html">Prospettiva Pilota UE</a>
-    <a href="verify.html">Verifica</a>
-  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/architecture/">Architecture</a>
+    <a href="/use-cases/">Use-Cases</a>
+    <a href="/create/">Create</a>
+    <a href="/verify/">Verify</a>
+    <a href="/audit/">Audit</a>
+    <a href="/eu/pilot/">EU Pilot</a>
+    <a href="/company/">Company</a>
+  </nav>
 </header>
 
 <div class="wrap">
 
   <div class="panel">
-    <h2>Definizione</h2>
-    <p>
-      Hermeticum è una infrastruttura in consolidamento progettata per collegare
-      <strong>identità</strong>, <strong>autorizzazione</strong>, <strong>azione</strong>,
-      <strong>audit</strong> e <strong>responsabilità</strong> in una continuità verificabile.
-    </p>
-    <p class="muted">
-      Non è una app. Non è un database. Non è una promessa. È uno strato tecnico sopra sistemi esistenti,
-      orientato a responsabilità operativa preventiva.
-    </p>
-    <div>
-      <span class="tag">UE_FIRST</span>
-      <span class="tag">AUDIT_FIRST</span>
-      <span class="tag">HASH_ONLY</span>
-      <span class="tag">FAIL_CLOSED</span>
-    </div>
+    <h2>Principi</h2>
+    <span class="tag">AUDIT_FIRST</span>
+    <span class="tag">FAIL_CLOSED</span>
+    <span class="tag">HASH_ONLY</span>
+    <span class="tag">NO_DATA_CUSTODY</span>
   </div>
 
   <div class="panel">
-    <h2>Problema che risolve</h2>
+    <h2>Create</h2>
     <p>
-      Nei sistemi digitali e autonomi la responsabilità viene spesso attribuita <em>dopo</em> gli eventi:
-      l’origine operativa è frammentata, la tracciabilità è discontinua, e l’autorizzazione non è
-      strutturalmente preventiva.
+      Generazione di <strong>riferimento SHA-256</strong> e <strong>receipt</strong> (artefatti JSON),
+      in modalità PUBLIC/PRIVATE. <strong>Non</strong> viene eseguita custodia dati.
     </p>
-    <p>
-      L’Identity Primary Record (IPR) introduce un riferimento identitario primario verificabile
-      che permette controllo e attribuzione prima dell’esecuzione delle azioni.
+    <p class="subtitle">
+      Nota: “Create” produce un riferimento verificabile (hash + receipt) e un bundle scaricabile.
+      Non “genera IPR”.
     </p>
+    <a class="btn" href="/create/">Apri Create</a>
   </div>
 
   <div class="panel">
-    <h2>Architettura in una riga</h2>
+    <h2>Verify</h2>
+    <p>
+      Verifica deterministica di un JSON tramite <strong>receipt_sha256(json)</strong> (PASS/FAIL),
+      senza invio o conservazione dati.
+    </p>
+    <a class="btn" href="/verify/">Apri Verify</a>
+  </div>
+
+  <div class="panel">
+    <h2>Audit</h2>
+    <p>
+      Catena temporale <strong>append-only</strong> derivata da <strong>prev_hash</strong>:
+      ogni audit punta al receipt del passo precedente per opponibilità nel tempo.
+    </p>
+    <a class="btn" href="/audit/">Apri Audit</a>
+  </div>
+
+  <div class="panel">
+    <h2>Architettura (sequenza unica)</h2>
     <div class="schema">
-      Sistema / AI / Infrastruttura<br>
+      Decisione (umana / istituzionale)<br>
       ↓<br>
-      Identità primaria (IPR)<br>
+      Riferimento (hash-only)<br>
       ↓<br>
-      Autorizzazione preventiva (ex-ante)<br>
+      Gate metrologico (PASS / FAIL)<br>
       ↓<br>
-      Audit continuo<br>
+      Esecuzione vincolata (solo in PASS)<br>
       ↓<br>
-      Responsabilità opponibile nel tempo<br>
-      ↓<br>
-      Responsabilità operativa verificabile (UE)
+      Evidence pack (hash-only, auditabile)
     </div>
-  </div>
-
-  <div class="panel">
-    <h2>Entrare nel sistema</h2>
-    <p class="muted">
-      Sezioni operative del nodo centrale. Tutto è progettato per convergere su IPR come motore identitario.
-    </p>
-
-    <div class="grid">
-      <a class="btn" href="architecture.html">Architettura (IPR Control Stack)</a>
-      <a class="btn" href="eu-pilot.html">Prospettiva Pilota UE</a>
-      <a class="btn" href="verify.html">Verifica & Riferimenti</a>
-      <a class="btn" href="https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/" target="_blank" rel="noopener">
-        Motore IPR (repository)
-      </a>
-    </div>
-  </div>
-
-  <div class="panel">
-    <h2>Stato</h2>
-    <p>
-      <strong>Infrastruttura in consolidamento.</strong><br>
-      Architettura definita, nucleo stabilizzato, motore identitario (IPR) operativo come riferimento tecnico.
-    </p>
   </div>
 
 </div>
 
 <footer>
   🜏 HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-  HERMETICUM B.C.E. S.r.l. · Nodo centrale infrastrutturale UE
+  HERMETICUM B.C.E. S.r.l. · EU
 </footer>
 
 </body>
