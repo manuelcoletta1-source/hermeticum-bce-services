@@ -1,280 +1,116 @@
-<!doctype html>
-<html lang="it">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>HERMETICUM — Verify</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Verifica crittografica UE-ready: ricalcolo receipt SHA-256(JSON) e confronto. Client-side, hash-only, no data custody.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verification — European Sovereign Responsibility Infrastructure</title>
 
 <style>
-:root{
-  --bg:#05070a;
-  --panel:#0b0f14;
-  --text:#eaf2ff;
-  --muted:#8aa0b8;
-  --line:#1c2733;
-  --line2:#223140;
-  --accent:#b7c9ff;
-  --ok:#7dffb2;
-  --fail:#ff7d8b;
-  --max:980px;
-}
-*{box-sizing:border-box}
 body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0a0a0a;
+    color:#eaeaea;
+    margin:0;
 }
-a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
-header{border-bottom:1px solid var(--line);padding:18px 0;background:rgba(0,0,0,.18)}
-.brand{font-weight:800;letter-spacing:2px}
-.brand small{display:block;color:var(--muted);font-weight:600;letter-spacing:.6px;margin-top:6px;font-size:12px}
-nav{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-nav a{font-size:12px;color:var(--muted);padding:6px 10px;border:1px solid transparent}
-nav a:hover{border-color:var(--line);color:var(--text);text-decoration:none}
-.policy{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;color:var(--muted);font-size:12px}
-.policy b{color:var(--text);font-weight:800}
 
-main{padding:22px 0 46px}
-.card{
-  border:1px solid var(--line);
-  background:var(--panel);
-  padding:18px;
+header{
+    text-align:center;
+    padding:40px;
+    border-bottom:1px solid #222;
 }
-h1{margin:0 0 8px;font-size:20px;letter-spacing:.6px;font-weight:800}
-.sub{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
-.hr{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
-h2{margin:0 0 8px;font-size:12px;letter-spacing:1.2px;color:var(--text);font-weight:900}
 
-label{display:block;font-size:12px;color:var(--muted);margin-top:10px}
-input,textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid var(--line2);
-  background:rgba(0,0,0,.18);
-  color:var(--text);
-  border-radius:0;
-  font-size:14px;
-  outline:none;
+.symbol{
+    font-size:44px;
 }
-textarea{min-height:120px;resize:vertical}
-input[type="file"]{padding:10px}
 
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:860px){.grid{grid-template-columns:1fr}}
-
-.note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
-
-.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.btn{
-  border:1px solid var(--line2);
-  background:rgba(255,255,255,.03);
-  color:var(--text);
-  padding:10px 14px;
-  border-radius:0;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.6px;
+.brand{
+    letter-spacing:2px;
+    font-size:14px;
+    opacity:0.8;
 }
-.btn:hover{background:rgba(255,255,255,.06)}
-.btn.primary{border-color:rgba(183,201,255,.35);background:rgba(183,201,255,.06)}
-.btn.primary:hover{background:rgba(183,201,255,.10)}
 
-.out{
-  margin-top:12px;
-  padding:14px;
-  border:1px solid var(--line2);
-  background:rgba(0,0,0,.18);
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  font-size:12px;
-  color:var(--muted);
-  white-space:pre-line;
-  overflow:auto;
+.section{
+    max-width:900px;
+    margin:auto;
+    padding:60px 20px;
 }
-.badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:6px 10px;border:1px solid var(--line2);
-  font-family:ui-monospace,monospace;font-size:12px;color:var(--muted);
-}
-.badge b{color:var(--text)}
-.badge.ok{border-color:rgba(125,255,178,.35)}
-.badge.ok b{color:var(--ok)}
-.badge.fail{border-color:rgba(255,125,139,.35)}
-.badge.fail b{color:var(--fail)}
 
-.footer{
-  border-top:1px solid var(--line);
-  margin-top:60px;
-  padding-top:22px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.6;
+.block{
+    border:1px solid #222;
+    padding:25px;
+    margin:20px 0;
+    background:#111;
 }
-.symbol{font-size:22px;letter-spacing:6px;margin:10px 0 8px;color:var(--text)}
+
+a{
+    color:white;
+}
+
+footer{
+    text-align:center;
+    padding:40px;
+    border-top:1px solid #222;
+    opacity:0.6;
+}
 </style>
 </head>
 
 <body>
+
 <header>
-  <div class="wrap">
-    <div class="brand">HERMETICUM <small>Verify — Console UE-ready (strict pass/fail)</small></div>
-    <nav>
-      <a href="/hermeticum-bce-platform/">Home</a>
-      <a href="/hermeticum-bce-platform/create/">Create IPR</a>
-      <a href="/hermeticum-bce-platform/audit/">Audit Chain</a>
-      <a href="/hermeticum-bce-platform/baseline/">Baseline</a>
-      <a href="/hermeticum-bce-platform/seal/">Seal</a>
-      <a href="/hermeticum-bce-platform/company/">Company</a>
-    </nav>
-    <div class="policy"><b>Audit-first</b> · <b>Fail-closed</b> · <b>Hash-only</b> · <b>No data custody</b></div>
-  </div>
+<div class="symbol">🜏</div>
+<div class="brand">
+HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+HERMETICUM B.C.E. S.r.l. · EU
+</div>
+
+<h1>Verification & Technical Reference</h1>
+<p>European Sovereign Responsibility Infrastructure</p>
 </header>
 
-<main class="wrap">
-  <div class="card">
-    <h1>Verifica crittografica</h1>
-    <p class="sub">
-      Questa console ricalcola <b>receipt_sha256(json)</b> e lo confronta con il receipt fornito.
-      Verifica client-side, senza invio dati, con esito <b>PASS</b> o <b>FAIL</b>.
-    </p>
+<div class="section">
 
-    <div class="hr"></div>
+<div class="block">
+<h2>Operational repository</h2>
+<p>
+<a href="https://manuelcoletta1-source.github.io/hermeticum-bce-platform/" target="_blank">
+Access infrastructure repository
+</a>
+</p>
+</div>
 
-    <h2>A) Inserimento</h2>
-    <div class="grid">
-      <div>
-        <label>JSON (incolla qui)</label>
-        <textarea id="json_in" placeholder='Incolla il JSON dell’artefatto (PUBLIC/PRIVATE).'></textarea>
-      </div>
-      <div>
-        <label>Oppure carica file JSON</label>
-        <input id="json_file" type="file" accept="application/json,.json">
-        <div class="note">Se carichi un file JSON, verrà usato quello (ha priorità sull’area testo).</div>
+<div class="block">
+<h2>Technical document</h2>
+<p>
+European Sovereign Responsibility Infrastructure  
+Identity Primary Record — Control Stack  
+Technical architecture for accountable AI, robotics and critical infrastructure in Europe
+</p>
+</div>
 
-        <label style="margin-top:14px">receipt_sha256(json) atteso</label>
-        <input id="receipt_in" placeholder="64 hex (SHA-256)">
-        <div class="note">Il receipt è quello che compare nel bundle o nel file receipt.sha256.txt.</div>
-      </div>
-    </div>
+<div class="block">
+<h2>Infrastructure origin</h2>
+<p>
+HERMETICUM — digital responsibility infrastructure<br>
+HERMETICUM B.C.E. S.r.l. · European Union
+</p>
+</div>
 
-    <div class="btnrow">
-      <button class="btn primary" onclick="verify()">Verifica (PASS/FAIL)</button>
-      <button class="btn" onclick="clearAll()">Reset</button>
-    </div>
+<div class="block">
+<h2>Status</h2>
+<p>
+Operational prototype<br>
+European research and infrastructure positioning<br>
+Preventive responsibility infrastructure layer
+</p>
+</div>
 
-    <div class="note">
-      Regola: il JSON deve essere identico byte-per-byte (stessa struttura e spaziatura inclusa) rispetto a quello usato per generare il receipt.
-      Consiglio operativo: usa sempre il JSON scaricato (file), non una copia manuale.
-    </div>
+</div>
 
-    <div class="hr"></div>
+<footer>
+🜏 HERMETICUM — European responsibility infrastructure<br>
+IPR Control Stack · Verification node
+</footer>
 
-    <h2>B) Esito</h2>
-    <div id="status" class="badge"><b>STATO</b>: IDLE</div>
-    <div id="out" class="out">STATO: IDLE</div>
-  </div>
-
-  <div class="footer">
-    <div class="symbol">🜏</div>
-    HERMETICUM — Blindata · Computabile · Evolutiva<br>
-    HERMETICUM B.C.E. S.r.l. · UE
-  </div>
-</main>
-
-<script>
-function normHex(s){
-  return (s||"").trim().toLowerCase().replace(/^0x/,"").replace(/[^0-9a-f]/g,"");
-}
-async function sha256String(text){
-  const bytes = new TextEncoder().encode(text);
-  const buf = await crypto.subtle.digest("SHA-256", bytes);
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-async function readFileText(file){
-  return await file.text();
-}
-function setBadge(type, text){
-  const el = document.getElementById("status");
-  el.className = "badge" + (type ? (" " + type) : "");
-  el.innerHTML = "<b>STATO</b>: " + text;
-}
-
-async function getJsonText(){
-  const f = document.getElementById("json_file").files[0];
-  if(f){
-    const t = await readFileText(f);
-    return t;
-  }
-  return document.getElementById("json_in").value || "";
-}
-
-async function verify(){
-  const out = document.getElementById("out");
-  setBadge("", "WORKING");
-
-  const jsonText = await getJsonText();
-  if(!jsonText.trim()){
-    setBadge("fail", "FAIL");
-    out.textContent = "STATO: FAIL\nMOTIVO: JSON mancante (incolla o carica un file).";
-    return;
-  }
-
-  const receiptExpected = normHex(document.getElementById("receipt_in").value);
-  if(!receiptExpected || receiptExpected.length !== 64){
-    setBadge("fail", "FAIL");
-    out.textContent = "STATO: FAIL\nMOTIVO: receipt atteso non valido (serve SHA-256 64 hex).";
-    return;
-  }
-
-  // Fail-closed: il JSON deve essere valido JSON
-  let obj;
-  try{
-    obj = JSON.parse(jsonText);
-  }catch(e){
-    setBadge("fail", "FAIL");
-    out.textContent = "STATO: FAIL\nMOTIVO: JSON non valido (parse error).";
-    return;
-  }
-
-  // Ricalcolo receipt sul testo JSON come fornito dal file/testo.
-  // Nota: se modifichi spazi/ordine/indentazione, cambia il receipt.
-  const receiptComputed = await sha256String(jsonText);
-
-  const pass = (receiptComputed === receiptExpected);
-
-  if(pass){
-    setBadge("ok", "PASS");
-    out.textContent =
-      "STATO: PASS\n" +
-      "receipt_expected:\n" + receiptExpected + "\n" +
-      "receipt_computed:\n" + receiptComputed + "\n\n" +
-      "DETTAGLI (estratti):\n" +
-      "kind: " + (obj.kind || "—") + "\n" +
-      "ipr_id: " + (obj.ipr_id || obj.audit_id || "—") + "\n" +
-      "timestamp_utc: " + (obj.timestamp_utc || "—") + "\n" +
-      "artifact.visibility: " + ((obj.artifact && obj.artifact.visibility) ? obj.artifact.visibility : "—") + "\n" +
-      "regime: " + (Array.isArray(obj.regime) ? obj.regime.join(",") : "—");
-    return;
-  }
-
-  setBadge("fail", "FAIL");
-  out.textContent =
-    "STATO: FAIL\n" +
-    "receipt_expected:\n" + receiptExpected + "\n" +
-    "receipt_computed:\n" + receiptComputed + "\n\n" +
-    "NOTA: se hai copiato il JSON manualmente, anche un singolo spazio cambia il receipt.\n" +
-    "Usa il file JSON originale scaricato dall’artefatto.";
-}
-
-function clearAll(){
-  document.getElementById("json_in").value = "";
-  document.getElementById("receipt_in").value = "";
-  document.getElementById("json_file").value = "";
-  setBadge("", "IDLE");
-  document.getElementById("out").textContent = "STATO: IDLE";
-}
-</script>
 </body>
 </html>
