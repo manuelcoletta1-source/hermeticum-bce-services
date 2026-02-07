@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attiva IPR Europeo — Hermeticum</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <header class="hdr">
+    <div class="sym">🜏</div>
+    <div class="brand">
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+      <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
+    </div>
+    <h1>Attiva IPR Europeo (Base)</h1>
+    <p class="muted">
+      Standard Cliente (UE) → payload_sha256 → scontrino timbrato (receipt) con marchio Hermeticum.<br>
+      Timbri: UNEBDO + OPC. Interfaccia AI JOKER opzionale (symbiotic temporal).
+    </p>
+
+    <nav class="nav">
+      <a href="../">Home</a>
+      <a href="./">Attiva IPR Europeo</a>
+      <a href="../verify/">Verify</a>
+      <a href="../audit/">Audit</a>
+      <a href="../architecture/">Architettura</a>
+      <a href="../eu/pilot/">Pilota UE</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>1) Standard Cliente (UE)</h2>
+      <p class="small">
+        Compila lo standard cliente. Il sito calcola l’hash (hash-only) e rilascia lo scontrino timbrato.
+        Nessuna custodia dati: tutto avviene nel browser.
+      </p>
+
+      <label>Standard Cliente (JSON)</label>
+      <textarea id="clientStd" rows="12"></textarea>
+
+      <div class="row">
+        <div>
+          <label>Modalità</label>
+          <select id="mode">
+            <option value="PRIVATE">PRIVATE (scarichi anche lo standard cliente)</option>
+            <option value="PUBLIC">PUBLIC (scarichi solo lo scontrino timbrato)</option>
+          </select>
+        </div>
+        <div>
+          <label>AI JOKER (opzionale)</label>
+          <select id="jokerEnabled">
+            <option value="false">Disattivo</option>
+            <option value="true">Attivo (symbiotic temporal)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <button class="btn" id="btnActivate">ATTIVA IPR EUROPEO</button>
+      <span class="pill" id="pill">IDLE</span>
+
+      <div class="hr"></div>
+
+      <h2>2) Output — Scontrino timbrato</h2>
+
+      <label>payload_sha256</label>
+      <input id="outPayloadSha" readonly />
+
+      <label>receipt (JSON timbrato Hermeticum)</label>
+      <textarea id="outReceipt" rows="14" readonly></textarea>
+
+      <div class="hr"></div>
+
+      <h2>3) Download</h2>
+      <p class="small">
+        <strong>HBCE_RECEIPT_IPR_EU.json</strong> è lo scontrino timbrato (marchio + tempo + hash + timbri).<br>
+        In PRIVATE puoi scaricare anche <strong>HBCE_CLIENT_STD.json</strong>.
+      </p>
+
+      <div class="row">
+        <button class="btn" id="btnDlReceipt">Scarica HBCE_RECEIPT_IPR_EU.json</button>
+        <button class="btn" id="btnDlClient">Scarica HBCE_CLIENT_STD.json (PRIVATE)</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ftr">
+    🜏 HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA · HERMETICUM B.C.E. S.r.l.
+  </footer>
+
+  <script src="../assets/app.js"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let lastReceipt = null;
+    let lastClient = null;
+
+    function setPill(t){ $("pill").textContent = t; }
+
+    // pre-carica template
+    fetch("../standards/IPR-CLIENT-STD-UE.json")
+      .then(r => r.text())
+      .then(t => { if(!$("clientStd").value.trim()) $("clientStd").value = t; })
+      .catch(()=>{});
+
+    $("btnActivate").addEventListener("click", async () => {
+      setPill("WORK");
+
+      const mode = $("mode").value.trim();
+      const jokerEnabled = $("jokerEnabled").value === "true";
+
+      const parsed = safeParseJson($("clientStd").value.trim());
+      if(!parsed.ok){
+        setPill("FAIL");
+        alert("Standard Cliente JSON non valido:\n" + parsed.error);
+        return;
+      }
+
+      lastClient = parsed.value;
+      const payloadSha = await sha256Hex(canonicalStringify(lastClient));
+
+      const receipt = await buildStampedIpREuReceipt({
+        mode,
+        payloadSha256: payloadSha,
+        prevHash: "",
+        clientStd: lastClient,
+        jokerEnabled
+      });
+
+      lastReceipt = receipt;
+
+      $("outPayloadSha").value = payloadSha;
+      $("outReceipt").value = JSON.stringify(receipt, null, 2);
+      setPill("OK");
+    });
+
+    $("btnDlReceipt").addEventListener("click", () => {
+      if(!lastReceipt){ alert("Prima premi: ATTIVA IPR EUROPEO."); return; }
+      downloadText("HBCE_RECEIPT_IPR_EU.json", JSON.stringify(lastReceipt, null, 2));
+    });
+
+    $("btnDlClient").addEventListener("click", () => {
+      if(!lastReceipt){ alert("Prima premi: ATTIVA IPR EUROPEO."); return; }
+      if($("mode").value !== "PRIVATE"){
+        alert("HBCE_CLIENT_STD.json è disponibile solo in modalità PRIVATE.");
+        return;
+      }
+      downloadText("HBCE_CLIENT_STD.json", JSON.stringify(lastClient, null, 2));
+    });
+  </script>
+</body>
+</html>
