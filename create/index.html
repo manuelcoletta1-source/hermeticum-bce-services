@@ -27,6 +27,20 @@
 
   <main class="wrap">
     <section class="card">
+      <h2>Istruzioni (importante)</h2>
+      <p class="small">
+        1) Incolla un <strong>payload JSON</strong><br>
+        2) Premi <strong>Crea riferimento</strong><br>
+        3) Poi premi <strong>Scarica receipt.json</strong> (sempre disponibile)<br>
+        4) Se sei in modalità <strong>PRIVATE</strong>, puoi anche scaricare <strong>payload.json</strong>
+      </p>
+      <p class="small">
+        Su Android/Chrome: se il download non parte, riprova una seconda volta oppure apri in browser esterno.
+        Il sistema non invia dati: genera i file localmente nel tuo browser.
+      </p>
+    </section>
+
+    <section class="card">
       <h2>Input</h2>
 
       <label>Modalità</label>
@@ -39,10 +53,18 @@
       <textarea id="payload" rows="10" placeholder='Esempio: {"evento":"X","valore":123}'></textarea>
 
       <div class="hr"></div>
+
       <button class="btn" id="btnCreate">Crea riferimento</button>
       <span class="pill" id="pillStatus">IDLE</span>
 
+      <p class="small" id="hintAfterCreate">
+        Dopo la creazione, sotto compariranno <strong>payload_sha256</strong> e <strong>receipt</strong>.
+        Poi usa i pulsanti “Scarica”.
+      </p>
+
       <div class="hr"></div>
+
+      <h2>Output</h2>
 
       <label>payload_sha256</label>
       <input id="outPayloadSha" readonly />
@@ -50,14 +72,22 @@
       <label>receipt (JSON)</label>
       <textarea id="outReceipt" rows="10" readonly></textarea>
 
+      <div class="hr"></div>
+
+      <h2>Download</h2>
+      <p class="small">
+        <strong>receipt.json</strong> è sempre scaricabile dopo “Crea riferimento”.<br>
+        <strong>payload.json</strong> è scaricabile solo in modalità <strong>PRIVATE</strong>.
+      </p>
+
       <div class="row">
-        <button class="btn" id="btnDlReceipt">Download receipt.json</button>
-        <button class="btn" id="btnDlBundle">Download bundle (PRIVATE)</button>
+        <button class="btn" id="btnDlReceipt">Scarica receipt.json</button>
+        <button class="btn" id="btnDlPayload">Scarica payload.json (PRIVATE)</button>
       </div>
 
       <p class="small">
-        Nota operativa: il payload viene canonicalizzato (chiavi ordinate) prima dell’hash.
-        In modalità PUBLIC scarichi solo il receipt. In PRIVATE scarichi receipt + payload.
+        Nota tecnica: il payload viene canonicalizzato (chiavi ordinate) prima dell’hash.
+        In PUBLIC scarichi solo il receipt (hash-only). In PRIVATE scarichi receipt + payload.
       </p>
     </section>
   </main>
@@ -106,17 +136,16 @@
   });
 
   $("btnDlReceipt").addEventListener("click", () => {
-    if(!lastReceipt){ alert("Crea prima un riferimento."); return; }
+    if(!lastReceipt){ alert("Prima premi: Crea riferimento."); return; }
     downloadText("receipt.json", JSON.stringify(lastReceipt, null, 2));
   });
 
-  $("btnDlBundle").addEventListener("click", () => {
-    if(!lastReceipt){ alert("Crea prima un riferimento."); return; }
+  $("btnDlPayload").addEventListener("click", () => {
+    if(!lastReceipt){ alert("Prima premi: Crea riferimento."); return; }
     if($("mode").value !== "PRIVATE"){
-      alert("Il bundle PRIVATE è disponibile solo in modalità PRIVATE.");
+      alert("payload.json è disponibile solo in modalità PRIVATE.");
       return;
     }
-    downloadText("receipt.json", JSON.stringify(lastReceipt, null, 2));
     downloadText("payload.json", JSON.stringify(lastPayloadObj, null, 2));
   });
 </script>
