@@ -1,144 +1,78 @@
-<!doctype html>
-<html lang="it">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>HERMETICUM — Infrastruttura di responsabilità digitale</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="IPR — Identity Primary Record. Infrastruttura UE-ready per identità, AI, robotica, auditabilità temporale e prova di integrità (legale/forense).">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>European Sovereign Responsibility Infrastructure</title>
 
 <style>
-:root{
-  --bg:#05070a;
-  --panel:#0b0f14;
-  --text:#eaf2ff;
-  --muted:#8aa0b8;
-  --line:#1c2733;
-  --max:1080px;
-}
-*{box-sizing:border-box}
 body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-  line-height:1.5;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0a0a0a;
+    color:#eaeaea;
+    margin:0;
+    padding:0;
 }
-.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
 
 header{
-  border-bottom:1px solid var(--line);
-  padding:22px 0;
-}
-.brand{
-  font-weight:900;
-  letter-spacing:2px;
-  font-size:20px;
-}
-.brand small{
-  display:block;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:6px;
-  letter-spacing:.6px;
-}
-
-nav{
-  margin-top:16px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-nav a{
-  font-size:12px;
-  color:var(--muted);
-  padding:6px 10px;
-  border:1px solid transparent;
-}
-nav a:hover{
-  border-color:var(--line);
-  color:var(--text);
-  text-decoration:none;
-}
-
-main{
-  padding:60px 0;
-}
-
-.hero{
-  border:1px solid var(--line);
-  background:var(--panel);
-  padding:40px;
-  margin-bottom:40px;
-}
-.hero h1{
-  margin:0 0 16px;
-  font-size:34px;
-  letter-spacing:1px;
-}
-.hero p{
-  margin:0 0 12px;
-  color:var(--muted);
-  font-size:15px;
-  line-height:1.8;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:20px;
-}
-@media(max-width:900px){
-  .grid{grid-template-columns:1fr}
-}
-
-.box{
-  border:1px solid var(--line);
-  background:var(--panel);
-  padding:22px;
-}
-.box h2{
-  margin:0 0 10px;
-  font-size:15px;
-  letter-spacing:.6px;
-}
-.box p{
-  margin:0;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.7;
-}
-
-.cta{
-  margin-top:26px;
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-}
-.btn{
-  border:1px solid var(--line);
-  padding:12px 18px;
-  font-size:13px;
-  letter-spacing:.8px;
-  text-decoration:none;
-  display:inline-block;
-}
-.btn:hover{
-  border-color:var(--text);
-  text-decoration:none;
+    padding:40px;
+    text-align:center;
+    border-bottom:1px solid #222;
 }
 
 .symbol{
-  text-align:center;
-  font-size:26px;
-  letter-spacing:8px;
-  margin-top:70px;
+    font-size:48px;
+    margin-bottom:10px;
 }
 
+.brand{
+    font-size:14px;
+    letter-spacing:2px;
+    opacity:0.8;
+}
+
+h1{
+    font-size:34px;
+    margin:20px 0 10px 0;
+}
+
+.subtitle{
+    font-size:18px;
+    opacity:0.8;
+}
+
+.section{
+    max-width:900px;
+    margin:auto;
+    padding:60px 20px;
+}
+
+.schema{
+    background:#111;
+    padding:25px;
+    margin:30px 0;
+    border:1px solid #222;
+    text-align:center;
+    line-height:2;
+}
+
+button{
+    padding:14px 22px;
+    margin:10px;
+    background:#111;
+    color:white;
+    border:1px solid #444;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#222;
+}
 footer{
-  margin-top:30px;
-  padding-top:20px;
-  border-top:1px solid var(--line);
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
+    border-top:1px solid #222;
+    padding:40px;
+    text-align:center;
+    opacity:0.6;
 }
 </style>
 </head>
@@ -146,109 +80,74 @@ footer{
 <body>
 
 <header>
-<div class="wrap">
-
-<div class="brand">
-HERMETICUM
-<small>Infrastruttura europea di responsabilità digitale</small>
-</div>
-
-<nav>
-<a href="/hermeticum-bce-platform/create/">Crea IPR</a>
-<a href="/hermeticum-bce-platform/verify/">Verifica</a>
-<a href="/hermeticum-bce-platform/audit/">Audit</a>
-<a href="/hermeticum-bce-platform/architecture/">Architettura</a>
-<a href="/hermeticum-bce-platform/use-cases/">Use-cases</a>
-<a href="/hermeticum-bce-platform/ai/">AI Interface</a>
-<a href="/hermeticum-bce-platform/baseline/">Baseline</a>
-<a href="/hermeticum-bce-platform/seal/">Seal</a>
-<a href="/hermeticum-bce-platform/company/">Company</a>
-</nav>
-
-</div>
-</header>
-
-<main class="wrap">
-
-<div class="hero">
-<h1>Identity Primary Record</h1>
-
-<p>
-IPR introduce identità crittografica verificabile, auditabilità temporale e responsabilità opponibile
-per esseri umani, sistemi artificiali e infrastrutture digitali.
-</p>
-
-<p>
-Senza identità primaria verificabile non esiste automazione opponibile.
-Senza audit nel tempo non esiste responsabilità tecnica.
-</p>
-
-<p>
-HERMETICUM implementa uno strato operativo UE-ready per integrazione di identità, AI e sistemi autonomi:
-<b>receipt SHA-256(JSON)</b>, <b>verifica deterministica</b>, <b>catena temporale audit</b>.
-</p>
-
-<div class="cta">
-  <a class="btn" href="/hermeticum-bce-platform/create/">Genera IPR</a>
-  <a class="btn" href="/hermeticum-bce-platform/verify/">Verifica integrità</a>
-  <a class="btn" href="/hermeticum-bce-platform/ai/">Interfaccia AI</a>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="box">
-<h2>Per il cittadino</h2>
-<p>
-Identità digitale verificabile nel tempo. Prova opponibile di contenuti e decisioni (hash/receipt).
-</p>
-</div>
-
-<div class="box">
-<h2>Per industria e lavoro</h2>
-<p>
-Tracciabilità di progetti, ricerca e produzione. Audit evolutivo senza custodia dati centralizzata.
-</p>
-</div>
-
-<div class="box">
-<h2>Per l’Europa</h2>
-<p>
-Strato di sicurezza per AI, robotica e automazione. Compatibile con cybersecurity e governance UE.
-</p>
-</div>
-
-<div class="box">
-<h2>Legale & forense</h2>
-<p>
-Prova di integrità e timeline verificabile (receipt + audit chain) per evidenze, versioni e allegati.
-Supporto tecnico a processi di contestazione e verifica, senza custodia dati.
-</p>
-</div>
-
-<div class="box">
-<h2>Sanità / istruzione / policy</h2>
-<p>
-Integrità e tracciabilità di documenti e workflow: emissione, verifica PASS/FAIL, evoluzione nel tempo.
-</p>
-</div>
-
-<div class="box">
-<h2>Per il futuro</h2>
-<p>
-L’automazione senza identità genera rischio. L’automazione con identità verificabile genera infrastruttura.
-</p>
-</div>
-
-</div>
 
 <div class="symbol">🜏</div>
 
+<div class="brand">
+HERMETICUM — BLINDATA · COMPUTABILE · EVOLUTIVA<br>
+HERMETICUM B.C.E. S.r.l. · EU
+</div>
+
+<h1>European Sovereign Responsibility Infrastructure</h1>
+<div class="subtitle">
+Identity Primary Record — Control Stack
+</div>
+
+</header>
+
+<div class="section">
+
+<p>
+Europe has established advanced regulatory frameworks for artificial intelligence, cybersecurity and digital governance.
+However, a structural gap persists: the absence of a unified technical layer capable of linking identity, authorization and responsibility to operational actions before execution.
+</p>
+
+<p>
+The Identity Primary Record (IPR) Control Stack introduces a preventive responsibility infrastructure designed for artificial intelligence, robotics and critical infrastructures operating within the European context.
+</p>
+
+<p>
+This platform represents the first operational prototype of a European preventive responsibility infrastructure layer.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>Architecture overview</h2>
+
+<div class="schema">
+System / AI / Infrastructure<br>
+↓<br>
+IPR Identity<br>
+↓<br>
+Ex-ante Authorization<br>
+↓<br>
+Continuous Audit Chain<br>
+↓<br>
+European Accountability
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Enter infrastructure</h2>
+
+<a href="infrastructure.html"><button>Infrastructure</button></a>
+<a href="architecture.html"><button>Architecture</button></a>
+<a href="domains.html"><button>Strategic domains</button></a>
+<a href="eu-pilot.html"><button>EU pilot</button></a>
+<a href="verify.html"><button>Verification</button></a>
+
+</div>
+
 <footer>
-HERMETICUM — Blindata · Computabile · Evolutiva<br>
-HERMETICUM B.C.E. S.r.l. · UE
+
+🜏 HERMETICUM — digital responsibility infrastructure<br>
+European Sovereign Responsibility Infrastructure · IPR Control Stack
+
 </footer>
 
-</main>
 </body>
 </html>
