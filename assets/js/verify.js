@@ -1,5 +1,6 @@
-// HBCE VERIFY ENGINE v2
+// HBCE VERIFY ENGINE v3
 // Deterministic | fail-closed | hash-only
+// Also sets a verified flag + exposes JOKER Node entry.
 
 function canonicalize(obj){
   const isObj = (x)=>x && typeof x==="object" && !Array.isArray(x);
@@ -23,7 +24,7 @@ async function sha256Hex(str){
 function out(txt, ok){
   const el = document.getElementById("hbce_out");
   if(!el) return;
-  el.className = "result " + (ok ? "ok":"err");
+  el.className = "result " + (ok ? "ok" : "bad");
   el.textContent = txt;
 }
 
@@ -32,9 +33,9 @@ function tryParseJSON(x){
 }
 
 async function verifyReceipt(obj){
-
-  if(!obj.payload_sha256) return out("DENIED\nreason_code=MISSING_PAYLOAD_HASH", false);
-  if(!obj.receipt_sha256) return out("DENIED\nreason_code=MISSING_RECEIPT_HASH", false);
+  if(!obj || typeof obj !== "object") return out("DENIED\nreason_code=RECEIPT_MISSING", false);
+  if(!obj.payload_sha256) return out("DENIED\nreason_code=PAYLOAD_SHA256_MISSING", false);
+  if(!obj.receipt_sha256) return out("DENIED\nreason_code=RECEIPT_SHA256_MISSING", false);
 
   const canon = canonicalize({
     proto: obj.proto,
@@ -47,17 +48,25 @@ async function verifyReceipt(obj){
   });
 
   const calc = await sha256Hex(canon);
-
   if(calc !== obj.receipt_sha256){
     return out("DENIED\nreason_code=HASH_MISMATCH", false);
   }
 
-  return out("AUTHORIZED\nreceipt valid\npayload="+obj.payload_sha256, true);
+  // Persist verified marker (local-only)
+  try{
+    localStorage.setItem("HBCE_VERIFIED_AT", new Date().toISOString());
+    localStorage.setItem("HBCE_VERIFIED_PAYLOAD", obj.payload_sha256);
+  }catch(_){}
+
+  return out(
+    "AUTHORIZED\nreceipt valid\npayload=" + obj.payload_sha256 +
+    "\n\nNext:\n- Open JOKER Node: ../joker/\n- Append timeline events (local hash-chain)",
+    true
+  );
 }
 
 async function HBCE_verify(){
-
-  const raw = document.getElementById("hbce_input").value.trim();
+  const raw = (document.getElementById("hbce_input")?.value || "").trim();
   if(!raw) return out("Waiting for input.", false);
 
   // SHA only check
@@ -76,7 +85,7 @@ async function HBCE_verify(){
 
   // array
   if(Array.isArray(parsed)){
-    const r = parsed.find(x=>x.type==="receipt");
+    const r = parsed.find(x=>x && x.type==="receipt");
     if(r && r.data) return verifyReceipt(r.data);
   }
 
@@ -90,9 +99,11 @@ window.addEventListener("DOMContentLoaded", ()=>{
     if(r){
       const obj = JSON.parse(r);
       const input = document.getElementById("hbce_input");
-      if(input) input.value = JSON.stringify(obj,null,2);
+      if(input && !input.value.trim()){
+        input.value = JSON.stringify(obj, null, 2);
+      }
     }
-  }catch(e){}
+  }catch(_){}
 });
 
 window.HBCE_verify = HBCE_verify;
