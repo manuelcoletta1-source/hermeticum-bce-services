@@ -1,70 +1,79 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HERMETICUM — Nodo Centrale</title>
-<style>
-  body{font-family:Arial,Helvetica,sans-serif;background:#0a0a0a;color:#eaeaea;margin:0}
-  header{padding:34px 18px;text-align:center;border-bottom:1px solid #222}
-  .symbol{font-size:52px;line-height:1;margin-bottom:10px}
-  .brand{letter-spacing:2px;font-size:14px;opacity:.85}
-  nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-  nav a{color:#eaeaea;text-decoration:none;border-bottom:1px solid #444;padding-bottom:2px}
-  nav a:hover{border-bottom:1px solid #fff}
-  .wrap{max-width:980px;margin:0 auto;padding:44px 18px}
-  .panel{background:#111;border:1px solid #222;padding:26px;margin:14px 0}
-  .btn{display:inline-block;margin-top:10px;padding:12px 14px;border:1px solid #444;color:#eaeaea;text-decoration:none;background:#111}
-  .btn:hover{background:#1a1a1a}
-  footer{border-top:1px solid #222;padding:30px 18px;text-align:center;opacity:.7}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HERMETICUM — Nodo Centrale</title>
+  <link rel="stylesheet" href="./assets/style.css" />
 </head>
 <body>
+  <header class="hdr">
+    <div class="sym">🜏</div>
+    <div class="brand">
+      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br />
+      <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
+    </div>
+    <h1>Nodo Centrale</h1>
+    <p class="muted">
+      Infrastruttura tecnica audit-first · fail-closed · hash-only · no data custody
+    </p>
 
-<header>
-  <div class="symbol">🜏</div>
-  <div class="brand">
-    HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-    HERMETICUM B.C.E. S.r.l. · UE
-  </div>
+    <nav class="nav">
+      <a href="./">Home</a>
+      <a href="./create/">Create</a>
+      <a href="./verify/">Verify</a>
+      <a href="./audit/">Audit</a>
+      <a href="./architecture/">Architettura</a>
+      <a href="./eu/pilot/">Pilota UE</a>
+    </nav>
+  </header>
 
-  <h1>Nodo Centrale</h1>
-  <p>Infrastruttura tecnica audit-first · fail-closed · hash-only · no data custody</p>
+  <main class="wrap">
+    <section class="card">
+      <h2>Create</h2>
+      <p>
+        Crea un <strong>riferimento verificabile</strong> (SHA-256) e un <strong>receipt</strong>.
+        Non “genera IPR”. Nessuna custodia dati.
+      </p>
+      <a class="btn" href="./create/">Apri Create</a>
+    </section>
 
-  <nav>
-    <a href="./">Home</a>
-    <a href="./create/">Create</a>
-    <a href="./verify/">Verify</a>
-    <a href="./audit/">Audit</a>
-    <a href="./architecture/">Architecture</a>
-    <a href="./eu/pilot/">EU Pilot</a>
-  </nav>
-</header>
+    <section class="card">
+      <h2>Verify</h2>
+      <p>
+        Verifica deterministica di un receipt (PASS/FAIL).
+        Se hai anche il payload, verifica che l’hash combaci.
+      </p>
+      <a class="btn" href="./verify/">Apri Verify</a>
+    </section>
 
-<div class="wrap">
-  <div class="panel">
-    <h2>Create</h2>
-    <p>Create produce un riferimento verificabile (hash + receipt). Non “genera IPR”.</p>
-    <a class="btn" href="./create/">Apri Create</a>
-  </div>
+    <section class="card">
+      <h2>Audit</h2>
+      <p>
+        Crea una catena <strong>append-only</strong> basata su <strong>prev_hash</strong>
+        per opponibilità nel tempo.
+      </p>
+      <a class="btn" href="./audit/">Apri Audit</a>
+    </section>
 
-  <div class="panel">
-    <h2>Verify</h2>
-    <p>Verify controlla un receipt in modo deterministico (PASS/FAIL), senza custodia dati.</p>
-    <a class="btn" href="./verify/">Apri Verify</a>
-  </div>
+    <section class="card">
+      <h2>Sequenza unica</h2>
+      <div class="mono">
+Decisione (umana / istituzionale)
+↓
+Riferimento (hash-only)
+↓
+Gate metrologico (PASS / FAIL)
+↓
+Esecuzione vincolata (solo in PASS)
+↓
+Evidence pack (receipt + hash)
+      </div>
+    </section>
+  </main>
 
-  <div class="panel">
-    <h2>Audit</h2>
-    <p>Audit mantiene sequenza append-only per opponibilità nel tempo.</p>
-    <a class="btn" href="./audit/">Apri Audit</a>
-  </div>
-</div>
-
-<footer>
-  🜏 HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-  HERMETICUM B.C.E. S.r.l.
-</footer>
-
+  <footer class="ftr">
+    🜏 HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA · HERMETICUM B.C.E. S.r.l.
+  </footer>
 </body>
 </html>
