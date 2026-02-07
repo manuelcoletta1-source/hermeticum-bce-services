@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Hermeticum — Camera interna</title>
+
+<link rel="stylesheet" href="../assets/css/main.css"/>
+<link rel="stylesheet" href="../assets/css/brand.css"/>
+
+<script>
+// controllo accesso IPR verificato
+window.addEventListener("DOMContentLoaded", ()=>{
+
+  const verified = localStorage.getItem("HBCE_VERIFIED_PAYLOAD");
+
+  if(!verified){
+    document.getElementById("locked").style.display="block";
+    document.getElementById("inside").style.display="none";
+    return;
+  }
+
+  document.getElementById("locked").style.display="none";
+  document.getElementById("inside").style.display="block";
+});
+</script>
+
+</head>
+
+<body>
+
+<header class="topbar">
+<div class="wrap">
+<div class="row">
+
+<div class="brandmark">
+<img src="../assets/img/hermeticum-mark-neon.svg"/>
+<span>IPR</span>
+</div>
+
+<nav class="nav">
+<a href="../">Gateway</a>
+<a href="../verify/">Verifica</a>
+<a href="../inside/" class="active">Interno</a>
+<a href="../status/">Stato nodo</a>
+</nav>
+
+<div class="spacer"></div>
+<div class="status active">Camera interna</div>
+
+</div>
+</div>
+</header>
+
+<main class="wrap">
+
+<!-- BLOCCO CHIUSO -->
+<section id="locked" style="display:none">
+<div class="panel">
+
+<h2>Accesso non disponibile</h2>
+
+<div style="color:var(--muted);line-height:1.8">
+Questa area è accessibile solo con IPR verificato.
+
+Il sistema richiede una prova di esistenza valida
+prima di consentire l’accesso all’ambiente interno.
+</div>
+
+<div style="margin-top:20px">
+<a class="btn primary" href="../verify/">Verifica IPR</a>
+</div>
+
+</div>
+</section>
+
+<!-- BLOCCO APERTO -->
+<section id="inside" style="display:none">
+
+<section class="hero">
+<h1>Nodo attivo</h1>
+<p class="lead">
+Accesso interno abilitato tramite IPR verificato
+</p>
+</section>
+
+<section class="section">
+<div class="panel">
+
+<h2>Stato</h2>
+
+<div style="color:var(--muted);line-height:1.8">
+
+IPR: verificato  
+Nodo: attivo  
+Ambiente: interno  
+Modalità: osservabile  
+
+Questo spazio è accessibile solo a identità verificabili.
+Nessun account. Nessuna password. Solo coerenza.
+
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="panel">
+
+<h2>Presenza</h2>
+
+<div style="color:var(--muted);line-height:1.8">
+
+Se sei qui, esisti come nodo verificabile.
+
+L’infrastruttura riconosce la tua presenza come origine
+tecnicamente attribuibile e verificabile.
+
+Persistenza locale attiva.
+
+</div>
+
+</div>
+</section>
+
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="wrap">
+<strong>Hermeticum — Ambiente interno accessibile via IPR</strong>
+</div>
+</footer>
+
+</body>
+</html>
