@@ -15,13 +15,10 @@ function canonicalStringify(obj){
 async function sha256Hex(str){
   const enc = new TextEncoder().encode(str);
   const buf = await crypto.subtle.digest("SHA-256", enc);
-  const arr = Array.from(new Uint8Array(buf));
-  return arr.map(b => b.toString(16).padStart(2,"0")).join("");
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
 }
 
-function nowISO(){
-  return new Date().toISOString();
-}
+function nowISO(){ return new Date().toISOString(); }
 
 function downloadText(filename, text){
   const blob = new Blob([text], {type:"application/json;charset=utf-8"});
@@ -35,44 +32,63 @@ function downloadText(filename, text){
   URL.revokeObjectURL(url);
 }
 
-async function buildReceipt({mode, payloadSha256, prevHash}){
+function safeParseJson(text){
+  try { return { ok:true, value: JSON.parse(text) }; }
+  catch(e){ return { ok:false, error: String(e) }; }
+}
+
+// Receipt timbrato per Attivazione IPR Europeo (BASE)
+async function buildStampedIpREuReceipt({ mode, payloadSha256, prevHash, clientStd, jokerEnabled }){
   const core = {
-    proto: "HBCE-REF-v1",
-    kind: "HASH_RECEIPT",
-    mode: mode,               // PUBLIC | PRIVATE
+    proto: "HBCE-IPR-EU-v1",
+    kind: "IPR_EU_BASE_RECEIPT",
+    issuer: {
+      hallmark: "HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA",
+      legal: "HERMETICUM B.C.E. S.r.l.",
+      symbol: "🜏"
+    },
+    policy: ["UE_FIRST","AUDIT_FIRST","HASH_ONLY","FAIL_CLOSED","NO_DATA_CUSTODY"],
+    stamps: {
+      UNEBDO: { proto: "UNEBDO-v1", stamp: "UNEBDO_STAMP_PRESENT" },
+      OPC:   { proto: "OPC-v1",   stamp: "OPC_CONFIRMABLE" }
+    },
+    mode: mode, // PUBLIC | PRIVATE
     created_at: nowISO(),
     payload_sha256: payloadSha256,
-    prev_hash: prevHash || ""
+    prev_hash: prevHash || "",
+    client_std: {
+      std: clientStd?.std || "HBCE-CLIENT-STD-UE-v1",
+      scope: clientStd?.scope || "IPR_EU_ACTIVATION"
+    },
+    joker: jokerEnabled ? {
+      enabled: true,
+      mode: "SYMBIOTIC_TEMPORAL",
+      tag: clientStd?.optional?.joker_tag || ""
+    } : { enabled: false }
   };
-  const coreCanon = canonicalStringify(core);
-  const receiptSha = await sha256Hex(coreCanon);
+
+  const receiptSha = await sha256Hex(canonicalStringify(core));
   return { ...core, receipt_sha256: receiptSha };
 }
 
-async function verifyReceipt(receiptObj, payloadObjOrNull){
-  // Recompute payload hash if payload provided; otherwise trust receipt payload_sha256
+// Verify deterministico del receipt (e opzionale payload)
+async function verifyStampedReceipt(receiptObj, payloadObjOrNull){
+  // payload hash: se il payload è fornito, lo ricalcolo e lo confronto implicitamente
   let payloadSha = receiptObj?.payload_sha256 || "";
   if (payloadObjOrNull !== null){
-    const payloadCanon = canonicalStringify(payloadObjOrNull);
-    payloadSha = await sha256Hex(payloadCanon);
+    payloadSha = await sha256Hex(canonicalStringify(payloadObjOrNull));
   }
 
-  const core = {
-    proto: receiptObj?.proto || "",
-    kind: receiptObj?.kind || "",
-    mode: receiptObj?.mode || "",
-    created_at: receiptObj?.created_at || "",
-    payload_sha256: payloadSha,
-    prev_hash: receiptObj?.prev_hash || ""
-  };
+  // ricostruisco core senza receipt_sha256
+  const core = { ...receiptObj };
+  delete core.receipt_sha256;
+
+  // forza payload_sha256 coerente (se payload fornito)
+  core.payload_sha256 = payloadSha;
+
   const expected = await sha256Hex(canonicalStringify(core));
   const declared = receiptObj?.receipt_sha256 || "";
   const pass = (expected === declared);
 
-  return { pass, expected_receipt_sha256: expected, payload_sha256: payloadSha };
-}
-
-function safeParseJson(text){
-  try { return { ok:true, value: JSON.parse(text) }; }
-  catch(e){ return { ok:false, error: String(e) }; }
+  return { pass, expected_receipt_sha256: expected, declared_receipt_sha256: declared, payload_sha256: payloadSha };
 }
