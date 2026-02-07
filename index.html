@@ -5,26 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>HERMETICUM — Nodo Centrale</title>
 <style>
-  :root{--bg:#0a0a0a;--panel:#111;--text:#eaeaea;--muted:#b8b8b8;--line:#222;--line2:#333;}
-  body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);margin:0}
-  header{padding:34px 18px;text-align:center;border-bottom:1px solid var(--line)}
-  nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-  nav a{color:var(--text);text-decoration:none;border-bottom:1px solid #444;padding-bottom:2px}
-  nav a:hover{border-bottom:1px solid var(--text)}
-  .brand{letter-spacing:2px;font-size:14px;color:var(--muted)}
+  body{font-family:Arial,Helvetica,sans-serif;background:#0a0a0a;color:#eaeaea;margin:0}
+  header{padding:34px 18px;text-align:center;border-bottom:1px solid #222}
   .symbol{font-size:52px;line-height:1;margin-bottom:10px}
-  h1{font-size:34px;margin:18px 0 8px}
-  .subtitle{max-width:980px;margin:0 auto;color:var(--muted);line-height:1.6}
+  .brand{letter-spacing:2px;font-size:14px;opacity:.85}
+  nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  nav a{color:#eaeaea;text-decoration:none;border-bottom:1px solid #444;padding-bottom:2px}
+  nav a:hover{border-bottom:1px solid #fff}
   .wrap{max-width:980px;margin:0 auto;padding:44px 18px}
-  .panel{background:var(--panel);border:1px solid var(--line);padding:26px;margin:14px 0}
-  h2{margin:0 0 10px 0;font-size:20px}
-  p{margin:10px 0;line-height:1.7}
-  .schema{background:#0f0f0f;border:1px solid var(--line2);padding:22px;text-align:center;line-height:2;margin-top:14px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
-  a.btn{display:block;text-decoration:none;color:var(--text);background:var(--panel);border:1px solid #444;padding:14px;text-align:center}
-  a.btn:hover{background:#1a1a1a}
-  .tag{display:inline-block;border:1px solid #333;padding:6px 10px;margin:6px 6px 0 0;color:var(--muted);font-size:12px;letter-spacing:1px}
-  footer{border-top:1px solid var(--line);padding:30px 18px;text-align:center;color:var(--muted);line-height:1.6}
+  .panel{background:#111;border:1px solid #222;padding:26px;margin:14px 0}
+  .btn{display:inline-block;margin-top:10px;padding:12px 14px;border:1px solid #444;color:#eaeaea;text-decoration:none;background:#111}
+  .btn:hover{background:#1a1a1a}
+  footer{border-top:1px solid #222;padding:30px 18px;text-align:center;opacity:.7}
 </style>
 </head>
 <body>
@@ -36,85 +28,42 @@
     HERMETICUM B.C.E. S.r.l. · UE
   </div>
 
-  <h1>HERMETICUM</h1>
-  <div class="subtitle">
-    Infrastruttura tecnica per attribuzione, tracciabilità e verifica deterministica di eventi digitali.
-    Modalità: audit-first · fail-closed · hash-only · no data custody.
-  </div>
+  <h1>Nodo Centrale</h1>
+  <p>Infrastruttura tecnica audit-first · fail-closed · hash-only · no data custody</p>
 
   <nav>
-    <a href="/">Home</a>
-    <a href="/architecture/">Architecture</a>
-    <a href="/use-cases/">Use-Cases</a>
-    <a href="/create/">Create</a>
-    <a href="/verify/">Verify</a>
-    <a href="/audit/">Audit</a>
-    <a href="/eu/pilot/">EU Pilot</a>
-    <a href="/company/">Company</a>
+    <a href="./">Home</a>
+    <a href="./create/">Create</a>
+    <a href="./verify/">Verify</a>
+    <a href="./audit/">Audit</a>
+    <a href="./architecture/">Architecture</a>
+    <a href="./eu/pilot/">EU Pilot</a>
   </nav>
 </header>
 
 <div class="wrap">
-
-  <div class="panel">
-    <h2>Principi</h2>
-    <span class="tag">AUDIT_FIRST</span>
-    <span class="tag">FAIL_CLOSED</span>
-    <span class="tag">HASH_ONLY</span>
-    <span class="tag">NO_DATA_CUSTODY</span>
-  </div>
-
   <div class="panel">
     <h2>Create</h2>
-    <p>
-      Generazione di <strong>riferimento SHA-256</strong> e <strong>receipt</strong> (artefatti JSON),
-      in modalità PUBLIC/PRIVATE. <strong>Non</strong> viene eseguita custodia dati.
-    </p>
-    <p class="subtitle">
-      Nota: “Create” produce un riferimento verificabile (hash + receipt) e un bundle scaricabile.
-      Non “genera IPR”.
-    </p>
-    <a class="btn" href="/create/">Apri Create</a>
+    <p>Create produce un riferimento verificabile (hash + receipt). Non “genera IPR”.</p>
+    <a class="btn" href="./create/">Apri Create</a>
   </div>
 
   <div class="panel">
     <h2>Verify</h2>
-    <p>
-      Verifica deterministica di un JSON tramite <strong>receipt_sha256(json)</strong> (PASS/FAIL),
-      senza invio o conservazione dati.
-    </p>
-    <a class="btn" href="/verify/">Apri Verify</a>
+    <p>Verify controlla un receipt in modo deterministico (PASS/FAIL), senza custodia dati.</p>
+    <a class="btn" href="./verify/">Apri Verify</a>
   </div>
 
   <div class="panel">
     <h2>Audit</h2>
-    <p>
-      Catena temporale <strong>append-only</strong> derivata da <strong>prev_hash</strong>:
-      ogni audit punta al receipt del passo precedente per opponibilità nel tempo.
-    </p>
-    <a class="btn" href="/audit/">Apri Audit</a>
+    <p>Audit mantiene sequenza append-only per opponibilità nel tempo.</p>
+    <a class="btn" href="./audit/">Apri Audit</a>
   </div>
-
-  <div class="panel">
-    <h2>Architettura (sequenza unica)</h2>
-    <div class="schema">
-      Decisione (umana / istituzionale)<br>
-      ↓<br>
-      Riferimento (hash-only)<br>
-      ↓<br>
-      Gate metrologico (PASS / FAIL)<br>
-      ↓<br>
-      Esecuzione vincolata (solo in PASS)<br>
-      ↓<br>
-      Evidence pack (hash-only, auditabile)
-    </div>
-  </div>
-
 </div>
 
 <footer>
   🜏 HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-  HERMETICUM B.C.E. S.r.l. · EU
+  HERMETICUM B.C.E. S.r.l.
 </footer>
 
 </body>
