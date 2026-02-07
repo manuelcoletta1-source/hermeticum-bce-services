@@ -1,60 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HERMETICUM — Nodo Centrale</title>
-  <link rel="stylesheet" href="./assets/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HERMETICUM — Operational Access Gateway</title>
+  <link rel="stylesheet" href="./assets/css/main.css" />
 </head>
 <body>
-  <header class="hdr">
-    <div class="sym">🜏</div>
-    <div class="brand">
-      HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-      <strong>HERMETICUM B.C.E. S.r.l.</strong> · UE
+<header class="topbar">
+  <div class="wrap">
+    <div class="row">
+      <div class="brand">HERMETICUM</div>
+      <nav class="nav">
+        <a class="active" href="./">Gateway</a>
+        <a href="./status/">Status</a>
+        <a href="./activate/">Activate</a>
+        <a href="./verify/">Verify</a>
+        <a href="./infrastructure/">Infrastructure</a>
+        <a href="./joker/">JOKER</a>
+        <a href="./docs/">Docs</a>
+      </nav>
+      <div class="spacer"></div>
+      <div class="status active">Infrastructure Status: ACTIVE</div>
     </div>
-    <h1>Nodo Centrale</h1>
-    <p class="muted">
-      Nodo UE pubblico: attivazione IPR → conferma OPC → registry append-only su GitHub.
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>European Ex-Ante Responsibility Infrastructure</h1>
+    <p class="lead">
+      Gateway operativo pubblico. <strong>IPR</strong> è il riferimento. <strong>JOKER</strong> è la misura ex-ante.
+      In assenza di prova → nessuna esecuzione (fail-closed).
     </p>
+    <div class="cta">
+      <a class="btn primary" href="./activate/">Attiva IPR</a>
+      <a class="btn" href="./verify/">Verifica IPR</a>
+      <a class="btn" href="./status/">Infrastructure Status</a>
+    </div>
+    <div class="pillrow">
+      <span class="pill">Audit-first</span>
+      <span class="pill">Fail-closed</span>
+      <span class="pill">Hash-only</span>
+      <span class="pill">No data custody</span>
+    </div>
+  </section>
 
-    <nav class="nav">
-      <a href="./">Home</a>
-      <a href="./activate/">Attiva IPR Europeo</a>
-      <a href="./opc/confirm/">OPC Confirm</a>
-      <a href="./registry/">Registry</a>
-      <a href="./verify/">Verify</a>
-      <a href="./audit/">Audit</a>
-      <a href="./architecture/">Architettura</a>
-      <a href="./eu/pilot/">Pilota UE</a>
-    </nav>
-  </header>
+  <section class="section">
+    <h2>Infrastructure Scope</h2>
+    <div class="grid">
+      <a class="card" href="./infrastructure/#robot">CYBER-ROBOT IPR<small>Robot umanoidi governati ex-ante</small></a>
+      <a class="card" href="./infrastructure/#datacenter">IPR-Datacenter<small>Calcolo critico vincolato ex-ante</small></a>
+      <a class="card" href="./infrastructure/#automotive">IPR-Automotive<small>Azioni veicolari critiche ex-ante</small></a>
+      <a class="card" href="./infrastructure/#space">IPR-Space<small>Manovre orbitali e azioni irreversibili</small></a>
+      <a class="card" href="./infrastructure/#critical">Critical Infrastructures<small>Energia, acqua, trasporti, digitale</small></a>
+      <a class="card" href="./docs/">Docs<small>Specs, principi, audit e interfacce</small></a>
+    </div>
+  </section>
+</main>
 
-  <main class="wrap">
-    <section class="card">
-      <h2>Flusso UE (pubblico)</h2>
-      <div class="mono">
-1) Attiva IPR Europeo (Base) → HBCE_RECEIPT_IPR_EU.json
-2) OPC Confirm → OPC_CONFIRM_RECEIPT.json (prev_hash = receipt_sha256 base)
-3) Registry → append entry (entry_hash) → commit su GitHub
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Regime</h2>
-      <div class="tags">
-        <span class="pill">UE_FIRST</span>
-        <span class="pill">AUDIT_FIRST</span>
-        <span class="pill">HASH_ONLY</span>
-        <span class="pill">FAIL_CLOSED</span>
-        <span class="pill">NO_DATA_CUSTODY</span>
-        <span class="pill">PUBLIC_REGISTRY</span>
-      </div>
-    </section>
-  </main>
-
-  <footer class="ftr">
-    🜏 HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA · HERMETICUM B.C.E. S.r.l.
-  </footer>
+<footer class="footer">
+  <div class="wrap">
+    <div class="row">
+      <strong>HERMETICUM</strong>
+      <div>HERMETICUM B.C.E. S.r.l. · UE</div>
+      <div>UE-first · audit-first · hash-only · fail-closed · no data custody</div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
