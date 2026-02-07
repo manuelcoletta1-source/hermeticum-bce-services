@@ -1,159 +1,123 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Infrastructure — 🜏 HERMETICUM</title>
-  <link rel="stylesheet" href="../assets/css/main.css" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Infrastructure — IPR</title>
+
+<link rel="stylesheet" href="../assets/css/main.css"/>
+<link rel="stylesheet" href="../assets/css/brand.css"/>
 </head>
+
 <body>
+
 <header class="topbar">
   <div class="wrap">
     <div class="row">
-      <div class="brand">🜏 HERMETICUM</div>
+
+      <div class="brandmark">
+        <img src="../assets/img/hermeticum-mark-neon.svg" alt="IPR"/>
+        <span>IPR</span>
+      </div>
 
       <nav class="nav">
         <a href="../">Gateway</a>
-        <a href="../status/">Status</a>
         <a href="../activate/">Activate</a>
         <a href="../verify/">Verify</a>
         <a class="active" href="./">Infrastructure</a>
-        <a href="../joker/">JOKER</a>
         <a href="../docs/">Docs</a>
+        <a href="../status/">Status</a>
       </nav>
 
       <div class="spacer"></div>
-      <div class="status active">Infrastructure Status: ACTIVE</div>
+      <div class="status active">EU Infrastructure: ACTIVE</div>
+
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <section class="hero">
-    <h1>Infrastructure Scope</h1>
-    <p class="lead">
-      Domini operativi in cui la responsabilità ex-ante è requisito tecnico.
-      Modello unico: <strong>Decisione → IPR → Verify/JOKER → PASS/FAIL → Evidence</strong>.
-    </p>
-  </section>
 
-  <section class="section">
-    <h2>Domini supportati</h2>
-    <div class="grid">
-      <a class="card" href="#robot">CYBER-ROBOT IPR<small>Robot umanoidi · azioni fisiche</small></a>
-      <a class="card" href="#datacenter">IPR-Datacenter<small>Calcolo critico · AI workloads</small></a>
-      <a class="card" href="#automotive">IPR-Automotive<small>Veicoli · azioni ad alto impatto</small></a>
-      <a class="card" href="#space">IPR-Space<small>Orbita · manovre irreversibili</small></a>
-      <a class="card" href="#critical">Critical Infrastructures<small>Energia · acqua · trasporti · digitale</small></a>
-      <a class="card" href="../activate/">Attiva IPR<small>Ingresso nel gateway operativo</small></a>
-    </div>
-  </section>
+<section class="hero">
+<h1>IPR Infrastructure</h1>
 
-  <section class="section" id="robot">
-    <div class="panel">
-      <h2>CYBER-ROBOT IPR</h2>
-      <p style="color:var(--muted);line-height:1.6;margin:8px 0 0">
-        Robot umanoidi e sistemi fisici autonomi richiedono una condizione ex-ante:
-        nessuna esecuzione senza origine verificabile e prova opponibile.
-      </p>
-      <hr />
-      <div style="color:var(--muted);line-height:1.7">
-        <strong>Flow operativo</strong><br/>
-        Decisione operativa → IPR (receipt) → Verify/JOKER → PASS/FAIL → Evidence (hash-only)
-      </div>
-      <div class="cta">
-        <a class="btn" href="../docs/">Spec & Policy</a>
-        <a class="btn primary" href="../verify/">Verify</a>
-      </div>
-    </div>
-  </section>
+<p class="lead">
+Responsibility and verification layer for high-impact systems.  
+Designed for AI, robotics, datacenters and critical infrastructure.
+</p>
 
-  <section class="section" id="datacenter">
-    <div class="panel">
-      <h2>IPR-Datacenter</h2>
-      <p style="color:var(--muted);line-height:1.6;margin:8px 0 0">
-        Esecuzione di calcolo critico e AI workloads condizionata ex-ante:
-        senza prerequisiti verificati → blocco (fail-closed).
-      </p>
-      <hr />
-      <div style="color:var(--muted);line-height:1.7">
-        <strong>Flow operativo</strong><br/>
-        Richiesta job → IPR (receipt) → Verify/JOKER → AUTHORIZED/DENIED → Evidence (hash-only)
-      </div>
-      <div class="cta">
-        <a class="btn" href="../docs/">Spec & Policy</a>
-        <a class="btn primary" href="../verify/">Verify</a>
-      </div>
-    </div>
-  </section>
+<div class="cta">
+<a class="btn" href="../docs/">Technical docs</a>
+<a class="btn" href="../verify/">Verify</a>
+<a class="btn primary" href="../activate/">Activate</a>
+</div>
+</section>
 
-  <section class="section" id="automotive">
-    <div class="panel">
-      <h2>IPR-Automotive</h2>
-      <p style="color:var(--muted);line-height:1.6;margin:8px 0 0">
-        Azioni veicolari critiche (sicurezza, responsabilità, audit):
-        l’ammissione dell’azione deve essere verificabile prima dell’esecuzione.
-      </p>
-      <hr />
-      <div style="color:var(--muted);line-height:1.7">
-        <strong>Flow operativo</strong><br/>
-        Comando critico → IPR (receipt) → Verify/JOKER → PASS/FAIL → Evidence (hash-only)
-      </div>
-      <div class="cta">
-        <a class="btn" href="../docs/">Spec & Policy</a>
-        <a class="btn primary" href="../verify/">Verify</a>
-      </div>
-    </div>
-  </section>
+<section class="section" id="ai">
+<h2>AI Systems</h2>
 
-  <section class="section" id="space">
-    <div class="panel">
-      <h2>IPR-Space</h2>
-      <p style="color:var(--muted);line-height:1.6;margin:8px 0 0">
-        Manovre orbitali e azioni irreversibili: responsabilità ex-ante come prerequisito tecnico,
-        con evidenza opponibile e audit.
-      </p>
-      <hr />
-      <div style="color:var(--muted);line-height:1.7">
-        <strong>Flow operativo</strong><br/>
-        Pianificazione manovra → IPR (receipt) → Verify/JOKER → AUTHORIZED/DENIED → Evidence (hash-only)
-      </div>
-      <div class="cta">
-        <a class="btn" href="../docs/">Spec & Policy</a>
-        <a class="btn primary" href="../verify/">Verify</a>
-      </div>
-    </div>
-  </section>
+<div class="panel">
+<div style="color:var(--muted);line-height:1.8">
+IPR binds identity and responsibility to AI-driven decisions.  
+Each execution can be verified ex-ante before deployment.
+</div>
+</div>
+</section>
 
-  <section class="section" id="critical">
-    <div class="panel">
-      <h2>Critical Infrastructures</h2>
-      <p style="color:var(--muted);line-height:1.6;margin:8px 0 0">
-        Energia, acqua, trasporti, digitale: azioni ad alto impatto richiedono
-        condizioni di ammissibilità verificabili prima dell’esecuzione.
-      </p>
-      <hr />
-      <div style="color:var(--muted);line-height:1.7">
-        <strong>Flow operativo</strong><br/>
-        Azione critica → IPR (receipt) → Verify/JOKER → PASS/FAIL → Evidence (hash-only)
-      </div>
-      <div class="cta">
-        <a class="btn" href="../docs/">Spec & Policy</a>
-        <a class="btn primary" href="../verify/">Verify</a>
-      </div>
-    </div>
-  </section>
+<section class="section" id="robot">
+<h2>Robotics</h2>
+
+<div class="panel">
+<div style="color:var(--muted);line-height:1.8">
+Physical actions executed by robots require attribution.  
+IPR enables responsibility verification before execution.
+</div>
+</div>
+</section>
+
+<section class="section" id="datacenter">
+<h2>Datacenter Execution</h2>
+
+<div class="panel">
+<div style="color:var(--muted);line-height:1.8">
+Compute actions can be gated by IPR verification.  
+Execution allowed only when responsibility is verifiable.
+</div>
+</div>
+</section>
+
+<section class="section" id="critical">
+<h2>Critical Infrastructure</h2>
+
+<div class="panel">
+<div style="color:var(--muted);line-height:1.8">
+Energy, transport and digital infrastructure require clear attribution.  
+IPR provides a verifiable responsibility layer.
+</div>
+</div>
+</section>
+
+<section class="section" id="governance">
+<h2>Governance & EU Pilot</h2>
+
+<div class="panel">
+<div style="color:var(--muted);line-height:1.8">
+Designed for EU-aligned pilot deployment.  
+Supports B2B and B2G verification workflows.
+</div>
+</div>
+</section>
 
 </main>
 
 <footer class="footer">
-  <div class="wrap">
-    <div class="row">
-      <strong>🜏 HERMETICUM</strong>
-      <div>Infrastructure Scope — EU public gateway</div>
-      <div>UE-first · audit-first · hash-only · fail-closed · no data custody</div>
-    </div>
-  </div>
+<div class="wrap">
+<div class="row">
+<strong>IPR Infrastructure</strong>
+<div>EU-first · audit-first · fail-closed · hash-only</div>
+</div>
+</div>
 </footer>
+
 </body>
 </html>
