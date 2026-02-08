@@ -1,0 +1,23 @@
+<svg width="420" height="420" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="420" height="420" fill="black"/>
+
+<!-- cerchio esterno -->
+<circle cx="210" cy="210" r="160" stroke="white" stroke-width="3" fill="none"/>
+
+<!-- croce assiale -->
+<line x1="210" y1="70" x2="210" y2="350" stroke="white" stroke-width="2"/>
+<line x1="70" y1="210" x2="350" y2="210" stroke="white" stroke-width="2"/>
+
+<!-- quadrato centrale -->
+<rect x="150" y="150" width="120" height="120" stroke="white" stroke-width="2" fill="none"/>
+
+<!-- punto identità -->
+<circle cx="210" cy="210" r="6" fill="white"/>
+
+<!-- testo -->
+<text x="210" y="385" font-size="18" text-anchor="middle" fill="white" font-family="Arial">
+HERMETICUM
+</text>
+
+</svg>
