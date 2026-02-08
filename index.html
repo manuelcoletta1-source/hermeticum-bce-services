@@ -17,28 +17,18 @@ body{
 .container{
     max-width:1100px;
     margin:auto;
-    padding:40px 20px;
+    padding:50px 20px;
 }
 
 h1{
-    font-size:38px;
-    margin-bottom:10px;
+    font-size:42px;
+    margin-bottom:8px;
 }
 
-h2{
-    margin-top:50px;
-    font-size:26px;
-}
-
-p{
+.subtitle{
     font-size:18px;
     color:#cfcfcf;
-}
-
-.sigillo{
-    width:260px;
-    margin:40px auto;
-    display:block;
+    margin-bottom:40px;
 }
 
 .grid{
@@ -51,7 +41,7 @@ p{
 .card{
     background:#111;
     border:1px solid #222;
-    padding:25px;
+    padding:26px;
     border-radius:12px;
     transition:0.3s;
 }
@@ -67,12 +57,30 @@ a{
     font-weight:bold;
 }
 
+.section{
+    margin-top:60px;
+}
+
 .footer{
-    margin-top:80px;
-    padding:40px;
+    margin-top:90px;
+    padding-top:40px;
     border-top:1px solid #222;
     font-size:14px;
     color:#888;
+}
+
+/* sigillo piccolo accanto azienda */
+.company{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-top:18px;
+    font-size:15px;
+}
+
+.company img{
+    width:22px;
 }
 </style>
 </head>
@@ -81,16 +89,12 @@ a{
 
 <div class="container">
 
-<img src="assets/sigillo-hermeticum.svg" class="sigillo">
-
 <h1>HERMETICUM B.C.E.</h1>
-<p>Infrastruttura europea di identità, responsabilità e verificabilità ex-ante</p>
+<div class="subtitle">
+Infrastruttura europea di identità, responsabilità e verificabilità ex-ante
+</div>
 
-<p>
-Sistema computabile che misura la validità dell’origine prima dell’esecuzione.  
-Nessuna custodia dati · Hash only · Fail closed · Audit first · UE-first
-</p>
-
+<div class="section">
 <h2>Attiva · Verifica · Opera</h2>
 
 <div class="grid">
@@ -103,7 +107,7 @@ Nessuna custodia dati · Hash only · Fail closed · Audit first · UE-first
 
 <div class="card">
 <h3>Verifica IPR</h3>
-<p>Verifica crittografica identità e origine</p>
+<p>Registro e verifica crittografica</p>
 <a href="https://manuelcoletta1-source.github.io/ue-ipr-registry/">Apri</a>
 </div>
 
@@ -120,7 +124,9 @@ Nessuna custodia dati · Hash only · Fail closed · Audit first · UE-first
 </div>
 
 </div>
+</div>
 
+<div class="section">
 <h2>Architettura tecnologica</h2>
 
 <div class="grid">
@@ -146,11 +152,6 @@ Nessuna custodia dati · Hash only · Fail closed · Audit first · UE-first
 </div>
 
 <div class="card">
-<h3>MetaExchange</h3>
-<a href="https://manuelcoletta1-source.github.io/metaexchange/">Apri</a>
-</div>
-
-<div class="card">
 <h3>NeuroLoop</h3>
 <a href="https://manuelcoletta1-source.github.io/neuroloop/">Apri</a>
 </div>
@@ -166,32 +167,20 @@ Nessuna custodia dati · Hash only · Fail closed · Audit first · UE-first
 </div>
 
 </div>
-
-<h2>Corpus scientifico</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Corpus Esoterologia</h3>
-<a href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/">Apri</a>
-</div>
-
-<div class="card">
-<h3>Lex Hermeticum</h3>
-<a href="https://manuelcoletta1-source.github.io/lex-hermeticum-volume-3/">Apri</a>
-</div>
-
-<div class="card">
-<h3>Apocalipsis</h3>
-<a href="https://manuelcoletta1-source.github.io/apocalipsis/">Apri</a>
-</div>
-
 </div>
 
 <div class="footer">
-HERMETICUM B.C.E. S.r.l.  
+
+<div class="company">
+<img src="assets/sigillo-hermeticum.svg">
+<span>HERMETICUM B.C.E. S.r.l.</span>
+</div>
+
+<div style="margin-top:10px;">
 Infrastruttura metrologica europea di identità e responsabilità digitale  
-Torino · UE node · Audit by design
+Nodo UE · Audit by design · Hash only · Fail closed
+</div>
+
 </div>
 
 </div>
