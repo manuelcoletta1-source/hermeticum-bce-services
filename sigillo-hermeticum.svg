@@ -1,45 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700">
-  <rect width="600" height="700" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 720">
 
-  <g fill="black">
+<rect width="600" height="720" fill="white"/>
 
-    <!-- cappello alto -->
-    <rect x="260" y="40" width="80" height="60" rx="20"/>
+<g fill="black">
 
-    <!-- asse verticale -->
-    <rect x="285" y="90" width="30" height="350"/>
+  <!-- cappello superiore -->
+  <rect x="250" y="60" width="100" height="26" rx="13"/>
 
-    <!-- croce superiore -->
-    <rect x="170" y="140" width="260" height="50" rx="25"/>
+  <!-- asse verticale -->
+  <rect x="285" y="80" width="30" height="350"/>
 
-    <!-- croce centrale -->
-    <rect x="170" y="220" width="260" height="50" rx="25"/>
+  <!-- doppia barra -->
+  <rect x="170" y="160" width="260" height="34" rx="17"/>
+  <rect x="170" y="220" width="260" height="34" rx="17"/>
 
-    <!-- infinito sinistra -->
-    <path d="
-      M300 420
-      C240 350 140 360 120 430
-      C100 500 180 560 260 500
-      C290 480 300 460 300 420
-      C300 460 290 480 260 500
-      C180 560 100 500 120 430
-      C140 360 240 350 300 420
-    " fill="none" stroke="black" stroke-width="35"/>
+  <!-- infinito principale -->
+  <path d="
+    M300 420
+    C230 340 120 360 110 440
+    C100 520 200 580 280 500
+    C295 485 300 470 300 450
+    C300 470 305 485 320 500
+    C400 580 500 520 490 440
+    C480 360 370 340 300 420
+  " fill="none" stroke="black" stroke-width="40" stroke-linecap="round"/>
 
-    <!-- infinito destra -->
-    <path d="
-      M300 420
-      C360 350 460 360 480 430
-      C500 500 420 560 340 500
-      C310 480 300 460 300 420
-      C300 460 310 480 340 500
-      C420 560 500 500 480 430
-      C460 360 360 350 300 420
-    " fill="none" stroke="black" stroke-width="35"/>
+  <!-- due trattini interni -->
+  <rect x="270" y="465" width="60" height="12" rx="6"/>
+  <rect x="270" y="495" width="60" height="12" rx="6"/>
 
-    <!-- doppio trattino centrale -->
-    <rect x="275" y="465" width="50" height="12"/>
-    <rect x="275" y="495" width="50" height="12"/>
+</g>
 
-  </g>
 </svg>
