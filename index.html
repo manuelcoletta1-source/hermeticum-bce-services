@@ -3,278 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HERMETICUM B.C.E. — Central Infrastructure Node</title>
+<title>HERMETICUM B.C.E. — Infrastruttura Europea di Responsabilità Digitale</title>
 
 <style>
-:root{
-  --bg:#0a0a0a;
-  --panel:#111;
-  --panel2:#0d0d0d;
-  --border:#222;
-  --text:#eaeaea;
-  --muted:#aaa;
-  --muted2:#9a9a9a;
-  --link:#4da3ff;
-  --link2:#82c1ff;
-  --cta:#0f62fe;
-  --cta2:#2a7bff;
-}
-
 body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:var(--bg);
-  color:var(--text);
+    margin:0;
+    background:#0a0a0a;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align:center;
 }
 
-header{
-  padding:46px 18px 34px;     /* MOBILE-FIRST: non deve mangiare lo schermo */
-  text-align:center;
-  background:#050505;
-  border-bottom:1px solid var(--border);
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
 }
 
 h1{
-  font-size:44px;
-  margin:0;
-  letter-spacing:1px;
+    font-size:38px;
+    margin-bottom:10px;
 }
 
-.subtitle{
-  color:var(--muted);
-  margin-top:10px;
-  font-size:16px;
-  line-height:1.5;
+h2{
+    margin-top:50px;
+    font-size:26px;
+}
+
+p{
+    font-size:18px;
+    color:#cfcfcf;
 }
 
 .sigillo{
-  margin-top:16px;
+    width:260px;
+    margin:40px auto;
+    display:block;
 }
-.sigillo img{
-  width:210px;               /* esplicito su desktop */
-  max-width:55vw;            /* ma non esplode su mobile */
-  height:auto;
-  opacity:0.97;
-  display:block;
-  margin:0 auto;
-}
-
-.sealtext{
-  margin-top:12px;
-  font-size:14px;
-  color:#ddd;
-  line-height:1.55;
-}
-
-.hero-actions{
-  margin-top:16px;
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-.hero-actions a{
-  display:inline-block;
-  padding:12px 18px;
-  background:var(--cta);
-  color:white;
-  text-decoration:none;
-  border-radius:8px;
-  font-weight:bold;
-}
-.hero-actions a:hover{ background:var(--cta2); }
-
-.container{
-  max-width:1040px;
-  margin:auto;
-  padding:34px 18px 18px;
-}
-
-.block{
-  background:var(--panel);
-  padding:30px;
-  margin:22px 0;
-  border:1px solid var(--border);
-  border-radius:12px;
-}
-
-h2{ margin-top:0; }
-
-p{ color:#cfcfcf; line-height:1.6; }
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-  gap:14px;
-  margin-top:14px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+    margin-top:40px;
 }
 
 .card{
-  background:var(--panel2);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:16px;
+    background:#111;
+    border:1px solid #222;
+    padding:25px;
+    border-radius:12px;
+    transition:0.3s;
 }
 
-.card strong{
-  display:block;
-  margin-bottom:6px;
+.card:hover{
+    border:1px solid #00ffd5;
+    transform:scale(1.03);
 }
 
-.card a{
-  color:var(--link);
-  text-decoration:none;
-}
-.card a:hover{ color:var(--link2); }
-
-.mini{
-  color:var(--muted2);
-  font-size:13px;
-  line-height:1.5;
-  margin-top:6px;
+a{
+    color:#00ffd5;
+    text-decoration:none;
+    font-weight:bold;
 }
 
 .footer{
-  text-align:center;
-  color:#666;
-  padding:60px 18px;
-  font-size:14px;
-}
-
-/* Desktop spacing upgrade */
-@media (min-width: 900px){
-  header{ padding:72px 20px 44px; }
-  h1{ font-size:52px; }
-  .subtitle{ font-size:18px; }
-  .sigillo img{ width:260px; max-width:320px; }
-  .sealtext{ font-size:15px; }
+    margin-top:80px;
+    padding:40px;
+    border-top:1px solid #222;
+    font-size:14px;
+    color:#888;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>HERMETICUM B.C.E.</h1>
-  <div class="subtitle">
-    Nodo centrale dell’infrastruttura identity-first.<br>
-    Verify before execute.
-  </div>
-
-  <div class="sigillo">
-    <img src="assets/sigillo-hermeticum.svg" alt="Sigillo Hermeticum">
-  </div>
-
-  <div class="sealtext">
-    HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-    HERMETICUM B.C.E. S.r.l.
-  </div>
-
-  <!-- IMPORTANT: azioni visibili subito (niente scroll) -->
-  <div class="hero-actions">
-    <a href="client.html">Accesso cliente</a>
-    <a href="system.html">System map</a>
-    <a href="https://github.com/manuelcoletta1-source">GitHub</a>
-  </div>
-</header>
-
 <div class="container">
 
-  <div class="block">
-    <h2>Nodo centrale</h2>
-    <p>
-      Infrastruttura operativa basata su identità verificabile (IPR).<br>
-      Ogni azione digitale o autonoma è autorizzata ex-ante (fail-closed).
-    </p>
-    <p class="mini">
-      Questo nodo collega: standard, prototipi, moduli operativi, AI/workers, gateway B2B/B2G, registry UE.
-    </p>
-  </div>
+<img src="assets/sigillo-hermeticum.svg" class="sigillo">
 
-  <div class="block">
-    <h2>Ingresso ingegneri (60s)</h2>
-    <div class="grid">
-      <div class="card">
-        <strong>Standard & Architettura</strong>
-        <a href="https://github.com/manuelcoletta1-source/hermeticum-system">hermeticum-system</a>
-        <div class="mini">Specifica tecnica + architettura AI-identità + onboarding.</div>
-      </div>
+<h1>HERMETICUM B.C.E.</h1>
+<p>Infrastruttura europea di identità, responsabilità e verificabilità ex-ante</p>
 
-      <div class="card">
-        <strong>Prototipo Live (ALLOW/BLOCK)</strong>
-        <a href="https://github.com/manuelcoletta1-source/hermeticum-system/tree/main/prototype/ipr-precheck">prototype/ipr-precheck</a>
-        <div class="mini">sha256(payload) ↔ manifest: mismatch = BLOCK.</div>
-      </div>
+<p>
+Sistema computabile che misura la validità dell’origine prima dell’esecuzione.  
+Nessuna custodia dati · Hash only · Fail closed · Audit first · UE-first
+</p>
 
-      <div class="card">
-        <strong>Technology Core</strong>
-        <a href="https://github.com/manuelcoletta1-source/Hermeticum-B.C.E.-Technology">Hermeticum-B.C.E.-Technology</a>
-        <div class="mini">Repository tecnologico ufficiale dell’infrastruttura.</div>
-      </div>
-    </div>
-  </div>
+<h2>Attiva · Verifica · Opera</h2>
 
-  <div class="block">
-    <h2>Repository — Nucleo</h2>
-    <div class="grid">
-      <div class="card"><strong>IPR Core</strong><a href="https://github.com/manuelcoletta1-source/ipr-core">ipr-core</a></div>
-      <div class="card"><strong>IPR Origin</strong><a href="https://github.com/manuelcoletta1-source/ipr-3-origin">ipr-3-origin</a></div>
-      <div class="card"><strong>UE IPR Registry</strong><a href="https://github.com/manuelcoletta1-source/ue-ipr-registry">ue-ipr-registry</a></div>
-      <div class="card"><strong>EU Standard</strong><a href="https://github.com/manuelcoletta1-source/ipr-gov-eu-standard">ipr-gov-eu-standard</a></div>
-      <div class="card"><strong>IPR Gateway (persona)</strong><a href="https://github.com/manuelcoletta1-source/hermeticum-bce-ipr">hermeticum-bce-ipr</a></div>
-    </div>
-  </div>
+<div class="grid">
 
-  <div class="block">
-    <h2>Repository — Motore operativo (ex-ante execution)</h2>
-    <div class="grid">
-      <div class="card"><strong>IPR Gate</strong><a href="https://github.com/manuelcoletta1-source/ipr-gate">ipr-gate</a></div>
-      <div class="card"><strong>IPR Comply</strong><a href="https://github.com/manuelcoletta1-source/ipr-comply">ipr-comply</a></div>
-      <div class="card"><strong>IPR Exchange</strong><a href="https://github.com/manuelcoletta1-source/ipr-exchange">ipr-exchange</a></div>
-      <div class="card"><strong>Capability Stack</strong><a href="https://github.com/manuelcoletta1-source/ipr-capability-stack">ipr-capability-stack</a></div>
-      <div class="card"><strong>Precheck API</strong><a href="https://github.com/manuelcoletta1-source/ipr-precheck-api">ipr-precheck-api</a></div>
-      <div class="card"><strong>IPR Datacenter</strong><a href="https://github.com/manuelcoletta1-source/ipr-metrological-datacenter">ipr-metrological-datacenter</a></div>
-    </div>
-  </div>
+<div class="card">
+<h3>Attiva IPR</h3>
+<p>Attivazione Identity Primary Record europeo</p>
+<a href="https://manuelcoletta1-source.github.io/hermeticum-bce-ipr/">Apri</a>
+</div>
 
-  <div class="block">
-    <h2>Repository — AI / Workers / C2</h2>
-    <div class="grid">
-      <div class="card"><strong>GitJoker C2</strong><a href="https://github.com/manuelcoletta1-source/gitjoker-c2">gitjoker-c2</a></div>
-      <div class="card"><strong>AI Joker Workers</strong><a href="https://github.com/manuelcoletta1-source/ai-joker-workers">ai-joker-workers</a></div>
-      <div class="card"><strong>Hermeticum AI Workers</strong><a href="https://github.com/manuelcoletta1-source/hermeticum-bce-ai-workers">hermeticum-bce-ai-workers</a></div>
-      <div class="card"><strong>NeuroLoop</strong><a href="https://github.com/manuelcoletta1-source/neuroloop">neuroloop</a></div>
-    </div>
-  </div>
+<div class="card">
+<h3>Verifica IPR</h3>
+<p>Verifica crittografica identità e origine</p>
+<a href="https://manuelcoletta1-source.github.io/ue-ipr-registry/">Apri</a>
+</div>
 
-  <div class="block">
-    <h2>Repository — Gateway B2B / B2G / Servizi</h2>
-    <div class="grid">
-      <div class="card"><strong>B2B Gateway</strong><a href="https://github.com/manuelcoletta1-source/hermeticum-bce-b2b">hermeticum-bce-b2b</a></div>
-      <div class="card"><strong>B2G Gateway</strong><a href="https://github.com/manuelcoletta1-source/hermeticum-bce-b2g">hermeticum-bce-b2g</a></div>
-      <div class="card"><strong>Technical Services</strong><a href="https://github.com/manuelcoletta1-source/hermeticum-bce-technical-services">hermeticum-bce-technical-services</a></div>
-    </div>
-    <p class="mini" style="margin-top:12px;">
-      Nota: lo strato editoriale (Corpus/Volumi/Opere) resta separato dal nodo centrale per mantenere chiarezza ingegneristica.
-    </p>
-  </div>
+<div class="card">
+<h3>Gateway B2B</h3>
+<p>Infrastruttura imprese verificabili</p>
+<a href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2b/">Apri</a>
+</div>
 
-  <div class="block">
-    <h2>Ambienti (meta-layer)</h2>
-    <div class="grid">
-      <div class="card"><strong>IoSpace</strong><a href="https://github.com/manuelcoletta1-source/iospace">iospace</a></div>
-      <div class="card"><strong>MetaExchange</strong><a href="https://github.com/manuelcoletta1-source/metaexchange">metaexchange</a></div>
-      <div class="card"><strong>CyberGlobal</strong><a href="https://github.com/manuelcoletta1-source/cyberglobal">cyberglobal</a></div>
-    </div>
-  </div>
+<div class="card">
+<h3>Gateway B2G</h3>
+<p>Governance pubblica e UE</p>
+<a href="https://manuelcoletta1-source.github.io/hermeticum-bce-b2g/">Apri</a>
+</div>
+
+</div>
+
+<h2>Architettura tecnologica</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Technology Core</h3>
+<a href="https://manuelcoletta1-source.github.io/Hermeticum-B.C.E.-Technology/">Apri</a>
+</div>
+
+<div class="card">
+<h3>IPR Core</h3>
+<a href="https://manuelcoletta1-source.github.io/ipr-core/">Apri</a>
+</div>
+
+<div class="card">
+<h3>IPR Gate</h3>
+<a href="https://manuelcoletta1-source.github.io/ipr-gate/">Apri</a>
+</div>
+
+<div class="card">
+<h3>IPR Comply</h3>
+<a href="https://manuelcoletta1-source.github.io/ipr-comply/">Apri</a>
+</div>
+
+<div class="card">
+<h3>MetaExchange</h3>
+<a href="https://manuelcoletta1-source.github.io/metaexchange/">Apri</a>
+</div>
+
+<div class="card">
+<h3>NeuroLoop</h3>
+<a href="https://manuelcoletta1-source.github.io/neuroloop/">Apri</a>
+</div>
+
+<div class="card">
+<h3>IoSpace</h3>
+<a href="https://manuelcoletta1-source.github.io/iospace/">Apri</a>
+</div>
+
+<div class="card">
+<h3>CyberGlobal</h3>
+<a href="https://manuelcoletta1-source.github.io/cyberglobal/">Apri</a>
+</div>
+
+</div>
+
+<h2>Corpus scientifico</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Corpus Esoterologia</h3>
+<a href="https://manuelcoletta1-source.github.io/corpus-esoterologia-ermetica/">Apri</a>
+</div>
+
+<div class="card">
+<h3>Lex Hermeticum</h3>
+<a href="https://manuelcoletta1-source.github.io/lex-hermeticum-volume-3/">Apri</a>
+</div>
+
+<div class="card">
+<h3>Apocalipsis</h3>
+<a href="https://manuelcoletta1-source.github.io/apocalipsis/">Apri</a>
+</div>
 
 </div>
 
 <div class="footer">
-  HERMETICUM - BLINDATA · COMPUTABILE · EVOLUTIVA<br>
-  HERMETICUM B.C.E. S.r.l.
+HERMETICUM B.C.E. S.r.l.  
+Infrastruttura metrologica europea di identità e responsabilità digitale  
+Torino · UE node · Audit by design
 </div>
 
+</div>
 </body>
 </html>
