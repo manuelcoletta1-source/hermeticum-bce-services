@@ -1,23 +1,45 @@
-<svg width="420" height="420" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700">
+  <rect width="600" height="700" fill="white"/>
 
-<rect width="420" height="420" fill="black"/>
+  <g fill="black">
 
-<!-- cerchio esterno -->
-<circle cx="210" cy="210" r="160" stroke="white" stroke-width="3" fill="none"/>
+    <!-- cappello alto -->
+    <rect x="260" y="40" width="80" height="60" rx="20"/>
 
-<!-- croce assiale -->
-<line x1="210" y1="70" x2="210" y2="350" stroke="white" stroke-width="2"/>
-<line x1="70" y1="210" x2="350" y2="210" stroke="white" stroke-width="2"/>
+    <!-- asse verticale -->
+    <rect x="285" y="90" width="30" height="350"/>
 
-<!-- quadrato centrale -->
-<rect x="150" y="150" width="120" height="120" stroke="white" stroke-width="2" fill="none"/>
+    <!-- croce superiore -->
+    <rect x="170" y="140" width="260" height="50" rx="25"/>
 
-<!-- punto identità -->
-<circle cx="210" cy="210" r="6" fill="white"/>
+    <!-- croce centrale -->
+    <rect x="170" y="220" width="260" height="50" rx="25"/>
 
-<!-- testo -->
-<text x="210" y="385" font-size="18" text-anchor="middle" fill="white" font-family="Arial">
-HERMETICUM
-</text>
+    <!-- infinito sinistra -->
+    <path d="
+      M300 420
+      C240 350 140 360 120 430
+      C100 500 180 560 260 500
+      C290 480 300 460 300 420
+      C300 460 290 480 260 500
+      C180 560 100 500 120 430
+      C140 360 240 350 300 420
+    " fill="none" stroke="black" stroke-width="35"/>
 
+    <!-- infinito destra -->
+    <path d="
+      M300 420
+      C360 350 460 360 480 430
+      C500 500 420 560 340 500
+      C310 480 300 460 300 420
+      C300 460 310 480 340 500
+      C420 560 500 500 480 430
+      C460 360 360 350 300 420
+    " fill="none" stroke="black" stroke-width="35"/>
+
+    <!-- doppio trattino centrale -->
+    <rect x="275" y="465" width="50" height="12"/>
+    <rect x="275" y="495" width="50" height="12"/>
+
+  </g>
 </svg>
